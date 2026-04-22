@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DAPR Canvas GitHub Image Folder Structure</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #212121; background: #fff; padding: 36px 48px; }
+  h1 { background: #1B5E20; color: #fff; padding: 16px 20px; font-size: 1.3em; border-radius: 4px; margin-bottom: 8px; }
+  .subtitle { font-size: 12px; color: #555; margin-bottom: 28px; }
+  .rule-box { background: #E8F5E9; border-left: 4px solid #1B5E20; padding: 12px 16px; margin: 0 0 24px; border-radius: 0 4px 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .rule-box svg { flex-shrink: 0; margin-top: 2px; }
+  .rule-box p { font-size: 13px; line-height: 1.7; }
+  .note-box { background: #E3F2FD; border-left: 4px solid #0D47A1; padding: 12px 16px; margin: 16px 0 24px; border-radius: 0 4px 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .note-box svg { flex-shrink: 0; margin-top: 2px; }
+  .note-box p { font-size: 13px; line-height: 1.7; }
+  .warn-box { background: #FFF8E1; border-left: 4px solid #F57F17; padding: 12px 16px; margin: 16px 0 24px; border-radius: 0 4px 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .warn-box svg { flex-shrink: 0; margin-top: 2px; }
+  .warn-box p { font-size: 13px; line-height: 1.7; }
+  h2 { font-size: 1.1em; color: #0D47A1; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin: 28px 0 14px; }
+  .course-block { margin-bottom: 20px; }
+  .course-header { display: flex; align-items: center; gap: 10px; background: #0D47A1; color: #fff; padding: 8px 14px; border-radius: 4px 4px 0 0; font-size: 13px; font-weight: bold; }
+  .course-content { border: 1px solid #B0BEC5; border-top: none; border-radius: 0 0 4px 4px; padding: 12px 16px; }
+  .folder-path { font-family: "Courier New", monospace; font-size: 12px; background: #F5F5F5; padding: 3px 8px; border-radius: 3px; display: inline-block; margin: 2px 0; }
+  .folder-list { margin: 8px 0 0 16px; }
+  .folder-list li { margin-bottom: 6px; list-style: none; font-size: 12.5px; }
+  .folder-list li::before { content: "├── "; font-family: "Courier New", monospace; color: #888; }
+  .folder-list li:last-child::before { content: "└── "; font-family: "Courier New", monospace; color: #888; }
+  .folder-note { font-size: 11px; color: #555; margin-left: 8px; font-style: italic; }
+  .url-pattern { font-family: "Courier New", monospace; font-size: 11px; background: #E8EAF6; color: #1A237E; padding: 8px 12px; border-radius: 4px; margin: 8px 0; display: block; word-break: break-all; }
+  .convert-table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 12.5px; }
+  .convert-table th { background: #0D47A1; color: #fff; padding: 7px 10px; text-align: left; }
+  .convert-table td { padding: 7px 10px; border: 1px solid #ddd; vertical-align: top; }
+  .convert-table tr:nth-child(even) td { background: #F5F5F5; }
+  .canvas-name { font-family: "Courier New", monospace; font-size: 11px; }
+  .github-name { font-family: "Courier New", monospace; font-size: 11.5px; color: #1A237E; font-weight: bold; }
+  .rule-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 16px 0; }
+  .rule-card { border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .rule-card-head { padding: 8px 12px; font-size: 12px; font-weight: bold; }
+  .rule-card-body { padding: 10px 12px; font-size: 12px; line-height: 1.6; background: #fafafa; }
+  .rule-card-body code { font-family: "Courier New", monospace; background: #eee; padding: 1px 4px; border-radius: 2px; }
+  .question-box { margin: 12px 0; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+  .question-row { display: grid; grid-template-columns: 110px 1fr; }
+  .question-row:not(:last-child) { border-bottom: 1px solid #ddd; }
+  .q-label { background: #0D47A1; color: #fff; padding: 10px 12px; font-size: 12px; font-weight: bold; }
+  .q-body { background: #F9F9F9; padding: 10px 12px; font-size: 12.5px; line-height: 1.5; }
+  .question-row:nth-child(even) .q-body { background: #F0F4FF; }
+  .system-box { background: #F3E5F5; border-left: 4px solid #4A148C; padding: 14px 18px; margin: 0 0 28px; border-radius: 0 4px 4px 0; }
+  .system-box h3 { color: #4A148C; font-size: 13px; margin-bottom: 10px; }
+  .system-box p { font-size: 13px; line-height: 1.7; margin-bottom: 6px; }
+  .system-box code { font-family: "Courier New", monospace; background: #E1BEE7; padding: 2px 6px; border-radius: 3px; font-size: 12px; }
+</style>
+</head>
+<body>
+
+<h1>DAPR Canvas Image Folder Structure</h1>
+<p class="subtitle">uvu-dapr/Canvas repository &nbsp;|&nbsp; All DAPR courses &nbsp;|&nbsp; Updated April 2026</p>
+
+<!-- Option D system overview -->
+<h2>Canvas Naming System: Option D (Permanent Standard)</h2>
+
+<div class="system-box">
+  <h3>ALL Canvas modules and pages across all 12 DAPR courses use Option D naming. No other system is in use.</h3>
+  <p><strong>Module title pattern:</strong> <code>Topic: M# - Descriptive Title (Week ##)</code></p>
+  <p><strong>Page name pattern:</strong> <code>Topic: Descriptive Page Title</code></p>
+  <p><strong>The three rules:</strong></p>
+  <p>Rule 1 - Module title carries the topic prefix, module number, descriptive title, and week in parentheses. Example: <code>Sound: M2 - Sound and Hearing (Week 02)</code></p>
+  <p>Rule 2 - Page name carries only the topic prefix and a plain descriptive title. No module number. No week. No part number. Example: <code>Sound: Read Sound and Hearing</code></p>
+  <p>Rule 3 - At semester rollover, update only the week parenthetical in module titles if pacing changed. Never rename pages. Pages have no week reference and require zero rollover maintenance.</p>
+</div>
+
+<div class="rule-grid">
+  <div class="rule-card">
+    <div class="rule-card-head" style="background:#1B5E20; color:#fff;">Module title examples</div>
+    <div class="rule-card-body">
+      <code>Jobs: M1 - Orientation and Recording Studio Jobs (Week 01)</code><br><br>
+      <code>Sound: M2 - Sound and Hearing (Week 02)</code><br><br>
+      <code>Sound: M3 - The Decibel (Week 03)</code><br><br>
+      <code>Networking: M3 - Network Configuration and Control (Week 08)</code><br><br>
+      <code>Networking: M4 - Audio Network Architecture (Week 09)</code>
+    </div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-card-head" style="background:#0D47A1; color:#fff;">Page name examples</div>
+    <div class="rule-card-body">
+      <code>Jobs: Overview</code><br>
+      <code>Jobs: Working in the Industry</code><br>
+      <code>Jobs: Read Chapter 1</code><br>
+      <code>Jobs: Jobs Quiz</code><br><br>
+      <code>Sound: Overview</code><br>
+      <code>Sound: Read Sound and Hearing</code><br>
+      <code>Sound: The Decibel</code><br>
+      <code>Sound: Sound Wave Properties</code><br><br>
+      <code>Networking: Address Resolution Protocol</code><br>
+      <code>Networking: Dynamic Host Configuration Protocol (DHCP)</code><br><br>
+      <code>MIDI: Channel Voice Messages</code><br><br>
+      <code>EQ: Overview</code><br>
+      <code>EQ: EQ Lab</code>
+    </div>
+  </div>
+</div>
+
+<!-- Folder naming rule -->
+<h2>GitHub Folder Naming Rule: Underscores vs. Hyphens</h2>
+
+<div class="rule-grid">
+  <div class="rule-card">
+    <div class="rule-card-head" style="background:#1B5E20; color:#fff;">Underscores _ connect words within one concept</div>
+    <div class="rule-card-body">
+      Use underscores when multiple words form a single concept title inside a folder name.<br><br>
+      <code>sound_and_hearing</code> - one concept<br>
+      <code>address_resolution_protocol</code> - one concept<br>
+      <code>the_decibel</code> - one concept<br>
+      <code>working_in_the_industry</code> - one concept<br>
+      <code>dynamic_host_configuration_protocol</code> - one concept
+    </div>
+  </div>
+  <div class="rule-card">
+    <div class="rule-card-head" style="background:#0D47A1; color:#fff;">Hyphens - separate distinct segments from each other</div>
+    <div class="rule-card-body">
+      Use hyphens between the topic prefix and the concept title in a folder name.<br><br>
+      <code>sound-the_decibel</code> - topic and concept are two segments<br>
+      <code>networking-address_resolution_protocol</code><br>
+      <code>jobs-working_in_the_industry</code><br>
+      <code>dapr-2000</code> - course prefix always hyphenated<br>
+      <code>dapr-2000l</code> - course prefix always hyphenated
+    </div>
+  </div>
+</div>
+
+<div class="rule-box">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+  </svg>
+  <p><strong>Folder name pattern:</strong> <code style="font-family:Courier New; background:#d4edda; padding:2px 6px; border-radius:3px;">topic-concept_title</code><br>
+  The folder name is derived from the Canvas page name. Strip the colon, lowercase everything, replace spaces with underscores within the concept title, and put a hyphen between the topic and the concept. The week from the module title is never included in any folder name. Folder names are permanent once a URL has been used in a Canvas page.</p>
+</div>
+
+<!-- Conversion table -->
+<h2>Canvas Page Name to GitHub Folder Name Conversion Examples</h2>
+
+<table class="convert-table">
+  <thead>
+    <tr>
+      <th style="width:38%;">Canvas Page Name (Option D)</th>
+      <th style="width:37%;">GitHub Folder Name</th>
+      <th>Rule Applied</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="canvas-name">Jobs: Overview</td>
+      <td class="github-name">dapr-2000/jobs-overview/</td>
+      <td>Topic prefix becomes first segment; concept title is one word</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">Jobs: Working in the Industry</td>
+      <td class="github-name">dapr-2000/jobs-working_in_the_industry/</td>
+      <td>Multi-word concept title uses underscores</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">Sound: Overview</td>
+      <td class="github-name">dapr-2000/sound-overview/</td>
+      <td>Topic prefix, one-word concept</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">Sound: The Decibel</td>
+      <td class="github-name">dapr-2000/sound-the_decibel/</td>
+      <td>Multi-word concept uses underscores</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">Sound: Sound Wave Properties</td>
+      <td class="github-name">dapr-2000/sound-sound_wave_properties/</td>
+      <td>Three-word concept title, all underscored</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">Networking: Address Resolution Protocol</td>
+      <td class="github-name">dapr-3255/networking-address_resolution_protocol/</td>
+      <td>Long concept title, all words underscored together</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">Networking: Dynamic Host Configuration Protocol (DHCP)</td>
+      <td class="github-name">dapr-3255/networking-dynamic_host_configuration_protocol/</td>
+      <td>Drop parenthetical acronym in folder name; keep it in the page name</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">MIDI: Channel Voice Messages</td>
+      <td class="github-name">dapr-3255/midi-channel_voice_messages/</td>
+      <td>MIDI topic prefix, multi-word concept underscored</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">EQ: EQ Lab</td>
+      <td class="github-name">dapr-2000l/eq-eq_lab/</td>
+      <td>Topic prefix, two-word concept underscored</td>
+    </tr>
+    <tr>
+      <td class="canvas-name">Pro Tools Cleanup (shared tutorial)</td>
+      <td class="github-name">All/ProToolsCleanup/</td>
+      <td>Legacy folder - keep original casing, do not rename</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- URL pattern -->
+<h2>Raw URL Pattern</h2>
+<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/dapr-2000/sound-the_decibel/filename.jpg</span>
+<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/dapr-3255/networking-address_resolution_protocol/filename.jpg</span>
+<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/All/ProToolsCleanup/before.jpg</span>
+
+<div class="note-box">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+  </svg>
+  <p><strong>Note:</strong> Always use <code style="font-family:Courier New; background:#dce8f5; padding:1px 4px; border-radius:2px;">raw.githubusercontent.com</code> not <code style="font-family:Courier New; background:#dce8f5; padding:1px 4px; border-radius:2px;">github.com</code>. Verify every new URL in Safari or Chrome before building the Canvas page. You should see the image with nothing else around it.</p>
+</div>
+
+<!-- All/ shared -->
+<h2>All/ - Shared Across Multiple Courses</h2>
+<div class="course-block">
+  <div class="course-header">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    All/ - Images referenced in more than one course
+  </div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">All/ProToolsCleanup/</span> <span class="folder-note">legacy - keep original casing, do not rename</span></li>
+      <li><span class="folder-path">All/topic-concept_title/</span> <span class="folder-note">all new shared folders follow the topic-concept_title pattern</span></li>
+    </ul>
+    <p style="font-size:12px; color:#555; margin-top:10px;">Use All/ only when the same image appears in pages across two or more different courses. If an image is used in only one course, it belongs in that course folder even if the topic is general.</p>
+  </div>
+</div>
+
+<!-- Course folders -->
+<h2>Course Folders - All 12 Courses</h2>
+
+<div class="course-block">
+  <div class="course-header">dapr-2000/ &nbsp;- Digital Audio Essentials</div>
+  <div class="course-content">
+    <p style="font-size:12px; color:#555; margin-bottom:10px;">Folder names derived from Option D page names. Quiz pages, read pages, and video watch pages rarely need images and do not need subfolders until images are actually required.</p>
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2000/jobs-overview/</span></li>
+      <li><span class="folder-path">dapr-2000/jobs-working_in_the_industry/</span></li>
+      <li><span class="folder-path">dapr-2000/sound-overview/</span></li>
+      <li><span class="folder-path">dapr-2000/sound-read_sound_and_hearing/</span></li>
+      <li><span class="folder-path">dapr-2000/sound-introducing_the_daw/</span></li>
+      <li><span class="folder-path">dapr-2000/sound-introduction_to_the_decibel/</span></li>
+      <li><span class="folder-path">dapr-2000/sound-more_about_the_db/</span></li>
+      <li><span class="folder-path">dapr-2000/sound-the_decibel/</span></li>
+      <li><span class="folder-path">dapr-2000/sound-sound_wave_properties/</span></li>
+      <li><span class="folder-path">dapr-2000/daw-overview/</span></li>
+      <li><span class="folder-path">dapr-2000/eq-overview/</span></li>
+      <li><span class="folder-path">dapr-2000/dynamics-dynamic_based_processing/</span></li>
+      <li><span class="folder-path">dapr-2000/topic-concept_title/</span> <span class="folder-note">add further pages as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-2000l/ &nbsp;- Digital Audio Essentials Lab</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2000l/groundwork-essential_groundwork/</span></li>
+      <li><span class="folder-path">dapr-2000l/eq-eq_lab/</span></li>
+      <li><span class="folder-path">dapr-2000l/compression-compression_lab/</span></li>
+      <li><span class="folder-path">dapr-2000l/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-2010/ &nbsp;- Core Recording</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2010/topic-concept_title/</span> <span class="folder-note">add as modules are built following the conversion rule</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-2010l/ &nbsp;- Core Recording Lab</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2010l/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-2020/ &nbsp;- Core Mixing</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2020/topic-concept_title/</span> <span class="folder-note">add as modules are built</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-2020l/ &nbsp;- Core Mixing Lab</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2020l/groundwork-essential_groundwork/</span> <span class="folder-note">referenced in Part XV of the Reference Guide</span></li>
+      <li><span class="folder-path">dapr-2020l/eq-eq_lab/</span></li>
+      <li><span class="folder-path">dapr-2020l/compression-compression_lab/</span></li>
+      <li><span class="folder-path">dapr-2020l/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-2080/ &nbsp;- Podcast and Radio Production</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2080/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-2255/ &nbsp;- Audio Hardware I</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-2255/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-3010r/ &nbsp;- Digital Lecture Series</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-3010r/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-3255/ &nbsp;- Audio Hardware II</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-3255/midi-channel_voice_messages/</span></li>
+      <li><span class="folder-path">dapr-3255/networking-address_resolution_protocol/</span></li>
+      <li><span class="folder-path">dapr-3255/networking-dynamic_host_configuration_protocol/</span></li>
+      <li><span class="folder-path">dapr-3255/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-3340/ &nbsp;- Spatial Audio I</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-3340/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<div class="course-block">
+  <div class="course-header">dapr-3345/ &nbsp;- Spatial Audio II</div>
+  <div class="course-content">
+    <ul class="folder-list">
+      <li><span class="folder-path">dapr-3345/spatial-spatial_mix_final/</span> <span class="folder-note">referenced in Part XVIII of the Reference Guide</span></li>
+      <li><span class="folder-path">dapr-3345/topic-concept_title/</span> <span class="folder-note">add as needed</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- Five questions -->
+<h2>The Five Questions - Asked Every Time Images Are Involved</h2>
+
+<div class="question-box">
+  <div class="question-row">
+    <div class="q-label">Question 1</div>
+    <div class="q-body">Is this image shared across multiple courses, or does it belong to one specific course? <strong>Shared = All/ &nbsp;&nbsp; One course = dapr-XXXX/</strong></div>
+  </div>
+  <div class="question-row">
+    <div class="q-label">Question 2</div>
+    <div class="q-body">What is the exact course folder name? (dapr-2000, dapr-2000l, dapr-2255, dapr-3345, etc.)</div>
+  </div>
+  <div class="question-row">
+    <div class="q-label">Question 3</div>
+    <div class="q-body">What is the Canvas page name this image belongs to? Apply the Option D conversion rule to derive the subfolder name: strip the colon, lowercase everything, underscores within the concept title, hyphen between topic and concept.</div>
+  </div>
+  <div class="question-row">
+    <div class="q-label">Question 4</div>
+    <div class="q-body">What are the exact filenames of the images that have been pushed to the repository? List all of them before any HTML is written.</div>
+  </div>
+  <div class="question-row">
+    <div class="q-label">Question 5</div>
+    <div class="q-body">Have these files been committed and pushed in GitHub Desktop? Confirm the push completed before any HTML is written.</div>
+  </div>
+</div>
+
+<div class="warn-box" style="margin-top:24px;">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/>
+    <line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+  </svg>
+  <p><strong>Never rename or move an image file after its URL has been used in a Canvas page.</strong> Canvas pages contain hardcoded raw URLs. Renaming breaks every page that references the file with no error message and no warning. To update an image, replace it in place using the exact same filename.</p>
+</div>
+
+</body>
+</html>
