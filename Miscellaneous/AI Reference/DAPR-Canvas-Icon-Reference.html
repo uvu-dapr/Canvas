@@ -1,0 +1,302 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAPR Canvas Icon System Reference</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; color: #212121; background: #ffffff; }
+.cover { background: #1B5E20; color: #ffffff; padding: 40px 48px 36px; }
+.cover h1 { font-size: 26px; font-weight: bold; margin-bottom: 6px; }
+.cover p { font-size: 13px; opacity: 0.85; }
+.page { padding: 36px 48px; }
+.critical-box { background:#FBE9E7; border-left:4px solid #C62828; padding:12px 16px; margin-bottom:24px; border-radius:0 4px 4px 0; font-size:13px; line-height:1.7; }
+.critical-box strong { color:#C62828; }
+.note-box { background:#E3F2FD; border-left:4px solid #0D47A1; padding:12px 16px; margin-bottom:28px; border-radius:0 4px 4px 0; }
+.note-box strong { color:#0D47A1; display:block; margin-bottom:4px; font-size:12px; }
+.note-box p { font-size:11.5px; line-height:1.6; }
+.section-head { font-size:11px; font-weight:bold; letter-spacing:0.08em; text-transform:uppercase; color:#555; border-bottom:1px solid #ddd; padding-bottom:6px; margin:32px 0 16px; }
+.icon-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:8px; }
+.icon-card { border:1px solid #e0e0e0; border-radius:8px; padding:16px 12px 14px; display:flex; flex-direction:column; align-items:center; gap:8px; background:#fff; }
+.icon-circle { width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.icon-label { font-size:12px; font-weight:bold; text-align:center; color:#212121; line-height:1.3; }
+.icon-hex { font-size:10px; font-family:"Courier New",monospace; color:#666; text-align:center; line-height:1.6; }
+.icon-file { font-size:10px; font-family:"Courier New",monospace; color:#0D47A1; text-align:center; }
+.icon-use { font-size:10px; color:#666; text-align:center; line-height:1.4; margin-top:2px; }
+.color-chip { display:inline-block; width:10px; height:10px; border-radius:2px; border:1px solid rgba(0,0,0,0.15); vertical-align:middle; margin-right:3px; }
+.template-head { font-size:13px; font-weight:bold; margin:24px 0 8px; }
+pre { background:#f5f5f5; border:1px solid #e0e0e0; border-radius:4px; padding:12px; font-size:10px; font-family:"Courier New",monospace; line-height:1.6; overflow-x:auto; white-space:pre-wrap; word-break:break-all; color:#212121; margin-bottom:24px; }
+@media print { .page { padding:24px 36px; } .icon-grid { grid-template-columns:repeat(4,1fr); } pre { font-size:8.5px; } }
+</style></head><body>
+<div class="cover"><h1>DAPR Canvas Icon System</h1>
+<p>Audio Program &nbsp;|&nbsp; Utah Valley University &nbsp;|&nbsp; Standardized Icon and Callout Box Reference</p></div>
+<div class="page">
+<p style="font-size:13px; line-height:1.7; color:#333; margin-bottom:20px;">This document defines the complete icon system for DAPR Canvas HTML pages. Every icon is implemented as inline SVG code pasted directly into the Canvas HTML editor. No image files or uploads are required. Each icon has a unique color identity. The filename, hex codes, and intended use are listed for every icon so that any AI tool reading this document can reproduce identical output.</p>
+<div class="critical-box"><strong>Canvas strips display:flex entirely.</strong> The copy-paste templates on this page use <code>&lt;table role="presentation"&gt;</code> for the icon-plus-text layout. This is the only method that works in Canvas. Do not use div/flex versions -- they render correctly in Safari but the icon disappears completely in Canvas.</div>
+<div class="note-box"><strong>Implementation Note</strong><p>Icons are inline SVG at viewBox 0 0 24 24, stroke-width 2.2, stroke-linecap round, stroke-linejoin round, fill none. In Canvas callout boxes, the icon is 22x22 inside a narrow table cell. Canvas preserves inline SVG reliably. The icon grid above uses flex/grid for the reference view only -- those styles are in a stylesheet and are fine for browser viewing. Only the copy-paste templates below matter for Canvas.</p></div>
+<div class="section-head">Callout Boxes</div><div class="icon-grid">
+<div class="icon-card">
+  <div class="icon-circle" style="background:#FBE9E7;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Critical / Stop icon"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+  </div>
+  <div class="icon-label">Critical / Stop</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#C62828;"></span>#C62828<br><span class="color-chip" style="background:#FBE9E7; border-color:#ccc;"></span>#FBE9E7</div>
+  <div class="icon-file">callout-critical.svg</div>
+  <div class="icon-use">Hard rules, enforcement policies, do not do this</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E3F2FD;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Note icon"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+  </div>
+  <div class="icon-label">Note</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#0D47A1;"></span>#0D47A1<br><span class="color-chip" style="background:#E3F2FD; border-color:#ccc;"></span>#E3F2FD</div>
+  <div class="icon-file">callout-note.svg</div>
+  <div class="icon-use">Clarifications, reminders, helpful context</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E8F5E9;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Required icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+  </div>
+  <div class="icon-label">Required</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#1B5E20;"></span>#1B5E20<br><span class="color-chip" style="background:#E8F5E9; border-color:#ccc;"></span>#E8F5E9</div>
+  <div class="icon-file">callout-required.svg</div>
+  <div class="icon-use">Mandatory rules, program standards, must-follow instructions</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#F3E5F5;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Tip / Pro tip icon"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div class="icon-label">Tip / Pro tip</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#4A148C;"></span>#4A148C<br><span class="color-chip" style="background:#F3E5F5; border-color:#ccc;"></span>#F3E5F5</div>
+  <div class="icon-file">callout-tip.svg</div>
+  <div class="icon-use">Helpful suggestions, shortcuts, efficiency notes</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#FFF8E1;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Warning icon"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  </div>
+  <div class="icon-label">Warning</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#F57F17;"></span>#F57F17<br><span class="color-chip" style="background:#FFF8E1; border-color:#ccc;"></span>#FFF8E1</div>
+  <div class="icon-file">callout-warning.svg</div>
+  <div class="icon-use">Common mistakes, known gotchas, proceed with caution</div>
+</div>
+</div>
+<div class="section-head">Feedback Quality</div><div class="icon-grid">
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E8F5E9;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Best icon"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+  </div>
+  <div class="icon-label">Best</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#1B5E20;"></span>#1B5E20<br><span class="color-chip" style="background:#E8F5E9; border-color:#ccc;"></span>#E8F5E9</div>
+  <div class="icon-file">feedback-best.svg</div>
+  <div class="icon-use">Specific, constructive, immediately actionable</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#FFFDE7;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F9A825" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Helpful icon"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+  </div>
+  <div class="icon-label">Helpful</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#F9A825;"></span>#F9A825<br><span class="color-chip" style="background:#FFFDE7; border-color:#ccc;"></span>#FFFDE7</div>
+  <div class="icon-file">feedback-helpful.svg</div>
+  <div class="icon-use">Specific enough to identify an issue, good starting point</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#FFEBEE;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#B71C1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Not Helpful icon"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+  </div>
+  <div class="icon-label">Not Helpful</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#B71C1C;"></span>#B71C1C<br><span class="color-chip" style="background:#FFEBEE; border-color:#ccc;"></span>#FFEBEE</div>
+  <div class="icon-file">feedback-not-helpful.svg</div>
+  <div class="icon-use">Vague, emotional, or impossible to act on</div>
+</div>
+</div>
+<div class="section-head">Submission Types</div><div class="icon-grid">
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E8EAF6;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1A237E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Audio File icon"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+  </div>
+  <div class="icon-label">Audio File</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#1A237E;"></span>#1A237E<br><span class="color-chip" style="background:#E8EAF6; border-color:#ccc;"></span>#E8EAF6</div>
+  <div class="icon-file">submit-audio.svg</div>
+  <div class="icon-use">WAV, MP3, AIFF, or any audio file submission</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#EFEBE9;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4E342E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Download icon"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+  </div>
+  <div class="icon-label">Download</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#4E342E;"></span>#4E342E<br><span class="color-chip" style="background:#EFEBE9; border-color:#ccc;"></span>#EFEBE9</div>
+  <div class="icon-file">submit-download.svg</div>
+  <div class="icon-use">Instructor provides a file for student to download — down arrow</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#F9FBE7;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#827717" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="PDF / Document icon"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+  </div>
+  <div class="icon-label">PDF / Document</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#827717;"></span>#827717<br><span class="color-chip" style="background:#F9FBE7; border-color:#ccc;"></span>#F9FBE7</div>
+  <div class="icon-file">submit-pdf.svg</div>
+  <div class="icon-use">PDF, DOCX, or TXT file submission</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E0F7FA;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#006064" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Session / ZIP icon"><rect x="2" y="2" width="8" height="4" rx="1"/><rect x="2" y="10" width="8" height="4" rx="1"/><rect x="2" y="18" width="8" height="4" rx="1"/><line x1="14" y1="4" x2="22" y2="4"/><line x1="14" y1="12" x2="22" y2="12"/><line x1="14" y1="20" x2="22" y2="20"/></svg>
+  </div>
+  <div class="icon-label">Session / ZIP</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#006064;"></span>#006064<br><span class="color-chip" style="background:#E0F7FA; border-color:#ccc;"></span>#E0F7FA</div>
+  <div class="icon-file">submit-session.svg</div>
+  <div class="icon-use">Pro Tools session folder or any zipped archive</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E8F5E9;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Submit / Upload icon"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+  </div>
+  <div class="icon-label">Submit / Upload</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#1B5E20;"></span>#1B5E20<br><span class="color-chip" style="background:#E8F5E9; border-color:#ccc;"></span>#E8F5E9</div>
+  <div class="icon-file">submit-upload.svg</div>
+  <div class="icon-use">Student submits any file to Canvas — up arrow = upload</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#FFF3E0;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E65100" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Video File icon"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+  </div>
+  <div class="icon-label">Video File</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#E65100;"></span>#E65100<br><span class="color-chip" style="background:#FFF3E0; border-color:#ccc;"></span>#FFF3E0</div>
+  <div class="icon-file">submit-video.svg</div>
+  <div class="icon-use">MP4, MOV, or any exported video file</div>
+</div>
+</div>
+<div class="section-head">Actions</div><div class="icon-grid">
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E8F5E9;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Checklist / Task icon"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+  </div>
+  <div class="icon-label">Checklist / Task</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#1B5E20;"></span>#1B5E20<br><span class="color-chip" style="background:#E8F5E9; border-color:#ccc;"></span>#E8F5E9</div>
+  <div class="icon-file">action-checklist.svg</div>
+  <div class="icon-use">Pre-submission checklist, task list, verification steps</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#FFF8E1;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Deadline / Due icon"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
+  </div>
+  <div class="icon-label">Deadline / Due</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#F57F17;"></span>#F57F17<br><span class="color-chip" style="background:#FFF8E1; border-color:#ccc;"></span>#FFF8E1</div>
+  <div class="icon-file">action-deadline.svg</div>
+  <div class="icon-use">Due date, submission deadline, time-sensitive notice</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E3F2FD;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Contact / Email icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+  </div>
+  <div class="icon-label">Contact / Email</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#0D47A1;"></span>#0D47A1<br><span class="color-chip" style="background:#E3F2FD; border-color:#ccc;"></span>#E3F2FD</div>
+  <div class="icon-file">action-email.svg</div>
+  <div class="icon-use">Contact instructor directly via Canvas message</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#E3F2FD;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="External Link icon"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+  </div>
+  <div class="icon-label">External Link</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#0D47A1;"></span>#0D47A1<br><span class="color-chip" style="background:#E3F2FD; border-color:#ccc;"></span>#E3F2FD</div>
+  <div class="icon-file">action-external-link.svg</div>
+  <div class="icon-use">Link opens in a new tab or leads to external resource</div>
+</div>
+<div class="icon-card">
+  <div class="icon-circle" style="background:#F3E5F5;">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Peer / Class icon"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+  </div>
+  <div class="icon-label">Peer / Class</div>
+  <div class="icon-hex"><span class="color-chip" style="background:#4A148C;"></span>#4A148C<br><span class="color-chip" style="background:#F3E5F5; border-color:#ccc;"></span>#F3E5F5</div>
+  <div class="icon-file">action-peer.svg</div>
+  <div class="icon-use">Peer review, class activity, group or cohort context</div>
+</div>
+</div>
+<div style="margin-top:36px;">
+<div class="section-head">HTML Callout Box Templates -- Canvas Safe (table layout, no flex)</div>
+<p style="font-size:12px; color:#555; margin-bottom:20px;">Copy any template below into the Canvas raw HTML editor. These use <strong>table layout, not flex</strong>. The live preview above each template shows exactly how it will look in Canvas.</p>
+<div class="template-head" style="color:#1B5E20;">Required (Green Shield)</div>
+<table role="presentation" style="width:100%; border-collapse:collapse; background-color:#E8F5E9; border-left:4px solid #1B5E20; margin:8px 0; border-radius:0 4px 4px 0;"><tr><td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><svg viewBox="0 0 24 24" width="22" height="22" style="display:block;" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></td><td style="padding:12px 14px 12px 4px; vertical-align:top;"><p style="margin:0; font-size:13px;"><strong>Required:</strong> This is what a Required callout looks like on a Canvas page.</p></td></tr></table>
+<pre>&lt;table role="presentation" style="width:100%; border-collapse:collapse; background-color:#E8F5E9; border-left:4px solid #1B5E20; margin:16px 0; border-radius:0 4px 4px 0;"&gt;
+  &lt;tr&gt;
+    &lt;td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+           style="display:block;" fill="none" stroke="#1B5E20"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+           role="img" aria-hidden="true"&gt;
+        &lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/&gt;&lt;polyline points="9 12 11 14 15 10"/&gt;
+      &lt;/svg&gt;
+    &lt;/td&gt;
+    &lt;td style="padding:12px 14px 12px 4px; vertical-align:top;"&gt;
+      &lt;p style="margin:0;"&gt;&lt;strong&gt;Required:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+<div class="template-head" style="color:#0D47A1;">Note (Blue Info Circle)</div>
+<table role="presentation" style="width:100%; border-collapse:collapse; background-color:#E3F2FD; border-left:4px solid #0D47A1; margin:8px 0; border-radius:0 4px 4px 0;"><tr><td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><svg viewBox="0 0 24 24" width="22" height="22" style="display:block;" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></td><td style="padding:12px 14px 12px 4px; vertical-align:top;"><p style="margin:0; font-size:13px;"><strong>Note:</strong> This is what a Note callout looks like on a Canvas page.</p></td></tr></table>
+<pre>&lt;table role="presentation" style="width:100%; border-collapse:collapse; background-color:#E3F2FD; border-left:4px solid #0D47A1; margin:16px 0; border-radius:0 4px 4px 0;"&gt;
+  &lt;tr&gt;
+    &lt;td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+           style="display:block;" fill="none" stroke="#0D47A1"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+           role="img" aria-hidden="true"&gt;
+        &lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="12" y1="16" x2="12" y2="12"/&gt;&lt;line x1="12" y1="8" x2="12.01" y2="8"/&gt;
+      &lt;/svg&gt;
+    &lt;/td&gt;
+    &lt;td style="padding:12px 14px 12px 4px; vertical-align:top;"&gt;
+      &lt;p style="margin:0;"&gt;&lt;strong&gt;Note:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+<div class="template-head" style="color:#F57F17;">Warning (Yellow Yield Triangle)</div>
+<table role="presentation" style="width:100%; border-collapse:collapse; background-color:#FFF8E1; border-left:4px solid #F57F17; margin:8px 0; border-radius:0 4px 4px 0;"><tr><td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><svg viewBox="0 0 24 24" width="22" height="22" style="display:block;" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></td><td style="padding:12px 14px 12px 4px; vertical-align:top;"><p style="margin:0; font-size:13px;"><strong>Warning:</strong> This is what a Warning callout looks like on a Canvas page.</p></td></tr></table>
+<pre>&lt;table role="presentation" style="width:100%; border-collapse:collapse; background-color:#FFF8E1; border-left:4px solid #F57F17; margin:16px 0; border-radius:0 4px 4px 0;"&gt;
+  &lt;tr&gt;
+    &lt;td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+           style="display:block;" fill="none" stroke="#F57F17"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+           role="img" aria-hidden="true"&gt;
+        &lt;path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/&gt;&lt;line x1="12" y1="9" x2="12" y2="13"/&gt;&lt;line x1="12" y1="17" x2="12.01" y2="17"/&gt;
+      &lt;/svg&gt;
+    &lt;/td&gt;
+    &lt;td style="padding:12px 14px 12px 4px; vertical-align:top;"&gt;
+      &lt;p style="margin:0;"&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+<div class="template-head" style="color:#C62828;">Critical / Stop (Red X Circle)</div>
+<table role="presentation" style="width:100%; border-collapse:collapse; background-color:#FBE9E7; border-left:4px solid #C62828; margin:8px 0; border-radius:0 4px 4px 0;"><tr><td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><svg viewBox="0 0 24 24" width="22" height="22" style="display:block;" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></td><td style="padding:12px 14px 12px 4px; vertical-align:top;"><p style="margin:0; font-size:13px;"><strong>Critical / Stop:</strong> This is what a Critical / Stop callout looks like on a Canvas page.</p></td></tr></table>
+<pre>&lt;table role="presentation" style="width:100%; border-collapse:collapse; background-color:#FBE9E7; border-left:4px solid #C62828; margin:16px 0; border-radius:0 4px 4px 0;"&gt;
+  &lt;tr&gt;
+    &lt;td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+           style="display:block;" fill="none" stroke="#C62828"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+           role="img" aria-hidden="true"&gt;
+        &lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="15" y1="9" x2="9" y2="15"/&gt;&lt;line x1="9" y1="9" x2="15" y2="15"/&gt;
+      &lt;/svg&gt;
+    &lt;/td&gt;
+    &lt;td style="padding:12px 14px 12px 4px; vertical-align:top;"&gt;
+      &lt;p style="margin:0;"&gt;&lt;strong&gt;Critical / Stop:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+<div class="template-head" style="color:#4A148C;">Tip / Pro tip (Purple Question Circle)</div>
+<table role="presentation" style="width:100%; border-collapse:collapse; background-color:#F3E5F5; border-left:4px solid #4A148C; margin:8px 0; border-radius:0 4px 4px 0;"><tr><td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><svg viewBox="0 0 24 24" width="22" height="22" style="display:block;" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></td><td style="padding:12px 14px 12px 4px; vertical-align:top;"><p style="margin:0; font-size:13px;"><strong>Tip / Pro tip:</strong> This is what a Tip / Pro tip callout looks like on a Canvas page.</p></td></tr></table>
+<pre>&lt;table role="presentation" style="width:100%; border-collapse:collapse; background-color:#F3E5F5; border-left:4px solid #4A148C; margin:16px 0; border-radius:0 4px 4px 0;"&gt;
+  &lt;tr&gt;
+    &lt;td style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"&gt;
+      &lt;svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="22" height="22"
+           style="display:block;" fill="none" stroke="#4A148C"
+           stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"
+           role="img" aria-hidden="true"&gt;
+        &lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/&gt;&lt;line x1="12" y1="17" x2="12.01" y2="17"/&gt;
+      &lt;/svg&gt;
+    &lt;/td&gt;
+    &lt;td style="padding:12px 14px 12px 4px; vertical-align:top;"&gt;
+      &lt;p style="margin:0;"&gt;&lt;strong&gt;Tip / Pro tip:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</pre>
+</div></div></body></html>
