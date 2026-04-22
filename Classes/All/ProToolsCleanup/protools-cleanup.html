@@ -1,0 +1,158 @@
+<div style="font-family: Arial, Helvetica, sans-serif; max-width: 900px; margin: 0 auto; color: #212121; line-height: 1.6;">
+<h2 style="background-color: #000000; color: #ffffff; padding: 16px 20px; font-size: 1.5em; border-radius: 4px; margin: 0;">Pro Tools Session Cleanup and Submission Prep</h2>
+<p style="margin: 16px 0;">A working session accumulates far more material than belongs in a final submission. Multiple takes, render artifacts, unused imports, false starts, and temp files all inflate the folder size. This tutorial walks through the complete workflow: saving a protected copy of your session first, then cleaning that copy down to only what is needed, bouncing the mix, and zipping for Canvas submission.</p>
+<p style="margin: 16px 0;">Complete these steps in order. Do not skip steps.</p>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Assignment requirements always take priority">
+<p style="margin: 0;"><strong>Assignment requirements always take priority.</strong> Every setting shown in this tutorial -- sample rate, bit depth, file format, file naming -- is an example based on a standard stereo mix assignment. Your actual assignment page lists the required settings for that specific project. If the assignment says 48 kHz, use 48 kHz. If the assignment uses a different naming convention, use that convention exactly. When this tutorial conflicts with your assignment page, follow the assignment page. No exceptions.</p>
+</div>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Workflow overview">
+<p style="margin: 0;"><strong>The strategy:</strong> Save Session Copy In first to create your submission folder. Then open that copy and do all cleanup work inside it. Your original session stays untouched as a backup. Everything you delete in the copy is gone permanently. That is the point. Smaller files, faster upload, cleaner submission.</p>
+</div>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 1 - Understand What You Are Starting With</h2>
+<p style="margin: 12px 0;">The image below shows what a working session looks like before cleanup. Each track contains multiple clips from different takes and edits. Some tracks have audio starting late, some have gaps, and the vocal track at the bottom has two separate clip regions. The Audio Files folder on disk contains every file ever recorded or imported, including many that are not on the timeline at all.</p>
+<img style="max-width: 100%; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/before.jpg" alt="Pro Tools Edit window before cleanup showing six tracks with multiple clips and gaps." />
+<p style="margin: 12px 0;">This is normal for a project in progress. The steps below remove the excess and leave only what the session needs to play back correctly.</p>
+<p style="margin: 12px 0;">When you open a working session folder on disk, it may also contain folders and files that do not belong in a submission:</p>
+<div style="display: block; margin: 12px 0;">
+<div style="margin-bottom: 12px;"><img style="max-width: 360px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/session-folder.jpg" alt="Pro Tools session folder showing extra folders including Session File Backups, Clip Groups, and WaveCache.wfm." /></div>
+<div style="border: 1px solid #cccccc; border-radius: 4px;">
+<div style="padding: 8px 12px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Video Files</strong> - Only present if you are also submitting a video. Otherwise this folder should not be in your submission.</div>
+<div style="padding: 8px 12px; border-bottom: 1px solid #cccccc;"><strong>Session File Backups</strong> - Auto-saves created by Pro Tools. Not needed for submission.</div>
+<div style="padding: 8px 12px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Clip Groups</strong> - Not needed unless specifically requested.</div>
+<div style="padding: 8px 12px;"><strong>WaveCache.wfm</strong> - A display cache Pro Tools regenerates automatically on open. Not needed.</div>
+</div>
+<p style="margin: 10px 0 0 0;">Save Session Copy In produces a new folder containing only what is needed. You do not manually delete these folders.</p>
+</div>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 2 - The Goal: What a Clean Session Looks Like</h2>
+<p style="margin: 12px 0;">Before you begin cleanup, here is what you are working toward. Each track ends up as a single clean clip region. Compare the before and after:</p>
+<div style="margin: 12px 0;">
+<div style="margin-bottom: 16px;">
+<p style="margin: 0 0 6px 0;">Before</p>
+<img style="max-width: 100%; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/before.jpg" alt="Pro Tools timeline before cleanup showing multiple clips and fragmented regions across six tracks." /></div>
+<div>
+<p style="margin: 0 0 6px 0;">After</p>
+<img style="max-width: 100%; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/after.jpg" alt="Pro Tools timeline after cleanup showing one consolidated clip per track starting at the same point." /></div>
+</div>
+<p style="margin: 12px 0;">One clip per track. No gaps. No orphaned regions. The Audio Files folder on disk contains only what is actually playing.</p>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 3 - Check Fades and Crossfades Before Anything Else</h2>
+<p style="margin: 12px 0;">Before you do any cleanup, make sure every clip that needs a fade or crossfade has one. Once you compact, clip boundaries are permanently rewritten and your opportunity to fix fades cleanly is gone.</p>
+<div style="border: 1px solid #cccccc; border-radius: 4px; margin: 16px 0;">
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;">Listen through the entire session from start to finish on headphones or monitors at a comfortable level.</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc;">Every clip that starts abruptly needs a fade-in. Every clip that ends abruptly needs a fade-out. Any two clips that butt against each other on the same track need a crossfade.</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;">A click or pop at a clip boundary means a fade is missing or broken. Fix it now.</div>
+<div style="padding: 10px 16px;">The beginning and end of the entire mix need fades. The very first sound should fade in from silence and the very last sound should fade out to silence. No hard starts and no abrupt endings.</div>
+</div>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Fades are required">
+<p style="margin: 0;"><strong>Required:</strong> Every clip boundary must be clean. Every mix must open and close with a fade. A submission that clicks, pops, or starts abruptly has not been finished. Do not proceed to cleanup until the session sounds correct from the first sample to the last.</p>
+</div>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 4 - Save Session Copy In First</h2>
+<p style="margin: 12px 0;">This is the first action you take in Pro Tools. Save Session Copy In creates a brand-new folder containing a copy of your session file and every audio file currently referenced on the timeline. Your original session folder stays completely untouched. All cleanup work happens inside this copy.</p>
+<p style="margin: 12px 0;">Go to File &gt; Save Session Copy In...</p>
+<img style="max-width: 380px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/save-copy-in-menu.jpg" alt="Pro Tools File menu open with Save Session Copy In highlighted." />
+<p style="margin: 12px 0;">In the dialog, set the following:</p>
+<img style="max-width: 480px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/save-copy-in-dialog.jpg" alt="Save Copy In dialog set to BWF WAV, 44.1 kHz, 16-bit, Interleaved, with Audio Files checked." />
+<div style="border: 1px solid #cccccc; border-radius: 4px; margin: 16px 0;">
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Audio File Type:</strong> as specified by your assignment (BWF .WAV shown as an example)</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc;"><strong>Sample Rate:</strong> as specified by your assignment (44.1 kHz shown as an example)</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Bit Depth:</strong> as specified by your assignment (16-bit shown as an example)</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc;"><strong>Interleaved:</strong> checked</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Items to Copy:</strong> check Audio Files and Convert to Specified Format</div>
+<div style="padding: 10px 16px;"><strong>Destination:</strong> a new folder on your desktop named exactly as your assignment specifies</div>
+</div>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Use the settings your assignment specifies">
+<p style="margin: 0;"><strong>Use the settings your assignment specifies.</strong> The dialog above shows 44.1 kHz and 16-bit as an example for a standard stereo mix assignment. Spatial audio assignments such as Dolby Atmos sessions require 48 kHz. Any assignment that specifies a different sample rate, bit depth, or file format overrides what is shown here. Read your assignment before filling in this dialog.</p>
+</div>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 5 - Close the Original and Open the Copied Session</h2>
+<p style="margin: 12px 0;">Close your current session in Pro Tools. Navigate to the new folder on your desktop and open the .ptx file inside it. All remaining steps are performed inside this copy. Your original session is your backup and stays closed.</p>
+<img style="max-width: 360px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/folder-open.jpg" alt="Pro Tools session folder on Mac showing the copied session with the .ptx file." />
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 6 - Select All Unused Clips and Delete Them from Disk</h2>
+<p style="margin: 12px 0;">The Clip List holds references to every audio file ever imported or recorded in this session, including clips that are no longer placed on any track. Select all unused clips and permanently delete them from disk. You are working in the copy. There is no reason to keep these files.</p>
+<div style="border: 1px solid #cccccc; border-radius: 4px; margin: 16px 0;">
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Mac:</strong> Press <code style="font-family: 'Courier New', Courier, monospace; background: #eeeeee; padding: 2px 5px; border-radius: 3px;">Command + Shift + U</code> to select all unused clips in the Clip List.</div>
+<div style="padding: 10px 16px;"><strong>Windows:</strong> Press <code style="font-family: 'Courier New', Courier, monospace; background: #eeeeee; padding: 2px 5px; border-radius: 3px;">Ctrl + Shift + U</code></div>
+</div>
+<p style="margin: 12px 0;">You can also reach this from the Clip List menu (the small triangle or three-line icon at the top right of the Clip List panel): choose "Select &gt; Unused".</p>
+<img style="max-width: 100%; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/select-unused.jpg" alt="Pro Tools Clip List menu open showing the Select submenu with Unused highlighted." />
+<p style="margin: 12px 0;">Once unused clips are selected, clear them. On a Mac with a number pad, press the Clear key. On a MacBook without a dedicated Clear key, open the Clip List menu and choose "Clear Selected". The standard Delete key on a laptop keyboard will not trigger this dialog from the Clip List. When the dialog appears, choose Delete.</p>
+<img style="max-width: 480px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/select-delete.jpg" alt="Pro Tools clear dialog with Delete circled in green as the correct choice for the submission copy." />
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Why Delete instead of Remove">
+<p style="margin: 0;"><strong>Choose Delete, not Remove.</strong> Remove only takes the reference out of Pro Tools and leaves the audio file sitting on disk. Delete removes the file from disk permanently. You are working in the submission copy. Everything unused in this folder is waste. Delete it. This is how you get the smallest possible zip file.</p>
+</div>
+<p style="margin: 12px 0;">Pro Tools may show a warning before deleting some files:</p>
+<img style="max-width: 400px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/press-yes.jpg" alt="Pro Tools warning asking to confirm permanent deletion of Audio 1_02.wav with No and Yes buttons." />
+<p style="margin: 12px 0;">This warning appears when Pro Tools detects that a file may still be referenced in the Undo queue, a plugin, or the clipboard. Click Yes. You have already verified your session sounds correct. The Undo queue and clipboard have no effect on how the session plays back. This is the submission copy. Delete the file.</p>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 7 - Compact Selected Clips</h2>
+<p style="margin: 12px 0;">Even the clips on your timeline contain more audio than is actually playing. Every time you trim a clip, the audio before and after the trim point stays in the file on disk. Compact rewrites each audio file so it contains only the audio that is used, plus a small buffer on each side.</p>
+<div style="border: 1px solid #cccccc; border-radius: 4px; margin: 16px 0;">
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Mac:</strong> Press <code style="font-family: 'Courier New', Courier, monospace; background: #eeeeee; padding: 2px 5px; border-radius: 3px;">Command + Shift + A</code> to select everything in the Clip List.</div>
+<div style="padding: 10px 16px;"><strong>Windows:</strong> Press <code style="font-family: 'Courier New', Courier, monospace; background: #eeeeee; padding: 2px 5px; border-radius: 3px;">Ctrl + Shift + A</code></div>
+</div>
+<p style="margin: 12px 0;">To open the Compact menu, left-click the disclosure arrow in the top right corner of the Clips bin. This is the small triangle icon that opens the Clip List menu. From there, choose "Compact..." The arrow shown in the image below is the exact spot to click.</p>
+<img style="max-width: 360px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/compact-menu.jpg" alt="Pro Tools Clip List menu with green arrow pointing to the disclosure arrow and Compact circled." />
+<p style="margin: 12px 0;">The Compact Selected dialog opens. The default Padding value is 1000 ms. Change it to 500 ms. This keeps half a second of audio before and after each clip boundary, which is enough for any crossfade, while removing roughly half the excess audio compared to the default. Click Compact.</p>
+<img style="max-width: 480px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/compact-dialog.jpg" alt="Compact Selected dialog in Pro Tools showing the Padding field set to 500 ms." />
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Compact saves automatically">
+<p style="margin: 0;"><strong>Note:</strong> After compacting, Pro Tools automatically saves the session. The audio files are permanently rewritten. The original full-length versions are gone from this folder. This is the intended outcome. You are in the submission copy.</p>
+</div>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 8 - Bounce the Mix</h2>
+<p style="margin: 12px 0;">With the session cleaned up, bounce the final mix. Go to File &gt; Bounce Mix... The settings below are examples for a standard stereo mix assignment. Your assignment specifies the required format, sample rate, bit depth, and output configuration. Use those values, not the ones shown here.</p>
+<img style="max-width: 480px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/bounce-mix.jpg" alt="Pro Tools Bounce Mix dialog set to WAV BWF, Interleaved, 16-bit, 44.1 kHz, Bounced Files destination." />
+<div style="border: 1px solid #cccccc; border-radius: 4px; margin: 16px 0;">
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>File Type:</strong> as specified by your assignment (WAV BWF shown as an example)</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc;"><strong>Format:</strong> as specified by your assignment (Interleaved shown as an example)</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Bit Depth:</strong> as specified by your assignment (16-bit shown as an example)</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc;"><strong>Sample Rate:</strong> as specified by your assignment (44.1 kHz shown as an example)</div>
+<div style="padding: 10px 16px;"><strong>Destination:</strong> Bounced Files folder inside your session folder, not your desktop or Downloads</div>
+</div>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Bounce settings come from your assignment">
+<p style="margin: 0;"><strong>Bounce settings come from your assignment.</strong> A standard stereo mix assignment may call for 44.1 kHz 16-bit WAV. A Dolby Atmos assignment will require 48 kHz and a different output path entirely. Always read the assignment before bouncing. The values shown in the image above are examples only.</p>
+</div>
+<p style="margin: 12px 0;">Name your bounce file exactly as your assignment specifies. The example below follows the naming convention for one specific assignment. Your assignment will give you the correct format.</p>
+<p style="margin: 12px 0; font-family: 'Courier New', Courier, monospace; background: #f5f5f5; padding: 10px 12px; border: 1px solid #cccccc; border-radius: 4px;">LastName, FirstName - Assignment Name - Song Name.wav</p>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 9 - Verify the Final Folder Structure</h2>
+<p style="margin: 12px 0;">Before zipping, open the session folder and confirm it contains only what belongs:</p>
+<div style="margin: 12px 0;">
+<div style="margin-bottom: 12px;"><img style="max-width: 360px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/cleaned-folder.jpg" alt="Clean session folder showing only Bounced Files, Audio Files, and the .ptx session file." /></div>
+<div style="border: 1px solid #cccccc; border-radius: 4px;">
+<div style="padding: 8px 12px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;"><strong>Bounced Files</strong> - contains your bounce file named exactly as your assignment requires</div>
+<div style="padding: 8px 12px; border-bottom: 1px solid #cccccc;"><strong>Audio Files</strong> - contains only the compacted stems, nothing extra</div>
+<div style="padding: 8px 12px;">The .ptx session file at the root, named exactly as your assignment requires</div>
+</div>
+<p style="margin: 10px 0 0 0;">No Session File Backups. No WaveCache.wfm. No Clip Groups. No Video Files folder unless you are also submitting a video file.</p>
+</div>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Folder check before zipping">
+<p style="margin: 0;">You have been working in this session throughout the cleanup steps, so you already know it plays correctly. Before zipping, confirm the folder contains only the three items shown above. If you see Session File Backups, WaveCache.wfm, Clip Groups, or any extra folders that are not part of your submission, Save Session Copy In did not run correctly. Re-run it from your original session and repeat the cleanup steps in the new copy.</p>
+</div>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 10 - Close Pro Tools, Compress the Folder, and Test the Zip</h2>
+<p style="margin: 12px 0;"><strong>Close Pro Tools before you compress.</strong> Press <code style="font-family: 'Courier New', Courier, monospace; background: #eeeeee; padding: 2px 5px; border-radius: 3px;">Command + Shift + W</code> to close the session, or quit Pro Tools entirely. Do not skip this step.</p>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Why the extra folders come back">
+<p style="margin: 0;"><strong>Why you see extra folders while Pro Tools is open:</strong> Pro Tools regenerates WaveCache.wfm, Session File Backups, and other working folders automatically while any session is running. You will see those folders appear inside your submission folder as long as the session is open. This is normal behavior and does not mean your cleanup failed. The folders are created by Pro Tools after Save Session Copy In already ran, so they will not be present in the zip as long as you close Pro Tools before compressing. If you compress while the session is still open, those folders end up inside the zip. Close first, then compress.</p>
+</div>
+<p style="margin: 12px 0;">Right-click the session folder on your desktop and choose "Compress". macOS creates a .zip file in the same location with the same name as the folder.</p>
+<img style="max-width: 480px; height: auto; border: 1px solid #cccccc; border-radius: 4px; display: block; margin: 12px 0;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/ProToolsCleanup/right-click-compress.jpg" alt="Mac Finder right-click context menu on the session folder with Compress highlighted in blue." />
+<p style="margin: 12px 0;">Name your ZIP file exactly as your assignment specifies. The example below follows the naming convention for one specific assignment. Your assignment will give you the correct format.</p>
+<p style="margin: 12px 0; font-family: 'Courier New', Courier, monospace; background: #f5f5f5; padding: 10px 12px; border: 1px solid #cccccc; border-radius: 4px;">LastName, FirstName - Assignment Name - Song Name.zip</p>
+<p style="margin: 12px 0;">Before you upload, test the zip. Copy the zip file to another Mac. Double-click it. macOS automatically extracts the folder. Open the extracted folder, open the .ptx file in Pro Tools, and confirm the session opens with all audio files present and plays back correctly from start to finish. If Session File Backups, WaveCache.wfm, or Clip Groups appear inside the extracted folder, the session was still open when you compressed. Delete the zip, close Pro Tools completely, re-compress, and test again.</p>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Windows zip extraction note">
+<p style="margin: 0;"><strong>Windows note:</strong> On Windows, double-clicking a zip file opens a preview of the contents inside File Explorer without actually extracting it. The files are not usable until extracted. To properly extract on Windows, right-click the zip file and choose "Extract All", then choose a destination folder. Open the extracted folder and verify the session opens correctly before submitting. Do not try to open the .ptx file from inside the zip preview window.</p>
+</div>
+<p style="margin: 12px 0;">Once you have confirmed the extracted session opens and plays back correctly, that same zip file is ready to upload to Canvas.</p>
+<h2 style="color: #0d47a1; font-size: 1.3em; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin-top: 24px;">Step 11 - Upload the Zip File to Canvas</h2>
+<div style="border: 1px solid #cccccc; border-radius: 4px; margin: 16px 0;">
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;">1. Open Canvas in your browser and navigate to this assignment.</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc;">2. Click "Submit Assignment".</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;">3. Click "Choose File", or drag the zip file directly into the upload area if Canvas shows a drop zone.</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc;">4. Navigate to your desktop, select the .zip file, and click "Open".</div>
+<div style="padding: 10px 16px; border-bottom: 1px solid #cccccc; background-color: #f5f5f5;">5. Wait for the upload to finish completely. Do not close the browser tab while it is uploading. Large files can take several minutes on campus Wi-Fi.</div>
+<div style="padding: 10px 16px;">6. Click "Submit Assignment" to finalize. Uploading alone does not submit. You must click Submit after the upload completes.</div>
+</div>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="Confirm your submission">
+<p style="margin: 0;"><strong>Confirm your submission:</strong> After submitting, Canvas shows a confirmation with a timestamp. If you do not see that confirmation, the submission did not go through. Check the assignment page to verify your file appears under Submission Details before the deadline.</p>
+</div>
+<div style="margin-top: 20px; padding-top: 16px; border-top: 4px solid #000000;">
+<p style="margin: 0;">A session submitted with hundreds of unused audio files, no bounce, or missing file errors on open is not a complete submission. Do the cleanup. It takes less time than you think and it is a professional habit you will use for the rest of your career.</p>
+</div>
+<div style="background-color: #fff3e0; border-left: 4px solid #E65100; padding: 12px 16px; margin: 16px 0;" role="note" aria-label="PDF submission note">
+<p style="margin: 0;">If this assignment also requires a PDF of your work, do not include the PDF inside the zip file. Upload the PDF as a separate file submission. A PDF buried inside a session zip is not accessible and will not be graded.</p>
+</div>
+</div>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>How to Upload Folders and Files to GitHub Desktop</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #212121; background: #fff; padding: 36px 48px; max-width: 960px; margin: 0 auto; }
+  h1 { background: #1B5E20; color: #fff; padding: 16px 20px; font-size: 1.3em; border-radius: 4px; margin-bottom: 8px; }
+  .subtitle { font-size: 12px; color: #555; margin-bottom: 28px; }
+  h2 { font-size: 1.1em; color: #0D47A1; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin: 32px 0 14px; }
+  h3 { font-size: 1em; color: #212121; margin: 20px 0 8px; }
+  p { font-size: 13px; line-height: 1.7; margin-bottom: 10px; }
+  .rule-box { background: #E8F5E9; border-left: 4px solid #1B5E20; padding: 12px 16px; margin: 0 0 24px; border-radius: 0 4px 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .rule-box svg { flex-shrink: 0; margin-top: 2px; }
+  .rule-box p { margin: 0; font-size: 13px; line-height: 1.7; }
+  .note-box { background: #E3F2FD; border-left: 4px solid #0D47A1; padding: 12px 16px; margin: 16px 0 24px; border-radius: 0 4px 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .note-box svg { flex-shrink: 0; margin-top: 2px; }
+  .note-box p { margin: 0; font-size: 13px; line-height: 1.7; }
+  .warn-box { background: #FFF8E1; border-left: 4px solid #F57F17; padding: 12px 16px; margin: 16px 0 24px; border-radius: 0 4px 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .warn-box svg { flex-shrink: 0; margin-top: 2px; }
+  .warn-box p { margin: 0; font-size: 13px; line-height: 1.7; }
+  .stop-box { background: #FBE9E7; border-left: 4px solid #C62828; padding: 12px 16px; margin: 16px 0 24px; border-radius: 0 4px 4px 0; display: flex; gap: 12px; align-items: flex-start; }
+  .stop-box svg { flex-shrink: 0; margin-top: 2px; }
+  .stop-box p { margin: 0; font-size: 13px; line-height: 1.7; }
+  .step-block { border: 1px solid #B0BEC5; border-radius: 6px; margin-bottom: 12px; overflow: hidden; }
+  .step-header { display: flex; align-items: center; gap: 12px; background: #0D47A1; color: #fff; padding: 10px 16px; font-size: 13px; font-weight: bold; }
+  .step-num { background: #fff; color: #0D47A1; border-radius: 50%; width: 24px; height: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0; }
+  .step-body { padding: 14px 16px; font-size: 13px; line-height: 1.7; background: #F9F9F9; }
+  .step-body p { margin-bottom: 8px; }
+  .step-body p:last-child { margin-bottom: 0; }
+  code { font-family: "Courier New", Courier, monospace; font-size: 12px; background: #F5F5F5; padding: 2px 6px; border-radius: 3px; border: 1px solid #ddd; }
+  .path-block { font-family: "Courier New", Courier, monospace; font-size: 12px; background: #E8EAF6; color: #1A237E; padding: 10px 14px; border-radius: 4px; margin: 8px 0; display: block; word-break: break-all; line-height: 1.8; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0; }
+  .panel { border: 1px solid #ddd; border-radius: 6px; overflow: hidden; }
+  .panel-head { padding: 8px 12px; font-size: 12px; font-weight: bold; }
+  .panel-body { padding: 12px; font-size: 12px; line-height: 1.7; background: #fafafa; }
+  .panel-body code { display: block; margin: 3px 0; }
+  .folder-tree { font-family: "Courier New", Courier, monospace; font-size: 12px; background: #F5F5F5; padding: 14px 16px; border-radius: 4px; border: 1px solid #ddd; line-height: 2; margin: 10px 0; }
+  .folder-tree .dir { color: #0D47A1; font-weight: bold; }
+  .folder-tree .file { color: #555; }
+  .summary-table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 12px 0; }
+  .summary-table th { background: #0D47A1; color: #fff; padding: 8px 10px; text-align: left; }
+  .summary-table td { padding: 8px 10px; border: 1px solid #ddd; vertical-align: top; }
+  .summary-table tr:nth-child(even) td { background: #F5F5F5; }
+  .pill { display: inline-block; padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: bold; }
+  .pill-green { background: #E8F5E9; color: #1B5E20; }
+  .pill-blue { background: #E3F2FD; color: #0D47A1; }
+  .pill-orange { background: #FFF3E0; color: #E65100; }
+  .divider { border: none; border-top: 2px solid #E0E0E0; margin: 28px 0; }
+</style>
+</head>
+<body>
+
+<h1>How to Upload Folders and Files to GitHub Desktop</h1>
+<p class="subtitle">uvu-dapr/Canvas repository &nbsp;|&nbsp; DAPR Program &nbsp;|&nbsp; GitHub Desktop on macOS &nbsp;|&nbsp; Updated April 2026</p>
+
+<div class="rule-box">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
+  </svg>
+  <p><strong>How GitHub Desktop works:</strong> GitHub Desktop is a visual interface for Git. It watches a folder on your Mac (the local repository). When you add, change, or delete files in that folder using Finder, GitHub Desktop sees the changes automatically. You then write a short summary and click two buttons to send those changes to GitHub. That is the entire workflow.</p>
+</div>
+
+<!-- Part 1: Concepts -->
+<h2>Part 1 - The Three Locations You Need to Understand</h2>
+
+<div class="two-col">
+  <div class="panel">
+    <div class="panel-head" style="background:#1B5E20; color:#fff;">Your Mac (Local Repository)</div>
+    <div class="panel-body">
+      <p>A regular folder on your Mac that GitHub Desktop is watching. For this program, the path is:</p>
+      <code style="display:block; word-break:break-all;">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/</code>
+      <p style="margin-top:8px;">This folder is synced by Dropbox AND tracked by Git. When you add files here in Finder, GitHub Desktop notices them immediately.</p>
+    </div>
+  </div>
+  <div class="panel">
+    <div class="panel-head" style="background:#0D47A1; color:#fff;">GitHub (Remote Repository)</div>
+    <div class="panel-body">
+      <p>The online copy at:</p>
+      <code style="display:block;">github.com/uvu-dapr/Canvas</code>
+      <p style="margin-top:8px;">This is what Canvas pages actually read from when they load your images. Changes only appear here after you Commit and Push from GitHub Desktop.</p>
+    </div>
+  </div>
+</div>
+
+<div class="note-box" style="margin-top:0;">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+  </svg>
+  <p><strong>The golden rule:</strong> Files are only live on GitHub - and therefore visible in Canvas - after you have completed both steps: <strong>Commit to main</strong> and <strong>Push origin</strong>. Adding files to the Finder folder alone does not make them live.</p>
+</div>
+
+<!-- Part 2: Setting up -->
+<h2>Part 2 - One-Time Setup (Only Do This Once)</h2>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">1</div> Download and install GitHub Desktop</div>
+  <div class="step-body">
+    <p>Go to <strong>desktop.github.com</strong> and download GitHub Desktop for Mac. Install it like any other Mac app. Sign in with your GitHub account when prompted.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">2</div> Clone the repository to your Mac</div>
+  <div class="step-body">
+    <p>Cloning creates a local copy of the GitHub repository on your Mac that GitHub Desktop can track.</p>
+    <p><strong>Option A - If the folder already exists at the Dropbox path:</strong> In GitHub Desktop, go to <strong>File &gt; Add Local Repository</strong> and navigate to the Canvas folder. If GitHub Desktop recognizes it as a Git repository, you are done.</p>
+    <p><strong>Option B - Starting fresh:</strong> In GitHub Desktop, go to <strong>File &gt; Clone Repository</strong>. Search for <code>uvu-dapr/Canvas</code>. For the local path, choose:</p>
+    <span class="path-block">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/</span>
+    <p>GitHub Desktop will create a <code>Canvas</code> folder at that path automatically.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">3</div> Confirm the repository is active in GitHub Desktop</div>
+  <div class="step-body">
+    <p>The repository name <strong>Canvas</strong> should appear in the top-left dropdown of the GitHub Desktop window. The main panel should say "No local changes" when nothing has been modified. If you see this, setup is complete.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- Part 3: Daily workflow -->
+<h2>Part 3 - The Daily Workflow (Adding Images and Folders)</h2>
+
+<p>Every time you need to add images to the repository - whether it is a new assignment folder or more files for an existing one - follow these steps in order.</p>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">1</div> Open Finder and navigate to the Canvas repository folder</div>
+  <div class="step-body">
+    <p>In Finder, navigate to:</p>
+    <span class="path-block">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/</span>
+    <p>You will see the top-level course folders: <code>All/</code>, <code>DAPR2000-DigitalAudioEssentials/</code>, <code>DAPR2000L-DigitalAudioEssentialsLab/</code>, and so on.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">2</div> Create the subfolder for your assignment (if it does not exist yet)</div>
+  <div class="step-body">
+    <p>Images must always be inside an assignment subfolder - never placed directly in a course folder. Navigate into the correct course folder, then create a new folder named after the assignment. Follow the naming rule: lowercase, hyphens between segments, underscores within concept words, no spaces.</p>
+    <p><strong>Examples of correct subfolder names:</strong></p>
+    <span class="path-block">eq_lab
+compression_lab
+essential_groundwork
+spatial_mix_final
+m02-p3-sound_wave_properties</span>
+    <p>To create the folder: in Finder, press <strong>Shift + Command + N</strong>, or right-click and choose New Folder. Type the name exactly as shown above.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">3</div> Copy your image files into the subfolder</div>
+  <div class="step-body">
+    <p>Drag or copy your <code>.jpg</code> screenshot files into the subfolder you just created. Image filenames must be lowercase with underscores (no spaces, no capital letters, no hyphens within a single word).</p>
+    <p><strong>Correct filename examples:</strong></p>
+    <span class="path-block">plugin_settings.jpg
+session_overview.jpg
+bounce_dialog.jpg
+eq_screenshot_before.jpg
+eq_screenshot_after.jpg</span>
+    <p><strong>Incorrect:</strong> <code>Screenshot 2026.jpg</code> &nbsp; <code>EQ Lab Before.jpg</code> &nbsp; <code>screenshot1.jpg</code></p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">4</div> Open GitHub Desktop - your new files appear automatically</div>
+  <div class="step-body">
+    <p>Switch to GitHub Desktop. The left panel (Changes) will list every file you just added. Each file has a green plus icon next to it, indicating it is new. You do not need to click anything to make them appear - GitHub Desktop detects them automatically.</p>
+    <p>If the changes panel is empty, make sure the correct repository (Canvas) is selected in the top-left dropdown.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">5</div> Write a commit summary</div>
+  <div class="step-body">
+    <p>At the bottom-left of the Changes panel, there is a Summary field. Type a short description of what you are adding. Keep it to one line. Examples:</p>
+    <span class="path-block">Add eq_lab images for dapr-2000l
+Add spatial_mix_final screenshots for dapr-3345
+Add Essential Groundwork images for dapr-2020l</span>
+    <p>The Description field below it is optional. Leave it blank.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">6</div> Click "Commit to main"</div>
+  <div class="step-body">
+    <p>Click the blue <strong>Commit to main</strong> button at the bottom of the left panel. This saves a snapshot of your changes to your local repository history. The files are now tracked by Git on your Mac, but not yet live on GitHub.</p>
+    <p>After clicking, the Changes panel will show "No local changes" - this is correct and expected.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">7</div> Click "Push origin"</div>
+  <div class="step-body">
+    <p>At the top of the GitHub Desktop window, click the <strong>Push origin</strong> button. This sends your committed changes to GitHub. After the push completes, the button label changes back to "Fetch origin."</p>
+    <p>Your images are now live. The raw URLs are active immediately.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">8</div> Verify one URL in a browser before building the Canvas page</div>
+  <div class="step-body">
+    <p>Before writing any <code>img</code> tags, paste one of your new raw URLs into Safari or Chrome. You should see the image with nothing else around it. If you see the GitHub file browser page instead, you used the wrong URL format.</p>
+    <p><strong>Correct URL format:</strong></p>
+    <span class="path-block">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/COURSE/SUBFOLDER/filename.jpg</span>
+    <p><strong>Example:</strong></p>
+    <span class="path-block">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/dapr-2000l/eq_lab/plugin_settings.jpg</span>
+    <p><strong>Wrong - this shows the GitHub file page, not the image:</strong></p>
+    <span class="path-block" style="background:#FBE9E7; color:#C62828;">https://github.com/uvu-dapr/Canvas/blob/main/dapr-2000l/eq_lab/plugin_settings.jpg</span>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- Part 4: Moving existing folders -->
+<h2>Part 4 - Uploading Your Existing Local Folder Structure</h2>
+
+<p>You already have class folders organized on your Mac (visible in the screenshot you shared). Here is how to get all of them into the repository at once.</p>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">1</div> Look at your existing folder names vs. the repository naming convention</div>
+  <div class="step-body">
+    <p>Your existing folders use the format <strong>DAPR2000L-DigitalAudioEssentialsLab</strong> - capital D, capital letters throughout the course name portion. The zip file provided with this tutorial contains empty folders with these exact names pre-built for you to use as a starting structure.</p>
+    <p>Note that the GitHub repository uses a different convention for image subfolders (lowercase with hyphens), but the top-level course folder names match your local naming format.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">2</div> Copy the course folders into the Canvas repository folder</div>
+  <div class="step-body">
+    <p>In Finder, copy your class folders (or the pre-built empty ones from the zip) into:</p>
+    <span class="path-block">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/</span>
+    <p>After copying, the Canvas folder should contain:</p>
+    <div class="folder-tree">
+      <span class="dir">Canvas/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">All/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2000-DigitalAudioEssentials/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2000L-DigitalAudioEssentialsLab/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2010-CoreRecording/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2010L-CoreRecordingLab/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2020-CoreMixing/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2020L-CoreMixingLab/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2080-PodcastAndRadioProduction/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR2255-AudioHardwareI/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR3010R-DigitalLectureSeries/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR3255-AudioHardwareII/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR3340-SpatialAudioI/</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="dir">DAPR3345-SpatialAudioII/</span>
+    </div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">3</div> GitHub cannot commit empty folders - use .gitkeep files</div>
+  <div class="step-body">
+    <p>Git ignores empty folders entirely. If a course folder has no files in it, it will not appear in GitHub after you push. The zip file provided already includes a hidden <code>.gitkeep</code> file inside each empty folder. This is a zero-byte placeholder file that Git will track, which forces the folder to appear in the repository even when it has no images yet.</p>
+    <p>When you later add real image files to a folder, you can delete the <code>.gitkeep</code> - it is no longer needed once there are real files present.</p>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-header"><div class="step-num">4</div> Switch to GitHub Desktop - commit and push everything at once</div>
+  <div class="step-body">
+    <p>GitHub Desktop will show all the new folders and files in the Changes panel. You can commit them all in a single commit. Use a summary like:</p>
+    <span class="path-block">Add all 12 DAPR course folders with initial structure</span>
+    <p>Click <strong>Commit to main</strong>, then <strong>Push origin</strong>. All folders are now live on GitHub.</p>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- Part 5: The DAPR Canvas Icon Reference folder -->
+<h2>Part 5 - Adding the DAPR-Canvas-Icon-Reference Folder</h2>
+
+<p>Your Dropbox path already has this folder at:</p>
+<span class="path-block">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/All/DAPR-Canvas-Icon-Reference/</span>
+
+<p>Since it is already inside the Canvas repository folder on your Mac, GitHub Desktop should already be tracking it. Check the Changes panel - if the folder and its files appear there, just commit and push. If it does not appear (because GitHub Desktop has not seen changes since your last push), go to <strong>Repository &gt; Push</strong> or make a small change to trigger a new commit.</p>
+
+<div class="note-box">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/>
+  </svg>
+  <p><strong>The DAPR-Canvas-Icon-Reference folder is in the All/ subfolder.</strong> Because it contains icons used across multiple courses, it belongs in <code>All/</code> rather than a specific course folder. Its raw URL pattern is:<br><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/All/DAPR-Canvas-Icon-Reference/filename.svg</code></p>
+</div>
+
+<hr class="divider">
+
+<!-- Part 6: Quick Reference -->
+<h2>Part 6 - Quick Reference Summary</h2>
+
+<table class="summary-table">
+  <thead>
+    <tr>
+      <th>Task</th>
+      <th>What to Do</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Add images for a new assignment</td>
+      <td>Create subfolder in Finder &gt; copy .jpg files in &gt; open GitHub Desktop &gt; write summary &gt; Commit to main &gt; Push origin</td>
+    </tr>
+    <tr>
+      <td>Update an existing image</td>
+      <td>Replace the file in Finder using the exact same filename &gt; GitHub Desktop shows it as modified &gt; Commit and Push</td>
+    </tr>
+    <tr>
+      <td>Add a new course folder</td>
+      <td>Create the folder in Finder inside the Canvas directory &gt; add a .gitkeep file inside it &gt; Commit and Push</td>
+    </tr>
+    <tr>
+      <td>Check if files are live</td>
+      <td>Paste the raw URL into Safari. You should see the image alone with no GitHub chrome around it.</td>
+    </tr>
+    <tr>
+      <td>Someone else pushed changes you do not have yet</td>
+      <td>Click Fetch origin in GitHub Desktop, then Pull origin if new changes appear</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="stop-box" style="margin-top:24px;">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true">
+    <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+  </svg>
+  <p><strong>Never rename or move an image file after it has been pushed and its URL has been used in a Canvas page.</strong> Canvas pages contain hardcoded raw URLs. Renaming a file breaks every page that references it with no warning and no error message. To update an image, replace the file in place using the exact same filename.</p>
+</div>
+
+</body>
+</html>
