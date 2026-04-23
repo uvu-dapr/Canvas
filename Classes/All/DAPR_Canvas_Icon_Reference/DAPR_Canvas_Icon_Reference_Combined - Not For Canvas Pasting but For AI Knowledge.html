@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DAPR Canvas Icon System - Complete AI Reference</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, Helvetica, sans-serif; color: #212121; background: #ffffff; font-size: 13px; line-height: 1.6; }
+
+  /* Cover */
+  .cover { background: #1B5E20; color: #fff; padding: 40px 48px 36px; }
+  .cover h1 { font-size: 26px; font-weight: bold; margin-bottom: 6px; }
+  .cover .sub { font-size: 13px; opacity: 0.85; margin-bottom: 16px; }
+  .cover .desc { font-size: 12px; opacity: 0.75; max-width: 680px; line-height: 1.7; }
+
+  /* Layout */
+  .page { padding: 36px 48px; max-width: 1100px; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+
+  /* Section headings */
+  .section-head { font-size: 11px; font-weight: bold; letter-spacing: 0.09em; text-transform: uppercase; color: #555; border-bottom: 1px solid #ddd; padding-bottom: 6px; margin: 36px 0 16px; }
+  h2.page-h2 { font-size: 16px; color: #0D47A1; border-bottom: 2px solid #0D47A1; padding-bottom: 5px; margin: 36px 0 14px; }
+  h3.page-h3 { font-size: 13px; font-weight: bold; margin: 20px 0 8px; }
+
+  /* Callout boxes (this doc only - not Canvas) */
+  .callout { display: flex; align-items: flex-start; gap: 12px; padding: 12px 16px; border-left: 4px solid; border-radius: 0 4px 4px 0; margin: 16px 0; }
+  .callout p { margin: 0; font-size: 12.5px; line-height: 1.65; }
+  .callout.required { background: #E8F5E9; border-color: #1B5E20; }
+  .callout.note    { background: #E3F2FD; border-color: #0D47A1; }
+  .callout.warning { background: #FFF8E1; border-color: #F57F17; }
+  .callout.critical{ background: #FBE9E7; border-color: #C62828; }
+  .callout.tip     { background: #F3E5F5; border-color: #4A148C; }
+  .callout svg     { flex-shrink: 0; margin-top: 2px; }
+
+  /* Icon cards */
+  .icon-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 8px; }
+  .icon-grid.four { grid-template-columns: repeat(4, 1fr); }
+  .icon-grid.three { grid-template-columns: repeat(3, 1fr); }
+  .icon-card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 14px 10px 12px; display: flex; flex-direction: column; align-items: center; gap: 7px; background: #fff; }
+  .icon-circle { width: 52px; height: 52px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .icon-label { font-size: 11.5px; font-weight: bold; text-align: center; color: #212121; line-height: 1.3; }
+  .icon-meta { font-size: 10px; font-family: "Courier New", monospace; color: #666; text-align: center; line-height: 1.65; }
+  .icon-file { font-size: 10px; font-family: "Courier New", monospace; color: #0D47A1; text-align: center; }
+  .icon-use { font-size: 10px; color: #555; text-align: center; line-height: 1.4; margin-top: 2px; }
+  .color-chip { display: inline-block; width: 9px; height: 9px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.15); vertical-align: middle; margin-right: 3px; }
+
+  /* Code blocks */
+  pre { background: #F5F5F5; border: 1px solid #e0e0e0; border-radius: 4px; padding: 12px 14px; font-size: 10.5px; font-family: "Courier New", monospace; line-height: 1.65; overflow-x: auto; white-space: pre-wrap; word-break: break-all; color: #212121; margin: 8px 0 20px; }
+  code { font-family: "Courier New", monospace; background: #EEEEEE; padding: 2px 5px; border-radius: 3px; font-size: 11px; }
+
+  /* Preview strips */
+  .preview-strip { border-left: 4px solid; padding: 10px 14px; border-radius: 0 4px 4px 0; display: flex; align-items: flex-start; gap: 10px; margin-bottom: 8px; }
+  .preview-strip p { margin: 0; font-size: 12.5px; }
+
+  /* Tables */
+  table.ref { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0 20px; }
+  table.ref th { background: #0D47A1; color: #fff; padding: 8px 12px; text-align: left; }
+  table.ref td { padding: 8px 12px; border: 1px solid #ddd; vertical-align: top; }
+  table.ref tr:nth-child(even) td { background: #F9F9F9; }
+  table.ref td code { font-size: 10.5px; }
+
+  /* Feedback table demo */
+  .fb-demo { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0 20px; }
+  .fb-demo th { padding: 10px 14px; text-align: left; }
+  .fb-demo td { padding: 9px 14px; border: 1px solid #ddd; vertical-align: top; font-size: 11.5px; }
+
+  /* Submission row demo */
+  .sub-row { display: flex; align-items: center; gap: 12px; padding: 9px 14px; background: #F9F9F9; border: 1px solid #ddd; border-radius: 4px; margin-bottom: 6px; font-size: 12.5px; }
+  .sub-circle { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+  /* Rule boxes */
+  .rule-box { background: #FFF3E0; border-left: 4px solid #E65100; padding: 12px 16px; border-radius: 0 4px 4px 0; margin: 12px 0 20px; font-size: 12px; line-height: 1.65; }
+  .rule-box strong { display: block; margin-bottom: 4px; color: #BF360C; }
+
+  /* Decision table */
+  .dec-table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0 20px; }
+  .dec-table th { background: #212121; color: #fff; padding: 8px 12px; text-align: left; }
+  .dec-table td { padding: 8px 12px; border: 1px solid #ddd; vertical-align: top; }
+  .dec-table tr:nth-child(even) td { background: #FAFAFA; }
+
+  /* GitHub path box */
+  .path-box { background: #F5F5F5; border: 1px solid #ddd; border-radius: 4px; padding: 12px 16px; font-family: "Courier New", monospace; font-size: 11px; line-height: 2; margin: 8px 0 16px; }
+  .url-box { background: #E8EAF6; border-radius: 4px; padding: 9px 12px; font-family: "Courier New", monospace; font-size: 11px; word-break: break-all; margin: 6px 0; }
+
+  /* Badge */
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 12px; font-size: 10px; font-weight: bold; vertical-align: middle; margin-left: 6px; }
+  .badge.green { background: #E8F5E9; color: #1B5E20; }
+  .badge.red   { background: #FBE9E7; color: #C62828; }
+  .badge.blue  { background: #E3F2FD; color: #0D47A1; }
+
+  @media print {
+    .page { padding: 24px 36px; }
+    .icon-grid { grid-template-columns: repeat(5, 1fr); }
+    pre { font-size: 8.5px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================================================
+     COVER
+     =================================================== -->
+<div class="cover">
+  <h1>DAPR Canvas Icon System</h1>
+  <p class="sub">Audio Program &nbsp;|&nbsp; Utah Valley University &nbsp;|&nbsp; Complete AI Reference</p>
+  <p class="desc">This document is the authoritative reference for every icon, callout box, and submission row used in DAPR Canvas HTML pages. It is written for AI tools and instructors alike. Section 1 explains the Canvas HTML environment and what does and does not work. Section 2 covers the critical SVG rule. Sections 3-6 define every icon with its colors, file, and copy-paste template. Section 7 is a decision guide. Section 8 covers the GitHub image repository. Read Section 1 and Section 2 before generating any Canvas HTML.</p>
+</div>
+
+<div class="page">
+
+<!-- ===================================================
+     SECTION 1 - CANVAS HTML ENVIRONMENT RULES
+     =================================================== -->
+<h2 class="page-h2">Section 1 - Canvas HTML Environment Rules for AI</h2>
+
+<p style="margin-bottom:14px;">Canvas is a filtered HTML environment. It strips disallowed tags and attributes on save. AI-generated HTML must follow these rules exactly or content will break silently with no error message.</p>
+
+<div class="two-col">
+  <div>
+    <h3 class="page-h3" style="color:#C62828;">What Canvas Strips on Save</h3>
+    <table class="ref">
+      <thead><tr><th>Element / Property</th><th>What Happens</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;style&gt;...&lt;/style&gt;</code></td><td>Removed entirely</td></tr>
+        <tr><td><code>&lt;script&gt;</code></td><td>Removed for security</td></tr>
+        <tr><td><code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, <code>&lt;body&gt;</code></td><td>Stripped - paste body content only</td></tr>
+        <tr><td><code>&lt;svg&gt;</code> tag</td><td><strong>Stripped - svg is not on the Canvas allowed tag list.</strong> Use <code>&lt;img&gt;</code> instead.</td></tr>
+        <tr><td>External CSS (<code>&lt;link&gt;</code>)</td><td>Removed entirely</td></tr>
+        <tr><td>Google Fonts / @font-face</td><td>Blocked</td></tr>
+        <tr><td>CSS variables (<code>--var</code>)</td><td>Not supported</td></tr>
+        <tr><td>JavaScript event handlers</td><td>Stripped</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div>
+    <h3 class="page-h3" style="color:#1B5E20;">What Canvas Allows</h3>
+    <table class="ref">
+      <thead><tr><th>Element / Property</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr><td>Inline <code>style=""</code></td><td>The only reliable CSS method</td></tr>
+        <tr><td><code>display:flex</code></td><td>On the Canvas style allowlist - works reliably</td></tr>
+        <tr><td><code>display:grid</code></td><td>On the allowlist - use with caution on older builds</td></tr>
+        <tr><td><code>&lt;img src="..."&gt;</code></td><td>Required alt attribute. Use for all icons.</td></tr>
+        <tr><td><code>&lt;table&gt;</code></td><td>Data and layout. Use <code>role="presentation"</code> for layout.</td></tr>
+        <tr><td><code>&lt;h2&gt;</code> - <code>&lt;h6&gt;</code></td><td>Never use H1 - Canvas owns H1 for the page title</td></tr>
+        <tr><td><code>border-radius</code>, <code>flex</code></td><td>Both on the official style allowlist</td></tr>
+        <tr><td>All standard block/inline elements</td><td>div, p, span, ul, ol, li, a, strong, em, hr, br, blockquote, pre, code</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="callout required">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+  <p><strong>Required - Accessibility standard:</strong> Every Canvas page must pass the Canvas Accessibility Checker with zero issues before publishing. Run the checker after every paste. The checker icon is the person-in-a-circle at the right end of the Rich Content Editor toolbar.</p>
+</div>
+
+<div class="callout critical">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+  <p><strong>Critical - Never use #CC4400 or #E65100 as text color.</strong> Both fail or get flagged by the Canvas accessibility checker. Use #993300 for any orange-toned body text. #E65100 is only safe as an SVG stroke color inside a colored icon circle - never as a text color or heading color.</p>
+</div>
+
+<h3 class="page-h3">Approved Color Combinations</h3>
+<table class="ref">
+  <thead><tr><th>Color</th><th>Use</th><th>On Background</th><th>Ratio</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td>#212121</td><td>Body text</td><td>#FFFFFF</td><td>16.1:1</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#0D47A1</td><td>Links, section headings</td><td>#FFFFFF</td><td>8.6:1</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#1B5E20</td><td>Green heading bars, Required callout text</td><td>#FFFFFF</td><td>8.4:1</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#993300</td><td>Orange-toned text (warnings, code)</td><td>#FFFFFF</td><td>7.4:1</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#C62828</td><td>Critical callout text</td><td>#FFFFFF</td><td>6.8:1</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#4A148C</td><td>Tip callout text</td><td>#FFFFFF</td><td>9.2:1</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#FFFFFF</td><td>Text on all dark header backgrounds</td><td>#1B5E20, #0D47A1, #C62828, #4A148C</td><td>8.4:1+</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#212121</td><td>Text on gold - REQUIRED for gold backgrounds</td><td>#F9A825</td><td>4.6:1</td><td><span class="badge green">PASS</span></td></tr>
+    <tr><td>#FFFFFF</td><td>Text on gold - NEVER USE</td><td>#F9A825</td><td>2.9:1</td><td><span class="badge red">FAIL</span></td></tr>
+    <tr><td>#E65100</td><td>Text - never use as text color</td><td>#FFFFFF</td><td>4.6:1</td><td><span class="badge red">FLAGGED</span></td></tr>
+    <tr><td>#CC4400</td><td>Text - never use</td><td>#FFFFFF</td><td>4.8:1</td><td><span class="badge red">FLAGGED</span></td></tr>
+  </tbody>
+</table>
+
+<h3 class="page-h3">Required Accessibility Attributes</h3>
+<table class="ref">
+  <thead><tr><th>Element</th><th>Required Attribute</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><code>&lt;img&gt;</code> - informational</td><td><code>alt="description"</code></td><td><code>&lt;img src="..." alt="Pro Tools timeline showing six tracks"&gt;</code></td></tr>
+    <tr><td><code>&lt;img&gt;</code> - decorative</td><td><code>alt=""</code></td><td><code>&lt;img src="divider.png" alt=""&gt;</code></td></tr>
+    <tr><td><code>&lt;a&gt;</code></td><td><code>title="destination description"</code></td><td><code>&lt;a href="..." title="Canvas submission page"&gt;</code></td></tr>
+    <tr><td><code>&lt;a target="_blank"&gt;</code></td><td><code>aria-label="...(opens in new tab)"</code></td><td><code>aria-label="Google Drive stems folder (opens in new tab)"</code></td></tr>
+    <tr><td>Data <code>&lt;table&gt;</code></td><td><code>&lt;caption&gt;</code> with no style attribute + <code>&lt;th scope="col"&gt;</code></td><td>Caption must be plain text - Canvas strips hidden-caption CSS</td></tr>
+    <tr><td>Layout <code>&lt;table&gt;</code></td><td><code>role="presentation"</code></td><td>No caption, no th needed</td></tr>
+    <tr><td>Heading hierarchy</td><td>Start at H2, never skip levels</td><td>Canvas provides H1 from page title. Content starts at H2 then H3.</td></tr>
+    <tr><td>Callout box divs</td><td><code>role="note"</code> and <code>aria-label="description"</code></td><td><code>role="note" aria-label="Required"</code></td></tr>
+  </tbody>
+</table>
+
+
+<!-- ===================================================
+     SECTION 2 - THE SVG RULE
+     =================================================== -->
+<h2 class="page-h2">Section 2 - The SVG Rule: Why Icons Use &lt;img&gt; Not &lt;svg&gt;</h2>
+
+<div class="callout critical">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+  <p><strong>Critical - &lt;svg&gt; is not on the Canvas allowed HTML tag list.</strong> Canvas strips the entire &lt;svg&gt; element on save. The callout box colored div survives. The icon inside it disappears. This is silent - no error message, no broken image indicator, just empty space. All icons in Canvas pages must be &lt;img&gt; tags. Never use inline &lt;svg&gt; in Canvas HTML.</p>
+</div>
+
+<div class="two-col">
+  <div>
+    <h3 class="page-h3" style="color:#C62828;">Wrong - Inline SVG (stripped by Canvas)</h3>
+    <pre>&lt;div style="background-color:#E8F5E9; border-left:4px solid #1B5E20; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px;"&gt;
+  &lt;svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20"&gt;
+    &lt;path d="M12 22s8-4 8-10V5l-8-3..."/&gt;
+  &lt;/svg&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Required:&lt;/strong&gt; Text here.&lt;/p&gt;
+&lt;/div&gt;
+
+RESULT: Colored box renders. SVG disappears entirely.</pre>
+  </div>
+  <div>
+    <h3 class="page-h3" style="color:#1B5E20;">Correct - &lt;img&gt; pointing at GitHub raw URL</h3>
+    <pre>&lt;div style="background-color:#E8F5E9; border-left:4px solid #1B5E20; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px;"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/
+Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
+Callout_Required.svg"
+       width="22" height="22"
+       alt="Required icon"
+       style="flex-shrink:0; margin-top:2px;"&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Required:&lt;/strong&gt; Text here.&lt;/p&gt;
+&lt;/div&gt;
+
+RESULT: Colored box renders. Icon renders. Zero issues.</pre>
+  </div>
+</div>
+
+<div class="callout warning">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+  <p><strong>Warning - SVG stroke colors and &lt;img&gt; tags:</strong> When an SVG file is loaded via &lt;img&gt;, the stroke color is baked into the file. You cannot override it with CSS. This matters for the feedback table header icons - they appear on dark colored backgrounds and need white (or dark on gold) strokes baked into the file. The repository contains two versions of each feedback icon: the original colored-stroke version for use on white backgrounds, and a white/dark-stroke version for header cells. See Section 6 for details.</p>
+</div>
+
+<h3 class="page-h3">GitHub Raw URL Pattern</h3>
+<div class="path-box">
+Canvas/ (repository root)<br>
+&nbsp;&nbsp;&nbsp;Classes/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;All/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DAPR_Canvas_Icon_Reference/ &nbsp;&nbsp;&lt;-- all icon SVG files<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Callout_Required.svg &nbsp;&nbsp;&nbsp;&nbsp;Callout_Note.svg &nbsp;&nbsp;&nbsp;&nbsp;Callout_Warning.svg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Callout_Critical.svg &nbsp;&nbsp;&nbsp;&nbsp;Callout_Tip.svg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submit_Upload.svg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submit_Download.svg &nbsp;Submit_Audio.svg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submit_PDF.svg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Submit_Session.svg &nbsp;&nbsp;Submit_Video.svg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action_Email.svg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action_Deadline.svg &nbsp;Action_Checklist.svg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Action_External_Link.svg &nbsp;Action_Peer.svg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feedback_Not_Helpful.svg &nbsp;Feedback_Helpful.svg &nbsp;Feedback_Best.svg<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feedback_Not_Helpful_white.svg &nbsp;(white stroke - for dark red header)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feedback_Helpful_dark.svg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(dark stroke - for gold header)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Feedback_Best_white.svg &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(white stroke - for dark green header)
+</div>
+<div class="url-box">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/[Filename].svg</div>
+<p style="font-size:11px; color:#555; margin:4px 0 0;">Local Dropbox path: Dropbox &gt; apps &gt; GitHub &gt; Canvas &gt; Classes &gt; All &gt; DAPR_Canvas_Icon_Reference &gt;</p>
+
+
+<!-- ===================================================
+     SECTION 3 - CALLOUT BOX ICONS
+     =================================================== -->
+<h2 class="page-h2">Section 3 - Callout Box Icons (5 Types)</h2>
+
+<p style="margin-bottom:16px;">These five callout types cover every scenario in DAPR course pages. The icon color always matches the left border color of its box. Colors are locked permanently - do not mix or substitute.</p>
+
+<div class="icon-grid" style="grid-template-columns: repeat(5,1fr);">
+
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E8F5E9;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Required icon" role="img"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+    </div>
+    <div class="icon-label">Required</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#1B5E20;"></span>#1B5E20 border<br><span class="color-chip" style="background:#E8F5E9;border-color:#ccc;"></span>#E8F5E9 fill</div>
+    <div class="icon-file">Callout_Required.svg</div>
+    <div class="icon-use">Mandatory rules. Must-follow instructions. Student loses points if missed.</div>
+  </div>
+
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E3F2FD;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Note icon" role="img"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+    </div>
+    <div class="icon-label">Note</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#0D47A1;"></span>#0D47A1 border<br><span class="color-chip" style="background:#E3F2FD;border-color:#ccc;"></span>#E3F2FD fill</div>
+    <div class="icon-file">Callout_Note.svg</div>
+    <div class="icon-use">Clarifications, reminders, helpful context. No penalty if missed.</div>
+  </div>
+
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#FFF8E1;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Warning icon" role="img"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="icon-label">Warning</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#F57F17;"></span>#F57F17 border<br><span class="color-chip" style="background:#FFF8E1;border-color:#ccc;"></span>#FFF8E1 fill</div>
+    <div class="icon-file">Callout_Warning.svg</div>
+    <div class="icon-use">Common mistakes, known gotchas. Risk is real but fixable before submission.</div>
+  </div>
+
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#FBE9E7;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Critical icon" role="img"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+    </div>
+    <div class="icon-label">Critical / Stop</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#C62828;"></span>#C62828 border<br><span class="color-chip" style="background:#FBE9E7;border-color:#ccc;"></span>#FBE9E7 fill</div>
+    <div class="icon-file">Callout_Critical.svg</div>
+    <div class="icon-use">Hard rules. Enforcement policies. Absolute prohibitions. Automatic failure.</div>
+  </div>
+
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#F3E5F5;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Tip icon" role="img"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    </div>
+    <div class="icon-label">Tip / Pro Tip</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#4A148C;"></span>#4A148C border<br><span class="color-chip" style="background:#F3E5F5;border-color:#ccc;"></span>#F3E5F5 fill</div>
+    <div class="icon-file">Callout_Tip.svg</div>
+    <div class="icon-use">Optional improvements, shortcuts, efficiency notes. Not graded.</div>
+  </div>
+
+</div>
+
+<div class="section-head">Callout Box Copy-Paste Templates for Canvas</div>
+<p style="font-size:11.5px; color:#555; margin-bottom:16px;">These templates are ready to paste into the Canvas raw HTML editor. The icon is an &lt;img&gt; tag pointing at the GitHub repository. Replace only the bold label and content text. Do not remove any attributes.</p>
+
+<!-- REQUIRED template -->
+<div class="preview-strip" style="background:#E8F5E9; border-color:#1B5E20;">
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" width="22" height="22" alt="Required icon" style="flex-shrink:0; margin-top:1px;">
+  <p><strong>Required:</strong> This is what a Required callout looks like in Canvas.</p>
+</div>
+<pre>&lt;div style="background-color:#E8F5E9; border-left:4px solid #1B5E20; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px; border-radius:0 4px 4px 0;" role="note" aria-label="Required"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" width="22" height="22" alt="Required icon" style="flex-shrink:0; margin-top:2px;"&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Required:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+<!-- NOTE template -->
+<div class="preview-strip" style="background:#E3F2FD; border-color:#0D47A1;">
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" width="22" height="22" alt="Note icon" style="flex-shrink:0; margin-top:1px;">
+  <p><strong>Note:</strong> This is what a Note callout looks like in Canvas.</p>
+</div>
+<pre>&lt;div style="background-color:#E3F2FD; border-left:4px solid #0D47A1; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px; border-radius:0 4px 4px 0;" role="note" aria-label="Note"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" width="22" height="22" alt="Note icon" style="flex-shrink:0; margin-top:2px;"&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Note:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+<!-- WARNING template -->
+<div class="preview-strip" style="background:#FFF8E1; border-color:#F57F17;">
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" width="22" height="22" alt="Warning icon" style="flex-shrink:0; margin-top:1px;">
+  <p><strong>Warning:</strong> This is what a Warning callout looks like in Canvas.</p>
+</div>
+<pre>&lt;div style="background-color:#FFF8E1; border-left:4px solid #F57F17; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px; border-radius:0 4px 4px 0;" role="note" aria-label="Warning"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" width="22" height="22" alt="Warning icon" style="flex-shrink:0; margin-top:2px;"&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Warning:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+<!-- CRITICAL template -->
+<div class="preview-strip" style="background:#FBE9E7; border-color:#C62828;">
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Critical.svg" width="22" height="22" alt="Critical icon" style="flex-shrink:0; margin-top:1px;">
+  <p><strong>Critical:</strong> This is what a Critical callout looks like in Canvas.</p>
+</div>
+<pre>&lt;div style="background-color:#FBE9E7; border-left:4px solid #C62828; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px; border-radius:0 4px 4px 0;" role="note" aria-label="Critical"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Critical.svg" width="22" height="22" alt="Critical icon" style="flex-shrink:0; margin-top:2px;"&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Critical:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+<!-- TIP template -->
+<div class="preview-strip" style="background:#F3E5F5; border-color:#4A148C;">
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" width="22" height="22" alt="Tip icon" style="flex-shrink:0; margin-top:1px;">
+  <p><strong>Tip:</strong> This is what a Tip callout looks like in Canvas.</p>
+</div>
+<pre>&lt;div style="background-color:#F3E5F5; border-left:4px solid #4A148C; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px; border-radius:0 4px 4px 0;" role="note" aria-label="Tip"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" width="22" height="22" alt="Tip icon" style="flex-shrink:0; margin-top:2px;"&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Tip:&lt;/strong&gt; Content goes here.&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+
+<!-- ===================================================
+     SECTION 4 - SUBMISSION TYPE ICONS
+     =================================================== -->
+<h2 class="page-h2">Section 4 - Submission Type Icons (6 Types)</h2>
+
+<p style="margin-bottom:16px;">Submission icons appear inline next to the file requirement line on assignment pages. Each signals what file type is expected. Place the icon in a colored circle div to the left of the filename label.</p>
+
+<div class="icon-grid four">
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E8F5E9;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Upload"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    </div>
+    <div class="icon-label">Submit / Upload</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#1B5E20;"></span>#1B5E20<br><span class="color-chip" style="background:#E8F5E9;border-color:#ccc;"></span>#E8F5E9</div>
+    <div class="icon-file">Submit_Upload.svg</div>
+    <div class="icon-use">Student submits any file to Canvas. Up arrow = upload direction.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#EFEBE9;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4E342E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Download"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    </div>
+    <div class="icon-label">Download</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#4E342E;"></span>#4E342E<br><span class="color-chip" style="background:#EFEBE9;border-color:#ccc;"></span>#EFEBE9</div>
+    <div class="icon-file">Submit_Download.svg</div>
+    <div class="icon-use">Instructor provides a file for students to retrieve. Down arrow = download direction.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E8EAF6;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1A237E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Audio"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+    </div>
+    <div class="icon-label">Audio File</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#1A237E;"></span>#1A237E<br><span class="color-chip" style="background:#E8EAF6;border-color:#ccc;"></span>#E8EAF6</div>
+    <div class="icon-file">Submit_Audio.svg</div>
+    <div class="icon-use">WAV, MP3, AIFF, or any audio file submission. Waveform shape.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#F9FBE7;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#827717" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="PDF"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+    </div>
+    <div class="icon-label">PDF / Document</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#827717;"></span>#827717<br><span class="color-chip" style="background:#F9FBE7;border-color:#ccc;"></span>#F9FBE7</div>
+    <div class="icon-file">Submit_PDF.svg</div>
+    <div class="icon-use">PDF, DOCX, or TXT file submission. Olive color.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E0F7FA;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#006064" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Session ZIP"><rect x="2" y="2" width="8" height="4" rx="1"/><rect x="2" y="10" width="8" height="4" rx="1"/><rect x="2" y="18" width="8" height="4" rx="1"/><line x1="14" y1="4" x2="22" y2="4"/><line x1="14" y1="12" x2="22" y2="12"/><line x1="14" y1="20" x2="22" y2="20"/></svg>
+    </div>
+    <div class="icon-label">Session / ZIP</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#006064;"></span>#006064<br><span class="color-chip" style="background:#E0F7FA;border-color:#ccc;"></span>#E0F7FA</div>
+    <div class="icon-file">Submit_Session.svg</div>
+    <div class="icon-use">Pro Tools session folder or any zipped archive. Teal color.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#FFF3E0;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#E65100" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Video"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+    </div>
+    <div class="icon-label">Video File</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#E65100;"></span>#E65100<br><span class="color-chip" style="background:#FFF3E0;border-color:#ccc;"></span>#FFF3E0</div>
+    <div class="icon-file">Submit_Video.svg</div>
+    <div class="icon-use">MP4, MOV, or exported video. Orange = resistor sequence position 3. Safe as SVG stroke on light background, never as text color.</div>
+  </div>
+</div>
+
+<div class="section-head">Submission Row Template for Canvas - Three-File Assignment Example</div>
+<p style="font-size:11.5px; color:#555; margin-bottom:12px;">Stack three rows for a standard 100-pt mix assignment. Each row is a div with an icon circle on the left and the filename label on the right.</p>
+
+<div class="sub-row"><div class="sub-circle" style="background:#E0F7FA;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Session.svg" width="20" height="20" alt="Session ZIP"></div><strong>Session ZIP</strong> &nbsp;- Smith, John - EQ - EQ Lab - Dont Think Twice.zip</div>
+<div class="sub-row"><div class="sub-circle" style="background:#E8EAF6;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Audio.svg" width="20" height="20" alt="Audio WAV"></div><strong>Audio WAV</strong> &nbsp;- Smith, John - EQ - EQ Lab - Dont Think Twice.wav</div>
+<div class="sub-row" style="margin-bottom:16px;"><div class="sub-circle" style="background:#F9FBE7;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_PDF.svg" width="20" height="20" alt="PDF Documentation"></div><strong>PDF Documentation</strong> &nbsp;- Smith, John - EQ - EQ Lab - Dont Think Twice.pdf</div>
+
+<pre>&lt;div style="display:flex; align-items:center; gap:12px; padding:9px 14px; background:#F9F9F9; border:1px solid #dddddd; border-radius:4px; margin-bottom:6px;"&gt;
+  &lt;div style="width:34px; height:34px; background:#E0F7FA; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0;"&gt;
+    &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Session.svg" width="20" height="20" alt="Session ZIP icon"&gt;
+  &lt;/div&gt;
+  &lt;p style="margin:0;"&gt;&lt;strong&gt;Session ZIP&lt;/strong&gt; - LastName, FirstName - Assignment Name - Song Name.zip&lt;/p&gt;
+&lt;/div&gt;</pre>
+
+
+<!-- ===================================================
+     SECTION 5 - ACTION ICONS
+     =================================================== -->
+<h2 class="page-h2">Section 5 - Action Icons (5 Types)</h2>
+
+<p style="margin-bottom:16px;">Action icons appear inline to signal what the student needs to do. Used less frequently than callout or submission icons. Each sits in a colored circle next to its label.</p>
+
+<div class="icon-grid" style="grid-template-columns:repeat(5,1fr);">
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E3F2FD;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Email"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+    </div>
+    <div class="icon-label">Contact / Email</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#0D47A1;"></span>#0D47A1<br><span class="color-chip" style="background:#E3F2FD;border-color:#ccc;"></span>#E3F2FD</div>
+    <div class="icon-file">Action_Email.svg</div>
+    <div class="icon-use">Contact instructor via Canvas message.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#FFF8E1;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Deadline"><circle cx="12" cy="12" r="10"/><polyline points="12 8 12 12 14 14"/></svg>
+    </div>
+    <div class="icon-label">Deadline / Due</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#F57F17;"></span>#F57F17<br><span class="color-chip" style="background:#FFF8E1;border-color:#ccc;"></span>#FFF8E1</div>
+    <div class="icon-file">Action_Deadline.svg</div>
+    <div class="icon-use">Due date or time-sensitive notice. Extra emphasis beyond Canvas due date field.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E8F5E9;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Checklist"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+    </div>
+    <div class="icon-label">Checklist / Task</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#1B5E20;"></span>#1B5E20<br><span class="color-chip" style="background:#E8F5E9;border-color:#ccc;"></span>#E8F5E9</div>
+    <div class="icon-file">Action_Checklist.svg</div>
+    <div class="icon-use">Pre-submission checklist, verification steps. Use at the end of assignment pages.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#E3F2FD;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="External link"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+    </div>
+    <div class="icon-label">External Link</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#0D47A1;"></span>#0D47A1<br><span class="color-chip" style="background:#E3F2FD;border-color:#ccc;"></span>#E3F2FD</div>
+    <div class="icon-file">Action_External_Link.svg</div>
+    <div class="icon-use">Link opens in new tab. Always add aria-label="...(opens in new tab)" to the anchor.</div>
+  </div>
+  <div class="icon-card">
+    <div class="icon-circle" style="background:#F3E5F5;">
+      <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Peer"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+    </div>
+    <div class="icon-label">Peer / Class</div>
+    <div class="icon-meta"><span class="color-chip" style="background:#4A148C;"></span>#4A148C<br><span class="color-chip" style="background:#F3E5F5;border-color:#ccc;"></span>#F3E5F5</div>
+    <div class="icon-file">Action_Peer.svg</div>
+    <div class="icon-use">Peer review, class activity, group or cohort context.</div>
+  </div>
+</div>
+
+
+<!-- ===================================================
+     SECTION 6 - FEEDBACK QUALITY ICONS
+     =================================================== -->
+<h2 class="page-h2">Section 6 - Feedback Quality Icons (3 Levels)</h2>
+
+<p style="margin-bottom:12px;">These icons appear exclusively in the feedback quality comparison table on peer review pages - not as standalone callout boxes. The table header cells use dark backgrounds, so the SVG files used for header cells must have white (or dark on gold) strokes baked in. There are two versions of each file in the repository.</p>
+
+<table class="ref" style="margin-bottom:20px;">
+  <thead><tr><th>Icon</th><th>Standard file (on white background)</th><th>Header file (on dark/gold background)</th><th>Header BG</th><th>Header text</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><div class="icon-circle" style="background:#FFEBEE; width:36px; height:36px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#B71C1C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Not helpful" role="img"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div></td>
+      <td><code>Feedback_Not_Helpful.svg</code><br>Stroke: #B71C1C - use on white/light bg</td>
+      <td><code>Feedback_Not_Helpful_white.svg</code><br>Stroke: #ffffff - use in dark red header</td>
+      <td>#B71C1C</td>
+      <td>#ffffff</td>
+    </tr>
+    <tr>
+      <td><div class="icon-circle" style="background:#FFFDE7; width:36px; height:36px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F9A825" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Helpful" role="img"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div></td>
+      <td><code>Feedback_Helpful.svg</code><br>Stroke: #F9A825 - use on white/light bg</td>
+      <td><code>Feedback_Helpful_dark.svg</code><br>Stroke: #212121 - use in gold header</td>
+      <td>#F9A825</td>
+      <td>#212121 (NOT white - fails contrast at 2.9:1)</td>
+    </tr>
+    <tr>
+      <td><div class="icon-circle" style="background:#E8F5E9; width:36px; height:36px;"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-label="Best" role="img"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div></td>
+      <td><code>Feedback_Best.svg</code><br>Stroke: #1B5E20 - use on white/light bg</td>
+      <td><code>Feedback_Best_white.svg</code><br>Stroke: #ffffff - use in dark green header</td>
+      <td>#1B5E20</td>
+      <td>#ffffff</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="section-head">Feedback Table Template for Canvas</div>
+
+<table class="fb-demo">
+  <caption style="font-size:12px; margin-bottom:6px;">Feedback Quality Levels - Colors and Contrast Rules</caption>
+  <thead>
+    <tr>
+      <th style="background:#B71C1C; color:#fff; border-radius:4px 0 0 0;">
+        <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Not_Helpful.svg" width="20" height="20" alt="Not helpful icon" style="vertical-align:middle; margin-right:8px; filter:brightness(0) invert(1);">Not Helpful
+      </th>
+      <th style="background:#F9A825; color:#212121;">
+        <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Helpful.svg" width="20" height="20" alt="Helpful icon" style="vertical-align:middle; margin-right:8px; filter:brightness(0);">Helpful
+      </th>
+      <th style="background:#1B5E20; color:#fff; border-radius:0 4px 0 0;">
+        <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Best.svg" width="20" height="20" alt="Best icon" style="vertical-align:middle; margin-right:8px; filter:brightness(0) invert(1);">Best
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="background:#FFEBEE; color:#B71C1C;">Vague, emotional, or impossible to act on. "Sounded weird to me."</td>
+      <td style="background:#FFFDE7; color:#212121;">Specific enough to identify an issue. "The low end felt muddy."</td>
+      <td style="background:#E8F5E9; color:#1B5E20;">Specific, constructive, immediately actionable. "The kick at 2:14 is clipping the master bus. Pull it down 2 dB and re-bounce."</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="callout note">
+  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+  <p><strong>Note - CSS filter trick for this reference doc only:</strong> The preview above uses <code>filter:brightness(0) invert(1)</code> to turn the standard-stroke icons white on dark backgrounds, and <code>filter:brightness(0)</code> to turn the gold-stroke icon dark. This CSS filter approach works in this standalone HTML reference document. It does NOT work reliably in Canvas because Canvas may strip filter from the style attribute. In Canvas HTML, always use the correct stroke-version of the file (<code>_white</code> or <code>_dark</code> suffix) for header cells.</p>
+</div>
+
+<pre>&lt;!-- Canvas-ready feedback table header - uses correct stroke-version files --&gt;
+&lt;th scope="col" style="background-color:#B71C1C; color:#ffffff; padding:12px 16px; text-align:left; border-radius:4px 0 0 0;"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Not_Helpful_white.svg"
+       width="22" height="22" alt="Not helpful feedback icon" style="vertical-align:middle; margin-right:8px;"&gt;Not Helpful
+&lt;/th&gt;
+&lt;th scope="col" style="background-color:#F9A825; color:#212121; padding:12px 16px; text-align:left;"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Helpful_dark.svg"
+       width="22" height="22" alt="Helpful feedback icon" style="vertical-align:middle; margin-right:8px;"&gt;Helpful
+&lt;/th&gt;
+&lt;th scope="col" style="background-color:#1B5E20; color:#ffffff; padding:12px 16px; text-align:left; border-radius:0 4px 0 0;"&gt;
+  &lt;img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Best_white.svg"
+       width="22" height="22" alt="Best feedback icon" style="vertical-align:middle; margin-right:8px;"&gt;Best
+&lt;/th&gt;</pre>
+
+
+<!-- ===================================================
+     SECTION 7 - DECISION GUIDE
+     =================================================== -->
+<h2 class="page-h2">Section 7 - When to Use Which Callout</h2>
+
+<table class="dec-table">
+  <thead><tr><th>Situation</th><th>Use This</th><th>Not These</th><th>Rule</th></tr></thead>
+  <tbody>
+    <tr><td>Student must do X or lose points</td><td style="color:#1B5E20;"><strong>Required (green)</strong></td><td>Note, Tip</td><td>Non-negotiable. Grade impact if missed.</td></tr>
+    <tr><td>Good to know, no penalty if missed</td><td style="color:#0D47A1;"><strong>Note (blue)</strong></td><td>Required, Warning</td><td>Context and clarification only.</td></tr>
+    <tr><td>Common mistake that causes point loss but is fixable before submission</td><td style="color:#993300;"><strong>Warning (yellow)</strong></td><td>Required, Critical</td><td>Risk is real but correctable. Not permanent.</td></tr>
+    <tr><td>Hard rule - automatic failure or permanent damage if violated</td><td style="color:#C62828;"><strong>Critical (red)</strong></td><td>Warning, Required</td><td>No tolerance. Cannot be undone. Reserve for genuine hard stops.</td></tr>
+    <tr><td>Optional improvement, not graded</td><td style="color:#4A148C;"><strong>Tip (purple)</strong></td><td>Required, Warning</td><td>Genuinely optional. Student can skip with no consequence.</td></tr>
+    <tr><td>Peer review, group work, class activity</td><td>Submission row with <strong>Action_Peer.svg</strong></td><td>Any callout type</td><td>Use action icon inline, not a callout box.</td></tr>
+  </tbody>
+</table>
+
+<div class="rule-box">
+  <strong>Overuse warning</strong>
+  Do not use more than one or two callout boxes per section. If every paragraph is a Required callout, none of them read as required. Reserve Critical for genuine hard stops - it loses all impact if overused. A page with five red Critical boxes communicates nothing.
+</div>
+
+<h3 class="page-h3">Heading Color Rules</h3>
+<table class="ref">
+  <thead><tr><th>Element</th><th>Correct Color</th><th>Never Use</th></tr></thead>
+  <tbody>
+    <tr><td>Warning callout h3 label heading</td><td>#993300</td><td>#E65100, #CC4400 (Canvas flags both as text colors)</td></tr>
+    <tr><td>Deadline action heading</td><td>#993300</td><td>#E65100 (fails checker as text color)</td></tr>
+    <tr><td>Section H2 headings</td><td>#0D47A1</td><td>Any color not on the approved list</td></tr>
+    <tr><td>Page title bar H2</td><td>#ffffff on colored background</td><td>Any dark color on a dark background</td></tr>
+    <tr><td>Gold feedback column text</td><td>#212121</td><td>#ffffff (2.9:1 - fails WCAG AA)</td></tr>
+  </tbody>
+</table>
+
+
+<!-- ===================================================
+     SECTION 8 - GITHUB IMAGE REPOSITORY
+     =================================================== -->
+<h2 class="page-h2">Section 8 - GitHub Image Repository Rules</h2>
+
+<p style="margin-bottom:14px;">All images used in Canvas pages - including icons - are hosted in the public GitHub repository <strong>uvu-dapr/Canvas</strong>. Images are referenced via raw GitHub URLs. They are never embedded as base64 or uploaded to Canvas Files.</p>
+
+<table class="ref">
+  <thead><tr><th>Rule</th><th>Detail</th></tr></thead>
+  <tbody>
+    <tr><td>Always use raw.githubusercontent.com</td><td>Never use github.com URLs - those show the GitHub file browser, not the image. Verify every new URL in a browser before building the page.</td></tr>
+    <tr><td>Never rename or move a file after its URL is in a Canvas page</td><td>Canvas pages contain hardcoded URLs. Renaming breaks every page that references the file with no error message. To update an image, replace it in place with the same filename.</td></tr>
+    <tr><td>Confirm filenames before writing img tags</td><td>Never guess a filename. Confirm the exact filename has been pushed to GitHub. A page built with assumed filenames will have silently broken images.</td></tr>
+    <tr><td>Folder structure: course / assignment subfolder</td><td>course folder = dapr-2000, dapr-2000l, etc. or All/ for shared. assignment subfolder = lowercase, underscores within concept words, hyphens between segments.</td></tr>
+    <tr><td>Alt text under 120 characters</td><td>Canvas accessibility checker flags alt text over 120 characters.</td></tr>
+    <tr><td>Images must be pushed before HTML is written</td><td>Raw URLs are live immediately after pushing via GitHub Desktop. Verify at least one URL in a browser before writing img tags.</td></tr>
+  </tbody>
+</table>
+
+<div class="url-box">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/COURSE/ASSIGNMENT_SUBFOLDER/filename.jpg</div>
+<div class="url-box">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg</div>
+
+
+<!-- ===================================================
+     SECTION 9 - AI GENERATION CHECKLIST
+     =================================================== -->
+<h2 class="page-h2">Section 9 - AI Generation Checklist</h2>
+
+<p style="margin-bottom:14px;">Before delivering any Canvas HTML, verify every item below. Content that fails any of these cannot be published.</p>
+
+<table class="ref">
+  <thead><tr><th>#</th><th>Check</th><th>Why It Matters</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>No &lt;svg&gt; tags anywhere in the output</td><td>Canvas strips the entire &lt;svg&gt; element silently. Use &lt;img&gt; for all icons.</td></tr>
+    <tr><td>2</td><td>No &lt;style&gt; blocks, no external CSS</td><td>Canvas removes style blocks. All CSS must be inline style="" attributes.</td></tr>
+    <tr><td>3</td><td>No &lt;html&gt;, &lt;head&gt;, or &lt;body&gt; tags</td><td>Paste only body content into Canvas.</td></tr>
+    <tr><td>4</td><td>First heading is H2, not H1</td><td>Canvas provides H1 from the page title automatically. Content starts at H2.</td></tr>
+    <tr><td>5</td><td>Heading levels never skip (H2 to H4 without H3)</td><td>Panorama and Canvas checker both flag skipped heading levels as Severe.</td></tr>
+    <tr><td>6</td><td>All &lt;img&gt; tags have alt="" attribute</td><td>Missing alt text is flagged as Severe. Informational images need description. Decorative use alt="".</td></tr>
+    <tr><td>7</td><td>All &lt;a&gt; tags have title="destination" attribute</td><td>Canvas accessibility checker flags links without descriptive titles.</td></tr>
+    <tr><td>8</td><td>No #E65100 or #CC4400 as text color</td><td>Both get flagged by the Canvas checker. Use #993300 for orange-toned text.</td></tr>
+    <tr><td>9</td><td>No white text on gold (#F9A825)</td><td>White on gold = 2.9:1 contrast. Fails WCAG AA. Always use #212121 on gold.</td></tr>
+    <tr><td>10</td><td>Data tables have &lt;caption&gt; with no style attribute + &lt;th scope="col"&gt;</td><td>Both are required independently. Missing either one is a separate checker error.</td></tr>
+    <tr><td>11</td><td>Layout tables have role="presentation"</td><td>Without this, Canvas evaluates them as data tables and flags missing headers.</td></tr>
+    <tr><td>12</td><td>Icon img tags use the correct GitHub raw URL</td><td>Only raw.githubusercontent.com serves the image directly. Confirm filenames are pushed.</td></tr>
+    <tr><td>13</td><td>Feedback table header icons use the _white or _dark stroke version</td><td>Standard stroke icons are invisible against their matching-color header backgrounds.</td></tr>
+    <tr><td>14</td><td>All colors are hex codes, no rgba()</td><td>Hex is easier to contrast-check and consistent with the approved color list.</td></tr>
+    <tr><td>15</td><td>No "All of the above" or "None of the above" in quiz questions</td><td>Prohibited by program policy. Rewrite as independent distractors.</td></tr>
+    <tr><td>16</td><td>No em dashes and no double hyphens (--) in visible page content</td><td>Use hyphen with spaces ( - ) as a separator in running text.</td></tr>
+    <tr><td>17</td><td>Submission instructions state exact filename for every deliverable</td><td>Students should never have to infer what to name their files. Show an example filename.</td></tr>
+  </tbody>
+</table>
+
+<div style="margin-top:32px; padding-top:20px; border-top:4px solid #1B5E20; font-size:11.5px; color:#555;">
+  <strong style="color:#212121;">DAPR Canvas Icon System Reference</strong> &nbsp;|&nbsp; Audio Program, Utah Valley University &nbsp;|&nbsp; Updated April 2026 &nbsp;|&nbsp; Repository: github.com/uvu-dapr/Canvas
+</div>
+
+</div><!-- end .page -->
+</body>
+</html>
