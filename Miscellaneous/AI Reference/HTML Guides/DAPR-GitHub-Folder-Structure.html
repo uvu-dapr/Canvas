@@ -54,7 +54,7 @@
 <body>
 
 <h1>DAPR Canvas Image Folder Structure</h1>
-<p class="subtitle">uvu-dapr/Canvas repository &nbsp;|&nbsp; All DAPR courses &nbsp;|&nbsp; Updated April 2026</p>
+<p class="subtitle">uvu-dapr/Canvas repository &nbsp;|&nbsp; Classes/ top-level prefix &nbsp;|&nbsp; All DAPR courses &nbsp;|&nbsp; Updated April 2026</p>
 
 <!-- Canvas Naming System -->
 <h2>Canvas Naming System: Option D (Permanent Standard)</h2>
@@ -141,7 +141,7 @@
     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/>
   </svg>
   <p><strong>Three-level folder structure (course-specific images):</strong><br>
-  <code style="font-family:Courier New; background:#d4edda; padding:2px 6px; border-radius:3px;">DAPR-####--Course_Name / Topic / Page_Title / Image_File.jpg</code><br><br>
+  <code style="font-family:Courier New; background:#d4edda; padding:2px 6px; border-radius:3px;">Classes / DAPR-####--Course_Name / Topic / Page_Title / Image_File.jpg</code><br><br>
   Level 1 = Course folder matching GitHub exactly. Level 2 = Topic word from the Canvas page topic prefix (e.g., Networking, MIDI, Sound, Jobs). Level 3 = Page title folder, matching the Canvas page descriptive title exactly with spaces replaced by underscores. All image files for that Canvas page go directly inside the Level 3 folder. No further subfolders. No module number anywhere in the path -- modules are intentionally excluded because moving a page between modules must never break an image URL.</p>
 </div>
 
@@ -159,57 +159,57 @@
   <tbody>
     <tr>
       <td class="canvas-name">Jobs: Overview</td>
-      <td class="github-name">DAPR-2000--Digital_Audio_Essentials/Jobs/Overview/</td>
+      <td class="github-name">Classes/DAPR-2000--Digital_Audio_Essentials/Jobs/Overview/</td>
       <td>Topic prefix = Level 2 folder; one-word page title = Level 3</td>
     </tr>
     <tr>
       <td class="canvas-name">Jobs: Working in the Industry</td>
-      <td class="github-name">DAPR-2000--Digital_Audio_Essentials/Jobs/Working_in_the_Industry/</td>
+      <td class="github-name">Classes/DAPR-2000--Digital_Audio_Essentials/Jobs/Working_in_the_Industry/</td>
       <td>Spaces become underscores; title case preserved</td>
     </tr>
     <tr>
       <td class="canvas-name">Sound: The Decibel</td>
-      <td class="github-name">DAPR-2000--Digital_Audio_Essentials/Sound/The_Decibel/</td>
+      <td class="github-name">Classes/DAPR-2000--Digital_Audio_Essentials/Sound/The_Decibel/</td>
       <td>Topic = Sound folder; page title = The_Decibel</td>
     </tr>
     <tr>
       <td class="canvas-name">Sound: Sound Wave Properties</td>
-      <td class="github-name">DAPR-2000--Digital_Audio_Essentials/Sound/Sound_Wave_Properties/</td>
+      <td class="github-name">Classes/DAPR-2000--Digital_Audio_Essentials/Sound/Sound_Wave_Properties/</td>
       <td>Three-word title, underscores throughout</td>
     </tr>
     <tr>
       <td class="canvas-name">Networking: Address Resolution Protocol</td>
-      <td class="github-name">DAPR-3255--Audio_Hardware2/Networking/Address_Resolution_Protocol/</td>
+      <td class="github-name">Classes/DAPR-3255--Audio_Hardware2/Networking/Address_Resolution_Protocol/</td>
       <td>Long title, all spaces become underscores</td>
     </tr>
     <tr>
       <td class="canvas-name">Networking: Dynamic Host Configuration Protocol (DHCP)</td>
-      <td class="github-name">DAPR-3255--Audio_Hardware2/Networking/Dynamic_Host_Configuration_Protocol/</td>
+      <td class="github-name">Classes/DAPR-3255--Audio_Hardware2/Networking/Dynamic_Host_Configuration_Protocol/</td>
       <td>Drop parenthetical acronym in folder name; keep it in the Canvas page name</td>
     </tr>
     <tr>
       <td class="canvas-name">Networking: Protocol Comparison</td>
-      <td class="github-name">DAPR-3255--Audio_Hardware2/Networking/Protocol_Comparison/</td>
+      <td class="github-name">Classes/DAPR-3255--Audio_Hardware2/Networking/Protocol_Comparison/</td>
       <td>Two-word title, underscore between words</td>
     </tr>
     <tr>
       <td class="canvas-name">Networking: Diagnostic Ladder</td>
-      <td class="github-name">DAPR-3255--Audio_Hardware2/Networking/Diagnostic_Ladder/</td>
+      <td class="github-name">Classes/DAPR-3255--Audio_Hardware2/Networking/Diagnostic_Ladder/</td>
       <td>Two-word title, underscore between words</td>
     </tr>
     <tr>
       <td class="canvas-name">MIDI: Channel Voice Messages</td>
-      <td class="github-name">DAPR-3255--Audio_Hardware2/MIDI/Channel_Voice_Messages/</td>
+      <td class="github-name">Classes/DAPR-3255--Audio_Hardware2/MIDI/Channel_Voice_Messages/</td>
       <td>MIDI stays all caps as the topic folder; title uses underscores</td>
     </tr>
     <tr>
       <td class="canvas-name">EQ: EQ Lab</td>
-      <td class="github-name">DAPR-2000L--Digital_Audio_Essentials_Lab/EQ/EQ_Lab/</td>
+      <td class="github-name">Classes/DAPR-2000L--Digital_Audio_Essentials_Lab/EQ/EQ_Lab/</td>
       <td>Topic = EQ folder; page title = EQ_Lab</td>
     </tr>
     <tr>
       <td class="canvas-name">Pro Tools Cleanup (shared tutorial)</td>
-      <td class="github-name">All/Pro_Tools_Cleanup/</td>
+      <td class="github-name">Classes/All/Pro_Tools_Cleanup/</td>
       <td>Shared content in All/ has no topic subfolder layer -- page title goes directly under All/</td>
     </tr>
   </tbody>
@@ -217,9 +217,9 @@
 
 <!-- URL pattern -->
 <h2>Raw URL Pattern</h2>
-<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/DAPR-2000--Digital_Audio_Essentials/Sound/The_Decibel/Filename.jpg</span>
-<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/DAPR-3255--Audio_Hardware2/Networking/Address_Resolution_Protocol/Filename.jpg</span>
-<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/All/Pro_Tools_Cleanup/Before.jpg</span>
+<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Sound/The_Decibel/Filename.jpg</span>
+<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-3255--Audio_Hardware2/Networking/Address_Resolution_Protocol/Filename.jpg</span>
+<span class="url-pattern">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/Pro_Tools_Cleanup/Before.jpg</span>
 
 <div class="note-box">
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
@@ -233,15 +233,15 @@
 <div class="course-block">
   <div class="course-header">
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
-    All/ - Images used in pages across multiple courses (no topic subfolder layer)
+    Classes/All/ - Images used in pages across multiple courses (no topic subfolder layer)
   </div>
   <div class="course-content">
     <ul class="folder-list">
-      <li><span class="folder-path">All/Pro_Tools_Cleanup/</span></li>
-      <li><span class="folder-path">All/DAPR_Canvas_Icon_Reference/</span></li>
-      <li><span class="folder-path">All/Page_Title_Name/</span> <span class="folder-note">add new shared folders as needed -- title case with underscores, no topic layer inside All/</span></li>
+      <li><span class="folder-path">Classes/All/Pro_Tools_Cleanup/</span></li>
+      <li><span class="folder-path">Classes/All/DAPR_Canvas_Icon_Reference/</span></li>
+      <li><span class="folder-path">Classes/All/Page_Title_Name/</span> <span class="folder-note">add new shared folders as needed -- title case with underscores, no topic layer inside All/</span></li>
     </ul>
-    <p style="font-size:12px; color:#555; margin-top:10px;">Use All/ only when the exact same image is needed on pages across two or more different courses. All/ skips the topic subfolder layer -- page-title folders sit directly inside All/. If an image is used in only one course it belongs in that course folder even if the topic is general.</p>
+    <p style="font-size:12px; color:#555; margin-top:10px;">Use Classes/All/ only when the exact same image is needed on pages across two or more different courses. Classes/All/ skips the topic subfolder layer -- page-title folders sit directly inside Classes/All/. If an image is used in only one course it belongs in that course folder even if the topic is general.</p>
   </div>
 </div>
 
@@ -390,11 +390,11 @@
 <div class="question-box">
   <div class="question-row">
     <div class="q-label">Question 1</div>
-    <div class="q-body">Is this image shared across multiple courses, or does it belong to one specific course? <strong>Shared across courses = All/ &nbsp;&nbsp; One course only = DAPR-####--Course_Name/</strong></div>
+    <div class="q-body">Is this image shared across multiple courses, or does it belong to one specific course? <strong>Shared across courses = Classes/All/ &nbsp;&nbsp; One course only = Classes/DAPR-####--Course_Name/</strong></div>
   </div>
   <div class="question-row">
     <div class="q-label">Question 2</div>
-    <div class="q-body">What is the exact course folder name as it appears in GitHub? (e.g., DAPR-2000--Digital_Audio_Essentials, DAPR-3255--Audio_Hardware2). Must match GitHub exactly including capitalization.</div>
+    <div class="q-body">What is the exact course folder name as it appears in GitHub under Classes/? (e.g., DAPR-2000--Digital_Audio_Essentials, DAPR-3255--Audio_Hardware2). Must match GitHub exactly including capitalization.</div>
   </div>
   <div class="question-row">
     <div class="q-label">Question 3</div>
