@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DAPR Canvas Student Reference Guide</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; color: #212121; background: #fff; padding: 32px 44px; max-width: 960px; }
+h1 { background: #1B5E20; color: #fff; padding: 16px 20px; font-size: 1.3em; border-radius: 4px; margin-bottom: 6px; }
+.subtitle { font-size: 12px; color: #555; margin-bottom: 28px; }
+h2 { font-size: 1.05em; color: #0D47A1; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin: 32px 0 12px; }
+h3 { font-size: 0.97em; color: #212121; margin: 18px 0 8px; }
+p { font-size: 13px; line-height: 1.7; margin-bottom: 10px; }
+ul, ol { font-size: 13px; line-height: 1.7; margin: 0 0 10px 20px; }
+li { margin-bottom: 5px; }
+code { font-family: "Courier New", monospace; font-size: 11.5px; background: #F5F5F5; padding: 1px 5px; border-radius: 3px; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 10px 0 18px; }
+th { background: #0D47A1; color: #fff; padding: 8px 10px; text-align: left; }
+td { padding: 7px 10px; border: 1px solid #ddd; vertical-align: top; }
+tr:nth-child(even) td { background: #F9F9F9; }
+.required { background: #E8F5E9; border-left: 4px solid #1B5E20; padding: 10px 14px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.note { background: #E3F2FD; border-left: 4px solid #0D47A1; padding: 10px 14px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.warn { background: #FFF8E1; border-left: 4px solid #F57F17; padding: 10px 14px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.stop { background: #FBE9E7; border-left: 4px solid #C62828; padding: 10px 14px; margin: 14px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.icon-row { display: flex; align-items: flex-start; gap: 16px; padding: 10px 0; border-bottom: 1px solid #eee; }
+.icon-row:last-child { border-bottom: none; }
+.icon-cell { flex-shrink: 0; width: 52px; text-align: center; }
+.icon-desc { font-size: 13px; line-height: 1.6; }
+.icon-desc strong { display: block; margin-bottom: 3px; }
+.toc { background: #F5F5F5; border: 1px solid #ddd; padding: 14px 18px; border-radius: 4px; margin-bottom: 28px; }
+.toc li { font-size: 12.5px; margin-bottom: 5px; }
+.toc a { color: #0D47A1; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.name-example { font-family: "Courier New", monospace; font-size: 11.5px; background: #E8EAF6; padding: 6px 10px; border-radius: 3px; display: block; margin: 6px 0; }
+.checklist li { list-style: none; margin-left: 0; padding-left: 20px; position: relative; }
+.checklist li::before { content: "☐"; position: absolute; left: 0; color: #1B5E20; font-size: 13px; }
+.section-divider { border: none; border-top: 2px solid #E0E0E0; margin: 36px 0 0; }
+</style>
+</head>
+<body>
+
+<h1>DAPR Canvas Student Reference Guide</h1>
+<p class="subtitle">Utah Valley University &nbsp;|&nbsp; Audio Program &nbsp;|&nbsp; All DAPR Courses &nbsp;|&nbsp; Updated April 2026</p>
+
+<p>This guide tells you what you need to know to succeed in every DAPR Canvas course at UVU. Read the file naming and submission sections before your first submission. The icon guide tells you what to look for on every assignment page.</p>
+
+<div class="toc">
+  <strong style="font-size: 12.5px; display: block; margin-bottom: 8px;">Contents</strong>
+  <ul>
+    <li><a href="#icons" title="Jump to icon guide section">1. Icons on Assignment Pages</a></li>
+    <li><a href="#file-naming" title="Jump to file naming section">2. File Naming Rules</a></li>
+    <li><a href="#submission-types" title="Jump to submission types section">3. Submission Types</a></li>
+    <li><a href="#pdf-workflow" title="Jump to PDF documentation section">4. PDF Documentation Workflow</a></li>
+    <li><a href="#wav-specs" title="Jump to WAV export specs section">5. WAV Export Specifications</a></li>
+    <li><a href="#zip-workflow" title="Jump to ZIP submission section">6. Zipping a Pro Tools Session</a></li>
+    <li><a href="#point-system" title="Jump to point system section">7. Point System</a></li>
+    <li><a href="#preflight" title="Jump to pre-submission checklist">8. Pre-Submission Checklist</a></li>
+    <li><a href="#late-policy" title="Jump to late policy section">9. Late Submissions and Returns</a></li>
+  </ul>
+</div>
+
+<!-- ====================================================== -->
+<h2 id="icons">1. Icons on Assignment Pages</h2>
+
+<p>Every assignment page in this program uses a consistent set of icons. There are two shapes: <strong>hexagons</strong> and <strong>circles</strong>. The shape tells you the category. The color tells you the specific type.</p>
+
+<div class="required"><strong>Shape rule:</strong> A hexagon always means a file - something you submit or that your instructor provides. A circle always means an action - something to do or be aware of, such as a deadline, checklist, or link.</div>
+
+<h3>File icons - hexagon shape</h3>
+
+<div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Upload.svg" width="48" height="48" alt="Green hexagon upload icon - submit a file to Canvas">
+    </div>
+    <div class="icon-desc">
+      <strong>Upload to Canvas - green hexagon</strong>
+      You are submitting this file through the Canvas assignment page. Appears next to every required deliverable.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Download.svg" width="48" height="48" alt="Brown hexagon download icon - instructor provides this file">
+    </div>
+    <div class="icon-desc">
+      <strong>Download from Canvas - brown hexagon</strong>
+      Your instructor is providing this file for you. Click the link below the icon to download it.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Audio.svg" width="48" height="48" alt="Indigo hexagon audio waveform icon - stereo WAV or MP3 submission">
+    </div>
+    <div class="icon-desc">
+      <strong>Audio bounce - indigo hexagon</strong>
+      A stereo mixdown exported from your session. Format is WAV 44.1 kHz / 24-bit interleaved unless the assignment specifies MP3. Name it exactly as shown in the assignment.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_PDF.svg" width="48" height="48" alt="Olive hexagon document icon - PDF documentation submission">
+    </div>
+    <div class="icon-desc">
+      <strong>PDF documentation - olive hexagon</strong>
+      A PDF exported from Word after inserting screenshots. Copy the numbered block from the assignment page into Word, add your screenshots below each item, then export as PDF. See Section 4 below.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Session.svg" width="48" height="48" alt="Teal hexagon archive icon with PT label - zipped Pro Tools session folder">
+    </div>
+    <div class="icon-desc">
+      <strong>Zipped Pro Tools session - teal hexagon, PT label</strong>
+      Your entire Pro Tools session folder compressed into a single ZIP. Use File - Save Copy In with Copy All Audio Files checked before zipping. See Section 6 below.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_ZIP.svg" width="48" height="48" alt="Teal hexagon archive icon with ZIP label - zipped folder submission">
+    </div>
+    <div class="icon-desc">
+      <strong>ZIP archive - teal hexagon, ZIP label</strong>
+      A zipped folder whose contents are not a Pro Tools session - for example stems, a project folder, or a set of exported files.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_PTX.svg" width="48" height="48" alt="Purple hexagon document icon with PTX label - Pro Tools session file">
+    </div>
+    <div class="icon-desc">
+      <strong>Pro Tools session file (.ptx) - purple hexagon</strong>
+      The .ptx session file itself inside the ZIP. Confirms the session file is named correctly and sitting at the root of the zipped folder.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Video.svg" width="48" height="48" alt="Orange hexagon video camera icon - video file submission">
+    </div>
+    <div class="icon-desc">
+      <strong>Video file - orange hexagon</strong>
+      An exported video file, typically MP4 or MOV. Appears on assignments requiring a screen recording or rendered video.
+    </div>
+  </div>
+</div>
+
+<h3>Action icons - circle shape</h3>
+
+<div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Deadline.svg" width="48" height="48" alt="Dark orange circle clock icon - deadline">
+    </div>
+    <div class="icon-desc">
+      <strong>Deadline - dark orange circle</strong>
+      The due date and time for this assignment. Default is 9:00 AM on the day listed unless the assignment page states otherwise.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg" width="48" height="48" alt="Green circle clipboard checklist icon - pre-submission checklist">
+    </div>
+    <div class="icon-desc">
+      <strong>Pre-submission checklist - green circle</strong>
+      Run through this list before you click Submit. Checks include matching filenames across ZIP, PTX, WAV, and PDF; audio files inside the ZIP; and correct WAV export settings.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Peer.svg" width="48" height="48" alt="Purple circle two people icon - peer review task">
+    </div>
+    <div class="icon-desc">
+      <strong>Peer review - purple circle</strong>
+      A cohort partner has been assigned to review your work, or you are reviewing theirs. Post your written feedback before the next class meeting. See the assignment page for the rubric criteria.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_External_Link.svg" width="48" height="48" alt="Blue circle external link arrow icon - link opens outside Canvas">
+    </div>
+    <div class="icon-desc">
+      <strong>External link - blue circle, arrow</strong>
+      This link leads outside Canvas - for example to a reference track, software download, or documentation. It opens in a new browser tab.
+    </div>
+  </div>
+  <div class="icon-row">
+    <div class="icon-cell">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Email.svg" width="48" height="48" alt="Blue circle envelope icon - contact your instructor">
+    </div>
+    <div class="icon-desc">
+      <strong>Contact your instructor - blue circle, envelope</strong>
+      Questions about this assignment go here. Send a Canvas message with your session filename in the subject line so your instructor can find your submission quickly.
+    </div>
+  </div>
+</div>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="file-naming">2. File Naming Rules</h2>
+
+<div class="stop"><strong>Stop:</strong> Files named incorrectly will be returned ungraded. There are no exceptions and no partial credit for incorrect naming.</div>
+
+<p>Every file you submit in this program uses the same three-segment pattern, separated by space-hyphen-space ( - ). The three segments are always in the same order.</p>
+
+<div class="required"><strong>Pattern with song name (mix assignments):</strong><br>
+<span class="name-example">LastName, FirstName - Assignment Name - Song Name.ext</span>
+<strong>Pattern without song name (process labs):</strong><br>
+<span class="name-example">LastName, FirstName - Assignment Name.ext</span>
+</div>
+
+<h3>Segment 1 - Your name</h3>
+<p>Use <code>LastName, FirstName</code> with a literal comma. Use your preferred name exactly as it appears in Canvas. Do not abbreviate or reorder.</p>
+<span class="name-example">Smith, John</span>
+
+<h3>Segment 2 - Assignment name</h3>
+<p>Use the full Canvas assignment name with original capitalization and spaces. Keep the module prefix. If the Canvas name contains a colon, replace it with a space-hyphen-space.</p>
+<table>
+  <thead><tr><th>Canvas Page Name</th><th>What Goes in Segment 2</th></tr></thead>
+  <tbody>
+    <tr><td>EQ: EQ Lab</td><td>EQ - EQ Lab</td></tr>
+    <tr><td>Sound: The Decibel</td><td>Sound - The Decibel</td></tr>
+    <tr><td>Mixing: DAW Mix 1</td><td>Mixing - DAW Mix 1</td></tr>
+  </tbody>
+</table>
+
+<h3>Segment 3 - Song name (mix assignments only)</h3>
+<p>Use the song title with normal capitalization and spaces. Strip apostrophes and all other punctuation (commas, periods, exclamation marks). Omit this segment entirely for process-only labs with no song deliverable.</p>
+<table>
+  <thead><tr><th>Song Title</th><th>What Goes in Segment 3</th></tr></thead>
+  <tbody>
+    <tr><td>Don't Think Twice, It's All Right</td><td>Dont Think Twice Its All Right</td></tr>
+    <tr><td>Knockin' on Heaven's Door</td><td>Knockin on Heavens Door</td></tr>
+    <tr><td>Mr. Tambourine Man</td><td>Mr Tambourine Man</td></tr>
+    <tr><td>Six of One</td><td>Six of One</td></tr>
+  </tbody>
+</table>
+
+<h3>Complete examples</h3>
+<table>
+  <thead><tr><th>Assignment Type</th><th>Required Filenames</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>25-pt lab with WAV and PDF</td>
+      <td>
+        <span class="name-example">Smith, John - EQ - EQ Lab - Dont Think Twice.wav</span>
+        <span class="name-example">Smith, John - EQ - EQ Lab - Dont Think Twice.pdf</span>
+      </td>
+    </tr>
+    <tr>
+      <td>25-pt process lab, no song</td>
+      <td><span class="name-example">Smith, John - Sound - The Decibel.pdf</span></td>
+    </tr>
+    <tr>
+      <td>100-pt major mix</td>
+      <td>
+        <span class="name-example">Smith, John - Mixing - DAW Mix 1 - Dont Think Twice.zip</span>
+        <span class="name-example">Smith, John - Mixing - DAW Mix 1 - Dont Think Twice.wav</span>
+        <span class="name-example">Smith, John - Mixing - DAW Mix 1 - Dont Think Twice.pdf</span>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="warn"><strong>Warning:</strong> The ZIP file, the .ptx session inside it, the WAV bounce, and the PDF must all share the same base filename. If they do not match, your submission cannot be identified in SpeedGrader and will be returned ungraded.</div>
+
+<h3>What will get your files returned ungraded</h3>
+<table>
+  <thead><tr><th>Wrong</th><th>Why It Fails</th></tr></thead>
+  <tbody>
+    <tr><td><code>Untitled.ptx</code></td><td>Default Pro Tools name. No student name, no assignment name.</td></tr>
+    <tr><td><code>john smith eq lab.ptx</code></td><td>Name order wrong. Comma missing. No separator dashes.</td></tr>
+    <tr><td><code>SmithJohn_EQLab_DontThinkTwice.ptx</code></td><td>Underscores instead of space-hyphen-space. No comma.</td></tr>
+    <tr><td><code>Smith, John - EQ: EQ Lab - Dont Think Twice.ptx</code></td><td>Colon not replaced. Replace every colon with a space-hyphen-space.</td></tr>
+  </tbody>
+</table>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="submission-types">3. Submission Types</h2>
+
+<p>Most assignments in this program require one or more of these file types. The assignment page will specify exactly which ones and how many points each is worth.</p>
+
+<table>
+  <thead><tr><th>File Type</th><th>What It Is</th><th>Song Name in Filename?</th></tr></thead>
+  <tbody>
+    <tr><td>.wav</td><td>Stereo bounce. 44.1 kHz / 24-bit / Interleaved stereo.</td><td>Yes (mix assignments)</td></tr>
+    <tr><td>.zip</td><td>Zipped Pro Tools session folder. Contains the .ptx, Audio Files folder, Fade Files folder, and all session assets.</td><td>Yes (mix assignments)</td></tr>
+    <tr><td>.pdf</td><td>Numbered screenshots exported from Word as PDF. See Section 4.</td><td>Yes for mix assignments, no for process-only labs</td></tr>
+    <tr><td>.ptx (inside zip)</td><td>The Pro Tools session file sitting at the root of the zipped folder. Must match the zip filename exactly.</td><td>Yes</td></tr>
+  </tbody>
+</table>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="pdf-workflow">4. PDF Documentation Workflow</h2>
+
+<p>Many assignments require a PDF that documents your work with screenshots. Here is the exact workflow.</p>
+
+<ol>
+  <li>Open the Canvas assignment page and find the gray copy-paste block near the bottom.</li>
+  <li>Select all the text in that block and copy it.</li>
+  <li>Open a new blank Word document and paste.</li>
+  <li>Select each numbered item line and apply: Format - Paragraph - Line and Page Breaks - Keep with next. This keeps the label attached to the screenshot below it and prevents orphaned headings at the bottom of a page.</li>
+  <li>Below each numbered item, insert the required screenshot directly into the document. Delete the placeholder line <code>[ Screenshot here ]</code> after inserting.</li>
+  <li>Name the document using the standard naming convention before exporting.</li>
+  <li>Export as PDF: File - Export - PDF. Do not print to PDF if you can avoid it - Export produces a cleaner file.</li>
+  <li>Submit the PDF to Canvas along with your other deliverables.</li>
+</ol>
+
+<div class="note"><strong>Note:</strong> The PDF is worth more points than you might expect - on a 25-point lab it is worth 15 points, and on a 100-point major mix it is worth 40 points. It documents that you completed the full workflow, not just the final bounce. Missing screenshots cost you significant points.</div>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="wav-specs">5. WAV Export Specifications</h2>
+
+<p>All WAV bounces in this program use the same settings unless an assignment specifies otherwise.</p>
+
+<table>
+  <thead><tr><th>Setting</th><th>Required Value</th></tr></thead>
+  <tbody>
+    <tr><td>File format</td><td>WAV (.wav)</td></tr>
+    <tr><td>Sample rate</td><td>44.1 kHz</td></tr>
+    <tr><td>Bit depth</td><td>24-bit</td></tr>
+    <tr><td>Format</td><td>Interleaved stereo</td></tr>
+    <tr><td>Duration</td><td>Full length of the mix - no extra silence at the start or end</td></tr>
+  </tbody>
+</table>
+
+<div class="warn"><strong>Warning:</strong> Do not submit MP3 files when WAV is required. Do not submit 16-bit or 32-bit files when 24-bit is required. Wrong specs count as incorrect delivery and lose points on the submission criterion.</div>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="zip-workflow">6. Zipping a Pro Tools Session</h2>
+
+<p>Always use Save Copy In before zipping. This ensures all audio files travel with the session and nothing is missing when your instructor opens it.</p>
+
+<ol>
+  <li>In Pro Tools, go to File - Save Copy In.</li>
+  <li>In the dialog, check Copy All Audio Files.</li>
+  <li>Name the saved copy using the standard naming convention. This will be the name of the .ptx file inside the zip.</li>
+  <li>Choose a location on your desktop or a dedicated submissions folder.</li>
+  <li>Click OK. Pro Tools creates a complete, self-contained session folder.</li>
+  <li>In Finder, right-click the session folder and select Compress. This creates the ZIP file.</li>
+  <li>Rename the ZIP file to match the session folder name exactly. The .ptx file inside and the .zip outside must share the same base name.</li>
+  <li>Submit the ZIP to Canvas.</li>
+</ol>
+
+<div class="stop"><strong>Stop:</strong> Do not zip a session folder that has missing audio files. If Audio Files or Fade Files are missing from inside the ZIP, your session zip receives zero points and the submission will be returned. Save Copy In with Copy All Audio Files checked prevents this.</div>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="point-system">7. Point System</h2>
+
+<p>Every gradable assignment in every DAPR course is one of two point values. There is no in-between.</p>
+
+<table>
+  <thead><tr><th>Type</th><th>Points</th><th>Expected Time</th><th>What Is Graded</th></tr></thead>
+  <tbody>
+    <tr><td>Lab or short assignment</td><td>25 pts</td><td>1 to 2 hours</td><td>Process completion - did you follow every step correctly?</td></tr>
+    <tr><td>Major mix or final project</td><td>100 pts</td><td>4 to 8 hours</td><td>Mix quality and technical decisions - how well does it sound and how well is it documented?</td></tr>
+  </tbody>
+</table>
+
+<h3>Where points go on a 25-point lab</h3>
+<table>
+  <thead><tr><th>Deliverable</th><th>Points</th></tr></thead>
+  <tbody>
+    <tr><td>WAV bounce file</td><td>10 pts</td></tr>
+    <tr><td>PDF documentation with screenshots</td><td>15 pts</td></tr>
+    <tr><td>Total</td><td>25 pts</td></tr>
+  </tbody>
+</table>
+
+<h3>Where points go on a 100-point major mix</h3>
+<table>
+  <thead><tr><th>Deliverable</th><th>Points</th></tr></thead>
+  <tbody>
+    <tr><td>Zipped Pro Tools session</td><td>40 pts</td></tr>
+    <tr><td>Stereo bounce WAV</td><td>20 pts</td></tr>
+    <tr><td>PDF documentation with screenshots</td><td>40 pts</td></tr>
+    <tr><td>Total</td><td>100 pts</td></tr>
+  </tbody>
+</table>
+
+<div class="note"><strong>Note:</strong> The PDF is worth as much as or more than the audio file in both tiers. A perfectly mixed track with no PDF documentation loses 15 or 40 points depending on the assignment tier. Document your work every time.</div>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="preflight">8. Pre-Submission Checklist</h2>
+
+<p>Run through this list every time before you click Submit. These are the most common reasons submissions are returned.</p>
+
+<ul class="checklist">
+  <li>All file names follow the LastName, FirstName - Assignment Name - Song Name pattern</li>
+  <li>Colons in the Canvas assignment name are replaced with space-hyphen-space ( - )</li>
+  <li>Apostrophes and punctuation are stripped from the song name segment</li>
+  <li>The ZIP filename, the .ptx inside it, the WAV, and the PDF all share the same base filename</li>
+  <li>The ZIP was created from a Save Copy In folder - audio files are inside</li>
+  <li>The WAV is 44.1 kHz, 24-bit, interleaved stereo</li>
+  <li>The PDF has a screenshot below every numbered item in the copy-paste block</li>
+  <li>Keep with next is applied to every numbered item line in the Word doc before export</li>
+  <li>The PDF filename matches the ZIP and WAV base name</li>
+  <li>All files are submitted to the correct Canvas assignment page before the deadline</li>
+</ul>
+
+<hr class="section-divider">
+
+<!-- ====================================================== -->
+<h2 id="late-policy">9. Late Submissions and Returns</h2>
+
+<p>Assignments submitted after the due date follow the late policy stated in the course syllabus. Check your syllabus - the policy is the same for all DAPR lab courses.</p>
+
+<p>Files returned ungraded due to naming errors or missing content are returned with a note in SpeedGrader comments. Correct the issue and resubmit. A resubmission after the deadline is subject to the late penalty even if the original submission was on time.</p>
+
+<div class="required"><strong>Most common reasons submissions are returned:</strong> incorrect file naming pattern, missing audio files inside the ZIP, wrong WAV export settings, PDF submitted without screenshots, or ZIP and WAV filenames do not match. Run through Section 8 before every submission.</div>
+
+</body>
+</html>

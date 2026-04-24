@@ -1,0 +1,101 @@
+<div style="font-family: Arial, sans-serif; line-height: 1.6;">
+
+  <h1>Canvas HTML Guidelines for AI-Generated Content</h1>
+
+  <p>
+    This page outlines what HTML works inside Canvas and how AI should generate content
+    that will render correctly without being stripped or modified.
+  </p>
+
+  <h2>1. What Canvas Allows</h2>
+  <ul>
+    <li>Basic HTML elements such as headings, paragraphs, lists, tables, and links</li>
+    <li>Inline styling using the style attribute</li>
+    <li>Simple structure without external dependencies</li>
+  </ul>
+
+  <h2>2. What Canvas Removes or Modifies</h2>
+  <ul>
+    <li>Script tags and JavaScript</li>
+    <li>Full HTML documents (html, head, body tags)</li>
+    <li>External CSS stylesheets</li>
+    <li>Complex layouts using advanced CSS</li>
+    <li>Unapproved iframes or embeds</li>
+  </ul>
+
+  <h2>3. Required Rules for AI-Generated HTML</h2>
+  <ol>
+    <li>Only generate HTML fragments, not full documents</li>
+    <li>Do not include html, head, or body tags</li>
+    <li>Do not include JavaScript</li>
+    <li>Use inline styles only when necessary</li>
+    <li>Keep structure simple and readable</li>
+    <li>Avoid using classes or IDs unless absolutely needed</li>
+    <li>Do not rely on external CSS or frameworks</li>
+  </ol>
+
+  <h2>4. Safe Formatting Examples</h2>
+
+  <h3>Paragraph</h3>
+  <p>This is a simple paragraph that will render correctly in Canvas.</p>
+
+  <h3>Styled Text</h3>
+  <p style="color: #333333; font-size: 16px;">
+    This text uses inline styling, which is generally safe in Canvas.
+  </p>
+
+  <h3>List</h3>
+  <ul>
+    <li>Item one</li>
+    <li>Item two</li>
+    <li>Item three</li>
+  </ul>
+
+  <h3>Table</h3>
+  <table border="1" cellpadding="8" cellspacing="0">
+    <tr>
+      <th>Element</th>
+      <th>Supported</th>
+    </tr>
+    <tr>
+      <td>Paragraph</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>JavaScript</td>
+      <td>No</td>
+    </tr>
+  </table>
+
+  <h2>5. Useful Links</h2>
+  <ul>
+    <li>
+      <a href="https://community.instructure.com/en/kb/articles/387066-canvas-html-editor-allowlist" target="_blank">
+        Canvas HTML Editor Allowlist
+      </a>
+    </li>
+    <li>
+      <a href="https://community.instructure.com/t5/Canvas-Basics-Guide/What-is-the-Rich-Content-Editor/ta-p/66" target="_blank">
+        Canvas Rich Content Editor Guide
+      </a>
+    </li>
+    <li>
+      <a href="https://developerdocs.instructure.com" target="_blank">
+        Canvas Developer Documentation
+      </a>
+    </li>
+  </ul>
+
+  <h2>6. Key Concept for AI</h2>
+  <p>
+    Canvas behaves like a filtered HTML environment. Even valid HTML may be rewritten or removed.
+    AI should generate only simple, safe, and minimal HTML to ensure consistent results.
+  </p>
+
+  <h2>7. Summary</h2>
+  <p>
+    The safest approach is to keep HTML simple, avoid advanced features, and assume Canvas will
+    sanitize anything that is not explicitly allowed.
+  </p>
+
+</div>

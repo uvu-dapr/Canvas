@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DAPR Canvas AI Reference Guide</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; color: #212121; background: #fff; padding: 32px 44px; max-width: 1100px; }
+h1 { background: #1B5E20; color: #fff; padding: 16px 20px; font-size: 1.3em; border-radius: 4px; margin-bottom: 6px; }
+.subtitle { font-size: 12px; color: #555; margin-bottom: 28px; }
+h2 { font-size: 1.05em; color: #0D47A1; border-bottom: 2px solid #0D47A1; padding-bottom: 4px; margin: 32px 0 12px; }
+h3 { font-size: 0.97em; color: #212121; margin: 18px 0 8px; }
+p { font-size: 13px; line-height: 1.7; margin-bottom: 10px; }
+ul, ol { font-size: 13px; line-height: 1.7; margin: 0 0 10px 20px; }
+li { margin-bottom: 4px; }
+code { font-family: "Courier New", monospace; font-size: 11.5px; background: #F5F5F5; padding: 1px 5px; border-radius: 3px; }
+pre { font-family: "Courier New", monospace; font-size: 11.5px; background: #F5F5F5; padding: 12px 14px; border-radius: 4px; margin: 8px 0 14px; overflow-x: auto; line-height: 1.6; white-space: pre-wrap; }
+table { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 10px 0 18px; }
+th { background: #0D47A1; color: #fff; padding: 8px 10px; text-align: left; }
+td { padding: 7px 10px; border: 1px solid #ddd; vertical-align: top; }
+tr:nth-child(even) td { background: #F9F9F9; }
+.required { background: #E8F5E9; border-left: 4px solid #1B5E20; padding: 10px 14px; margin: 12px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.note { background: #E3F2FD; border-left: 4px solid #0D47A1; padding: 10px 14px; margin: 12px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.warn { background: #FFF8E1; border-left: 4px solid #F57F17; padding: 10px 14px; margin: 12px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.stop { background: #FBE9E7; border-left: 4px solid #C62828; padding: 10px 14px; margin: 12px 0; border-radius: 0 4px 4px 0; font-size: 13px; line-height: 1.6; }
+.path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 10px 0 16px; }
+.path-item { font-family: "Courier New", monospace; font-size: 11px; background: #E8EAF6; color: #1A237E; padding: 5px 9px; border-radius: 3px; }
+.path-item a { color: #1A237E; text-decoration: none; }
+.path-item a:hover { text-decoration: underline; }
+.swatch { display: inline-block; width: 14px; height: 14px; border-radius: 2px; vertical-align: middle; margin-right: 5px; border: 1px solid #ccc; }
+.toc { background: #F5F5F5; border: 1px solid #ddd; padding: 14px 18px; border-radius: 4px; margin-bottom: 28px; }
+.toc ul { columns: 2; column-gap: 24px; }
+.toc li { font-size: 12.5px; margin-bottom: 5px; }
+.toc a { color: #0D47A1; text-decoration: none; }
+.toc a:hover { text-decoration: underline; }
+.checklist li { list-style: none; margin-left: 0; padding-left: 18px; position: relative; }
+.checklist li::before { content: "☐"; position: absolute; left: 0; }
+</style>
+</head>
+<body>
+
+<h1>DAPR Canvas AI Reference Guide</h1>
+<p class="subtitle">Utah Valley University &nbsp;|&nbsp; Audio Program &nbsp;|&nbsp; For AI use only &nbsp;|&nbsp; April 2026</p>
+
+<div class="required"><strong>Required:</strong> This document is the authoritative AI reference for generating Canvas LMS content for the DAPR Audio Program at UVU. Read it in full before producing any HTML, QTI, rubric CSV, or assignment copy-paste block. Canvas content that does not pass the Accessibility Checker with zero issues must not be published. WCAG 2.1 AA and Section 508 compliance are mandatory.</div>
+
+<div class="toc">
+  <strong style="font-size: 12.5px; display: block; margin-bottom: 8px;">Contents</strong>
+  <ul>
+    <li><a href="#canvas-rules">1. Canvas HTML Rules</a></li>
+    <li><a href="#accessibility">2. Accessibility Requirements</a></li>
+    <li><a href="#colors">3. Approved Colors</a></li>
+    <li><a href="#naming">4. Module and Page Naming (Option D)</a></li>
+    <li><a href="#github">5. GitHub Image Paths</a></li>
+    <li><a href="#master-prompt">6. Master Prompt for HTML Pages</a></li>
+    <li><a href="#qti-prompt">7. Master Prompt for QTI Files</a></li>
+    <li><a href="#rubric">8. Rubric CSV Rules</a></li>
+    <li><a href="#file-naming">9. Student File Naming (Part XIX)</a></li>
+    <li><a href="#pdf-block">10. PDF Documentation Block Rules</a></li>
+    <li><a href="#points">11. Point System</a></li>
+    <li><a href="#voice">12. Voice and Writing Standards</a></li>
+    <li><a href="#callout-boxes">13. Callout Boxes and Icons</a></li>
+    <li><a href="#checklist">14. Pre-Publish Checklists</a></li>
+  </ul>
+</div>
+
+<!-- ====================================================== -->
+<h2 id="canvas-rules">1. Canvas HTML Rules</h2>
+
+<div class="stop"><strong>Stop:</strong> Canvas strips external stylesheets, all JavaScript, CSS Grid, Flexbox, CSS variables, Google Fonts, position:absolute/fixed, box-shadow, and filter. Write every element with inline style="" attributes. No exceptions.</div>
+
+<h3>What Canvas strips (never use these)</h3>
+<table>
+  <thead><tr><th>Removed / Broken</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td><code>&lt;link rel="..."&gt;</code></td><td>Completely removed</td></tr>
+    <tr><td><code>&lt;style&gt;...&lt;/style&gt;</code></td><td>Removed in most contexts</td></tr>
+    <tr><td><code>display:grid</code></td><td>Layout collapses</td></tr>
+    <tr><td><code>display:flex</code></td><td>Not rendered in older Canvas builds</td></tr>
+    <tr><td><code>@font-face</code> / Google Fonts</td><td>Blocked</td></tr>
+    <tr><td><code>&lt;script&gt;</code></td><td>All JS removed for security</td></tr>
+    <tr><td><code>position:absolute/fixed</code></td><td>Stripped or broken</td></tr>
+    <tr><td><code>--var</code> CSS variables</td><td>Not supported</td></tr>
+    <tr><td><code>box-shadow</code>, <code>filter</code></td><td>Usually stripped</td></tr>
+    <tr><td><code>class=</code> (custom)</td><td>No effect without inline rule</td></tr>
+    <tr><td><code>rgba()</code> color values</td><td>Use hex codes only</td></tr>
+  </tbody>
+</table>
+
+<h3>What Canvas supports (safe to use)</h3>
+<table>
+  <thead><tr><th>Element / Property</th><th>Notes</th></tr></thead>
+  <tbody>
+    <tr><td><code>style=""</code> inline</td><td>Only reliable CSS method</td></tr>
+    <tr><td><code>&lt;table&gt;</code></td><td>Multi-column layout; use percentage widths</td></tr>
+    <tr><td><code>&lt;h2&gt; - &lt;h6&gt;</code></td><td>Never use H1 inside content - Canvas owns H1</td></tr>
+    <tr><td><code>&lt;p&gt;</code>, <code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code></td><td>Safe</td></tr>
+    <tr><td><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code></td><td>Safe</td></tr>
+    <tr><td><code>&lt;a href="..."&gt;</code></td><td>Must include title= attribute</td></tr>
+    <tr><td><code>&lt;img&gt;</code></td><td>Must include alt= attribute</td></tr>
+    <tr><td><code>&lt;div style="..."&gt;</code>, <code>&lt;span style="..."&gt;</code></td><td>Block and inline containers</td></tr>
+    <tr><td><code>&lt;hr&gt;</code>, <code>&lt;br&gt;</code></td><td>Safe for dividers and line breaks</td></tr>
+    <tr><td>Inline SVG</td><td>Paste raw SVG directly; add role="img" aria-hidden="true"</td></tr>
+    <tr><td><code>&lt;figure&gt;</code>, <code>&lt;figcaption&gt;</code></td><td>Use for Wikimedia Commons image attribution</td></tr>
+    <tr><td><code>&lt;iframe&gt;</code></td><td>Safe for YouTube and trusted embeds</td></tr>
+  </tbody>
+</table>
+
+<h3>Layout rules</h3>
+<ul>
+  <li>Multi-column layout: use <code>&lt;table role="presentation"&gt;</code> with percentage widths.</li>
+  <li>Stacked vertical lists: use <code>&lt;div&gt;</code> elements - never a table.</li>
+  <li>Image side-by-side: use stacked divs, not a two-column table. Canvas flags presentation tables with data-looking content.</li>
+  <li>Never use a table for decorative banners or totals - use a styled <code>&lt;div&gt;</code>.</li>
+  <li>Do not use manual digit-period labels (1. 2. 3.) inside divs. Canvas flags these as implied lists. Use word-based labels (First, Second, Third) or use actual <code>&lt;ol&gt;</code> elements.</li>
+</ul>
+
+<h3>Fonts (system-safe only)</h3>
+<ul>
+  <li>Body and headings: <code>font-family: Arial, Helvetica, sans-serif;</code></li>
+  <li>Code samples: <code>font-family: "Courier New", Courier, monospace;</code></li>
+  <li>Quotes / callouts (sparingly): <code>font-family: Georgia, "Times New Roman", serif;</code></li>
+</ul>
+
+<h3>Output format rule</h3>
+<div class="required"><strong>Required:</strong> Output only the HTML that goes inside the Canvas content editor body. Do not include <code>&lt;!DOCTYPE&gt;</code>, <code>&lt;html&gt;</code>, <code>&lt;head&gt;</code>, or <code>&lt;body&gt;</code> tags. Canvas only uses the content between body tags.</div>
+
+<!-- ====================================================== -->
+<h2 id="accessibility">2. Accessibility Requirements</h2>
+
+<table>
+  <thead><tr><th>Rule</th><th>Requirement</th></tr></thead>
+  <tbody>
+    <tr><td>H1 in body</td><td>Never. Canvas provides H1 from the page title. Start content at H2.</td></tr>
+    <tr><td>Heading hierarchy</td><td>Never skip levels. H2 then H3. H3 as the first heading on a page is a Severe Panorama error.</td></tr>
+    <tr><td>Images</td><td>Every <code>&lt;img&gt;</code> needs alt="description" or alt="" for decorative. Alt text must be under 120 characters.</td></tr>
+    <tr><td>Links</td><td>Every <code>&lt;a&gt;</code> needs a title= attribute. New-tab links need aria-label="... (opens in new tab)".</td></tr>
+    <tr><td>Data tables</td><td>Require <code>&lt;caption&gt;</code> (plain text, no style attribute), <code>&lt;thead&gt;</code> with <code>&lt;th scope="col"&gt;</code>, and <code>&lt;tbody&gt;</code>.</td></tr>
+    <tr><td>Layout tables</td><td>Add <code>role="presentation"</code>. Or better: replace with stacked divs to avoid all table checker warnings.</td></tr>
+    <tr><td>Caption rule</td><td>The <code>&lt;caption&gt;</code> tag must have no style attribute. Canvas strips hidden-caption CSS and the checker cannot find it.</td></tr>
+    <tr><td>Two-column comparison tables</td><td>If the table has labeled column headers, it is a data table - use thead/th/caption. Do not use role="presentation" on any table with meaningful column labels.</td></tr>
+    <tr><td>Inline SVG</td><td>Add <code>role="img" aria-hidden="true"</code> to the opening <code>&lt;svg&gt;</code> tag.</td></tr>
+    <tr><td>Color alone</td><td>Never convey meaning with color alone. Add a text label, icon, or bold indicator.</td></tr>
+    <tr><td>Contrast</td><td>4.5:1 minimum for normal text. 3:1 for large text (18pt+ or 14pt bold).</td></tr>
+  </tbody>
+</table>
+
+<!-- ====================================================== -->
+<h2 id="colors">3. Approved Colors</h2>
+
+<div class="warn"><strong>Warning:</strong> Never use rgba() for any color. Use hex codes only. Never use #CC4400 - Canvas flags it. Use #993300 or darker for orange text. Gold background #F9A825 requires dark text #212121, not white (white on gold fails contrast at 2.9:1).</div>
+
+<table>
+  <thead><tr><th>Hex</th><th>Swatch</th><th>Use</th><th>Ratio on White</th></tr></thead>
+  <tbody>
+    <tr><td><code>#212121</code></td><td><span class="swatch" style="background:#212121;"></span></td><td>Body text on white</td><td>16.1:1 PASS</td></tr>
+    <tr><td><code>#0D47A1</code></td><td><span class="swatch" style="background:#0D47A1;"></span></td><td>Links, section headers, blue callout borders</td><td>8.6:1 PASS</td></tr>
+    <tr><td><code>#1B5E20</code></td><td><span class="swatch" style="background:#1B5E20;"></span></td><td>Header bars (program default), required callout borders</td><td>8.4:1 PASS</td></tr>
+    <tr><td><code>#993300</code></td><td><span class="swatch" style="background:#993300;"></span></td><td>Warnings / code text - use this, NOT #CC4400</td><td>7.4:1 PASS</td></tr>
+    <tr><td><code>#B71C1C</code></td><td><span class="swatch" style="background:#B71C1C;"></span></td><td>Error / not-helpful feedback table header</td><td>PASS</td></tr>
+    <tr><td><code>#C62828</code></td><td><span class="swatch" style="background:#C62828;"></span></td><td>Critical/Stop callout border and icon stroke</td><td>PASS</td></tr>
+    <tr><td><code>#E65100</code></td><td><span class="swatch" style="background:#E65100;"></span></td><td>Orange header bar (resistor sequence position 3) - Panorama false positive on contrast; accept and document</td><td>4.6:1 PASS</td></tr>
+    <tr><td><code>#F57F17</code></td><td><span class="swatch" style="background:#F57F17;"></span></td><td>Warning callout border and icon stroke</td><td>PASS on dark bg</td></tr>
+    <tr><td><code>#4A148C</code></td><td><span class="swatch" style="background:#4A148C;"></span></td><td>Tip/Pro tip callout border and icon stroke; violet header bar</td><td>PASS</td></tr>
+    <tr><td><code>#F9A825</code></td><td><span class="swatch" style="background:#F9A825;"></span></td><td>Helpful feedback column header BG - MUST use dark text #212121</td><td>N/A</td></tr>
+    <tr><td><code>#CC4400</code></td><td><span class="swatch" style="background:#CC4400;"></span></td><td>PROHIBITED - Canvas accessibility checker flags this</td><td>FAIL</td></tr>
+  </tbody>
+</table>
+
+<h3>Header bar color sequence (locked - do not change)</h3>
+<table>
+  <thead><tr><th>#</th><th>Name</th><th>Hex</th><th>Text</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>Brown</td><td><code>#5D4037</code></td><td>White #FFFFFF</td></tr>
+    <tr><td>2</td><td>Red</td><td><code>#B71C1C</code></td><td>White #FFFFFF</td></tr>
+    <tr><td>3</td><td>Orange</td><td><code>#E65100</code></td><td>White #FFFFFF</td></tr>
+    <tr><td>4</td><td>Yellow</td><td><code>#FBC02D</code></td><td><strong>Black #212121 only</strong></td></tr>
+    <tr><td>5</td><td>Green</td><td><code>#1B5E20</code></td><td>White #FFFFFF (program default)</td></tr>
+    <tr><td>6</td><td>Blue</td><td><code>#0D47A1</code></td><td>White #FFFFFF</td></tr>
+    <tr><td>7</td><td>Violet</td><td><code>#4A148C</code></td><td>White #FFFFFF</td></tr>
+    <tr><td>8</td><td>Grey</td><td><code>#424242</code></td><td>White #FFFFFF</td></tr>
+    <tr><td>9</td><td>Pink</td><td><code>#C2185B</code></td><td>White #FFFFFF</td></tr>
+    <tr><td>10</td><td>Black</td><td><code>#000000</code></td><td>White #FFFFFF</td></tr>
+  </tbody>
+</table>
+
+<!-- ====================================================== -->
+<h2 id="naming">4. Module and Page Naming (Option D)</h2>
+
+<div class="required"><strong>Required:</strong> All 12 DAPR courses use Option D naming. No other system is in use. Apply automatically without being asked.</div>
+
+<table>
+  <thead><tr><th>Element</th><th>Pattern</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td>Module title</td><td><code>Topic: M# - Descriptive Title (Week ##)</code></td><td><code>Sound: M2 - Sound and Hearing (Week 02)</code></td></tr>
+    <tr><td>Page name</td><td><code>Topic: Descriptive Page Title</code></td><td><code>Sound: Read Sound and Hearing</code></td></tr>
+    <tr><td>Rollover rule</td><td>Update week parenthetical in module titles only. Never rename pages.</td><td>Change <code>(Week 03)</code> to <code>(Week 04)</code></td></tr>
+  </tbody>
+</table>
+
+<p>Pages carry only topic prefix and content identity. No module number, week, or part number in any page name. This is intentional - pages never need renaming when modules are reordered or rescheduled.</p>
+
+<h3>GitHub folder name derivation from page name</h3>
+<p>Strip the colon, lowercase everything, underscores within concept words, hyphen between topic and concept. Week parenthetical never included.</p>
+<table>
+  <thead><tr><th>Canvas Page Name</th><th>GitHub Folder</th></tr></thead>
+  <tbody>
+    <tr><td>Sound: The Decibel</td><td><code>dapr-2000/sound-the_decibel/</code></td></tr>
+    <tr><td>Networking: Address Resolution Protocol</td><td><code>dapr-3255/networking-address_resolution_protocol/</code></td></tr>
+    <tr><td>EQ: EQ Lab</td><td><code>dapr-2000l/eq-eq_lab/</code></td></tr>
+    <tr><td>Jobs: Working in the Industry</td><td><code>dapr-2000/jobs-working_in_the_industry/</code></td></tr>
+    <tr><td>Networking: Dynamic Host Configuration Protocol (DHCP)</td><td><code>dapr-3255/networking-dynamic_host_configuration_protocol/</code> (drop acronym in folder)</td></tr>
+  </tbody>
+</table>
+
+<!-- ====================================================== -->
+<h2 id="github">5. GitHub Image Paths</h2>
+
+<div class="required"><strong>Required:</strong> Confirm the folder path and all filenames before writing a single img tag. Never guess a filename. A page built with assumed filenames will have silently broken images in Canvas with no error message.</div>
+
+<p>Raw URL pattern: <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/FOLDER/FILENAME.jpg</code></p>
+<p>Always use <code>raw.githubusercontent.com</code>, never <code>github.com</code>. Verify at least one URL in a browser before building the Canvas page. You should see only the image with nothing around it.</p>
+
+<h3>Five mandatory pre-build questions</h3>
+<ol>
+  <li>Is this image shared across multiple courses, or does it belong to one specific course? (Shared = All/ &nbsp; One course = dapr-XXXX/)</li>
+  <li>What is the exact course folder name?</li>
+  <li>What is the exact assignment subfolder name?</li>
+  <li>What are the exact filenames of all images already pushed to the repository?</li>
+  <li>Have these files been committed and pushed in GitHub Desktop? Confirm before writing any HTML.</li>
+</ol>
+
+<h3>All 25 repository paths</h3>
+<div class="path-grid">
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/All" title="Shared images across all courses on GitHub" target="_blank" aria-label="All shared images folder on GitHub (opens in new tab)">All/ - Shared across all courses</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/All/ProToolsCleanup" title="Pro Tools Cleanup tutorial images on GitHub" target="_blank" aria-label="Pro Tools Cleanup folder on GitHub (opens in new tab)">All/ProToolsCleanup/ - legacy, keep casing</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000" title="DAPR 2000 Digital Audio Essentials images on GitHub" target="_blank" aria-label="DAPR 2000 folder on GitHub (opens in new tab)">dapr-2000/ - Digital Audio Essentials</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000l" title="DAPR 2000L Digital Audio Essentials Lab images on GitHub" target="_blank" aria-label="DAPR 2000L folder on GitHub (opens in new tab)">dapr-2000l/ - Digital Audio Essentials Lab</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2010" title="DAPR 2010 Core Recording images on GitHub" target="_blank" aria-label="DAPR 2010 folder on GitHub (opens in new tab)">dapr-2010/ - Core Recording</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2010l" title="DAPR 2010L Core Recording Lab images on GitHub" target="_blank" aria-label="DAPR 2010L folder on GitHub (opens in new tab)">dapr-2010l/ - Core Recording Lab</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2020" title="DAPR 2020 Core Mixing images on GitHub" target="_blank" aria-label="DAPR 2020 folder on GitHub (opens in new tab)">dapr-2020/ - Core Mixing</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2020l" title="DAPR 2020L Core Mixing Lab images on GitHub" target="_blank" aria-label="DAPR 2020L folder on GitHub (opens in new tab)">dapr-2020l/ - Core Mixing Lab</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2080" title="DAPR 2080 Podcast and Radio Production images on GitHub" target="_blank" aria-label="DAPR 2080 folder on GitHub (opens in new tab)">dapr-2080/ - Podcast and Radio Production</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2255" title="DAPR 2255 Audio Hardware I images on GitHub" target="_blank" aria-label="DAPR 2255 folder on GitHub (opens in new tab)">dapr-2255/ - Audio Hardware I</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-3010r" title="DAPR 3010R Digital Lecture Series images on GitHub" target="_blank" aria-label="DAPR 3010R folder on GitHub (opens in new tab)">dapr-3010r/ - Digital Lecture Series</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-3255" title="DAPR 3255 Audio Hardware II images on GitHub" target="_blank" aria-label="DAPR 3255 folder on GitHub (opens in new tab)">dapr-3255/ - Audio Hardware II</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-3340" title="DAPR 3340 Spatial Audio I images on GitHub" target="_blank" aria-label="DAPR 3340 folder on GitHub (opens in new tab)">dapr-3340/ - Spatial Audio I</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-3345" title="DAPR 3345 Spatial Audio II images on GitHub" target="_blank" aria-label="DAPR 3345 folder on GitHub (opens in new tab)">dapr-3345/ - Spatial Audio II</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000/jobs-overview" title="Jobs overview folder for DAPR 2000" target="_blank" aria-label="Jobs overview folder on GitHub (opens in new tab)">dapr-2000/jobs-overview/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000/jobs-working_in_the_industry" title="Jobs working in the industry folder for DAPR 2000" target="_blank" aria-label="Jobs working in the industry folder on GitHub (opens in new tab)">dapr-2000/jobs-working_in_the_industry/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000/sound-the_decibel" title="Sound the decibel folder for DAPR 2000" target="_blank" aria-label="Sound the decibel folder on GitHub (opens in new tab)">dapr-2000/sound-the_decibel/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000/sound-sound_wave_properties" title="Sound wave properties folder for DAPR 2000" target="_blank" aria-label="Sound wave properties folder on GitHub (opens in new tab)">dapr-2000/sound-sound_wave_properties/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000l/eq-eq_lab" title="EQ Lab folder for DAPR 2000L" target="_blank" aria-label="EQ Lab folder on GitHub (opens in new tab)">dapr-2000l/eq-eq_lab/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2000l/compression-compression_lab" title="Compression Lab folder for DAPR 2000L" target="_blank" aria-label="Compression Lab folder on GitHub (opens in new tab)">dapr-2000l/compression-compression_lab/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2020l/groundwork-essential_groundwork" title="Essential Groundwork folder for DAPR 2020L" target="_blank" aria-label="Essential Groundwork folder on GitHub (opens in new tab)">dapr-2020l/groundwork-essential_groundwork/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-2020l/eq-eq_lab" title="EQ Lab folder for DAPR 2020L" target="_blank" aria-label="EQ Lab DAPR 2020L folder on GitHub (opens in new tab)">dapr-2020l/eq-eq_lab/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-3255/networking-address_resolution_protocol" title="ARP folder for DAPR 3255" target="_blank" aria-label="ARP folder on GitHub (opens in new tab)">dapr-3255/networking-address_resolution_protocol/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-3255/midi-channel_voice_messages" title="MIDI Channel Voice Messages folder for DAPR 3255" target="_blank" aria-label="MIDI Channel Voice Messages folder on GitHub (opens in new tab)">dapr-3255/midi-channel_voice_messages/</a></div>
+  <div class="path-item"><a href="https://github.com/uvu-dapr/Canvas/tree/main/dapr-3345/spatial-spatial_mix_final" title="Spatial Mix Final folder for DAPR 3345" target="_blank" aria-label="Spatial Mix Final folder on GitHub (opens in new tab)">dapr-3345/spatial-spatial_mix_final/</a></div>
+</div>
+
+<div class="warn"><strong>Warning:</strong> Never rename or move an image file after its URL has been used in a Canvas page. Canvas pages contain hardcoded raw URLs. Renaming breaks every page that references the file with no error message. To update an image, replace it in place with the exact same filename.</div>
+
+<!-- ====================================================== -->
+<h2 id="master-prompt">6. Master Prompt for HTML Pages</h2>
+<p>Paste this at the start of any session before asking for Canvas HTML generation.</p>
+<pre>
+You are generating HTML for Canvas LMS (Instructure) for the DAPR Audio Program at
+Utah Valley University. Canvas strips most modern CSS and all JavaScript.
+Follow these rules exactly:
+
+HTML RULES:
+- All CSS must be inline style="" attributes. No style blocks, no external CSS.
+- Layout: use HTML tables with role="presentation" for side-by-side columns.
+  For vertical lists of items, use stacked div elements, not tables.
+- Fonts: Arial, Georgia, or Courier New only. No Google Fonts.
+- No CSS Grid, no Flexbox, no CSS variables, no JavaScript.
+- Use hex color codes. Never use rgba().
+- Do not include navigation links to standalone HTML files.
+- For diagrams: use inline SVG pasted directly into the HTML.
+  Add role="img" and aria-hidden="true" to the opening svg tag.
+- For photographs from Wikimedia Commons: use figure/img/figcaption.
+  Include author, Wikimedia Commons link, and license link.
+  Both links need title and aria-label with "(opens in new tab)".
+- No em dashes and no double hyphens (--) in visible page content.
+  Use a hyphen with spaces ( - ) as a separator in running text.
+- Do not use manual digit-period labels (1. 2. 3.) inside div elements.
+  Use word-based labels or actual ol elements.
+
+ACCESSIBILITY RULES (Canvas checker must show 0 issues):
+- First heading in content area must be h2. Never use h1.
+- All img tags need alt="description" (under 120 chars) or alt="" for decorative.
+- All a links need title="where this goes" attribute.
+- New-tab links need aria-label="... (opens in new tab)".
+- Data tables require caption (plain text, no style attribute),
+  thead with th scope="col", and tbody.
+- Layout tables: add role="presentation". Better: use divs instead.
+- Never use a table for decorative banners or totals. Use a div.
+- Text color must pass WCAG 4.5:1 contrast on its background.
+  Safe colors on white: #212121, #0D47A1, #1B5E20, #993300, #B71C1C.
+  Never use #CC4400. Use #993300 or darker for orange text.
+- Gold background #F9A825 requires dark text #212121, not white.
+- Never skip heading levels. H2 then H3. Never H2 to H4.
+
+NAMING RULES (Option D - mandatory):
+- Module title pattern: Topic: M# - Descriptive Title (Week ##)
+- Page name pattern: Topic: Descriptive Page Title (no module number, no week)
+
+QUIZ RULES (when generating QTI):
+- Never use "All of the above" or "None of the above" as answer options.
+- All assessments must be self-grading. No essay questions.
+
+VOICE AND WRITING:
+- Write in the instructor's direct voice. Do not refer to "your instructor."
+- No conditional softening: no "if required", "if applicable", "you may",
+  "depending on course requirements".
+- Submission instructions must state file type, naming convention,
+  and zip requirements explicitly.
+
+OUTPUT FORMAT:
+- Output only the HTML that goes inside the Canvas content editor body.
+- Do not include DOCTYPE, html, head, or body tags.
+</pre>
+
+<!-- ====================================================== -->
+<h2 id="qti-prompt">7. Master Prompt for QTI Files</h2>
+<pre>
+Generate a Canvas QTI 1.2 quiz package as a .zip file ready for import.
+
+TECHNICAL REQUIREMENTS:
+- The zip must contain imsmanifest.xml at the root level.
+- Use xmlns="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1" in the manifest.
+- Each question must have a unique ident attribute (use random hex strings).
+- question_type values: multiple_choice_question, true_false_question,
+  short_answer_question, essay_question
+- All HTML in mattext tags must use texttype="text/html" and encode
+  &lt; as &amp;lt; and &gt; as &amp;gt;
+- For true/false questions use ident="true_answer" and ident="false_answer".
+- Essay questions do not include a resprocessing block.
+- Set points_possible for every question.
+
+ITEM TITLE FORMAT:
+- Set the title attribute on every item to the question bank or category name.
+- All questions in the same category share the exact same title string.
+- Do not use the question text as the title.
+- The ident attribute stays unique per question.
+
+QUESTION DESIGN:
+- Never use "All of the above" or "None of the above."
+- Each distractor must be independently plausible.
+- Keep distractor length consistent.
+- All questions must be self-grading (no essay or file upload).
+
+QUIZ SETTINGS TO SPECIFY:
+  Quiz name:
+  Number of questions:
+  Points per question:
+  Question types (MC, T/F, short answer, matching, mixed):
+  Shuffle answers: yes/no
+
+SOURCE QUESTIONS:
+  [Paste your questions here]
+</pre>
+
+<!-- ====================================================== -->
+<h2 id="rubric">8. Rubric CSV Rules</h2>
+
+<div class="required"><strong>Required:</strong> Generate a companion rubric CSV alongside every assignment HTML page. Use Python csv.writer with QUOTE_ALL - no manual CSV construction.</div>
+
+<h3>Exact header row (case-sensitive)</h3>
+<pre>Rubric Name, Criteria Name, Criteria Description, Criteria Enable Range, Rating Name, Rating Description, Rating Points, Rating Name, Rating Description, Rating Points, Rating Name, Rating Description, Rating Points</pre>
+
+<h3>Rules</h3>
+<ul>
+  <li>Rubric Name must be identical on every row of the same rubric.</li>
+  <li>Rating points must be in descending order (highest to lowest, left to right). Canvas rejects ascending order.</li>
+  <li>Criteria Enable Range: use <code>false</code> unless point ranges are explicitly requested.</li>
+  <li>Three rating levels per criterion: Full Credit (100%), Partial Credit (50% rounded), No Credit (0).</li>
+  <li><strong>No commas in any field.</strong> This is the single most important rule. Commas in any field cause silent column misalignment on import - some criteria silently receive 0 points. Replace all commas with "and" or "or".</li>
+  <li>CSV filename convention: <code>COURSE_A#_Rubric.csv</code> (example: <code>DAPR3345_A4_Rubric.csv</code>).</li>
+  <li>After import, verify every criterion shows a non-zero point value in the Canvas Criteria Builder.</li>
+</ul>
+
+<h3>Standard rating descriptions</h3>
+<table>
+  <thead><tr><th>Level</th><th>Points</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td>Full Credit</td><td>100% of criterion</td><td>All criteria for this section are met as described.</td></tr>
+    <tr><td>Partial Credit</td><td>50% rounded</td><td>Some criteria met but submission is incomplete or missing required evidence.</td></tr>
+    <tr><td>No Credit</td><td>0</td><td>Not submitted or does not meet minimum requirements for this section.</td></tr>
+  </tbody>
+</table>
+
+<!-- ====================================================== -->
+<h2 id="file-naming">9. Student File Naming (Part XIX)</h2>
+
+<div class="required"><strong>Required:</strong> Every submitted filename uses three segments separated by space-hyphen-space ( - ). Files named incorrectly are returned ungraded.</div>
+
+<table>
+  <thead><tr><th>Type</th><th>Pattern</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td>With song name</td><td><code>LastName, FirstName - Assignment Name - Song Name.ext</code></td><td><code>Smith, John - EQ - EQ Lab - Dont Think Twice.wav</code></td></tr>
+    <tr><td>Without song name</td><td><code>LastName, FirstName - Assignment Name.ext</code></td><td><code>Smith, John - Sound - The Decibel.pdf</code></td></tr>
+  </tbody>
+</table>
+
+<h3>Segment rules</h3>
+<ul>
+  <li><strong>Segment 1 - Student Name:</strong> LastName, FirstName (literal comma required)</li>
+  <li><strong>Segment 2 - Assignment Name:</strong> Full Canvas page name with original capitalization. Replace any colon with space-hyphen-space. Module prefix retained.</li>
+  <li><strong>Segment 3 - Song Name (mix assignments only):</strong> Normal capitalization with spaces. Strip apostrophes and all other punctuation. Omit entirely for process-only labs.</li>
+</ul>
+
+<p>The ZIP file, the .ptx session file inside it, the WAV bounce, and the PDF must all share the same base filename when submitted together.</p>
+
+<h3>Song name stripping examples</h3>
+<table>
+  <thead><tr><th>Song Title</th><th>Filename Segment</th></tr></thead>
+  <tbody>
+    <tr><td>Don't Think Twice, It's All Right</td><td>Dont Think Twice Its All Right</td></tr>
+    <tr><td>Knockin' on Heaven's Door</td><td>Knockin on Heavens Door</td></tr>
+    <tr><td>Mr. Tambourine Man</td><td>Mr Tambourine Man</td></tr>
+  </tbody>
+</table>
+
+<!-- ====================================================== -->
+<h2 id="pdf-block">10. PDF Documentation Block Rules (Part XVI)</h2>
+
+<ul>
+  <li>Every numbered item must include its point value in parentheses on the same line: <strong>1. EQ (15 pts)</strong></li>
+  <li>Point values in the copy-paste block must exactly match the rubric table.</li>
+  <li>The "Keep with next" instruction appears inside the copy-paste box before the first numbered item.</li>
+  <li>Every numbered item has a <code>[ Screenshot here ]</code> placeholder line below its description.</li>
+  <li>Filename naming convention appears at the top in monospace.</li>
+  <li>The block is visually distinct from surrounding Canvas content (gray background box).</li>
+</ul>
+
+<div class="note"><strong>Required instruction line at top of every copy-paste block:</strong> After pasting this into Word, select each numbered item line and apply Format - Paragraph - Line and Page Breaks - Keep with next. This prevents a section label from appearing alone at the bottom of a page while its screenshot is on the next page.</div>
+
+<!-- ====================================================== -->
+<h2 id="points">11. Point System (Part XVII)</h2>
+
+<table>
+  <thead><tr><th>Tier</th><th>Points</th><th>Expected Time</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td>Lab / Short Assignment</td><td>25 pts</td><td>1-2 hours</td><td>Ear training, session prep, short skill-building. Graded on process completion.</td></tr>
+    <tr><td>Major Mix / Final Project</td><td>100 pts</td><td>4-8 hours</td><td>Full mix deliverables, end-of-unit and end-of-semester finals. Graded on quality and decisions.</td></tr>
+  </tbody>
+</table>
+
+<h3>25-point lab - deliverable split</h3>
+<table>
+  <thead><tr><th>Deliverable</th><th>Points</th></tr></thead>
+  <tbody>
+    <tr><td>WAV bounce file</td><td>10 pts</td></tr>
+    <tr><td>PDF documentation</td><td>15 pts</td></tr>
+  </tbody>
+</table>
+
+<h3>25-point lab - internal rubric breakdown</h3>
+<table>
+  <thead><tr><th>Criterion</th><th>Points</th></tr></thead>
+  <tbody>
+    <tr><td>Criterion 1 - first major process step</td><td>6 pts</td></tr>
+    <tr><td>Criterion 2 - second major process step</td><td>6 pts</td></tr>
+    <tr><td>Criterion 3 - third major process step</td><td>6 pts</td></tr>
+    <tr><td>Criterion 4 - Submission (file type, naming, export specs, PDF)</td><td>7 pts</td></tr>
+  </tbody>
+</table>
+
+<h3>100-point major mix - deliverable split</h3>
+<table>
+  <thead><tr><th>Deliverable</th><th>Points</th></tr></thead>
+  <tbody>
+    <tr><td>Zipped Pro Tools session</td><td>40 pts</td></tr>
+    <tr><td>Stereo bounce WAV</td><td>20 pts</td></tr>
+    <tr><td>PDF documentation</td><td>40 pts</td></tr>
+  </tbody>
+</table>
+
+<!-- ====================================================== -->
+<h2 id="voice">12. Voice and Writing Standards</h2>
+
+<table>
+  <thead><tr><th>Prohibited (Bad)</th><th>Required (Good)</th></tr></thead>
+  <tbody>
+    <tr><td>"Only required if your instructor has requested the session file."</td><td>"Submit the full session folder as a zipped file. Include all associated audio assets."</td></tr>
+    <tr><td>"You may include screenshots if needed."</td><td>"Include two screenshots that clearly show the completed routing configuration."</td></tr>
+    <tr><td>"Depending on your setup, you might want to..."</td><td>"Configure your I/O settings as follows before beginning."</td></tr>
+  </tbody>
+</table>
+
+<p>Prohibited phrases: "if required", "if requested", "if applicable", "depending on course requirements", "you may", "optional unless".</p>
+<p>When unsure whether something is conditional or decisive, choose decisive. Students should finish reading any page and know exactly what to build, submit, and how it will be graded.</p>
+
+<!-- ====================================================== -->
+<h2 id="callout-boxes">13. Callout Boxes and Icons</h2>
+
+<table>
+  <thead><tr><th>Type</th><th>Border / Stroke</th><th>Background Fill</th><th>Label</th><th>When to Use</th></tr></thead>
+  <tbody>
+    <tr><td>Required</td><td><code>#1B5E20</code></td><td><code>#E8F5E9</code></td><td>Required:</td><td>Mandatory rules, must-follow program standards</td></tr>
+    <tr><td>Note</td><td><code>#0D47A1</code></td><td><code>#E3F2FD</code></td><td>Note:</td><td>Clarifications, reminders, helpful context</td></tr>
+    <tr><td>Warning</td><td><code>#F57F17</code></td><td><code>#FFF8E1</code></td><td>Warning:</td><td>Common mistakes, known gotchas, proceed with caution</td></tr>
+    <tr><td>Critical / Stop</td><td><code>#C62828</code></td><td><code>#FBE9E7</code></td><td>Stop:</td><td>Hard rules, absolute prohibitions</td></tr>
+    <tr><td>Tip / Pro tip</td><td><code>#4A148C</code></td><td><code>#F3E5F5</code></td><td>Tip:</td><td>Optional suggestions, shortcuts, efficiency notes</td></tr>
+  </tbody>
+</table>
+
+<p>Icons are inline SVG at <code>viewBox="0 0 24 24"</code>, <code>fill="none"</code>, <code>stroke-width="2.2"</code>, <code>stroke-linecap="round"</code>, <code>stroke-linejoin="round"</code>. Size is <code>width="22" height="22"</code> in callout boxes. Add <code>role="img" aria-hidden="true"</code> to every icon SVG.</p>
+
+<h3>Writing rule - dashes</h3>
+<div class="stop"><strong>Stop:</strong> No em dashes and no double hyphens (--) in any visible Canvas HTML content. Use a hyphen with spaces ( - ) as a separator in running text. Double dashes are permitted only inside HTML comments, which Canvas strips before rendering.</div>
+
+<!-- ====================================================== -->
+<h2 id="checklist">14. Pre-Publish Checklists</h2>
+
+<h3>HTML page checklist</h3>
+<ul class="checklist">
+  <li>All styles are inline - no style blocks, no external CSS</li>
+  <li>Only Arial, Georgia, or Courier New fonts used</li>
+  <li>First heading in content area is H2 (never H1)</li>
+  <li>Layout uses presentation tables or stacked divs</li>
+  <li>All img tags have alt text under 120 characters (or alt="" for decorative)</li>
+  <li>All link text is descriptive - no "click here"</li>
+  <li>All a tags have a title= attribute</li>
+  <li>Heading hierarchy is logical - no skipped levels</li>
+  <li>Data tables have plain caption, thead, th scope="col", and tbody</li>
+  <li>No table used for decorative banners or totals - div used instead</li>
+  <li>All text/background combinations pass WCAG 4.5:1</li>
+  <li>#CC4400 replaced with #993300 or darker</li>
+  <li>Gold backgrounds use #212121 dark text, not white</li>
+  <li>No JavaScript embedded</li>
+  <li>No em dashes or double hyphens in visible content</li>
+  <li>No digit-period labels (1. 2.) inside divs</li>
+  <li>Canvas Accessibility Checker shows 0 issues before publishing</li>
+</ul>
+
+<h3>Common AI mistakes and fixes</h3>
+<table>
+  <thead><tr><th>AI Mistake</th><th>Fix</th></tr></thead>
+  <tbody>
+    <tr><td>Uses rgba() for colors</td><td>Replace all rgba() with equivalent hex codes</td></tr>
+    <tr><td>Puts H1 as first heading</td><td>Change to H2 - Canvas provides H1 from page title</td></tr>
+    <tr><td>Caption uses hidden CSS</td><td>Remove the style attribute from caption entirely</td></tr>
+    <tr><td>Table for points total banner</td><td>Replace with styled div - never use a table for decorative content</td></tr>
+    <tr><td>Links without title attribute</td><td>Add title="description of destination" to every a tag</td></tr>
+    <tr><td>Includes DOCTYPE or html tags</td><td>Output only content between body tags</td></tr>
+    <tr><td>Uses #CC4400 for orange text</td><td>Replace with #993300</td></tr>
+    <tr><td>"All of the above" as answer</td><td>Remove. Rewrite as specific independent distractors.</td></tr>
+    <tr><td>Essay questions in self-grading quiz</td><td>Remove. Replace with multiple choice or short answer exact match.</td></tr>
+    <tr><td>Em dashes or double hyphens in text</td><td>Replace with hyphen-space ( - ) in running text</td></tr>
+    <tr><td>Digit-period labels in divs</td><td>Use word-based labels or actual ol/li elements</td></tr>
+  </tbody>
+</table>
+
+</body>
+</html>
