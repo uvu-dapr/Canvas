@@ -1,4 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Checklist or submission checklist">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Pre-submission checklist">
   <circle cx="24" cy="24" r="21" fill="#E8F5E9" stroke="#1B5E20" stroke-width="1.2"/>
-  <rect x="15" y="17" width="18" height="18" rx="2" fill="none" stroke="#1B5E20" stroke-width="1.8"/><rect x="20" y="15" width="8" height="4" rx="1" fill="none" stroke="#1B5E20" stroke-width="1.6"/><polyline points="19,26 21.5,28.5 25,24" fill="none" stroke="#1B5E20" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><line x1="27" y1="26" x2="30" y2="26" stroke="#1B5E20" stroke-width="1.6" stroke-linecap="round"/><line x1="19" y1="30" x2="30" y2="30" stroke="#1B5E20" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Clipboard body -->
+  <rect x="14" y="16" width="20" height="20" rx="2" fill="none" stroke="#1B5E20" stroke-width="1.8"/>
+  <!-- Clip notch at top -->
+  <rect x="19" y="14" width="10" height="5" rx="1.5" fill="none" stroke="#1B5E20" stroke-width="1.6"/>
+  <!-- Checkmark row -->
+  <polyline points="18,25 21,28 25,22" fill="none" stroke="#1B5E20" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="27" y1="25" x2="31" y2="25" stroke="#1B5E20" stroke-width="1.6" stroke-linecap="round"/>
+  <!-- Second line -->
+  <line x1="18" y1="31" x2="31" y2="31" stroke="#1B5E20" stroke-width="1.6" stroke-linecap="round"/>
 </svg>
