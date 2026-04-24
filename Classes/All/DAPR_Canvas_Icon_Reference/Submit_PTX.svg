@@ -1,10 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-hidden="true">
-  <title>Pro Tools Session PTX</title>
-  <circle cx="24" cy="24" r="20" fill="#6B21D6"/>
-  <g transform="translate(12,12)" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-    <!-- Avid-style waveform arc symbol -->
-    <path d="M12 3 C19 3 21 8 21 12 C21 16 19 21 12 21 C5 21 3 16 3 12 C3 8 5 3 12 3z" stroke-width="1.8"/>
-    <path d="M12 7 C16 7 17 9.5 17 12 C17 14.5 16 17 12 17 C8 17 7 14.5 7 12 C7 9.5 8 7 12 7z" stroke-width="1.8"/>
-    <path d="M8 12 Q9 8 12 8 Q15 8 16 12" fill="none" stroke-width="1.8"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <title>Pro Tools session file</title>
+  <desc>PTX — the Pro Tools session file itself, not the folder</desc>
+  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+  <polyline points="14 2 14 8 20 8"/>
+  <text x="12" y="19" font-size="5.5" text-anchor="middle" font-weight="700" stroke="none" fill="#4A148C" font-family="Arial, Helvetica, sans-serif">PTX</text>
 </svg>
