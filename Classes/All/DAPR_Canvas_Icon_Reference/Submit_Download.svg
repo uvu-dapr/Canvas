@@ -1,7 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#4E342E" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-  <title>Download</title>
-  <desc>Instructor provides a file for student to download — cloud with down arrow</desc>
-  <path d="M20.88 18.09A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.29"/>
-  <polyline points="8 17 12 21 16 17"/>
-  <line x1="12" y1="12" x2="12" y2="21"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Download file from Canvas">
+  <path d="M 41.32,14.00 L 41.32,34.00 L 24.00,44.00 L 6.68,34.00 L 6.68,14.00 L 24.00,4.00 Z" fill="#EFEBE9" stroke="#4E342E" stroke-width="1.2"/>
+  <!-- Cloud body shifted up 2px -->
+  <path d="M18 26 Q14 26 14 22 Q14 18 18 18 Q18 14 22 13 Q26 12 28 16 Q32 16 32 20 Q32 24 28 24" fill="none" stroke="#4E342E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Down arrow shaft -->
+  <line x1="24" y1="20" x2="24" y2="32" stroke="#4E342E" stroke-width="2" stroke-linecap="round"/>
+  <!-- Arrowhead -->
+  <polyline points="21,29 24,32 27,29" fill="none" stroke="#4E342E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Base line -->
+  <line x1="19" y1="34" x2="29" y2="34" stroke="#4E342E" stroke-width="2" stroke-linecap="round"/>
 </svg>

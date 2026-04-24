@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="#00695C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+  <title>Pro Tools session folder (zipped)</title>
+  <desc>Archive box with sine wave inside — a zipped audio session</desc>
+  <rect x="1" y="3" width="22" height="5"/>
+  <polyline points="21 8 21 21 3 21 3 8"/>
+  <path d="M5 14 Q 7.5 11 10 14 T 15 14 T 20 14"/>
+</svg>
