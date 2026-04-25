@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 820 360" width="820" height="360">
+  <defs>
+    <style>
+      .hdr  { font-family: Arial, Helvetica, sans-serif; font-size: 14px; font-weight: 700;
+              fill: #F9A825; text-anchor: middle; }
+      .sub  { font-family: Arial, Helvetica, sans-serif; font-size: 11px;
+              fill: #999999; text-anchor: middle; }
+      .pnum { font-family: Arial, Helvetica, sans-serif; font-size: 12px; font-weight: 700;
+              fill: #FFFFFF; text-anchor: middle; dominant-baseline: central; }
+      .wlbl { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
+      .nc   { font-family: Arial, Helvetica, sans-serif; font-size: 10px;
+              fill: #666666; text-anchor: middle; }
+    </style>
+    <radialGradient id="cg" cx="38%" cy="32%" r="62%">
+      <stop offset="0%" stop-color="#505050"/>
+      <stop offset="100%" stop-color="#1C1C1C"/>
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="820" height="360" fill="#161616" rx="10"/>
+
+  <!-- ══════════════════════════════════════════
+       DIN 5-PIN MALE   center (170, 180)
+       Shell radius 85, face radius 72
+       DIN 41524 pin layout (mating face view):
+         Pin 1  upper-left   (140, 143)
+         Pin 3  upper-right  (200, 143)
+         Pin 4  mid-left     (123, 190)
+         Pin 5  mid-right    (217, 190)
+         Pin 2  bottom-ctr   (170, 228)
+       ══════════════════════════════════════════ -->
+
+  <!-- Connector shell -->
+  <circle cx="170" cy="180" r="85" fill="url(#cg)" stroke="#808080" stroke-width="3"/>
+  <!-- Face -->
+  <circle cx="170" cy="180" r="71" fill="#101010" stroke="#3A3A3A" stroke-width="1.5"/>
+
+  <!-- Pin 1 - NC -->
+  <circle cx="140" cy="143" r="13" fill="#222222" stroke="#505050" stroke-width="2"/>
+  <text x="140" y="143" class="pnum">1</text>
+  <!-- NC dashes up and out of shell -->
+  <line x1="140" y1="130" x2="140" y2="90"  stroke="#555" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="140" y="84" class="nc">NC</text>
+
+  <!-- Pin 3 - NC -->
+  <circle cx="200" cy="143" r="13" fill="#222222" stroke="#505050" stroke-width="2"/>
+  <text x="200" y="143" class="pnum">3</text>
+  <line x1="200" y1="130" x2="200" y2="90"  stroke="#555" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="200" y="84" class="nc">NC</text>
+
+  <!-- Pin 4 - Source → XLR Pin 3  (red) -->
+  <circle cx="123" cy="190" r="14" fill="#5C0000" stroke="#EF5350" stroke-width="2.5"/>
+  <text x="123" y="190" class="pnum">4</text>
+
+  <!-- Pin 5 - Sink → XLR Pin 2  (green) -->
+  <circle cx="217" cy="190" r="14" fill="#073507" stroke="#4CAF50" stroke-width="2.5"/>
+  <text x="217" y="190" class="pnum">5</text>
+
+  <!-- Pin 2 - Shield → XLR Pin 1  (blue) -->
+  <circle cx="170" cy="228" r="14" fill="#041840" stroke="#42A5F5" stroke-width="2.5"/>
+  <text x="170" y="228" class="pnum">2</text>
+
+  <!-- Header + sub-label -->
+  <text x="170" y="296" class="hdr">MIDI 5-PIN DIN</text>
+  <text x="170" y="314" class="sub">Male plug (mating face)</text>
+
+
+  <!-- ══════════════════════════════════════════
+       XLR 3-PIN FEMALE   center (650, 180)
+       Shell radius 85, face radius 72
+       IEC 60268-12 pin layout (mating face view):
+         Pin 1  bottom-left   (618, 222)
+         Pin 2  top-center    (650, 133)
+         Pin 3  bottom-right  (682, 222)
+       ══════════════════════════════════════════ -->
+
+  <!-- Connector shell -->
+  <circle cx="650" cy="180" r="85" fill="url(#cg)" stroke="#808080" stroke-width="3"/>
+  <!-- Face -->
+  <circle cx="650" cy="180" r="71" fill="#101010" stroke="#3A3A3A" stroke-width="1.5"/>
+
+  <!-- Pin 1 - Shield / GND  (blue) -->
+  <circle cx="618" cy="222" r="14" fill="#041840" stroke="#42A5F5" stroke-width="2.5"/>
+  <text x="618" y="222" class="pnum">1</text>
+
+  <!-- Pin 2 - Hot +  (green) -->
+  <circle cx="650" cy="133" r="14" fill="#073507" stroke="#4CAF50" stroke-width="2.5"/>
+  <text x="650" y="133" class="pnum">2</text>
+
+  <!-- Pin 3 - Cold -  (red) -->
+  <circle cx="682" cy="222" r="14" fill="#5C0000" stroke="#EF5350" stroke-width="2.5"/>
+  <text x="682" y="222" class="pnum">3</text>
+
+  <!-- Header + sub-label -->
+  <text x="650" y="296" class="hdr">XLR 3-PIN</text>
+  <text x="650" y="314" class="sub">Female receptacle (mating face)</text>
+
+
+  <!-- ══════════════════════════════════════════
+       WIRES - from pin center to pin center
+       with a horizontal run in between
+       ══════════════════════════════════════════ -->
+
+  <!-- GREEN: DIN Pin 5 (217,190) → XLR Pin 2 (650,133) -->
+  <path d="M 231,190 L 400,190 L 400,133 L 636,133"
+        stroke="#4CAF50" stroke-width="3" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- RED: DIN Pin 4 (123,190) → XLR Pin 3 (682,222) -->
+  <path d="M 137,190 L 420,190 L 420,222 L 668,222"
+        stroke="#EF5350" stroke-width="3" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- BLUE: DIN Pin 2 (170,228) → XLR Pin 1 (618,222) -->
+  <path d="M 170,242 L 170,260 L 440,260 L 440,222 L 604,222"
+        stroke="#42A5F5" stroke-width="3" fill="none"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+
+  <!-- ══════════════════════════════════════════
+       WIRE LABELS  (centered on horizontal runs)
+       ══════════════════════════════════════════ -->
+
+  <!-- Green label on horizontal segment y=133, x mid ~ 400–636 -->
+  <text x="420" y="124" class="wlbl" fill="#4CAF50" text-anchor="middle">
+    Pin 5 (Sink / data)  →  Pin 2 (Hot +)
+  </text>
+
+  <!-- Red label on horizontal segment y=190, x mid ~ 137–420 -->
+  <!-- shift up so it doesn't overlap green wire -->
+  <text x="280" y="182" class="wlbl" fill="#EF5350" text-anchor="middle">
+    Pin 4 (Source)  →  Pin 3 (Cold −)
+  </text>
+
+  <!-- Blue label on horizontal segment y=260, x mid ~ 170–440 -->
+  <text x="305" y="275" class="wlbl" fill="#42A5F5" text-anchor="middle">
+    Pin 2 (Shield / GND)  →  Pin 1 (Shield / GND)
+  </text>
+
+</svg>
