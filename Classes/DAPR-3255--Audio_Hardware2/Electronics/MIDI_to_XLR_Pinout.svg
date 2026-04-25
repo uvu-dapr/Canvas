@@ -1,0 +1,155 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 620" width="900" height="620">
+  <defs>
+    <style>
+      .title { font-family: 'Arial Black', Arial, sans-serif; font-size: 22px; font-weight: 900; fill: #FFFFFF; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 13px; fill: #AAAAAA; }
+      .section-label { font-family: 'Arial Black', Arial, sans-serif; font-size: 14px; font-weight: 700; fill: #F9A825; letter-spacing: 1px; }
+      .pin-label { font-family: 'Courier New', monospace; font-size: 13px; fill: #E0E0E0; }
+      .pin-num { font-family: 'Courier New', monospace; font-size: 11px; fill: #FFFFFF; font-weight: 700; }
+      .connector-label { font-family: Arial, sans-serif; font-size: 12px; fill: #AAAAAA; text-anchor: middle; }
+      .wire-green { stroke: #4CAF50; stroke-width: 3; fill: none; stroke-linecap: round; }
+      .wire-red   { stroke: #EF5350; stroke-width: 3; fill: none; stroke-linecap: round; }
+      .wire-blue  { stroke: #42A5F5; stroke-width: 3; fill: none; stroke-linecap: round; }
+      .wire-gray  { stroke: #777777; stroke-width: 2; fill: none; stroke-linecap: round; stroke-dasharray: 6,4; }
+      .body-text  { font-family: Arial, sans-serif; font-size: 12.5px; fill: #CCCCCC; }
+      .callout    { font-family: Arial, sans-serif; font-size: 11.5px; fill: #90CAF9; }
+    </style>
+  </defs>
+
+  <!-- Background -->
+  <rect width="900" height="620" fill="#121212" rx="10"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="900" height="6" fill="#F9A825" rx="3"/>
+
+  <!-- Title block -->
+  <text x="450" y="42" text-anchor="middle" class="title">MIDI 5-PIN DIN to XLR CABLE</text>
+  <text x="450" y="62" text-anchor="middle" class="subtitle">DAPR 3255 - Audio Hardware II  |  Utah Valley University</text>
+
+  <!-- Divider -->
+  <line x1="30" y1="75" x2="870" y2="75" stroke="#333333" stroke-width="1"/>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- LEFT CONNECTOR: 5-Pin DIN (Male) -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <text x="175" y="102" text-anchor="middle" class="section-label">MIDI 5-PIN DIN (MALE)</text>
+
+  <!-- DIN connector body - circular shell -->
+  <ellipse cx="175" cy="200" rx="75" ry="78" fill="#2A2A2A" stroke="#888888" stroke-width="3"/>
+  <ellipse cx="175" cy="200" rx="65" ry="67" fill="#1E1E1E" stroke="#555555" stroke-width="1.5"/>
+
+  <!-- DIN pin positions: standard DIN 41524 layout -->
+  <!-- Pin 1: top-left  -->
+  <!-- Pin 2: bottom-center  -->
+  <!-- Pin 3: top-right  -->
+  <!-- Pin 4: mid-left  -->
+  <!-- Pin 5: mid-right  -->
+
+  <!-- Pin circles with numbers -->
+  <!-- Pin 1 (top-left, not connected) -->
+  <circle cx="145" cy="165" r="11" fill="#333333" stroke="#666666" stroke-width="2"/>
+  <text x="145" y="169" text-anchor="middle" class="pin-num">1</text>
+
+  <!-- Pin 3 (top-right, not connected) -->
+  <circle cx="205" cy="165" r="11" fill="#333333" stroke="#666666" stroke-width="2"/>
+  <text x="205" y="169" text-anchor="middle" class="pin-num">3</text>
+
+  <!-- Pin 4 (mid-left, SOURCE = XLR 3) -->
+  <circle cx="133" cy="210" r="11" fill="#B71C1C" stroke="#EF5350" stroke-width="2.5"/>
+  <text x="133" y="214" text-anchor="middle" class="pin-num">4</text>
+
+  <!-- Pin 5 (mid-right, SINK = XLR 2) -->
+  <circle cx="217" cy="210" r="11" fill="#1B5E20" stroke="#4CAF50" stroke-width="2.5"/>
+  <text x="217" y="214" text-anchor="middle" class="pin-num">5</text>
+
+  <!-- Pin 2 (bottom-center, SHIELD = XLR 1) -->
+  <circle cx="175" cy="244" r="11" fill="#0D47A1" stroke="#42A5F5" stroke-width="2.5"/>
+  <text x="175" y="248" text-anchor="middle" class="pin-num">2</text>
+
+  <!-- DIN connector label -->
+  <text x="175" y="306" text-anchor="middle" class="connector-label">Male plug on cable</text>
+
+  <!-- Pin legend for DIN -->
+  <text x="30" y="330" class="pin-label">Pin 1 — not connected</text>
+  <text x="30" y="348" class="pin-label">Pin 2 — Shield / Ground  ──► XLR Pin 1</text>
+  <text x="30" y="366" class="pin-label">Pin 3 — not connected</text>
+  <text x="30" y="384" class="pin-label">Pin 4 — Source (current)  ──► XLR Pin 3</text>
+  <text x="30" y="402" class="pin-label">Pin 5 — Sink (data)       ──► XLR Pin 2</text>
+
+  <!-- Color key dots -->
+  <circle cx="20" cy="344" r="5" fill="#42A5F5"/>
+  <circle cx="20" cy="380" r="5" fill="#EF5350"/>
+  <circle cx="20" cy="398" r="5" fill="#4CAF50"/>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- WIRES (center routing) -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <!-- Wire: Pin 5 (green) to XLR Pin 2 -->
+  <path class="wire-green" d="M 228,210 C 380,210 520,185 665,185"/>
+
+  <!-- Wire: Pin 4 (red) to XLR Pin 3 -->
+  <path class="wire-red" d="M 144,210 C 380,240 520,225 665,225"/>
+
+  <!-- Wire: Pin 2 (blue) to XLR Pin 1 -->
+  <path class="wire-blue" d="M 175,255 C 380,275 520,260 665,260"/>
+
+  <!-- Wire labels at midpoint -->
+  <text x="420" y="198" text-anchor="middle" class="callout">Pin 5 → XLR 2 (hot)</text>
+  <text x="420" y="237" text-anchor="middle" class="callout">Pin 4 → XLR 3 (cold)</text>
+  <text x="420" y="272" text-anchor="middle" class="callout">Pin 2 → XLR 1 (shield)</text>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- RIGHT CONNECTOR: Female XLR -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <text x="725" y="102" text-anchor="middle" class="section-label">XLR 3-PIN (FEMALE)</text>
+
+  <!-- XLR connector body - rounded rectangle -->
+  <rect x="660" y="130" width="130" height="160" rx="18" fill="#2A2A2A" stroke="#888888" stroke-width="3"/>
+  <rect x="670" y="140" width="110" height="140" rx="12" fill="#1A1A1A" stroke="#444444" stroke-width="1.5"/>
+
+  <!-- XLR Pin 1 (left, shield/ground = blue) -->
+  <circle cx="695" cy="185" r="14" fill="#0D47A1" stroke="#42A5F5" stroke-width="2.5"/>
+  <text x="695" y="189" text-anchor="middle" class="pin-num">1</text>
+
+  <!-- XLR Pin 2 (right, hot = green) -->
+  <circle cx="755" cy="185" r="14" fill="#1B5E20" stroke="#4CAF50" stroke-width="2.5"/>
+  <text x="755" y="189" text-anchor="middle" class="pin-num">2</text>
+
+  <!-- XLR Pin 3 (bottom center, cold = red) -->
+  <circle cx="725" cy="235" r="14" fill="#B71C1C" stroke="#EF5350" stroke-width="2.5"/>
+  <text x="725" y="239" text-anchor="middle" class="pin-num">3</text>
+
+  <!-- XLR connector label -->
+  <text x="725" y="306" text-anchor="middle" class="connector-label">Female chassis / cable end</text>
+
+  <!-- XLR pin legend -->
+  <text x="660" y="330" class="pin-label">Pin 1 — Shield / Ground  ◄── MIDI Pin 2</text>
+  <text x="660" y="348" class="pin-label">Pin 2 — Hot (+)          ◄── MIDI Pin 5</text>
+  <text x="660" y="366" class="pin-label">Pin 3 — Cold (–)         ◄── MIDI Pin 4</text>
+
+  <circle cx="650" cy="326" r="5" fill="#42A5F5"/>
+  <circle cx="650" cy="344" r="5" fill="#4CAF50"/>
+  <circle cx="650" cy="362" r="5" fill="#EF5350"/>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- IMPORTANT NOTE BOX -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <rect x="30" y="425" width="840" height="80" rx="8" fill="#1A1A2E" stroke="#F9A825" stroke-width="1.5"/>
+  <text x="46" y="446" class="section-label" font-size="12">NOTE — PASSIVE CIRCUIT / NO PHANTOM POWER</text>
+  <text x="46" y="463" class="body-text">This cable carries only MIDI current-loop signal (5 mA). It is NOT an audio cable. Never route audio or phantom power through this wiring.</text>
+  <text x="46" y="480" class="body-text">The XLR end connects to a MIDI interface input, not a mic preamp. The cable enables routing MIDI through XLR patchbays and TT/bantam bays in professional studios.</text>
+  <text x="46" y="497" class="body-text">Use Type A TRS-MIDI wiring convention (MIDI Standard): Pin 5 = Sink (data in), Pin 4 = Source (current), Pin 2 = Shield.</text>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- WHY USE THIS CABLE block -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <rect x="30" y="518" width="840" height="82" rx="8" fill="#1A2A1A" stroke="#4CAF50" stroke-width="1.5"/>
+  <text x="46" y="538" class="section-label" font-size="12" fill="#4CAF50">WHY USE THIS CABLE?</text>
+  <text x="46" y="556" class="body-text">Studios universally have XLR wall plates and TT patchbays. Very few have MIDI wall plates. This adapter lets you route MIDI from a keyboard or controller</text>
+  <text x="46" y="573" class="body-text">through the patchbay (TT to XLR) to a MIDI interface — capturing MIDI data and audio simultaneously. You get the flexibility to re-render with different</text>
+  <text x="46" y="590" class="body-text">instruments, adjust note timing, layer sounds, and fix performance issues — all from a standard patchbay run with no extra infrastructure.</text>
+
+  <!-- Bottom bar -->
+  <rect x="0" y="614" width="900" height="6" fill="#F9A825" rx="3"/>
+</svg>

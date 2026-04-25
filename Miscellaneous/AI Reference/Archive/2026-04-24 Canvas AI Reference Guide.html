@@ -561,7 +561,7 @@
         <tr><td>Rubric CSV</td><td>XV</td></tr>
         <tr><td>PDF documentation block</td><td>XVII, XVIII</td></tr>
         <tr><td>Assignment page with point values</td><td>XVIII</td></tr>
-        <tr><td>Images on any Canvas page</td><td>XIX (GitHub), XX (File Naming), XXII</td></tr>
+        <tr><td>Images on any Canvas page</td><td>II (1.9 Image Hosting Rule), XIX (GitHub), XX (File Naming), XXII, XXIV - All images must use raw.githubusercontent.com</td></tr>
         <tr><td>Adding icons to a Canvas page</td><td>XXIV</td></tr>
         <tr><td>Module or page naming</td><td>XXIII</td></tr>
         <tr><td>Student file naming</td><td>XX (File Naming)</td></tr>
@@ -578,7 +578,7 @@
     </div>
 
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Authority:</strong> Instructure documentation is the source of truth for what Canvas actually supports. When this guide and Instructure disagree, Instructure wins. This section exists to make cross-checking fast.</p>
     </div>
 
@@ -713,7 +713,7 @@
     </table>
 
     <div class="box box-note">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>How to use this section:</strong> Before generating or reviewing a Canvas page, open the Allowlist in one tab and the Accessibility Checklist in another. Everything else in this guide is applied on top of those two authoritative documents.</p>
     </div>
   </section>
@@ -726,7 +726,7 @@
     </div>
 
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Core Rule:</strong> Every element that needs visual formatting must carry its own inline <code>style=""</code> attribute. There are no external stylesheets. Write as if you have no stylesheet at all.</p>
     </div>
 
@@ -740,7 +740,7 @@
           <tr><td><code>&lt;style&gt;...&lt;/style&gt;</code> blocks</td><td>Not in the allowlist. Behavior is inconsistent - sometimes preserved, often stripped when the page is saved or re-edited. Do not rely on embedded style blocks.</td></tr>
           <tr><td><code>&lt;script&gt;</code></td><td>Removed. All JavaScript is stripped for security. Not in the allowlist.</td></tr>
           <tr><td><code>&lt;h1&gt;</code></td><td>Removed. Only <code>h2</code> through <code>h6</code> are in the allowlist. Canvas provides the H1 from the page title.</td></tr>
-          <tr><td><code>display: flex</code></td><td><strong>Allowed</strong> per the allowlist. However, inline SVG icons placed inside a flex container sometimes fail to render in Canvas. Use <code>&lt;table role="presentation"&gt;</code> for icon + text callout layouts. Reserve flex for non-icon content.</td></tr>
+          <tr><td><code>display: flex</code></td><td><strong>Allowed</strong> per the allowlist. However, inline SVG icons placed inside a flex container sometimes fail to render in Canvas. Use the Panorama-passing table template from Part XXI section 21.4 for icon + text callout layouts. Reserve flex for non-icon content.</td></tr>
           <tr><td><code>display: grid</code></td><td><strong>Allowed</strong> per the allowlist. Not all Canvas themes render it predictably at narrow widths. Use tables with percentage widths if the layout must be identical in every Canvas build.</td></tr>
           <tr><td><code>position: absolute / fixed</code></td><td><strong>Allowed</strong> per the allowlist. Avoid anyway because Canvas page chrome (sidebar, banners) can overlap absolutely positioned content unpredictably.</td></tr>
           <tr><td><code>@font-face</code> / Google Fonts</td><td>Not in the allowed style properties list. Use system fonts (Arial, Georgia, Courier New).</td></tr>
@@ -752,8 +752,8 @@
     </details>
 
     <div class="box box-warning">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <p><strong>The flex-with-icons gotcha:</strong> Canvas's allowlist permits <code>display: flex</code>, but inline SVG icons placed inside a flex container frequently fail to appear on the rendered page even though they are present in the source. Use a two-column table with <code>role="presentation"</code> for any icon-plus-text callout. This is the single most common cause of "my icon disappeared" reports.</p>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>The flex-with-icons gotcha:</strong> Canvas's allowlist permits <code>display: flex</code>, but inline SVG icons placed inside a flex container frequently fail to appear on the rendered page even though they are present in the source. Use the Panorama-passing table template from Part XXI section 21.4 for any icon-plus-text callout. This is the single most common cause of "my icon disappeared" reports.</p>
     </div>
 
     <details>
@@ -801,7 +801,7 @@ font-family: Georgia, "Times New Roman", serif;</pre>
     </table>
 
     <div class="box box-warning">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Never use #CC4400.</strong> Always use #993300 or darker for orange-toned text. Panorama also flags #E65100 as a false positive - do not change the orange header color, it is locked at position 3 in the resistor color sequence.</p>
     </div>
 
@@ -827,6 +827,25 @@ font-family: Georgia, "Times New Roman", serif;</pre>
     <p>All Canvas pages and generated HTML must use UTF-8 encoding. Without it, quotation marks and apostrophes display as corrupted characters. Include in standalone files:</p>
     <pre><span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span></pre>
     <p>Use straight quotes, not smart quotes. If you see <code>â€œsyncâ€</code> instead of <code>"sync"</code>, UTF-8 is missing.</p>
+
+    <h3>1.9 Image Hosting Rule - GitHub Required</h3>
+    <div class="box box-critical">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>Every image and SVG file used in a Canvas page must be hosted on GitHub and referenced via a raw.githubusercontent.com URL.</strong> Images must never be base64-encoded or embedded directly inside HTML. Base64 data URIs bloat the page enormously and Canvas may silently truncate the content. Canvas Files uploads are prohibited for program icons and shared assets because they break the copy-paste workflow and cannot be shared across courses.</p>
+    </div>
+    <table>
+      <caption>Image Hosting Methods - Allowed vs. Prohibited</caption>
+      <thead><tr><th scope="col">Method</th><th scope="col">Allowed?</th><th scope="col">When to Use</th></tr></thead>
+      <tbody>
+        <tr><td>GitHub raw URL (<code>raw.githubusercontent.com/...</code>)</td><td><strong>Required for everything</strong></td><td>All icons, screenshots, photos, and diagrams. Every image on every Canvas page.</td></tr>
+        <tr><td>Base64 data URI (<code>data:image/png;base64,...</code>)</td><td><strong>Prohibited</strong></td><td>Never. Bloats HTML, may exceed Canvas page size limits, impossible to update.</td></tr>
+        <tr><td>Inline SVG path data pasted into Canvas HTML</td><td><strong>Prohibited</strong></td><td>Never. Use a GitHub-hosted <code>&lt;img&gt;</code> tag for every icon including callout box icons.</td></tr>
+        <tr><td>Canvas Files upload</td><td><strong>Prohibited for shared assets</strong></td><td>Never for program icons or reusable content.</td></tr>
+        <tr><td>github.com page URL</td><td><strong>Prohibited</strong></td><td>Never. Returns an HTML preview page, not the file. Canvas shows a broken image.</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Repository base URL for all program assets:</strong> <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/</code><br>
+    Icons: <code>Classes/All/DAPR_Canvas_Icon_Reference/</code> - Course assets: <code>Classes/dapr-XXXX/topic-assignment_name/</code></p>
   </section>
 
   <!-- PART III -->
@@ -848,7 +867,7 @@ font-family: Georgia, "Times New Roman", serif;</pre>
 
     <h3>2.2 Headings - Proper Hierarchy</h3>
     <div class="box box-critical">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Never use &lt;h1&gt; inside a Canvas Page body.</strong> Canvas provides H1 from the page title automatically. Your content starts at H2. Never skip levels (H2 to H4 without H3). H3 as the first heading on a page is a Severe Panorama error.</p>
     </div>
 
@@ -865,7 +884,7 @@ font-family: Georgia, "Times New Roman", serif;</pre>
       </tbody>
     </table>
     <div class="box box-warning">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Caption Note:</strong> Canvas strips visually-hidden caption CSS. Use a plain <code>&lt;caption&gt;</code> tag with NO style attribute. <code>&lt;caption&gt;</code> and <code>&lt;th scope="col"&gt;</code> are always required together - missing either one is a separate flagged error. A two-column comparison table with labeled headers is a data table, not a layout table.</p>
     </div>
   </section>
@@ -947,7 +966,7 @@ font-family: Georgia, "Times New Roman", serif;</pre>
 
     <h3>6.6 QTI Item Title Rule</h3>
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Set the title attribute on every &lt;item&gt; to the question bank or category name.</strong> All questions in the same category share the exact same title string. Do not use the question text as the title. Example: <code>title="Network Wiring Standards"</code> on every question in that bank.</p>
     </div>
 
@@ -978,7 +997,7 @@ font-family: Georgia, "Times New Roman", serif;</pre>
       <h2>Part VII - Self-Grading Policy and Question Design Rules</h2>
     </div>
     <div class="box box-critical">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Never use "All of the above" or "None of the above" as answer options.</strong> These test test-taking skill, not content knowledge. Every distractor must stand independently and be plausible on its own.</p>
     </div>
     <table>
@@ -1027,7 +1046,7 @@ font-family: Georgia, "Times New Roman", serif;</pre>
       </tbody>
     </table>
     <div class="box box-note">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Note:</strong> Do not import the Automatic Missing Policy during semester rollovers. Use "Don't Import Policy" until due dates are updated.</p>
     </div>
   </section>
@@ -1055,6 +1074,14 @@ HTML RULES:
   Use a hyphen with spaces ( - ) where a dash is needed in text.
 - Do not use manual numbered labels (1. 2. 3.) inside div elements
   when items convey a sequence. Use word-based labels instead.
+- ALL images and SVG files must use GitHub raw URLs pointing to
+  https://raw.githubusercontent.com/uvu-dapr/Canvas/main/
+  Never embed base64 data URIs. Never use github.com page URLs.
+  Never paste inline SVG path data into Canvas HTML.
+  Every icon - including callout box icons - must be an
+  &lt;img&gt; tag pointing to raw.githubusercontent.com.
+  Callout icons live at:
+  https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
 
 ACCESSIBILITY RULES (Canvas checker must show 0 issues):
 - First heading in content area must be &lt;h2&gt;. Never use &lt;h1&gt;.
@@ -1122,6 +1149,8 @@ SOURCE QUESTIONS:
         <tr><td>Uses #CC4400 for orange text</td><td>"Replace #CC4400 with #993300"</td></tr>
         <tr><td>Includes "All of the above"</td><td>"Remove all meta-answers. Rewrite as specific independent distractors."</td></tr>
         <tr><td>Em dashes or double dashes in visible text</td><td>"Replace all em dashes and double dashes in visible text with a hyphen with spaces ( - )"</td></tr>
+        <tr><td>Uses base64 data URIs for images</td><td>"Replace every data:image/... src with a raw.githubusercontent.com URL. All images must be hosted on GitHub, never embedded."</td></tr>
+        <tr><td>Uses github.com URLs for images</td><td>"Replace every github.com/uvu-dapr URL with raw.githubusercontent.com/uvu-dapr. The github.com URL serves an HTML page, not the file."</td></tr>
       </tbody>
     </table>
   </section>
@@ -1162,6 +1191,7 @@ SOURCE QUESTIONS:
         <li>All text/background color combinations pass WCAG 4.5:1 contrast ratio</li>
         <li>#CC4400 replaced with #993300 or darker</li>
         <li>No em dashes or double dashes in visible text</li>
+        <li>All images use raw.githubusercontent.com URLs - no base64 data URIs, no github.com page URLs, no Canvas Files uploads for shared assets</li>
         <li>Canvas Accessibility Checker shows 0 issues before publishing</li>
       </ul>
     </details>
@@ -1187,6 +1217,7 @@ SOURCE QUESTIONS:
         <li>All &lt;img&gt; tags include alt text under 120 characters</li>
         <li>All &lt;a&gt; tags include title attribute</li>
         <li>No em dashes or double dashes in visible content</li>
+        <li>All images use raw.githubusercontent.com URLs - no base64, no github.com URLs</li>
         <li>No "All of the above" or "None of the above" in quiz questions</li>
         <li>Content reviewed for instructor voice - no conditional softening language</li>
         <li>Submission instructions state file type, naming convention, and zip requirements</li>
@@ -1241,7 +1272,7 @@ SOURCE QUESTIONS:
     </table>
 
     <div class="box box-critical">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>No commas in ANY field.</strong> Canvas parses rubric CSVs by splitting on commas. A comma inside any field causes silent column misalignment - one or more criteria receive 0 points with no error message. Replace comma-separated lists with "and" or "or" as conjunctions throughout every field in every row.</p>
     </div>
 
@@ -1292,12 +1323,12 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
     </ol>
 
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Required instruction line at top of every copy-paste block:</strong> "After pasting this into Word, select each numbered item line and apply Format &gt; Paragraph &gt; Line and Page Breaks &gt; Keep with next. This prevents a section label from appearing alone at the bottom of a page while its screenshot is on the next page."</p>
     </div>
 
     <div class="box box-warning">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Point values in the copy-paste block must exactly match the rubric table on the same Canvas page.</strong> Format: <code>1. EQ (15 pts)</code> - not <code>1. EQ</code>. Students copy this block before they know the rubric - they must see point values while building the document.</p>
     </div>
   </section>
@@ -1360,15 +1391,20 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
       <h2>Part XIX - GitHub Image Repository Standards</h2>
     </div>
 
+    <div class="box box-critical">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>Every image and SVG file on a Canvas page must be hosted on this GitHub repository and referenced via a raw.githubusercontent.com URL.</strong> There are no exceptions for screenshots, diagrams, photos, or icons. Never embed images as base64 data URIs. Never use Canvas Files uploads for shared program assets. Never link to a github.com page URL - it returns HTML, not the file, and Canvas renders a broken image.</p>
+    </div>
+
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Repository:</strong> https://github.com/uvu-dapr/Canvas<br>
       <strong>Raw URL pattern:</strong> <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/FOLDER/SUBFOLDER/FILENAME.jpg</code><br>
       Always use raw.githubusercontent.com, never github.com. Verify every new URL in a browser before building the Canvas page.</p>
     </div>
 
     <div class="box box-critical">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Never rename or move an existing image file.</strong> Canvas pages contain hardcoded URLs. Renaming a file breaks every page that references it with no warning. To update an image, replace the file in place using the same filename.</p>
     </div>
 
@@ -1453,7 +1489,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
     </div>
 
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Master pattern:</strong> Three segments separated by space-hyphen-space ( - )<br>
       With song: <code>LastName, FirstName - Assignment Name - Song Name.ext</code><br>
       Without song: <code>LastName, FirstName - Assignment Name.ext</code></p>
@@ -1491,7 +1527,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
     </table>
 
     <div class="box box-note">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Zip-Session Matching Rule:</strong> The zip file, the .ptx session file inside it, and the WAV bounce must all share the same base name. Canvas shows only the zip filename in SpeedGrader. If the names do not match it is impossible to verify the correct session was submitted.</p>
     </div>
   </section>
@@ -1500,16 +1536,17 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
   <section class="part" id="part21">
     <div class="part-header">
       <h2>Part XXI - Canvas Icon and Callout Box System</h2>
-      <p class="part-desc">Standardized inline-SVG icons and color-coded callout boxes for all DAPR Canvas HTML pages. Every icon is implemented as inline SVG. No image uploads are required.</p>
+      <p class="part-desc">Standardized GitHub-hosted icons and color-coded callout boxes for all DAPR Canvas HTML pages. Every icon is an <code>&lt;img&gt;</code> tag pointing to a raw.githubusercontent.com URL. No inline SVG and no embedded images.</p>
     </div>
 
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-      <p><strong>Required:</strong> Every Canvas page that uses a callout box must use one of the six approved types below. Custom colors and custom icon shapes are not permitted. An AI generating Canvas HTML must reference this section to produce the correct SVG path data, hex codes, and border colors.</p>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>Required:</strong> Every Canvas page that uses a callout box must use one of the six approved types below. Custom colors and custom icon shapes are not permitted. An AI generating Canvas HTML must reference this section to produce the correct GitHub icon URL, hex codes, and border colors. Every icon is an <code>&lt;img&gt;</code> tag. No inline SVG anywhere.</p>
     </div>
 
     <h3>21.1 The Icon Specification Rule</h3>
-    <p>Icons are SVG rendered at <code>viewBox="0 0 24 24"</code> with the following fixed attributes on every icon: <code>fill="none"</code>, <code>stroke-width="2.2"</code>, <code>stroke-linecap="round"</code>, <code>stroke-linejoin="round"</code>. The stroke color matches the border color of its callout box. The icon is sized at <code>width="22" height="22"</code> inside callout boxes and <code>width="36" height="36"</code> for standalone contact or email callouts at the bottom of pages. Every icon must include <code>role="img"</code> and <code>aria-hidden="true"</code> so screen readers skip the decorative graphic.</p>
+    <p>Every callout box icon is embedded as an <code>&lt;img&gt;</code> tag pointing to the raw GitHub URL for that icon. The icon is sized at <code>width="22" height="22"</code> inside callout boxes and <code>width="36" height="36"</code> for standalone icons appearing inline in assignment page content.</p>
+    <p><strong>Alt text on callout icons - Panorama requires descriptive alt text.</strong> Use <code>alt=""</code> passes the Canvas Accessibility Checker but Panorama (YuJa) flags it as a Severe error ("item does not have an alternative description") on every callout icon. Use the label name as the alt text instead: <code>alt="Required"</code>, <code>alt="Note"</code>, <code>alt="Warning"</code>, <code>alt="Critical"</code>, <code>alt="Tip"</code>, <code>alt="FAQ"</code>. Use descriptive alt text on submission type and action icons that appear without accompanying labels as well.</p>
 
     <h3>21.2 Six Callout Types - Locked Colors</h3>
     <p>The six callout box types and their locked colors are listed below. The Background column is the fill color of the box. The Border / Stroke column is the left border and the icon stroke color. Do not use any other color combinations.</p>
@@ -1519,7 +1556,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
         <tr>
           <td>
             <div class="box box-required" style="margin:0; padding:6px 10px;">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="18" height="18" style="flex-shrink:0;">
               <p style="margin:0; font-size:12px;"><strong>Required</strong></p>
             </div>
           </td>
@@ -1530,7 +1567,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
         <tr>
           <td>
             <div class="box box-note" style="margin:0; padding:6px 10px;">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="18" height="18" style="flex-shrink:0;">
               <p style="margin:0; font-size:12px;"><strong>Note</strong></p>
             </div>
           </td>
@@ -1541,7 +1578,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
         <tr>
           <td>
             <div class="box box-warning" style="margin:0; padding:6px 10px;">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="18" height="18" style="flex-shrink:0;">
               <p style="margin:0; font-size:12px;"><strong>Warning</strong></p>
             </div>
           </td>
@@ -1552,7 +1589,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
         <tr>
           <td>
             <div class="box box-critical" style="margin:0; padding:6px 10px;">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="18" height="18" style="flex-shrink:0;">
               <p style="margin:0; font-size:12px;"><strong>Critical</strong></p>
             </div>
           </td>
@@ -1563,7 +1600,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
         <tr>
           <td>
             <div class="box box-tip" style="margin:0; padding:6px 10px;">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="" width="18" height="18" style="flex-shrink:0;">
               <p style="margin:0; font-size:12px;"><strong>Tip / Pro tip</strong></p>
             </div>
           </td>
@@ -1574,7 +1611,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
         <tr>
           <td>
             <div class="box box-faq" style="margin:0; padding:6px 10px;">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#AD1457" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_FAQ.svg" alt="" width="18" height="18" style="flex-shrink:0;">
               <p style="margin:0; font-size:12px;"><strong>FAQ</strong></p>
             </div>
           </td>
@@ -1586,7 +1623,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
     </table>
 
     <div class="box box-note">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Tip vs. FAQ - when to use which:</strong> A <strong>Tip</strong> is a suggestion the instructor is offering unprompted ("here is a faster way to do this"). An <strong>FAQ</strong> is an answer to a question the instructor expects students to ask ("Why do we use WAV instead of MP3?"). If the content is phrased as a question-and-answer, use FAQ. If it is phrased as advice or a shortcut, use Tip.</p>
     </div>
 
@@ -1594,64 +1631,68 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
     <p>These two callouts use the same structural template. Only the icon, border color, and background change.</p>
 
     <div class="box box-tip">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Tip:</strong> Render a reference of your mix before uploading. A rendered WAV bounced from the session often reveals plugin-bypass mistakes that are hard to hear during real-time playback.</p>
     </div>
 
     <div class="box box-faq">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#AD1457" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_FAQ.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>FAQ - Why do we submit WAV instead of MP3?</strong> WAV is lossless. MP3 throws away frequency content during compression, which changes the sonic decisions the instructor is grading. Export from the session as 24-bit WAV at the session sample rate.</p>
     </div>
 
-    <h3>21.4 Callout Box HTML Template</h3>
-    <p>Every callout box in Canvas HTML uses this structure. Replace the fill color, border color, icon stroke color, SVG path data, label text, and content text to match the type.</p>
+    <h3>21.4 Callout Box HTML Template (Panorama-Passing)</h3>
+    <p>Every callout box in Canvas HTML uses this structure. This template passes both the Canvas Accessibility Checker and Panorama with zero issues. Replace the background color, border color, GitHub icon URL, caption text, label text, and content text to match the callout type.</p>
     <div class="box box-warning">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <p><strong>Canvas layout rule:</strong> For Canvas pages, use a <code>&lt;table role="presentation"&gt;</code> for the icon + text layout, not <code>display:flex</code>. Flex is allowed per the Canvas allowlist, but inline SVG icons inside a flex container often fail to render in Canvas. The table-based layout renders reliably in every Canvas build.</p>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>Canvas layout rule:</strong> Use a <code>&lt;table&gt;</code> for the icon + text layout, not <code>display:flex</code>. Flex is allowed per the Canvas allowlist, but icons inside a flex container often fail to render in Canvas. The table-based layout renders reliably in every Canvas build.</p>
     </div>
-    <pre><span class="tag">&lt;table</span> <span class="attr">role</span>=<span class="val">"presentation"</span> <span class="attr">style</span>=<span class="val">"width:100%; background-color:#E8F5E9; border-left:4px solid #1B5E20;
+    <div class="box box-critical">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>No inline SVG anywhere in Canvas HTML.</strong> Every icon - including callout box icons - must be an <code>&lt;img&gt;</code> tag with a <code>raw.githubusercontent.com</code> URL. Never paste SVG path data directly into Canvas page HTML. Never embed images as base64 data URIs. The GitHub raw URL is the only permitted method for all images and icons.</p>
+    </div>
+    <div class="box box-critical">
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>Do not use <code>role="presentation"</code> on callout tables.</strong> Panorama does not accept <code>role="presentation"</code> as a substitute for proper table structure. A callout table with <code>role="presentation"</code> and no <code>&lt;caption&gt;</code> or <code>&lt;thead&gt;</code> generates two Panorama errors per box: one Severe ("table does not have a header") and one Minor ("table does not have a caption"). Use the full template below instead - it passes both the Canvas Accessibility Checker and Panorama with zero issues.</p>
+    </div>
+    <p>Every callout box in Canvas HTML uses this structure. Replace the background color, border color, GitHub icon URL, label text, and content text to match the type. The caption and thead are visually hidden using <code>position:absolute; clip:rect(0,0,0,0); width:1px; height:1px; overflow:hidden</code> so they are read by screen readers and Panorama but do not appear on screen. The icon alt text matches the label name.</p>
+    <pre><span class="tag">&lt;table</span> <span class="attr">style</span>=<span class="val">"width:100%; background-color:#E8F5E9; border-left:4px solid #1B5E20;
        border-collapse:collapse; margin:16px 0; border-radius:0 4px 4px 0;"</span><span class="tag">&gt;</span>
-  <span class="tag">&lt;tr&gt;</span>
-    <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"width:38px; padding:12px 8px 12px 14px; vertical-align:top;"</span><span class="tag">&gt;</span>
-      <span class="tag">&lt;svg</span> <span class="attr">xmlns</span>=<span class="val">"http://www.w3.org/2000/svg"</span> <span class="attr">viewBox</span>=<span class="val">"0 0 24 24"</span>
-           <span class="attr">width</span>=<span class="val">"22"</span> <span class="attr">height</span>=<span class="val">"22"</span>
-           <span class="attr">fill</span>=<span class="val">"none"</span> <span class="attr">stroke</span>=<span class="val">"#1B5E20"</span>
-           <span class="attr">stroke-width</span>=<span class="val">"2.2"</span> <span class="attr">stroke-linecap</span>=<span class="val">"round"</span> <span class="attr">stroke-linejoin</span>=<span class="val">"round"</span>
-           <span class="attr">role</span>=<span class="val">"img"</span> <span class="attr">aria-hidden</span>=<span class="val">"true"</span><span class="tag">&gt;</span>
-        <span class="comment">&lt;!-- Paste SVG path data here --&gt;</span>
-      <span class="tag">&lt;/svg&gt;</span>
-    <span class="tag">&lt;/td&gt;</span>
-    <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"padding:12px 14px 12px 4px;"</span><span class="tag">&gt;</span>
-      <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"margin:0;"</span><span class="tag">&gt;</span><span class="tag">&lt;strong&gt;</span>Label:<span class="tag">&lt;/strong&gt;</span> Content goes here.<span class="tag">&lt;/p&gt;</span>
-    <span class="tag">&lt;/td&gt;</span>
-  <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;caption</span> <span class="attr">style</span>=<span class="val">"position:absolute; clip:rect(0,0,0,0); width:1px; height:1px; overflow:hidden;"</span><span class="tag">&gt;</span>Descriptive caption for this callout<span class="tag">&lt;/caption&gt;</span>
+  <span class="tag">&lt;thead&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;th</span> <span class="attr">scope</span>=<span class="val">"col"</span> <span class="attr">style</span>=<span class="val">"position:absolute; clip:rect(0,0,0,0); width:1px; height:1px; overflow:hidden;"</span><span class="tag">&gt;</span>Icon<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th</span> <span class="attr">scope</span>=<span class="val">"col"</span> <span class="attr">style</span>=<span class="val">"position:absolute; clip:rect(0,0,0,0); width:1px; height:1px; overflow:hidden;"</span><span class="tag">&gt;</span>Content<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/thead&gt;</span>
+  <span class="tag">&lt;tbody&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"width:38px; padding:12px 8px 12px 14px; vertical-align:top;"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;img</span>
+          <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg"</span>
+          <span class="attr">alt</span>=<span class="val">"Required"</span>
+          <span class="attr">width</span>=<span class="val">"22"</span> <span class="attr">height</span>=<span class="val">"22"</span>
+          <span class="attr">style</span>=<span class="val">"display:block;"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"padding:12px 14px 12px 4px;"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"margin:0;"</span><span class="tag">&gt;</span><span class="tag">&lt;strong&gt;</span>Label:<span class="tag">&lt;/strong&gt;</span> Content goes here.<span class="tag">&lt;/p&gt;</span>
+      <span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/tbody&gt;</span>
 <span class="tag">&lt;/table&gt;</span></pre>
 
-    <h3>21.5 SVG Path Data for Each Type</h3>
-    <p>Paste these path fragments inside the opening and closing <code>&lt;svg&gt;</code> tags. Everything else in the SVG tag stays identical across types - only the stroke color and the path data change.</p>
-    <pre><span class="comment">/* Required - green shield with checkmark */</span>
-stroke="#1B5E20"
-&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/&gt;&lt;polyline points="9 12 11 14 15 10"/&gt;
-
-<span class="comment">/* Note - blue info circle */</span>
-stroke="#0D47A1"
-&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="12" y1="16" x2="12" y2="12"/&gt;&lt;line x1="12" y1="8" x2="12.01" y2="8"/&gt;
-
-<span class="comment">/* Warning - yellow yield triangle */</span>
-stroke="#F57F17"
-&lt;path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/&gt;&lt;line x1="12" y1="9" x2="12" y2="13"/&gt;&lt;line x1="12" y1="17" x2="12.01" y2="17"/&gt;
-
-<span class="comment">/* Critical - red x-circle */</span>
-stroke="#C62828"
-&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="15" y1="9" x2="9" y2="15"/&gt;&lt;line x1="9" y1="9" x2="15" y2="15"/&gt;
-
-<span class="comment">/* Tip - purple lightbulb */</span>
-stroke="#4A148C"
-&lt;path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/&gt;&lt;path d="M9 18h6"/&gt;&lt;path d="M10 22h4"/&gt;
-
-<span class="comment">/* FAQ - hot pink question circle */</span>
-stroke="#AD1457"
-&lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/&gt;&lt;line x1="12" y1="17" x2="12.01" y2="17"/&gt;</pre>
+    <h3>21.5 Callout Icon GitHub URLs</h3>
+    <p>Use these exact URLs in the <code>src</code> attribute of the <code>&lt;img&gt;</code> tag inside each callout box template. Replace the background color and border color values in the table style to match the type. All six files live in the same GitHub folder.</p>
+    <table>
+      <thead><tr><th scope="col">Type</th><th scope="col">img src URL</th><th scope="col">Background</th><th scope="col">Border</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Required</strong></td><td><code style="font-size:10.5px; word-break:break-all;">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg</code></td><td><code>#E8F5E9</code></td><td><code>#1B5E20</code></td></tr>
+        <tr><td><strong>Note</strong></td><td><code style="font-size:10.5px; word-break:break-all;">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg</code></td><td><code>#E3F2FD</code></td><td><code>#0D47A1</code></td></tr>
+        <tr><td><strong>Warning</strong></td><td><code style="font-size:10.5px; word-break:break-all;">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg</code></td><td><code>#FFF8E1</code></td><td><code>#F57F17</code></td></tr>
+        <tr><td><strong>Critical</strong></td><td><code style="font-size:10.5px; word-break:break-all;">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg</code></td><td><code>#FBE9E7</code></td><td><code>#C62828</code></td></tr>
+        <tr><td><strong>Tip</strong></td><td><code style="font-size:10.5px; word-break:break-all;">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg</code></td><td><code>#F3E5F5</code></td><td><code>#4A148C</code></td></tr>
+        <tr><td><strong>FAQ</strong></td><td><code style="font-size:10.5px; word-break:break-all;">https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_FAQ.svg</code></td><td><code>#FCE4EC</code></td><td><code>#AD1457</code></td></tr>
+      </tbody>
+    </table>
 
     <h3>21.6 Feedback Quality Icons - Three Levels</h3>
     <p>The feedback quality comparison uses three icon types in column headers. These are not callout boxes - they appear as colored header cells in a data table. Use this table as a visual rubric when teaching students (or AI tools) how to write actionable feedback on peer mixes.</p>
@@ -1698,7 +1739,7 @@ stroke="#AD1457"
     </table>
 
     <div class="box box-warning">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Gold header contrast rule:</strong> The Helpful column uses a gold background <code>#F9A825</code> that requires dark text <code>#212121</code>, not white. White text on <code>#F9A825</code> produces only 2.9:1 contrast, which fails WCAG AA (minimum 4.5:1). The icon stroke color must also switch to <code>#212121</code> on gold backgrounds. Every other feedback quality column (Not Helpful <code>#B71C1C</code> and Best <code>#1B5E20</code>) passes with white text and white icon strokes.</p>
     </div>
   </section>
@@ -1735,7 +1776,7 @@ stroke="#AD1457"
     </div>
 
     <div class="box box-note">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Why pages have no module number or week reference:</strong> If a page name included a module number or week, that page would need renaming every time its module was reordered or rescheduled. Across hundreds of pages and 12 courses over multiple semesters, that maintenance cost is unacceptable. The topic prefix alone sorts and groups pages correctly in every Canvas view.</p>
     </div>
 
@@ -1754,8 +1795,9 @@ Smith, John - Networking - Address Resolution Protocol.pdf</pre>
     </div>
 
     <div class="box box-required">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-      <p><strong>Required:</strong> Never hotlink to a GitHub page URL (github.com). Always use the raw URL (raw.githubusercontent.com). Only the raw URL serves the actual file. Verify every URL in a browser before pasting into a Canvas page.</p>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
+      <p><strong>Required:</strong> Never hotlink to a GitHub page URL (github.com). Always use the raw URL (raw.githubusercontent.com). Only the raw URL serves the actual file. Verify every URL in a browser before pasting into a Canvas page.<br><br>
+      <strong>There are no exceptions.</strong> Every icon in this library - callout box icons, submission type icons, action icons, and feedback quality icons - is always embedded using an <code>&lt;img&gt;</code> tag pointing to raw.githubusercontent.com. Never paste inline SVG path data into Canvas HTML. Never use base64 data URIs.</p>
     </div>
 
     <h3>24.1 URL Structure - Local File vs. GitHub Raw URL</h3>
@@ -1788,62 +1830,62 @@ Smith, John - Networking - Address Resolution Protocol.pdf</pre>
   <span class="attr">width</span>=<span class="val">"24"</span>
   <span class="attr">height</span>=<span class="val">"24"</span>
   <span class="attr">style</span>=<span class="val">"vertical-align:middle; margin-right:6px;"</span><span class="tag">&gt;</span></pre>
-    <p>For callout boxes (Required, Note, Warning, Critical, Tip, FAQ), use inline SVG path data instead of an img tag. See Part XXI section 21.5 for all callout SVG paths. Inline SVG cannot break from a missing file, which is why callout boxes use it.</p>
+    <p>For callout boxes (Required, Note, Warning, Critical, Tip, FAQ), use an <code>&lt;img&gt;</code> tag pointing to the raw GitHub URL for that callout type. See Part XXI section 21.5 for the complete URL table. Every icon on every Canvas page is a GitHub-hosted <code>&lt;img&gt;</code> tag - no exceptions.</p>
 
     <div class="box box-warning">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Never rename or move an icon file.</strong> Canvas pages contain hardcoded raw URLs. Renaming a file breaks every page that references it with no warning or error. To replace an icon, upload the new version using the exact same filename.</p>
     </div>
 
     <h3>24.3 Callout Box Icons</h3>
-    <p>These six icons are always used as inline SVG inside callout boxes, not as img tags. The path data is in Part XXI section 21.5. The files on GitHub serve as the canonical reference and backup source for the path data.</p>
+    <p>These six icons are used as <code>&lt;img&gt;</code> tags in callout boxes, exactly like all other icons in this library. Use the raw GitHub URL in the <code>src</code> attribute. See Part XXI section 21.5 for the complete URL-to-type reference table.</p>
     <table>
-      <thead><tr><th>Preview</th><th>Filename</th><th>Raw GitHub URL</th><th>Stroke Color</th><th>Background</th><th>Use</th></tr></thead>
+      <thead><tr><th>Preview</th><th>Filename</th><th>img src (raw GitHub URL)</th><th>Background</th><th>Border</th><th>Use</th></tr></thead>
       <tbody>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></td>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="28" height="28" style="display:block; margin:0 auto;"></td>
           <td><code>Callout_Required.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Required.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg</code></td>
           <td><span class="swatch" style="background:#1B5E20;"></span><code>#1B5E20</code></td>
           <td><code>#E8F5E9</code></td>
           <td>Mandatory rules, program standards</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></td>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="28" height="28" style="display:block; margin:0 auto;"></td>
           <td><code>Callout_Note.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Note.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg</code></td>
           <td><span class="swatch" style="background:#0D47A1;"></span><code>#0D47A1</code></td>
           <td><code>#E3F2FD</code></td>
           <td>Clarifications, reminders, helpful context</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></td>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="28" height="28" style="display:block; margin:0 auto;"></td>
           <td><code>Callout_Warning.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Warning.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg</code></td>
           <td><span class="swatch" style="background:#F57F17;"></span><code>#F57F17</code></td>
           <td><code>#FFF8E1</code></td>
           <td>Common mistakes, known gotchas</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></td>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="28" height="28" style="display:block; margin:0 auto;"></td>
           <td><code>Callout_Avoid.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Avoid.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg</code></td>
           <td><span class="swatch" style="background:#C62828;"></span><code>#C62828</code></td>
           <td><code>#FBE9E7</code></td>
           <td>Hard rules, absolute prohibitions (Critical/Stop)</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></td>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="28" height="28" style="display:block; margin:0 auto;"></td>
           <td><code>Callout_Tip.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Tip.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg</code></td>
           <td><span class="swatch" style="background:#4A148C;"></span><code>#4A148C</code></td>
           <td><code>#F3E5F5</code></td>
           <td>Helpful suggestions, shortcuts, optional improvements</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#AD1457" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></td>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_FAQ.svg" alt="FAQ" width="28" height="28" style="display:block; margin:0 auto;"></td>
           <td><code>Callout_FAQ.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_FAQ.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_FAQ.svg</code></td>
           <td><span class="swatch" style="background:#AD1457;"></span><code>#AD1457</code></td>
           <td><code>#FCE4EC</code></td>
           <td>Frequently asked questions, anticipated student questions</td>
@@ -1855,7 +1897,7 @@ Smith, John - Networking - Address Resolution Protocol.pdf</pre>
     <h3>24.4 Feedback Quality Icons</h3>
     <p>Used in the Not Helpful / Helpful / Best comparison table. Each level has two versions: a colored version for use on light row backgrounds and a variant matched to the dark table header. Previews below load directly from GitHub. See Part XXI section 21.6 for the full rendered table.</p>
     <div class="box box-note">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Canvas accessibility checker and img tags:</strong> When icons are embedded as <code>&lt;img&gt;</code> tags, the Canvas accessibility checker cannot automatically detect contrast between the icon and its background. The checker only scans text contrast. The Feedback_Helpful_dark.svg file still exists because a dark icon on a gold background is visually correct for humans - the checker just will not flag it if you accidentally use the wrong version.</p>
     </div>
     <table>
@@ -2016,7 +2058,7 @@ Smith, John - Networking - Address Resolution Protocol.pdf</pre>
     <p>Copy the exact URL from this table into any Canvas <code>&lt;img src=""&gt;</code> tag. All files live in the same folder.</p>
     <pre>BASE: https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
 
-<span class="comment">-- CALLOUT (use as inline SVG path data, not img tags) --</span>
+<span class="comment">-- CALLOUT (use as img tags with raw GitHub URL in callout box templates) --</span>
 Callout_Required.svg
 Callout_Note.svg
 Callout_Warning.svg
@@ -2024,7 +2066,7 @@ Callout_Avoid.svg
 Callout_Tip.svg
 Callout_FAQ.svg
 
-<span class="comment">-- FEEDBACK QUALITY (use as inline SVG or img tags in feedback tables) --</span>
+<span class="comment">-- FEEDBACK QUALITY (use as img tags in feedback quality tables) --</span>
 Feedback_Not_Helpful.svg          (red stroke #B71C1C - body rows)
 Feedback_Not_Helpful_white.svg    (white stroke - red header only)
 Feedback_Helpful.svg              (gold stroke #F9A825 - body rows)
@@ -2050,7 +2092,7 @@ Action_External_Link.svg
 Action_Peer.svg</pre>
 
     <div class="box box-note">
-      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="" width="22" height="22" style="flex-shrink:0; margin-top:2px;">
       <p><strong>Adding a new icon to the library:</strong> Place the SVG file in <code>Classes/All/DAPR_Canvas_Icon_Reference/</code> in GitHub Desktop, commit, and push. The raw URL is immediately live. Verify the URL in a browser before adding it to any Canvas page. Add the icon to this table so the library stays current.</p>
     </div>
   </section>

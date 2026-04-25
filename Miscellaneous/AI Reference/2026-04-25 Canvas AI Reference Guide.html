@@ -546,7 +546,7 @@
     <h1>Canvas AI Reference Guide</h1>
     <p class="subtitle">HTML Pages - QTI Quizzes - Rubrics - Accessibility - Image Hosting - File Naming - April 2026</p>
     <div class="required-note">
-      <strong>Required:</strong> This guide defines the technical, accessibility, structural, and governance standards for all Canvas LMS content in this program. Compliance with Section 508 and WCAG 2.1 AA is mandatory. Content that does not pass the Canvas Accessibility Checker with zero issues must not be published.
+      <strong>Required:</strong> This guide defines the technical, accessibility, structural, and governance standards for all Canvas LMS content in this program. Compliance with Section 508 and WCAG 2.1 AA is mandatory. Content that does not pass the Canvas Accessibility Checker with zero issues must not be published. <strong>Every icon on every Canvas page is sourced from the GitHub icon library at <code style="color:#A5D6A7;">raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code> via an <code style="color:#A5D6A7;">&lt;img&gt;</code> tag - never inline SVG.</strong>
     </div>
   </header>
 
@@ -556,18 +556,23 @@
     <table>
       <thead><tr><th>Task Type</th><th>Parts to Load First</th></tr></thead>
       <tbody>
-        <tr><td>Any Canvas HTML page</td><td>I, II, III, IV, V, X, XI, XXI</td></tr>
+        <tr><td>Any Canvas HTML page</td><td><strong>I, II, III, IV, V, X, XI, XXI, XXIV</strong> (XXIV is the icon source for every page)</td></tr>
+        <tr><td>Any callout box (Required, Note, Warning, Critical, Tip, FAQ)</td><td>XXI, XXIV</td></tr>
         <tr><td>Quiz or QTI file</td><td>VI, VII, VIII, X</td></tr>
         <tr><td>Rubric CSV</td><td>XV</td></tr>
         <tr><td>PDF documentation block</td><td>XVII, XVIII</td></tr>
-        <tr><td>Assignment page with point values</td><td>XVIII</td></tr>
-        <tr><td>Images on any Canvas page</td><td>XIX (GitHub), XX (File Naming), XXII</td></tr>
-        <tr><td>Adding icons to a Canvas page</td><td>XXIV</td></tr>
+        <tr><td>Assignment page with point values</td><td>XVIII, XXI, XXIV</td></tr>
+        <tr><td>Content images (not icons) on a Canvas page</td><td>XIX (GitHub), XX (File Naming), XXII</td></tr>
+        <tr><td>Adding any icon to a Canvas page</td><td><strong>XXIV always</strong>, plus XXI if the icon is in a callout box</td></tr>
         <tr><td>Module or page naming</td><td>XXIII</td></tr>
         <tr><td>Student file naming</td><td>XX (File Naming)</td></tr>
         <tr><td>Panorama audit</td><td>XIV</td></tr>
       </tbody>
     </table>
+    <div class="box box-required" style="margin-top:14px;">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Icon source rule (read this first, every time):</strong> Every icon on every Canvas page is referenced via an <code>&lt;img&gt;</code> tag pointing to <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code>. Inline <code>&lt;svg&gt;</code> is never used in Canvas page HTML. See Part XXIV for the complete icon library and Part XXI for callout box construction.</p>
+    </div>
   </section>
 
   <!-- PART I - REFERENCES -->
@@ -740,7 +745,7 @@
           <tr><td><code>&lt;style&gt;...&lt;/style&gt;</code> blocks</td><td>Not in the allowlist. Behavior is inconsistent - sometimes preserved, often stripped when the page is saved or re-edited. Do not rely on embedded style blocks.</td></tr>
           <tr><td><code>&lt;script&gt;</code></td><td>Removed. All JavaScript is stripped for security. Not in the allowlist.</td></tr>
           <tr><td><code>&lt;h1&gt;</code></td><td>Removed. Only <code>h2</code> through <code>h6</code> are in the allowlist. Canvas provides the H1 from the page title.</td></tr>
-          <tr><td><code>display: flex</code></td><td><strong>Allowed</strong> per the allowlist. However, inline SVG icons placed inside a flex container sometimes fail to render in Canvas. Use <code>&lt;table role="presentation"&gt;</code> for icon + text callout layouts. Reserve flex for non-icon content.</td></tr>
+          <tr><td><code>display: flex</code></td><td><strong>Allowed</strong> per the allowlist. However, image and icon elements placed inside a flex container can render inconsistently across Canvas themes and offline exports. Use <code>&lt;table role="presentation"&gt;</code> for icon + text callout layouts. Reserve flex for non-icon content if you use it at all.</td></tr>
           <tr><td><code>display: grid</code></td><td><strong>Allowed</strong> per the allowlist. Not all Canvas themes render it predictably at narrow widths. Use tables with percentage widths if the layout must be identical in every Canvas build.</td></tr>
           <tr><td><code>position: absolute / fixed</code></td><td><strong>Allowed</strong> per the allowlist. Avoid anyway because Canvas page chrome (sidebar, banners) can overlap absolutely positioned content unpredictably.</td></tr>
           <tr><td><code>@font-face</code> / Google Fonts</td><td>Not in the allowed style properties list. Use system fonts (Arial, Georgia, Courier New).</td></tr>
@@ -753,7 +758,7 @@
 
     <div class="box box-warning">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <p><strong>The flex-with-icons gotcha:</strong> Canvas's allowlist permits <code>display: flex</code>, but inline SVG icons placed inside a flex container frequently fail to appear on the rendered page even though they are present in the source. Use a two-column table with <code>role="presentation"</code> for any icon-plus-text callout. This is the single most common cause of "my icon disappeared" reports.</p>
+      <p><strong>The flex-with-icons gotcha:</strong> Canvas's allowlist permits <code>display: flex</code>, but icon images placed inside a flex container can render inconsistently across Canvas themes, mobile views, and offline exports. Use a two-column table with <code>role="presentation"</code> for any icon-plus-text callout. Combined with the <code>&lt;img&gt;</code>-from-GitHub icon source rule (Part XXI), the table layout is the reliable pattern across every Canvas build.</p>
     </div>
 
     <details>
@@ -923,12 +928,20 @@ font-family: Georgia, "Times New Roman", serif;</pre>
     <span class="tag">&lt;/tr&gt;&lt;/tbody&gt;</span>
   <span class="tag">&lt;/table&gt;</span>
 
-  <span class="comment">&lt;!-- Note callout box --&gt;</span>
-  <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"background-color:#E3F2FD; border-left:4px solid #0D47A1; padding:12px 16px; margin:16px 0; display:flex; align-items:flex-start; gap:12px; border-radius:0 4px 4px 0;"</span>
-       <span class="attr">role</span>=<span class="val">"note"</span> <span class="attr">aria-label</span>=<span class="val">"Note"</span><span class="tag">&gt;</span>
-    <span class="comment">&lt;!-- Paste SVG icon here --&gt;</span>
-    <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"margin:0;"</span><span class="tag">&gt;</span><span class="tag">&lt;strong&gt;</span>Note:<span class="tag">&lt;/strong&gt;</span> Submit your file by Friday at midnight.<span class="tag">&lt;/p&gt;</span>
-  <span class="tag">&lt;/div&gt;</span>
+  <span class="comment">&lt;!-- Note callout - icon loaded from GitHub via img tag (see Part XXI) --&gt;</span>
+  <span class="tag">&lt;table</span> <span class="attr">role</span>=<span class="val">"presentation"</span> <span class="attr">style</span>=<span class="val">"width:100%; background-color:#E3F2FD; border-left:4px solid #0D47A1;
+         border-collapse:collapse; margin:16px 0; border-radius:0 4px 4px 0;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;tr&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"width:38px; padding:12px 8px 12px 14px; vertical-align:top;"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;img</span>
+          <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg"</span>
+          <span class="attr">alt</span>=<span class="val">"Note"</span> <span class="attr">width</span>=<span class="val">"22"</span> <span class="attr">height</span>=<span class="val">"22"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"padding:12px 14px 12px 4px;"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"margin:0;"</span><span class="tag">&gt;</span><span class="tag">&lt;strong&gt;</span>Note:<span class="tag">&lt;/strong&gt;</span> Submit your file by Friday at midnight.<span class="tag">&lt;/p&gt;</span>
+      <span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;</span>
+  <span class="tag">&lt;/table&gt;</span>
 
 <span class="tag">&lt;/div&gt;</span></pre>
   </section>
@@ -1056,6 +1069,28 @@ HTML RULES:
 - Do not use manual numbered labels (1. 2. 3.) inside div elements
   when items convey a sequence. Use word-based labels instead.
 
+ICON RULES (mandatory - see DAPR Reference Guide Part XXI and Part XXIV):
+- Every icon is an &lt;img&gt; tag pointing to the DAPR GitHub icon library.
+- Never use inline &lt;svg&gt; tags for icons in Canvas page HTML.
+- Base URL for every icon:
+  https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
+- Callout box icons: Callout_Required.svg, Callout_Note.svg, Callout_Warning.svg,
+  Callout_Avoid.svg (used for Critical), Callout_Tip.svg, Callout_FAQ.svg
+- Submission icons: Submit_Upload.svg, Submit_Download.svg, Submit_Audio.svg,
+  Submit_PDF.svg, Submit_PTX.svg, Submit_Session.svg, Submit_ZIP.svg, Submit_Video.svg
+- Action icons: Action_Checklist.svg, Action_Deadline.svg, Action_Email.svg,
+  Action_External_Link.svg, Action_Peer.svg
+- Feedback quality icons: Feedback_Not_Helpful(_white).svg, Feedback_Helpful(_dark).svg,
+  Feedback_Best(_white).svg
+- Every icon img tag must include alt, width, and height attributes.
+
+CALLOUT BOX RULES:
+- Use only the six approved callout types: Required (green), Note (blue),
+  Warning (yellow), Critical (red - filename Callout_Avoid.svg), Tip (purple), FAQ (pink).
+- Build callouts as a 2-cell &lt;table role="presentation"&gt; with the icon img in cell 1
+  and the labeled paragraph in cell 2. Never use display:flex.
+- Border-left color matches the icon's color family. Background uses the matched pastel.
+
 ACCESSIBILITY RULES (Canvas checker must show 0 issues):
 - First heading in content area must be &lt;h2&gt;. Never use &lt;h1&gt;.
 - All &lt;img&gt; tags need alt="description" or alt="" for decorative.
@@ -1113,6 +1148,10 @@ SOURCE QUESTIONS:
     <table>
       <thead><tr><th>AI Mistake</th><th>What to Tell AI to Fix It</th></tr></thead>
       <tbody>
+        <tr><td>Generates inline &lt;svg&gt; for callout icons</td><td>"Replace every inline &lt;svg&gt; icon with an &lt;img&gt; tag pointing to the matching file at https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/"</td></tr>
+        <tr><td>Uses github.com URL instead of raw.githubusercontent.com</td><td>"Change every github.com URL to raw.githubusercontent.com - the github.com URL returns an HTML page, not the file"</td></tr>
+        <tr><td>Invents new icon filenames or callout colors</td><td>"Use only the six approved callout types and the exact filenames in Part XXIV. Do not invent new icons or colors."</td></tr>
+        <tr><td>Uses display:flex for icon + text callouts</td><td>"Replace flex with a 2-cell &lt;table role='presentation'&gt; - icon img in cell 1, paragraph in cell 2"</td></tr>
         <tr><td>Uses rgba() for colors</td><td>"Replace all rgba() values with equivalent hex codes"</td></tr>
         <tr><td>Puts H1 as first heading in content</td><td>"Change the first H1 to H2 - Canvas provides H1 from the page title"</td></tr>
         <tr><td>Table caption uses visually-hidden CSS</td><td>"Remove the style attribute from the &lt;caption&gt; tag entirely"</td></tr>
@@ -1162,6 +1201,9 @@ SOURCE QUESTIONS:
         <li>All text/background color combinations pass WCAG 4.5:1 contrast ratio</li>
         <li>#CC4400 replaced with #993300 or darker</li>
         <li>No em dashes or double dashes in visible text</li>
+        <li><strong>Every icon is an &lt;img&gt; tag pointing to raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</strong></li>
+        <li><strong>No inline &lt;svg&gt; tags anywhere in the page HTML</strong></li>
+        <li><strong>Every callout box uses one of the six approved types from Part XXI (Required, Note, Warning, Critical, Tip, FAQ)</strong></li>
         <li>Canvas Accessibility Checker shows 0 issues before publishing</li>
       </ul>
     </details>
@@ -1358,6 +1400,7 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
   <section class="part" id="part19">
     <div class="part-header">
       <h2>Part XIX - GitHub Image Repository Standards</h2>
+      <p class="part-desc">The GitHub repository holds image files only - icons (SVG) and content images (JPG, PNG). It does not host CSS files, JavaScript files, HTML pages, PDFs, audio files, video files, session files, or any other resource. Every other Canvas resource lives in Canvas Files, in the assignment, or on the student's own machine.</p>
     </div>
 
     <div class="box box-required">
@@ -1365,6 +1408,11 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
       <p><strong>Repository:</strong> https://github.com/uvu-dapr/Canvas<br>
       <strong>Raw URL pattern:</strong> <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/FOLDER/SUBFOLDER/FILENAME.jpg</code><br>
       Always use raw.githubusercontent.com, never github.com. Verify every new URL in a browser before building the Canvas page.</p>
+    </div>
+
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Only image files belong in this repository.</strong> Acceptable file types are SVG (icons), JPG, PNG, and GIF (content images). Do not commit CSS, JavaScript, HTML pages, PDFs, audio, video, Pro Tools sessions, ZIPs, or any non-image asset. Canvas does not load external CSS or JS even if hosted on GitHub - the Canvas allowlist strips those references on save.</p>
     </div>
 
     <div class="box box-critical">
@@ -1500,16 +1548,29 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
   <section class="part" id="part21">
     <div class="part-header">
       <h2>Part XXI - Canvas Icon and Callout Box System</h2>
-      <p class="part-desc">Standardized inline-SVG icons and color-coded callout boxes for all DAPR Canvas HTML pages. Every icon is implemented as inline SVG. No image uploads are required.</p>
+      <p class="part-desc">Standardized icons hosted on GitHub and color-coded callout boxes for all DAPR Canvas HTML pages. Every icon on every Canvas page is referenced via an <code>&lt;img&gt;</code> tag pointing to the GitHub raw URL. No inline SVG is used in Canvas page HTML.</p>
+    </div>
+
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Icon Source Authority - The Single Rule:</strong> Every icon on every Canvas page is an <code>&lt;img&gt;</code> tag with <code>src</code> set to a raw URL under <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code>. Never use inline SVG. Never upload icon files to Canvas. Never link to <code>github.com</code> page URLs. The raw URL is the only acceptable source.</p>
     </div>
 
     <div class="box box-required">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
-      <p><strong>Required:</strong> Every Canvas page that uses a callout box must use one of the six approved types below. Custom colors and custom icon shapes are not permitted. An AI generating Canvas HTML must reference this section to produce the correct SVG path data, hex codes, and border colors.</p>
+      <p><strong>Required:</strong> Every Canvas page that uses a callout box must use one of the six approved types below. Custom colors, custom icon shapes, and custom border styles are not permitted. An AI generating Canvas HTML must reference this section and Part XXIV to produce the correct GitHub raw URL, hex codes, and border colors for each callout type.</p>
     </div>
 
     <h3>21.1 The Icon Specification Rule</h3>
-    <p>Icons are SVG rendered at <code>viewBox="0 0 24 24"</code> with the following fixed attributes on every icon: <code>fill="none"</code>, <code>stroke-width="2.2"</code>, <code>stroke-linecap="round"</code>, <code>stroke-linejoin="round"</code>. The stroke color matches the border color of its callout box. The icon is sized at <code>width="22" height="22"</code> inside callout boxes and <code>width="36" height="36"</code> for standalone contact or email callouts at the bottom of pages. Every icon must include <code>role="img"</code> and <code>aria-hidden="true"</code> so screen readers skip the decorative graphic.</p>
+    <p>Every icon used in Canvas HTML is an <code>&lt;img&gt;</code> tag. The <code>src</code> attribute is always a GitHub raw URL pointing to a file under <code>Classes/All/DAPR_Canvas_Icon_Reference/</code>. Never use inline <code>&lt;svg&gt;</code> tags in Canvas page HTML - they are not used in this program even though Canvas technically allows them.</p>
+    <p>Required attributes on every icon <code>&lt;img&gt;</code> tag:</p>
+    <ul>
+      <li><code>src</code> - the full raw GitHub URL (see Part XXIV for every icon's URL)</li>
+      <li><code>alt</code> - short descriptive text matching the icon's meaning ("Required", "Note", "Warning", etc.) or <code>alt=""</code> if the surrounding label text already names the callout type</li>
+      <li><code>width</code> and <code>height</code> - <code>22</code> inside callout boxes, <code>36</code> for standalone email/contact icons at the bottom of pages, <code>20</code> for inline use next to a single line of text</li>
+      <li><code>style="vertical-align:middle;"</code> when the icon sits inline next to text in a flowing paragraph</li>
+    </ul>
+    <p>The icon files themselves are designed at <code>viewBox="0 0 24 24"</code> with <code>stroke-width="2.2"</code>, <code>stroke-linecap="round"</code>, and <code>stroke-linejoin="round"</code>. These are properties of the source SVG file on GitHub, not attributes you write in your Canvas HTML. You only write the <code>&lt;img&gt;</code> tag.</p>
 
     <h3>21.2 Six Callout Types - Locked Colors</h3>
     <p>The six callout box types and their locked colors are listed below. The Background column is the fill color of the box. The Border / Stroke column is the left border and the icon stroke color. Do not use any other color combinations.</p>
@@ -1604,54 +1665,50 @@ with open('your_rubric.csv', newline='', encoding='utf-8') as f:
     </div>
 
     <h3>21.4 Callout Box HTML Template</h3>
-    <p>Every callout box in Canvas HTML uses this structure. Replace the fill color, border color, icon stroke color, SVG path data, label text, and content text to match the type.</p>
+    <p>Every callout box in Canvas HTML uses this single structure. Replace the icon's <code>src</code> URL, the background color, the border color, the <code>alt</code> text, the bold label, and the content text to match the callout type. The structure itself never changes.</p>
     <div class="box box-warning">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <p><strong>Canvas layout rule:</strong> For Canvas pages, use a <code>&lt;table role="presentation"&gt;</code> for the icon + text layout, not <code>display:flex</code>. Flex is allowed per the Canvas allowlist, but inline SVG icons inside a flex container often fail to render in Canvas. The table-based layout renders reliably in every Canvas build.</p>
+      <p><strong>Canvas layout rule:</strong> For Canvas pages, use a <code>&lt;table role="presentation"&gt;</code> for the icon + text layout, not <code>display:flex</code>. Flex is allowed per the Canvas allowlist, but inline images inside a flex container can render inconsistently across Canvas themes and offline exports. The table-based layout renders reliably in every Canvas build.</p>
     </div>
-    <pre><span class="tag">&lt;table</span> <span class="attr">role</span>=<span class="val">"presentation"</span> <span class="attr">style</span>=<span class="val">"width:100%; background-color:#E8F5E9; border-left:4px solid #1B5E20;
+    <pre><span class="comment">&lt;!-- Required callout - green --&gt;</span>
+<span class="tag">&lt;table</span> <span class="attr">role</span>=<span class="val">"presentation"</span> <span class="attr">style</span>=<span class="val">"width:100%; background-color:#E8F5E9; border-left:4px solid #1B5E20;
        border-collapse:collapse; margin:16px 0; border-radius:0 4px 4px 0;"</span><span class="tag">&gt;</span>
   <span class="tag">&lt;tr&gt;</span>
     <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"width:38px; padding:12px 8px 12px 14px; vertical-align:top;"</span><span class="tag">&gt;</span>
-      <span class="tag">&lt;svg</span> <span class="attr">xmlns</span>=<span class="val">"http://www.w3.org/2000/svg"</span> <span class="attr">viewBox</span>=<span class="val">"0 0 24 24"</span>
-           <span class="attr">width</span>=<span class="val">"22"</span> <span class="attr">height</span>=<span class="val">"22"</span>
-           <span class="attr">fill</span>=<span class="val">"none"</span> <span class="attr">stroke</span>=<span class="val">"#1B5E20"</span>
-           <span class="attr">stroke-width</span>=<span class="val">"2.2"</span> <span class="attr">stroke-linecap</span>=<span class="val">"round"</span> <span class="attr">stroke-linejoin</span>=<span class="val">"round"</span>
-           <span class="attr">role</span>=<span class="val">"img"</span> <span class="attr">aria-hidden</span>=<span class="val">"true"</span><span class="tag">&gt;</span>
-        <span class="comment">&lt;!-- Paste SVG path data here --&gt;</span>
-      <span class="tag">&lt;/svg&gt;</span>
+      <span class="tag">&lt;img</span>
+        <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg"</span>
+        <span class="attr">alt</span>=<span class="val">"Required"</span> <span class="attr">width</span>=<span class="val">"22"</span> <span class="attr">height</span>=<span class="val">"22"</span><span class="tag">&gt;</span>
     <span class="tag">&lt;/td&gt;</span>
     <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"padding:12px 14px 12px 4px;"</span><span class="tag">&gt;</span>
-      <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"margin:0;"</span><span class="tag">&gt;</span><span class="tag">&lt;strong&gt;</span>Label:<span class="tag">&lt;/strong&gt;</span> Content goes here.<span class="tag">&lt;/p&gt;</span>
+      <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"margin:0;"</span><span class="tag">&gt;</span><span class="tag">&lt;strong&gt;</span>Required:<span class="tag">&lt;/strong&gt;</span> Content goes here.<span class="tag">&lt;/p&gt;</span>
     <span class="tag">&lt;/td&gt;</span>
   <span class="tag">&lt;/tr&gt;</span>
 <span class="tag">&lt;/table&gt;</span></pre>
 
-    <h3>21.5 SVG Path Data for Each Type</h3>
-    <p>Paste these path fragments inside the opening and closing <code>&lt;svg&gt;</code> tags. Everything else in the SVG tag stays identical across types - only the stroke color and the path data change.</p>
-    <pre><span class="comment">/* Required - green shield with checkmark */</span>
-stroke="#1B5E20"
-&lt;path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/&gt;&lt;polyline points="9 12 11 14 15 10"/&gt;
+    <p>To produce another callout type, change three things in the template above and nothing else:</p>
+    <ol>
+      <li>The icon filename in the <code>src</code> URL (<code>Callout_Required.svg</code> &rarr; <code>Callout_Note.svg</code>, etc.)</li>
+      <li>The <code>alt</code> attribute on the img tag</li>
+      <li>The two color values: <code>background-color</code> and the hex code in <code>border-left</code></li>
+    </ol>
 
-<span class="comment">/* Note - blue info circle */</span>
-stroke="#0D47A1"
-&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="12" y1="16" x2="12" y2="12"/&gt;&lt;line x1="12" y1="8" x2="12.01" y2="8"/&gt;
+    <h3>21.5 Callout Type Reference - Filename, Border, Background</h3>
+    <p>Use this table when applying the template above. The Filename column drops into the <code>src</code> URL after the base path. The Border and Background columns drop into the inline <code>style</code>. Do not use any combination not shown here.</p>
+    <pre><span class="comment">BASE URL (every callout icon):</span>
+https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
 
-<span class="comment">/* Warning - yellow yield triangle */</span>
-stroke="#F57F17"
-&lt;path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/&gt;&lt;line x1="12" y1="9" x2="12" y2="13"/&gt;&lt;line x1="12" y1="17" x2="12.01" y2="17"/&gt;
+<span class="comment">CALLOUT TYPE -> FILENAME / BORDER / BACKGROUND / ALT</span>
+Required  ->  Callout_Required.svg  /  #1B5E20  /  #E8F5E9  /  alt="Required"
+Note      ->  Callout_Note.svg      /  #0D47A1  /  #E3F2FD  /  alt="Note"
+Warning   ->  Callout_Warning.svg   /  #F57F17  /  #FFF8E1  /  alt="Warning"
+Critical  ->  Callout_Avoid.svg     /  #C62828  /  #FBE9E7  /  alt="Critical"
+Tip       ->  Callout_Tip.svg       /  #4A148C  /  #F3E5F5  /  alt="Tip"
+FAQ       ->  Callout_FAQ.svg       /  #AD1457  /  #FCE4EC  /  alt="FAQ"</pre>
 
-<span class="comment">/* Critical - red x-circle */</span>
-stroke="#C62828"
-&lt;circle cx="12" cy="12" r="10"/&gt;&lt;line x1="15" y1="9" x2="9" y2="15"/&gt;&lt;line x1="9" y1="9" x2="15" y2="15"/&gt;
-
-<span class="comment">/* Tip - purple lightbulb */</span>
-stroke="#4A148C"
-&lt;path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/&gt;&lt;path d="M9 18h6"/&gt;&lt;path d="M10 22h4"/&gt;
-
-<span class="comment">/* FAQ - hot pink question circle */</span>
-stroke="#AD1457"
-&lt;circle cx="12" cy="12" r="10"/&gt;&lt;path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/&gt;&lt;line x1="12" y1="17" x2="12.01" y2="17"/&gt;</pre>
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Why "Critical" uses Callout_Avoid.svg:</strong> The icon shape is a red x-circle that semantically reads as "stop" or "avoid." When the file was first committed to GitHub it was named <code>Callout_Avoid.svg</code>. Per the never-rename rule (Part XIX and Part XXIV), the filename stays as committed. Callout type is "Critical"; filename is <code>Callout_Avoid.svg</code>.</p>
+    </div>
 
     <h3>21.6 Feedback Quality Icons - Three Levels</h3>
     <p>The feedback quality comparison uses three icon types in column headers. These are not callout boxes - they appear as colored header cells in a data table. Use this table as a visual rubric when teaching students (or AI tools) how to write actionable feedback on peer mixes.</p>
@@ -1780,77 +1837,83 @@ Smith, John - Networking - Address Resolution Protocol.pdf</pre>
       </tbody>
     </table>
 
-    <h3>24.2 How to Embed an Icon in a Canvas Page</h3>
-    <p>For inline icons next to text (action and submission types), use an <code>&lt;img&gt;</code> tag with the raw GitHub URL:</p>
+    <h3>24.2 How to Embed Any Icon in a Canvas Page</h3>
+    <p>Every icon in this library - callout icons, feedback quality icons, submission type icons, and action icons - is embedded the same way: as an <code>&lt;img&gt;</code> tag with the raw GitHub URL as the <code>src</code>. Inline SVG is never used in Canvas page HTML.</p>
     <pre><span class="tag">&lt;img</span>
   <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg"</span>
   <span class="attr">alt</span>=<span class="val">"Checklist"</span>
   <span class="attr">width</span>=<span class="val">"24"</span>
   <span class="attr">height</span>=<span class="val">"24"</span>
   <span class="attr">style</span>=<span class="val">"vertical-align:middle; margin-right:6px;"</span><span class="tag">&gt;</span></pre>
-    <p>For callout boxes (Required, Note, Warning, Critical, Tip, FAQ), use inline SVG path data instead of an img tag. See Part XXI section 21.5 for all callout SVG paths. Inline SVG cannot break from a missing file, which is why callout boxes use it.</p>
+    <p>For callout boxes (Required, Note, Warning, Critical, Tip, FAQ), the same <code>&lt;img&gt;</code> tag is placed inside a left-icon table cell. See Part XXI section 21.4 for the complete callout box template, and Part XXI section 21.5 for the filename and color combination of each callout type.</p>
 
     <div class="box box-warning">
       <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-      <p><strong>Never rename or move an icon file.</strong> Canvas pages contain hardcoded raw URLs. Renaming a file breaks every page that references it with no warning or error. To replace an icon, upload the new version using the exact same filename.</p>
+      <p><strong>Never rename or move an icon file.</strong> Canvas pages contain hardcoded raw URLs. Renaming a file breaks every page that references it with no warning or error. To replace an icon, upload the new version using the exact same filename. This is the same rule as Part XIX for content images.</p>
     </div>
 
     <h3>24.3 Callout Box Icons</h3>
-    <p>These six icons are always used as inline SVG inside callout boxes, not as img tags. The path data is in Part XXI section 21.5. The files on GitHub serve as the canonical reference and backup source for the path data.</p>
+    <p>These six icons are the icon source for every callout box in Part XXI. Each one is referenced via an <code>&lt;img&gt;</code> tag pointing to the GitHub raw URL. The full callout box HTML structure (the table, padding, border, and background) lives in Part XXI section 21.4. This table maps each callout type to its filename and color values.</p>
     <table>
-      <thead><tr><th>Preview</th><th>Filename</th><th>Raw GitHub URL</th><th>Stroke Color</th><th>Background</th><th>Use</th></tr></thead>
+      <thead><tr><th>Preview (live from GitHub)</th><th>Filename</th><th>Border Stroke</th><th>Background</th><th>Use</th></tr></thead>
       <tbody>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg></td>
+          <td style="text-align:center; padding:8px; background:#E8F5E9;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
           <td><code>Callout_Required.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Required.svg</code></td>
           <td><span class="swatch" style="background:#1B5E20;"></span><code>#1B5E20</code></td>
           <td><code>#E8F5E9</code></td>
           <td>Mandatory rules, program standards</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></td>
+          <td style="text-align:center; padding:8px; background:#E3F2FD;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
           <td><code>Callout_Note.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Note.svg</code></td>
           <td><span class="swatch" style="background:#0D47A1;"></span><code>#0D47A1</code></td>
           <td><code>#E3F2FD</code></td>
           <td>Clarifications, reminders, helpful context</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></td>
+          <td style="text-align:center; padding:8px; background:#FFF8E1;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
           <td><code>Callout_Warning.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Warning.svg</code></td>
           <td><span class="swatch" style="background:#F57F17;"></span><code>#F57F17</code></td>
           <td><code>#FFF8E1</code></td>
           <td>Common mistakes, known gotchas</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></td>
-          <td><code>Callout_Avoid.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Avoid.svg</code></td>
+          <td style="text-align:center; padding:8px; background:#FBE9E7;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Callout_Avoid.svg</code><br><span style="font-size:10px; color:#555;">(used for "Critical" callouts)</span></td>
           <td><span class="swatch" style="background:#C62828;"></span><code>#C62828</code></td>
           <td><code>#FBE9E7</code></td>
-          <td>Hard rules, absolute prohibitions (Critical/Stop)</td>
+          <td>Hard rules, absolute prohibitions (Critical / Stop)</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg></td>
+          <td style="text-align:center; padding:8px; background:#F3E5F5;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
           <td><code>Callout_Tip.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_Tip.svg</code></td>
           <td><span class="swatch" style="background:#4A148C;"></span><code>#4A148C</code></td>
           <td><code>#F3E5F5</code></td>
           <td>Helpful suggestions, shortcuts, optional improvements</td>
         </tr>
         <tr>
-          <td style="text-align:center; padding:8px;"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="#AD1457" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></td>
+          <td style="text-align:center; padding:8px; background:#FCE4EC;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_FAQ.svg" alt="FAQ" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
           <td><code>Callout_FAQ.svg</code></td>
-          <td style="font-size:11px; word-break:break-all;"><code>…/Callout_FAQ.svg</code></td>
           <td><span class="swatch" style="background:#AD1457;"></span><code>#AD1457</code></td>
           <td><code>#FCE4EC</code></td>
           <td>Frequently asked questions, anticipated student questions</td>
         </tr>
       </tbody>
     </table>
-    <p style="font-size:11.5px; color:#555; margin-top:4px;">Full base URL: <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code></p>
+    <p style="font-size:11.5px; color:#555; margin-top:4px;">Full base URL prepended to every filename: <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code></p>
 
     <h3>24.4 Feedback Quality Icons</h3>
     <p>Used in the Not Helpful / Helpful / Best comparison table. Each level has two versions: a colored version for use on light row backgrounds and a variant matched to the dark table header. Previews below load directly from GitHub. See Part XXI section 21.6 for the full rendered table.</p>
@@ -2013,10 +2076,10 @@ Smith, John - Networking - Address Resolution Protocol.pdf</pre>
     </table>
 
     <h3>24.7 Complete File List with Raw URLs</h3>
-    <p>Copy the exact URL from this table into any Canvas <code>&lt;img src=""&gt;</code> tag. All files live in the same folder.</p>
+    <p>Copy the exact URL from this table into any Canvas <code>&lt;img src=""&gt;</code> tag. All files live in the same folder. Every icon below is used the same way - via an <code>&lt;img&gt;</code> tag with the raw GitHub URL as the <code>src</code>. Inline SVG is not used in Canvas page HTML.</p>
     <pre>BASE: https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
 
-<span class="comment">-- CALLOUT (use as inline SVG path data, not img tags) --</span>
+<span class="comment">-- CALLOUT (img tag inside callout box table - see Part XXI section 21.4) --</span>
 Callout_Required.svg
 Callout_Note.svg
 Callout_Warning.svg
@@ -2024,7 +2087,7 @@ Callout_Avoid.svg
 Callout_Tip.svg
 Callout_FAQ.svg
 
-<span class="comment">-- FEEDBACK QUALITY (use as inline SVG or img tags in feedback tables) --</span>
+<span class="comment">-- FEEDBACK QUALITY (img tag in feedback comparison tables) --</span>
 Feedback_Not_Helpful.svg          (red stroke #B71C1C - body rows)
 Feedback_Not_Helpful_white.svg    (white stroke - red header only)
 Feedback_Helpful.svg              (gold stroke #F9A825 - body rows)
@@ -2032,7 +2095,7 @@ Feedback_Helpful_dark.svg         (dark stroke #212121 - gold header only)
 Feedback_Best.svg                 (green stroke #1B5E20 - body rows)
 Feedback_Best_white.svg           (white stroke - green header only)
 
-<span class="comment">-- SUBMISSION TYPE (use as img tags inline in assignment pages) --</span>
+<span class="comment">-- SUBMISSION TYPE (img tag inline in assignment pages) --</span>
 Submit_Upload.svg
 Submit_Download.svg
 Submit_Audio.svg
@@ -2042,7 +2105,7 @@ Submit_Session.svg
 Submit_ZIP.svg
 Submit_Video.svg
 
-<span class="comment">-- ACTION (use as img tags inline in assignment instructions) --</span>
+<span class="comment">-- ACTION (img tag inline in assignment instructions) --</span>
 Action_Checklist.svg
 Action_Deadline.svg
 Action_Email.svg
