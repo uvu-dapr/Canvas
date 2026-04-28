@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Download file from Canvas">
+
+  <path d="M 41.32,14.00 L 41.32,34.00 L 24.00,44.00 L 6.68,34.00 L 6.68,14.00 L 24.00,4.00 Z" fill="#EFEBE9" stroke="#4E342E" stroke-width="1.2"/>
+  <!-- Cloud body -->
+  <path d="M18 28 Q14 28 14 24 Q14 20 18 20 Q18 16 22 15 Q26 14 28 18 Q32 18 32 22 Q32 26 28 26" fill="none" stroke="#4E342E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Down arrow -->
+  <line x1="24" y1="22" x2="24" y2="34" stroke="#4E342E" stroke-width="2" stroke-linecap="round"/>
+  <polyline points="21,31 24,34 27,31" fill="none" stroke="#4E342E" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- base line -->
+  <line x1="19" y1="36" x2="29" y2="36" stroke="#4E342E" stroke-width="2" stroke-linecap="round"/>
+
+</svg>

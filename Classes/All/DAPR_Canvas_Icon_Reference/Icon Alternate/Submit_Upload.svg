@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="Upload file to Canvas">
+
+  <!-- Hexagon background -->
+  <path d="M 41.32,14.00 L 41.32,34.00 L 24.00,44.00 L 6.68,34.00 L 6.68,14.00 L 24.00,4.00 Z" fill="#E8F5E9" stroke="#1B5E20" stroke-width="1.2"/>
+  <!-- Cloud body -->
+  <path d="M18 30 Q14 30 14 26 Q14 22 18 22 Q18 18 22 17 Q26 16 28 20 Q32 20 32 24 Q32 28 28 28" fill="none" stroke="#1B5E20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Up arrow shaft + head -->
+  <line x1="24" y1="28" x2="24" y2="34" stroke="#1B5E20" stroke-width="2" stroke-linecap="round"/>
+  <polyline points="21,31 24,28 27,31" fill="none" stroke="#1B5E20" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+</svg>

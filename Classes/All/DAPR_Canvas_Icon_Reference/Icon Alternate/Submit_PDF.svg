@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-label="PDF or document submission">
+  <!-- Hexagon background -->
+  <path d="M 41.32,14.00 L 41.32,34.00 L 24.00,44.00 L 6.68,34.00 L 6.68,14.00 L 24.00,4.00 Z" fill="#F9FBE7" stroke="#827717" stroke-width="1.2"/>
+  <!-- Document page with folded corner -->
+  <path d="M15 12 L28 12 L33 17 L33 36 L15 36 Z" fill="none" stroke="#827717" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- Fold crease -->
+  <path d="M28 12 L28 17 L33 17" fill="none" stroke="#827717" stroke-width="1.8" stroke-linejoin="round"/>
+  <!-- PDF text centered in page body -->
+  <text x="23" y="27" font-family="Arial, Helvetica, sans-serif" font-size="8" font-weight="bold" fill="#827717" stroke="none" text-anchor="middle" dominant-baseline="middle">PDF</text>
+</svg>
