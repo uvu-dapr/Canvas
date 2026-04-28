@@ -1,0 +1,2247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Canvas AI Reference Guide - DAPR Audio Program - UVU</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark: #1B5E20;
+    --green-mid: #2E7D32;
+    --green-light: #E8F5E9;
+    --blue-dark: #0D47A1;
+    --blue-light: #E3F2FD;
+    --yellow-bg: #FFF8E1;
+    --yellow-border: #F57F17;
+    --red-bg: #FBE9E7;
+    --red-border: #C62828;
+    --purple-bg: #F3E5F5;
+    --purple-border: #4A148C;
+    --pink-bg: #FCE4EC;
+    --pink-border: #AD1457;
+    --body: #212121;
+    --muted: #555;
+    --border: #ddd;
+    --code-bg: #F5F5F5;
+    --sidebar-w: 260px;
+    --font-body: 'Georgia', 'Times New Roman', serif;
+    --font-sans: Arial, Helvetica, sans-serif;
+    --font-mono: 'Courier New', Courier, monospace;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-sans);
+    color: var(--body);
+    background: #fafafa;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  /* ── SIDEBAR ── */
+  #sidebar {
+    position: fixed;
+    top: 0; left: 0; bottom: 0;
+    width: var(--sidebar-w);
+    background: var(--green-dark);
+    color: #fff;
+    overflow-y: auto;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #sidebar-header {
+    padding: 20px 16px 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.15);
+    flex-shrink: 0;
+  }
+
+  #sidebar-header .program {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 4px;
+  }
+
+  #sidebar-header h1 {
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 1.3;
+    color: #fff;
+  }
+
+  #sidebar-header .version {
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 6px;
+  }
+
+  #sidebar nav { flex: 1; padding: 8px 0; }
+
+  .nav-group-label {
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    padding: 14px 16px 4px;
+    font-weight: bold;
+  }
+
+  #sidebar nav a {
+    display: block;
+    padding: 6px 16px;
+    color: rgba(255,255,255,0.78);
+    text-decoration: none;
+    font-size: 12.5px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s;
+    line-height: 1.3;
+  }
+
+  #sidebar nav a:hover,
+  #sidebar nav a.active {
+    background: rgba(255,255,255,0.1);
+    color: #fff;
+    border-left-color: #A5D6A7;
+  }
+
+  #sidebar nav a .part-num {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    display: block;
+  }
+
+  /* ── MAIN CONTENT ── */
+  #main {
+    margin-left: var(--sidebar-w);
+    min-height: 100vh;
+    padding: 0 0 60px;
+  }
+
+  /* ── TOP BANNER ── */
+  #top-banner {
+    background: var(--blue-dark);
+    color: #fff;
+    padding: 28px 48px 24px;
+    border-bottom: 4px solid var(--green-dark);
+  }
+
+  #top-banner .tag {
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+  }
+
+  #top-banner h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  #top-banner .subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  #top-banner .required-note {
+    margin-top: 16px;
+    background: rgba(255,255,255,0.1);
+    border-left: 4px solid #A5D6A7;
+    padding: 10px 14px;
+    border-radius: 0 4px 4px 0;
+    font-size: 12.5px;
+    color: rgba(255,255,255,0.9);
+  }
+
+  /* ── SECTIONS ── */
+  .part {
+    padding: 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .part-header {
+    padding: 28px 0 0;
+    margin-bottom: 20px;
+  }
+
+  .part-header h2 {
+    font-size: 18px;
+    color: var(--green-dark);
+    border-bottom: 2px solid var(--green-dark);
+    padding-bottom: 6px;
+    margin-bottom: 8px;
+  }
+
+  .part-header .part-desc {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  h3 {
+    font-size: 14px;
+    color: var(--blue-dark);
+    margin: 20px 0 8px;
+    font-weight: bold;
+  }
+
+  p { margin: 8px 0; font-size: 13.5px; }
+
+  /* ── QUICK LOAD TABLE ── */
+  #quick-load {
+    background: var(--blue-light);
+    border-left: 4px solid var(--blue-dark);
+    padding: 20px 48px 24px;
+    margin-bottom: 0;
+  }
+
+  #quick-load h2 {
+    font-size: 14px;
+    color: var(--blue-dark);
+    font-weight: bold;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  /* ── TABLES ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 12.5px;
+  }
+
+  table caption {
+    font-size: 11px;
+    color: var(--muted);
+    text-align: left;
+    padding: 0 0 4px;
+    font-style: italic;
+  }
+
+  thead th {
+    background: var(--blue-dark);
+    color: #fff;
+    padding: 8px 10px;
+    text-align: left;
+    font-size: 12px;
+  }
+
+  .green-head thead th { background: var(--green-dark); }
+
+  tbody td {
+    padding: 7px 10px;
+    border: 1px solid var(--border);
+    vertical-align: top;
+  }
+
+  tbody tr:nth-child(even) td { background: #f9f9f9; }
+
+  /* ── REFERENCES TABLE ── */
+  .refs-table td { padding: 10px 12px; font-size: 12.5px; }
+  .refs-table a {
+    color: var(--blue-dark);
+    text-decoration: none;
+    font-weight: bold;
+    word-break: break-word;
+  }
+  .refs-table a:hover { text-decoration: underline; }
+  .refs-table .ref-desc {
+    color: var(--muted);
+    font-size: 11.5px;
+    margin-top: 2px;
+    font-style: italic;
+  }
+  .refs-group-label {
+    background: var(--green-dark) !important;
+    color: #fff !important;
+    font-size: 11.5px !important;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 12px !important;
+    font-weight: bold;
+  }
+
+  td code, th code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    background: rgba(0,0,0,0.06);
+    padding: 1px 4px;
+    border-radius: 2px;
+  }
+
+  /* ── CALLOUT BOXES ── */
+  .box {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: 13px;
+  }
+
+  .box svg { flex-shrink: 0; margin-top: 2px; }
+  .box p { margin: 0; line-height: 1.55; }
+
+  .box-required { background: var(--green-light); border-left: 4px solid var(--green-dark); }
+  .box-note     { background: var(--blue-light);  border-left: 4px solid var(--blue-dark); }
+  .box-warning  { background: var(--yellow-bg);   border-left: 4px solid var(--yellow-border); }
+  .box-critical { background: var(--red-bg);      border-left: 4px solid var(--red-border); }
+  .box-tip      { background: var(--purple-bg);   border-left: 4px solid var(--purple-border); }
+  .box-faq      { background: var(--pink-bg);     border-left: 4px solid var(--pink-border); }
+
+  /* ── FEEDBACK QUALITY HEADERS ── */
+  .fq-table thead th { color: #fff; padding: 10px 12px; font-size: 13px; }
+  .fq-table thead th.fq-not-helpful { background: #B71C1C; }
+  .fq-table thead th.fq-helpful     { background: #F9A825; color: #212121; }
+  .fq-table thead th.fq-best        { background: #1B5E20; }
+  .fq-table tbody td { padding: 10px 12px; border: 1px solid var(--border); vertical-align: top; }
+  .fq-table tbody tr td.fq-cell-not-helpful { background: #FFEBEE; color: #B71C1C; }
+  .fq-table tbody tr td.fq-cell-helpful     { background: #FFFDE7; color: #212121; }
+  .fq-table tbody tr td.fq-cell-best        { background: #E8F5E9; color: #212121; }
+  .fq-icon { display: inline-flex; align-items: center; gap: 8px; }
+
+  /* ── CODE BLOCKS ── */
+  pre {
+    background: #1e1e2e;
+    color: #cdd6f4;
+    padding: 14px 16px;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    line-height: 1.55;
+    overflow-x: auto;
+    margin: 10px 0;
+    white-space: pre-wrap;
+  }
+
+  pre .comment { color: #6c7086; }
+  pre .tag     { color: #89b4fa; }
+  pre .attr    { color: #f38ba8; }
+  pre .val     { color: #a6e3a1; }
+  pre .kw      { color: #cba6f7; }
+
+  code {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--code-bg);
+    padding: 2px 5px;
+    border-radius: 3px;
+    color: #c62828;
+  }
+
+  /* ── LISTS ── */
+  ul, ol {
+    margin: 8px 0 8px 20px;
+    font-size: 13.5px;
+  }
+
+  li { margin-bottom: 4px; }
+
+  /* ── COLOR SWATCHES ── */
+  .swatch {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    vertical-align: middle;
+    margin-right: 6px;
+    border: 1px solid rgba(0,0,0,0.12);
+  }
+
+  /* ── BADGE ── */
+  .badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: bold;
+    letter-spacing: 0.06em;
+    padding: 2px 7px;
+    border-radius: 10px;
+    margin-left: 8px;
+    vertical-align: middle;
+  }
+
+  .badge-required { background: var(--green-dark); color: #fff; }
+  .badge-note     { background: var(--blue-dark);  color: #fff; }
+  .badge-warning  { background: var(--yellow-border); color: #fff; }
+  .badge-critical { background: var(--red-border);    color: #fff; }
+
+  /* ── COLLAPSIBLE SECTIONS ── */
+  details { margin: 8px 0; }
+
+  summary {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 13px;
+    color: var(--blue-dark);
+    padding: 8px 10px;
+    background: var(--blue-light);
+    border-radius: 4px;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    user-select: none;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  summary::before {
+    content: '▶';
+    font-size: 10px;
+    transition: transform 0.2s;
+    color: var(--blue-dark);
+    flex-shrink: 0;
+  }
+
+  details[open] summary::before { transform: rotate(90deg); }
+
+  details > *:not(summary) {
+    padding: 12px 0 4px;
+  }
+
+  /* ── TWO COLUMN GRID ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 12px 0;
+  }
+
+  .col-card {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .col-card-head {
+    padding: 8px 12px;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+  }
+
+  .col-card-body {
+    padding: 10px 12px;
+    font-size: 12px;
+    line-height: 1.6;
+    background: #fafafa;
+  }
+
+  .col-card-body code {
+    display: block;
+    margin: 2px 0;
+    background: transparent;
+    color: #0D47A1;
+    padding: 0;
+  }
+
+  /* ── SEARCH BAR ── */
+  #search-wrap {
+    padding: 12px 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    flex-shrink: 0;
+  }
+
+  #search {
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 4px;
+    border: none;
+    background: rgba(255,255,255,0.12);
+    color: #fff;
+    font-size: 12px;
+    outline: none;
+  }
+
+  #search::placeholder { color: rgba(255,255,255,0.4); }
+
+  /* ── PRINT STYLES ── */
+  @media print {
+    #sidebar { display: none; }
+    #main { margin-left: 0; }
+    details { display: block; }
+    details > *:not(summary) { display: block !important; }
+    .part { page-break-inside: avoid; }
+    pre { background: #f5f5f5; color: #212121; }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    :root { --sidebar-w: 0px; }
+    #sidebar { display: none; }
+    #main { margin-left: 0; }
+    .part, #quick-load, #top-banner { padding-left: 20px; padding-right: 20px; }
+    .two-col { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- SIDEBAR -->
+<nav id="sidebar" role="navigation" aria-label="Reference guide navigation">
+  <div id="sidebar-header">
+    <p class="program">UVU Audio Program</p>
+    <h1>Canvas AI Reference Guide</h1>
+    <p class="version">April 2026 - Panorama-Safe Revision</p>
+  </div>
+
+  <div id="search-wrap">
+    <input type="search" id="search" placeholder="Find a section..." aria-label="Search sections">
+  </div>
+
+  <nav>
+    <p class="nav-group-label">Reference</p>
+    <a href="#part1"><span class="part-num">Part I</span>Canvas Official Documentation</a>
+
+    <p class="nav-group-label">Always Apply</p>
+    <a href="#quick-load"><span class="part-num">Quick Reference</span>Load Guide by Task</a>
+    <a href="#part2"><span class="part-num">Part II</span>Core HTML Standards</a>
+    <a href="#part3"><span class="part-num">Part III</span>Accessibility Requirements</a>
+    <a href="#part4"><span class="part-num">Part IV</span>Accessibility Checker</a>
+    <a href="#part5"><span class="part-num">Part V</span>Page Template</a>
+    <a href="#part10"><span class="part-num">Part X</span>AI Prompts</a>
+    <a href="#part11"><span class="part-num">Part XI</span>Voice and Writing</a>
+    <a href="#part12"><span class="part-num">Part XII</span>Checklists</a>
+    <a href="#part21"><span class="part-num">Part XXI</span>Callout Box System</a>
+
+    <p class="nav-group-label">Quiz and Assessment</p>
+    <a href="#part6"><span class="part-num">Part VI</span>QTI Standards</a>
+    <a href="#part7"><span class="part-num">Part VII</span>Question Design Rules</a>
+    <a href="#part8"><span class="part-num">Part VIII</span>New Quizzes Conversion</a>
+    <a href="#part9"><span class="part-num">Part IX</span>Import Formats</a>
+
+    <p class="nav-group-label">Rubrics and Assignments</p>
+    <a href="#part15"><span class="part-num">Part XV</span>Rubric CSV Import</a>
+    <a href="#part17"><span class="part-num">Part XVII</span>PDF Documentation</a>
+    <a href="#part18"><span class="part-num">Part XVIII</span>Point System</a>
+
+    <p class="nav-group-label">Images and Naming</p>
+    <a href="#part19"><span class="part-num">Part XIX</span>GitHub Image Hosting</a>
+    <a href="#part22"><span class="part-num">Part XXII</span>Image Workflow</a>
+    <a href="#part20"><span class="part-num">Part XX</span>Student File Naming</a>
+    <a href="#part23"><span class="part-num">Part XXIII</span>Module/Page Naming</a>
+    <a href="#part24"><span class="part-num">Part XXIV</span>Icon Reference Library</a>
+
+    <p class="nav-group-label">Scanning and Audit</p>
+    <a href="#part14"><span class="part-num">Part XIV</span>Panorama Scanner</a>
+  </nav>
+</nav>
+
+<!-- MAIN -->
+<main id="main">
+
+  <!-- TOP BANNER -->
+  <header id="top-banner">
+    <p class="tag">Utah Valley University - Digital Audio Production Program</p>
+    <h1>Canvas AI Reference Guide</h1>
+    <p class="subtitle">HTML Pages - QTI Quizzes - Rubrics - Accessibility - Image Hosting - File Naming - April 2026 (Panorama-Safe Revision)</p>
+    <div class="required-note">
+      <strong>Required:</strong> This guide defines the technical, accessibility, structural, and governance standards for all Canvas LMS content in this program. Compliance with Section 508 and WCAG 2.1 AA is mandatory. Content that does not pass the Canvas Accessibility Checker AND Canvas Panorama with zero issues must not be published. <strong>Every icon on every Canvas page is sourced from the GitHub icon library at <code style="color:#A5D6A7;">raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code> via an <code style="color:#A5D6A7;">&lt;img&gt;</code> tag - never inline SVG.</strong> <strong style="color:#FFEB3B;">April 2026 update:</strong> All layout tables (including <code style="color:#A5D6A7;">role="presentation"</code>) are deprecated. Canvas Panorama flags every <code style="color:#A5D6A7;">&lt;table&gt;</code> tag regardless of role. Use <code style="color:#A5D6A7;">&lt;div&gt;</code> with inline <code style="color:#A5D6A7;">&lt;img&gt;</code> for all callouts, banners, and icon+text rows. Default icon size is now 44x44 (was 22x22).
+    </div>
+  </header>
+
+  <!-- QUICK LOAD GUIDE -->
+  <section id="quick-load">
+    <h2>Quick Load Guide - Which Parts to Apply by Task</h2>
+    <table>
+      <thead><tr><th>Task Type</th><th>Parts to Load First</th></tr></thead>
+      <tbody>
+        <tr><td>Any Canvas HTML page</td><td><strong>I, II, III, IV, V, X, XI, XXI, XXIV</strong> (XXIV is the icon source for every page)</td></tr>
+        <tr><td>Any callout box (Required, Note, Warning, Critical, Tip, FAQ)</td><td>XXI, XXIV</td></tr>
+        <tr><td>Quiz or QTI file</td><td>VI, VII, VIII, X</td></tr>
+        <tr><td>Rubric CSV</td><td>XV</td></tr>
+        <tr><td>PDF documentation block</td><td>XVII, XVIII</td></tr>
+        <tr><td>Assignment page with point values</td><td>XVIII, XXI, XXIV</td></tr>
+        <tr><td>Content images (not icons) on a Canvas page</td><td>XIX (GitHub), XX (File Naming), XXII</td></tr>
+        <tr><td>Adding any icon to a Canvas page</td><td><strong>XXIV always</strong>, plus XXI if the icon is in a callout box</td></tr>
+        <tr><td>Module or page naming</td><td>XXIII</td></tr>
+        <tr><td>Student file naming</td><td>XX (File Naming)</td></tr>
+        <tr><td>Panorama audit</td><td>XIV</td></tr>
+      </tbody>
+    </table>
+    <div class="box box-required" style="margin-top:14px;">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Icon source rule (read this first, every time):</strong> Every icon on every Canvas page is referenced via an <code>&lt;img&gt;</code> tag pointing to <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code>. Inline <code>&lt;svg&gt;</code> is never used in Canvas page HTML. See Part XXIV for the complete icon library and Part XXI for callout box construction.</p>
+    </div>
+  </section>
+
+  <!-- PART I - REFERENCES -->
+  <section class="part" id="part1">
+    <div class="part-header">
+      <h2>Part I - Canvas Official Documentation References</h2>
+      <p class="part-desc">Primary sources from Instructure. Every rule in this guide traces back to these documents. Verify against these before overriding any rule in this guide.</p>
+    </div>
+
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Authority:</strong> Instructure documentation is the source of truth for what Canvas actually supports. When this guide and Instructure disagree, Instructure wins. This section exists to make cross-checking fast.</p>
+    </div>
+
+    <h3>Canvas HTML, CSS, and Rich Content Editor</h3>
+    <table class="refs-table">
+      <thead><tr><th>Source</th><th>What It Tells You</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/387066-canvas-html-editor-allowlist" title="Canvas HTML Editor Allowlist (opens in new tab)" target="_blank" rel="noopener">Canvas HTML Editor Allowlist</a>
+            <div class="ref-desc">The definitive list: allowed HTML tags, MathML tags, element attributes, URL protocols, and CSS style properties.</div>
+          </td>
+          <td>The single most important reference. Confirms that <code>flex</code>, <code>grid</code>, <code>position</code>, <code>display</code>, and <code>border-radius</code> are all <strong>allowed</strong>. Confirms <code>h1</code> is not in the tag list, so content must start at <code>h2</code>. No <code>script</code> or <code>style</code> tags in the allowlist.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/662912-how-do-i-use-the-html-view-in-the-rich-content-editor" title="How do I use the HTML view in the Rich Content Editor? (opens in new tab)" target="_blank" rel="noopener">HTML View in the RCE</a>
+            <div class="ref-desc">How to open the pretty vs raw HTML editor inside the Rich Content Editor.</div>
+          </td>
+          <td>Confirms that HTML tags not on the allowlist may be stripped when the page is saved. Applies to Announcements, Assignments, Discussions, Pages, and Quizzes.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/662769-what-is-the-rich-content-editor-rce" title="What is the Rich Content Editor (RCE)? (opens in new tab)" target="_blank" rel="noopener">What is the Rich Content Editor (RCE)?</a>
+            <div class="ref-desc">Overview of the editor surface where Canvas HTML pages are authored.</div>
+          </td>
+          <td>Confirms the RCE is the entry point for every page, announcement, assignment, discussion, and quiz description in Canvas.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>ePortfolios, Catalog, and Custom CSS/JS</h3>
+    <table class="refs-table">
+      <thead><tr><th>Source</th><th>What It Tells You</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/662832-how-do-i-add-html-embedded-content-to-my-eportfolio-page" title="How do I add HTML/embedded content to my ePortfolio page? (opens in new tab)" target="_blank" rel="noopener">HTML and Embedded Content in ePortfolios</a>
+            <div class="ref-desc">How students and instructors paste HTML into ePortfolio pages.</div>
+          </td>
+          <td>The ePortfolio HTML editor follows the same allowlist as the Rich Content Editor. Same rules, same strip behavior.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/661316-how-do-i-view-course-content-offline-as-an-html-file-as-a-student" title="How do I view course content offline as an HTML file as a student? (opens in new tab)" target="_blank" rel="noopener">Offline HTML Export for Students</a>
+            <div class="ref-desc">How students download course content as a self-contained HTML file.</div>
+          </td>
+          <td>Confirms that student offline exports preserve the HTML Canvas actually stored. Pages that rely on things Canvas stripped will look different offline than in the browser.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/660418-how-do-i-customize-a-catalog-using-css-js-or-html-files" title="How do I customize a Catalog using CSS, JS, or HTML files? (opens in new tab)" target="_blank" rel="noopener">Customize Canvas Catalog with CSS, JS, or HTML</a>
+            <div class="ref-desc">Admin-only. Catalog is a separate Instructure product with its own customization surface.</div>
+          </td>
+          <td>Catalog allows uploaded custom CSS and JS files at the account level. This is different from what the per-page HTML editor allows and applies only to the Catalog product, not to course pages.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/660421-what-customization-options-are-available-in-canvas-catalog-using-css-js-or-html" title="What customization options are available in Canvas Catalog? (opens in new tab)" target="_blank" rel="noopener">Catalog Customization Options</a>
+            <div class="ref-desc">Full list of what admins can theme inside Canvas Catalog.</div>
+          </td>
+          <td>Describes where uploaded theme files apply: headers, footers, homepage, listing pages. Again, scope is Catalog only.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/661411-how-do-i-upload-custom-javascript-and-css-files-to-an-account" title="How do I upload custom JavaScript and CSS files to an account? (opens in new tab)" target="_blank" rel="noopener">Upload Custom JS/CSS to an Account</a>
+            <div class="ref-desc">Admin theme editor for account-wide CSS and JavaScript overrides.</div>
+          </td>
+          <td>Confirms that account-level custom CSS and JS exists at the admin theme layer only. Instructors cannot upload CSS or JS at the course or page level.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/discussion/594332/embedded-css-in-a-page?tab=all" title="Embedded CSS in a Page - Community Discussion (opens in new tab)" target="_blank" rel="noopener">Embedded CSS in a Page (Community Discussion)</a>
+            <div class="ref-desc">User-submitted discussion on why embedded &lt;style&gt; blocks behave inconsistently.</div>
+          </td>
+          <td>Confirms community consensus that <code>&lt;style&gt;</code> blocks are unreliable in Canvas pages. Treat this as a signal, not as official documentation. The allowlist remains the authoritative source.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Accessibility - Canvas Official</h3>
+    <table class="refs-table">
+      <thead><tr><th>Source</th><th>What It Tells You</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/662723-what-are-the-canvas-accessibility-standards" title="What are the Canvas accessibility standards? (opens in new tab)" target="_blank" rel="noopener">Canvas Accessibility Standards</a>
+            <div class="ref-desc">Which standards Canvas commits to as a platform.</div>
+          </td>
+          <td>Canvas conforms to WCAG 2.1 Level AA and Section 508. This is the basis for requiring 4.5:1 contrast on normal text.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/529364-canvas-course-accessibility-checklist" title="Canvas Course Accessibility Checklist (opens in new tab)" target="_blank" rel="noopener">Canvas Course Accessibility Checklist</a>
+            <div class="ref-desc">Instructure's own checklist for instructor-authored content.</div>
+          </td>
+          <td>Covers headings, alt text, link text, color contrast, tables, and media. Aligned with what the Canvas Accessibility Checker flags.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/662936-how-do-i-use-the-accessibility-checker-in-the-rich-content-editor" title="How do I use the Accessibility Checker in the RCE? (opens in new tab)" target="_blank" rel="noopener">Accessibility Checker in the RCE</a>
+            <div class="ref-desc">How to run the built-in checker on a page before publishing.</div>
+          </td>
+          <td>The checker runs inside the RCE. Every issue it lists must be fixed. Zero issues is the bar Instructure itself describes.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/664351-how-do-i-use-the-accessibility-checker-in-canvas" title="How do I use the Accessibility Checker in Canvas? (opens in new tab)" target="_blank" rel="noopener">Accessibility Checker in Canvas (general)</a>
+            <div class="ref-desc">Overview of the checker across Canvas surfaces beyond the RCE.</div>
+          </td>
+          <td>Useful when auditing quizzes, discussions, or content outside a plain page.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>Character Limits, Equations, and Supporting References</h3>
+    <table class="refs-table">
+      <thead><tr><th>Source</th><th>What It Tells You</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/529365-canvas-character-limits" title="Canvas Character Limits (opens in new tab)" target="_blank" rel="noopener">Canvas Character Limits</a>
+            <div class="ref-desc">Hard numeric caps on page titles, course names, quiz question text, and more.</div>
+          </td>
+          <td>Reference this before drafting long titles, assignment descriptions, or rubric criterion text so content is not silently truncated on save.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/387060-canvas-equation-editor-tips-chemistry-using-latex" title="Canvas Equation Editor LaTeX Tips (opens in new tab)" target="_blank" rel="noopener">Equation Editor - LaTeX Tips</a>
+            <div class="ref-desc">How to render math and chemistry notation in the RCE.</div>
+          </td>
+          <td>Relevant for audio courses that reference frequency math, dB calculations, or impedance formulas.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/662918-how-do-i-upload-and-embed-an-image-in-the-rich-content-editor" title="How do I upload and embed an image in the RCE? (opens in new tab)" target="_blank" rel="noopener">Upload and Embed Images in the RCE</a>
+            <div class="ref-desc">Canvas-native image handling via the editor (not the GitHub workflow).</div>
+          </td>
+          <td>Useful when a file is truly course-specific and does not need to live in a shared GitHub repository. Images uploaded through the RCE live in Canvas Files.</td>
+        </tr>
+        <tr>
+          <td><a href="https://community.instructure.com/en/kb/articles/662925-how-do-i-link-to-or-embed-a-youtube-video-in-the-rich-content-editor" title="How do I embed a YouTube video in the RCE? (opens in new tab)" target="_blank" rel="noopener">Embed YouTube Videos in the RCE</a>
+            <div class="ref-desc">Official way to add YouTube content to a page.</div>
+          </td>
+          <td>Use the embed flow rather than a raw <code>&lt;iframe&gt;</code> when possible. Canvas allows iframe in the allowlist, but the official embed path handles accessibility attributes automatically.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>How to use this section:</strong> Before generating or reviewing a Canvas page, open the Allowlist in one tab and the Accessibility Checklist in another. Everything else in this guide is applied on top of those two authoritative documents.</p>
+    </div>
+  </section>
+
+  <!-- PART II -->
+  <section class="part" id="part2">
+    <div class="part-header">
+      <h2>Part II - Core Canvas HTML Standards</h2>
+      <p class="part-desc">Canvas strips most modern CSS and all JavaScript. Write HTML as if you have no stylesheet.</p>
+    </div>
+
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Core Rule:</strong> Every element that needs visual formatting must carry its own inline <code>style=""</code> attribute. There are no external stylesheets. Write as if you have no stylesheet at all.</p>
+    </div>
+
+    <details>
+      <summary>What Canvas Actually Strips (per Official Allowlist)</summary>
+      <p style="margin-bottom:8px;">Verified against the <a href="https://community.instructure.com/en/kb/articles/387066-canvas-html-editor-allowlist" title="Canvas HTML Editor Allowlist (opens in new tab)" target="_blank" rel="noopener">Canvas HTML Editor Allowlist</a>. Some properties that older internal notes described as "stripped" are in fact allowed - the real issue is often a rendering quirk, not removal.</p>
+      <table>
+        <thead><tr><th>Item</th><th>Actual Canvas Behavior</th></tr></thead>
+        <tbody>
+          <tr><td><code>&lt;link rel="..."&gt;</code> (external CSS)</td><td>Removed. Not in the allowlist.</td></tr>
+          <tr><td><code>&lt;style&gt;...&lt;/style&gt;</code> blocks</td><td>Not in the allowlist. Behavior is inconsistent - sometimes preserved, often stripped when the page is saved or re-edited. Do not rely on embedded style blocks.</td></tr>
+          <tr><td><code>&lt;script&gt;</code></td><td>Removed. All JavaScript is stripped for security. Not in the allowlist.</td></tr>
+          <tr><td><code>&lt;h1&gt;</code></td><td>Removed. Only <code>h2</code> through <code>h6</code> are in the allowlist. Canvas provides the H1 from the page title.</td></tr>
+          <tr><td><code>display: flex</code></td><td><strong>Allowed</strong> per the allowlist. However, image and icon elements placed inside a flex container can render inconsistently across Canvas themes and offline exports. Use <code>&lt;table role="presentation"&gt;</code> for icon + text callout layouts. Reserve flex for non-icon content if you use it at all.</td></tr>
+          <tr><td><code>display: grid</code></td><td><strong>Allowed</strong> per the allowlist. Not all Canvas themes render it predictably at narrow widths. Use tables with percentage widths if the layout must be identical in every Canvas build.</td></tr>
+          <tr><td><code>position: absolute / fixed</code></td><td><strong>Allowed</strong> per the allowlist. Avoid anyway because Canvas page chrome (sidebar, banners) can overlap absolutely positioned content unpredictably.</td></tr>
+          <tr><td><code>@font-face</code> / Google Fonts</td><td>Not in the allowed style properties list. Use system fonts (Arial, Georgia, Courier New).</td></tr>
+          <tr><td>CSS custom properties (<code>--var</code>)</td><td>Not supported by the RCE in a reliable way. Inline hex codes directly.</td></tr>
+          <tr><td><code>rgba()</code> color values</td><td>Render but make WCAG contrast harder to verify. Use hex codes.</td></tr>
+          <tr><td><code>class=</code> (custom classes)</td><td>Class attribute is preserved on elements, but Canvas does not ship a stylesheet that matches author-defined class names. Pair every class with an inline <code>style</code> attribute or skip the class.</td></tr>
+        </tbody>
+      </table>
+    </details>
+
+    <div class="box box-warning">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>The flex-with-icons gotcha:</strong> Canvas's allowlist permits <code>display: flex</code>, but icon images placed inside a flex container can render inconsistently across Canvas themes, mobile views, and offline exports. Use a two-column table with <code>role="presentation"</code> for any icon-plus-text callout. Combined with the <code>&lt;img&gt;</code>-from-GitHub icon source rule (Part XXI), the table layout is the reliable pattern across every Canvas build.</p>
+    </div>
+
+    <details>
+      <summary>What Canvas Supports (Safe to Use)</summary>
+      <table>
+        <thead><tr><th>Allowed</th><th>Notes</th></tr></thead>
+        <tbody>
+          <tr><td><code>inline style=""</code></td><td>The only reliable CSS method</td></tr>
+          <tr><td><code>&lt;table&gt;</code></td><td>Side-by-side column layout; use percentage widths</td></tr>
+          <tr><td><code>&lt;p&gt;</code>, <code>&lt;h2&gt;</code>-<code>&lt;h6&gt;</code></td><td>Paragraph and heading tags with inline styles</td></tr>
+          <tr><td><code>&lt;strong&gt;</code>, <code>&lt;em&gt;</code></td><td>Bold and italic - safe</td></tr>
+          <tr><td><code>&lt;ul&gt;</code>, <code>&lt;ol&gt;</code>, <code>&lt;li&gt;</code></td><td>Lists - safe</td></tr>
+          <tr><td><code>&lt;a href="..."&gt;</code></td><td>Hyperlinks - add title and aria-label for accessibility</td></tr>
+          <tr><td><code>&lt;img&gt;</code></td><td>Must include alt attribute</td></tr>
+          <tr><td><code>&lt;div style="..."&gt;</code></td><td>Block containers with inline styles - safe</td></tr>
+          <tr><td><code>&lt;span style="..."&gt;</code></td><td>Inline text styling - safe</td></tr>
+          <tr><td><code>&lt;iframe&gt;</code></td><td>YouTube embeds - safe if from trusted source</td></tr>
+        </tbody>
+      </table>
+    </details>
+
+    <h3>1.5 Fonts - System-Safe Only</h3>
+    <pre><span class="comment">/* Sans-serif (body text, headings) */</span>
+font-family: Arial, Helvetica, sans-serif;
+
+<span class="comment">/* Monospace (code samples, terminal output) */</span>
+font-family: "Courier New", Courier, monospace;
+
+<span class="comment">/* Serif (sparingly, for quotes or callouts) */</span>
+font-family: Georgia, "Times New Roman", serif;</pre>
+
+    <h3>1.6 Color and Contrast - Accessibility Required</h3>
+    <p>All text must meet WCAG 2.1 AA: 4.5:1 for normal text, 3:1 for large text (18pt+ or 14pt bold).</p>
+    <table>
+      <thead><tr><th>Swatch</th><th>Color Combination</th><th>Ratio</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td><span class="swatch" style="background:#1B5E20;"></span></td><td>#FFFFFF on #1B5E20</td><td>8.4:1</td><td><strong>PASS</strong> - heading bars</td></tr>
+        <tr><td><span class="swatch" style="background:#212121;"></span></td><td>#212121 on #FFFFFF</td><td>16.1:1</td><td><strong>PASS</strong> - body text</td></tr>
+        <tr><td><span class="swatch" style="background:#0D47A1;"></span></td><td>#0D47A1 on #FFFFFF</td><td>8.6:1</td><td><strong>PASS</strong> - links</td></tr>
+        <tr><td><span class="swatch" style="background:#993300;"></span></td><td>#993300 on #FFFFFF</td><td>7.4:1</td><td><strong>PASS</strong> - use this, NOT #CC4400</td></tr>
+        <tr><td><span class="swatch" style="background:#E65100;"></span></td><td>#E65100 on #FFFFFF</td><td>4.6:1</td><td><strong>PASS</strong> - dark orange on white only (Panorama false positive)</td></tr>
+        <tr><td><span class="swatch" style="background:#CC4400;"></span></td><td>#CC4400 on #FFFFFF</td><td>4.8:1</td><td><strong>MARGINAL</strong> - Canvas checker flags this</td></tr>
+        <tr><td><span class="swatch" style="background:#FFFF00; border:1px solid #ccc;"></span></td><td>#FFFF00 on #FFFFFF</td><td>1.1:1</td><td><strong>FAIL</strong> - never use</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-warning">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Never use #CC4400.</strong> Always use #993300 or darker for orange-toned text. Panorama also flags #E65100 as a false positive - do not change the orange header color, it is locked at position 3 in the resistor color sequence.</p>
+    </div>
+
+    <h3>1.7 Color Sequence System for Page Headers</h3>
+    <p>This program uses a fixed resistor color code sequence for module page header backgrounds. The sequence is locked permanently. File naming determines color, not the page title.</p>
+    <table>
+      <thead><tr><th>#</th><th>Swatch</th><th>Color Name</th><th>Hex Code</th><th>Text Color</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td><span class="swatch" style="background:#5D4037;"></span></td><td>Brown</td><td><code>#5D4037</code></td><td>White</td></tr>
+        <tr><td>2</td><td><span class="swatch" style="background:#B71C1C;"></span></td><td>Red</td><td><code>#B71C1C</code></td><td>White</td></tr>
+        <tr><td>3</td><td><span class="swatch" style="background:#E65100;"></span></td><td>Orange</td><td><code>#E65100</code></td><td>White (Panorama false positive)</td></tr>
+        <tr><td>4</td><td><span class="swatch" style="background:#FBC02D;"></span></td><td>Yellow</td><td><code>#FBC02D</code></td><td><strong>Black only (#212121)</strong></td></tr>
+        <tr><td>5</td><td><span class="swatch" style="background:#1B5E20;"></span></td><td>Green</td><td><code>#1B5E20</code></td><td>White - program default</td></tr>
+        <tr><td>6</td><td><span class="swatch" style="background:#0D47A1;"></span></td><td>Blue</td><td><code>#0D47A1</code></td><td>White</td></tr>
+        <tr><td>7</td><td><span class="swatch" style="background:#4A148C;"></span></td><td>Violet</td><td><code>#4A148C</code></td><td>White</td></tr>
+        <tr><td>8</td><td><span class="swatch" style="background:#424242;"></span></td><td>Grey</td><td><code>#424242</code></td><td>White</td></tr>
+        <tr><td>9</td><td><span class="swatch" style="background:#C2185B;"></span></td><td>Pink</td><td><code>#C2185B</code></td><td>White - use bold text</td></tr>
+        <tr><td>10</td><td><span class="swatch" style="background:#000000;"></span></td><td>Black</td><td><code>#000000</code></td><td>White</td></tr>
+      </tbody>
+    </table>
+
+    <h3>1.8 UTF-8 Encoding Rule</h3>
+    <p>All Canvas pages and generated HTML must use UTF-8 encoding. Without it, quotation marks and apostrophes display as corrupted characters. Include in standalone files:</p>
+    <pre><span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span></pre>
+    <p>Use straight quotes, not smart quotes. If you see <code>â€œsyncâ€</code> instead of <code>"sync"</code>, UTF-8 is missing.</p>
+  </section>
+
+  <!-- PART III -->
+  <section class="part" id="part3">
+    <div class="part-header">
+      <h2>Part III - Accessibility Requirements</h2>
+      <p class="part-desc">UVU must comply with Section 508 and WCAG 2.1 Level AA. Every page, assignment, and quiz must meet these rules.</p>
+    </div>
+
+    <h3>2.1 Images - Alt Text Required</h3>
+    <p>Every <code>&lt;img&gt;</code> tag must have an alt attribute. Alt text must be under 120 characters (Canvas flags anything longer).</p>
+    <pre><span class="comment">&lt;!-- Informational image --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"waveform.png"</span>
+     <span class="attr">alt</span>=<span class="val">"Sine wave showing one complete cycle at 440 Hz"</span>
+     <span class="attr">style</span>=<span class="val">"max-width:100%; height:auto;"</span><span class="tag">&gt;</span>
+
+<span class="comment">&lt;!-- Decorative image --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"divider.png"</span> <span class="attr">alt</span>=<span class="val">""</span> <span class="attr">role</span>=<span class="val">"presentation"</span><span class="tag">&gt;</span></pre>
+
+    <h3>2.2 Headings - Proper Hierarchy</h3>
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Never use &lt;h1&gt; inside a Canvas Page body.</strong> Canvas provides H1 from the page title automatically. Your content starts at H2. Never skip levels (H2 to H4 without H3). H3 as the first heading on a page is a Severe Panorama error.</p>
+    </div>
+
+    <h3>2.3 Links - Descriptive Text and Title Required</h3>
+    <p>Never use "click here" or "read more." All links must carry a <code>title</code> attribute. Links that open new tabs must warn the user.</p>
+
+    <h3>2.4 Tables - Data vs. Layout</h3>
+    <table>
+      <thead><tr><th>Table Type</th><th>Required Treatment</th></tr></thead>
+      <tbody>
+        <tr><td>Data table (rubrics, specs, comparisons)</td><td>Must have <code>&lt;caption&gt;</code> (plain text, no style), <code>&lt;thead&gt;</code> with <code>&lt;th scope="col"&gt;</code>, and <code>&lt;tbody&gt;</code>. This is the ONLY allowed use of <code>&lt;table&gt;</code>.</td></tr>
+        <tr><td>Layout table (side-by-side icon+text, callouts, banners)</td><td><strong>Deprecated as of 2026.</strong> Use <code>&lt;div&gt;</code> with inline <code>&lt;img style="vertical-align:middle"&gt;</code> instead. Even <code>role="presentation"</code> tables are flagged by Canvas Panorama.</td></tr>
+        <tr><td>Numbered checklist or stacked rows</td><td>Use stacked <code>&lt;div&gt;</code> elements with alternating background colors. Never <code>&lt;table&gt;</code>, never <code>display:table</code>.</td></tr>
+      </tbody>
+    </table>
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Critical Panorama Rule:</strong> Canvas Panorama scans every <code>&lt;table&gt;</code> tag for missing headers and captions <em>regardless of <code>role="presentation"</code></em>. Even CSS-table-emulating divs (<code>display:table</code>, <code>display:table-cell</code>) are flagged. To pass Panorama with zero issues, layout patterns must use plain <code>&lt;div&gt;</code> with inline images and <code>position:absolute</code> for offset elements.</p>
+    </div>
+    <div class="box box-warning">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Caption Note:</strong> Canvas strips visually-hidden caption CSS. For data tables, use a plain <code>&lt;caption&gt;</code> tag with NO style attribute. <code>&lt;caption&gt;</code> and <code>&lt;th scope="col"&gt;</code> are always required together - missing either one is a separate flagged error. A two-column comparison table with labeled headers is a data table, not a layout table.</p>
+    </div>
+  </section>
+
+  <!-- PART IV -->
+  <section class="part" id="part4">
+    <div class="part-header">
+      <h2>Part IV - Canvas Accessibility Checker</h2>
+      <p class="part-desc">Run before publishing every page. Zero issues is the program standard.</p>
+    </div>
+    <h3>Common Issues and Fixes</h3>
+    <table>
+      <thead><tr><th>Issue</th><th>Root Cause</th><th>Fastest Fix</th></tr></thead>
+      <tbody>
+        <tr><td>First heading should be H2</td><td>Used H1 inside the page body</td><td>Change all H1 tags to H2 in raw HTML</td></tr>
+        <tr><td>Text contrast ratio too low</td><td>Common offender: #CC4400</td><td>Replace #CC4400 with #993300</td></tr>
+        <tr><td>Tables should include a caption</td><td>Layout table being scanned as data table - happens even with <code>role="presentation"</code></td><td>For data tables: add <code>&lt;caption&gt;</code> as plain text. For layout tables: replace entire table with <code>&lt;div&gt;</code> structure.</td></tr>
+        <tr><td>Tables should include at least one header</td><td>Layout table with no <code>&lt;th&gt;</code> tags - happens even with <code>role="presentation"</code></td><td>For data tables: add <code>&lt;th scope="col"&gt;</code>. For layout tables: replace with divs entirely.</td></tr>
+        <tr><td>26 table errors after replacing all <code>&lt;table&gt;</code> tags</td><td>Divs using <code>display:table</code> or <code>display:table-cell</code></td><td>Search file for <code>display:table</code> - Canvas treats CSS-table divs as real tables. Use <code>position:absolute</code> instead.</td></tr>
+        <tr><td>Image has no alt text</td><td>Missing alt attribute on <code>&lt;img&gt;</code></td><td>Add <code>alt="..."</code> or <code>alt=""</code> for decorative</td></tr>
+        <tr><td>This link should have a descriptive title</td><td><code>&lt;a&gt;</code> tag missing a title attribute</td><td>Add <code>title="Description of where this link goes"</code></td></tr>
+        <tr><td>Heading levels skipped</td><td>Jumped from H2 to H4</td><td>Add the missing H3 level</td></tr>
+      </tbody>
+    </table>
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <p><strong>Zero-Table Strategy:</strong> The single most reliable way to get to 0 Panorama issues is to use no <code>&lt;table&gt;</code> tags at all except for genuine data tables (rubrics, specs). Every callout, banner, icon+text row, checklist, and submission item should use <code>&lt;div&gt;</code> with an inline <code>&lt;img&gt;</code>. If you see table errors after publishing, run a find for both <code>&lt;table</code> and <code>display:table</code> in your raw HTML - both must go.</p>
+    </div>
+  </section>
+
+  <!-- PART V -->
+  <section class="part" id="part5">
+    <div class="part-header">
+      <h2>Part V - Canvas Page Template</h2>
+      <p class="part-desc">Copy into the Canvas raw HTML editor. Replace all placeholder text. Do not remove accessibility attributes. Updated 2026 for zero-table layout.</p>
+    </div>
+    <pre><span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6;"</span><span class="tag">&gt;</span>
+
+  <span class="comment">&lt;!-- Title bar - color from module sequence --&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">style</span>=<span class="val">"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;"</span><span class="tag">&gt;</span>
+    Assignment Title Here
+  <span class="tag">&lt;/h2&gt;</span>
+
+  <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"font-size:1em; margin:16px 0;"</span><span class="tag">&gt;</span>Brief description.<span class="tag">&lt;/p&gt;</span>
+
+  <span class="comment">&lt;!-- Goals - bulleted list --&gt;</span>
+  <span class="tag">&lt;h2</span> <span class="attr">style</span>=<span class="val">"color:#1B5E20; font-size:1.3em; border-bottom:2px solid #1B5E20; padding-bottom:4px;"</span><span class="tag">&gt;</span>Goals<span class="tag">&lt;/h2&gt;</span>
+  <span class="tag">&lt;ul&gt;</span>
+    <span class="tag">&lt;li&gt;</span>Learning objective one.<span class="tag">&lt;/li&gt;</span>
+  <span class="tag">&lt;/ul&gt;</span>
+
+  <span class="comment">&lt;!-- Section header with icon (44x44 standard) --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"margin:20px 0 6px 0;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;img</span>
+      <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg"</span>
+      <span class="attr">alt</span>=<span class="val">"Checklist"</span> <span class="attr">width</span>=<span class="val">"44"</span> <span class="attr">height</span>=<span class="val">"44"</span>
+      <span class="attr">style</span>=<span class="val">"vertical-align:middle; margin-right:10px;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;strong</span> <span class="attr">style</span>=<span class="val">"font-size:1.1em; vertical-align:middle;"</span><span class="tag">&gt;</span>Section Title<span class="tag">&lt;/strong&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+  <span class="comment">&lt;!-- Numbered checklist (div rows, NOT a table) --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"border:1px solid #cccccc; margin:8px 0;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"padding:10px 16px; background-color:#f5f5f5; border-bottom:1px solid #cccccc;"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;strong</span> <span class="attr">style</span>=<span class="val">"color:#1B5E20;"</span><span class="tag">&gt;</span>1 &amp;nbsp;<span class="tag">&lt;/strong&gt;&lt;strong&gt;</span>Item label.<span class="tag">&lt;/strong&gt;</span> Description.
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"padding:10px 16px; background-color:#ffffff;"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;strong</span> <span class="attr">style</span>=<span class="val">"color:#1B5E20;"</span><span class="tag">&gt;</span>2 &amp;nbsp;<span class="tag">&lt;/strong&gt;&lt;strong&gt;</span>Item label.<span class="tag">&lt;/strong&gt;</span> Description.
+    <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+  <span class="comment">&lt;!-- Note callout (div-only, Panorama-safe) --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"background-color:#E3F2FD; border-left:4px solid #0D47A1; margin:16px 0; padding:12px 14px;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;img</span>
+      <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg"</span>
+      <span class="attr">alt</span>=<span class="val">"Note"</span> <span class="attr">width</span>=<span class="val">"44"</span> <span class="attr">height</span>=<span class="val">"44"</span>
+      <span class="attr">style</span>=<span class="val">"vertical-align:middle; margin-right:10px;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;strong</span> <span class="attr">style</span>=<span class="val">"vertical-align:middle;"</span><span class="tag">&gt;</span>Note:<span class="tag">&lt;/strong&gt;</span> <span class="tag">&lt;span</span> <span class="attr">style</span>=<span class="val">"vertical-align:middle;"</span><span class="tag">&gt;</span>Content here.<span class="tag">&lt;/span&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+  <span class="comment">&lt;!-- Data Table - requires caption + th with scope. ONLY allowed table use. --&gt;</span>
+  <span class="tag">&lt;table</span> <span class="attr">style</span>=<span class="val">"width:100%; border-collapse:collapse;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;caption&gt;</span>Grading Rubric<span class="tag">&lt;/caption&gt;</span>
+    <span class="tag">&lt;thead&gt;&lt;tr&gt;</span>
+      <span class="tag">&lt;th</span> <span class="attr">scope</span>=<span class="val">"col"</span> <span class="attr">style</span>=<span class="val">"background:#0D47A1; color:#fff; padding:8px;"</span><span class="tag">&gt;</span>Criteria<span class="tag">&lt;/th&gt;</span>
+      <span class="tag">&lt;th</span> <span class="attr">scope</span>=<span class="val">"col"</span> <span class="attr">style</span>=<span class="val">"background:#0D47A1; color:#fff; padding:8px;"</span><span class="tag">&gt;</span>Points<span class="tag">&lt;/th&gt;</span>
+    <span class="tag">&lt;/tr&gt;&lt;/thead&gt;</span>
+    <span class="tag">&lt;tbody&gt;&lt;tr&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"padding:8px; border:1px solid #ccc;"</span><span class="tag">&gt;</span>Criterion 1<span class="tag">&lt;/td&gt;</span>
+      <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"padding:8px; border:1px solid #ccc;"</span><span class="tag">&gt;</span>50<span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;/tr&gt;&lt;/tbody&gt;</span>
+  <span class="tag">&lt;/table&gt;</span>
+
+  <span class="comment">&lt;!-- WHAT TO SUBMIT - ALWAYS LAST, separated by green rule --&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"border-top:3px solid #1B5E20; margin-top:36px;"</span><span class="tag">&gt;&lt;/div&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"margin:16px 0 6px 0;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;img</span>
+      <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Deadline.svg"</span>
+      <span class="attr">alt</span>=<span class="val">"Deadline"</span> <span class="attr">width</span>=<span class="val">"44"</span> <span class="attr">height</span>=<span class="val">"44"</span>
+      <span class="attr">style</span>=<span class="val">"vertical-align:middle; margin-right:10px;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;strong</span> <span class="attr">style</span>=<span class="val">"font-size:1.3em; color:#1B5E20; vertical-align:middle;"</span><span class="tag">&gt;</span>What to Submit<span class="tag">&lt;/strong&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/div&gt;</span></pre>
+
+    <h3>Page Section Order (Locked)</h3>
+    <ol>
+      <li>Title bar (h2 with colored background)</li>
+      <li>Intro paragraph</li>
+      <li>Goals or Objectives</li>
+      <li>Body sections (Session Requirements, Required Techniques, etc.)</li>
+      <li>Peer Feedback (when applicable)</li>
+      <li><strong>What to Submit - ALWAYS LAST</strong>, preceded by a 3px green horizontal rule. Inside this section: naming convention callout, then required-action callouts, then list of submission items with per-item submit icons.</li>
+    </ol>
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p><strong>Why "What to Submit" is locked at the bottom:</strong> Students should be able to scroll to the end of any assignment page and find exactly what to submit, without naming conventions, testing instructions, or peer feedback rules mixed in earlier. The 3px green rule is the visual signal that the deliverables list begins.</p>
+    </div>
+  </section>
+
+  <!-- PART VI -->
+  <section class="part" id="part6">
+    <div class="part-header">
+      <h2>Part VI - QTI Quiz File Standards</h2>
+      <p class="part-desc">Use QTI 1.2 for all quiz imports. QTI 2.0 and 2.1 may be downgraded on import.</p>
+    </div>
+
+    <h3>6.1 QTI File Structure</h3>
+    <pre>my_quiz.zip
+  imsmanifest.xml      &lt;-- required
+  quiz_abc123.xml      &lt;-- required: contains the actual questions</pre>
+
+    <h3>6.6 QTI Item Title Rule</h3>
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Set the title attribute on every &lt;item&gt; to the question bank or category name.</strong> All questions in the same category share the exact same title string. Do not use the question text as the title. Example: <code>title="Network Wiring Standards"</code> on every question in that bank.</p>
+    </div>
+
+    <details>
+      <summary>imsmanifest.xml Template</summary>
+      <pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;manifest identifier="MANIFEST_001"
+  xmlns="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1"&gt;
+  &lt;metadata&gt;
+    &lt;schema&gt;IMS Content&lt;/schema&gt;
+    &lt;schemaversion&gt;1.1.3&lt;/schemaversion&gt;
+  &lt;/metadata&gt;
+  &lt;organizations/&gt;
+  &lt;resources&gt;
+    &lt;resource identifier="ASSESSMENT_001"
+             type="imsqti_xmlv1p2"
+             href="assessment.xml"&gt;
+      &lt;file href="assessment.xml"/&gt;
+    &lt;/resource&gt;
+  &lt;/resources&gt;
+&lt;/manifest&gt;</pre>
+    </details>
+  </section>
+
+  <!-- PART VII -->
+  <section class="part" id="part7">
+    <div class="part-header">
+      <h2>Part VII - Self-Grading Policy and Question Design Rules</h2>
+    </div>
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Never use "All of the above" or "None of the above" as answer options.</strong> These test test-taking skill, not content knowledge. Every distractor must stand independently and be plausible on its own.</p>
+    </div>
+    <table>
+      <thead><tr><th>Permitted</th><th>Prohibited</th></tr></thead>
+      <tbody>
+        <tr><td>Multiple Choice - single correct answer</td><td>Essay / long answer (requires manual grading)</td></tr>
+        <tr><td>True / False (unambiguous answers only)</td><td>File upload (requires manual review)</td></tr>
+        <tr><td>Matching, Numeric answer</td><td>Any manually graded response</td></tr>
+        <tr><td>Short answer - exact match</td><td>"All of the above" / "None of the above"</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PART VIII -->
+  <section class="part" id="part8">
+    <div class="part-header">
+      <h2>Part VIII - New Quizzes Conversion Standard</h2>
+      <p class="part-desc">Import via QTI 1.2 first, then convert. Do not build directly in New Quizzes without first validating through QTI import.</p>
+    </div>
+    <h3>Post-Conversion Verification Checklist</h3>
+    <ul>
+      <li>Points per question match the intended value</li>
+      <li>Correct answers spot-checked (at least 20% of questions)</li>
+      <li>Shuffle answers setting confirmed</li>
+      <li>Attempts allowed confirmed</li>
+      <li>Time limit confirmed</li>
+      <li>Question display settings confirmed (all at once vs. one at a time)</li>
+      <li>No essay questions present in converted quiz</li>
+      <li>Tested in Student View before deployment</li>
+    </ul>
+  </section>
+
+  <!-- PART IX -->
+  <section class="part" id="part9">
+    <div class="part-header">
+      <h2>Part IX - Canvas Import Formats</h2>
+    </div>
+    <table>
+      <thead><tr><th>Situation</th><th>Use This Format</th></tr></thead>
+      <tbody>
+        <tr><td>Rolling a course forward to a new semester at UVU</td><td>Copy a Canvas Course</td></tr>
+        <tr><td>Sharing a complete course with another institution</td><td>Canvas Course Export Package (.imscc)</td></tr>
+        <tr><td>Importing only a quiz question bank</td><td>QTI .zip file</td></tr>
+        <tr><td>Publisher provided a course cartridge</td><td>Common Cartridge 1.x Package</td></tr>
+        <tr><td>Uploading Pro Tools session files or audio stems</td><td>Unzip .zip file into folder</td></tr>
+      </tbody>
+    </table>
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Note:</strong> Do not import the Automatic Missing Policy during semester rollovers. Use "Don't Import Policy" until due dates are updated.</p>
+    </div>
+  </section>
+
+  <!-- PART X -->
+  <section class="part" id="part10">
+    <div class="part-header">
+      <h2>Part X - Using AI to Build Canvas Content</h2>
+    </div>
+
+    <h3>Master Prompt for Canvas HTML Pages</h3>
+    <p>Paste this at the start of every AI session before generating Canvas content. Works with Claude, ChatGPT, Gemini, and any other AI tool. Updated April 2026 for zero-table layout.</p>
+    <pre>You are generating HTML for Canvas LMS (Instructure). Canvas strips most
+modern CSS and all JavaScript. Canvas Panorama (the accessibility scanner)
+flags every &lt;table&gt; tag for missing header/caption regardless of role,
+and also flags display:table on divs. Follow these rules exactly:
+
+HTML RULES:
+- All CSS must be inline style="" attributes. No &lt;style&gt; blocks, no external CSS.
+- Layout: use stacked &lt;div&gt; elements with inline &lt;img style="vertical-align:middle"&gt;
+  for icon + text rows. Never use &lt;table&gt; for layout - even role="presentation"
+  is flagged by Canvas Panorama.
+- Never use display:table or display:table-cell on divs. Use position:relative
+  + position:absolute for offset elements (number badges, fixed-slot icons).
+- The ONLY allowed &lt;table&gt; use is true data tables (rubrics, specs, comparisons)
+  with &lt;caption&gt;, &lt;thead&gt;, and &lt;th scope="col"&gt;.
+- Fonts: Arial, Georgia, or Courier New only. No Google Fonts.
+- No CSS Grid, no Flexbox, no CSS variables, no JavaScript.
+- Use hex color codes. Never use rgba().
+- No em dashes and no double dashes (--) in visible content.
+  Use a hyphen with spaces ( - ) where a dash is needed in text.
+
+ICON RULES (mandatory - see DAPR Reference Guide Part XXI and Part XXIV):
+- Every icon is an &lt;img&gt; tag pointing to the DAPR GitHub icon library.
+- Never use inline &lt;svg&gt; tags for icons in Canvas page HTML.
+- Base URL for every icon:
+  https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
+- Default icon size is 44x44 for all visible icons (callouts, section
+  headers, checklist row icons, submit-item icons). Use 20x20 only for
+  tiny inline icons next to a single word inside a paragraph.
+- Every icon img tag must include alt, width, and height attributes,
+  plus style="vertical-align:middle; margin-right:10px;" when inline.
+- Do not repeat the same icon on every checklist row. Use one icon in
+  the section header, then number the rows below as 1, 2, 3 with no
+  per-row icons. Per-row icons only when each row is a distinct file
+  type or distinct action (Submit_Session for zip, Submit_Audio for WAV).
+- Icon files: Callout_Required.svg, Callout_Note.svg, Callout_Warning.svg,
+  Callout_Avoid.svg (used for Critical), Callout_Tip.svg, Callout_FAQ.svg,
+  Submit_Upload.svg, Submit_Download.svg, Submit_Audio.svg, Submit_PDF.svg,
+  Submit_PTX.svg, Submit_Session.svg, Submit_ZIP.svg, Submit_Video.svg,
+  Action_Checklist.svg, Action_Deadline.svg, Action_Email.svg,
+  Action_External_Link.svg, Action_Peer.svg, Feedback_Not_Helpful(_white).svg,
+  Feedback_Helpful(_dark).svg, Feedback_Best(_white).svg.
+
+CALLOUT BOX RULES:
+- Use only the six approved callout types: Required (green), Note (blue),
+  Warning (yellow), Critical (red - filename Callout_Avoid.svg), Tip (purple), FAQ (pink).
+- Build callouts as a single &lt;div&gt; with background-color, border-left,
+  inline &lt;img style="vertical-align:middle; margin-right:10px"&gt;, then
+  the labeled text. Never use &lt;table role="presentation"&gt; - Panorama flags it.
+- Border-left color matches the icon's color family. Background uses the matched pastel.
+
+PAGE STRUCTURE RULES:
+- Section order is locked: Title bar, intro, Goals, body sections,
+  Peer Feedback (if applicable), then What to Submit ALWAYS LAST.
+- The What to Submit section is preceded by a 3px green horizontal rule
+  (border-top:3px solid #1B5E20).
+- Naming convention callouts and "test your zip" callouts go INSIDE the
+  What to Submit section. Never anywhere else on the page.
+
+ACCESSIBILITY RULES (Canvas Panorama must show 0 issues):
+- First heading in content area must be &lt;h2&gt;. Never use &lt;h1&gt;.
+- All &lt;img&gt; tags need alt="description" or alt="" for decorative.
+  Alt text must be under 120 characters.
+- All &lt;a&gt; links need title="where this goes" attribute.
+- Data tables: require &lt;caption&gt; (plain text, no style),
+  &lt;thead&gt; with &lt;th scope="col"&gt;, and &lt;tbody&gt;.
+- All other layout patterns: use &lt;div&gt;, never &lt;table&gt;.
+- Text color must pass WCAG 4.5:1 contrast on its background.
+  Safe colors on white: #212121, #0D47A1, #1B5E20, #993300, #B71C1C.
+  Never use #CC4400. Gold background (#F9A825) requires dark text (#212121).
+
+QUIZ RULES (when generating QTI):
+- Never use "All of the above" or "None of the above."
+- Each distractor must stand independently.
+- All assessments must be self-grading. No essay questions.
+
+OUTPUT FORMAT:
+- Output only the HTML that goes inside the Canvas content editor body.
+- Do not include &lt;!DOCTYPE&gt;, &lt;html&gt;, &lt;head&gt;, or &lt;body&gt; tags.</pre>
+
+    <h3>Master Prompt for QTI Quiz Files</h3>
+    <pre>Generate a Canvas QTI 1.2 quiz package as a .zip file ready for import.
+
+TECHNICAL REQUIREMENTS:
+- The zip must contain imsmanifest.xml at the root level.
+- Use xmlns="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1" in the manifest.
+- Each question must have a unique ident attribute (use random hex strings).
+- All HTML in mattext tags must use texttype="text/html" and encode &lt; as &amp;lt; and &gt; as &amp;gt;
+- For true/false questions use ident="true_answer" and ident="false_answer".
+- Set points_possible for every question.
+
+ITEM TITLE FORMAT:
+- Set the title attribute on every &lt;item&gt; to the question bank category name.
+- All questions in the same category share the exact same title string.
+- Confirm the bank name before writing any &lt;item&gt; elements.
+
+QUESTION DESIGN REQUIREMENTS:
+- Never use "All of the above" or "None of the above."
+- Each distractor must be independently plausible.
+- All questions must be self-grading. No essay or file upload.
+
+QUIZ SETTINGS:
+  Quiz name:
+  Number of questions:
+  Points per question:
+  Question types (MC, T/F, short answer, matching, mixed):
+  Shuffle answers: yes/no
+
+SOURCE QUESTIONS:
+  [Paste your questions here]</pre>
+
+    <h3>Common AI Mistakes and Fixes</h3>
+    <table>
+      <thead><tr><th>AI Mistake</th><th>What to Tell AI to Fix It</th></tr></thead>
+      <tbody>
+        <tr><td>Generates inline &lt;svg&gt; for callout icons</td><td>"Replace every inline &lt;svg&gt; icon with an &lt;img&gt; tag pointing to the matching file at https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/"</td></tr>
+        <tr><td>Uses github.com URL instead of raw.githubusercontent.com</td><td>"Change every github.com URL to raw.githubusercontent.com - the github.com URL returns an HTML page, not the file"</td></tr>
+        <tr><td>Invents new icon filenames or callout colors</td><td>"Use only the six approved callout types and the exact filenames in Part XXIV. Do not invent new icons or colors."</td></tr>
+        <tr><td>Uses display:flex for icon + text callouts</td><td>"Replace flex with a &lt;div&gt; containing an inline &lt;img style='vertical-align:middle; margin-right:10px'&gt; followed by the text"</td></tr>
+        <tr><td>Uses &lt;table role='presentation'&gt; for layout</td><td>"Canvas Panorama flags every &lt;table&gt; tag regardless of role. Replace all layout tables with &lt;div&gt; containing an inline &lt;img style='vertical-align:middle'&gt;"</td></tr>
+        <tr><td>Uses display:table or display:table-cell on divs</td><td>"Canvas treats CSS-table divs as real tables. Replace with position:relative parent and position:absolute child for offset elements, or a simple inline-block layout."</td></tr>
+        <tr><td>Icons are too small (20px or 22px)</td><td>"The program standard is 44x44 for all visible icons - section headers, callouts, checklist rows, and submit items. Use width='44' height='44' on every img tag."</td></tr>
+        <tr><td>Repeats the same icon on every checklist row</td><td>"Place one icon in the section header at 44x44. Number the rows below as 1, 2, 3 with no per-row icons. Per-row icons only when each row is a distinct file type or distinct action."</td></tr>
+        <tr><td>"What to Submit" section in middle of page</td><td>"Move the What to Submit section to the very end of the page, preceded by a 3px green horizontal rule (border-top:3px solid #1B5E20). Naming convention and test-zip callouts go inside the What to Submit section, not anywhere else."</td></tr>
+        <tr><td>Uses rgba() for colors</td><td>"Replace all rgba() values with equivalent hex codes"</td></tr>
+        <tr><td>Puts H1 as first heading in content</td><td>"Change the first H1 to H2 - Canvas provides H1 from the page title"</td></tr>
+        <tr><td>Table caption uses visually-hidden CSS</td><td>"Remove the style attribute from the &lt;caption&gt; tag entirely"</td></tr>
+        <tr><td>Uses a table for a totals banner</td><td>"Replace the total banner table with a styled &lt;div&gt;"</td></tr>
+        <tr><td>Links without title attribute</td><td>"Add title='description of destination' to every &lt;a&gt; tag"</td></tr>
+        <tr><td>Includes &lt;!DOCTYPE&gt; or &lt;html&gt; tags</td><td>"Output only the content between the &lt;body&gt; tags"</td></tr>
+        <tr><td>Uses #CC4400 for orange text</td><td>"Replace #CC4400 with #993300"</td></tr>
+        <tr><td>Includes "All of the above"</td><td>"Remove all meta-answers. Rewrite as specific independent distractors."</td></tr>
+        <tr><td>Em dashes or double dashes in visible text</td><td>"Replace all em dashes and double dashes in visible text with a hyphen with spaces ( - )"</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PART XI -->
+  <section class="part" id="part11">
+    <div class="part-header">
+      <h2>Part XI - AI Voice and Writing Standards</h2>
+      <p class="part-desc">All AI-generated content must sound like it was written directly by the course instructor.</p>
+    </div>
+    <table>
+      <thead><tr><th>Prohibited (Bad)</th><th>Required (Good)</th></tr></thead>
+      <tbody>
+        <tr><td>"Only required if your instructor has requested the session file."</td><td>"Submit the full session folder as a zipped file. Include all associated audio assets."</td></tr>
+        <tr><td>"You may include screenshots if needed."</td><td>"Include two screenshots that clearly show the completed routing configuration."</td></tr>
+        <tr><td>"Depending on your setup, you might want to..."</td><td>"Configure your I/O settings as follows before beginning."</td></tr>
+      </tbody>
+    </table>
+    <p><strong>Prohibited phrases:</strong> "if required," "if requested," "if applicable," "depending on course requirements," "you may," "optional unless." When unsure whether something should be conditional or decisive, choose decisive.</p>
+  </section>
+
+  <!-- PART XII -->
+  <section class="part" id="part12">
+    <div class="part-header">
+      <h2>Part XII - Pre-Publication Checklists</h2>
+    </div>
+    <details open>
+      <summary>HTML Page Checklist</summary>
+      <ul>
+        <li>All styles are inline - no &lt;style&gt; blocks, no external CSS files</li>
+        <li>Only system-safe fonts: Arial, Georgia, or Courier New</li>
+        <li>First heading in content area is H2 (never H1 - Canvas provides H1)</li>
+        <li>All &lt;img&gt; tags have meaningful alt text under 120 characters</li>
+        <li>All &lt;a&gt; tags have a title attribute</li>
+        <li>Heading tags follow logical hierarchy: H2 &gt; H3 (no skipped levels)</li>
+        <li>Data tables have &lt;caption&gt; with plain text (no style attribute) AND &lt;th scope="col"&gt;</li>
+        <li>No &lt;table&gt; used for decorative banners or totals - use &lt;div&gt; instead</li>
+        <li>All text/background color combinations pass WCAG 4.5:1 contrast ratio</li>
+        <li>#CC4400 replaced with #993300 or darker</li>
+        <li>No em dashes or double dashes in visible text</li>
+        <li><strong>Every icon is an &lt;img&gt; tag pointing to raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</strong></li>
+        <li><strong>No inline &lt;svg&gt; tags anywhere in the page HTML</strong></li>
+        <li><strong>Every callout box uses one of the six approved types from Part XXI (Required, Note, Warning, Critical, Tip, FAQ)</strong></li>
+        <li>Canvas Accessibility Checker shows 0 issues before publishing</li>
+      </ul>
+    </details>
+    <details>
+      <summary>QTI Quiz File Checklist</summary>
+      <ul>
+        <li>imsmanifest.xml is present at the root of the .zip file</li>
+        <li>Manifest uses the imsccv1p1 xmlns path</li>
+        <li>Each &lt;item&gt; has a unique ident attribute</li>
+        <li>All questions in the same bank share the same title string (the bank name)</li>
+        <li>points_possible is set for every question</li>
+        <li>Each multiple choice question has at least 3 answer options</li>
+        <li>No "All of the above" or "None of the above" used in any question</li>
+        <li>No essay questions in self-grading assessment files</li>
+      </ul>
+    </details>
+    <details>
+      <summary>AI Generation Checklist</summary>
+      <ul>
+        <li>HTML output uses inline styles only</li>
+        <li>First heading in AI-generated content is H2</li>
+        <li>All colors are hex codes - no rgba() values</li>
+        <li>All &lt;img&gt; tags include alt text under 120 characters</li>
+        <li>All &lt;a&gt; tags include title attribute</li>
+        <li>No em dashes or double dashes in visible content</li>
+        <li>No "All of the above" or "None of the above" in quiz questions</li>
+        <li>Content reviewed for instructor voice - no conditional softening language</li>
+        <li>Submission instructions state file type, naming convention, and zip requirements</li>
+        <li>Canvas Accessibility Checker shows 0 issues after paste</li>
+      </ul>
+    </details>
+  </section>
+
+  <!-- PART XIV -->
+  <section class="part" id="part14">
+    <div class="part-header">
+      <h2>Part XIV - Panorama Accessibility Scanner</h2>
+      <p class="part-desc">Panorama is the automated accessibility evaluation platform integrated into Canvas. It scans uploaded course files and HTML pages based on WCAG 2.1 AA and Section 508.</p>
+    </div>
+    <table>
+      <thead><tr><th>Severity</th><th>Meaning</th><th>Score Impact</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Severe</strong></td><td>Critical barrier that prevents access entirely</td><td>Fails hard - tanks score even in isolation</td></tr>
+        <tr><td><strong>Major</strong></td><td>Significantly breaks usability for users with disabilities</td><td>Medium score penalty</td></tr>
+        <tr><td><strong>Minor</strong></td><td>Cosmetic or consistency issues</td><td>Low score penalty</td></tr>
+      </tbody>
+    </table>
+    <h3>PowerPoint-Specific Requirements</h3>
+    <ul>
+      <li>Every slide must have a Title placeholder (not a text box) - Severe if missing</li>
+      <li>Slides with no visible title need an off-slide placeholder at x="-10000000" y="-10000000" EMUs</li>
+      <li>Every slide title must be unique</li>
+      <li>All images must have alt text or be marked as decorative (right-click, Edit Alt Text)</li>
+      <li>Reading order verified in Selection Pane - objects are read bottom-to-top in the list</li>
+      <li>Tables must have Header Row checked in Table Design tab - no merged or split cells</li>
+      <li>Section names must be unique and descriptive</li>
+    </ul>
+  </section>
+
+  <!-- PART XV -->
+  <section class="part" id="part15">
+    <div class="part-header">
+      <h2>Part XV - Rubric CSV Import Standards</h2>
+    </div>
+
+    <h3>Required Header Row (exact text, case-sensitive)</h3>
+    <pre>Rubric Name, Criteria Name, Criteria Description, Criteria Enable Range, Rating Name, Rating Description, Rating Points, Rating Name, Rating Description, Rating Points, Rating Name, Rating Description, Rating Points</pre>
+
+    <h3>Program Standard Rating Scale</h3>
+    <table class="green-head">
+      <thead><tr><th>Level</th><th>Points</th><th>Description</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Full Credit</strong></td><td>100% of criterion points</td><td>All criteria for this section are met as described.</td></tr>
+        <tr><td><strong>Partial Credit</strong></td><td>50% (round to nearest whole number)</td><td>Some criteria met but submission is incomplete or missing required evidence.</td></tr>
+        <tr><td><strong>No Credit</strong></td><td>0 points</td><td>Not submitted or does not meet minimum requirements for this section.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>No commas in ANY field.</strong> Canvas parses rubric CSVs by splitting on commas. A comma inside any field causes silent column misalignment - one or more criteria receive 0 points with no error message. Replace comma-separated lists with "and" or "or" as conjunctions throughout every field in every row.</p>
+    </div>
+
+    <h3>Required Generation Method</h3>
+    <p>All rubric CSV files must be generated using Python's csv.writer module with QUOTE_ALL. Verify every data row produces exactly 13 columns. CSV filename convention: <code>COURSE_A#_Rubric.csv</code> (example: <code>DAPR3345_A4_Rubric.csv</code>).</p>
+
+    <details>
+      <summary>Python Generation Template and Audit Script</summary>
+      <pre>import csv
+
+header = ["Rubric Name","Criteria Name","Criteria Description","Criteria Enable Range",
+    "Rating Name","Rating Description","Rating Points",
+    "Rating Name","Rating Description","Rating Points",
+    "Rating Name","Rating Description","Rating Points"]
+
+with open('rubric.csv', 'w', newline='', encoding='utf-8') as f:
+    writer = csv.writer(f, quoting=csv.QUOTE_ALL)
+    writer.writerows([header, criterion_row_1, criterion_row_2])
+
+<span class="comment"># Verify: every data row must show 13 columns</span>
+with open('rubric.csv', newline='') as f:
+    for i, row in enumerate(csv.reader(f)):
+        print(f'Row {i}: {len(row)} cols')
+
+<span class="comment"># Pre-import audit: scan for commas in Rating Description columns</span>
+with open('your_rubric.csv', newline='', encoding='utf-8') as f:
+    for i, row in enumerate(csv.reader(f)):
+        if i == 0: continue
+        for col in [5, 8, 11]:
+            if col &lt; len(row) and ',' in row[col]:
+                print(f'ISSUE: Row {i+1} col {col+1}: {row[col][:60]}')</pre>
+    </details>
+  </section>
+
+  <!-- PART XVII -->
+  <section class="part" id="part17">
+    <div class="part-header">
+      <h2>Part XVII - PDF Documentation Page Standards</h2>
+      <p class="part-desc">For assignments that require students to document their work as a PDF alongside a session file.</p>
+    </div>
+
+    <h3>Required Structure of Every Copy-Paste Block</h3>
+    <ol>
+      <li>Filename line in monospace at the top (the naming convention for the PDF)</li>
+      <li>Assignment title line with course and institution</li>
+      <li>The "Keep with next" instruction line</li>
+      <li>One numbered item per screenshot: <strong>Item Name (X pts)</strong> on line 1, description on line 2, <strong>[ Screenshot here ]</strong> on line 3</li>
+    </ol>
+
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Required instruction line at top of every copy-paste block:</strong> "After pasting this into Word, select each numbered item line and apply Format &gt; Paragraph &gt; Line and Page Breaks &gt; Keep with next. This prevents a section label from appearing alone at the bottom of a page while its screenshot is on the next page."</p>
+    </div>
+
+    <div class="box box-warning">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Point values in the copy-paste block must exactly match the rubric table on the same Canvas page.</strong> Format: <code>1. EQ (15 pts)</code> - not <code>1. EQ</code>. Students copy this block before they know the rubric - they must see point values while building the document.</p>
+    </div>
+  </section>
+
+  <!-- PART XVIII -->
+  <section class="part" id="part18">
+    <div class="part-header">
+      <h2>Part XVIII - Assignment Classification and Point System</h2>
+    </div>
+    <div class="two-col">
+      <div class="col-card">
+        <div class="col-card-head" style="background:#1B5E20;">Lab / Short Assignment - 25 Points</div>
+        <div class="col-card-body">
+          <p><strong>Expected time:</strong> 1 to 2 hours</p>
+          <p>Ear training, session prep, short skill-building, process-completion assignments. Any assignment in a course whose title includes "Lab" (DAPR 2000L, 2020L, 2010L).</p>
+          <p style="margin-top:8px;"><strong>Rubric breakdown (sum to 25):</strong></p>
+          <code>Criterion 1: 6 pts</code>
+          <code>Criterion 2: 6 pts</code>
+          <code>Criterion 3: 6 pts</code>
+          <code>Criterion 4 - Submission: 7 pts</code>
+          <p style="margin-top:8px;"><strong>With WAV + PDF:</strong> WAV = 10 pts, PDF = 15 pts</p>
+        </div>
+      </div>
+      <div class="col-card">
+        <div class="col-card-head" style="background:#0D47A1;">Major Mix / Final Project - 100 Points</div>
+        <div class="col-card-body">
+          <p><strong>Expected time:</strong> 4 to 8 hours</p>
+          <p>Full mix deliverables, end-of-unit and end-of-semester final projects. Graded on mix quality and creative decisions, not just process steps.</p>
+          <p style="margin-top:8px;"><strong>Deliverable weights:</strong></p>
+          <code>Zipped Pro Tools session: 40 pts</code>
+          <code>Stereo bounce WAV: 20 pts</code>
+          <code>PDF documentation: 40 pts</code>
+          <p style="margin-top:8px;">ZIP must contain: .ptx file, Audio Files folder, Fade Files folder. Use File &gt; Save Copy In with Copy All Audio Files checked before zipping.</p>
+        </div>
+      </div>
+    </div>
+    <h3>DAPR Course Reference</h3>
+    <table>
+      <thead><tr><th>Course</th><th>Title</th><th>Lab Course?</th></tr></thead>
+      <tbody>
+        <tr><td>DAPR 2000</td><td>Digital Audio Essentials</td><td>No</td></tr>
+        <tr><td>DAPR 2000L</td><td>Digital Audio Essentials Lab</td><td>Yes - all assignments 25 pts</td></tr>
+        <tr><td>DAPR 2010</td><td>Core Recording</td><td>No</td></tr>
+        <tr><td>DAPR 2010L</td><td>Core Recording Lab</td><td>Yes - all assignments 25 pts</td></tr>
+        <tr><td>DAPR 2020</td><td>Core Mixing</td><td>No</td></tr>
+        <tr><td>DAPR 2020L</td><td>Core Mixing Lab</td><td>Yes - all assignments 25 pts</td></tr>
+        <tr><td>DAPR 2080</td><td>Podcast and Radio Production</td><td>No</td></tr>
+        <tr><td>DAPR 2255</td><td>Audio Hardware I</td><td>No</td></tr>
+        <tr><td>DAPR 3010R</td><td>Digital Lecture Series</td><td>No</td></tr>
+        <tr><td>DAPR 3255</td><td>Audio Hardware II</td><td>No</td></tr>
+        <tr><td>DAPR 3340</td><td>Spatial Audio I</td><td>No</td></tr>
+        <tr><td>DAPR 3345</td><td>Spatial Audio II</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PART XIX -->
+  <section class="part" id="part19">
+    <div class="part-header">
+      <h2>Part XIX - GitHub Image Repository Standards</h2>
+      <p class="part-desc">The GitHub repository holds image files only - icons (SVG) and content images (JPG, PNG). It does not host CSS files, JavaScript files, HTML pages, PDFs, audio files, video files, session files, or any other resource. Every other Canvas resource lives in Canvas Files, in the assignment, or on the student's own machine.</p>
+    </div>
+
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Repository:</strong> https://github.com/uvu-dapr/Canvas<br>
+      <strong>Raw URL pattern:</strong> <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/FOLDER/SUBFOLDER/FILENAME.jpg</code><br>
+      Always use raw.githubusercontent.com, never github.com. Verify every new URL in a browser before building the Canvas page.</p>
+    </div>
+
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Only image files belong in this repository.</strong> Acceptable file types are SVG (icons), JPG, PNG, and GIF (content images). Do not commit CSS, JavaScript, HTML pages, PDFs, audio, video, Pro Tools sessions, ZIPs, or any non-image asset. Canvas does not load external CSS or JS even if hosted on GitHub - the Canvas allowlist strips those references on save.</p>
+    </div>
+
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Never rename or move an existing image file.</strong> Canvas pages contain hardcoded URLs. Renaming a file breaks every page that references it with no warning. To update an image, replace the file in place using the same filename.</p>
+    </div>
+
+    <h3>Folder Naming Rule - Underscores vs. Hyphens</h3>
+    <div class="two-col">
+      <div class="col-card">
+        <div class="col-card-head" style="background:#1B5E20;">Underscores _ connect words within one concept</div>
+        <div class="col-card-body">
+          <code>sound_and_hearing</code>
+          <code>address_resolution_protocol</code>
+          <code>the_decibel</code>
+          <code>working_in_the_industry</code>
+          <code>eq_lab</code>
+        </div>
+      </div>
+      <div class="col-card">
+        <div class="col-card-head" style="background:#0D47A1;">Hyphens - separate distinct segments</div>
+        <div class="col-card-body">
+          <code>sound-the_decibel</code>
+          <code>networking-address_resolution_protocol</code>
+          <code>jobs-working_in_the_industry</code>
+          <code>dapr-2000</code>
+          <code>dapr-2000l</code>
+        </div>
+      </div>
+    </div>
+
+    <h3>Canvas Page Name to GitHub Folder Conversion</h3>
+    <table>
+      <thead><tr><th>Canvas Page Name (Option D)</th><th>GitHub Folder Name</th></tr></thead>
+      <tbody>
+        <tr><td>Jobs: Overview</td><td><code>dapr-2000/jobs-overview/</code></td></tr>
+        <tr><td>Jobs: Working in the Industry</td><td><code>dapr-2000/jobs-working_in_the_industry/</code></td></tr>
+        <tr><td>Sound: The Decibel</td><td><code>dapr-2000/sound-the_decibel/</code></td></tr>
+        <tr><td>Sound: Sound Wave Properties</td><td><code>dapr-2000/sound-sound_wave_properties/</code></td></tr>
+        <tr><td>Networking: Address Resolution Protocol</td><td><code>dapr-3255/networking-address_resolution_protocol/</code></td></tr>
+        <tr><td>Networking: Dynamic Host Configuration Protocol (DHCP)</td><td><code>dapr-3255/networking-dynamic_host_configuration_protocol/</code></td></tr>
+        <tr><td>EQ: EQ Lab</td><td><code>dapr-2000l/eq-eq_lab/</code></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- PART XXII -->
+  <section class="part" id="part22">
+    <div class="part-header">
+      <h2>Part XXII - GitHub Image Workflow for Canvas Pages</h2>
+    </div>
+
+    <h3>The Five Mandatory Pre-Build Questions</h3>
+    <table class="green-head">
+      <thead><tr><th>Question</th><th>What to Confirm</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Is this image shared across multiple courses, or does it belong to one specific course? Shared = All/ &nbsp; One course = dapr-XXXX/</td></tr>
+        <tr><td><strong>2</strong></td><td>What is the exact course folder name? (dapr-2000, dapr-2000l, dapr-3255, etc.)</td></tr>
+        <tr><td><strong>3</strong></td><td>What is the exact assignment subfolder name? Apply the Option D conversion rule.</td></tr>
+        <tr><td><strong>4</strong></td><td>What are the exact filenames of all images pushed to the repository? List all before any HTML is written.</td></tr>
+        <tr><td><strong>5</strong></td><td>Have these files been committed and pushed in GitHub Desktop? Confirm before writing any HTML.</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Image Placement - Stacked Divs (not tables)</h3>
+    <pre><span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"margin:12px 0;"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"margin-bottom:16px;"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"font-weight:bold;"</span><span class="tag">&gt;</span>Before<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/FOLDER/before.jpg"</span>
+         <span class="attr">alt</span>=<span class="val">"Description of what the before state shows"</span>
+         <span class="attr">style</span>=<span class="val">"max-width:100%; height:auto;"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+  <span class="tag">&lt;div&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"font-weight:bold;"</span><span class="tag">&gt;</span>After<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/FOLDER/after.jpg"</span>
+         <span class="attr">alt</span>=<span class="val">"Description of what the after state shows"</span>
+         <span class="attr">style</span>=<span class="val">"max-width:100%; height:auto;"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+  </section>
+
+  <!-- PART XX -->
+  <section class="part" id="part20">
+    <div class="part-header">
+      <h2>Part XX - Student File Naming Standards</h2>
+    </div>
+
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Master pattern:</strong> Three segments separated by space-hyphen-space ( - )<br>
+      With song: <code>LastName, FirstName - Assignment Name - Song Name.ext</code><br>
+      Without song: <code>LastName, FirstName - Assignment Name.ext</code></p>
+    </div>
+
+    <h3>Segment Rules</h3>
+    <table>
+      <thead><tr><th>Segment</th><th>Rule</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1 - Student Name</strong></td><td>LastName, FirstName - comma is literal and required</td><td>Smith, John</td></tr>
+        <tr><td><strong>2 - Assignment Name</strong></td><td>Full Canvas page name. Replace any colon with space-hyphen-space ( - )</td><td>Sound - The Decibel</td></tr>
+        <tr><td><strong>3 - Song Name (mix only)</strong></td><td>Normal capitalization. Strip apostrophes. Strip all other punctuation. Omit for labs.</td><td>Dont Think Twice Its All Right</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Song Name Punctuation Examples</h3>
+    <table>
+      <thead><tr><th>Song Title</th><th>Filename Segment</th></tr></thead>
+      <tbody>
+        <tr><td>Don't Think Twice, It's All Right</td><td>Dont Think Twice Its All Right</td></tr>
+        <tr><td>Knockin' on Heaven's Door</td><td>Knockin on Heavens Door</td></tr>
+        <tr><td>Mr. Tambourine Man</td><td>Mr Tambourine Man</td></tr>
+      </tbody>
+    </table>
+
+    <h3>Prohibited Naming Patterns</h3>
+    <table>
+      <thead><tr><th>Prohibited</th><th>Why It Fails</th></tr></thead>
+      <tbody>
+        <tr><td><code>Untitled.ptx</code></td><td>Default Pro Tools session name</td></tr>
+        <tr><td><code>SmithJohn_EQLab_DontThinkTwice.ptx</code></td><td>Underscores instead of space-hyphen-space separators</td></tr>
+        <tr><td><code>Smith, John - Sound: The Decibel.ptx</code></td><td>Colon retained - replace with space-hyphen-space</td></tr>
+        <tr><td><code>Smith, John - The Decibel.ptx</code></td><td>Topic prefix dropped - keep the full Canvas page name</td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Zip-Session Matching Rule:</strong> The zip file, the .ptx session file inside it, and the WAV bounce must all share the same base name. Canvas shows only the zip filename in SpeedGrader. If the names do not match it is impossible to verify the correct session was submitted.</p>
+    </div>
+  </section>
+
+  <!-- PART XXI -->
+  <section class="part" id="part21">
+    <div class="part-header">
+      <h2>Part XXI - Canvas Icon and Callout Box System</h2>
+      <p class="part-desc">Standardized icons hosted on GitHub and color-coded callout boxes for all DAPR Canvas HTML pages. Every icon on every Canvas page is referenced via an <code>&lt;img&gt;</code> tag pointing to the GitHub raw URL. No inline SVG is used in Canvas page HTML.</p>
+    </div>
+
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Icon Source Authority - The Single Rule:</strong> Every icon on every Canvas page is an <code>&lt;img&gt;</code> tag with <code>src</code> set to a raw URL under <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code>. Never use inline SVG. Never upload icon files to Canvas. Never link to <code>github.com</code> page URLs. The raw URL is the only acceptable source.</p>
+    </div>
+
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Required:</strong> Every Canvas page that uses a callout box must use one of the six approved types below. Custom colors, custom icon shapes, and custom border styles are not permitted. An AI generating Canvas HTML must reference this section and Part XXIV to produce the correct GitHub raw URL, hex codes, and border colors for each callout type.</p>
+    </div>
+
+    <h3>21.1 The Icon Specification Rule</h3>
+    <p>Every icon used in Canvas HTML is an <code>&lt;img&gt;</code> tag. The <code>src</code> attribute is always a GitHub raw URL pointing to a file under <code>Classes/All/DAPR_Canvas_Icon_Reference/</code>. Never use inline <code>&lt;svg&gt;</code> tags in Canvas page HTML - they are not used in this program even though Canvas technically allows them.</p>
+    <p>Required attributes on every icon <code>&lt;img&gt;</code> tag:</p>
+    <ul>
+      <li><code>src</code> - the full raw GitHub URL (see Part XXIV for every icon's URL)</li>
+      <li><code>alt</code> - short descriptive text matching the icon's meaning ("Required", "Note", "Warning", etc.) or <code>alt=""</code> if the surrounding label text already names the callout type</li>
+      <li><code>width</code> and <code>height</code> - <strong><code>44</code> is the program standard</strong> for callouts, section headers, checklist row icons, and submit-item icons. Use <code>20</code> only for tiny inline icons next to a single word inside a paragraph (rare).</li>
+      <li><code>style="vertical-align:middle; margin-right:10px;"</code> when the icon sits inline next to text in a section header or callout (always required - the div-only layout depends on this for alignment)</li>
+    </ul>
+    <p>The icon files themselves are designed at <code>viewBox="0 0 24 24"</code> with <code>stroke-width="2.2"</code>, <code>stroke-linecap="round"</code>, and <code>stroke-linejoin="round"</code>. These are properties of the source SVG file on GitHub, not attributes you write in your Canvas HTML. You only write the <code>&lt;img&gt;</code> tag.</p>
+    <div class="box box-warning">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Sizing Update (April 2026):</strong> The previous standard had three sizes (22 in callouts, 36 standalone, 20 inline). After student feedback that 20-22 px icons were too small to identify quickly, the program standard is now 44x44 for all visible icons. The only exception is genuinely inline icons next to a single word, which stay at 20x20.</p>
+    </div>
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      <p><strong>Don't repeat the same icon on every row.</strong> When a section has many checklist rows, place ONE 44x44 icon in the section header and use plain numbered div rows below. Repeating the same icon (Action_Checklist) on every row drains it of meaning. Per-row icons are reserved for distinct file types or distinct actions, such as the What to Submit section using Submit_Session for the zip and Submit_Audio for the WAV.</p>
+    </div>
+
+    <h3>21.2 Six Callout Types - Locked Colors</h3>
+    <p>The six callout box types and their locked colors are listed below. The Background column is the fill color of the box. The Border / Stroke column is the left border and the icon stroke color. Do not use any other color combinations.</p>
+    <table>
+      <thead><tr><th>Type</th><th>Border / Stroke</th><th>Background</th><th>When to Use</th></tr></thead>
+      <tbody>
+        <tr>
+          <td>
+            <div class="box box-required" style="margin:0; padding:6px 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+              <p style="margin:0; font-size:12px;"><strong>Required</strong></p>
+            </div>
+          </td>
+          <td><code>#1B5E20</code></td>
+          <td><code>#E8F5E9</code></td>
+          <td>Mandatory rules, program standards, must-follow instructions</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="box box-note" style="margin:0; padding:6px 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <p style="margin:0; font-size:12px;"><strong>Note</strong></p>
+            </div>
+          </td>
+          <td><code>#0D47A1</code></td>
+          <td><code>#E3F2FD</code></td>
+          <td>Clarifications, reminders, helpful context</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="box box-warning" style="margin:0; padding:6px 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <p style="margin:0; font-size:12px;"><strong>Warning</strong></p>
+            </div>
+          </td>
+          <td><code>#F57F17</code></td>
+          <td><code>#FFF8E1</code></td>
+          <td>Common mistakes, known gotchas, proceed with caution</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="box box-critical" style="margin:0; padding:6px 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+              <p style="margin:0; font-size:12px;"><strong>Critical</strong></p>
+            </div>
+          </td>
+          <td><code>#C62828</code></td>
+          <td><code>#FBE9E7</code></td>
+          <td>Hard rules, enforcement policies, absolute prohibitions</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="box box-tip" style="margin:0; padding:6px 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+              <p style="margin:0; font-size:12px;"><strong>Tip / Pro tip</strong></p>
+            </div>
+          </td>
+          <td><code>#4A148C</code></td>
+          <td><code>#F3E5F5</code></td>
+          <td>Helpful suggestions, shortcuts, efficiency notes, optional improvements</td>
+        </tr>
+        <tr>
+          <td>
+            <div class="box box-faq" style="margin:0; padding:6px 10px;">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#AD1457" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              <p style="margin:0; font-size:12px;"><strong>FAQ</strong></p>
+            </div>
+          </td>
+          <td><code>#AD1457</code></td>
+          <td><code>#FCE4EC</code></td>
+          <td>Frequently asked questions, anticipated student questions, clarifying Q&amp;A blocks</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Tip vs. FAQ - when to use which:</strong> A <strong>Tip</strong> is a suggestion the instructor is offering unprompted ("here is a faster way to do this"). An <strong>FAQ</strong> is an answer to a question the instructor expects students to ask ("Why do we use WAV instead of MP3?"). If the content is phrased as a question-and-answer, use FAQ. If it is phrased as advice or a shortcut, use Tip.</p>
+    </div>
+
+    <h3>21.3 Example - Tip and FAQ Rendered</h3>
+    <p>These two callouts use the same structural template. Only the icon, border color, and background change.</p>
+
+    <div class="box box-tip">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#4A148C" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5a6 6 0 0 0-12 0c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg>
+      <p><strong>Tip:</strong> Render a reference of your mix before uploading. A rendered WAV bounced from the session often reveals plugin-bypass mistakes that are hard to hear during real-time playback.</p>
+    </div>
+
+    <div class="box box-faq">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#AD1457" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>FAQ - Why do we submit WAV instead of MP3?</strong> WAV is lossless. MP3 throws away frequency content during compression, which changes the sonic decisions the instructor is grading. Export from the session as 24-bit WAV at the session sample rate.</p>
+    </div>
+
+    <h3>21.4 Callout Box HTML Template</h3>
+    <p>Every callout box in Canvas HTML uses this single div-based structure. Replace the icon's <code>src</code> URL, the background color, the border color, the <code>alt</code> text, the bold label, and the content text to match the callout type. The structure itself never changes.</p>
+    <div class="box box-critical">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#C62828" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <p><strong>Updated April 2026:</strong> Callouts no longer use <code>&lt;table role="presentation"&gt;</code>. Canvas Panorama flags every <code>&lt;table&gt;</code> tag for missing header/caption regardless of role. Use the div-only template below. The legacy table-based template is retained at the end of this section for reference only.</p>
+    </div>
+    <pre><span class="comment">&lt;!-- Required callout - div only, Panorama-safe --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"background-color:#E8F5E9; border-left:4px solid #1B5E20; margin:16px 0; padding:12px 14px;"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;img</span>
+    <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg"</span>
+    <span class="attr">alt</span>=<span class="val">"Required"</span> <span class="attr">width</span>=<span class="val">"44"</span> <span class="attr">height</span>=<span class="val">"44"</span>
+    <span class="attr">style</span>=<span class="val">"vertical-align:middle; margin-right:10px;"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;strong</span> <span class="attr">style</span>=<span class="val">"vertical-align:middle;"</span><span class="tag">&gt;</span>Required:<span class="tag">&lt;/strong&gt;</span> <span class="tag">&lt;span</span> <span class="attr">style</span>=<span class="val">"vertical-align:middle;"</span><span class="tag">&gt;</span>Content goes here.<span class="tag">&lt;/span&gt;</span>
+<span class="tag">&lt;/div&gt;</span></pre>
+
+    <p>To produce another callout type, change three things in the template above and nothing else:</p>
+    <ol>
+      <li>The icon filename in the <code>src</code> URL (<code>Callout_Required.svg</code> &rarr; <code>Callout_Note.svg</code>, etc.)</li>
+      <li>The <code>alt</code> attribute on the img tag</li>
+      <li>The two color values: <code>background-color</code> and the hex code in <code>border-left</code></li>
+    </ol>
+    <p>For multi-line content, indent continuation lines with <code>margin-left:54px</code> (44px icon plus 10px gap) so wrapped text aligns under the strong label rather than wrapping under the icon.</p>
+
+    <h4>Legacy Callout Template (deprecated)</h4>
+    <p>This table-based template was the program standard before April 2026. It triggers Canvas Panorama "Table does not have a header" errors and should not be used in new content.</p>
+    <pre><span class="comment">&lt;!-- DEPRECATED - flagged by Canvas Panorama --&gt;</span>
+<span class="tag">&lt;table</span> <span class="attr">role</span>=<span class="val">"presentation"</span> <span class="attr">style</span>=<span class="val">"width:100%; background-color:#E8F5E9; border-left:4px solid #1B5E20;
+       border-collapse:collapse; margin:16px 0; border-radius:0 4px 4px 0;"</span><span class="tag">&gt;</span>
+  <span class="tag">&lt;tr&gt;</span>
+    <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"width:38px; padding:12px 8px 12px 14px; vertical-align:top;"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"..."</span> <span class="attr">alt</span>=<span class="val">"Required"</span> <span class="attr">width</span>=<span class="val">"22"</span> <span class="attr">height</span>=<span class="val">"22"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;/td&gt;</span>
+    <span class="tag">&lt;td</span> <span class="attr">style</span>=<span class="val">"padding:12px 14px 12px 4px;"</span><span class="tag">&gt;</span>
+      <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="val">"margin:0;"</span><span class="tag">&gt;</span><span class="tag">&lt;strong&gt;</span>Required:<span class="tag">&lt;/strong&gt;</span> Content goes here.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/td&gt;</span>
+  <span class="tag">&lt;/tr&gt;</span>
+<span class="tag">&lt;/table&gt;</span></pre>
+
+    <h3>21.5 Callout Type Reference - Filename, Border, Background</h3>
+    <p>Use this table when applying the template above. The Filename column drops into the <code>src</code> URL after the base path. The Border and Background columns drop into the inline <code>style</code>. Do not use any combination not shown here.</p>
+    <pre><span class="comment">BASE URL (every callout icon):</span>
+https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
+
+<span class="comment">CALLOUT TYPE -> FILENAME / BORDER / BACKGROUND / ALT</span>
+Required  ->  Callout_Required.svg  /  #1B5E20  /  #E8F5E9  /  alt="Required"
+Note      ->  Callout_Note.svg      /  #0D47A1  /  #E3F2FD  /  alt="Note"
+Warning   ->  Callout_Warning.svg   /  #F57F17  /  #FFF8E1  /  alt="Warning"
+Critical  ->  Callout_Avoid.svg     /  #C62828  /  #FBE9E7  /  alt="Critical"
+Tip       ->  Callout_Tip.svg       /  #4A148C  /  #F3E5F5  /  alt="Tip"
+FAQ       ->  Callout_FAQ.svg       /  #AD1457  /  #FCE4EC  /  alt="FAQ"</pre>
+
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Why "Critical" uses Callout_Avoid.svg:</strong> The icon shape is a red x-circle that semantically reads as "stop" or "avoid." When the file was first committed to GitHub it was named <code>Callout_Avoid.svg</code>. Per the never-rename rule (Part XIX and Part XXIV), the filename stays as committed. Callout type is "Critical"; filename is <code>Callout_Avoid.svg</code>.</p>
+    </div>
+
+    <h3>21.6 Feedback Quality Icons - Three Levels</h3>
+    <p>The feedback quality comparison uses three icon types in column headers. These are not callout boxes - they appear as colored header cells in a data table. Use this table as a visual rubric when teaching students (or AI tools) how to write actionable feedback on peer mixes.</p>
+    <table class="fq-table">
+      <thead>
+        <tr>
+          <th class="fq-not-helpful">
+            <span class="fq-icon">
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Not_Helpful_white.svg" alt="Not Helpful" width="20" height="20">
+              Not Helpful
+            </span>
+          </th>
+          <th class="fq-helpful">
+            <span class="fq-icon">
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Helpful_dark.svg" alt="Helpful" width="20" height="20">
+              Helpful
+            </span>
+          </th>
+          <th class="fq-best">
+            <span class="fq-icon">
+              <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Best_white.svg" alt="Best" width="20" height="20">
+              Best
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="fq-cell-not-helpful">Vague, emotional, or impossible to act on. "Sounded weird to me."</td>
+          <td class="fq-cell-helpful">Specific enough to identify an issue. "The low end felt muddy."</td>
+          <td class="fq-cell-best">Specific, constructive, immediately actionable. "The kick at 2:14 is clipping the master bus. Pull it down 2 dB and re-bounce."</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>21.7 Feedback Quality - Color Specifications</h3>
+    <table>
+      <thead><tr><th>Level</th><th>Header Background</th><th>Row Background</th><th>Text Color</th><th>Icon Stroke</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Not Helpful</strong></td><td><code>#B71C1C</code></td><td><code>#FFEBEE</code></td><td><code>#B71C1C</code></td><td><code>#FFFFFF</code></td></tr>
+        <tr><td><strong>Helpful</strong></td><td><code>#F9A825</code></td><td><code>#FFFDE7</code></td><td><code>#212121</code></td><td><code>#212121</code></td></tr>
+        <tr><td><strong>Best</strong></td><td><code>#1B5E20</code></td><td><code>#E8F5E9</code></td><td><code>#212121</code></td><td><code>#FFFFFF</code></td></tr>
+      </tbody>
+    </table>
+
+    <div class="box box-warning">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Gold header contrast rule:</strong> The Helpful column uses a gold background <code>#F9A825</code> that requires dark text <code>#212121</code>, not white. White text on <code>#F9A825</code> produces only 2.9:1 contrast, which fails WCAG AA (minimum 4.5:1). The icon stroke color must also switch to <code>#212121</code> on gold backgrounds. Every other feedback quality column (Not Helpful <code>#B71C1C</code> and Best <code>#1B5E20</code>) passes with white text and white icon strokes.</p>
+    </div>
+  </section>
+
+  <!-- PART XXIII -->
+  <section class="part" id="part23">
+    <div class="part-header">
+      <h2>Part XXIII - Canvas Module and Page Naming (Option D)</h2>
+      <p class="part-desc">The permanent naming system for all Canvas modules and pages across every DAPR course. Apply automatically when generating any Canvas content.</p>
+    </div>
+
+    <div class="two-col">
+      <div class="col-card">
+        <div class="col-card-head" style="background:#1B5E20;">Module Title Pattern</div>
+        <div class="col-card-body">
+          <p style="font-size:11px; color:#555; margin-bottom:6px;"><code>Topic: M# - Descriptive Title (Week ##)</code></p>
+          <code>Sound: M2 - Sound and Hearing (Week 02)</code>
+          <code>Sound: M3 - The Decibel (Week 03)</code>
+          <code>Networking: M3 - Network Configuration (Week 08)</code>
+          <p style="margin-top:8px; font-size:11px; color:#555;">At rollover: update only the week parenthetical if pacing changed. Never rename pages.</p>
+        </div>
+      </div>
+      <div class="col-card">
+        <div class="col-card-head" style="background:#0D47A1;">Page Name Pattern</div>
+        <div class="col-card-body">
+          <p style="font-size:11px; color:#555; margin-bottom:6px;"><code>Topic: Descriptive Page Title</code> (no module number, no week, no part number)</p>
+          <code>Sound: Overview</code>
+          <code>Sound: The Decibel</code>
+          <code>Sound: Sound Wave Properties</code>
+          <code>Networking: Address Resolution Protocol</code>
+          <code>EQ: EQ Lab</code>
+        </div>
+      </div>
+    </div>
+
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Why pages have no module number or week reference:</strong> If a page name included a module number or week, that page would need renaming every time its module was reordered or rescheduled. Across hundreds of pages and 12 courses over multiple semesters, that maintenance cost is unacceptable. The topic prefix alone sorts and groups pages correctly in every Canvas view.</p>
+    </div>
+
+    <h3>Student File Naming Under Option D</h3>
+    <p>The Canvas page name becomes Segment 2 of the student filename. Replace any colon with space-hyphen-space ( - ).</p>
+    <pre>Smith, John - EQ - EQ Lab - Dont Think Twice.wav
+Smith, John - Sound - The Decibel.pdf
+Smith, John - Networking - Address Resolution Protocol.pdf</pre>
+  </section>
+
+  <!-- PART XXIV -->
+  <section class="part" id="part24">
+    <div class="part-header">
+      <h2>Part XXIV - DAPR Canvas Icon Reference Library</h2>
+      <p class="part-desc">Every approved icon for use in DAPR Canvas pages. All icons are hosted on GitHub and referenced via raw URL. Inline SVG is used for callout boxes. Img tags are used for action and submission icons appearing inline in page content.</p>
+    </div>
+
+    <div class="box box-required">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1B5E20" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+      <p><strong>Required:</strong> Never hotlink to a GitHub page URL (github.com). Always use the raw URL (raw.githubusercontent.com). Only the raw URL serves the actual file. Verify every URL in a browser before pasting into a Canvas page.</p>
+    </div>
+
+    <h3>24.1 URL Structure - Local File vs. GitHub Raw URL</h3>
+    <table>
+      <thead><tr><th>Context</th><th>Format</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Local file path</strong><br><span style="font-size:11px; color:#555;">(GitHub Desktop / your machine)</span></td>
+          <td><code>Classes/All/DAPR_Canvas_Icon_Reference/&lt;Filename&gt;.svg</code></td>
+          <td><code>Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg</code></td>
+        </tr>
+        <tr>
+          <td><strong>GitHub raw URL</strong><br><span style="font-size:11px; color:#555;">(paste into Canvas img src)</span></td>
+          <td><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/&lt;Filename&gt;.svg</code></td>
+          <td><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg</code></td>
+        </tr>
+        <tr>
+          <td><strong>GitHub page URL</strong><br><span style="font-size:11px; color:#555; font-weight:bold; color:#C62828;">Never use this in Canvas</span></td>
+          <td><code>https://github.com/uvu-dapr/Canvas/blob/main/Classes/All/DAPR_Canvas_Icon_Reference/&lt;Filename&gt;.svg</code></td>
+          <td>Returns an HTML page, not the file. Canvas will show a broken image.</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>24.2 How to Embed Any Icon in a Canvas Page</h3>
+    <p>Every icon in this library - callout icons, feedback quality icons, submission type icons, and action icons - is embedded the same way: as an <code>&lt;img&gt;</code> tag with the raw GitHub URL as the <code>src</code>. Inline SVG is never used in Canvas page HTML.</p>
+    <pre><span class="tag">&lt;img</span>
+  <span class="attr">src</span>=<span class="val">"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg"</span>
+  <span class="attr">alt</span>=<span class="val">"Checklist"</span>
+  <span class="attr">width</span>=<span class="val">"24"</span>
+  <span class="attr">height</span>=<span class="val">"24"</span>
+  <span class="attr">style</span>=<span class="val">"vertical-align:middle; margin-right:6px;"</span><span class="tag">&gt;</span></pre>
+    <p>For callout boxes (Required, Note, Warning, Critical, Tip, FAQ), the same <code>&lt;img&gt;</code> tag is placed inside a left-icon table cell. See Part XXI section 21.4 for the complete callout box template, and Part XXI section 21.5 for the filename and color combination of each callout type.</p>
+
+    <div class="box box-warning">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#F57F17" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+      <p><strong>Never rename or move an icon file.</strong> Canvas pages contain hardcoded raw URLs. Renaming a file breaks every page that references it with no warning or error. To replace an icon, upload the new version using the exact same filename. This is the same rule as Part XIX for content images.</p>
+    </div>
+
+    <h3>24.3 Callout Box Icons</h3>
+    <p>These six icons are the icon source for every callout box in Part XXI. Each one is referenced via an <code>&lt;img&gt;</code> tag pointing to the GitHub raw URL. The full callout box HTML structure (the table, padding, border, and background) lives in Part XXI section 21.4. This table maps each callout type to its filename and color values.</p>
+    <table>
+      <thead><tr><th>Preview (live from GitHub)</th><th>Filename</th><th>Border Stroke</th><th>Background</th><th>Use</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#E8F5E9;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Callout_Required.svg</code></td>
+          <td><span class="swatch" style="background:#1B5E20;"></span><code>#1B5E20</code></td>
+          <td><code>#E8F5E9</code></td>
+          <td>Mandatory rules, program standards</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#E3F2FD;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Callout_Note.svg</code></td>
+          <td><span class="swatch" style="background:#0D47A1;"></span><code>#0D47A1</code></td>
+          <td><code>#E3F2FD</code></td>
+          <td>Clarifications, reminders, helpful context</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#FFF8E1;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Callout_Warning.svg</code></td>
+          <td><span class="swatch" style="background:#F57F17;"></span><code>#F57F17</code></td>
+          <td><code>#FFF8E1</code></td>
+          <td>Common mistakes, known gotchas</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#FBE9E7;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Callout_Avoid.svg</code><br><span style="font-size:10px; color:#555;">(used for "Critical" callouts)</span></td>
+          <td><span class="swatch" style="background:#C62828;"></span><code>#C62828</code></td>
+          <td><code>#FBE9E7</code></td>
+          <td>Hard rules, absolute prohibitions (Critical / Stop)</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#F3E5F5;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Callout_Tip.svg</code></td>
+          <td><span class="swatch" style="background:#4A148C;"></span><code>#4A148C</code></td>
+          <td><code>#F3E5F5</code></td>
+          <td>Helpful suggestions, shortcuts, optional improvements</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#FCE4EC;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_FAQ.svg" alt="FAQ" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Callout_FAQ.svg</code></td>
+          <td><span class="swatch" style="background:#AD1457;"></span><code>#AD1457</code></td>
+          <td><code>#FCE4EC</code></td>
+          <td>Frequently asked questions, anticipated student questions</td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11.5px; color:#555; margin-top:4px;">Full base URL prepended to every filename: <code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/</code></p>
+
+    <h3>24.4 Feedback Quality Icons</h3>
+    <p>Used in the Not Helpful / Helpful / Best comparison table. Each level has two versions: a colored version for use on light row backgrounds and a variant matched to the dark table header. Previews below load directly from GitHub. See Part XXI section 21.6 for the full rendered table.</p>
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Canvas accessibility checker and img tags:</strong> When icons are embedded as <code>&lt;img&gt;</code> tags, the Canvas accessibility checker cannot automatically detect contrast between the icon and its background. The checker only scans text contrast. The Feedback_Helpful_dark.svg file still exists because a dark icon on a gold background is visually correct for humans - the checker just will not flag it if you accidentally use the wrong version.</p>
+    </div>
+    <table>
+      <thead><tr><th>Preview</th><th>Filename</th><th>GitHub Raw URL</th><th>Used On</th><th>Notes</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#FFEBEE;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Not_Helpful.svg" alt="Not Helpful" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Feedback_Not_Helpful.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Not_Helpful.svg</code></td>
+          <td>Light red row background <code>#FFEBEE</code></td>
+          <td>Colored version - body rows only</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#B71C1C;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Not_Helpful_white.svg" alt="Not Helpful (white)" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Feedback_Not_Helpful_white.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Not_Helpful_white.svg</code></td>
+          <td>Dark red column header <code>#B71C1C</code></td>
+          <td>White stroke - column header only</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#FFFDE7;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Helpful.svg" alt="Helpful" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Feedback_Helpful.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Helpful.svg</code></td>
+          <td>Light gold row background <code>#FFFDE7</code></td>
+          <td>Gold stroke - body rows only</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#F9A825;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Helpful_dark.svg" alt="Helpful (dark)" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Feedback_Helpful_dark.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Helpful_dark.svg</code></td>
+          <td>Gold column header <code>#F9A825</code></td>
+          <td>Dark stroke <code>#212121</code> - gold header only. Same icon path as Feedback_Helpful.svg.</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#E8F5E9;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Best.svg" alt="Best" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Feedback_Best.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Best.svg</code></td>
+          <td>Light green row background <code>#E8F5E9</code></td>
+          <td>Green stroke - body rows only</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px; background:#1B5E20;">
+            <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Best_white.svg" alt="Best (white)" width="32" height="32" style="display:block; margin:0 auto;">
+          </td>
+          <td><code>Feedback_Best_white.svg</code></td>
+          <td style="font-size:11px; word-break:break-all;"><code>https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Feedback_Best_white.svg</code></td>
+          <td>Dark green column header <code>#1B5E20</code></td>
+          <td>White stroke - column header only</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>24.5 Submission Type Icons</h3>
+    <p>Use these icons inline next to submission requirement text on Canvas assignment pages. Each icon identifies the file type the student must submit or that the instructor is providing. Icons appear in content via <code>&lt;img&gt;</code> tags pointing to the raw GitHub URL.</p>
+    <table>
+      <thead><tr><th>Preview</th><th>Filename</th><th>Label</th><th>When to Use</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Upload.svg" alt="Upload" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_Upload.svg</code></td>
+          <td>Submit / Upload</td>
+          <td>Student uploads any file to Canvas</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Download.svg" alt="Download" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_Download.svg</code></td>
+          <td>Download</td>
+          <td>Instructor is providing a file for students to download</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Audio.svg" alt="Audio File" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_Audio.svg</code></td>
+          <td>Audio File</td>
+          <td>WAV, MP3, AIFF, or any audio file submission</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_PDF.svg" alt="PDF or Document" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_PDF.svg</code></td>
+          <td>PDF / Document</td>
+          <td>PDF, DOCX, or TXT file submission</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_PTX.svg" alt="Pro Tools Session" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_PTX.svg</code></td>
+          <td>Pro Tools Session</td>
+          <td>.ptx session file specifically. Use instead of Submit_Session when the assignment requires only the .ptx file without a full zip.</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Session.svg" alt="Session Folder or ZIP" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_Session.svg</code></td>
+          <td>Session / ZIP</td>
+          <td>Full Pro Tools session folder zipped for submission (.ptx + Audio Files + Fade Files)</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_ZIP.svg" alt="ZIP Archive" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_ZIP.svg</code></td>
+          <td>ZIP Archive</td>
+          <td>A .zip archive that is not a Pro Tools session - multi-file project bundles, exported stems, or any non-session zip.</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Video.svg" alt="Video File" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Submit_Video.svg</code></td>
+          <td>Video File</td>
+          <td>MP4, MOV, or any exported video file submission</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>24.6 Action Icons</h3>
+    <p>Used inline in assignment instructions to indicate what type of action a student is taking or what kind of resource is being provided. Appears before or alongside instruction text, not inside callout boxes.</p>
+    <table>
+      <thead><tr><th>Preview</th><th>Filename</th><th>Label</th><th>When to Use</th></tr></thead>
+      <tbody>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg" alt="Checklist" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Action_Checklist.svg</code></td>
+          <td>Checklist</td>
+          <td>Pre-submission checklist items or step-by-step verification tasks</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Deadline.svg" alt="Deadline" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Action_Deadline.svg</code></td>
+          <td>Deadline</td>
+          <td>Due dates, submission windows, or time-sensitive requirements</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Email.svg" alt="Email" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Action_Email.svg</code></td>
+          <td>Email</td>
+          <td>Email the instructor, contact information blocks, or message-based actions</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_External_Link.svg" alt="External Link" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Action_External_Link.svg</code></td>
+          <td>External Link</td>
+          <td>Links that open outside Canvas - manufacturer sites, reference docs, external tools</td>
+        </tr>
+        <tr>
+          <td style="text-align:center; padding:8px;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Peer.svg" alt="Peer Review" width="36" height="36" style="display:block; margin:0 auto;"></td>
+          <td><code>Action_Peer.svg</code></td>
+          <td>Peer Review</td>
+          <td>Peer review assignments, collaborative listening sessions, or student-to-student feedback tasks</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>24.7 Complete File List with Raw URLs</h3>
+    <p>Copy the exact URL from this table into any Canvas <code>&lt;img src=""&gt;</code> tag. All files live in the same folder. Every icon below is used the same way - via an <code>&lt;img&gt;</code> tag with the raw GitHub URL as the <code>src</code>. Inline SVG is not used in Canvas page HTML.</p>
+    <pre>BASE: https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/
+
+<span class="comment">-- CALLOUT (img tag inside callout box table - see Part XXI section 21.4) --</span>
+Callout_Required.svg
+Callout_Note.svg
+Callout_Warning.svg
+Callout_Avoid.svg
+Callout_Tip.svg
+Callout_FAQ.svg
+
+<span class="comment">-- FEEDBACK QUALITY (img tag in feedback comparison tables) --</span>
+Feedback_Not_Helpful.svg          (red stroke #B71C1C - body rows)
+Feedback_Not_Helpful_white.svg    (white stroke - red header only)
+Feedback_Helpful.svg              (gold stroke #F9A825 - body rows)
+Feedback_Helpful_dark.svg         (dark stroke #212121 - gold header only)
+Feedback_Best.svg                 (green stroke #1B5E20 - body rows)
+Feedback_Best_white.svg           (white stroke - green header only)
+
+<span class="comment">-- SUBMISSION TYPE (img tag inline in assignment pages) --</span>
+Submit_Upload.svg
+Submit_Download.svg
+Submit_Audio.svg
+Submit_PDF.svg
+Submit_PTX.svg
+Submit_Session.svg
+Submit_ZIP.svg
+Submit_Video.svg
+
+<span class="comment">-- ACTION (img tag inline in assignment instructions) --</span>
+Action_Checklist.svg
+Action_Deadline.svg
+Action_Email.svg
+Action_External_Link.svg
+Action_Peer.svg</pre>
+
+    <div class="box box-note">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#0D47A1" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" role="img" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+      <p><strong>Adding a new icon to the library:</strong> Place the SVG file in <code>Classes/All/DAPR_Canvas_Icon_Reference/</code> in GitHub Desktop, commit, and push. The raw URL is immediately live. Verify the URL in a browser before adding it to any Canvas page. Add the icon to this table so the library stays current.</p>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// Sidebar active state tracking
+const sections = document.querySelectorAll('[id]');
+const navLinks = document.querySelectorAll('#sidebar nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === '#' + entry.target.id) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { rootMargin: '-20% 0px -70% 0px' });
+
+sections.forEach(s => observer.observe(s));
+
+// Search filtering
+document.getElementById('search').addEventListener('input', function() {
+  const q = this.value.toLowerCase();
+  navLinks.forEach(link => {
+    const text = link.textContent.toLowerCase();
+    link.style.display = (!q || text.includes(q)) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.nav-group-label').forEach(label => {
+    label.style.display = 'block';
+  });
+});
+</script>
+
+</body>
+</html>
