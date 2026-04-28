@@ -124,17 +124,18 @@ When a section has many checklist rows, do NOT repeat the same icon on every row
 - Feedback_Best.svg — green stroke #1B5E20, light green rows
 - Feedback_Best_white.svg — white stroke, dark green header #1B5E20 only
 
-**Submission (8):**
-- Submit_Upload — generic file upload AND the locked icon for the "What to Submit" banner header (66×66 in the banner; 44×44 elsewhere). See §6a.
-- Submit_Download — instructor-provided download (body of page only, never inside What to Submit)
-- Submit_Audio — WAV/MP3/AIFF (also used for media-recording bounce uploads). Row color: purple #6A1B9A / #F3E5F5
-- Submit_PDF — PDF/DOCX/TXT. Row color: olive #7D7230 / #FAFAEC
-- Submit_PTX — .ptx file only (no zip). Row color: cyan #00838F / #E0F7FA
-- Submit_Session — full PT session zipped (.ptx + Audio Files + Fade Files). Row color: cyan #00838F / #E0F7FA
-- Submit_ZIP — non-session zip (stems, bundles). Row color: cyan #00838F / #E0F7FA
-- Submit_Video — MP4/MOV. Row color: red #C62828 / #FBE9E7
+**Submission (7):** Students UPLOAD files. There is no "submit a download" - downloads are an instructor-provided body-of-page item, not a submission. The Download icon lives under Action.
+- Submit_Upload — DUAL-PURPOSE icon. (1) The locked banner header for the "What to Submit" section at 66×66. (2) A 44×44 generic upload row for unusual file types not covered by the other icons (.pages, .xml, .sib, .als, .logicx, screenshots, plain text, etc.). Row color: forest green #2E6B3E / #EBF5EE
+- Submit_Session — full PT session zipped (.ptx + Audio Files + Fade Files). Row color: cyan/teal #0097A7 / #E0F7FA
+- Submit_ZIP — non-session zip (stems, bundles, exports). Row color: grey-blue #607D8B / #ECEFF1
+- Submit_Audio — WAV/MP3/AIFF (also used for media-recording bounce uploads). Row color: purple/violet #6A3FA0 / #F3EEFA
+- Submit_PTX — .ptx file only (no zip), used when audio is provided by the instructor. Row color: dark indigo #4527A0 / #EDE7F6
+- Submit_PDF — PDF documentation. Always export from Word as PDF; never submit .docx. Row color: olive/khaki #7D7230 / #FAFAEC
+- Submit_Video — MP4/MOV walkthroughs and screen recordings. Row color: orange #C05C00 / #FFF3E0
 
-**Action (5):** Action_Checklist, Action_Deadline, Action_Email, Action_External_Link, Action_Peer
+**Action (6):** Action_Checklist, Action_Deadline, Action_Download, Action_Email, Action_External_Link, Action_Peer
+
+`Action_Download.svg` marks files the instructor is providing for the student to download (starter sessions, stems, templates, reference tracks). It appears in the body of an assignment page next to a download link, NOT in "What to Submit." Border color when used in a row card: blue #2979C0 / #EEF5FC. **There is no Submit_Download icon.** Anything coming TO the student is an Action; anything going FROM the student is a Submission.
 
 ### Feedback Quality Table — full color spec
 
@@ -297,35 +298,41 @@ Each upload item is a `<div>` indented 32px, with a 2px border and a tinted back
 
 | Submission type | Icon | Border | Background |
 |---|---|---|---|
-| Zipped Pro Tools session | Submit_Session.svg | #00838F (cyan) | #E0F7FA |
-| Stereo mixdown/bounce (WAV) | Submit_Audio.svg | #6A1B9A (purple) | #F3E5F5 |
-| PDF documentation | Submit_PDF.svg | #7D7230 (olive) | #FAFAEC |
-| Generic file upload | Submit_Upload.svg | #1B5E20 (green) | #E8F5E9 |
-| Instructor-provided download | Submit_Download.svg | (not in What to Submit - body of page only) | — |
-| .ptx only (no zip) | Submit_PTX.svg | #00838F (cyan) | #E0F7FA |
-| Non-session zip | Submit_ZIP.svg | #00838F (cyan) | #E0F7FA |
-| Video file | Submit_Video.svg | #C62828 (red) | #FBE9E7 |
+| Zipped Pro Tools session | Submit_Session.svg | #0097A7 (cyan/teal) | #E0F7FA |
+| Stereo mixdown/bounce (WAV) | Submit_Audio.svg | #6A3FA0 (purple/violet) | #F3EEFA |
+| PDF documentation | Submit_PDF.svg | #7D7230 (olive/khaki) | #FAFAEC |
+| .ptx only (no zip) | Submit_PTX.svg | #4527A0 (dark indigo) | #EDE7F6 |
+| Non-session zip (stems, bundles) | Submit_ZIP.svg | #607D8B (grey-blue) | #ECEFF1 |
+| Video file | Submit_Video.svg | #C05C00 (orange) | #FFF3E0 |
+| Generic file upload (unusual file types) | Submit_Upload.svg | #2E6B3E (forest green) | #EBF5EE |
+| Instructor download | **Action_Download.svg** | (NOT a submission - body of page only) | — |
 
 The color of each row reflects the color family of its icon so students can scan the bottom of the page and visually match icon shape + tint to the file they are uploading. Every assignment in the program uses the same row colors for the same file types.
+
+**Submit_Upload's two roles:**
+- **66×66 banner header** for "What to Submit" - the visual signal that the deliverables list begins
+- **44×44 generic upload row** for files not covered by the specific Submit_* icons - .pages, .xml, .sib, .als, .logicx, screenshots, plain text, etc. The row uses the forest green spec from the table above.
+
+**There is no Submit_Download icon.** If the assignment provides a file for the student to download (starter session, stems, reference track, template), that goes in the BODY of the page using **Action_Download.svg**, not in "What to Submit." Anything coming TO the student is an Action; anything going FROM the student is a Submission.
 
 #### Reference implementation (canonical)
 
 ```html
-<!-- Session zip (cyan) -->
-<div style="margin:10px 0 10px 32px; border:2px solid #00838F; border-radius:6px; padding:10px 14px; background-color:#E0F7FA;">
+<!-- Session zip (cyan/teal) -->
+<div style="margin:10px 0 10px 32px; border:2px solid #0097A7; border-radius:6px; padding:10px 14px; background-color:#E0F7FA;">
   <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Session.svg" alt="Session zip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
   <strong style="vertical-align:middle;">Zipped Pro Tools session</strong>
   <span style="vertical-align:middle; color:#616161;"> - <code>Smith, John - EQ - EQ Lab.zip</code></span>
 </div>
 
-<!-- WAV mixdown (purple) -->
-<div style="margin:10px 0 10px 32px; border:2px solid #6A1B9A; border-radius:6px; padding:10px 14px; background-color:#F3E5F5;">
+<!-- WAV mixdown (purple/violet) -->
+<div style="margin:10px 0 10px 32px; border:2px solid #6A3FA0; border-radius:6px; padding:10px 14px; background-color:#F3EEFA;">
   <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_Audio.svg" alt="WAV mixdown/bounce" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
   <strong style="vertical-align:middle;">Stereo mixdown/bounce (WAV)</strong>
   <span style="vertical-align:middle; color:#616161;"> - <code>Smith, John - EQ - EQ Lab.wav</code> (upload as media recording)</span>
 </div>
 
-<!-- PDF (olive) -->
+<!-- PDF (olive/khaki) -->
 <div style="margin:10px 0 10px 32px; border:2px solid #7D7230; border-radius:6px; padding:10px 14px; background-color:#FAFAEC;">
   <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Submit_PDF.svg" alt="PDF documentation" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
   <strong style="vertical-align:middle;">PDF documentation</strong>
@@ -582,11 +589,12 @@ Don't import Automatic Missing Policy during rollovers — use "Don't Import Pol
 - Em dash or `--` → ` - `
 - Icons too small (20×20) → use 44×44 for headers and checklist rows
 - Same icon repeated on every checklist row → use one icon in the section header instead
+- Using `Submit_Download.svg` anywhere → that icon does not exist in the program. Downloads going TO the student use `Action_Download.svg` in the body of the page. The "Submit_*" prefix is reserved for files going FROM the student (uploads).
 - Naming convention or "test your zip" callouts mixed throughout the page → put them in the "Before You Submit" prep section, NOT inside "What to Submit"
 - "What to Submit" contains naming-convention or bounce-prep callouts → these belong in "Before You Submit". "What to Submit" is upload action items only.
 - "What to Submit" section in middle of page → must be LAST, separated by 3px green `<hr>` flush against a solid green banner
 - "What to Submit" header uses Action_Deadline or some other icon → it must be Submit_Upload.svg at 66x66 inside a green banner with white text. Always.
-- "What to Submit" rows are uncolored or all the same color → each row's border + background tint matches its icon: cyan for Submit_Session/PTX/ZIP, purple for Submit_Audio, olive for Submit_PDF, red for Submit_Video, green for Submit_Upload. See §6a row color table.
+- "What to Submit" rows are uncolored or all the same color → each row's border + background tint matches its icon: cyan/teal for Submit_Session, grey-blue for Submit_ZIP, purple/violet for Submit_Audio, dark indigo for Submit_PTX, olive for Submit_PDF, orange for Submit_Video, forest green for Submit_Upload (generic). See §6a row color table.
 - Gap between the green `<hr>` and the green banner header → both need `margin:0` on the touching edge so the hr sits flush against the banner top.
 - "Before You Submit" missing one of its three required sub-blocks → it always has File Naming Convention (Required callout), Test your zip (Warning callout), and Pre-submit checklist (Action_Checklist header + ul). All three. In that order.
 - Extra paragraph or "thank you" line after the last submission row → the final colored row is the last thing on the page.
