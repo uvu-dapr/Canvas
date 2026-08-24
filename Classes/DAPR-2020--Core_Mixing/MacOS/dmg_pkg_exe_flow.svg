@@ -1,0 +1,45 @@
+<svg viewBox="0 0 760 300" xmlns="http://www.w3.org/2000/svg" font-family="Arial, Helvetica, sans-serif">
+  <rect width="760" height="300" fill="#ffffff"/>
+
+  <text x="220" y="30" text-anchor="middle" fill="#5d4037" font-size="16" font-weight="bold">Mac</text>
+  <text x="620" y="30" text-anchor="middle" fill="#5d4037" font-size="16" font-weight="bold">Windows</text>
+
+  <rect x="40" y="50" width="150" height="46" rx="6" fill="#e3f2fd" stroke="#0d47a1" stroke-width="2"/>
+  <text x="115" y="78" text-anchor="middle" fill="#212121" font-size="14">.dmg file</text>
+
+  <line x1="190" y1="73" x2="230" y2="73" stroke="#616161" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="230" y="50" width="180" height="46" rx="6" fill="#e3f2fd" stroke="#0d47a1" stroke-width="2"/>
+  <text x="320" y="70" text-anchor="middle" fill="#212121" font-size="12">Mounts a virtual disk</text>
+  <text x="320" y="86" text-anchor="middle" fill="#212121" font-size="12">(double-click)</text>
+
+  <line x1="410" y1="73" x2="450" y2="73" stroke="#616161" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="450" y="50" width="180" height="46" rx="6" fill="#e8f5e9" stroke="#1b5e20" stroke-width="2"/>
+  <text x="540" y="78" text-anchor="middle" fill="#212121" font-size="13">Drag to Applications</text>
+
+  <rect x="40" y="140" width="150" height="46" rx="6" fill="#efebe9" stroke="#5d4037" stroke-width="2"/>
+  <text x="115" y="168" text-anchor="middle" fill="#212121" font-size="14">.pkg installer</text>
+
+  <line x1="190" y1="163" x2="230" y2="163" stroke="#616161" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="230" y="140" width="180" height="46" rx="6" fill="#efebe9" stroke="#5d4037" stroke-width="2"/>
+  <text x="320" y="160" text-anchor="middle" fill="#212121" font-size="12">Runs a scripted install</text>
+  <text x="320" y="176" text-anchor="middle" fill="#212121" font-size="12">(asks for admin password)</text>
+
+  <line x1="410" y1="163" x2="450" y2="163" stroke="#616161" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="450" y="140" width="180" height="46" rx="6" fill="#fbe9e7" stroke="#c62828" stroke-width="2"/>
+  <text x="540" y="160" text-anchor="middle" fill="#212121" font-size="12">Writes to protected</text>
+  <text x="540" y="176" text-anchor="middle" fill="#212121" font-size="12">system folders</text>
+
+  <rect x="500" y="230" width="150" height="46" rx="6" fill="#f3e5f5" stroke="#4a148c" stroke-width="2"/>
+  <text x="575" y="258" text-anchor="middle" fill="#212121" font-size="14">.exe file</text>
+
+  <line x1="500" y1="253" x2="460" y2="253" stroke="#616161" stroke-width="2" marker-end="url(#a1)"/>
+  <rect x="280" y="230" width="180" height="46" rx="6" fill="#f3e5f5" stroke="#4a148c" stroke-width="2"/>
+  <text x="370" y="250" text-anchor="middle" fill="#212121" font-size="12">Install wizard writes to</text>
+  <text x="370" y="266" text-anchor="middle" fill="#212121" font-size="12">Registry + Program Files</text>
+
+  <defs>
+    <marker id="a1" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#616161"/>
+    </marker>
+  </defs>
+</svg>
