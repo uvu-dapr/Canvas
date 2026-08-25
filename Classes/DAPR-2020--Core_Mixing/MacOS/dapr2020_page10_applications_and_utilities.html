@@ -1,0 +1,62 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Applications and Utilities</h2>
+  <p>Most Mac software installs itself with a single drag, and uninstalls with a single delete - but that simplicity hides a few files that get left behind every time. Knowing where those files go, and why, explains a whole category of utility apps built specifically to clean them up.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Why Most Mac Apps Don't Need an Installer</h2>
+  <p>A typical Mac app is a single, self-contained .app bundle - all of its code and resources live inside that one bundle. Copying it into the Applications folder is the entire installation. There is no separate install program to run, and no registry to write to, because there is no registry on macOS at all.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">What Actually Happens When You Delete an App</h2>
+  <p>Dragging an app to the Trash removes only the .app bundle itself. It does not remove:</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Library/Preferences/*.plist</strong>
+    <span style="color:#616161;"> - the app's saved settings file.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Library/Application Support/[AppName]</strong>
+    <span style="color:#616161;"> - the app's presets, templates, caches, and license or activation data.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Launch Agents</strong>
+    <span style="color:#616161;"> - any background helper the app installed to start itself automatically at login.</span>
+  </div>
+  <p>Over months or years, these leftover files accumulate across every app that was ever tried and later deleted - quietly consuming space, and occasionally causing conflicts if the same app is reinstalled later and finds its old settings still sitting there.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Why Apps Like Hazel Exist</h2>
+  <p>Hazel, and similar utilities such as AppCleaner, watch for the moment you drag an app to the Trash and automatically search the common Library locations for that same app's leftover files, offering to remove everything at once.</p>
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">This is not a Windows-style uninstaller.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Hazel is not running an uninstall script the way Windows' Add or Remove Programs does - there is no registry to clean on a Mac. It is specifically hunting down the scattered Library files that a simple drag-to-Trash leaves behind.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/app_leftover_files.svg" alt="Diagram showing an app being dragged to the Trash while its preferences file and Application Support folder remain behind" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Diagram: what a simple drag-to-Trash actually removes, and what it leaves behind.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">A Tour of the Utilities Folder</h2>
+  <p>Applications > Utilities holds the built-in tools that manage the Mac itself, rather than doing user-facing work:</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/utilities_folder.png" alt="Finder window showing the contents of Applications/Utilities, including Console, Disk Utility, Terminal, and other management tools" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">The Utilities folder on a real Mac - dozens of small, focused tools live here alongside the ones covered in this unit.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Activity Monitor</strong>
+    <span style="color:#616161;"> - shows every running process and how much CPU, memory, energy, disk, and network activity each one is using.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Console</strong>
+    <span style="color:#616161;"> - reads the system log, including crash reports and diagnostic messages.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Disk Utility</strong>
+    <span style="color:#616161;"> - erases, formats, partitions, and repairs drives.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Audio MIDI Setup</strong>
+    <span style="color:#616161;"> - configures connected audio interfaces and shows a map of every MIDI device macOS sees.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Terminal</strong>
+    <span style="color:#616161;"> - a text-based, command-line way to interact with macOS directly.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Migration Assistant</strong>
+    <span style="color:#616161;"> - transfers accounts, apps, and files from an old Mac or a Time Machine backup to a new one.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Keychain Access</strong>
+    <span style="color:#616161;"> - stores and manages saved passwords, certificates, and login credentials.</span>
+  </div>
+</div>
