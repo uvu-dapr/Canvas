@@ -1,53 +1,58 @@
 <div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
   <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Terminal Basics</h2>
-  <p>Terminal is a text-based way to talk directly to macOS, typing commands instead of clicking icons. This unit only asks for a handful of commands, but understanding what those few actually do turns Terminal from an intimidating black box into a genuinely useful tool - and makes commands like launchctl, covered on the Login Items, Launch Agents, and Launch Daemons page, make real sense.</p>
+  <p>Terminal is a text-based way to talk directly to macOS, typing commands instead of clicking icons. A handful of commands turn it from an intimidating black box into a genuinely useful tool for an audio engineer - one that can tell you more about a WAV file in five seconds than digging through an app's Get Info window ever could.</p>
   <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Where Terminal Lives</h2>
-  <p>Terminal.app sits inside Applications > Utilities, alongside Console, Disk Utility, and Audio MIDI Setup - the folder Apple reserves for the built-in tools that manage the Mac itself rather than doing user-facing creative work. Opening it drops you at a prompt showing your username, your Mac's name, and a blinking cursor waiting for a command.</p>
-  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Five Commands Worth Knowing</h2>
+  <p>Terminal.app sits inside Applications > Utilities, alongside Console, Disk Utility, and Audio MIDI Setup - the folder Apple reserves for the built-in tools that manage the Mac itself. Opening it drops you at a prompt showing your username, your Mac's name, and a blinking cursor waiting for a command.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Terminal Commands Worth Trying</h2>
+  <p>Each of these does something real and immediately visible - copy any of them in, try it, and see what happens.</p>
   <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
-    <strong style="font-family:'Courier New', Courier, monospace;">pwd</strong>
-    <span style="color:#616161;"> - print working directory - shows the full path of the folder you are currently in.</span>
+    <strong style="font-family:'Courier New', Courier, monospace;">open .</strong>
+    <span style="color:#616161;"> - opens the current Terminal location as a real Finder window - the fastest bridge back from the command line to the graphical interface, and proof that a period on its own means "right here."</span>
   </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">afinfo</strong>
+    <span style="color:#616161;"> - prints the technical details of an audio file - sample rate, channel count, duration, bit depth, and format. Type afinfo followed by a space, then drag a WAV or AIFF file from Finder into the Terminal window and press Return.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">afplay</strong>
+    <span style="color:#616161;"> - plays an audio file straight through the Mac's speakers, no app required. Type afplay followed by a space, drag in an audio file, and press Return.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">system_profiler SPAudioDataType</strong>
+    <span style="color:#616161;"> - lists every audio device macOS currently recognizes. If an interface is missing from a DAW, this checks whether macOS itself can even see it - a real troubleshooting step, not just a demo.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">caffeinate</strong>
+    <span style="color:#616161;"> - keeps the Mac from sleeping for as long as it runs - useful during a long file transfer or bounce. Press Control-C to stop it.</span>
+  </div>
+  <div style="background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Start with afinfo.</strong>
+    <div style="margin-left:54px; margin-top:4px;">This is the command that makes the whole page click. Drag one of your own session's WAV files into a Terminal window after typing afinfo, and macOS hands back its exact sample rate, channel count, and format - proof that the operating system itself understands audio, underneath whatever DAW happens to be running.</div>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Drag Files Into Terminal</h2>
+  <p>This is probably the single most useful trick on this page. Typing out a full file path by hand is slow and easy to get wrong - instead, start typing a command, add a space, and drag the file itself from Finder directly into the Terminal window. macOS inserts the complete, correct path automatically, spaces and all.</p>
+  <p>Type afinfo, add a space, then drag in a file named My Mix.wav. Terminal fills in something like afinfo /Users/yourname/Desktop/My\ Mix.wav on its own - notice the backslash before the space, which is just how Terminal marks a space that is part of a filename rather than a break between words. There is no need to type any of that by hand; dragging the file does it correctly every time.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Just Enough Navigation</h2>
   <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
     <strong style="font-family:'Courier New', Courier, monospace;">ls</strong>
     <span style="color:#616161;"> - list - shows every file and folder inside the current directory.</span>
   </div>
   <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
     <strong style="font-family:'Courier New', Courier, monospace;">cd</strong>
-    <span style="color:#616161;"> - change directory - moves you into a different folder, by typing cd followed by a path.</span>
+    <span style="color:#616161;"> - change directory - moves into a different folder, typed as cd followed by a path.</span>
   </div>
   <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
     <strong style="font-family:'Courier New', Courier, monospace;">open .</strong>
-    <span style="color:#616161;"> - opens the current Terminal location as a Finder window - a fast bridge back from the command line to the graphical interface.</span>
-  </div>
-  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
-    <strong style="font-family:'Courier New', Courier, monospace;">whoami</strong>
-    <span style="color:#616161;"> - prints the username of whoever is currently logged in.</span>
+    <span style="color:#616161;"> - opens the current folder in Finder - already covered above, and worth knowing as a navigation command too.</span>
   </div>
   <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/terminal_pwd_ls_cd.png" alt="Terminal window showing pwd, ls, and cd Documents run in sequence with real output after each command" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
-  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">pwd confirming the home folder, ls listing everything inside it, and cd Documents moving into a subfolder - the prompt itself updates to show the new location.</p>
-  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Four Symbols That Mean Something Specific</h2>
-  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
-    <strong style="font-family:'Courier New', Courier, monospace;">.</strong>
-    <span style="color:#616161;"> - the current directory - the folder you are already in.</span>
-  </div>
-  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
-    <strong style="font-family:'Courier New', Courier, monospace;">..</strong>
-    <span style="color:#616161;"> - the parent directory - one level up from where you are.</span>
-  </div>
-  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
-    <strong style="font-family:'Courier New', Courier, monospace;">~</strong>
-    <span style="color:#616161;"> - your home folder, exactly the same shortcut covered on the File-System Structure and Paths page.</span>
-  </div>
-  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
-    <strong style="font-family:'Courier New', Courier, monospace;">/</strong>
-    <span style="color:#616161;"> - root, the very start of every absolute path - also covered on that same page.</span>
-  </div>
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">ls listing a folder's contents, and cd Documents moving into a subfolder - the prompt itself updates to show the new location.</p>
   <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Tab Completion</h2>
-  <p>Typing the first few letters of a file or folder name and pressing Tab completes the rest automatically, or shows every match if more than one name fits. This is not just a convenience - it also protects against a typo turning one command into an entirely different, unintended one.</p>
+  <p>Start typing a file or folder name and press Tab. Terminal completes the name automatically when it can, or shows every match if more than one name fits. This saves typing and helps prevent path errors.</p>
   <div style="background-color:#fbe9e7; border-left:4px solid #c62828; margin:16px 0; padding:12px 14px;">
     <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
     <strong style="vertical-align:middle;">Do not paste Terminal commands from the internet unless you understand what they do.</strong>
-    <div style="margin-left:54px; margin-top:4px;">Be especially cautious with any command that includes sudo - it runs with full administrator power and can affect the entire system, not just your own account. A command copied blindly from a forum post can do real, permanent damage. If you do not understand every word of a command, do not run it.</div>
+    <div style="margin-left:54px; margin-top:4px;">Terminal commands can make system-level changes very quickly. Be especially cautious with anything containing sudo, which gives a command full administrator privileges. The commands on this page are safe to experiment with - but do not assume every command found online carries the same low risk.</div>
   </div>
 </div>

@@ -6,12 +6,16 @@
 <style>
   body { font-family: Arial, Helvetica, sans-serif; max-width: 900px; margin: 0 auto; padding: 24px; color: #212121; background: #f5f5f5; }
   h1 { color: #5d4037; }
-  p.lead { color: #616161; margin-bottom: 28px; }
+  p.lead { color: #616161; margin-bottom: 20px; }
+  .top-warning { background: #fff8e1; border-left: 5px solid #f57f17; border-radius: 6px; padding: 14px 18px; margin-bottom: 28px; }
   .section-head { background-color: #5d4037; color: #ffffff; padding: 10px 16px; border-radius: 6px 6px 0 0; font-weight: bold; margin-top: 28px; }
   .section-body { background: #ffffff; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 6px 6px; }
-  .row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #eeeeee; }
+  .row { padding: 12px 16px; border-bottom: 1px solid #eeeeee; }
   .row:last-child { border-bottom: none; }
-  .title { font-size: 15px; }
+  .row-main { display: flex; align-items: center; justify-content: space-between; }
+  .title { font-size: 15px; font-family: 'Courier New', Courier, monospace; }
+  .collision-note { margin-top: 8px; font-size: 13px; color: #c62828; background: #fbe9e7; border-left: 3px solid #c62828; padding: 8px 10px; border-radius: 4px; }
+  .collision-note strong { color: #c62828; }
   button.copybtn {
     min-width: 88px;
     padding: 7px 14px;
@@ -22,15 +26,22 @@
     font-weight: bold;
     cursor: pointer;
     font-size: 13px;
+    flex-shrink: 0;
+    margin-left: 12px;
   }
   button.copybtn:hover { background: #efebe9; }
   button.copybtn.copied { background: #1b5e20; border-color: #1b5e20; color: #ffffff; }
+  .row.has-collision { background: #fff8f8; }
 </style>
 </head>
 <body>
 
 <h1>macOS Unit - One-Click Page Name Copy</h1>
-<p class="lead">Click Copy next to any title, then paste it straight into the Canvas page title field. No selecting text needed.</p>
+<p class="lead">Every title below carries the full "macOS: P# - " prefix, matching your MIDI course's pattern where every page under M1 repeats "MIDI: M1 -". Click Copy, paste straight into the Canvas title field.</p>
+
+<div class="top-warning">
+  <strong>Before creating anything: check your existing Pages list first.</strong> Six items below are confirmed already live in your course under an older name. For those, <strong>open the existing page and rename + replace its content</strong> - do not create a new page. Every other item is unconfirmed either way - search your Pages list before creating, just in case.
+</div>
 
 <div class="section-head">P1: Getting Around macOS</div>
 <div class="section-body" id="s1"></div>
@@ -47,48 +58,49 @@
 <div class="section-head">P5: Mac Skills for Audio Engineers</div>
 <div class="section-body" id="s5"></div>
 
-<div class="section-head">Final Project and Quiz</div>
+<div class="section-head">P6: Final Project and Quiz</div>
 <div class="section-body" id="s6"></div>
 
 <script>
+// Each item: [full new title, old title already live in Canvas (or null if unconfirmed)]
 const sections = {
   s1: [
-    "Getting Around Your Mac",
-    "Mac Interface and Application Behavior",
-    "Modifier Keys and Essential Shortcuts",
-    "Mouse and Trackpad Settings",
-    "Finder Deep Dive",
-    "Finder Smart Folders",
-    "Spotlight, Quick Look, and Screenshots"
+    ["macOS: P1: Getting Around Your Mac", null],
+    ["macOS: P1: Mac Interface and Application Behavior", null],
+    ["macOS: P1: Modifier Keys and Essential Shortcuts", null],
+    ["macOS: P1: Mouse and Trackpad Settings", "Mouse and Trackpad"],
+    ["macOS: P1: Finder Deep Dive", null],
+    ["macOS: P1: Finder Smart Folders", null],
+    ["macOS: P1: Spotlight, Quick Look, and Screenshots", null]
   ],
   s2: [
-    "Root of Your Mac",
-    "File Extensions and File Types",
-    "Files, Folders, Applications, Packages, and Aliases",
-    "Copying, Moving, and Archiving Files"
+    ["macOS: P2: File-System Structure and Paths", null],
+    ["macOS: P2: File Extensions and File Types", null],
+    ["macOS: P2: Files, Folders, Applications, Packages, and Aliases", null],
+    ["macOS: P2: Copying, Moving, and Archiving Files", null]
   ],
   s3: [
-    "Installing Software - DMG, APP, and PKG",
-    "Removing Applications and Leftovers",
-    "Launch Agents Vs Daemons",
-    "Terminal Basics",
-    "Privacy and Security"
+    ["macOS: P3: Installing Software - DMG, APP, and PKG", "DMG vs EXE"],
+    ["macOS: P3: Removing Applications and Leftovers", "Applications and Utilities"],
+    ["macOS: P3: Login Items, Launch Agents, and Launch Daemons", "Launch Agents Vs Daemons"],
+    ["macOS: P3: Terminal Basics", null],
+    ["macOS: P3: Privacy and Security", null]
   ],
   s4: [
-    "System Diagnostic Tools",
-    "Force Quit and Troubleshooting",
-    "RAM, Storage, and CPUs",
-    "Hardware, Software, and Firmware",
-    "External Drives, Volumes, and File Systems",
-    "iCloud, Cloud Files, and Backup"
+    ["macOS: P4: System Diagnostic Tools", null],
+    ["macOS: P4: Force Quit and Troubleshooting", null],
+    ["macOS: P4: RAM, Storage, and CPUs", null],
+    ["macOS: P4: Hardware, Software, and Firmware", null],
+    ["macOS: P4: External Drives, Volumes, and File Systems", "Disk Utility & File Systems"],
+    ["macOS: P4: iCloud, Cloud Files, and Backup", null]
   ],
   s5: [
-    "Audio MIDI Setup",
-    "Library vs. System - Pro Tools and Your Files"
+    ["macOS: P5: Audio MIDI Setup", null],
+    ["macOS: P5: Library vs. System - Pro Tools and Your Files", "Library Versus System"]
   ],
   s6: [
-    "macOS: Pt6 - Mac Navigation Deep Dive - Assignment",
-    "macOS: Pt6 - Mac Navigation Deep Dive - Quiz"
+    ["macOS: P6: Mac Navigation Deep Dive - Assignment", null],
+    ["macOS: P6: Mac Navigation Deep Dive - Quiz", null]
   ]
 };
 
@@ -123,21 +135,35 @@ function fallbackCopy(text, callback) {
 
 Object.keys(sections).forEach(function (sectionId) {
   const container = document.getElementById(sectionId);
-  sections[sectionId].forEach(function (title) {
+  sections[sectionId].forEach(function (item) {
+    const [newTitle, oldTitle] = item;
+
     const row = document.createElement("div");
-    row.className = "row";
+    row.className = "row" + (oldTitle ? " has-collision" : "");
+
+    const mainDiv = document.createElement("div");
+    mainDiv.className = "row-main";
 
     const span = document.createElement("span");
     span.className = "title";
-    span.textContent = title;
+    span.textContent = newTitle;
 
     const btn = document.createElement("button");
     btn.className = "copybtn";
     btn.textContent = "Copy";
-    btn.addEventListener("click", function () { copyText(title, btn); });
+    btn.addEventListener("click", function () { copyText(newTitle, btn); });
 
-    row.appendChild(span);
-    row.appendChild(btn);
+    mainDiv.appendChild(span);
+    mainDiv.appendChild(btn);
+    row.appendChild(mainDiv);
+
+    if (oldTitle) {
+      const note = document.createElement("div");
+      note.className = "collision-note";
+      note.innerHTML = "<strong>Already exists as:</strong> \"" + oldTitle + "\" - rename that page (title AND content), do not create a new one.";
+      row.appendChild(note);
+    }
+
     container.appendChild(row);
   });
 });
