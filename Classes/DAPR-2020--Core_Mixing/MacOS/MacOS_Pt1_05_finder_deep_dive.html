@@ -1,0 +1,66 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Finder Deep Dive</h2>
+  <p>Finder is the single app every other piece of Mac navigation eventually routes through. Most of what makes it fast is turned off by default or hidden behind a menu most people never open - this page turns all of it on.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">The Sidebar</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Favorites</strong>
+    <span style="color:#616161;"> - any folder you drag into this section for one-click access - your session folder, a scratch drive, anything you open constantly.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Locations</strong>
+    <span style="color:#616161;"> - This Mac, iCloud Drive, and any connected server all live here automatically.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">External drives</strong>
+    <span style="color:#616161;"> - appear in the sidebar automatically the moment they are connected, with an eject icon next to each one.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Four Ways to View a Folder</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Icon View</strong>
+    <span style="color:#616161;"> - best for visually scanning thumbnails - picking out an image or a waveform preview by eye.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">List View</strong>
+    <span style="color:#616161;"> - best for sorting by name, date, or size, and for scanning a long list of session files at once.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Column View</strong>
+    <span style="color:#616161;"> - best for drilling down through several nested folders quickly, since each click adds a column instead of replacing the window.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Gallery View</strong>
+    <span style="color:#616161;"> - a large preview pane plus a filmstrip - useful for previewing several files back to back without opening each one.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Sorting, Grouping, and Searching</h2>
+  <p>Click any column header in List View to sort by it - clicking Date Modified twice puts the most recent files at the top. The View menu's Group By option clusters files by kind, date, or tag without changing the sort order underneath. The search field in the top right defaults to searching This Mac; a small scope bar lets you narrow it down to just the current folder instead.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/finder_view_options.png" alt="Finder View Options panel for a real folder, showing Group By, Sort By, icon size, text size, and which columns are visible" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">View Options (Command-J) for a specific folder - Group By, Sort By, and exactly which columns show up in List View, all set per-folder rather than globally.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Reading a Window Without Opening Anything</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Preview pane</strong>
+    <span style="color:#616161;"> - turned on from View > Show Preview - shows a live preview of whatever is selected, alongside file details, without opening it.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Status Bar</strong>
+    <span style="color:#616161;"> - shows item count and free space at the bottom of the window.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Path Bar</strong>
+    <span style="color:#616161;"> - turned on from View > Show Path Bar - shows the exact nested-folder route to whatever is selected, as a row of clickable segments at the bottom of the window.</span>
+  </div>
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Turn on the Path Bar and actually read it.</strong>
+    <div style="margin-left:54px; margin-top:4px;">The path bar is not decoration - it is the literal address of the selected item, one folder inside the next. Clicking any segment jumps straight to that folder. Enable View > Show Path Bar now and click through a few segments before moving on.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/library_audio_folder.png" alt="A real Finder window with the Path Bar visible at the bottom, showing Macintosh HD > Library > Audio" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">The Path Bar in action at the bottom of a real Finder window - Macintosh HD, then Library, then Audio, each segment clickable.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Get Info and Finder Settings</h2>
+  <p>Command-I on any selected file opens Get Info - size, kind, exact location, tags, and a Sharing & Permissions section covered in depth on the Privacy and Security page. Finder's own preferences live under Finder > Settings, split into General, Tabs, Sidebar, and Advanced tabs. Advanced is where filename extensions and iCloud removal warnings are controlled, covered next on the File Extensions and File Types page.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Showing Hidden Files</h2>
+  <p>Shift-Command-. toggles whether hidden files and folders - anything starting with a dot, like .DS_Store - are visible in the current Finder window. These files exist for a reason and are hidden on purpose; toggling them visible for troubleshooting is fine, but nothing here should be deleted without knowing exactly what it does first.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Go to Folder</h2>
+  <p>Shift-Command-G opens a small text field where typing any path - ~/Music, /Library/Audio, or anything else - jumps directly there, instantly. This is dramatically faster than clicking through several nested folders by hand, and it is the standard way to reach folders, like the hidden user Library, that Finder does not show a shortcut to.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/go_to_folder_autocomplete.png" alt="The Go to Folder dialog with a real path typed in, showing autocomplete suggestions for nearby folders" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Go to Folder, mid-type - notice the autocomplete offering nearby matching folders below the typed path, a fast way to catch a typo before pressing Return.</p>
+</div>

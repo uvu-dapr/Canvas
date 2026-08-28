@@ -1,0 +1,36 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Force Quit and Troubleshooting</h2>
+  <p>A frozen app is not a reason to hold down the power button. macOS has a graduated set of tools for exactly this situation, each one more forceful than the last, and working through them in order solves almost everything without ever risking an unclean shutdown.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Getting There Fast: Option-Command-Escape</h2>
+  <p>Option-Command-Escape opens the Force Quit Applications window immediately, skipping the Apple menu entirely. It lists every running app; selecting one and clicking Force Quit ends it right away, without waiting for that app to finish whatever it was doing.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/force_quit_window.png" alt="Force Quit Applications window listing running apps, with one selected and the Force Quit button available" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">The Force Quit Applications window - select an app from the list and click Force Quit. Note the reminder at the bottom: this exact window opens with Option-Command-Escape.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Five Levels, From Gentlest to Last Resort</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Quit (Command-Q)</strong>
+    <span style="color:#616161;"> - asks the app to close itself normally, saving anything it needs to first. This only works if the app is still responding.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Force Quit (Option-Command-Escape)</strong>
+    <span style="color:#616161;"> - ends an unresponsive app immediately, with no chance to save unsaved work in that app - use this once Quit has failed to do anything for a few seconds.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Activity Monitor Quit</strong>
+    <span style="color:#616161;"> - select the process in Activity Monitor, click the X button, and choose Quit - functionally the same gentle request as Command-Q, just reachable when the app itself is too frozen to show a Quit menu.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Activity Monitor Force Quit</strong>
+    <span style="color:#616161;"> - the same button's more forceful option - ends the process immediately, useful when a background process with no visible window or Dock icon needs to be stopped.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Restart the Mac</strong>
+    <span style="color:#616161;"> - the last resort, reserved for when the whole system - not just one app - has stopped responding to any of the above.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">A Sensible Order to Actually Follow</h2>
+  <p>Try Command-Q first and give it a few seconds - many apparent freezes are just a slow save or a large file operation finishing. If nothing happens, move to Option-Command-Escape and Force Quit that one app. If the app does not even appear in the Force Quit list, or a background process is the actual problem, open Activity Monitor and end it from there. Reach for a full restart only when the Mac itself has stopped responding to input at all, not as the default first move for a single stuck app.</p>
+  <div style="background-color:#fff8e1; border-left:4px solid #f57f17; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Holding the power button is not a normal troubleshooting step.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Holding the power button forces an unclean shutdown of the entire Mac, not just the frozen app, and skips every safety step macOS normally takes when closing files and sessions. Reserve it for when the Mac is completely unresponsive to everything else on this page - not as a shortcut for a single misbehaving plugin window.</div>
+  </div>
+</div>

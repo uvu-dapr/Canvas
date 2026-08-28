@@ -1,0 +1,67 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Library vs. System: Pro Tools and Your Files</h2>
+  <p>At the root of the drive, Library and System look like similar folders, but they hold entirely different kinds of content. This page goes past the basics into what actually lives inside them - especially the parts that matter for audio work.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Two Different Library Folders, Quickly Recapped</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Library</strong>
+    <span style="color:#616161;"> - visible in Finder by default, shared by every account on the Mac.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Library</strong>
+    <span style="color:#616161;"> - hidden by default, and scoped to your own user account only. Reveal it from the Finder Go menu by holding Option.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Inside Application Support</h2>
+  <p>Application Support is where an app stores larger, persistent data that goes beyond a simple settings file - custom presets, templates, caches, license data, and helper-app files.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/application_support_folder.png" alt="Finder window showing the Library/Application Support folder with a long list of vendor folders" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">/Library/Application Support, showing one folder per company or piece of software that installed something system-wide.</p>
+  <p>Effectively, this is a shared filing cabinet - one folder per vendor. The per-user version, ~/Library/Application Support, holds the same kind of data but scoped to a single account only.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Inside Library/Audio</h2>
+  <p>Both /Library/Audio and ~/Library/Audio hold the files CoreAudio and CoreMIDI - the audio and MIDI engines built into macOS - actually use:</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Plug-Ins/Components</strong>
+    <span style="color:#616161;"> - Audio Unit (AU) format plug-ins.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Plug-Ins/VST and VST3</strong>
+    <span style="color:#616161;"> - VST-format plug-ins, stored alongside the AU folder.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">MIDI Drivers</strong>
+    <span style="color:#616161;"> - drivers for MIDI interfaces.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Sounds</strong>
+    <span style="color:#616161;"> - system alert sound files.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Apple Loops</strong>
+    <span style="color:#616161;"> - loop content used by GarageBand and Logic.</span>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/library_audio_folder.png" alt="Finder window showing the real contents of Library/Audio, including VST XMLs, Sounds, Presets, Plug-Ins, MIDI Patch Names, MIDI Drivers, MIDI Devices, Impulse Responses, and Apple Loops" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Library/Audio on a real, actively-used Mac - considerably more than the short list above once every plug-in and driver installer has added its own folder.</p>
+  <p>This is the actual, physical home of every plug-in a DAW can load. If a plug-in is not showing up in Pro Tools, checking whether its files genuinely exist inside this folder is a direct, filesystem-level check - separate from anything a driver or a Launch Agent controls.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Pro Tools' AAX Plug-In Location</h2>
+  <p>AAX is Avid's own plug-in format, built specifically for Pro Tools, and it lives in a specific, dedicated location rather than the general Plug-Ins folder covered above:</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Library/Application Support/Avid/Audio/Plug-Ins</strong>
+    <span style="color:#616161;"> - every AAX plug-in Pro Tools can currently load.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Library/Application Support/Avid/Audio/Plug-Ins (Unused)</strong>
+    <span style="color:#616161;"> - a holding folder Pro Tools uses when a plug-in is deliberately disabled without being deleted. A plug-in sitting here will not appear in Pro Tools until it is moved back into the main Plug-Ins folder.</span>
+  </div>
+  <p>AU and VST/VST3 plug-ins use entirely different locations and formats from AAX - the ones already covered above under Library/Audio - which is why the same plug-in from the same manufacturer sometimes has to be installed once for Pro Tools and separately again for a different DAW.</p>
+
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Navigate there yourself using Go to Folder.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Press Shift-Command-G, type /Library/Application Support/Avid/Audio/Plug-Ins, and press Return. Screenshot the resulting window showing your installed AAX plug-ins - this reinforces both the Go to Folder skill from earlier in this unit and exactly where Pro Tools' plug-ins actually live.</div>
+  </div>
+
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/aax_plugins_folder.png" alt="Go to Folder navigating to Library/Application Support/Avid/Audio/Plug-Ins, with the resulting folder of real AAX plug-ins visible" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Go to Folder navigating straight to the AAX Plug-Ins folder, with dozens of real .aaxplugin files visible - and the neighboring Plug-Ins (Unused) and Plug-Ins - Archive folders mentioned above, right where this page says they would be.</p>
+
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Pro Tools: User Files vs. System-Wide Files</h2>
+  <p>Pro Tools itself is the clearest real example of the /Library vs. ~/Library split covered throughout this unit. Its AAX plug-ins, covered above, live in /Library - shared by every account on the Mac, since any user should be able to load the same plug-ins. Pro Tools' own preferences, custom key command sets, and per-user settings, on the other hand, live inside ~/Library/Application Support and ~/Library/Preferences - scoped to your account alone, so two different logins on the same Mac can each have their own personalized Pro Tools setup without interfering with each other.</p>
+  <p>This is not a trivia detail specific to one app - it is the same system-wide-vs-personal split every piece of software on the Mac follows, just made concrete with software you will use every day in this program.</p>
+</div>

@@ -1,0 +1,46 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">File Extensions and File Types</h2>
+  <p>The letters after the last dot in a filename are not decoration. They are a label telling macOS, and every app on it, exactly how to interpret the data stored inside that file - and macOS hides that label by default.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">What an Extension Actually Tells You</h2>
+  <p>An extension is a short suffix - .wav, .zip, .app - that identifies a file's format. Double-clicking a file makes macOS look at its extension to decide which app should open it. The extension is metadata about the file, not the content of the file itself; changing it does not touch a single byte of the actual data inside.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Extensions You'll See Constantly in This Program</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">.ptx</strong>
+    <span style="color:#616161;"> - a Pro Tools session file - the project itself, not the audio inside it.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">.wav / .aif / .aiff</strong>
+    <span style="color:#616161;"> - uncompressed audio - the standard formats for tracking and mixing.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">.mp3</strong>
+    <span style="color:#616161;"> - compressed, lossy audio - fine for reference, not for production work.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">.mov / .mp4</strong>
+    <span style="color:#616161;"> - video containers, common for picture-sync work and screen recordings.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">.zip</strong>
+    <span style="color:#616161;"> - a compressed archive, covered in depth on the Copying, Moving, and Archiving Files page.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">.dmg / .pkg / .app</strong>
+    <span style="color:#616161;"> - Mac disk images, installer packages, and application bundles, covered in depth on the Installing Software page.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">.aaxplugin</strong>
+    <span style="color:#616161;"> - Avid's plug-in format for Pro Tools - a package, not a single file, covered on the Library vs. System page.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Turning Extensions On</h2>
+  <p>macOS hides most extensions by default, showing a clean file name instead. Turn this off from Finder > Settings > Advanced, and check Show all filename extensions. With it on, every file in every Finder window shows its true format at a glance - essential for confirming you are about to submit a PDF and not an accidentally-saved .docx.</p>
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Enable extensions and confirm it.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Turn on Show all filename extensions in Finder > Settings > Advanced, then open a folder containing a mix of file types and confirm each one now shows its extension.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/finder_settings_advanced.png" alt="Finder Settings Advanced tab with Show all filename extensions checked" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Show all filename extensions, checked - along with the other Advanced settings covered on the Finder Deep Dive page, like the warning before changing an extension and the search scope default.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Changing an Extension Doesn't Change the File</h2>
+  <p>Renaming song.wav to song.mp3 does not compress or re-encode a single sample of audio. The file's actual content - the raw audio data inside - is completely untouched; only the label changed. What usually happens next is that whichever app tries to open it gets confused, because the label now promises a format the data does not actually match, and the file either fails to open or opens as garbled noise. The only way to actually convert a file's format is to export or bounce it through an app that reads the original format and writes a new file in the target format - renaming is never a substitute for conversion.</p>
+</div>

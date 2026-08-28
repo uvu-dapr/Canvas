@@ -1,0 +1,38 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Hardware, Software, and Firmware</h2>
+  <p>These three words get used loosely, but they describe three genuinely different layers of a working computer, and mixing them up leads directly to troubleshooting the wrong thing.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Hardware</h2>
+  <p>Hardware is the physical, touchable equipment - the CPU, the RAM chips, the storage drive, the ports on the side of the Mac, the audio interface sitting on your desk. Hardware cannot be updated with a download; it can only be repaired or replaced.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Software</h2>
+  <p>Software is the set of instructions running on that hardware, from the operating system itself down to a single app. macOS is software. Pro Tools is software. A plugin is software. Software is what gets installed, updated, and uninstalled.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Firmware</h2>
+  <p>Firmware is a special layer of software written directly onto a hardware component itself, controlling how that specific piece of hardware boots and behaves before the operating system ever loads. It usually does not change unless the manufacturer issues a firmware update.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Your Mac's own firmware</strong>
+    <span style="color:#616161;"> - controls the boot process before macOS starts loading at all.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">An audio interface's firmware</strong>
+    <span style="color:#616161;"> - controls how that interface communicates over USB or Thunderbolt, running on the interface itself - separate entirely from the driver, which is software running on the Mac.</span>
+  </div>
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Why this distinction matters in troubleshooting.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Reinstalling a driver only changes the software layer running on the Mac. If an interface is behaving oddly, checking the manufacturer's site for a firmware update addresses a completely different layer, and one that a driver reinstall cannot touch.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/hardware_software_firmware_stack.svg" alt="Layered stack diagram showing Software on top, Firmware in the middle, and Hardware as the base layer" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Diagram: how the three layers stack on top of each other.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">A Quick Comparison</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Hardware</strong>
+    <span style="color:#616161;"> - physical equipment. Updated by replacement, not download.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Software</strong>
+    <span style="color:#616161;"> - instructions running on hardware. Installed, updated, and uninstalled freely - macOS, Pro Tools, and every plugin all count.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Firmware</strong>
+    <span style="color:#616161;"> - software built into a specific piece of hardware, controlling its lowest-level behavior. Rarely updated, and only through a process the manufacturer provides.</span>
+  </div>
+</div>

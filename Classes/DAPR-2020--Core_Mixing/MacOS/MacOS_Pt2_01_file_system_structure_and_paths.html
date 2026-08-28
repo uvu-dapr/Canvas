@@ -1,0 +1,63 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">macOS File-System Structure and Paths</h2>
+  <p>Every single thing on your Mac's drive lives at a specific, exact address. Learning that address system - where it starts, how it branches, and how to write it down - makes the rest of this unit, and a good chunk of Pro Tools troubleshooting, dramatically easier.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">The Root of the Drive: /</h2>
+  <p>Every path on the Mac starts at exactly one place: the root, written as a single forward slash, /. Every folder on the drive, without exception, is either sitting directly inside root or nested inside another folder that eventually traces back to it. Four folders sit right at that root level and matter most for this unit - the same four shown in the screenshot at the top of this unit's first page.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Applications</strong>
+    <span style="color:#616161;"> - apps available to every account on the Mac.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Library</strong>
+    <span style="color:#616161;"> - system-wide settings, support files, and plug-ins shared by every account - a different, visible folder from the hidden one inside your own user folder.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/System</strong>
+    <span style="color:#616161;"> - the operating system itself, on a read-only, signed volume since macOS Catalina.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Users</strong>
+    <span style="color:#616161;"> - every account's home folder on this Mac lives here.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Home: ~</h2>
+  <p>Your own personal folder, /Users/yourname, has a shortcut: the tilde, ~. Typing ~/Desktop means exactly the same thing as typing /Users/yourname/Desktop - the tilde always expands to your own home folder, whichever account is currently logged in.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Desktop</strong>
+    <span style="color:#616161;"> - files and folders visible on your Desktop.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Documents</strong>
+    <span style="color:#616161;"> - the default save location for most documents.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Downloads</strong>
+    <span style="color:#616161;"> - where browsers and Mail save downloaded files by default.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Music</strong>
+    <span style="color:#616161;"> - the default location for Music.app's library and some audio apps' default save folder.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Library</strong>
+    <span style="color:#616161;"> - hidden by default - your own personal settings and support files, covered in depth on its own page later in this unit.</span>
+  </div>
+  <div style="background-color:#fbe9e7; border-left:4px solid #c62828; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">/Library and ~/Library are genuinely different folders.</strong>
+    <div style="margin-left:54px; margin-top:4px;">They share a name, but they are not the same folder, not aliases of each other, and often hold completely different files for the very same piece of software - one copy shared by everyone, one copy scoped to just you. Confusing the two is the single most common file-system mistake in this entire unit.</div>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">What a Path Actually Is</h2>
+  <p>A path is the literal, unambiguous address of a file or folder - a chain of names separated by forward slashes, always starting from either root or home. An absolute path starts with / and spells out the entire route from root: /Users/yourname/Music/song.wav. The same file can be written starting from home instead: ~/Music/song.wav. Both point to the exact same file - they are just two different starting points for writing the same address.</p>
+  <p>Two tools from the Finder Deep Dive page work together here: the Path Bar reads a path back to you for whatever is selected, and Go to Folder lets you type a path in and jump straight there. Later in this unit, reaching your Pro Tools AAX plug-ins means typing /Library/Application Support/Avid/Audio/Plug-Ins directly into Go to Folder, rather than clicking through five nested windows by hand.</p>
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Screenshot both the root level and your own Home folder.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Show a Finder window at the very root of the drive with Library, System, Users, and Applications visible, and a second screenshot of your own Home folder showing Desktop, Documents, Downloads, Music, and Library.</div>
+  </div>
+  <div style="border:2px dashed #616161; border-radius:6px; padding:16px; margin:16px 0; text-align:center; color:#616161; font-style:italic;">
+    [ Screenshot still needed - a Finder window at the root of the drive showing Library, System, Users, and Applications ]
+  </div>
+
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/home_folder_contents.png" alt="A real Home folder listing at /Users/adamwolson, showing Desktop, Documents, Downloads, Dropbox, Library, and personal folders" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">A real Home folder - Desktop, Documents, Downloads, and the rest sit alongside whatever personal folders someone has added over time, all still inside that same one account folder.</p>
+</div>

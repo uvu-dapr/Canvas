@@ -1,0 +1,82 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Login Items, Launch Agents, and Launch Daemons</h2>
+  <p>Some apps start themselves the moment you log in, and some run in the background permanently without ever opening a window at all. Both behaviors are controlled by the same underlying system, visible at two different levels - one you manage yourself, and one macOS manages for every app that asks.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Login Items and Background Items</h2>
+  <p>System Settings > General > Login Items &amp; Extensions lists every app set to open automatically when you log in, plus every background item currently running that did not need you to open anything at all. The "Open at Login" list is one you edit directly - add an app you want to start automatically, or remove one you are tired of seeing launch every morning. The background items list below it is different: it shows helper processes and extensions that other apps installed and manage themselves, which is exactly why an audio interface's control panel, or a plug-in license manager, can be running even when you have never manually opened it and its main app is not on screen.</p>
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Login Items are the visible surface of a bigger system.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Everything listed under background items in Login Items &amp; Extensions is, underneath, either a Launch Agent or a Launch Daemon - the two mechanisms covered for the rest of this page. Login Items &amp; Extensions is the friendly front door; Launch Agents and Launch Daemons are the actual machinery behind it.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/login_items_panel.png" alt="System Settings General Login Items and Extensions panel, showing the Open at Login list and App Background Activity toggles" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">A real Login Items & Extensions panel - the Open at Login list above, and App Background Activity toggles below, each one a background item running on its own.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">What launchd Actually Does</h2>
+  <p>launchd is the first process macOS starts at boot, and it never quits. Every other background process on the Mac - system service or third-party helper - is started, supervised, and eventually stopped by launchd, based on the instructions written inside a .plist configuration file.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Launch Agents</h2>
+  <p>A Launch Agent runs inside a logged-in user's session. It can draw a window, show a menu bar icon, or ask for input, because it has access to that user's full desktop environment. Agents start after login, and if two accounts are logged in on the same Mac, each gets its own separate copy of the same agent.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Library/LaunchAgents</strong>
+    <span style="color:#616161;"> - agents that belong to your user account only.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Library/LaunchAgents</strong>
+    <span style="color:#616161;"> - agents installed for every account on the Mac, though each still runs separately per logged-in user rather than as one shared process.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/System/Library/LaunchAgents</strong>
+    <span style="color:#616161;"> - Apple's own agents, protected by System Integrity Protection.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Launch Daemons</h2>
+  <p>A Launch Daemon runs as root, with no user session and no ability to show a window. Daemons start at boot, before anyone logs in, and keep running even if every user logs out. There is no per-user LaunchDaemons folder - a daemon is system-wide by definition.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Library/LaunchDaemons</strong>
+    <span style="color:#616161;"> - third-party daemons - most audio interface drivers install one here.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/System/Library/LaunchDaemons</strong>
+    <span style="color:#616161;"> - Apple's own system services, protected by System Integrity Protection.</span>
+  </div>
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">The short version:</strong>
+    <span style="vertical-align:middle;">An Agent runs as you, can show UI, and starts at login. A Daemon runs as root, shows nothing, and starts at boot.</span>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/launch_agents_vs_daemons.svg" alt="Side-by-side comparison diagram of Launch Agent versus Launch Daemon properties" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Diagram: Launch Agent vs. Launch Daemon, compared by who runs them, whether they can show UI, when they start, and where their files live.</p>
+
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/launch_agents_daemons_folders.png" alt="Three real Finder windows side by side showing the contents of Library LaunchAgents, Library LaunchDaemons, and the user's own LaunchAgents folder, each full of real .plist files" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">All three folders, for real, side by side - /Library/LaunchAgents, /Library/LaunchDaemons, and ~/Library/LaunchAgents - each holding dozens of real .plist files from software installed over time. Notice the matching "- Archive" folders below them, where macOS moves old entries during major updates rather than deleting them outright.</p>
+
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Who Installs These, and Why</h2>
+  <p>Audio interface driver installers (Focusrite, Universal Audio, RME, and similar), the iLok License Manager, and Adobe and Microsoft update helpers all drop a Launch Agent or Launch Daemon during installation. That is how they keep running quietly in the background instead of requiring you to open them by hand every time you turn the Mac on.</p>
+  <div style="background-color:#fff8e1; border-left:4px solid #f57f17; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Watch for this in troubleshooting.</strong>
+    <div style="margin-left:54px; margin-top:4px;">A stuck or corrupted Launch Agent is one of the most common reasons a plug-in or audio interface refuses to authorize, or a Mac feels slow immediately after login.</div>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Inspecting and Managing Them</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">launchctl list</strong>
+    <span style="color:#616161;"> - run in Terminal, prints every Launch Agent currently loaded for your user account.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Activity Monitor</strong>
+    <span style="color:#616161;"> - shows every running process, agent or daemon, under the Process Name column, with its parent process visible.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">launchctl bootout</strong>
+    <span style="color:#616161;"> - unloads a specific Launch Agent or Daemon by its .plist path, stopping it until the Mac restarts or it is reloaded.</span>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/launchctl_list_terminal.png" alt="Terminal window showing the output of launchctl list, a long column of PIDs, statuses, and Agent labels" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">A real launchctl list output. Recognizable entries like com.noodlesoft.HazelHelper and com.audinate.dante.DanteVia.DanteViaLoader show exactly the kind of third-party Agent covered above.</p>
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">This only shows Agents, not Daemons.</strong>
+    <div style="margin-left:54px; margin-top:4px;">A plain launchctl list run as yourself lists Agents running in your own session. Root-level Daemons do not show up here - seeing those requires running sudo launchctl list instead.</div>
+  </div>
+  <div style="background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Tip:</strong>
+    <span style="vertical-align:middle;">Do not remove a Launch Agent or Daemon you do not recognize without researching the name first. Some are essential to macOS itself, and Apple's own agents in /System are protected from casual deletion anyway.</span>
+  </div>
+</div>

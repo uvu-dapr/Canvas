@@ -1,0 +1,83 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">System Information, Activity Monitor, and Console</h2>
+  <p>Three built-in apps answer three different questions about your Mac: what hardware is actually connected, what is using resources right now, and what has the system been logging in the background. Learning all three turns troubleshooting from guesswork into a process.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">System Information</h2>
+  <p>Open it from the Apple menu > About This Mac > More Info > System Report, or search for it directly in Spotlight. The sidebar organizes every category of hardware and software on the Mac - Hardware (CPU, Memory, Storage, USB, Thunderbolt/USB4, Audio, Bluetooth, and more), Network, and Software.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/system_information_usb.png" alt="System Information window showing the USB category with a tree of connected USB hubs and devices" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">The USB category, expanded to show every hub and device in the chain, along with each device's connection type and link speed.</p>
+  <p>This view lists every connected USB device in a tree, including hubs, along with the link speed each one is negotiating - 5 Gb/s or 10 Gb/s, for example. This is the first place to check when Pro Tools does not see an interface: if the device is missing here entirely, the problem is a cable, a port, or power - not Pro Tools.</p>
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Windows equivalent.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Windows' closest match to this hardware tree is Device Manager. The Windows "System Information" app (run via msinfo32) is closer to a general system summary than to the detailed hardware tree shown here.</div>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Activity Monitor</h2>
+  <p>Open it from Applications > Utilities > Activity Monitor. Five tabs - CPU, Memory, Energy, Disk, and Network - each sort every running process by that specific resource.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/activity_monitor_cpu_tab.png" alt="Activity Monitor CPU tab showing running processes sorted by percent CPU usage" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">The CPU tab, sorted by % CPU, with the system-wide load summary at the bottom.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">% CPU / CPU Time</strong>
+    <span style="color:#616161;"> - how much processing power a process is using right now, and its running total since it launched.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Threads / Idle Wake Ups</strong>
+    <span style="color:#616161;"> - how many parallel execution paths a process is using, and how often it wakes the CPU from an idle state - a high wake count can point to a background app draining resources unnecessarily.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">PID / User</strong>
+    <span style="color:#616161;"> - the process's unique ID number, and which account owns it.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Real Mem / Private Mem</strong>
+    <span style="color:#616161;"> - how much RAM the process is actually using right now, versus memory only that process can access.</span>
+  </div>
+  <p>When Pro Tools' meters spike or an interface glitches, sort the CPU tab by % CPU to find whichever background process is stealing processing power. The summary bar at the bottom - System, User, and Idle percentages, plus total Threads and Processes - shows at a glance whether the whole Mac is under real load or one runaway app is the culprit.</p>
+
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">The Other Four Tabs</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Memory</strong>
+    <span style="color:#616161;"> - shows a Memory Pressure graph at the bottom: green means plenty of headroom, yellow means macOS is starting to work harder to manage memory, and red means it is actively struggling and swapping to disk - the exact moment a session starts to stutter.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Energy</strong>
+    <span style="color:#616161;"> - ranks processes by power impact, most useful for tracking down what is draining a laptop battery fast.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Disk</strong>
+    <span style="color:#616161;"> - shows read and write activity per process, useful when session playback stutters and RAM is not the bottleneck - the drive itself might be.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Network</strong>
+    <span style="color:#616161;"> - shows data sent and received per process, useful for catching a cloud-sync app or an auto-updater competing for bandwidth or system resources mid-session.</span>
+  </div>
+
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Applications vs. background processes.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Activity Monitor lists both at once, with no visual separator by default. An application is something you opened yourself and see in the Dock; a background process is everything else - system services, Launch Agents, helper apps - running without ever appearing as a window. A process consuming heavy CPU without a Dock icon to match is almost always a background item worth investigating, not a bug in Activity Monitor.</div>
+  </div>
+
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Console</h2>
+  <p>Open it from Applications > Utilities > Console. Console reads the system log - every message macOS and its apps write about what they are doing, including errors and crash reports.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/console_no_messages.png" alt="Console app open with no messages showing, before streaming has started" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Console before pressing Start streaming. The sidebar lists connected Devices, and Reports for Crash, Spin, Log, and Diagnostic reports.</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Devices</strong>
+    <span style="color:#616161;"> - the Mac itself, plus any connected iOS devices, each with its own log stream.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Reports</strong>
+    <span style="color:#616161;"> - Crash Reports, Spin Reports, Log Reports, and Diagnostic Reports - saved records rather than a live stream.</span>
+  </div>
+  <div style="background-color:#fff8e1; border-left:4px solid #f57f17; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Streaming live logs affects performance.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Console warns that streaming log messages will impact system performance. Turn streaming on only while actively troubleshooting a specific problem, not as a background habit.</div>
+  </div>
+  <p>After a Pro Tools crash, Console's Crash Reports section under Reports holds a detailed log of exactly what failed - the single most useful place to look before contacting support.</p>
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Work from hardware down to software.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Check System Information first to confirm a device physically exists and is recognized. Check Activity Monitor next to see what is actually running. Check Console last to read what the system logged about it. That order narrows a problem fastest.</div>
+  </div>
+</div>

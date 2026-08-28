@@ -1,0 +1,31 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Copying, Moving, and Archiving Files</h2>
+  <p>Dragging a file feels like the simplest thing you can do on a Mac, but what actually happens - a copy or a move - quietly depends on where you drag it, and getting that wrong is one of the most common causes of a Pro Tools session that suddenly can't find its own audio.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Same Drive vs. Different Drive</h2>
+  <p>Dragging a file within the same drive moves it - the file leaves its original folder entirely and exists only in the new location. Dragging a file to a different drive copies it instead - the original stays exactly where it was, and a second, independent copy appears in the new location. Same gesture, two different outcomes, decided entirely by whether the destination is on the same physical drive.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Forcing the Opposite with Option</h2>
+  <p>Holding Option while dragging within the same drive forces a copy instead of a move, leaving the original untouched. There is rarely a need to force a move across drives, since that is already the default there - Option-drag matters almost exclusively for same-drive copying.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Duplicating and Aliases</h2>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Command-D</strong>
+    <span style="color:#616161;"> - duplicates the selected item in place, appending "copy" to its name.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Alias</strong>
+    <span style="color:#616161;"> - a lightweight pointer to the original file, covered in full on the Files, Folders, Applications, Packages, and Aliases page - not the same thing as a duplicate.</span>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">The Trash: Deleting, Restoring, Emptying</h2>
+  <p>Moving a file to the Trash does not delete it - it relocates the file into a holding folder, still fully recoverable. Right-click any item in the Trash and choose Put Back to restore it to its original location. Nothing is actually deleted, and no space is reclaimed, until you choose Empty Trash, which asks for confirmation before permanently removing everything inside.</p>
+  <div style="background-color:#fbe9e7; border-left:4px solid #c62828; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Moving session audio outside its expected location breaks the session.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Pro Tools sessions reference their audio files by location. Moving, renaming, or relocating a source WAV file outside the Audio Files folder Pro Tools expects it in produces a missing-file warning the next time that session opens, forcing a manual relink before playback works again. When in doubt, leave session media exactly where it was recorded or imported.</div>
+  </div>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">ZIP Archives</h2>
+  <p>Right-click any file or folder and choose Compress to create a .zip archive - a single file containing a compressed copy of everything selected. The original folder is untouched; the .zip is an entirely separate file sitting alongside it. Double-clicking a .zip extracts its contents into a new folder, decompressed and ready to use, again without touching the .zip file itself. Always open the extracted folder and confirm every expected file is present and plays back correctly before deleting either the original folder or the .zip - a corrupted archive fails silently far more often than it fails loudly.</p>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/compress_context_menu.png" alt="Right-click context menu on a folder with Compress highlighted" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">The right-click context menu with Compress selected - macOS names the resulting .zip after the folder automatically, leaving the original folder completely untouched alongside it.</p>
+
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/compressed_zip_result.png" alt="The resulting .zip file icon, sitting at 3.1 MB, from the Compress action" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">The finished archive - a completely separate file from the original folder, with its own size on disk.</p>
+</div>

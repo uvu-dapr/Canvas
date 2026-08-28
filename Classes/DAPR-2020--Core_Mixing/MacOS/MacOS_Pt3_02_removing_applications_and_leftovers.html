@@ -1,0 +1,51 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Removing Applications and Leftovers</h2>
+  <p>Most Mac software installs itself with a single drag, and uninstalls with a single delete - but that simplicity hides a few files that get left behind every time. Knowing where those files go, and when to use something more thorough than the Trash, keeps a Mac clean over years of installing and removing audio software.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Why Most Mac Apps Don't Need an Installer</h2>
+  <p>A typical Mac app is a single, self-contained .app bundle - all of its code and resources live inside that one bundle. Copying it into the Applications folder is the entire installation. There is no separate install program to run, and no registry to write to, because there is no registry on macOS at all.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">What Actually Happens When You Delete an App</h2>
+  <p>Dragging an app to the Trash removes only the .app bundle itself. It does not remove any of the following:</p>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Applications</strong>
+    <span style="color:#616161;"> - the .app bundle itself - the only thing a simple Trash drag actually removes.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Library/Preferences</strong>
+    <span style="color:#616161;"> - the app's saved settings file, one small .plist per app.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">~/Library/Application Support</strong>
+    <span style="color:#616161;"> - presets, templates, caches, and license or activation data - scoped to your account.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">/Library/Application Support</strong>
+    <span style="color:#616161;"> - the same kind of data, but shared system-wide across every account.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">Plug-in locations</strong>
+    <span style="color:#616161;"> - Audio Unit, VST, and AAX plug-ins the app installed, which do not live inside the app itself and are never touched by deleting it.</span>
+  </div>
+  <div style="border:2px solid #424242; background-color:#f5f5f5; border-radius:6px; padding:10px 14px; margin:8px 0;">
+    <strong style="font-family:'Courier New', Courier, monospace;">LaunchAgents and LaunchDaemons</strong>
+    <span style="color:#616161;"> - background helpers the app installed to run automatically, covered in full on the Login Items, Launch Agents, and Launch Daemons page.</span>
+  </div>
+  <p>Over months or years, these leftover files accumulate across every app that was ever tried and later deleted - quietly consuming space, and occasionally causing conflicts if the same app is reinstalled later and finds its old settings still sitting there.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">When to Use a Manufacturer's Uninstaller Instead</h2>
+  <p>Professional audio software that installs drivers, kernel-level components, or Launch Daemons often ships its own dedicated uninstaller app precisely because a simple Trash drag cannot cleanly reverse that kind of install. Apogee's Control 2 installer, covered on the Installing Software page, is a real example - it includes a Software Uninstaller app alongside its installer specifically so a driver-level install has a clean, complete way back out. When an uninstaller is provided, use it instead of dragging the app to the Trash.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Why Apps Like Hazel Exist</h2>
+  <p>Hazel, and similar utilities such as AppCleaner, watch for the moment you drag an app to the Trash and automatically search the common Library locations for that same app's leftover files, offering to remove everything at once.</p>
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">This is not a Windows-style uninstaller.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Hazel is not running an uninstall script the way Windows' Add or Remove Programs does - there is no registry to clean on a Mac. It is specifically hunting down the scattered Library files that a simple drag-to-Trash leaves behind, and it is a different tool from a manufacturer's dedicated uninstaller.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/app_leftover_files.svg" alt="Diagram showing an app being dragged to the Trash while its preferences file and Application Support folder remain behind" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Diagram: what a simple drag-to-Trash actually removes, and what it leaves behind.</p>
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Find a real leftover folder.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Locate a folder inside ~/Library/Preferences or ~/Library/Application Support belonging to an app that no longer appears in your Applications folder, and screenshot it.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/turbotax_leftover_folder.png" alt="A real leftover folder in Application Support named TurboTax 2023, holding Forms, licensing files, and settings from software used seasonally" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">A real example - TurboTax 2023, sitting in Application Support with Forms, licensing files, and settings intact, long after tax season and likely long after the app itself was deleted.</p>
+</div>

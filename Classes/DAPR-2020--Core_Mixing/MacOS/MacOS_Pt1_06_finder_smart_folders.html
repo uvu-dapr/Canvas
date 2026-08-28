@@ -1,0 +1,33 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#5d4037; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Finder Smart Folders</h2>
+  <p>A Smart Folder looks like an ordinary folder in the sidebar, but it holds nothing at all. It is a saved search that runs live every time you open it, which makes it one of the more genuinely useful Finder features almost nobody turns on.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">What a Smart Folder Actually Is</h2>
+  <p>A Smart Folder does not move, copy, or store a single file. It displays whatever currently matches a set of search criteria you define once, and that result list updates automatically every time you open it - a file that starts matching shows up without you doing anything, and a file that no longer matches disappears the same way. The files themselves never leave their real, original locations.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Building One</h2>
+  <p>The process is the same every time:</p>
+  <ol>
+    <li>Open Finder.</li>
+    <li>Choose File > New Smart Folder.</li>
+    <li>Set the search scope to either This Mac or a specific location using the bar at the top of the window.</li>
+    <li>Click the + button to add a search criterion.</li>
+    <li>Combine as many criteria as needed - each additional + button adds another condition.</li>
+    <li>Click Save, give it a name, and choose whether to add it to the sidebar.</li>
+  </ol>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">An Audio-Production Example</h2>
+  <p>A genuinely useful Smart Folder for this program: set the Kind criterion to Audio, add a second criterion for Date Modified within the last 7 days, and save it as "Recent Audio." The result is a folder that always shows whatever audio you have touched in the last week, across your entire Mac, without you ever having to remember where each file actually lives.</p>
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Build the Recent Audio Smart Folder and demonstrate it.</strong>
+    <div style="margin-left:54px; margin-top:4px;">Create the Smart Folder described above - Kind is Audio, Date Modified within the last 7 days - save it, and add it to the sidebar. Your screenshot for this step needs to show both the criteria you set and the resulting file list.</div>
+  </div>
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/new_smart_folder_menu.png" alt="Finder File menu with New Smart Folder highlighted" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Starting the process: File > New Smart Folder.</p>
+
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/smart_folder_icon.png" alt="A saved Smart Folder icon, distinguished by its gear badge, named Perc Wav Files.savedSearch" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">A real saved Smart Folder - notice the gear icon on the folder, and the .savedSearch extension, marking it as a search rather than an ordinary folder. This one filters for percussion WAV files rather than the Recent Audio example above, but the mechanism is identical.</p>
+
+  <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/MacOS/smart_folder_results.png" alt="An opened Smart Folder showing 345 live matching WAV file results" style="max-width:100%; height:auto; border:1px solid #424242; border-radius:4px; margin:12px 0;">
+  <p style="color:#616161; font-style:italic; margin:0 0 16px 0;">Opened, this Smart Folder shows 345 live results pulled from across the drive - none of these files were moved or duplicated to get here.</p>
+  <h2 style="color:#5d4037; font-size:1.3em; border-bottom:2px solid #5d4037; padding-bottom:4px;">Why This Beats a Normal Folder</h2>
+  <p>A normal folder only contains what you manually drag into it, and it goes stale the moment a matching file gets added somewhere else or an old one gets deleted - nothing updates until you go fix it by hand. A Smart Folder never goes stale, because it is not really holding files at all; it is re-running its search every time it opens. The same file can also appear inside several different Smart Folders at once - a WAV file could show up in both a "Recent Audio" Smart Folder and a "Files Over 100 MB" Smart Folder simultaneously - without ever being duplicated on disk.</p>
+</div>
