@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>macOS Unit - Naming Layout and Import Guide</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; max-width: 1000px; margin: 0 auto; padding: 24px; color: #212121; line-height: 1.5; }
+  h1 { color: #5d4037; }
+  h2 { color: #ffffff; background-color: #5d4037; padding: 10px 16px; border-radius: 4px; margin-top: 40px; }
+  h3 { color: #5d4037; border-bottom: 2px solid #5d4037; padding-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 12px; }
+  th { text-align: left; background-color: #efebe9; padding: 8px; border-bottom: 2px solid #5d4037; }
+  td { padding: 8px; border-bottom: 1px solid #e0e0e0; vertical-align: top; }
+  .pagename { font-family: 'Courier New', Courier, monospace; font-weight: bold; }
+  .filename { font-family: 'Courier New', Courier, monospace; font-size: 0.85em; color: #4527a0; }
+  .status-done { color: #1b5e20; font-weight: bold; }
+  .status-keep { color: #616161; font-weight: bold; }
+  .legend { background: #f5f5f5; border: 1px solid #ccc; border-radius: 6px; padding: 12px 16px; margin-bottom: 24px; }
+  .modulehead { background: #efebe9; font-weight: bold; padding: 10px 12px; border-left: 4px solid #5d4037; margin: 20px 0 6px; }
+  ol.steps > li { margin-bottom: 14px; }
+  .required { background: #e8f5e9; border-left: 4px solid #1b5e20; padding: 10px 14px; border-radius: 6px; margin: 10px 0; }
+  .warning { background: #fff8e1; border-left: 4px solid #f57f17; padding: 10px 14px; border-radius: 6px; margin: 10px 0; }
+</style>
+</head>
+<body>
+
+<h1>macOS Unit - Naming Layout and Fastest Path to Canvas</h1>
+<p>Every local file is now named <span class="filename">MacOS_PtN_##_slug</span> - Part number, then sequence within that Part, then a short descriptive slug. Sorting the folder alphabetically now puts every file in exact reading order, Part by Part. The <span class="filename">MacOS_Pt0_</span> files sort first on purpose - they're the two things to handle before touching any page.</p>
+
+<h2>Fastest Path to Canvas</h2>
+
+<h3>Step 1 - Push images to GitHub first</h3>
+<ol class="steps">
+  <li>Unzip <span class="filename">MacOS_Pt0_assets_images_all.zip</span>.</li>
+  <li>Copy every file inside it into <span class="filename">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/MacOS/</span> - flat, no subfolders.</li>
+  <li>Open GitHub Desktop, confirm the new files show as changes, write a commit message, commit, and push.</li>
+  <li>Wait about a minute for the raw.githubusercontent.com CDN to catch up before checking a page.</li>
+</ol>
+
+<h3>Step 2 - Create the 5 Modules</h3>
+<p>Canvas > Modules > + Module. Create these five, in this order:</p>
+<ol class="steps">
+  <li><span class="pagename">macOS: M1 - Getting Around macOS</span></li>
+  <li><span class="pagename">macOS: M2 - Understanding Files and Finder</span></li>
+  <li><span class="pagename">macOS: M3 - Applications and macOS</span></li>
+  <li><span class="pagename">macOS: M4 - Hardware, Storage, and Troubleshooting</span></li>
+  <li><span class="pagename">macOS: M5 - Mac Skills for Audio Engineers</span></li>
+</ol>
+
+<h3>Step 3 - Create each Page, module by module</h3>
+<ol class="steps">
+  <li>Canvas > Pages > + Page.</li>
+  <li>Paste the exact <strong>Canvas Page Name</strong> from the table into the title field.</li>
+  <li>In the Rich Content Editor toolbar, click the <strong>&lt;/&gt;</strong> icon (HTML Editor) to switch to raw HTML mode.</li>
+  <li>Open the matching local file (listed in reading order below - just work top to bottom) and paste its full contents into the HTML Editor box.</li>
+  <li>Switch back to Rich Content view to confirm it rendered correctly, then Save & Publish.</li>
+  <li>Drag the finished page into its Module.</li>
+</ol>
+<div class="warning"><strong>Because the files now sort correctly</strong>, you can open the whole output folder, select all the MacOS_Pt1_ files, and work straight down the list without hunting for the next one.</div>
+
+<h3>Step 4 - Build the Final Project assignment</h3>
+<ol class="steps">
+  <li>Canvas > Assignments > + Assignment.</li>
+  <li>Title: <span class="pagename">macOS: Pt6 - Mac Navigation Deep Dive - Assignment</span></li>
+  <li>Points Possible: <strong>125</strong></li>
+  <li>Submission Type: Online, File Upload, PDF</li>
+  <li>Switch the description field to the HTML Editor and paste in the full contents of <span class="filename">MacOS_Pt6_01_final_project_mac_navigation_deep_dive.html</span>.</li>
+  <li>Click Rubric > Find a Rubric > the upload/import icon, and upload <span class="filename">MacOS_Pt6_01_final_project_rubric.csv</span>.</li>
+  <li>Save & Publish, then place it in Module 5.</li>
+</ol>
+
+<h3>Step 5 - Import the Quiz</h3>
+<ol class="steps">
+  <li>Course Settings > Import Course Content.</li>
+  <li>Content Type: <strong>QTI .zip file</strong>.</li>
+  <li>Choose <span class="filename">MacOS_Pt6_02_quiz_mac_navigation_qti.zip</span> and click Import.</li>
+  <li>Rename it to <span class="pagename">macOS: Pt6 - Mac Navigation Deep Dive - Quiz</span> if it did not already pick up that name, confirm it is graded, and accept conversion to a New Quiz if your course uses that.</li>
+  <li>Publish it and add it to a Module.</li>
+</ol>
+
+<h3>Step 6 - Publish and double-check two renames</h3>
+<p>Two pages were revised in place from earlier versions with different titles. Canvas does not rename a live page automatically just because the pasted content changed - rename these two manually:</p>
+<div class="required">
+  <strong>MacOS_Pt3_01_installing_software_dmg_app_pkg.html</strong> was previously titled "Installers: DMG vs. EXE" - set its Canvas title to <span class="pagename">macOS: Installing Software - DMG, APP, and PKG</span><br><br>
+  <strong>MacOS_Pt3_03_login_items_launch_agents_daemons.html</strong> was previously titled "Launch Agents vs. Launch Daemons" - set its Canvas title to <span class="pagename">macOS: Login Items, Launch Agents, and Launch Daemons</span>
+</div>
+
+<div class="legend">
+<strong>Status key:</strong><br>
+<span class="status-done">BUILT</span> - file exists and is ready to publish<br>
+<span class="status-keep">KEEP AS-IS</span> - existing page already satisfies the spec, no changes needed
+</div>
+
+<h2>Full Naming Table (in file-sort order)</h2>
+
+<div class="modulehead">macOS: M1 - Getting Around macOS</div>
+<table>
+<tr><th>Canvas Page Name</th><th>Local File</th><th>Status</th></tr>
+<tr><td class="pagename">macOS: Getting Around Your Mac</td><td class="filename">MacOS_Pt1_01_getting_around_your_mac.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Mac Interface and Application Behavior</td><td class="filename">MacOS_Pt1_02_mac_interface_and_app_behavior.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Modifier Keys and Essential Shortcuts</td><td class="filename">MacOS_Pt1_03_modifier_keys_and_shortcuts.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Mouse and Trackpad Settings</td><td class="filename">MacOS_Pt1_04_mouse_and_trackpad.html</td><td class="status-keep">KEEP AS-IS</td></tr>
+<tr><td class="pagename">macOS: Finder Deep Dive</td><td class="filename">MacOS_Pt1_05_finder_deep_dive.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Finder Smart Folders</td><td class="filename">MacOS_Pt1_06_finder_smart_folders.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Spotlight, Quick Look, and Screenshots</td><td class="filename">MacOS_Pt1_07_spotlight_quicklook_screenshots.html</td><td class="status-done">BUILT</td></tr>
+</table>
+
+<div class="modulehead">macOS: M2 - Understanding Files and Finder</div>
+<table>
+<tr><th>Canvas Page Name</th><th>Local File</th><th>Status</th></tr>
+<tr><td class="pagename">macOS: macOS File-System Structure and Paths</td><td class="filename">MacOS_Pt2_01_file_system_structure_and_paths.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: File Extensions and File Types</td><td class="filename">MacOS_Pt2_02_file_extensions_and_types.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Files, Folders, Applications, Packages, and Aliases</td><td class="filename">MacOS_Pt2_03_files_folders_packages_aliases.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Copying, Moving, and Archiving Files</td><td class="filename">MacOS_Pt2_04_copying_moving_archiving.html</td><td class="status-done">BUILT</td></tr>
+</table>
+
+<div class="modulehead">macOS: M3 - Applications and macOS</div>
+<table>
+<tr><th>Canvas Page Name</th><th>Local File</th><th>Status</th></tr>
+<tr><td class="pagename">macOS: Installing Software - DMG, APP, and PKG</td><td class="filename">MacOS_Pt3_01_installing_software_dmg_app_pkg.html</td><td class="status-done">BUILT (rename live page - Step 6)</td></tr>
+<tr><td class="pagename">macOS: Removing Applications and Leftovers</td><td class="filename">MacOS_Pt3_02_removing_applications_and_leftovers.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Login Items, Launch Agents, and Launch Daemons</td><td class="filename">MacOS_Pt3_03_login_items_launch_agents_daemons.html</td><td class="status-done">BUILT (rename live page - Step 6)</td></tr>
+<tr><td class="pagename">macOS: Terminal Basics</td><td class="filename">MacOS_Pt3_04_terminal_basics.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Privacy and Security</td><td class="filename">MacOS_Pt3_05_privacy_and_security.html</td><td class="status-done">BUILT</td></tr>
+</table>
+
+<div class="modulehead">macOS: M4 - Hardware, Storage, and Troubleshooting</div>
+<table>
+<tr><th>Canvas Page Name</th><th>Local File</th><th>Status</th></tr>
+<tr><td class="pagename">macOS: System Information, Activity Monitor, and Console</td><td class="filename">MacOS_Pt4_01_system_diagnostic_tools.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Force Quit and Troubleshooting</td><td class="filename">MacOS_Pt4_02_force_quit_and_troubleshooting.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: RAM, Storage, and CPUs</td><td class="filename">MacOS_Pt4_03_ram_storage_cpus.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Hardware, Software, and Firmware</td><td class="filename">MacOS_Pt4_04_hardware_software_firmware.html</td><td class="status-keep">KEEP AS-IS</td></tr>
+<tr><td class="pagename">macOS: External Drives, Volumes, and File Systems</td><td class="filename">MacOS_Pt4_05_external_drives_disk_utility_file_systems.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: iCloud, Cloud Files, and Backup</td><td class="filename">MacOS_Pt4_06_icloud_cloud_files_backup.html</td><td class="status-done">BUILT</td></tr>
+</table>
+
+<div class="modulehead">macOS: M5 - Mac Skills for Audio Engineers</div>
+<table>
+<tr><th>Canvas Page Name</th><th>Local File</th><th>Status</th></tr>
+<tr><td class="pagename">macOS: Audio MIDI Setup - Devices, Aggregates, and MIDI Studio</td><td class="filename">MacOS_Pt5_01_audio_midi_setup.html</td><td class="status-done">BUILT</td></tr>
+<tr><td class="pagename">macOS: Library vs. System - Pro Tools and Your Files</td><td class="filename">MacOS_Pt5_02_library_vs_system_pro_tools_files.html</td><td class="status-done">BUILT</td></tr>
+</table>
+
+<div class="modulehead">Final Project and Quiz</div>
+<table>
+<tr><th>Canvas Item Name</th><th>Local File</th><th>Status</th></tr>
+<tr><td class="pagename">macOS: Pt6 - Mac Navigation Deep Dive - Assignment</td><td class="filename">MacOS_Pt6_01_final_project_mac_navigation_deep_dive.html<br>MacOS_Pt6_01_final_project_rubric.csv</td><td class="status-done">BUILT - 125 pts, 25 items</td></tr>
+<tr><td class="pagename">macOS: Pt6 - Mac Navigation Deep Dive - Quiz</td><td class="filename">MacOS_Pt6_02_quiz_mac_navigation_qti.zip</td><td class="status-done">BUILT - 80 questions, 400 pts</td></tr>
+</table>
+
+<p style="margin-top:32px; color:#616161;">Total: 24 reference pages (including the original lab), one Final Project, one Quiz, across 5 Modules.</p>
+
+</body>
+</html>

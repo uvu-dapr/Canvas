@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>macOS Unit - One-Click Page Name Copy</title>
+<style>
+  body { font-family: Arial, Helvetica, sans-serif; max-width: 900px; margin: 0 auto; padding: 24px; color: #212121; background: #f5f5f5; }
+  h1 { color: #5d4037; }
+  p.lead { color: #616161; margin-bottom: 28px; }
+  .section-head { background-color: #5d4037; color: #ffffff; padding: 10px 16px; border-radius: 6px 6px 0 0; font-weight: bold; margin-top: 28px; }
+  .section-body { background: #ffffff; border: 1px solid #e0e0e0; border-top: none; border-radius: 0 0 6px 6px; }
+  .row { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid #eeeeee; }
+  .row:last-child { border-bottom: none; }
+  .title { font-size: 15px; }
+  button.copybtn {
+    min-width: 88px;
+    padding: 7px 14px;
+    border: 1px solid #5d4037;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #5d4037;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+  }
+  button.copybtn:hover { background: #efebe9; }
+  button.copybtn.copied { background: #1b5e20; border-color: #1b5e20; color: #ffffff; }
+</style>
+</head>
+<body>
+
+<h1>macOS Unit - One-Click Page Name Copy</h1>
+<p class="lead">Click Copy next to any title, then paste it straight into the Canvas page title field. No selecting text needed.</p>
+
+<div class="section-head">P1: Getting Around macOS</div>
+<div class="section-body" id="s1"></div>
+
+<div class="section-head">P2: Understanding Files and Finder</div>
+<div class="section-body" id="s2"></div>
+
+<div class="section-head">P3: Applications and macOS</div>
+<div class="section-body" id="s3"></div>
+
+<div class="section-head">P4: Hardware, Storage, and Troubleshooting</div>
+<div class="section-body" id="s4"></div>
+
+<div class="section-head">P5: Mac Skills for Audio Engineers</div>
+<div class="section-body" id="s5"></div>
+
+<div class="section-head">Final Project and Quiz</div>
+<div class="section-body" id="s6"></div>
+
+<script>
+const sections = {
+  s1: [
+    "Getting Around Your Mac",
+    "Mac Interface and Application Behavior",
+    "Modifier Keys and Essential Shortcuts",
+    "Mouse and Trackpad Settings",
+    "Finder Deep Dive",
+    "Finder Smart Folders",
+    "Spotlight, Quick Look, and Screenshots"
+  ],
+  s2: [
+    "Root of Your Mac",
+    "File Extensions and File Types",
+    "Files, Folders, Applications, Packages, and Aliases",
+    "Copying, Moving, and Archiving Files"
+  ],
+  s3: [
+    "Installing Software - DMG, APP, and PKG",
+    "Removing Applications and Leftovers",
+    "Launch Agents Vs Daemons",
+    "Terminal Basics",
+    "Privacy and Security"
+  ],
+  s4: [
+    "System Diagnostic Tools",
+    "Force Quit and Troubleshooting",
+    "RAM, Storage, and CPUs",
+    "Hardware, Software, and Firmware",
+    "External Drives, Volumes, and File Systems",
+    "iCloud, Cloud Files, and Backup"
+  ],
+  s5: [
+    "Audio MIDI Setup",
+    "Library vs. System - Pro Tools and Your Files"
+  ],
+  s6: [
+    "macOS: Pt6 - Mac Navigation Deep Dive - Assignment",
+    "macOS: Pt6 - Mac Navigation Deep Dive - Quiz"
+  ]
+};
+
+function copyText(text, btn) {
+  const doCopyFeedback = () => {
+    const original = btn.textContent;
+    btn.textContent = "Copied!";
+    btn.classList.add("copied");
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.classList.remove("copied");
+    }, 1200);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(doCopyFeedback).catch(() => fallbackCopy(text, doCopyFeedback));
+  } else {
+    fallbackCopy(text, doCopyFeedback);
+  }
+}
+
+function fallbackCopy(text, callback) {
+  const ta = document.createElement("textarea");
+  ta.value = text;
+  ta.style.position = "fixed";
+  ta.style.opacity = "0";
+  document.body.appendChild(ta);
+  ta.select();
+  try { document.execCommand("copy"); } catch (e) {}
+  document.body.removeChild(ta);
+  callback();
+}
+
+Object.keys(sections).forEach(function (sectionId) {
+  const container = document.getElementById(sectionId);
+  sections[sectionId].forEach(function (title) {
+    const row = document.createElement("div");
+    row.className = "row";
+
+    const span = document.createElement("span");
+    span.className = "title";
+    span.textContent = title;
+
+    const btn = document.createElement("button");
+    btn.className = "copybtn";
+    btn.textContent = "Copy";
+    btn.addEventListener("click", function () { copyText(title, btn); });
+
+    row.appendChild(span);
+    row.appendChild(btn);
+    container.appendChild(row);
+  });
+});
+</script>
+
+</body>
+</html>
