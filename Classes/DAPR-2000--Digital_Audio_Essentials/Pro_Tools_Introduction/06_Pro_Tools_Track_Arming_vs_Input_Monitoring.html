@@ -1,0 +1,80 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+
+  <h2 style="background-color:#0d47a1; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Pro Tools: Track Arming vs Input Monitoring</h2>
+
+  <p>Track Arming and Input Monitoring look similar, but they control different things in Pro Tools. This page shows what you actually hear in each combination of transport state and track state.</p>
+
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Key:</strong>
+    <div style="margin-left:54px; margin-top:6px;">
+      <p style="margin:0 0 4px 0;"><strong>Track Armed</strong> means the record enable button is on.</p>
+      <p style="margin:0;"><strong>Input Monitoring</strong> means the input I button is on.</p>
+    </div>
+  </div>
+
+  <table style="width:100%; border-collapse:collapse; margin:24px 0 40px 0; border:2px solid #0d47a1; border-radius:4px;">
+    <caption>Pro Tools Track Monitoring Modes</caption>
+    <thead>
+      <tr>
+        <th scope="col" style="background-color:#0d47a1; color:#ffffff; padding:10px 12px; text-align:left; width:14%; border-right:1px solid #5472b8;">Transport State</th>
+        <th scope="col" style="background-color:#0d47a1; color:#ffffff; padding:10px 12px; text-align:left; width:20%; border-right:1px solid #5472b8;">Track State</th>
+        <th scope="col" style="background-color:#0d47a1; color:#ffffff; padding:10px 12px; text-align:left; width:36%; border-right:1px solid #5472b8;">What You Hear</th>
+        <th scope="col" style="background-color:#0d47a1; color:#ffffff; padding:10px 12px; text-align:left; width:30%;">Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color:#f5f5f5;">
+        <td rowspan="2" style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0; vertical-align:top;"><strong>Playhead Parked</strong></td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Track Armed</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">You hear the live input on that track.</td>
+        <td rowspan="2" style="padding:10px 12px; border-bottom:1px solid #e0e0e0; vertical-align:top;">When Pro Tools is parked, Track Armed and Input Monitoring behave the same. Both let you hear the input signal.</td>
+      </tr>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Input Monitoring On</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">You hear the live input on that track.</td>
+      </tr>
+      <tr>
+        <td rowspan="2" style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0; vertical-align:top;"><strong>Playing</strong></td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Track Armed with Input Monitoring off</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">You hear what is recorded on the track at the playhead position. If the track has audio, it plays. If the track is empty, you hear silence.</td>
+        <td rowspan="2" style="padding:10px 12px; border-bottom:1px solid #e0e0e0; vertical-align:top;">During playback, Track Armed follows the audio clips on the track rather than the input. Input Monitoring ignores what is on the track and monitors the input signal instead.</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Input Monitoring On</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">You hear only the live input. You do not hear the audio clips on the track.</td>
+      </tr>
+      <tr style="background-color:#f5f5f5;">
+        <td rowspan="2" style="padding:10px 12px; border-right:1px solid #e0e0e0; vertical-align:top;"><strong>Recording</strong></td>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">Track Armed and recording</td>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">You hear the live input that is being recorded to the track.</td>
+        <td rowspan="2" style="padding:10px 12px; vertical-align:top;">During recording, Track Armed and Input Monitoring behave the same. You hear the input signal while it is written to the track.</td>
+      </tr>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">Input Monitoring On during recording</td>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">You hear the same live input that is being recorded.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="color:#0d47a1; font-size:1.3em; border-bottom:2px solid #0d47a1; padding-bottom:4px; margin-top:40px;">See It In Action</h2>
+
+  <p>This session shows four tracks during playback, each in a different combination of Record Enable and Input Monitoring. Compare this to the Playing row of the table above.</p>
+
+  <div style="margin:16px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_15_Input-Monitoring-Playback-Example.png" alt="Pro Tools Edit window showing four tracks with different Record Enable and Input Monitor button states" style="max-width:100%; height:auto;">
+  </div>
+
+  <div style="border-radius:6px; padding:14px 16px; margin:12px 0 32px 0; background-color:#f4f6f0; border:2px solid #5d7a3e;">
+    <p style="margin:0 0 6px 0;"><strong>Audio 1</strong> - Armed, Input Monitoring off, no clip on the track. Silent during playback.</p>
+    <p style="margin:0 0 6px 0;"><strong>Audio 2</strong> - Not armed, Input Monitoring on, no clip on the track. You hear the live input.</p>
+    <p style="margin:0 0 6px 0;"><strong>Audio 3</strong> - Armed, Input Monitoring off, clip present. The recorded clip plays back.</p>
+    <p style="margin:0;"><strong>Audio 4</strong> - Not armed, Input Monitoring on, clip present. The clip is ignored. You hear the live input instead.</p>
+  </div>
+
+  <div style="background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0 40px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Tip:</strong> <span style="vertical-align:middle;">Audio 3 and Audio 4 both have a recorded clip, but only Audio 3 plays it back. Audio 4 is Input Monitoring, so it skips the clip entirely and monitors the live input instead.</span>
+  </div>
+
+</div>

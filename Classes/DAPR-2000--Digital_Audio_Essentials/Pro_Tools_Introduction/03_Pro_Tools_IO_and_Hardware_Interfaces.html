@@ -1,0 +1,116 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#1b5e20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Pro Tools: I/O and Hardware Interfaces</h2>
+
+  <p>Pro Tools needs an audio device to move sound into and out of the computer. In a studio, that device is normally a hardware audio interface. The Playback Engine tells Pro Tools which device to use. I/O Setup defines the named paths that connect session tracks to that device and to internal buses.</p>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px;">Goals</h2>
+  <ul style="margin-bottom:90px;">
+    <li>Explain the role of a hardware audio interface.</li>
+    <li>Connect an interface and select it as the Playback Engine.</li>
+    <li>Connect headphones safely to a dedicated headphone output.</li>
+    <li>Distinguish hardware inputs, hardware outputs, and internal buses.</li>
+    <li>Confirm Input, Output, and Bus paths in I/O Setup.</li>
+  </ul>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">What a Hardware Audio Interface Does</h2>
+  <p>A hardware audio interface is the bridge between analog sound equipment and the digital audio workstation. Depending on the model, it can provide microphone preamps, analog-to-digital conversion, digital-to-analog conversion, line inputs and outputs, monitor outputs, a headphone amplifier, and digital I/O.</p>
+  <ul>
+    <li style="margin-bottom:8px;">Inputs receive microphone, instrument, line-level, or digital signals.</li>
+    <li style="margin-bottom:8px;">Converters turn incoming analog voltage into digital samples and turn digital playback into analog voltage.</li>
+    <li style="margin-bottom:8px;">Outputs feed studio monitors, headphones, recorders, or other equipment.</li>
+    <li style="margin-bottom:8px;">Monitoring controls set listening level without changing the recorded audio.</li>
+  </ul>
+
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Use the interface for both input and output</strong>
+    <div style="margin-left:54px; margin-top:4px;">When recording through an interface, select that same interface as the Playback Engine and monitor from its headphone or monitor outputs. Splitting input and output between unrelated devices can create routing, clocking, and latency problems.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Connect the Interface and Select the Playback Engine</h2>
+  <ol>
+    <li style="margin-bottom:8px;">Turn the interface's monitor and headphone level controls down.</li>
+    <li style="margin-bottom:8px;">Connect the interface to the computer with its required USB, USB-C, Thunderbolt, or network connection.</li>
+    <li style="margin-bottom:8px;">Connect power and turn on the interface when the model requires external power.</li>
+    <li style="margin-bottom:8px;">Install the manufacturer's current driver or control software when required.</li>
+    <li style="margin-bottom:8px;">Open Pro Tools and choose Setup &gt; Playback Engine.</li>
+    <li style="margin-bottom:8px;">Select the connected interface from the Playback Engine selector and click OK.</li>
+    <li style="margin-bottom:8px;">If Pro Tools closes and reopens the session, wait for the new engine and routing to initialize.</li>
+  </ol>
+
+  <div style="background-color:#fff8e1; border-left:4px solid #f57f17; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Changing the Playback Engine can change available paths</strong>
+    <div style="margin-left:54px; margin-top:4px;">A session made with another interface may show inactive inputs or outputs. Select the correct Playback Engine first, then inspect I/O Setup. Do not troubleshoot track assignments before Pro Tools is using the intended hardware.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Connect Headphones Correctly</h2>
+  <ol>
+    <li style="margin-bottom:8px;">Locate the interface output labeled Phones or Headphones.</li>
+    <li style="margin-bottom:8px;">Turn the headphone level down before connecting.</li>
+    <li style="margin-bottom:8px;">Insert the headphone plug into the dedicated headphone output. Most studio interfaces use a 1/4-inch TRS headphone connector.</li>
+    <li style="margin-bottom:8px;">If the headphones have a 3.5 mm stereo plug, use a 3.5 mm TRS to 1/4-inch TRS stereo adapter.</li>
+    <li style="margin-bottom:8px;">Start playback and raise the headphone level slowly to a comfortable level.</li>
+  </ol>
+
+  <div style="background-color:#fbe9e7; border-left:4px solid #c62828; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Do not connect headphones to a line output or microphone input</strong>
+    <div style="margin-left:54px; margin-top:4px;">Use the dedicated headphone output because it includes the proper stereo connection and headphone amplifier. A stereo headphone TRS connector uses tip for left, ring for right, and sleeve as the common return. In this use, TRS does not mean a balanced mono connection.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Open I/O Setup</h2>
+  <p>Choose Setup &gt; I/O. The names created here appear in track Input, Output, Insert, and Send selectors. Click OK to save valid changes. Use Default on a page when paths are missing or do not match the selected interface.</p>
+
+  <table style="width:100%; border-collapse:collapse; margin:12px 0 32px 0; border:2px solid #1b5e20; border-radius:4px;">
+    <caption>Three I/O Setup Pages Used in This Module</caption>
+    <thead>
+      <tr>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:20%; border-right:1px solid #2e7d32;">Page</th>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:40%; border-right:1px solid #2e7d32;">What It Defines</th>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:40%;">Beginner Example</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Input</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Named paths from physical interface inputs into Pro Tools</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Mic Input 1 feeds a mono audio track</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Output</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Named paths from Pro Tools to physical interface outputs</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Main Out 1-2 feeds monitors or headphones</td>
+      </tr>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">Bus</td>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">Internal paths between tracks plus output-bus mapping</td>
+        <td style="padding:10px 12px;">Bus 1-2 carries several vocal sends to a reverb Aux</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#1b5e20; font-size:1.2em; font-weight:bold; border-bottom:2px solid #1b5e20; padding-bottom:6px; margin-top:38px; margin-bottom:18px;">1. Confirm the Input Page</h3>
+  <p>The Input page maps Pro Tools input paths to physical inputs on the selected audio device. A mono microphone normally uses one mono input path.</p>
+  <div style="margin:12px 0 32px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_05_IO-Setup-Input-Page.jpg" alt="Pro Tools I/O Setup Input page with a mono MacBook microphone path" style="max-width:100%; height:auto;">
+  </div>
+
+  <h3 style="color:#1b5e20; font-size:1.2em; font-weight:bold; border-bottom:2px solid #1b5e20; padding-bottom:6px; margin-top:38px; margin-bottom:18px;">2. Confirm the Output Page</h3>
+  <p>The Output page maps Pro Tools output paths to physical outputs. The screenshot shows a built-in Mac output. When an interface is selected, its hardware outputs should appear instead.</p>
+  <div style="margin:12px 0 32px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_04_IO-Setup-Output-Page.jpg" alt="Pro Tools I/O Setup Output page with a stereo MacBook speaker path" style="max-width:100%; height:auto;">
+  </div>
+
+  <h3 style="color:#1b5e20; font-size:1.2em; font-weight:bold; border-bottom:2px solid #1b5e20; padding-bottom:6px; margin-top:38px; margin-bottom:18px;">3. Confirm the Bus Page</h3>
+  <p>The Bus page creates internal routes and maps output buses to hardware output paths. Buses do not require a physical cable because the audio remains inside Pro Tools until a track or bus is routed to a hardware output.</p>
+  <div style="margin:12px 0 32px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_06_IO-Setup-Bus-Page.jpg" alt="Pro Tools I/O Setup Bus page with internal stereo buses" style="max-width:100%; height:auto;">
+  </div>
+
+  <div style="background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Troubleshoot in signal-flow order</strong>
+    <div style="margin-left:54px; margin-top:4px;">Check the physical connection, then the Playback Engine, then I/O Setup, then the track input and output assignments, and finally the monitor or headphone level. Moving in order prevents random changes that hide the real problem.</div>
+  </div>
+</div>

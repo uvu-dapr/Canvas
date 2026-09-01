@@ -1,0 +1,116 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#1b5e20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Pro Tools: Tracks and New Track Setup</h2>
+
+  <p>A Pro Tools track is more than a lane on the screen. Its type determines whether it can record audio, store MIDI, host a virtual instrument, receive a bus, organize other tracks, or control the level of an output path.</p>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px;">Goals</h2>
+  <ul style="margin-bottom:90px;">
+    <li>Select the correct track type for a specific task.</li>
+    <li>Choose mono or stereo according to the source and signal path.</li>
+    <li>Distinguish sample-based and tick-based timebases.</li>
+    <li>Create several track types in one New Tracks dialog.</li>
+    <li>Name tracks clearly before recording.</li>
+  </ul>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Basic Track Types</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0 32px 0; border:2px solid #1b5e20; border-radius:4px;">
+    <caption>Basic Pro Tools Track Types</caption>
+    <thead>
+      <tr>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:20%; border-right:1px solid #2e7d32;">Track Type</th>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:40%; border-right:1px solid #2e7d32;">What It Does</th>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:40%;">Common Use</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Audio</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Records audio to disk and plays recorded or imported audio clips</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Voice, guitar, drums, sound effects, or music files</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">MIDI</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Records and plays MIDI performance data but does not carry audio</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Controlling an external MIDI device or routing MIDI separately</td>
+      </tr>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Instrument</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Combines MIDI performance controls and an audio channel strip</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Playing a virtual instrument plugin</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Auxiliary Input</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Receives live audio from a bus or hardware input and passes it through the mixer without recording it to disk</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Reverb return, delay return, submix, or monitor return</td>
+      </tr>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Master Fader</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Controls the level of its assigned output or bus path</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Main output level, cue output level, or bus master control</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">Folder</td>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">Contains other tracks; a Routing Folder also passes and processes audio</td>
+        <td style="padding:10px 12px;">Organizing drums, dialogue, guitars, or other track groups</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">MIDI is instructions, not recorded sound</strong>
+    <div style="margin-left:54px; margin-top:4px;">MIDI data can describe notes, timing, velocity, controllers, and other performance information. A MIDI track needs an instrument or external MIDI device to create audio. An Instrument track combines the MIDI side and an audio channel strip for a virtual instrument.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Track Format: Mono or Stereo</h2>
+  <ul>
+    <li style="margin-bottom:8px;">Create a mono audio track for one microphone, one guitar input, or another single-channel source.</li>
+    <li style="margin-bottom:8px;">Create a stereo audio track for a true two-channel source such as a stereo keyboard, stereo recorder, or stereo music file.</li>
+    <li style="margin-bottom:8px;">Create stereo Auxiliary Inputs for stereo reverbs, stereo delays, and stereo submixes.</li>
+    <li style="margin-bottom:8px;">Create a stereo Master Fader for a stereo main output path.</li>
+  </ul>
+
+  <div style="background-color:#fbe9e7; border-left:4px solid #c62828; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Do not create a stereo track for one microphone</strong>
+    <div style="margin-left:54px; margin-top:4px;">One microphone produces one mono signal. Recording it to a stereo track can place the signal on only one side or duplicate it unnecessarily. A mono track can still be panned anywhere in a stereo mix.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Track Timebase: Samples or Ticks</h2>
+  <p>Sample-based tracks keep clips anchored to absolute time. Tick-based tracks follow musical tempo and bar-and-beat changes. Audio tracks commonly begin sample-based. MIDI and Instrument tracks commonly begin tick-based because musical performances normally follow the session tempo map.</p>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Create New Tracks</h2>
+  <div style="margin:16px 0 6px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg" alt="Checklist" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="font-size:1.1em; vertical-align:middle;">Build the practice track layout</strong>
+  </div>
+  <ol style="margin-left:54px;">
+    <li style="margin-bottom:8px;">Choose Track &gt; New or press Command+Shift+N on Mac. On Windows, press Control+Shift+N.</li>
+    <li style="margin-bottom:8px;">In the first row, create four new mono Audio Tracks in Samples.</li>
+    <li style="margin-bottom:8px;">Click the plus button to add another row.</li>
+    <li style="margin-bottom:8px;">Create one new stereo Audio Track in Samples.</li>
+    <li style="margin-bottom:8px;">Add one MIDI Track in Ticks.</li>
+    <li style="margin-bottom:8px;">Add one stereo Auxiliary Input in Samples.</li>
+    <li style="margin-bottom:8px;">Add one stereo Master Fader in Samples.</li>
+    <li style="margin-bottom:8px;">Name the tracks by source or purpose, then click Create.</li>
+  </ol>
+  <div style="margin:12px 0 32px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_01_New-Tracks-Dialog.jpg" alt="New Tracks dialog configured with audio MIDI Aux and Master tracks" style="max-width:100%; height:auto;">
+    <p style="margin:6px 0 0 0; color:#616161;">Each row defines a quantity, channel format, track type, timebase, and name.</p>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Read the Track Layout</h2>
+  <p>The session below contains five Audio tracks, one MIDI track, one Auxiliary Input, and one Master Fader. Track colors and icons make the types easier to recognize, but the track name and controls confirm the track's purpose.</p>
+  <div style="margin:12px 0 16px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_03_Edit-Window-Track-Types.jpg" alt="Edit window showing audio MIDI Aux and Master tracks" style="max-width:100%; height:auto;">
+  </div>
+  <div style="margin:12px 0 32px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_02_Mix-Window-Track-Types.jpg" alt="Mix window showing the same audio MIDI Aux and Master tracks" style="max-width:100%; height:auto;">
+  </div>
+
+  <div style="background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Name before recording</strong>
+    <div style="margin-left:54px; margin-top:4px;">Recorded audio files inherit the track name. Naming a track Lead Vocal before recording creates files that are easier to identify than files created from a default name such as Audio 1.</div>
+  </div>
+</div>

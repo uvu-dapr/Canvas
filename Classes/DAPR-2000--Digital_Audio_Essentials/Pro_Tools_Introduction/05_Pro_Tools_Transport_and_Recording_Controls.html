@@ -1,0 +1,96 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#1b5e20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Pro Tools: Transport and Recording Controls</h2>
+
+  <p>The Transport controls move through the session and control playback and recording. Recording requires two separate preparations: the destination track must be record-enabled, and the Transport must be armed for recording.</p>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px;">Goals</h2>
+  <ul style="margin-bottom:90px;">
+    <li>Identify the basic Transport buttons and counters.</li>
+    <li>Distinguish Track Record Enable from the Transport Record button.</li>
+    <li>Use input monitoring to hear a source before and during recording.</li>
+    <li>Prepare and complete a basic recording pass safely.</li>
+  </ul>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Open the Transport</h2>
+  <p>Choose Window &gt; Transport to open the floating Transport window. Basic Transport controls can also appear in the Edit window toolbar. The floating window can show counters, pre-roll, post-roll, selection values, MIDI controls, and expanded controls.</p>
+
+  <div style="margin:12px 0 32px 0; text-align:center;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_12_Transport-Window-Controls.png" alt="Labeled Pro Tools Transport window controls and indicators" style="max-width:100%; height:auto;">
+    <p style="margin:6px 0 0 0; color:#616161; text-align:left;">Source: Avid Pro Tools Reference Guide 2026.4, page 265.</p>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Basic Transport Controls</h2>
+  <ul>
+    <li style="margin-bottom:8px;">Return to Zero moves to the beginning of the session.</li>
+    <li style="margin-bottom:8px;">Rewind and Fast Forward move the current location backward or forward.</li>
+    <li style="margin-bottom:8px;">Go to End moves to the end of the session.</li>
+    <li style="margin-bottom:8px;">Stop stops playback or recording.</li>
+    <li style="margin-bottom:8px;">Play starts playback from the timeline insertion point or selection.</li>
+    <li style="margin-bottom:8px;">Record arms the Transport. When Play starts, Pro Tools records on each record-enabled track.</li>
+  </ul>
+
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">The Spacebar controls Play and Stop</strong>
+    <div style="margin-left:54px; margin-top:4px;">Press the Spacebar to start or stop playback. If the Transport Record button is already armed and at least one track is record-enabled, starting playback begins recording instead.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Track Record Enable and Transport Record</h2>
+  <p>Track Record Enable chooses which track will receive new material. The Transport Record button prepares the Pro Tools recording system. These controls work together but do different jobs.</p>
+  <ul>
+    <li style="margin-bottom:8px;">A track's Record Enable button flashes red when that track is armed.</li>
+    <li style="margin-bottom:8px;">The Transport Track Record Enable indicator turns red when at least one audio track is armed.</li>
+    <li style="margin-bottom:8px;">The Transport Record button flashes when Pro Tools is ready to record.</li>
+    <li style="margin-bottom:8px;">Recording begins only when playback starts after the Transport has been armed.</li>
+  </ul>
+
+  <div style="margin:12px 0 32px 0; text-align:center;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_13_Record-Enabled-Audio-Track.png" alt="Record-enabled audio track in the Pro Tools Mix and Edit windows" style="max-width:100%; height:auto;">
+    <p style="margin:6px 0 0 0; color:#616161; text-align:left;">A record-enabled audio track shows a red Record Enable button and red fader. Source: Avid Pro Tools Reference Guide 2026.4, page 763.</p>
+  </div>
+
+  <div style="background-color:#fff8e1; border-left:4px solid #f57f17; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Armed does not mean recording</strong>
+    <div style="margin-left:54px; margin-top:4px;">A red or flashing record control means the system is prepared. Confirm that the Transport is moving and the track is writing a new clip before assuming the performance is being recorded.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Input Monitoring</h2>
+  <p>The TrackInput Monitor button lets a track monitor its assigned input. In Auto Input Monitoring, a record-enabled track normally monitors the live input while stopped and during recording, then plays existing track material during playback. In Input Only Monitoring, the live input remains monitored instead of switching to recorded material.</p>
+
+  <div style="background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.svg" alt="Note" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Continue with the Input Monitoring Tutorial</strong>
+    <div style="margin-left:54px; margin-top:4px;">The next module page compares Record Enable and Input Monitor while the Transport is stopped, playing, and recording.</div>
+  </div>
+
+  <div style="background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Watch the meter before pressing Record</strong>
+    <div style="margin-left:54px; margin-top:4px;">Record-enable the track and perform at the loudest expected level. Set input gain on the hardware interface while watching the track meter. The track fader changes monitoring level after the signal enters Pro Tools and does not set the recorded input level.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Complete a Basic Recording Pass</h2>
+  <div style="margin:16px 0 6px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Action_Checklist.svg" alt="Checklist" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="font-size:1.1em; vertical-align:middle;">Recording checklist</strong>
+  </div>
+  <ol style="margin-left:54px;">
+    <li style="margin-bottom:8px;">Create and name a mono Audio track for one microphone or one interface input.</li>
+    <li style="margin-bottom:8px;">Assign the correct hardware input and the correct monitor output.</li>
+    <li style="margin-bottom:8px;">Connect the source and set the interface preamp gain with the performer producing the loudest expected level.</li>
+    <li style="margin-bottom:8px;">Click the track's Record Enable button.</li>
+    <li style="margin-bottom:8px;">Confirm that the meter responds and that the source is audible through the intended monitoring path.</li>
+    <li style="margin-bottom:8px;">Place the timeline insertion point where recording should begin.</li>
+    <li style="margin-bottom:8px;">Click Record in the Transport. The button flashes.</li>
+    <li style="margin-bottom:8px;">Click Play or press the Spacebar to begin recording.</li>
+    <li style="margin-bottom:8px;">Press the Spacebar or click Stop to end the pass.</li>
+    <li style="margin-bottom:8px;">Disarm the track, return to the beginning of the new clip, and listen to the recording.</li>
+  </ol>
+
+  <div style="background-color:#fbe9e7; border-left:4px solid #c62828; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Protect hearing and equipment</strong>
+    <div style="margin-left:54px; margin-top:4px;">Keep monitor and headphone levels low while connecting sources, enabling phantom power, changing routing, or troubleshooting. Raise listening level only after the signal path is stable.</div>
+  </div>
+</div>

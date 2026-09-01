@@ -1,0 +1,128 @@
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+  <h2 style="background-color:#1b5e20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Pro Tools: Basic Routing with Inserts and Sends</h2>
+
+  <p>Routing determines where a signal comes from, where it goes, and which processing it passes through. Inputs and outputs define the main path. Inserts process the signal in series on a track. Sends create additional routes to buses or hardware outputs.</p>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px;">Goals</h2>
+  <ul style="margin-bottom:90px;">
+    <li>Trace the main signal path through an Audio track.</li>
+    <li>Assign hardware inputs, hardware outputs, and internal buses.</li>
+    <li>Explain the difference between an insert and a send.</li>
+    <li>Build a shared reverb with a send, bus, and Auxiliary Input.</li>
+    <li>Explain how sends create headphone cue mixes.</li>
+  </ul>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">The Main Signal Path</h2>
+  <div style="border:2px solid #2e6b3e; border-radius:6px; padding:14px 16px; margin:12px 0 32px 0; background-color:#ebf5ee;">
+    <p style="margin:0; text-align:center;">Physical source &rarr; interface input &rarr; track input &rarr; inserts &rarr; fader and pan &rarr; track output &rarr; interface output &rarr; headphones or monitors</p>
+  </div>
+  <p>A track needs an assigned hardware input to record a physical source. It needs an assigned and mapped output path to be audible through an interface output. A track can also receive from or send to internal buses instead of physical connectors.</p>
+
+  <div style="background-color:#fff8e1; border-left:4px solid #f57f17; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.svg" alt="Warning" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">No Output means no audible main path</strong>
+    <div style="margin-left:54px; margin-top:4px;">A track assigned to No Output can still feed a send, but its main output will not be heard. When a track meter moves but nothing is audible, inspect the track output and the output mapping in I/O Setup.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Find Routing Controls</h2>
+  <p>In the Mix window, routing controls appear near the top of each channel strip. In the Edit window, use the Edit Window View selector to show Inserts A-E, Sends A-E, and I/O.</p>
+  <div style="margin:12px 0 16px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_02_Mix-Window-Track-Types.jpg" alt="Mix window with inserts sends and I/O controls on channel strips" style="max-width:100%; height:auto;">
+  </div>
+  <div style="margin:12px 0 32px 0;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Pro_Tools_Introduction/Images/DAPR2000_ProTools_08_Edit-Window-View-Selector.jpg" alt="Edit Window View selector with inserts sends and I/O enabled" style="max-width:100%; height:auto;">
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Inserts and Sends</h2>
+  <table style="width:100%; border-collapse:collapse; margin:12px 0 32px 0; border:2px solid #1b5e20; border-radius:4px;">
+    <caption>Inserts Compared with Sends</caption>
+    <thead>
+      <tr>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:22%; border-right:1px solid #2e7d32;">Feature</th>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:39%; border-right:1px solid #2e7d32;">Insert</th>
+        <th scope="col" style="background-color:#1b5e20; color:#ffffff; padding:10px 12px; text-align:left; width:39%;">Send</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Signal relationship</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">The track signal passes through the processor in series</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">An additional copy is routed to a bus or hardware output</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Return path</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Returns automatically to the same track</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Must reach an Auxiliary Input, Audio track, Instrument track, or hardware destination</td>
+      </tr>
+      <tr style="background-color:#f5f5f5;">
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Typical control</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0; border-right:1px solid #e0e0e0;">Plugin settings and bypass</td>
+        <td style="padding:10px 12px; border-bottom:1px solid #e0e0e0;">Send level, pan, mute, and pre-fader or post-fader status</td>
+      </tr>
+      <tr>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">Common use</td>
+        <td style="padding:10px 12px; border-right:1px solid #e0e0e0;">EQ, compression, gating, or processing intended for the entire track signal</td>
+        <td style="padding:10px 12px;">Shared reverb, shared delay, parallel processing, or a headphone cue mix</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="color:#1b5e20; font-size:1.2em; font-weight:bold; border-bottom:2px solid #1b5e20; padding-bottom:6px; margin-top:38px; margin-bottom:18px;">Insert Signal Flow</h3>
+  <div style="border:2px solid #607d8b; border-radius:6px; padding:14px 16px; margin:12px 0 32px 0; background-color:#eceff1;">
+    <p style="margin:0; text-align:center;">Track audio &rarr; Insert A plugin &rarr; Insert B plugin &rarr; track fader &rarr; output</p>
+  </div>
+  <p>Pro Tools provides up to ten insert slots, A-E and F-J, on Audio, Auxiliary Input, Master Fader, and Instrument tracks. Inserts on Audio, Auxiliary Input, and Instrument tracks are pre-fader. Master Fader inserts are post-fader.</p>
+
+  <h3 style="color:#1b5e20; font-size:1.2em; font-weight:bold; border-bottom:2px solid #1b5e20; padding-bottom:6px; margin-top:38px; margin-bottom:18px;">Send and Return Signal Flow</h3>
+  <div style="border:2px solid #6a3fa0; border-radius:6px; padding:14px 16px; margin:12px 0 32px 0; background-color:#f3eefa;">
+    <p style="margin:0; text-align:center;">Audio track send &rarr; internal bus &rarr; Auxiliary Input &rarr; effect insert &rarr; main output</p>
+  </div>
+  <p>The original Audio track continues to its main output while the send routes an additional copy to the effect path. This parallel structure lets several tracks share one processor while each track has its own send level.</p>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Build a Shared Reverb</h2>
+  <ol>
+    <li style="margin-bottom:8px;">Create a stereo Auxiliary Input and name it Reverb Return.</li>
+    <li style="margin-bottom:8px;">Create or select a stereo internal bus and name it Reverb.</li>
+    <li style="margin-bottom:8px;">Set the Reverb Return input to the Reverb bus.</li>
+    <li style="margin-bottom:8px;">Set the Reverb Return output to the main stereo output.</li>
+    <li style="margin-bottom:8px;">Insert a reverb plugin on the Reverb Return and set the plugin mix to 100 percent wet.</li>
+    <li style="margin-bottom:8px;">On each source track that needs reverb, assign a send to the Reverb bus.</li>
+    <li style="margin-bottom:8px;">Use each source track's send level to control how much of that source reaches the reverb.</li>
+    <li style="margin-bottom:8px;">Use the Reverb Return fader to control the overall reverb level in the mix.</li>
+  </ol>
+
+  <div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.svg" alt="Required" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Set a send-and-return effect to 100 percent wet</strong>
+    <div style="margin-left:54px; margin-top:4px;">The dry signal already reaches the main output from the source track. The Auxiliary Input should return only the effect. Mixing dry signal into the return can change level and make the routing harder to control.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Pre-Fader and Post-Fader Sends</h2>
+  <ul>
+    <li style="margin-bottom:8px;">A post-fader send follows changes made with the source track fader. This is the common starting point for reverb and delay because the effect follows the source level.</li>
+    <li style="margin-bottom:8px;">A pre-fader send is independent of the source track fader. This is useful when a headphone mix or parallel path must remain separate from the control-room mix.</li>
+  </ul>
+
+  <div style="background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.svg" alt="Tip" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Choose send type according to the relationship you need</strong>
+    <div style="margin-left:54px; margin-top:4px;">Use post-fader when the additional path should follow the main mix. Use pre-fader when it should remain independent. Do not choose pre-fader or post-fader by habit without considering what should happen when the source fader moves.</div>
+  </div>
+
+  <h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px; margin-top:120px;">Use Sends for a Headphone Cue Mix</h2>
+  <p>A cue mix is a separate monitor mix for a performer. Source tracks can keep their main outputs routed to the control-room mix while sends feed another pair of interface outputs connected to a headphone system. Each send level creates the performer's balance without requiring changes to the main mix.</p>
+  <ol>
+    <li style="margin-bottom:8px;">Confirm which interface output pair feeds the headphone system.</li>
+    <li style="margin-bottom:8px;">Assign a send from each needed source track to that cue output or to a cue bus that reaches that output.</li>
+    <li style="margin-bottom:8px;">Choose post-fader sends when the cue should follow the main mix with small level adjustments.</li>
+    <li style="margin-bottom:8px;">Choose pre-fader sends when the performer needs a mix independent of the main faders.</li>
+    <li style="margin-bottom:8px;">Balance the send levels while the performer listens through the headphones.</li>
+    <li style="margin-bottom:8px;">Control the cue output's overall level with its hardware headphone control or an assigned Master Fader.</li>
+  </ol>
+
+  <div style="background-color:#fbe9e7; border-left:4px solid #c62828; margin:16px 0; padding:12px 14px;">
+    <img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Avoid.svg" alt="Critical" width="44" height="44" style="vertical-align:middle; margin-right:10px;">
+    <strong style="vertical-align:middle;">Avoid delayed monitoring paths while recording</strong>
+    <div style="margin-left:54px; margin-top:4px;">High-latency plugins and complex routing can make a performer hear a delayed version of the live source. Keep the record and cue path simple, use low-latency processing, or use the interface's direct-monitoring system when instructed.</div>
+  </div>
+</div>
