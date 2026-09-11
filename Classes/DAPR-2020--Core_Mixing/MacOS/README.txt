@@ -3,7 +3,7 @@ Where to put these on your Mac
 
 Copy all 23 files in this zip directly into:
 
-/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/MacOS/
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Images/macOS_Foundations/
 
 Flat folder, no subfolders. This replaces the previous image zip entirely -
 some old diagram files (mouse_trackpad_zones.svg, about_this_mac_overview.svg,
