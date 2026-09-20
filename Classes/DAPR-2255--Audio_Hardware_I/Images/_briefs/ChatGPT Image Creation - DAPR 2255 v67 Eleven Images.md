@@ -1,3 +1,12 @@
+> **Superseded on 2026-09-20 by `ChatGPT Image Creation - DAPR 2255 v69.md` in this same
+> folder.** Every prompt below is reissued there in the locked Standards 20.5 form: a full
+> per-image table, the palette in hex, and no title baked into the picture. Two blocks below
+> are also wrong on the facts and were fixed in v69. Image 6 asks the generator to number the
+> DIN pins "in the standard DIN order", which is exactly the instruction that produced the
+> wrong pinout now sitting in DAPR 2010; v69 spells the arc out as 1, 4, 2, 5, 3 instead.
+> Image 1 and image 2 save over the broken files rather than landing on a new `-01` name.
+> **Generate from v69, not from this file.** Kept for the record only.
+
 # DAPR 2255: Eleven Images to Generate (v67)
 
 Written 2026-09-20 from the v67 build. Two of these replace images already in the repo
