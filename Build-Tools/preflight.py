@@ -455,14 +455,33 @@ L('quiz images on an external host (must be 0): %d'%ext)
 if ext: fails.append('external quiz image refs: %d'%ext)
 
 # 11 alt text and inline svg
+import html as _H
 noalt=svg=0
-for p in glob.glob('wiki_content/*.html'):
+longalt=[]   # Standards 2 caps alt at 120 characters
+nocap=[]     # Standards 8.1: every content image has a caption on its page
+for p in sorted(set(glob.glob('**/*.html',recursive=True))):
     s=open(p,encoding='utf-8').read()
     svg+= s.count('<svg')
     for m in re.finditer(r'<img[^>]*>',s):
-        if 'alt=' not in m.group(0): noalt+=1
+        tag=m.group(0)
+        if 'alt=' not in tag:
+            noalt+=1; continue
+        a=re.search(r'alt="([^"]*)"',tag)
+        if a and len(_H.unescape(a.group(1)))>120:
+            longalt.append((os.path.basename(p),len(_H.unescape(a.group(1)))))
+        src=re.search(r'src="([^"]*)"',tag)
+        if src and 'DAPR_Canvas_Icon' not in src.group(1):
+            after=s[m.end():m.end()+400]
+            if '<p style="font-style:italic' not in after:
+                nocap.append((os.path.basename(p),src.group(1).rsplit('/',1)[-1]))
 L('images with no alt attribute: %d   inline <svg>: %d'%(noalt,svg))
+L('alt attributes over the 120-character cap (must be 0): %d'%len(longalt))
+if longalt: L('   '+'; '.join('%s %d'%x for x in longalt[:8]))
+L('content images with no caption: %d'%len(nocap))
+if nocap: L('   '+'; '.join('%s %s'%x for x in nocap[:8]))
 if noalt: fails.append('images with no alt: %d'%noalt)
+if longalt: fails.append('alt attributes over 120 chars: %d'%len(longalt))
+if nocap: warns.append('content images with no caption: %d'%len(nocap))
 if svg: warns.append('inline svg present: %d'%svg)
 
 # 12 week suffixes must not appear in module titles
