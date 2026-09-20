@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Image Capture Sheet - DAPR 3255 / v6 New Pages</title>
+<style>
+  :root { color-scheme: light; }
+  body { font-family: Arial, Helvetica, sans-serif; color:#212121; background:#f5f5f5;
+         margin:0; padding:32px 24px 80px 24px; }
+  .wrap { max-width:1100px; margin:0 auto; }
+  h1 { font-size:1.6em; margin:0 0 4px 0; }
+  .sub { color:#616161; margin:0 0 24px 0; }
+  .howto { background:#ffffff; border-left:4px solid #0d47a1; border-radius:4px;
+           padding:16px 20px; margin:0 0 28px 0; }
+  .howto h2 { font-size:1.05em; margin:0 0 8px 0; }
+  .howto ul { margin:0; padding-left:20px; }
+  .howto li { margin:4px 0; }
+  h2.sec { background:#0d47a1; color:#ffffff; padding:8px 14px; border-radius:4px;
+           font-size:1.05em; margin:32px 0 12px 0; }
+  .card { background:#ffffff; border-radius:6px; padding:18px 20px; margin:0 0 18px 0;
+          box-shadow:0 1px 3px rgba(0,0,0,0.12); display:flex; gap:20px; }
+  .card .meta { flex:1 1 auto; min-width:0; }
+  .card .slot { flex:0 0 260px; text-align:center; }
+  .card h3 { font-size:1.05em; margin:0 0 8px 0; }
+  table.f { border-collapse:collapse; width:100%; font-size:0.86em; }
+  table.f td { padding:4px 8px 4px 0; vertical-align:top; }
+  table.f td.k { color:#616161; width:110px; white-space:nowrap; }
+  code { background:#eeeeee; padding:1px 5px; border-radius:3px; font-size:0.92em;
+         word-break:break-all; }
+  .slot img { max-width:240px; max-height:200px; border:1px solid #ddd; background:#fafafa;
+              display:block; margin:0 auto 6px auto; }
+  .slot .empty { width:240px; height:150px; border:2px dashed #bdbdbd; border-radius:4px;
+                 display:flex; align-items:center; justify-content:center; color:#9e9e9e;
+                 font-size:0.85em; margin:0 auto 6px auto; }
+  .slot .dims { font-size:0.8em; color:#616161; }
+  .slot .warn { font-size:0.8em; color:#b71c1c; font-weight:bold; }
+  .slot .ok { font-size:0.8em; color:#1b5e20; font-weight:bold; }
+  .note { background:#fff3e0; border-left:4px solid #e65100; padding:12px 16px;
+          margin:12px 0 0 0; font-size:0.9em; }
+  .path { background:#ffffff; border:1px solid #e0e0e0; border-radius:4px;
+          padding:10px 14px; margin:8px 0 24px 0; font-family:monospace;
+          font-size:0.85em; word-break:break-all; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Image Capture Sheet</h1>
+<p class="sub">DAPR 3255 Audio Hardware II, the fifteen pages added in v6.
+Eight captures. Everything here is real hardware or real software, so none of it
+is generated. Built 2026-09-20.</p>
+
+<div class="howto">
+<h2>How to work this sheet</h2>
+<ul>
+  <li>Work top to bottom. Each card names the exact filename and the exact folder.</li>
+  <li>Save the file under the name shown. Do not rename it afterwards.</li>
+  <li>Reload this page after each save. The preview slot fills in and prints the
+      real pixel dimensions, and warns if the shot came in under 1600 px wide.</li>
+  <li>Empty slots are your to-do list.</li>
+  <li><strong>Native resolution, cropped to the window.</strong> Never upscale.</li>
+  <li><strong>Window captures only.</strong> No desktop, no Dock, no menu bar clutter,
+      no other apps behind.</li>
+  <li><strong>Nothing personal in frame.</strong> No student names, no email addresses,
+      no visible path containing <code>adamwolson</code>, no notification banners.
+      Do Not Disturb on first.</li>
+  <li><strong>macOS light mode</strong> for any interface that offers it, so the shot
+      does not become a black hole on a white Canvas page.</li>
+  <li><strong>PNG</strong> for anything containing text or an interface.
+      <strong>JPEG</strong> for a photograph of an object.</li>
+  <li>Manufacturer press photos are fine for gear not on hand. Prefer the
+      manufacturer's own product image on white.</li>
+</ul>
+</div>
+
+<h2 class="sec">Wireless hardware</h2>
+
+<div class="card">
+  <div class="meta">
+    <h3>1. Directional log periodic antenna</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>wireless-log-periodic-antenna-01.png</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/wireless/</code></td></tr>
+      <tr><td class="k">Format</td><td>PNG, transparent or on white, 1600 px wide minimum</td></tr>
+      <tr><td class="k">Used on</td><td>Wireless: Antennas and Distribution</td></tr>
+      <tr><td class="k">Must show</td><td>The whole paddle, face on, with the mounting
+        point and connector visible. Nothing else in frame.</td></tr>
+      <tr><td class="k">Source</td><td>Shure's press asset or product page image for the
+        UA874 or equivalent, at the largest resolution offered. Not a reseller listing.</td></tr>
+      <tr><td class="k">Alt text</td><td>A directional log periodic paddle antenna seen
+        face on, with its mount and coaxial connector</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 2. A log periodic paddle. Point it at the
+        stage, not at the ceiling.</td></tr>
+    </table>
+    <div class="note">The copies in your RF Spectrum deck are 200 to 250 px wide,
+      well under the 1600 px standard, and upscaling is prohibited. These have to
+      come from the manufacturer at full size.</div>
+  </div>
+  <div class="slot" data-file="../wireless/wireless-log-periodic-antenna-01.png"></div>
+</div>
+
+<div class="card">
+  <div class="meta">
+    <h3>2. Helical antenna</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>wireless-helical-antenna-01.png</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/wireless/</code></td></tr>
+      <tr><td class="k">Format</td><td>PNG, 1600 px wide minimum</td></tr>
+      <tr><td class="k">Used on</td><td>Wireless: Antennas and Distribution</td></tr>
+      <tr><td class="k">Must show</td><td>The helix and its reflector plate, at an angle
+        that makes the coil turns countable.</td></tr>
+      <tr><td class="k">Source</td><td>Manufacturer product page at full resolution.</td></tr>
+      <tr><td class="k">Alt text</td><td>A helical antenna, its coil turns visible in
+        front of a circular reflector plate</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 3. A helical. Longer throw, narrower beam,
+        and it does not care how the transmitter is rotated.</td></tr>
+    </table>
+  </div>
+  <div class="slot" data-file="../wireless/wireless-helical-antenna-01.png"></div>
+</div>
+
+<div class="card">
+  <div class="meta">
+    <h3>3. A wireless system, receiver and both transmitter types</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>wireless-system-components-01.png</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/wireless/</code></td></tr>
+      <tr><td class="k">Format</td><td>PNG, 1600 px wide minimum</td></tr>
+      <tr><td class="k">Used on</td><td>Wireless: System Architecture</td></tr>
+      <tr><td class="k">Must show</td><td>A half-rack receiver with both whip antennas,
+        a handheld transmitter, and a bodypack with a lavalier, in one frame.</td></tr>
+      <tr><td class="k">Source</td><td>Shure's press image for a QLXD or ULXD system set
+        is exactly this shot, or photograph the lab's own rig against a plain wall.</td></tr>
+      <tr><td class="k">Alt text</td><td>A wireless receiver with two antennas beside a
+        handheld transmitter and a bodypack transmitter with a lavalier microphone</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 1. The four blocks, as they actually
+        arrive in a case.</td></tr>
+    </table>
+  </div>
+  <div class="slot" data-file="../wireless/wireless-system-components-01.png"></div>
+</div>
+
+<h2 class="sec">Software interfaces</h2>
+
+<div class="card">
+  <div class="meta">
+    <h3>4. Dante Controller routing grid</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>audio-protocols-dante-controller-routing-grid-01.png</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/audio-protocols/</code></td></tr>
+      <tr><td class="k">Format</td><td>PNG, native retina, window capture only</td></tr>
+      <tr><td class="k">Used on</td><td>Software: Dante Controller and the Dante Essentials</td></tr>
+      <tr><td class="k">Must show</td><td>The Routing tab with at least four devices
+        discovered, transmitters expanded across the top, receivers down the side, and
+        <strong>several subscriptions already made</strong> so the green checks are
+        visible. Device names should read as real names, not model defaults.</td></tr>
+      <tr><td class="k">How</td><td>Light mode. Window capture, Shift Command 4 then
+        Space. Widen the window so no column is truncated.</td></tr>
+      <tr><td class="k">Alt text</td><td>The Dante Controller routing matrix with
+        transmitter channels across the top, receiver channels down the side, and
+        subscriptions made at several intersections</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 1. The matrix. Transmitters across the
+        top, receivers down the side.</td></tr>
+    </table>
+    <div class="note">Check the window for anything identifying before you save: a
+      computer name in the title bar, a Finder window behind, a notification.</div>
+  </div>
+  <div class="slot" data-file="../audio-protocols/audio-protocols-dante-controller-routing-grid-01.png"></div>
+</div>
+
+<div class="card">
+  <div class="meta">
+    <h3>5. Dante Controller clock status</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>audio-protocols-dante-controller-clock-status-01.png</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/audio-protocols/</code></td></tr>
+      <tr><td class="k">Format</td><td>PNG, native retina, window capture only</td></tr>
+      <tr><td class="k">Used on</td><td>Software: Dante Controller and the Dante Essentials</td></tr>
+      <tr><td class="k">Must show</td><td>The Clock Status tab with the leader clock
+        marked and the followers listed, and the Preferred Leader column visible.</td></tr>
+      <tr><td class="k">Alt text</td><td>The Dante Controller clock status tab showing
+        which device is the leader clock and which devices are following it</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 2. Read this tab before you believe a
+        system is healthy.</td></tr>
+    </table>
+  </div>
+  <div class="slot" data-file="../audio-protocols/audio-protocols-dante-controller-clock-status-01.png"></div>
+</div>
+
+<div class="card">
+  <div class="meta">
+    <h3>6. Wireless coordination software, calculated plan</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>wireless-coordination-software-frequency-plan-01.png</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/wireless/</code></td></tr>
+      <tr><td class="k">Format</td><td>PNG, native retina, window capture only</td></tr>
+      <tr><td class="k">Used on</td><td>Software: Wireless System Management</td></tr>
+      <tr><td class="k">Must show</td><td>Shure Wireless Workbench or Sennheiser Wireless
+        Systems Manager with a <strong>calculated frequency plan on screen</strong>:
+        the inventory list on one side and the assigned frequencies beside it. A scan
+        trace in the background is a bonus.</td></tr>
+      <tr><td class="k">How</td><td>Use a show file with at least eight channels so the
+        list looks like real work. Do not use the empty startup state.</td></tr>
+      <tr><td class="k">Alt text</td><td>Wireless coordination software showing an
+        equipment inventory beside a calculated list of compatible frequencies</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 1. Inventory on one side, a compatible
+        frequency plan on the other.</td></tr>
+    </table>
+    <div class="note">Venue name and location fields are often filled in. Blank them or
+      crop them out before saving. The repo is public.</div>
+  </div>
+  <div class="slot" data-file="../wireless/wireless-coordination-software-frequency-plan-01.png"></div>
+</div>
+
+<div class="card">
+  <div class="meta">
+    <h3>7. Wireshark with a display filter applied</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>network-diagnostics-wireshark-ptp-filter-01.png</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/network-diagnostics/</code></td></tr>
+      <tr><td class="k">Format</td><td>PNG, native retina, window capture only</td></tr>
+      <tr><td class="k">Used on</td><td>Software: Network Capture and Analysis</td></tr>
+      <tr><td class="k">Must show</td><td>A capture with <code>ptp</code> typed in the
+        display filter bar and applied, the packet list showing Announce, Sync and
+        Follow_Up messages, and the time column set to seconds since the previous
+        displayed packet.</td></tr>
+      <tr><td class="k">How</td><td>View, Time Display Format, Seconds Since Previous
+        Displayed Packet. That setting is the whole point of the figure.</td></tr>
+      <tr><td class="k">Alt text</td><td>A Wireshark capture filtered to Precision Time
+        Protocol, showing announce, sync and follow-up messages at a steady interval</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 2. The same capture becomes readable the
+        moment the time column shows intervals.</td></tr>
+    </table>
+    <div class="note">Source and destination IP addresses are fine. A computer name in
+      the title bar is not.</div>
+  </div>
+  <div class="slot" data-file="../network-diagnostics/network-diagnostics-wireshark-ptp-filter-01.png"></div>
+</div>
+
+<h2 class="sec">Bench</h2>
+
+<div class="card">
+  <div class="meta">
+    <h3>8. Soldering iron tips, four shapes</h3>
+    <table class="f">
+      <tr><td class="k">Filename</td><td><code>electronics-soldering-iron-tip-shapes-01.jpg</code></td></tr>
+      <tr><td class="k">Folder</td><td><code>Images/electronics/</code></td></tr>
+      <tr><td class="k">Format</td><td>JPEG, quality 85 to 90, 1600 px wide minimum</td></tr>
+      <tr><td class="k">Used on</td><td>Electronics: Soldering Technique and Inspection</td></tr>
+      <tr><td class="k">Must show</td><td>A chisel, a bevel or hoof, a conical and a knife
+        tip laid side by side on a plain light surface, working ends toward the camera,
+        close enough that the contact faces are distinguishable.</td></tr>
+      <tr><td class="k">How</td><td>Plain white or light grey background. Even light,
+        no hard shadows. Shoot straight down.</td></tr>
+      <tr><td class="k">Alt text</td><td>Four soldering iron tips side by side: chisel,
+        bevel, conical and knife, with their working faces toward the camera</td></tr>
+      <tr><td class="k">Caption</td><td>Figure 4. Contact area is what moves heat. Use
+        the largest tip that fits the work.</td></tr>
+    </table>
+    <div class="note">If the bench does not have all four, shoot what it has and say so.
+      Three is enough to make the point. A manufacturer's tip range image on white is an
+      acceptable substitute.</div>
+  </div>
+  <div class="slot" data-file="../electronics/electronics-soldering-iron-tip-shapes-01.jpg"></div>
+</div>
+
+<h2 class="sec">Where the folders are</h2>
+
+<div class="path">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Images/wireless</div>
+<div class="path">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Images/audio-protocols</div>
+<div class="path">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Images/network-diagnostics</div>
+<div class="path">/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Images/electronics</div>
+
+<p style="font-size:0.9em;color:#616161;">The <code>wireless</code> folder does not
+exist yet. Create it. The other three already hold files.</p>
+
+<p style="font-size:0.9em;color:#616161;">When these land, tell me and I will write
+the img tags onto the pages in one pass with the alt text and captions above, then
+reship the cartridge. Nothing points at these filenames yet, so no page is showing a
+broken box in the meantime.</p>
+
+</div>
+
+<script>
+(function () {
+  document.querySelectorAll('.slot').forEach(function (slot) {
+    var src = slot.getAttribute('data-file');
+    var img = new Image();
+    img.onload = function () {
+      slot.innerHTML = '';
+      var el = document.createElement('img');
+      el.src = src;
+      el.alt = '';
+      slot.appendChild(el);
+      var d = document.createElement('div');
+      var w = img.naturalWidth, h = img.naturalHeight;
+      if (w < 1600) {
+        d.className = 'warn';
+        d.textContent = w + ' x ' + h + '  under 1600 px wide';
+      } else {
+        d.className = 'ok';
+        d.textContent = w + ' x ' + h + '  ok';
+      }
+      slot.appendChild(d);
+    };
+    img.onerror = function () {
+      slot.innerHTML =
+        '<div class="empty">not saved yet</div>' +
+        '<div class="dims">' + src.split('/').pop() + '</div>';
+    };
+    img.src = src;
+  });
+})();
+</script>
+
+</body>
+</html>
