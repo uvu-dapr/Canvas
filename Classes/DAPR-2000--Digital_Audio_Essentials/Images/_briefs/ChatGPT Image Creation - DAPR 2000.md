@@ -24,9 +24,9 @@ Create a 1600 x 900 pixel PNG with a fully transparent background.
 
 Flat vector-style illustration, clean line weights, no gradients, no drop shadows, no 3D, no photorealism, no watermark, no signature.
 
-Draw one smooth sine wave running left to right across the full width, about two and a half cycles. Mark one complete cycle with a horizontal double-headed arrow above the wave. Mark the vertical distance from the centre line to the crest with a vertical double-headed arrow. Draw a dashed horizontal centre line through the middle.
+Draw one smooth sine wave running left to right across the full width, about two and a half cycles. Mark one complete cycle with a horizontal double-headed arrow above the wave. Mark the vertical distance from the center line to the crest with a vertical double-headed arrow. Draw a dashed horizontal center line through the middle.
 
-Label in dark grey #212121, exactly: "Wavelength", "Period", "Amplitude", "One cycle", "Crest", "Trough", "Zero crossing".
+Label in dark gray #212121, exactly: "Wavelength", "Period", "Amplitude", "One cycle", "Crest", "Trough", "Zero crossing".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -59,7 +59,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw five rounded rectangles in a single horizontal row, connected left to right by arrows. Inside each box place the stage name on the first line and the role title on a second, smaller line beneath it.
 
-Label in dark grey #212121, exactly: "Tracking", "Recording Engineer", "Overdubs", "Session Musician", "Editing", "Editor", "Mixing", "Mix Engineer", "Mastering", "Mastering Engineer".
+Label in dark gray #212121, exactly: "Tracking", "Recording Engineer", "Overdubs", "Session Musician", "Editing", "Editor", "Mixing", "Mix Engineer", "Mastering", "Mastering Engineer".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -92,7 +92,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw five rounded rectangles in a single horizontal row connected left to right by arrows, each with the stage name on the first line and the role title on a smaller second line.
 
-Label in dark grey #212121, exactly: "Production Sound", "Production Mixer", "Dialogue Edit", "Dialogue Editor", "Sound Design", "Sound Designer", "Foley", "Foley Artist", "Final Mix", "Re-recording Mixer".
+Label in dark gray #212121, exactly: "Production Sound", "Production Mixer", "Dialogue Edit", "Dialogue Editor", "Sound Design", "Sound Designer", "Foley", "Foley Artist", "Final Mix", "Re-recording Mixer".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -125,7 +125,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw a horizontal signal path with five simple stage icons connected by arrows: a microphone, a stage box, a mixing console, a loudspeaker, and a seated audience shape. Beneath each icon place a small rounded label box holding the role title.
 
-Label in dark grey #212121, exactly: "Stage", "Stage Tech", "Snake", "Systems Tech", "Console", "Front of House Engineer", "Monitors", "Monitor Engineer", "Audience".
+Label in dark gray #212121, exactly: "Stage", "Stage Tech", "Snake", "Systems Tech", "Console", "Front of House Engineer", "Monitors", "Monitor Engineer", "Audience".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -158,7 +158,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw four rounded rectangles in a horizontal row connected by arrows, with a curved feedback arrow running from the last box back to the second. Each box carries the stage name on the first line and the role title on a smaller second line.
 
-Label in dark grey #212121, exactly: "Asset Creation", "Sound Designer", "Implementation", "Technical Sound Designer", "Middleware", "Audio Programmer", "Runtime Mix", "Player".
+Label in dark gray #212121, exactly: "Asset Creation", "Sound Designer", "Implementation", "Technical Sound Designer", "Middleware", "Audio Programmer", "Runtime Mix", "Player".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -179,7 +179,7 @@ Do not draw any logo, brand mark, model number, product photograph, or software 
 | Destination folder | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Images/careers/` |
 | Raw URL after push | `https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2000--Digital_Audio_Essentials/Images/careers/careers-pathway-map-01.png` |
 | Used on | Canvas page `Careers: Specialized Audio Jobs & Finding Your Career Path` |
-| Alt text | `Branching map from a shared foundation into four specialised audio career tracks` |
+| Alt text | `Branching map from a shared foundation into four specialized audio career tracks` |
 | Caption | `Figure 1. One foundation, four directions. Most careers start in the same place.` |
 
 **ChatGPT prompt (paste as-is):**
@@ -191,7 +191,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw one wide rounded rectangle at the left labeled with the foundation. From its right edge draw four arrows fanning out to four rounded rectangles stacked vertically on the right side.
 
-Label in dark grey #212121, exactly: "Core Audio Skills", "Music", "Media and Post", "Live and Install", "Technology and Research".
+Label in dark gray #212121, exactly: "Core Audio Skills", "Music", "Media and Post", "Live and Install", "Technology and Research".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -222,9 +222,9 @@ Create a 1600 x 900 pixel PNG with a fully transparent background.
 
 Flat vector-style illustration, clean line weights, no gradients, no drop shadows, no 3D, no photorealism, no watermark, no signature.
 
-Draw one smooth analog sine wave in light grey across the full width. Overlay evenly spaced vertical sample lines with a solid dot where each line meets the curve. Beneath the dots draw the resulting stair step shape in a second color. Add a horizontal double-headed arrow between two adjacent sample lines and a vertical double-headed arrow between two adjacent quantization levels.
+Draw one smooth analog sine wave in light gray across the full width. Overlay evenly spaced vertical sample lines with a solid dot where each line meets the curve. Beneath the dots draw the resulting stair step shape in a second color. Add a horizontal double-headed arrow between two adjacent sample lines and a vertical double-headed arrow between two adjacent quantization levels.
 
-Label in dark grey #212121, exactly: "Analog signal", "Sample points", "Quantized output", "Sample interval", "Quantization step".
+Label in dark gray #212121, exactly: "Analog signal", "Sample points", "Quantized output", "Sample interval", "Quantization step".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -257,7 +257,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw three vertical bars of increasing height side by side, evenly spaced, sitting on a common baseline. Label each bar underneath with its bit depth and inside or above with its dynamic range figure. Add a vertical axis line on the left with tick marks.
 
-Label in dark grey #212121, exactly: "16 bit", "24 bit", "32 bit float", "96 dB", "144 dB", "Dynamic range".
+Label in dark gray #212121, exactly: "16 bit", "24 bit", "32 bit float", "96 dB", "144 dB", "Dynamic range".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -288,9 +288,9 @@ Create a 1600 x 900 pixel PNG with a fully transparent background.
 
 Flat vector-style illustration, clean line weights, no gradients, no drop shadows, no 3D, no photorealism, no watermark, no signature.
 
-Draw two horizontal timeline lanes stacked vertically, each the full width, each with a light grey background strip. In the upper lane draw one perfectly flat horizontal line. In the lower lane draw a line with gentle rises and falls and several breakpoint dots. Place section markers as small vertical ticks along the top of both lanes.
+Draw two horizontal timeline lanes stacked vertically, each the full width, each with a light gray background strip. In the upper lane draw one perfectly flat horizontal line. In the lower lane draw a line with gentle rises and falls and several breakpoint dots. Place section markers as small vertical ticks along the top of both lanes.
 
-Label in dark grey #212121, exactly: "Static mix", "Automated mix", "Verse", "Chorus", "Verse", "Chorus", "Outro".
+Label in dark gray #212121, exactly: "Static mix", "Automated mix", "Verse", "Chorus", "Verse", "Chorus", "Outro".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -323,7 +323,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw a graph with a horizontal frequency axis and a vertical sound pressure level axis. Plot three smooth curves stacked vertically, each dipping in the middle of the frequency range and rising steeply at the left end and moderately at the right end. Label each curve at its left end.
 
-Label in dark grey #212121, exactly: "20 Hz", "200 Hz", "2 kHz", "20 kHz", "Frequency", "Sound Pressure Level", "40 phon", "60 phon", "80 phon".
+Label in dark gray #212121, exactly: "20 Hz", "200 Hz", "2 kHz", "20 kHz", "Frequency", "Sound Pressure Level", "40 phon", "60 phon", "80 phon".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -356,7 +356,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw one wide horizontal bar spanning the full width, divided into three colored segments of unequal width. Below the bar draw a scale line with tick marks. Above the bar draw a bracket spanning the whole width.
 
-Label in dark grey #212121, exactly: "20 Hz", "200 Hz", "2 kHz", "20 kHz", "Low", "Mid", "High", "Audible range".
+Label in dark gray #212121, exactly: "20 Hz", "200 Hz", "2 kHz", "20 kHz", "Low", "Mid", "High", "Audible range".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -389,7 +389,7 @@ Flat vector-style illustration, clean line weights, no gradients, no drop shadow
 
 Draw a vertical scale line running the full height with evenly spaced tick marks. To the right of each tick draw a small rounded label box. Shade the background lightly green at the bottom, amber in the middle and red at the top.
 
-Label in dark grey #212121, exactly: "0 dB", "30 dB", "60 dB", "85 dB", "110 dB", "130 dB", "Threshold of hearing", "Quiet room", "Conversation", "Hearing damage risk", "Live concert", "Threshold of pain".
+Label in dark gray #212121, exactly: "0 dB", "30 dB", "60 dB", "85 dB", "110 dB", "130 dB", "Threshold of hearing", "Quiet room", "Conversation", "Hearing damage risk", "Live concert", "Threshold of pain".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
@@ -420,13 +420,13 @@ Create a 1600 x 900 pixel PNG with a fully transparent background.
 
 Flat vector-style illustration, clean line weights, no gradients, no drop shadows, no 3D, no photorealism, no watermark, no signature.
 
-Draw one circle at the centre. Around it place eight rounded rectangles evenly spaced in a ring, each connected to the centre circle by a straight line. Keep the centre circle clearly larger than the outer boxes.
+Draw one circle at the center. Around it place eight rounded rectangles evenly spaced in a ring, each connected to the center circle by a straight line. Keep the center circle clearly larger than the outer boxes.
 
-Label in dark grey #212121, exactly: "DAPR 2000", "Sound and Hearing", "The Decibel", "Wave Properties", "Digital Domain", "Microphones", "Signal Flow", "Processing", "Monitoring".
+Label in dark gray #212121, exactly: "DAPR 2000", "Sound and Hearing", "The Decibel", "Wave Properties", "Digital Domain", "Microphones", "Signal Flow", "Processing", "Monitoring".
 
 Use #212121 for outlines and all text, #0D47A1 as the primary accent, #1B5E20 as the secondary accent, and #993300 for any warm highlight.
 
-Radial, centre outward.
+Radial, center outward.
 
 Do not draw any logo, brand mark, model number, product photograph, or software interface. Do not include borders, frames, title bars, decorative people, or caption text. Do not add any text other than the labels listed above.
 ```

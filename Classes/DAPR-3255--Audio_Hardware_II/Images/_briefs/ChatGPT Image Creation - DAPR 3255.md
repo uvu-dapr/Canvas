@@ -216,8 +216,8 @@ line. Label them exactly "A", "B", "C", "D".
 Inside the switch draw a small two column table with a header row reading exactly
 "Port" and "Address", and four body rows reading "1 / A", "2 / B", "3 / C", "4 / D".
 
-Draw one thick arrow in #1B5E20 travelling from square A up into the switch and back
-down to square C only. Draw faint dashed grey #616161 lines from the switch toward B
+Draw one thick arrow in #1B5E20 traveling from square A up into the switch and back
+down to square C only. Draw faint dashed gray #616161 lines from the switch toward B
 and D to show they are not used.
 
 Use #212121 for all text outside the switch. Reading direction is left to right.
@@ -1421,7 +1421,7 @@ any text other than the labels listed above.
 | Destination folder | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Images/network-diagnostics/` |
 | Raw URL after push | `https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-3255--Audio_Hardware_II/Images/network-diagnostics/network-diagnostics-ping-round-trip-01.png` |
 | Used on | Canvas page `Networking: Ping` |
-| Alt text | `Echo request travelling out and echo reply returning, with the round trip time measured` |
+| Alt text | `Echo request traveling out and echo reply returning, with the round trip time measured` |
 | Caption | `Figure 2. Ping measures the round trip, not the one way trip.` |
 
 **ChatGPT prompt (paste as-is):**

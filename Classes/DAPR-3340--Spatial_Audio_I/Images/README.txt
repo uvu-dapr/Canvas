@@ -21,7 +21,7 @@ FILES
     ITU-R BS.2051-3 Sound System I (0+7+0) 7.1 layout.
 
 1-25LFEVsBassManagement.png
-    Separates the dedicated LFE programme channel from playback bass management.
+    Separates the dedicated LFE program channel from playback bass management.
 
 1-26SevenPointOneNamingCrosswalk.png
     Crosswalk between ITU/professional labels and common consumer names.

@@ -34,10 +34,10 @@ arrows, with a stereo waveform entering at the far left and leaving at the far
 right. The waveform on the right is slightly denser and more even than the one on
 the left, but not squared off.
 
-Label the four boxes in dark grey #212121, exactly, in this order:
+Label the four boxes in dark gray #212121, exactly, in this order:
 "STEREO MIX", "EQ", "COMPRESSION", "LIMITER".
 
-Under each of the middle three boxes place one short line of smaller grey text,
+Under each of the middle three boxes place one short line of smaller gray text,
 exactly:
 under EQ: "broad strokes, 1 to 2 dB"
 under COMPRESSION: "1.5:1 to 3:1, slow attack"
@@ -79,7 +79,7 @@ Flat vector-style technical illustration. Clean line weights, no gradients, no
 drop shadows, no 3D, no photorealism, no watermark, no signature.
 
 Divide the canvas into a top half and a bottom half separated by a thin dashed
-horizontal grey line.
+horizontal gray line.
 
 In the top half show three stereo waveform blocks side by side, left to right,
 all the same width. The left one is clearly dynamic with tall peaks and visible
@@ -95,7 +95,7 @@ Label the top half on its left edge, rotated vertically, exactly: "AS DELIVERED"
 Label the bottom half on its left edge, rotated vertically, exactly: "AS PLAYED
 BACK".
 
-Under each of the three waveforms in the top half, place one short grey label,
+Under each of the three waveforms in the top half, place one short gray label,
 exactly, left to right: "-16 LUFS", "-14 LUFS", "-8 LUFS".
 
 Use #0D47A1 for the two left waveforms, #1B5E20 for the two middle waveforms,
@@ -135,10 +135,10 @@ Show three large rounded rectangular boxes arranged left to right, connected by
 two thick arrows pointing right. Add a third curved arrow that leaves the middle
 box, arcs below the row, and re-enters the right box from underneath.
 
-Label the three boxes in dark grey #212121, exactly, left to right:
+Label the three boxes in dark gray #212121, exactly, left to right:
 "MIX 1A", "MIX 1B", "MIX 2".
 
-Under each box place two short lines of smaller grey text, exactly:
+Under each box place two short lines of smaller gray text, exactly:
 under MIX 1A: "your first pass" then "100 points"
 under MIX 1B: "the class listens" then "50 points"
 under MIX 2: "the revision" then "75 points"

@@ -70,7 +70,7 @@ From the left-hand edge of the rectangle draw two short horizontal leads
 going left, one from the upper portion and one from the lower portion.
 Place a plus sign just above the upper lead.
 
-Label in dark grey #212121, spelled exactly: "Loudspeaker", "LS1", "Voice
+Label in dark gray #212121, spelled exactly: "Loudspeaker", "LS1", "Voice
 coil", "Cone", "+".
 
 Place "Voice coil" with a thin leader line pointing at the rectangle. Place
@@ -113,7 +113,7 @@ the circle. The vertical line must sit inside the circle, not outside it.
 From the right-hand side of the circle draw two short horizontal leads going
 right, one from the upper right and one from the lower right.
 
-Label in dark grey #212121, spelled exactly: "Microphone", "MIC1",
+Label in dark gray #212121, spelled exactly: "Microphone", "MIC1",
 "Diaphragm".
 
 Place "Diaphragm" with a thin leader line pointing at the vertical line
@@ -160,7 +160,7 @@ horizontal lead on the left, then a smooth S-shaped curve, then a short
 horizontal lead on the right. The S-curve replaces the middle of the wire.
 Do not draw a rectangle around it.
 
-Label in dark grey #212121, spelled exactly: "IEC", "ANSI", "F1", "Fuse".
+Label in dark gray #212121, spelled exactly: "IEC", "ANSI", "F1", "Fuse".
 
 Place "IEC" centered above the left symbol and "ANSI" centered above the
 right symbol. Place "F1" just below the left symbol. Place "Fuse" centered
@@ -212,7 +212,7 @@ they are clearly separated.
 In the lower row, draw the same plug and socket with the triangle's tip
 nested inside the opening of the bracket, so they are clearly mated.
 
-Label in dark grey #212121, spelled exactly: "Plug (P1)", "Jack (J1)",
+Label in dark gray #212121, spelled exactly: "Plug (P1)", "Jack (J1)",
 "Unmated", "Mated".
 
 Place "Plug (P1)" below the plug in the upper row and "Jack (J1)" below the

@@ -52,7 +52,7 @@ the bottom wire.
 Place one arrowhead on the top wire between the diode and the resistor,
 pointing right.
 
-Label in dark grey #212121, spelled exactly: "DC Supply", "12 V", "D1",
+Label in dark gray #212121, spelled exactly: "DC Supply", "12 V", "D1",
 "Load", "Current flow".
 
 Use #212121 for all wires, component outlines, and text. Use #0D47A1 for the
@@ -106,7 +106,7 @@ upper node to the same lower node, and place a diode in it. The diode must be
 drawn as a solid triangle pointing UP with a horizontal bar touching its
 upper tip, so the bar sits at the top, nearest the upper node.
 
-Label in dark grey #212121, spelled exactly: "DC Supply", "12 V", "Relay
+Label in dark gray #212121, spelled exactly: "DC Supply", "12 V", "Relay
 Coil", "D1", "Switch".
 
 Use #212121 for all wires, component outlines, and text. Use #B71C1C for a

@@ -108,7 +108,7 @@ A wide banner illustration, overhead view, of a listening position in a small ro
 Two speaker shapes at the top angled inward toward a single head shape at the bottom
 center, forming a triangle. Straight lines run from each speaker to the head. Additional
 lines bounce off the left and right walls before reaching the head, drawn lighter to show
-they are reflections. Deep blue and warm grey palette.
+they are reflections. Deep blue and warm gray palette.
 ```
 
 ### A2-2 Sound and hearing
@@ -119,7 +119,7 @@ they are reflections. Deep blue and warm grey palette.
 A wide banner illustration. On the left, a simple sine wave. Moving right, the wave
 gradually separates into a series of vertical bars of increasing then decreasing height,
 suggesting a frequency spectrum. The bars run from tall on the left to short on the right.
-Deep teal and warm grey palette.
+Deep teal and warm gray palette.
 ```
 
 ### A2-3 EQ and dynamics
@@ -153,7 +153,7 @@ out at the right edge. Deep orange and charcoal palette.
 ```
 A wide banner illustration. A smooth continuous sine wave runs left to right. Overlaid on
 it, a stepped staircase shape follows the same contour in discrete horizontal steps. Small
-dots mark where each step meets the smooth curve. Deep violet and warm grey palette.
+dots mark where each step meets the smooth curve. Deep violet and warm gray palette.
 ```
 
 ### A2-6 Mixing and mastering
@@ -163,7 +163,7 @@ dots mark where each step meets the smooth curve. Deep violet and warm grey pale
 ```
 A wide banner illustration. A row of eight vertical fader tracks with knobs at varying
 heights across the left two thirds. Lines from the bottom of each track converge toward
-the right into a single vertical meter bar. Slate grey and deep green palette.
+the right into a single vertical meter bar. Slate gray and deep green palette.
 ```
 
 ### A2-7 Microphones
@@ -176,7 +176,7 @@ Left: a perfect circle.
 Center: a heart shape with the point facing downward.
 Right: a figure of eight, two circles stacked vertically touching at the middle.
 Each shape has a small dot at its center marking the microphone position.
-Deep red and warm grey palette.
+Deep red and warm gray palette.
 ```
 
 ---

@@ -49,7 +49,7 @@ positioned in space rather than assigned to a speaker.
 
 Draw speakers as simple trapezoids. Draw the object dots filled in orange.
 
-Label the diagram in dark grey #212121, exactly: "Stereo", "5.1 Channel Based", "Object Based Immersive".
+Label the diagram in dark gray #212121, exactly: "Stereo", "5.1 Channel Based", "Object Based Immersive".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -91,7 +91,7 @@ labels do not collide.
 
 Place the decade labels directly on the timeline beneath the arrow.
 
-Label the diagram in dark grey #212121, exactly: "Quadraphonic", "Dolby Stereo", "Dolby Pro Logic", "Dolby Digital 5.1", "DTS", "7.1 Surround", "Dolby Atmos", "1970s", "1980s", "1990s", "2000s", "2010s".
+Label the diagram in dark gray #212121, exactly: "Quadraphonic", "Dolby Stereo", "Dolby Pro Logic", "Dolby Digital 5.1", "DTS", "7.1 Surround", "Dolby Atmos", "1970s", "1980s", "1990s", "2000s", "2010s".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -135,7 +135,7 @@ speakers as small trapezoids around the perimeter. In the theater, draw multiple
 rows of small seat rectangles and several surround speakers along each side wall
 rather than one pair.
 
-Label the diagram in dark grey #212121, exactly: "Professional", "Consumer", "Theatrical".
+Label the diagram in dark gray #212121, exactly: "Professional", "Consumer", "Theatrical".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -184,7 +184,7 @@ the LFE channel is not the same thing as bass management.
 
 Use a dashed line style for the LFE bypass path and solid lines everywhere else.
 
-Label the diagram in dark grey #212121, exactly: "L", "C", "R", "Ls", "Rs", "Bass Management Crossover", "Satellites", "Subwoofer", "LFE".
+Label the diagram in dark gray #212121, exactly: "L", "C", "R", "Ls", "Rs", "Bass Management Crossover", "Satellites", "Subwoofer", "LFE".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -231,7 +231,7 @@ pattern shape with its null facing the front of the image.
 
 Draw a small arrow at the top of each diagram pointing up, to indicate the stage direction.
 
-Label the diagram in dark grey #212121, exactly: "Decca Tree", "Fukada Tree", "IRT Cross", "Hamasaki Square", "Stage".
+Label the diagram in dark gray #212121, exactly: "Decca Tree", "Fukada Tree", "IRT Cross", "Hamasaki Square", "Stage".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -275,7 +275,7 @@ branch ending in two small speaker trapezoids.
 
 Keep all five stage rectangles the same height and width.
 
-Label the diagram in dark grey #212121, exactly: "Microphone Array", "Preamps", "A to D Conversion", "Multitrack Recorder", "Monitor Controller", "Headphone Monitoring", "Speaker Monitoring".
+Label the diagram in dark gray #212121, exactly: "Microphone Array", "Preamps", "A to D Conversion", "Multitrack Recorder", "Monitor Controller", "Headphone Monitoring", "Speaker Monitoring".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -321,7 +321,7 @@ Connect left to middle with thin lines, several sources feeding each bus, then
 middle to right with thicker lines. Use one accent color for the thicker bus to
 output lines.
 
-Label the diagram in dark grey #212121, exactly: "Source Tracks", "Submix Buses", "5.1 Output Path", "Dialogue", "Music", "Effects".
+Label the diagram in dark gray #212121, exactly: "Source Tracks", "Submix Buses", "5.1 Output Path", "Dialogue", "Music", "Effects".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -363,7 +363,7 @@ by a right pointing arrow.
 Draw the numerals 1 through 6 inside filled circles at the top left corner of
 each rectangle.
 
-Label the diagram in dark grey #212121, exactly: "Session Prep", "Output Configuration", "Static Balance", "Panning and Placement", "Automation", "Print the Mix".
+Label the diagram in dark gray #212121, exactly: "Session Prep", "Output Configuration", "Static Balance", "Panning and Placement", "Automation", "Print the Mix".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -405,7 +405,7 @@ Above the chain, draw a thin horizontal bar split into six segments aligned with
 the blocks, shaded progressively darker from left to right, to suggest cumulative
 processing. Do not label that bar.
 
-Label the diagram in dark grey #212121, exactly: "Mix", "Multiband Compression", "Mid and Side", "Limiting", "Dither", "Master".
+Label the diagram in dark gray #212121, exactly: "Mix", "Multiband Compression", "Mid and Side", "Limiting", "Dither", "Master".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -449,7 +449,7 @@ control knobs above it, suggesting one finished program.
 
 Put the panel labels at the top of each panel.
 
-Label the diagram in dark grey #212121, exactly: "Mixing", "Mastering", "Many Elements", "One Program".
+Label the diagram in dark gray #212121, exactly: "Mixing", "Mastering", "Many Elements", "One Program".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -495,7 +495,7 @@ around it, and the staircase steps broken up rather than blocky.
 
 Label each panel at its left edge.
 
-Label the diagram in dark grey #212121, exactly: "Without Dither", "With Dither".
+Label the diagram in dark gray #212121, exactly: "Without Dither", "With Dither".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -535,9 +535,9 @@ left to right: the format name, a small speaker layout icon drawn as dots
 arranged around a center point, and a channel count numeral.
 
 Keep the rows evenly spaced and left aligned. Alternate the row background between
-white and a very light grey.
+white and a very light gray.
 
-Label the diagram in dark grey #212121, exactly: "Dolby Digital", "DTS", "Dolby TrueHD", "DTS-HD Master Audio", "Dolby Atmos", "5.1", "7.1", "Object Based".
+Label the diagram in dark gray #212121, exactly: "Dolby Digital", "DTS", "Dolby TrueHD", "DTS-HD Master Audio", "Dolby Atmos", "5.1", "7.1", "Object Based".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -583,7 +583,7 @@ each ear from different angles.
 
 Draw a single right pointing arrow between the two panels.
 
-Label the diagram in dark grey #212121, exactly: "Ambisonic Capture", "Binaural Reproduction".
+Label the diagram in dark gray #212121, exactly: "Ambisonic Capture", "Binaural Reproduction".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -628,7 +628,7 @@ Draw thin curved connector lines between matching letters across the two stacks,
 so the crossing lines make the reordering visible. Color the W rectangles one
 color and leave the other three a neutral color.
 
-Label the diagram in dark grey #212121, exactly: "AmbiX", "FuMa", "W", "X", "Y", "Z".
+Label the diagram in dark gray #212121, exactly: "AmbiX", "FuMa", "W", "X", "Y", "Z".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -676,7 +676,7 @@ overhead rather than at ear level.
 
 Add a short key at the bottom with one solid trapezoid and one outlined trapezoid.
 
-Label the diagram in dark grey #212121, exactly: "Ear Level", "Height", "9.0.4".
+Label the diagram in dark gray #212121, exactly: "Ear Level", "Height", "9.0.4".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -722,7 +722,7 @@ Draw a thick arrow from left to center labeled with the bed and object text, and
 two arrows from center to the two right rectangles. Draw one thin dashed arrow
 running backward from center to left, to show timecode returning to the DAW.
 
-Label the diagram in dark grey #212121, exactly: "Pro Tools", "Dolby Atmos Renderer", "Speaker Array", "Headphones", "Beds and Objects", "Timecode".
+Label the diagram in dark gray #212121, exactly: "Pro Tools", "Dolby Atmos Renderer", "Speaker Array", "Headphones", "Beds and Objects", "Timecode".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -767,7 +767,7 @@ right branch line with the short answer words.
 Beneath each ending rectangle, add two or three small example rectangles showing
 typical content for that destination.
 
-Label the diagram in dark grey #212121, exactly: "Audio Track", "Does it need to move in 3D space?", "No", "Yes", "Bed Path", "Object Path", "Ambience", "Music", "Flyover", "Dialogue".
+Label the diagram in dark gray #212121, exactly: "Audio Track", "Does it need to move in 3D space?", "No", "Yes", "Bed Path", "Object Path", "Ambience", "Music", "Flyover", "Dialogue".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -815,7 +815,7 @@ Put a small numeral inside each circle, counting 1 through 8.
 Add a bracket to the left of the bed rectangle and a bracket to the left of the
 object area, each with its label.
 
-Label the diagram in dark grey #212121, exactly: "7.1.2 Bed", "Objects", "Fixed Channels", "Positioned in 3D".
+Label the diagram in dark gray #212121, exactly: "7.1.2 Bed", "Objects", "Fixed Channels", "Positioned in 3D".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -861,7 +861,7 @@ lines, representing individual channel based renders.
 
 Keep the four second level rectangles the same size as each other.
 
-Label the diagram in dark grey #212121, exactly: "Dolby Atmos Master", "ADM BWF", "IMF IAB", "Binaural", "Re-renders", "7.1", "5.1", "Stereo".
+Label the diagram in dark gray #212121, exactly: "Dolby Atmos Master", "ADM BWF", "IMF IAB", "Binaural", "Re-renders", "7.1", "5.1", "Stereo".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.
@@ -906,7 +906,7 @@ circles, with no text next to them.
 
 Make the center circle a different fill color from the four outer circles.
 
-Label the diagram in dark grey #212121, exactly: "Spatial Audio", "Channel Based", "Object Based", "Ambisonic", "Binaural".
+Label the diagram in dark gray #212121, exactly: "Spatial Audio", "Channel Based", "Object Based", "Ambisonic", "Binaural".
 
 Use #1B5E20 green as the primary color, #0D47A1 blue as the secondary color,
 and #993300 orange as the single accent. Use #212121 for all text and outlines.

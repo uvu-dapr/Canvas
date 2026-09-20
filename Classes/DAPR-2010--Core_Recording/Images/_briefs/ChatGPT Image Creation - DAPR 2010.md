@@ -13,7 +13,7 @@ arrive with a white box around it.
 
 **Palette, from Standards Section 3.** Body text and outlines `#212121`. Green
 `#1B5E20`. Blue `#0D47A1`. Red `#B71C1C`. Copper and orange `#993300`. Violet
-`#4A148C`. Muted grey `#616161`.
+`#4A148C`. Muted gray `#616161`.
 
 **If a label comes back misspelled,** regenerate that image with the label
 quoted more explicitly. Do not hand-patch text in an editor.
@@ -47,7 +47,7 @@ arrows, each box progressively narrower than the one above it.
 Label the boxes top to bottom, exactly: "CLIENT", "PRODUCER", "ENGINEER",
 "ASSISTANT".
 
-To the right of each box, in smaller text, place one short phrase in dark grey
+To the right of each box, in smaller text, place one short phrase in dark gray
 #212121, exactly: "Pays for the time", "Decides the sound", "Runs the room",
 "Makes it possible".
 
@@ -139,7 +139,7 @@ Left: a dynamic transducer. Show a domed diaphragm on the left, a coil of wire
 wound around a cylinder attached behind it, and a block magnet surrounding the
 coil.
 
-Centre: a condenser transducer. Show a thin flat diaphragm on the left, a
+Center: a condenser transducer. Show a thin flat diaphragm on the left, a
 parallel perforated backplate a small distance behind it, and a battery symbol
 wired between the two to indicate polarizing voltage.
 
@@ -334,7 +334,7 @@ Left panel: the switch contact is closed and a #212121 line joins top to bottom.
 Draw a plug inserted into the top jack and show the vertical link broken, with a
 red #B71C1C X over the break.
 
-Centre panel: same, but the plug is in the top jack and the vertical link stays
+Center panel: same, but the plug is in the top jack and the vertical link stays
 joined in green #1B5E20, with a second #1B5E20 line branching out to the right.
 
 Right panel: there is no vertical link at all between the jacks, just a gap.
@@ -382,7 +382,7 @@ Label the five boxes left to right in #212121, exactly: "CHANNEL", "AUX SEND",
 "CUE BUS", "HEADPHONE AMP", "PERFORMER".
 
 From the CHANNEL box also draw a separate green #1B5E20 arrow branching downward
-to a sixth box below the chain, labelled in #212121, exactly: "MIX BUS".
+to a sixth box below the chain, labeled in #212121, exactly: "MIX BUS".
 
 Beside the AUX SEND box place a small #993300 label, exactly: "PRE-FADER".
 Beside the MIX BUS box place a small #616161 label, exactly: "Control room, not
@@ -473,17 +473,17 @@ Label the three scale headings across the top in #212121, exactly: "dBu",
 "dBFS", "VU".
 
 On the left scale mark ticks reading, bottom to top, exactly: "-20", "-10", "0",
-"+4", "+20". On the centre scale mark ticks reading, bottom to top, exactly:
+"+4", "+20". On the center scale mark ticks reading, bottom to top, exactly:
 "-40", "-18", "-6", "0". On the right scale mark ticks reading, bottom to top,
 exactly: "-20", "0", "+3".
 
 Draw one horizontal green #1B5E20 dashed line running across all three scales,
-connecting "+4" on the left scale, "-18" on the centre scale, and "0" on the
+connecting "+4" on the left scale, "-18" on the center scale, and "0" on the
 right scale. Label that line at the far right in green #1B5E20, exactly:
 "Nominal operating level".
 
-Draw a second horizontal red #B71C1C dashed line at the top of the centre scale
-at "0", extending only across the centre scale. Label it at the far right in red
+Draw a second horizontal red #B71C1C dashed line at the top of the center scale
+at "0", extending only across the center scale. Label it at the far right in red
 #B71C1C, exactly: "Digital clip".
 
 Reading direction is bottom to top.
@@ -516,10 +516,10 @@ Create a 1600 x 1000 pixel PNG with a fully transparent background.
 Flat vector-style technical illustration. Clean line weights, no gradients, no
 drop shadows, no 3D, no photorealism, no watermark, no signature.
 
-Draw one tall vertical bar in the centre-left of the canvas, divided into four
+Draw one tall vertical bar in the center-left of the canvas, divided into four
 horizontal bands.
 
-From bottom to top, fill the bands: the lowest band grey #616161, the next band
+From bottom to top, fill the bands: the lowest band gray #616161, the next band
 green #1B5E20, a thin band above it in blue #0D47A1, and the top band red
 #B71C1C. The green band should be the tallest.
 
@@ -562,9 +562,9 @@ Flat vector-style schematic. Clean line weights, no gradients, no drop shadows,
 no 3D, no photorealism, no watermark, no signature.
 
 Draw two simple circuits side by side, separated by a thin vertical #616161
-divider line. Each circuit is a source symbol on the left, a resistor labelled
+divider line. Each circuit is a source symbol on the left, a resistor labeled
 as the source impedance, a wire, and a second resistor to ground on the right
-labelled as the load impedance.
+labeled as the load impedance.
 
 Left circuit: label the two resistors in #212121, exactly: "600 ohm source",
 "600 ohm load". Beneath it place a #B71C1C label, exactly: "Half the voltage
@@ -611,8 +611,8 @@ Flat vector-style schematic. Clean line weights, no gradients, no drop shadows,
 no 3D, no photorealism, no watermark, no signature.
 
 Draw a single vertical voltage divider: a source symbol at the top left, a
-resistor in series labelled as the source impedance, a junction, and a second
-resistor from the junction down to a ground symbol labelled as the load
+resistor in series labeled as the source impedance, a junction, and a second
+resistor from the junction down to a ground symbol labeled as the load
 impedance. Draw an output arrow leaving the junction to the right.
 
 Label the parts in #212121, exactly: "Source", "Z source", "Z load", "Output".
@@ -622,7 +622,7 @@ lengths, in a column, with a short label beside each. The three labels, top to
 bottom, exactly: "Load 10x source: 91 percent", "Load equal to source: 50
 percent", "Load one tenth of source: 9 percent".
 
-Colour the top bar green #1B5E20, the middle bar #993300, and the bottom bar red
+Color the top bar green #1B5E20, the middle bar #993300, and the bottom bar red
 #B71C1C.
 
 Reading direction is top to bottom on the right, and top to bottom in the
@@ -663,14 +663,14 @@ arrows.
 Label the eight boxes left to right in #212121, exactly: "SOURCE", "MIC",
 "PREAMP", "A/D", "DAW", "D/A", "MONITOR", "EARS".
 
-Colour the arrows between SOURCE, MIC, PREAMP and A/D in #993300. Colour the
-arrows between A/D, DAW and D/A in #0D47A1. Colour the arrows between D/A,
+Color the arrows between SOURCE, MIC, PREAMP and A/D in #993300. Color the
+arrows between A/D, DAW and D/A in #0D47A1. Color the arrows between D/A,
 MONITOR and EARS in #993300.
 
 Beneath the chain draw a single horizontal bracket spanning from A/D to D/A,
-labelled in #0D47A1, exactly: "Digital domain".
+labeled in #0D47A1, exactly: "Digital domain".
 
-Beneath the chain draw a second bracket spanning SOURCE to A/D, labelled in
+Beneath the chain draw a second bracket spanning SOURCE to A/D, labeled in
 #993300, exactly: "Analog domain". Draw a third bracket spanning D/A to EARS
 with the same #993300 label, exactly: "Analog domain".
 
@@ -816,7 +816,7 @@ central section, running up through the ruler.
 Label those two vertical lines at the top in red #B71C1C, exactly: "PUNCH IN",
 "PUNCH OUT".
 
-Fill the three lower lanes in grey #616161 at about 15 percent opacity.
+Fill the three lower lanes in gray #616161 at about 15 percent opacity.
 
 Label the four lanes at their left ends in #212121, exactly: "Playlist 1",
 "Playlist 2", "Playlist 3", "Playlist 4".
@@ -960,7 +960,7 @@ outlined triangles pointing away from a shared origin point, with a curved
 Left panel: two triangles crossed at 90 degrees from one shared point, both
 pointing forward and outward.
 
-Centre panel: two triangles crossed at 90 degrees from one shared point, each
+Center panel: two triangles crossed at 90 degrees from one shared point, each
 drawn as a bidirectional lens shape rather than a triangle.
 
 Right panel: one triangle pointing straight forward and one bidirectional lens
@@ -1010,7 +1010,7 @@ Draw two side-by-side panels, equally sized, separated by a thin vertical
 #616161 divider line. Draw microphone capsules as small outlined triangles.
 
 Left panel: two triangles separated by a short horizontal distance, each angled
-outward from centre. Draw a #0D47A1 horizontal dimension line between them with
+outward from center. Draw a #0D47A1 horizontal dimension line between them with
 arrowheads at both ends, and a curved #0D47A1 angle arc showing the splay.
 
 Right panel: two triangles separated by a much wider horizontal distance, both
@@ -1065,7 +1065,7 @@ Left panel: draw one outgoing #0D47A1 arrow leaving at the mirror angle, the
 same thickness as the incoming arrow. Draw the surface bar as a solid flat
 #212121 block.
 
-Centre panel: draw no outgoing arrow. Draw the surface bar as a #1B5E20 block
+Center panel: draw no outgoing arrow. Draw the surface bar as a #1B5E20 block
 filled with a hatched or porous texture, and draw the incoming arrow fading out
 inside it.
 
@@ -1113,7 +1113,7 @@ signature.
 
 Draw a plain rectangular room outline in #212121. Place two small filled
 rectangles near the top edge, angled inward, representing a stereo speaker pair.
-Place a small circle near the centre of the room representing the listening
+Place a small circle near the center of the room representing the listening
 position.
 
 Draw a straight green #1B5E20 line from each speaker directly to the circle.
@@ -1164,11 +1164,11 @@ Draw two thick vertical #212121 bars, one at the far left and one at the far
 right, representing two parallel walls.
 
 Between them draw a smooth standing wave envelope in blue #0D47A1: a symmetrical
-shape that is wide at both walls, pinches to nothing at the centre, and is drawn
-as a mirrored pair of curves above and below a horizontal centre line.
+shape that is wide at both walls, pinches to nothing at the center, and is drawn
+as a mirrored pair of curves above and below a horizontal center line.
 
 Mark the two widest points, at the walls, with filled green #1B5E20 circles.
-Mark the pinch point at the centre with a filled red #B71C1C circle.
+Mark the pinch point at the center with a filled red #B71C1C circle.
 
 Label the circles in their own colors, exactly: "Pressure peak", "Null",
 "Pressure peak".
@@ -1211,7 +1211,7 @@ weights, no gradients, no drop shadows, no 3D, no photorealism, no watermark, no
 signature.
 
 Draw a drum kit as plain outlined circles and ellipses in #212121, arranged in a
-standard layout: one large circle at the bottom centre for the kick, one medium
+standard layout: one large circle at the bottom center for the kick, one medium
 circle to its left for the snare, two small circles above the kick for rack
 toms, one medium circle to the right for a floor tom, one thin ellipse to the
 upper left for the hi-hat, and two thin ellipses to the upper right and upper
@@ -1248,7 +1248,7 @@ ten labels listed above.
 | Raw URL after push | `https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2010--Core_Recording/Images/drums/drums-overhead-techniques-01.png` |
 | Used on | Canvas page `Drums: Microphone Placement From the Overheads Down` |
 | Alt text | `Two overhead placements compared, each measured for equal distance to the snare` |
-| Caption | `Figure 2. Whichever overhead placement you choose, measure both mics to the snare. Equal distance is what keeps the centre solid.` |
+| Caption | `Figure 2. Whichever overhead placement you choose, measure both mics to the snare. Equal distance is what keeps the center solid.` |
 
 **ChatGPT prompt (paste as-is):**
 
@@ -1261,11 +1261,11 @@ signature.
 
 Draw two side-by-side panels, equally sized, separated by a thin vertical
 #616161 divider line. In each panel draw a small outlined circle near the bottom
-centre representing the snare drum, and two small outlined triangles above it
+center representing the snare drum, and two small outlined triangles above it
 representing overhead microphones.
 
 Left panel: the two triangles are far apart horizontally, both angled down
-toward the centre.
+toward the center.
 
 Right panel: the two triangles are touching at a single point directly above the
 snare, crossed at an angle.
@@ -1312,13 +1312,13 @@ Create a 1600 x 900 pixel PNG with a fully transparent background.
 Flat vector-style technical diagram. Clean line weights, no gradients, no drop
 shadows, no 3D, no photorealism, no watermark, no signature.
 
-Draw a large circle in the centre left of the canvas representing a speaker seen
+Draw a large circle in the center left of the canvas representing a speaker seen
 face on, with a smaller concentric circle inside it representing the dust cap,
 and a faint #616161 ring between them representing the cone.
 
 Mark four microphone positions on the circle with small filled #B71C1C
-triangles: one at the exact centre, one halfway out on the cone, one at the
-outer edge of the cone, and one at the centre but drawn tilted at an angle.
+triangles: one at the exact center, one halfway out on the cone, one at the
+outer edge of the cone, and one at the center but drawn tilted at an angle.
 
 From each position draw a thin #0D47A1 leader line out to the right, ending at a
 short phrase in #212121. The four phrases, top to bottom, exactly: "Brightest,
@@ -1563,7 +1563,7 @@ Draw three side-by-side panels, equally sized, separated by thin vertical
 of differing lengths, stacked vertically.
 
 Left panel: three bars of increasing length, in green #1B5E20.
-Centre panel: three bars of identical length, in #0D47A1.
+Center panel: three bars of identical length, in #0D47A1.
 Right panel: three bars of identical length, in #4A148C.
 
 Label the three panels across the top in #212121, exactly: "HOURLY",

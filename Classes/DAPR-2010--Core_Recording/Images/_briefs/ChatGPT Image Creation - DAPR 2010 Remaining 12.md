@@ -11,7 +11,7 @@ one sits on a Canvas page and a JPEG would arrive with a white box around it.
 
 **Palette, from Standards Section 3.** Body text and outlines `#212121`. Green
 `#1B5E20`. Blue `#0D47A1`. Red `#B71C1C`. Copper and orange `#993300`. Violet
-`#4A148C`. Muted grey `#616161`.
+`#4A148C`. Muted gray `#616161`.
 
 **One prompt per ChatGPT message.** Two pasted together come back as one crowded
 composite.
@@ -42,7 +42,7 @@ Draw two side-by-side panels, equally sized, separated by a thin vertical
 #616161 divider line. Draw microphone capsules as small outlined triangles.
 
 Left panel: two triangles separated by a short horizontal distance, each angled
-outward from centre. Draw a #0D47A1 horizontal dimension line between them with
+outward from center. Draw a #0D47A1 horizontal dimension line between them with
 arrowheads at both ends, and a curved #0D47A1 angle arc showing the splay.
 
 Right panel: two triangles separated by a much wider horizontal distance, both
@@ -95,7 +95,7 @@ Left panel: draw one outgoing #0D47A1 arrow leaving at the mirror angle, the
 same thickness as the incoming arrow. Draw the surface bar as a solid flat
 #212121 block.
 
-Centre panel: draw no outgoing arrow. Draw the surface bar as a #1B5E20 block
+Center panel: draw no outgoing arrow. Draw the surface bar as a #1B5E20 block
 filled with a hatched or porous texture, and draw the incoming arrow fading out
 inside it.
 
@@ -141,7 +141,7 @@ signature.
 
 Draw a plain rectangular room outline in #212121. Place two small filled
 rectangles near the top edge, angled inward, representing a stereo speaker pair.
-Place a small circle near the centre of the room representing the listening
+Place a small circle near the center of the room representing the listening
 position.
 
 Draw a straight green #1B5E20 line from each speaker directly to the circle.
@@ -190,11 +190,11 @@ Draw two thick vertical #212121 bars, one at the far left and one at the far
 right, representing two parallel walls.
 
 Between them draw a smooth standing wave envelope in blue #0D47A1: a symmetrical
-shape that is wide at both walls, pinches to nothing at the centre, and is drawn
-as a mirrored pair of curves above and below a horizontal centre line.
+shape that is wide at both walls, pinches to nothing at the center, and is drawn
+as a mirrored pair of curves above and below a horizontal center line.
 
 Mark the two widest points, at the walls, with filled green #1B5E20 circles.
-Mark the pinch point at the centre with a filled red #B71C1C circle.
+Mark the pinch point at the center with a filled red #B71C1C circle.
 
 Label the circles in their own colors, exactly: "Pressure peak", "Null",
 "Pressure peak".
@@ -235,7 +235,7 @@ weights, no gradients, no drop shadows, no 3D, no photorealism, no watermark, no
 signature.
 
 Draw a drum kit as plain outlined circles and ellipses in #212121, arranged in a
-standard layout: one large circle at the bottom centre for the kick, one medium
+standard layout: one large circle at the bottom center for the kick, one medium
 circle to its left for the snare, two small circles above the kick for rack
 toms, one medium circle to the right for a floor tom, one thin ellipse to the
 upper left for the hi-hat, and two thin ellipses to the upper right and upper
@@ -270,7 +270,7 @@ ten labels listed above.
 | Dimensions | 1600 x 800 px |
 | Destination folder | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Images/drums/` |
 | Used on | Canvas page `Drums: Microphone Placement From the Overheads Down` |
-| Caption | `Figure 2. Whichever overhead placement you choose, measure both mics to the snare. Equal distance is what keeps the centre solid.` |
+| Caption | `Figure 2. Whichever overhead placement you choose, measure both mics to the snare. Equal distance is what keeps the center solid.` |
 
 **ChatGPT prompt (paste as-is):**
 
@@ -283,11 +283,11 @@ signature.
 
 Draw two side-by-side panels, equally sized, separated by a thin vertical
 #616161 divider line. In each panel draw a small outlined circle near the bottom
-centre representing the snare drum, and two small outlined triangles above it
+center representing the snare drum, and two small outlined triangles above it
 representing overhead microphones.
 
 Left panel: the two triangles are far apart horizontally, both angled down
-toward the centre.
+toward the center.
 
 Right panel: the two triangles are touching at a single point directly above the
 snare, crossed at an angle.
@@ -332,13 +332,13 @@ Create a 1600 x 900 pixel PNG with a fully transparent background.
 Flat vector-style technical diagram. Clean line weights, no gradients, no drop
 shadows, no 3D, no photorealism, no watermark, no signature.
 
-Draw a large circle in the centre left of the canvas representing a speaker seen
+Draw a large circle in the center left of the canvas representing a speaker seen
 face on, with a smaller concentric circle inside it representing the dust cap,
 and a faint #616161 ring between them representing the cone.
 
 Mark four microphone positions on the circle with small filled #B71C1C
-triangles: one at the exact centre, one halfway out on the cone, one at the
-outer edge of the cone, and one at the centre but drawn tilted at an angle.
+triangles: one at the exact center, one halfway out on the cone, one at the
+outer edge of the cone, and one at the center but drawn tilted at an angle.
 
 From each position draw a thin #0D47A1 leader line out to the right, ending at a
 short phrase in #212121. The four phrases, top to bottom, exactly: "Brightest,
@@ -573,7 +573,7 @@ Draw three side-by-side panels, equally sized, separated by thin vertical
 of differing lengths, stacked vertically.
 
 Left panel: three bars of increasing length, in green #1B5E20.
-Centre panel: three bars of identical length, in #0D47A1.
+Center panel: three bars of identical length, in #0D47A1.
 Right panel: three bars of identical length, in #4A148C.
 
 Label the three panels across the top in #212121, exactly: "HOURLY",

@@ -34,7 +34,7 @@ pin connector on the right, and the conductors running between them. Label the t
 both connectors exactly: "1", "2", "3". Label the conductors exactly: "SHIELD", "HOT (+)",
 "COLD (-)".
 
-Draw the balanced line complete and correct: both signal conductors present, the shield connected at both ends, and pin 1 to shield, pin 2 hot, pin 3 cold all labelled.
+Draw the balanced line complete and correct: both signal conductors present, the shield connected at both ends, and pin 1 to shield, pin 2 hot, pin 3 cold all labeled.
 
 Use #212121 for all outlines and text. Use #0D47A1 for the hot conductor, #B71C1C for the cold
 conductor, and #616161 for the shield. Reading direction is left to right, source to
