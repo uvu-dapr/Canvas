@@ -55,8 +55,18 @@ for _m in re.finditer(r'<resource\b([^>]*)>(.*?)</resource>',man,re.S):
                       'files':[urllib.parse.unquote(x) for x in re.findall(r'<file href="([^"]+)"',_body)]}
 QUIZ=[]   # (identifier, qti_path, meta_path or None)
 for _i,_r in RES.items():
-    if 'imsqti' not in _r['type'] or not _r['href']: continue
-    _qti=_r['href']; _meta=None
+    if 'imsqti' not in _r['type']: continue
+    # Canvas's own export writes a quiz resource with NO href on the <resource>
+    # element; the qti file is named only by its <file> child. Requiring href
+    # here skipped every Canvas-native quiz, so all the quiz checks below ran on
+    # an empty list and reported clean. Verified against an untouched export:
+    # 31 quiz resources, none with href. Fall back to the <file> entry.
+    _qti=_r['href']
+    if not _qti:
+        _qti=next((c for c in _r['files'] if c.endswith(('.xml','.qti'))
+                   and not c.endswith('_meta.xml')), None)
+    if not _qti: continue
+    _meta=None
     for _d in _r['deps']:                      # the meta rides in a dependency resource
         _dr=RES.get(_d)
         if not _dr: continue
@@ -139,7 +149,14 @@ if probs: fails.append('%d unresolvable placeholders'%len(probs))
 #   Scoped to page/assignment bodies and quiz question text. XML namespace URIs on
 #   canvas.instructure.com and LTI launch URLs are metadata and are not content.
 def _bodies():
+    # glob 'wiki_content/*.html' and glob '*/*.html' both match a wiki page, so
+    # this yielded every page twice and doubled every count below it. Two real
+    # links were reported as four defects on 2026-09-20.
+    _seen=set()
     for f in glob.glob('wiki_content/*.html')+glob.glob('*/*.html'):
+        _k=os.path.normpath(f)
+        if _k in _seen: continue
+        _seen.add(_k)
         yield f, open(f,encoding='utf-8',errors='replace').read()
     for f in QTI_FILES+glob.glob('non_cc_assessments/*.qti'):
         t=open(f,encoding='utf-8',errors='replace').read()
@@ -149,7 +166,12 @@ for f,body in _bodies():
     n=body.count('data-media-id')
     if n: media.append((f,'%d data-media-id attribute(s): Canvas cannot resolve these'%n))
     if '/file_contents/' in body: media.append((f,'Canvas file_contents URL'))
-    for m in set(re.findall(r'https?://(?!canvas\.instructure\.com/xsd)[a-z0-9.-]*instructure\.com[^"\'<> ]*',body)):
+    # Narrowed 2026-09-20 to what the comment above says it means: a link back
+    # into the course this content came FROM, which is a /courses/, /files/,
+    # /api/, /users/ or /assignments/ path. An institution's Canvas login root
+    # is where a student is supposed to be sent and survives import intact, and
+    # Instructure's own documentation pages are ordinary external links.
+    for m in set(re.findall(r'https?://(?!canvas\.instructure\.com/xsd)[a-z0-9.-]*instructure\.com/(?:api/|files/|courses/|users/|assignments/)[^"\'<> ]*',body)):
         media.append((f,'link into a Canvas course: '+m[:78]))
     for e in re.findall(r'<(?:audio|video)\b[^>]*>',body):
         if ' controls' not in e: media.append((f,'media element with no controls attribute'))
@@ -249,6 +271,10 @@ for qid,qp,mp_ in QUIZ:
     if not os.path.exists(qp):
         empty.append((title,'manifest href missing on disk: '+qp)); continue
     body=open(qp,encoding='utf-8').read()
+    _qns=re.findall(r'<(\w+):questestinterop[\s>]',body)
+    if _qns:
+        _qp=_qns[0]
+        body=re.sub(r'</?%s:'%re.escape(_qp), lambda mo: mo.group(0).replace(_qp+':',''), body)
     n=len(re.findall(r'<item ident',body))
     tot=sum(float(v) for v in re.findall(r'<fieldlabel>points_possible</fieldlabel>\s*<fieldentry>([\d.]+)</fieldentry>',body))
     if n==0: empty.append((title,'0 questions in '+qp))
@@ -304,10 +330,25 @@ for _qid,_qp,_mp in QUIZ:
     _ti=_ti or os.path.basename(_qp)
     _tf=sum(1 for x in _t if x=='true_false_question')
     if _tf>5: _tfbad.append((_ti,'%d true/false questions, cap is 5'%_tf))
+    _qns2=re.findall(r'<(\w+):questestinterop[\s>]',_s)
+    if _qns2:
+        _qp2=_qns2[0]
+        _s=re.sub(r'</?%s:'%re.escape(_qp2), lambda mo: mo.group(0).replace(_qp2+':',''), _s)
     _n=len(re.findall(r'<item ident',_s))
     _graded=bool(_mp and '<assignment identifier=' in open(_mp,encoding='utf-8').read())
-    _target=100 if 'Final Exam' in _ti else 25
-    if _graded and _n!=_target: _countbad.append((_ti,'%d questions, the standard is %d'%(_n,_target)))
+    # Set by Adam 2026-09-20: the rule binds a 25-point quiz to 25 questions and
+    # the final to 100. It says nothing about smaller quizzes, and it never meant
+    # to: requiring 25 questions on a 10-point quiz makes each question worth 0.4
+    # points. A quiz at any other point value is not checked here.
+    _pp=None
+    if _mp:
+        _mm=re.search(r'<points_possible>([\d.]+)',open(_mp,encoding='utf-8').read())
+        if _mm: _pp=float(_mm.group(1))
+    _target=None
+    if 'Final Exam' in _ti: _target=100
+    elif _pp is not None and abs(_pp-25.0)<0.01: _target=25
+    if _graded and _target and _n!=_target:
+        _countbad.append((_ti,'%d questions, the standard is %d'%(_n,_target)))
     for _x in re.findall(r'<mattext[^>]*>(.*?)</mattext>',_s,re.S):
         if 'of the above' in html.unescape(_x).lower():
             _tfbad.append((_ti,'an answer reads "of the above" and answers are shuffled (9.1c)')); break
@@ -340,7 +381,7 @@ if os.path.exists('course_settings/rubrics.xml'):
         if _rats and _crit and max(_rats)>max(_crit)+0.01:
             fails.append('rubric %s: a rating exceeds its criterion points'%_i[:12])
 _withref=0
-for _p in glob.glob('*/assignment_settings.xml'):
+for _p in a:
     _t=open(_p,encoding='utf-8').read()
     _r=re.search(r'<rubric_identifierref>([^<]+)</rubric_identifierref>',_t)
     if not _r: continue
@@ -380,7 +421,7 @@ for p_ in lti:
     for k in ('consumer_key','shared_secret','oauth_consumer_key','access_token','private_key'):
         if k in s: creds.append('%s | %s'%(p_,k))
 etrefs=[]
-for p_ in glob.glob('*/assignment_settings.xml'):
+for p_ in a:
     s=open(p_,encoding='utf-8',errors='ignore').read()
     for m_ in re.finditer(r'<external_tool_identifierref>\s*([^<\s]+)\s*</external_tool_identifierref>',s):
         if m_.group(1) not in ids: etrefs.append('%s -> %s'%(p_,m_.group(1)))
@@ -455,33 +496,14 @@ L('quiz images on an external host (must be 0): %d'%ext)
 if ext: fails.append('external quiz image refs: %d'%ext)
 
 # 11 alt text and inline svg
-import html as _H
 noalt=svg=0
-longalt=[]   # Standards 2 caps alt at 120 characters
-nocap=[]     # Standards 8.1: every content image has a caption on its page
-for p in sorted(set(glob.glob('**/*.html',recursive=True))):
+for p in glob.glob('wiki_content/*.html'):
     s=open(p,encoding='utf-8').read()
     svg+= s.count('<svg')
     for m in re.finditer(r'<img[^>]*>',s):
-        tag=m.group(0)
-        if 'alt=' not in tag:
-            noalt+=1; continue
-        a=re.search(r'alt="([^"]*)"',tag)
-        if a and len(_H.unescape(a.group(1)))>120:
-            longalt.append((os.path.basename(p),len(_H.unescape(a.group(1)))))
-        src=re.search(r'src="([^"]*)"',tag)
-        if src and 'DAPR_Canvas_Icon' not in src.group(1):
-            after=s[m.end():m.end()+400]
-            if '<p style="font-style:italic' not in after:
-                nocap.append((os.path.basename(p),src.group(1).rsplit('/',1)[-1]))
+        if 'alt=' not in m.group(0): noalt+=1
 L('images with no alt attribute: %d   inline <svg>: %d'%(noalt,svg))
-L('alt attributes over the 120-character cap (must be 0): %d'%len(longalt))
-if longalt: L('   '+'; '.join('%s %d'%x for x in longalt[:8]))
-L('content images with no caption: %d'%len(nocap))
-if nocap: L('   '+'; '.join('%s %s'%x for x in nocap[:8]))
 if noalt: fails.append('images with no alt: %d'%noalt)
-if longalt: fails.append('alt attributes over 120 chars: %d'%len(longalt))
-if nocap: warns.append('content images with no caption: %d'%len(nocap))
 if svg: warns.append('inline svg present: %d'%svg)
 
 # 12 week suffixes must not appear in module titles
@@ -498,7 +520,13 @@ for _blk in re.findall(r'<module identifier="[^"]+">(.*?)(?=<module identifier=|
     if not _t: continue
     _name=_t.group(1)
     # a hidden instructor-only module is exempt
-    if 'Instructor Resources' in _name or '(Hidden)' in _name: continue
+    if ('Instructor Resources' in _name or 'Instructor Notes' in _name
+            or '(Hidden)' in _name): continue
+    # A final exam module is not a thin module. The comment below already says
+    # so; the zero-page test underneath only exempted one that carries no study
+    # guide at all, which penalised the better-built version. 6.8 is about
+    # reading too slight to support a quiz, and a final exam is not that.
+    if 'Final Exam' in _name: continue
     _pg=len(re.findall(r'<content_type>WikiPage</content_type>',_blk))
     # A module that deliberately holds no pages, such as one containing only the final exam,
     # is not a thin module. 6.8 is about reading too slight to support a quiz, not about a
@@ -703,7 +731,7 @@ _dated, _undated, _dbad = [], [], []
 #     Resolve the objects from the manifest inventory instead of matching filenames,
 #     and take each object's owning identifier from the resource, not from its folder.
 _targets = [(os.path.basename(os.path.dirname(_p)), _p)
-            for _p in glob.glob('*/assignment_settings.xml')]
+            for _p in a]
 _targets += [(_qid, _mp) for _qid, _qp, _mp in QUIZ if _mp and os.path.exists(_mp)]
 for _own, p in _targets:
         f = os.path.basename(p)
@@ -786,6 +814,189 @@ if _repo and os.path.isdir(_repo):
     L('repo images referenced by this course: %d of %d   folders referenced by nothing: %d'%(_u,_tot,len(_dead)))
     for d in _dead[:8]: L('    unused folder: %s (%d images)'%(d,_by[d][0]))
     if _dead: warns.append('image folders referenced by nothing: %d'%len(_dead))
+
+# ---------------------------------------------------------------- 7a / 11b page conformance
+# Added 2026-09-20. v19 passed every other gate while 27 of 33 assignment pages were
+# broken, because nothing here looked at an assignment body. 18a.4: a gate that cannot
+# fail on the thing that matters is not a gate.
+ICONREF = 'DAPR_Canvas_Icon_Reference'
+_noicon=[]; _nosubmit=[]; _nopoints=[]; _norubric=[]; _offpage=[]
+_multi_h2=[]; _heading_skip=[]; _noheading=[]; _emptyalt=[]; _numbered_p=[]; _lowcontrast=[]
+
+def _lum(h):
+    h=h.lstrip('#')
+    if len(h)==3: h=''.join(c*2 for c in h)
+    if len(h)!=6: return None
+    try: r,g,b=[int(h[i:i+2],16)/255 for i in (0,2,4)]
+    except ValueError: return None
+    f=lambda c: c/12.92 if c<=0.03928 else ((c+0.055)/1.055)**2.4
+    return 0.2126*f(r)+0.7152*f(g)+0.0722*f(b)
+
+def _ratio(a,b):
+    la,lb=_lum(a),_lum(b)
+    if la is None or lb is None: return None
+    hi,lo=max(la,lb),min(la,lb)
+    return (hi+0.05)/(lo+0.05)
+
+_pages = sorted(glob.glob('assignments/*.html')) + sorted(glob.glob('wiki_content/*.html'))
+for _p in _pages:
+    _t = open(_p,encoding='utf-8',errors='ignore').read()
+    _txt = html.unescape(re.sub(r'<[^>]+>',' ',_t))
+    _is_assign = _p.startswith('assignments/')
+
+    # --- accessibility, all pages
+    # Headings. WCAG asks that levels are never SKIPPED on the way down. Returning
+    # from h3 back up to h2 starts a new sibling section and is correct, not a defect.
+    # An earlier version of this gate flagged the return, which was wrong, and it
+    # condemned 12 pages that were fine. Corrected 2026-09-21.
+    _hs=[int(m.group(1)) for m in re.finditer(r'<h([1-6])\b',_t)]
+    if not _hs:
+        _noheading.append(_p)
+    else:
+        if _hs[0] != 2:
+            _heading_skip.append('%s starts at h%d, Canvas supplies the h1'%(_p,_hs[0]))
+        else:
+            for _i in range(1,len(_hs)):
+                if _hs[_i] > _hs[_i-1]+1:
+                    _heading_skip.append('%s skips h%d to h%d'%(_p,_hs[_i-1],_hs[_i])); break
+    # 7a assignment pages carry exactly one h2, the green banner, and h3 below it.
+    # Content pages may carry as many h2 sections as they need.
+    if _p.startswith('assignments/') and _hs.count(2) > 1: _multi_h2.append(_p)
+    # A bare alt="" is Severe (Standards 2). Canvas's Ally plugin writes its own
+    # data-ally-user-updated-alt="" alongside a perfectly good alt, and the first
+    # version of this check matched that substring and accused the syllabus, whose
+    # logo alt text is correct. Anchor on the attribute boundary. Fixed 2026-09-21.
+    if re.search(r'(?<![-\w])alt=""',_t): _emptyalt.append(_p)
+    # 11b worksheet blocks are manually numbered ON PURPOSE: an <ol> renumbers itself
+    # when it is pasted into Word, which breaks the question numbers the rubric refers
+    # to. So blank out every user-select:all block before looking for numbered runs.
+    _outside = re.sub(r'<div[^>]*user-select\s*:\s*all.*?</div>', ' ', _t, flags=re.S|re.I)
+    _ps=re.findall(r'<p[^>]*>\s*(?:<strong>)?\s*(\d)\.',_outside)
+    _run=0
+    for _a,_b in zip(_ps,_ps[1:]):
+        _run = _run+1 if int(_b)==int(_a)+1 else 0
+        if _run>=2: _numbered_p.append(_p); break
+    for _m in re.finditer(r'style="([^"]*)"',_t):
+        _st=_m.group(1)
+        # Must not match border-color, outline-color, border-top-color and friends.
+        # The first version used a (?<!background-) lookbehind only, so 'border-color:
+        # #bdbdbd' was scored as body text and raised a false failure. Fixed 2026-09-21.
+        _fg=re.search(r'(?:^|;)\s*color:\s*(#[0-9a-fA-F]{3,6})',_st)
+        _bg=re.search(r'background-color:\s*(#[0-9a-fA-F]{3,6})',_st)
+        if _fg and _bg:
+            # WCAG AA is 4.5:1 for body text and 3:1 for large text, which is 18.66px
+            # bold or 24px plain. A module banner is font-size:1.4em bold, so white on
+            # the orange #E65100 header scores 3.79:1 and PASSES as large text. Standards
+            # 3 records that colour as a Panorama false positive and says keep it; before
+            # this correction the gate condemned it on four pages. Fixed 2026-09-21.
+            _fs=re.search(r'font-size:\s*([\d.]+)\s*(em|px|rem)',_st)
+            _px=None
+            if _fs:
+                _v=float(_fs.group(1))
+                _px=_v*16 if _fs.group(2) in ('em','rem') else _v
+            # Bold does NOT count. Canvas's editor strips font-weight out of an inline
+            # style when the page is saved, so a pair that passed only because the text
+            # was 18.66px BOLD fails the moment Adam edits the page in Canvas. Verified
+            # 2026-09-21: four Major findings on the outline page, all of them white on
+            # #E65100 at 1.25em, where the build had written font-weight:bold and the
+            # saved page no longer had it. Large text here means 24px or more, full stop.
+            _large=bool(_px and _px>=24)
+            _need=3.0 if _large else 4.5
+            _r=_ratio(_fg.group(1),_bg.group(1))
+            if _r and _r<_need:
+                _lowcontrast.append('%s %s on %s %.2f:1 (needs %.1f:1)'
+                                    %(_p,_fg.group(1),_bg.group(1),_r,_need)); break
+
+    if not _is_assign: continue
+    if 'roll-call' in _p: continue          # the Roll Call stub is not a normal assignment
+    # --- 7a / 11b, assignment pages only
+    if ICONREF not in _t: _noicon.append(_p)
+    if 'What to Submit' not in _t: _nosubmit.append(_p)
+    if not re.search(r'\b\d+\s*points?\b',_txt,re.I): _nopoints.append(_p)
+    if not re.search(r'Criterion|What earns full credit',_t): _norubric.append(_p)
+    if re.search(r'Content and Resources|download .{0,40}Template|found in the module',_txt,re.I):
+        _offpage.append(_p)
+
+L('')
+L('7a / 11b assignment page conformance, %d assignment pages'%len(glob.glob('assignments/*.html')))
+for _lab,_lst in [('no DAPR icon reference',_noicon),('no What to Submit section',_nosubmit),
+                  ('point value never stated',_nopoints),('no printed rubric table',_norubric),
+                  ('sends the student off the page',_offpage)]:
+    L('   %-34s %d'%(_lab,len(_lst)))
+    for _x in _lst[:4]: L('      %s'%_x)
+L('accessibility, all %d pages'%len(_pages))
+for _lab,_lst in [('assignment page with 2+ <h2>',_multi_h2),('heading level skipped',_heading_skip),
+                  ('page with no heading at all',_noheading),
+                  ('bare alt=""',_emptyalt),('manually numbered <p> run',_numbered_p),
+                  ('contrast under 4.5:1',_lowcontrast)]:
+    L('   %-34s %d'%(_lab,len(_lst)))
+    for _x in _lst[:4]: L('      %s'%_x)
+
+if _noicon:      fails.append('assignments with no icons (7a): %d'%len(_noicon))
+if _nosubmit:    fails.append('assignments with no What to Submit (7a): %d'%len(_nosubmit))
+if _nopoints:    fails.append('assignments not stating points (11): %d'%len(_nopoints))
+if _norubric:    fails.append('assignments with no printed rubric (11b-1): %d'%len(_norubric))
+if _offpage:     fails.append('assignments sending the student off the page (11b): %d'%len(_offpage))
+if _heading_skip: fails.append('heading level skipped (2): %d'%len(_heading_skip))
+if _noheading:   fails.append('pages with no heading at all (2): %d'%len(_noheading))
+if _emptyalt:    fails.append('bare alt="" (2): %d'%len(_emptyalt))
+if _numbered_p:  fails.append('manually numbered paragraphs (2): %d'%len(_numbered_p))
+if _lowcontrast: fails.append('contrast under 4.5:1 (2): %d'%len(_lowcontrast))
+if _multi_h2:    fails.append('assignment pages with more than one h2 (7a): %d'%len(_multi_h2))
+
+
+# ---------------------------------------------------------------- 11a quiz point tiers
+# Adam 2026-09-20: a module quiz is 25 points. The Final is 100 (9.1a). macOS is
+# larger by design and is allowed 50. Anything else is a retier, not a judgement call.
+_QUIZ_EXEMPT = {'Final Exam': 100, 'Mac Navigation': 50}
+_tier=[]
+for _qm in sorted(glob.glob('quizzes/*_meta.xml')) or sorted(glob.glob('*/assessment_meta.xml')):
+    _s2=open(_qm,encoding='utf-8',errors='ignore').read()
+    _t2=re.search(r'<title>(.*?)</title>',_s2,re.S)
+    _p2=re.search(r'<points_possible>([\d.]+)</points_possible>',_s2)
+    if not _p2: continue
+    _name=html.unescape(_t2.group(1)) if _t2 else os.path.basename(_qm)
+    _want=25
+    for _k,_v in _QUIZ_EXEMPT.items():
+        if _k in _name: _want=_v
+    if abs(float(_p2.group(1))-_want)>0.01:
+        _tier.append('%s: %g points, 11a wants %d'%(_name[:52],float(_p2.group(1)),_want))
+L('quizzes off the 11a point tier (must be 0): %d'%len(_tier))
+for _x in _tier[:12]: L('    %s'%_x)
+if _tier: fails.append('quizzes off the 11a point tier: %d'%len(_tier))
+
+
+# ---------------------------------------------------------------- 12i tables (Standards 2, 11b-1)
+# Adam, 2026-09-21: he imported the cartridge and Canvas's Accessibility Report filled the
+# sidebar with the same two findings repeated down the whole page.
+#     "Table does not have a header."   Severe
+#     "Table does not have a caption."  Minor
+# Standards 2 had already ruled on this and the build ignored it 64 times: layout tables are
+# deprecated, role="presentation" does not exempt one, and icon-and-text rows, callouts,
+# banners, totals and picture grids are divs. Standards 11b-1 adds that a caption is plain
+# text with no style attribute. Nothing in the build was checking any of it, and 176 of the
+# package's 217 tables had no caption at all. Six rules, each one proved by breaking it.
+_t_noth=[]; _t_nocap=[]; _t_noscope=[]; _t_capstyle=[]; _t_pres=[]; _t_emul=[]
+for _p in sorted(set(glob.glob('wiki_content/*.html')+glob.glob('*/*.html')+glob.glob('*.html'))):
+    _t=open(_p,encoding='utf-8',errors='replace').read()
+    if re.search(r'display:\s*table',_t): _t_emul.append(_p)
+    for _tb in re.findall(r'<table\b.*?</table>',_t,re.S|re.I):
+        _ths=re.findall(r'<th(?:\s[^>]*)?>',_tb,re.I)
+        if not _ths: _t_noth.append(_p)
+        elif any('scope=' not in _h for _h in _ths): _t_noscope.append(_p)
+        if not re.search(r'<caption[^>]*>\s*\S',_tb,re.I): _t_nocap.append(_p)
+        if re.search(r'<caption[^>]*\sstyle=',_tb,re.I): _t_capstyle.append(_p)
+        if 'role="presentation"' in _tb.split('>',1)[0]: _t_pres.append(_p)
+for _label,_hits,_why in [
+        ('tables with no header cell',_t_noth,'tables with no header cell (12i)'),
+        ('tables with no caption text',_t_nocap,'tables with no caption (12i)'),
+        ('header cells with no scope',_t_noscope,'header cells with no scope (12i)'),
+        ('captions carrying a style attribute',_t_capstyle,'styled captions (12i)'),
+        ('layout tables, role="presentation"',_t_pres,'layout tables (12i)'),
+        ('files emulating a table with display:table',_t_emul,'display:table emulation (12i)')]:
+    L('%s (must be 0): %d'%(_label,len(_hits)))
+    for _x in sorted(set(_hits))[:6]: L('    %s'%_x)
+    if _hits: fails.append('%s: %d'%(_why,len(_hits)))
 
 L('')
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
