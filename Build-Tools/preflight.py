@@ -1006,6 +1006,57 @@ for _label,_hits,_why in [
     for _x in sorted(set(_hits))[:6]: L('    %s'%_x)
     if _hits: fails.append('%s: %d'%(_why,len(_hits)))
 
+
+# ---------------------------------------------------------------- 2b inherited-background contrast
+# Adam 2026-09-21: the 12i contrast check only compared a colour to a background declared
+# in the SAME style attribute. 58 section headings styled color:#fbc02d with no background
+# of their own, sitting on the wrapper's white, shipped at 1.66:1 and nothing saw them.
+# 193 pairs failed in v71; the old check reported 29. This carries the nearest ancestor
+# background down the tree, which is what a browser and a screen reader both do.
+from html.parser import HTMLParser as _HP
+
+def _lum(h):
+    h=h.lstrip('#')
+    if len(h)==3: h="".join(c*2 for c in h)
+    f=lambda v:(lambda x: x/12.92 if x<=0.04045 else ((x+0.055)/1.055)**2.4)(int(v,16)/255.0)
+    return 0.2126*f(h[0:2])+0.7152*f(h[2:4])+0.0722*f(h[4:6])
+
+def _ratio(a,b):
+    la,lb=_lum(a),_lum(b); hi,lo=max(la,lb),min(la,lb); return (hi+0.05)/(lo+0.05)
+
+_BGRE=re.compile(r'(?<!-)background(?:-color)?:\s*(#[0-9a-fA-F]{3,8})')
+_FGRE=re.compile(r'(?<![a-z-])color:\s*(#[0-9a-fA-F]{3,8})')
+_VOID={'img','br','hr','input','meta','link','source'}
+
+class _InkScan(_HP):
+    def __init__(self):
+        _HP.__init__(self, convert_charrefs=True)
+        self.stack=['#ffffff']; self.bad=[]
+    def handle_starttag(self, tag, attrs):
+        st=dict(attrs).get('style','') or ''
+        _b=_BGRE.search(st); _f=_FGRE.search(st)
+        here=_b.group(1).lower() if _b else self.stack[-1]
+        if _f and len(_f.group(1))==7:
+            _ink=_f.group(1).lower()
+            _r=_ratio(_ink,here)
+            if _r<4.5: self.bad.append((_ink,here,round(_r,2)))
+        if tag not in _VOID: self.stack.append(here)
+    def handle_endtag(self, tag):
+        if tag not in _VOID and len(self.stack)>1: self.stack.pop()
+
+_ink_bad=[]
+for _p in sorted(set(glob.glob('wiki_content/*.html')+glob.glob('*/*.html')+glob.glob('*.html'))):
+    _sc=_InkScan()
+    try: _sc.feed(open(_p,encoding='utf-8',errors='replace').read())
+    except Exception: continue
+    for _ink,_bg,_r in _sc.bad: _ink_bad.append((_p,_ink,_bg,_r))
+L('text on its INHERITED background under 4.5:1 (2b, must be 0): %d'%len(_ink_bad))
+_seen={}
+for _p,_ink,_bg,_r in _ink_bad: _seen.setdefault((_ink,_bg,_r),[]).append(_p)
+for (_ink,_bg,_r),_fs in sorted(_seen.items(), key=lambda x:-len(x[1]))[:8]:
+    L('    %s on %s  %.2f:1  x%d   e.g. %s'%(_ink,_bg,_r,len(_fs),os.path.basename(_fs[0])))
+if _ink_bad: fails.append('inherited-background contrast under 4.5:1 (2b): %d'%len(_ink_bad))
+
 L('')
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
 sys.exit(1 if fails else 0)
