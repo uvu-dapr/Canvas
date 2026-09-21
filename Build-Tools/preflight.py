@@ -956,6 +956,14 @@ for _qm in sorted(glob.glob('quizzes/*_meta.xml')) or sorted(glob.glob('*/assess
     _p2=re.search(r'<points_possible>([\d.]+)</points_possible>',_s2)
     if not _p2: continue
     _name=html.unescape(_t2.group(1)) if _t2 else os.path.basename(_qm)
+    # Adam 2026-09-21: a Canvas practice quiz is ungraded by definition, so the 25 point
+    # tier does not apply to it. It is still held to a rule: a practice quiz carries zero.
+    # DAPR 2255's M0 Diagnostic Prior Knowledge Survey is the case that exposed this.
+    if re.search(r'<quiz_type>\s*practice_quiz\s*</quiz_type>',_s2):
+        if abs(float(_p2.group(1)))>0.01:
+            _tier.append('%s: practice quiz carrying %g points, 11a wants 0'
+                         %(_name[:52],float(_p2.group(1))))
+        continue
     _want=25
     for _k,_v in _QUIZ_EXEMPT.items():
         if _k in _name: _want=_v
