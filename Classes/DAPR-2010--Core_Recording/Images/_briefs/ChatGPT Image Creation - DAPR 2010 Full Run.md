@@ -9,12 +9,19 @@ course from 31 of 56 pages carrying an image to 53 of 56, which is the 95 percen
 
 ## Read this before you start
 
-**Background is opaque white, not transparent.** This differs from the two earlier briefs in
-this folder, deliberately. Fourteen images in this course shipped transparent and render as
-invisible dark line work anywhere that does not composite them on white, which is how the
-polar patterns plate came back black on screen. Canvas is safe because Standards 1 pins the
-page wrapper to white. A local browser, the cartridge preview and any dark mode viewer are
-not.
+**Background: fully transparent, and every label sits on its own filled chip.**
+A figure has to survive whatever color the page behind it is. An opaque white plate looks
+like a white slab the moment the page is tinted, so the background is transparent PNG-24.
+The failure transparency used to cause, dark line work going invisible on a dark page, is
+fixed in the drawing rather than in the background: every text label, value and caption sits
+inside its own filled shape, a white or light gray chip with a `#212121` outline, rather than
+floating naked on the background. Boxes, chips and panels keep their solid fills. Only the
+area outside the artwork is transparent. Canvas itself pins the page wrapper to `#ffffff`
+under Standards 1, so this costs nothing there and buys a figure that also reads on a tinted
+page, in the cartridge preview and in a dark mode viewer.
+
+**Photographs, console panel crops and application screenshots are the exception.** Those
+are rectangular rasters with no background to remove, so they stay opaque and full bleed.
 
 **Numbers drawn in pixels must match numbers printed in labels.** This is the single most
 common defect in this course. Three separate figures have shipped with a ratio, an angle or a
@@ -59,11 +66,11 @@ describing the ratio in words has failed twice.
 |---|---|
 | Filename | `miking-techniques-three-to-one-rule-03.png` |
 | Folder | `Images/miking-techniques/` |
-| Format | PNG-24, opaque white background |
+| Format | PNG-24, fully transparent background |
 | Dimensions | 1600 x 800 px |
 
 ```text
-Create a 1600 x 800 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 800 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector geometric diagram, top-down plan view. No gradients, shadows, 3D or photorealism.
 
 THE REQUIREMENT THAT MATTERS MOST, and two previous attempts got it wrong in opposite
@@ -95,11 +102,11 @@ drawn angle contradicts the printed number. NOS is missing entirely.
 |---|---|
 | Filename | `miking-techniques-spaced-arrays-02.png` |
 | Folder | `Images/miking-techniques/` |
-| Format | PNG-24, opaque white background |
+| Format | PNG-24, fully transparent background |
 | Dimensions | 1600 x 700 px |
 
 ```text
-Create a 1600 x 700 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 700 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector geometric diagram, top-down plan view. No gradients, shadows, 3D or photorealism.
 
 Three panels of equal width separated by thin vertical #616161 dividers.
@@ -142,10 +149,10 @@ The dB rings carry no numbers.
 |---|---|
 | Filename | `microphones-polar-patterns-03.png` |
 | Folder | `Images/microphones/` |
-| Dimensions | 1600 x 560 px, opaque white |
+| Dimensions | 1600 x 560 px, transparent |
 
 ```text
-Create a 1600 x 560 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 560 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector technical diagram. No gradients, shadows or 3D.
 
 Five polar response plots in one row, equally spaced. Each plot is a circular polar grid of
@@ -187,10 +194,10 @@ unreadable garble.
 |---|---|
 | Filename | `gain-staging-decibel-scales-03.png` |
 | Folder | `Images/gain-staging/` |
-| Dimensions | 1600 x 900 px, opaque white |
+| Dimensions | 1600 x 900 px, transparent |
 
 ```text
-Create a 1600 x 900 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 900 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector technical diagram. No gradients, shadows or 3D.
 
 Three vertical scales side by side, evenly spaced, each drawn as a tall #212121 line with
@@ -225,10 +232,10 @@ symbol, so the circuit reads as open.
 |---|---|
 | Filename | `impedance-voltage-divider-03.png` |
 | Folder | `Images/impedance/` |
-| Dimensions | 1600 x 760 px, opaque white |
+| Dimensions | 1600 x 760 px, transparent |
 
 ```text
-Create a 1600 x 760 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 760 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector schematic. No gradients, shadows or 3D.
 
 Left half: a complete closed circuit drawn in #212121 with standard schematic symbols.
@@ -263,10 +270,10 @@ never shown, and it is the case that defines half normal.
 |---|---|
 | Filename | `patch-bays-normalling-types-03.png` |
 | Folder | `Images/patch-bays/` |
-| Dimensions | 1600 x 1000 px, opaque white |
+| Dimensions | 1600 x 1000 px, transparent |
 
 ```text
-Create a 1600 x 1000 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 1000 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector schematic. No gradients, shadows or 3D.
 
 A grid three columns wide and three rows tall.
@@ -310,10 +317,10 @@ than a crossed XY, and the equal distance label sits on the panel divider.
 |---|---|
 | Filename | `drums-overhead-techniques-02.png` |
 | Folder | `Images/drums/` |
-| Dimensions | 1600 x 700 px, opaque white |
+| Dimensions | 1600 x 700 px, transparent |
 
 ```text
-Create a 1600 x 700 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 700 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram, top-down plan view. No gradients, shadows or 3D.
 
 Three panels of equal width separated by thin vertical #616161 dividers. Titles in bold
@@ -350,10 +357,10 @@ nothing addresses polarity or time alignment.
 |---|---|
 | Filename | `guitar-bass-di-and-amp-blend-02.png` |
 | Folder | `Images/guitar-bass/` |
-| Dimensions | 1600 x 800 px, opaque white |
+| Dimensions | 1600 x 800 px, transparent |
 
 ```text
-Create a 1600 x 800 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 800 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector signal flow diagram, left to right. No gradients, shadows or 3D.
 
 Draw rounded rectangles outlined in #212121 connected by #212121 arrows.
@@ -386,10 +393,10 @@ label text overlaps the speaker outline.
 |---|---|
 | Filename | `guitar-bass-speaker-cone-positions-02.png` |
 | Folder | `Images/guitar-bass/` |
-| Dimensions | 1600 x 900 px, opaque white |
+| Dimensions | 1600 x 900 px, transparent |
 
 ```text
-Create a 1600 x 900 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 900 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram. No gradients, shadows or 3D.
 
 Draw one guitar speaker seen face on, as a large #212121 circle with a smaller concentric
@@ -425,10 +432,10 @@ room rather than sitting on the wall, and no time gap is shown.
 |---|---|
 | Filename | `acoustics-early-reflections-02.png` |
 | Folder | `Images/acoustics/` |
-| Dimensions | 1600 x 900 px, opaque white |
+| Dimensions | 1600 x 900 px, transparent |
 
 ```text
-Create a 1600 x 900 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 900 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram, top-down plan view. No gradients, shadows or 3D.
 
 Upper two thirds: a rectangular room drawn as four #212121 walls. Inside, near the top wall,
@@ -461,10 +468,10 @@ arrowhead, so the incident direction is unreadable.
 |---|---|
 | Filename | `acoustics-reflection-absorption-diffusion-02.png` |
 | Folder | `Images/acoustics/` |
-| Dimensions | 1600 x 700 px, opaque white |
+| Dimensions | 1600 x 700 px, transparent |
 
 ```text
-Create a 1600 x 700 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 700 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram. No gradients, shadows or 3D.
 
 Three panels of equal width separated by thin vertical #616161 dividers. Titles in bold
@@ -501,10 +508,10 @@ clearly unequal distances from the snare.
 |---|---|
 | Filename | `drums-microphone-placement-02.png` |
 | Folder | `Images/drums/` |
-| Dimensions | 1600 x 1000 px, opaque white |
+| Dimensions | 1600 x 1000 px, transparent |
 
 ```text
-Create a 1600 x 1000 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 1000 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram, top-down plan view. No gradients, shadows or 3D.
 
 Draw a five piece drum kit from above in #212121 outline: a large circle at the front for the
@@ -543,10 +550,10 @@ not a transducer diagram at all.
 |---|---|
 | Filename | `microphones-pressure-vs-gradient-01.png` |
 | Folder | `Images/microphones/` |
-| Dimensions | 1600 x 700 px, opaque white |
+| Dimensions | 1600 x 700 px, transparent |
 
 ```text
-Create a 1600 x 700 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 700 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector cross section diagram. No gradients, shadows or 3D.
 
 Two panels of equal width separated by a thin vertical #616161 divider. Titles in bold
@@ -578,11 +585,11 @@ the gradient capsule with a sealed back.
 |---|---|
 | Filename | `drums-tuning-and-prep-01.png` |
 | Folder | `Images/drums/` |
-| Dimensions | 1600 x 800 px, opaque white |
+| Dimensions | 1600 x 800 px, transparent |
 | Used on | `Drums: Preparing the Kit` |
 
 ```text
-Create a 1600 x 800 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 800 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram. No gradients, shadows or 3D.
 
 Left half: one drum seen from directly above, drawn in #212121 as two concentric circles with
@@ -611,11 +618,11 @@ Title across the top in bold #212121 capitals, exactly: "BEFORE A MICROPHONE GOE
 |---|---|
 | Filename | `studio-care-gear-handling-01.png` |
 | Folder | `Images/studio-care/` |
-| Dimensions | 1600 x 800 px, opaque white |
+| Dimensions | 1600 x 800 px, transparent |
 | Used on | `Studio Care: Handling Gear That Can Be Destroyed` |
 
 ```text
-Create a 1600 x 800 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 800 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram. No gradients, shadows or 3D.
 
 Four panels of equal width separated by thin vertical #616161 dividers. Each panel has a
@@ -646,11 +653,11 @@ Caption exactly: "Monitors go on last and off first. A pop at full gain costs a 
 |---|---|
 | Filename | `impedance-safe-interconnection-01.png` |
 | Folder | `Images/impedance/` |
-| Dimensions | 1600 x 800 px, opaque white |
+| Dimensions | 1600 x 800 px, transparent |
 | Used on | `Impedance: Connecting Real Studio Gear Without Damage` |
 
 ```text
-Create a 1600 x 800 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 800 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector diagram. No gradients, shadows or 3D.
 
 Three rows, each a short left to right signal chain of rounded rectangles outlined in #212121
@@ -677,11 +684,11 @@ lower you lose level, and if it is a speaker output you lose the gear."
 |---|---|
 | Filename | `studio-etiquette-assistant-timeline-01.png` |
 | Folder | `Images/studio-etiquette/` |
-| Dimensions | 1600 x 800 px, opaque white |
+| Dimensions | 1600 x 800 px, transparent |
 | Used on | `Studio Etiquette: What an Assistant Actually Does` |
 
 ```text
-Create a 1600 x 800 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 800 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector timeline diagram. No gradients, shadows or 3D.
 
 One horizontal #212121 timeline arrow running left to right across the middle of the image,
@@ -714,8 +721,8 @@ Each of these is one wide banner figure that sits under the page title on a modu
 They all share a layout so the course reads as one system: a wide strip, a single subject
 drawn left of center, and three short labeled callouts stacked on the right.
 
-Common instruction for all 14 prompts below: **1600 x 500 pixels, solid opaque white
-background, no transparency, flat vector, no gradients, shadows or 3D, real readable Arial
+Common instruction for all 14 prompts below: **1600 x 500 pixels, fully transparent
+fully transparent background, flat vector, no gradients, shadows or 3D, real readable Arial
 style lettering, American spelling, no dashes of any kind.**
 
 ## 18 to 31. The fourteen overview banners
@@ -740,7 +747,7 @@ style lettering, American spelling, no dashes of any kind.**
 **Prompt template. Paste this once per row, swapping only the two bracketed parts.**
 
 ```text
-Create a 1600 x 500 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 500 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 Flat vector illustration in a clean editorial style. No gradients, no drop shadows, no 3D, no
 photorealism, no watermark, no signature.
 

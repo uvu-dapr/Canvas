@@ -7,13 +7,19 @@ exact filename shown, into the exact folder shown. Do not rename.
 image gets the next number and the original is never overwritten, which is why the
 filenames below end in `-03` and `-02`.
 
-**Background: opaque white, not transparent.** This differs from the two earlier briefs in
-this folder, deliberately. Fourteen images in this course shipped with transparent
-backgrounds and render as invisible dark line work anywhere that does not composite them
-on white, which is how the polar patterns plate came back black on screen. Canvas itself is
-safe because Standards 1 pins the page wrapper to `#ffffff`, but the cartridge preview, a
-local browser, and any dark mode viewer are not. Twelve of the fourteen have already been
-flattened onto white and are what the current cartridge uses.
+**Background: fully transparent, and every label sits on its own filled chip.**
+A figure has to survive whatever color the page behind it is. An opaque white plate looks
+like a white slab the moment the page is tinted, so the background is transparent PNG-24.
+The failure transparency used to cause, dark line work going invisible on a dark page, is
+fixed in the drawing rather than in the background: every text label, value and caption sits
+inside its own filled shape, a white or light gray chip with a `#212121` outline, rather than
+floating naked on the background. Boxes, chips and panels keep their solid fills. Only the
+area outside the artwork is transparent. Canvas itself pins the page wrapper to `#ffffff`
+under Standards 1, so this costs nothing there and buys a figure that also reads on a tinted
+page, in the cartridge preview and in a dark mode viewer.
+
+**Photographs, console panel crops and application screenshots are the exception.** Those
+are rectangular rasters with no background to remove, so they stay opaque and full bleed.
 
 **Palette, from Standards Section 3.** Body text and outlines `#212121`. Green `#1B5E20`.
 Blue `#0D47A1`. Red `#B71C1C`. Copper and orange `#993300`. Violet `#4A148C`. Muted gray
@@ -33,7 +39,7 @@ in words, because describing the ratio in words has now failed twice.
 | Field | Value |
 |---|---|
 | Filename | `miking-techniques-three-to-one-rule-03.png` |
-| Format | PNG-24, opaque white background |
+| Format | PNG-24, fully transparent background |
 | Dimensions | 1600 x 800 px |
 | Destination folder | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Images/miking-techniques/` |
 | Used on | Canvas page `Miking Techniques: Five Stereo Arrays` |
@@ -42,7 +48,7 @@ in words, because describing the ratio in words has now failed twice.
 **ChatGPT prompt (paste as-is):**
 
 ```text
-Create a 1600 x 800 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 800 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 
 Flat vector-style geometric diagram, top-down plan view. Clean line weights, no gradients,
 no drop shadows, no 3D, no photorealism, no watermark, no signature.
@@ -85,7 +91,7 @@ degrees, so the drawn angle contradicts the printed number. NOS is missing entir
 | Field | Value |
 |---|---|
 | Filename | `miking-techniques-spaced-arrays-02.png` |
-| Format | PNG-24, opaque white background |
+| Format | PNG-24, fully transparent background |
 | Dimensions | 1600 x 700 px |
 | Destination folder | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Images/miking-techniques/` |
 | Used on | Canvas page `Miking Techniques: Five Stereo Arrays` |
@@ -94,7 +100,7 @@ degrees, so the drawn angle contradicts the printed number. NOS is missing entir
 **ChatGPT prompt (paste as-is):**
 
 ```text
-Create a 1600 x 700 pixel PNG with a solid opaque white background. No transparency.
+Create a 1600 x 700 pixel PNG with a fully transparent background. Every text label sits on its own filled chip, never naked on the background.
 
 Flat vector-style geometric diagram, top-down plan view. Clean line weights, no gradients,
 no drop shadows, no 3D, no photorealism, no watermark, no signature.
