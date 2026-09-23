@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-23
 **Purpose:** the one place to look up a Cloudflare download URL. Every file in `Canvas Links/` with the module it belongs to and the exact URL to reference.
-**Totals:** 80 downloads with a module and a URL, 0 waiting to be assigned.
+**Totals:** 77 downloads with a module and a URL, 0 waiting to be assigned.
 
 
 ---
@@ -19,7 +19,7 @@ The module folder is the Canvas module name with three substitutions: space beco
 
 **Copy the URL from the table. Do not construct it from memory and do not reuse a URL from an older brief.** Every path on this page changed on 2026-09-23.
 
-Files under `_unused/` have no URL on purpose. Do not link to them. To use one, move it into its module folder first and run the Cloudflare sync.
+Files under `_unused/` are left out of this index on purpose. Do not link to them. To use one, move it into its module folder first and run the Cloudflare sync.
 
 ---
 
@@ -37,13 +37,17 @@ Files under `_unused/` have no URL on purpose. Do not link to them. To use one, 
 
 ## DAPR-2010--Core_Recording
 
-38 downloads across 13 modules.
+35 downloads across 14 modules.
 
 | Canvas module | File | URL |
 |---|---|---|
 | Acoustics | `Acoustics.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Acoustics/Acoustics.pptx` |
+| Console Operation | `Behringer.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Operation/Behringer.pptx` |
+| Console Operation | `Console_Review.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Operation/Console_Review.pptx` |
 | Console Operation | `How_to_Create_Headphone_Mix_Audient.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Operation/How_to_Create_Headphone_Mix_Audient.pdf` |
 | Console Operation | `How_to_Plug_in_a_Mic_and_Set_Levels_Audient.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Operation/How_to_Plug_in_a_Mic_and_Set_Levels_Audient.pdf` |
+| Console Signal Flow | `ASP4816_HE_Visualization.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Signal_Flow/ASP4816_HE_Visualization.pdf` |
+| Console Signal Flow | `Audient_ASP4816.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Signal_Flow/Audient_ASP4816.pptx` |
 | Console Signal Flow | `Audient_ASP4816_Setup_Sheet.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Signal_Flow/Audient_ASP4816_Setup_Sheet.pdf` |
 | Console Signal Flow | `Audient_ASP_4816_Console.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Console_Signal_Flow/Audient_ASP_4816_Console.pdf` |
 | Drum Recording | `Drum_Setup_List.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Drum_Recording/Drum_Setup_List.docx` |
@@ -51,34 +55,27 @@ Files under `_unused/` have no URL on purpose. Do not link to them. To use one, 
 | Final Project | `A_Horse_is_Not_a_Home_Lyrics.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Final_Project/A_Horse_is_Not_a_Home_Lyrics.pdf` |
 | Gain Staging | `Gain_Staging.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Gain_Staging/Gain_Staging.pptx` |
 | Impedance & Voltage | `Impedance_Matching.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Impedance_and_Voltage/Impedance_Matching.pdf` |
+| Impedance & Voltage | `Impedance_and_dB.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Impedance_and_Voltage/Impedance_and_dB.pptx` |
 | Microphones | `Mic_Book_Condensed.xlsx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Microphones/Mic_Book_Condensed.xlsx` |
 | Microphones | `Mic_Book_Page_Template.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Microphones/Mic_Book_Page_Template.docx` |
 | Microphones | `Microphones.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Microphones/Microphones.pptx` |
+| Miking Techniques | `Mid_Side_Miking_Presentation.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Miking_Techniques/Mid_Side_Miking_Presentation.pptx` |
+| Miking Techniques | `Multi_Mic_Setups.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Miking_Techniques/Multi_Mic_Setups.pptx` |
+| Patch Bays | `Connector_Panel_Visualization.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Patch_Bays/Connector_Panel_Visualization.pdf` |
+| Patch Bays | `Patch_Bay.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Patch_Bays/Patch_Bay.pptx` |
 | Patch Bays | `Studio_B_Patch_Bay.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Patch_Bays/Studio_B_Patch_Bay.pdf` |
 | Pro Tools for Tracking | `Studio_Map.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Pro_Tools_for_Tracking/Studio_Map.pdf` |
 | Pro Tools for Tracking | `Track_List.xlsx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Pro_Tools_for_Tracking/Track_List.xlsx` |
+| Pro Tools for Tracking | `Tracking_Techniques.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Pro_Tools_for_Tracking/Tracking_Techniques.pptx` |
 | Studio Etiquette | `Assistant_Engineering.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Etiquette/Assistant_Engineering.pdf` |
 | Studio Etiquette | `Basic_Studio_Etiquette.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Etiquette/Basic_Studio_Etiquette.pdf` |
 | Studio Etiquette | `Studio_Etiquette.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Etiquette/Studio_Etiquette.pptx` |
+| Studio Use & Care | `DAPR_Studio_Reservation_Agreement.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Use_and_Care/DAPR_Studio_Reservation_Agreement.docx` |
+| Studio Use & Care | `Equipment_and_Checkout_Criteria.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Use_and_Care/Equipment_and_Checkout_Criteria.docx` |
+| Studio Use & Care | `Reservable_Studio_Equipment.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Use_and_Care/Reservable_Studio_Equipment.docx` |
 | Studio Use & Care | `Studio_Checklist.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Use_and_Care/Studio_Checklist.docx` |
 | Studio Use & Care | `Studio_Rules.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/Studio_Use_and_Care/Studio_Rules.pdf` |
-| _unused | `ASP4816_HE_Visualization.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/ASP4816_HE_Visualization.pdf` |
-| _unused | `Audient_ASP4816.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Audient_ASP4816.pptx` |
-| _unused | `Audient_ASP4816_Duplicate.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Audient_ASP4816_Duplicate.pptx` |
-| _unused | `Behringer.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Behringer.pptx` |
-| _unused | `Connector_Panel_Visualization.pdf` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Connector_Panel_Visualization.pdf` |
-| _unused | `Console_Review.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Console_Review.pptx` |
-| _unused | `DAPR_Studio_Reservation_Agreement.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/DAPR_Studio_Reservation_Agreement.docx` |
-| _unused | `Digital_Audio_Workstations.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Digital_Audio_Workstations.pptx` |
-| _unused | `Equipment_and_Checkout_Criteria.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Equipment_and_Checkout_Criteria.docx` |
-| _unused | `Impedance_and_dB.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Impedance_and_dB.pptx` |
-| _unused | `Mid_Side_Miking_Presentation.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Mid_Side_Miking_Presentation.pptx` |
-| _unused | `Multi_Mic_Setups.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Multi_Mic_Setups.pptx` |
-| _unused | `Patch_Bay.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Patch_Bay.pptx` |
-| _unused | `Patch_Bay_Duplicate.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Patch_Bay_Duplicate.pptx` |
-| _unused | `Reservable_Studio_Equipment.docx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Reservable_Studio_Equipment.docx` |
-| _unused | `Sonic_Reality_in_a_Virtual_World.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Sonic_Reality_in_a_Virtual_World.pptx` |
-| _unused | `Tracking_Techniques.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/_unused/Tracking_Techniques.pptx` |
+| The Digital Recording Process | `Digital_Audio_Workstations.pptx` | `https://uvu-files.adamo.workers.dev/DAPR-2010--Core_Recording/The_Digital_Recording_Process/Digital_Audio_Workstations.pptx` |
 
 ## DAPR-2020--Core_Mixing
 
