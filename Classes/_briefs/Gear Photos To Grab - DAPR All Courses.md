@@ -2,7 +2,7 @@
 
 Updated 2026-09-23 evening. Real products come from the manufacturer or an open license, never from ChatGPT (Canvas Standards 20.1 rule 3).
 
-## Already downloaded and in place (18 files, not committed)
+## Already downloaded and in place (19 files, not committed)
 
 Claude downloaded these, checked each one by eye, and saved them over the existing file names, so the pages need no change. Open license photos need the credit in the image caption; manufacturer shots get "Image courtesy (maker)".
 
@@ -10,6 +10,7 @@ Claude downloaded these, checked each one by eye, and saved them over the existi
 |---|---|---|
 | Tt_Bantam_Plug.png | Hosa TTS-102 | Image courtesy Hosa Technology |
 | Db25_Male.png | Hosa DTP-800 snake | Image courtesy Hosa Technology |
+| Db25_Female.png | American Radio Supply, right angle DB25 female port (found by Adam) | Image courtesy American Radio Supply |
 | Firewire_400_6_Pin.png | StarTech 1394_6 | Image courtesy StarTech.com |
 | Adam_Audio_Monitors.jpg | ADAM Audio T5V | Image courtesy ADAM Audio |
 | Electrolytic_Large_Bank.jpg | Flickr, NAD 310 interior | "NAD 310 Capacitors" by Turntable Guy, CC BY 2.0 |
@@ -31,7 +32,6 @@ Claude downloaded these, checked each one by eye, and saved them over the existi
 
 | Save as (under Classes/) | Why Claude could not do it | Easiest fix |
 |---|---|---|
-| `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Db25_Female.png` | Only candidate is on Wikimedia, which Claude's tools cannot reach | Phone photo of a DB25 jack on a studio interface, or download [this Commons file](https://commons.wikimedia.org/wiki/File:D-SUB_DB-25_F_PRINT_PINK_LPT_LINE_PRINTER_CONNECTOR_IEEE-1284_IMG_1221.JPG) |
 | `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/TA5_Mini_XLR.png` | Switchcraft's site blocked the download | Save [ta5m.jpg](https://www.switchcraft.com/assets/1/24/DimLarge/ta5m.jpg) and [ta5flx.jpg](https://www.switchcraft.com/assets/1/24/DimLarge/ta5flx.jpg) anywhere in the repo and tell Claude, who will set them side by side |
 | `DAPR-2255--Audio_Hardware_I/Power/Wattmeter.jpg` | Good photos are on Wikimedia; the maker's image is only 450 px | Download [this Commons file](https://commons.wikimedia.org/wiki/File:P3-Kill-a-watt.jpg), or a phone photo of any plug in power meter |
 | `DAPR-3340--Spatial_Audio_I/Introduction_to_Surround_and_Multichannel_Audio/Legacy_Dolby_Hardware_Milestones.png` and `Dolby_Pro_Logic_History_Overview.png` | No openly licensed photos of 1980s Pro Logic gear exist | Photo of an old receiver, or drop the images |
@@ -74,7 +74,6 @@ Base folder for every path below:
 |---|---|---|---|---|
 | `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Tt_Bantam_Plug.png` | [Hosa TTS-102](https://hosatech.com/products/analog-audio/interconnect-cables/single-interconnects/tts-102/) | [TTS-102-Connector.jpg](https://hosatech.com/wp-content/uploads/2014/03/TTS-102-Connector.jpg) | Three conductors: tip, ring, sleeve. Backup: [Bittree TT cords](https://www.bittree.com/collections/patchcords/products/tt-bantam-110-ohm-audio-patch-cables) | Image courtesy Hosa Technology |
 | `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Db25_Male.png` | [Hosa DTP-800 snake](https://hosatech.com/products/analog-audio/snakes/dtp-800/) | [DTP-800-Connector.jpg](https://hosatech.com/wp-content/uploads/2014/03/DTP-800-Connector.jpg) | 25 pins, 13 over 12. Backup: [DBD-300-Connector.jpg](https://hosatech.com/wp-content/uploads/2014/03/DBD-300-Connector.jpg) | Image courtesy Hosa Technology |
-| `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Db25_Female.png` | [Commons: DB-25 F](https://commons.wikimedia.org/wiki/File:D-SUB_DB-25_F_PRINT_PINK_LPT_LINE_PRINTER_CONNECTOR_IEEE-1284_IMG_1221.JPG) | Special:FilePath link on that page | 25 sockets, 13 over 12. It's a computer printer port, not audio. **Best option: photograph the DB25 jack on an interface in the studio** | From the Commons page |
 | `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/TA5_Mini_XLR.png` | [Switchcraft TA5MX](https://www.switchcraft.com/tini-qg-mini-xlr-5-pin-male-cable-mount-silver-pins-nickel/ta5mx/) and [TA5FLX](https://www.switchcraft.com/tini-qg-mini-xlr-5-pin-female-cable-mount-no-flex-relief-large-cable-opening-silver-pins-nickel/ta5flx/) | [ta5m.jpg](https://www.switchcraft.com/assets/1/24/DimLarge/ta5m.jpg), [ta5flx.jpg](https://www.switchcraft.com/assets/1/24/DimLarge/ta5flx.jpg), or the [group shot](https://www.switchcraft.com/assets/1/24/DimLarge/mini_xlr_connectors_group.png) | Five pins. Two separate photos: send both to me and I'll set them side by side | Image courtesy Switchcraft Inc. |
 | `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Firewire_400_6_Pin.png` | [Commons: Firewire6-pin.jpg](https://commons.wikimedia.org/wiki/File:Firewire6-pin.jpg) | Special:FilePath link on that page | Rounded 6 pin end, not the square 9 pin FireWire 800. Backup: [StarTech 1394_6](https://www.startech.com/en-us/cables/1394_6) | From the Commons page |
 | `DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Adam_Audio_Monitors.jpg` | [ADAM T5V](https://www.adam-audio.com/en/t-series/t5v/) | [T5V featured image](https://www.adam-audio.com/content/uploads/2023/04/adam-audio-t5v-studio-monitor-featured-image.png) | At least 1200 wide. Backup: [T7V](https://www.adam-audio.com/content/uploads/2023/04/adam-audio-t7v-studio-monitor-featured-image.png) (1500 x 1000) | Image courtesy ADAM Audio |
