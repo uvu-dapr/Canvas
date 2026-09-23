@@ -12,6 +12,12 @@ Written 2026-09-23. Every image below is on disk now but looks wrong: a watermar
 
 **Not for ChatGPT (real products must be sourced, per 20.1 rule 3):** `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Adam_Audio_Monitors.jpg` is a 225 pixel product photo. Replace it with a photo of the real monitors (your own shot or the manufacturer's press image) at 1600 pixels wide, same filename.
 
+**Status on 2026-09-23 evening**
+
+* Done: Images 18, 19 and 20 (GM_Channel_10, Alkaline_Cross_Section, Assignment_Bench). Checked and kept.
+* Still to run: Images 01 through 17.
+* Claude and ChatGPT were editing the same files at the same time tonight. From now on ChatGPT works only on Images 01 to 17 in Part 1. Everything in Part 2 is either finished or needs Adam.
+
 ---
 
 ## Image 01. DAPR 2000: Cardioid polar chart (replaces a SoundGuys watermarked image)
@@ -419,58 +425,58 @@ Real hardware, real software, and third party figures are sourced, never generat
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Monitor/Audio_Technica_ATH_R30x.png` | Looks like the ATH R70x | Check the model; replace or rename |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Monitor/Philips_SHP9500.png` | Closed cups; the SHP9500 has open grilles | Check the model; replace |
 
-## Blur personal information before students see it
-
-The repo is public. Blur in Preview (Tools, Annotate, a filled rectangle) or recapture.
+## Still needs you (not photos)
 
 | File (full path) | Problem | Fix |
 |---|---|---|
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_This_MAC.png` | Mac serial number | Blur the serial |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_This_MAC_M5.png` | Mac serial number | Blur the serial |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Audio_Devices_Window.png` | Device named Adam Olson 16 Pro | Blur or rename the device, recapture |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/External_Drive_Sidebar.png` | Adam Olson UVU Time Machine | Blur |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Home_Folder_Contents.png` | /Users/adamwolson and personal folder names | Recapture on a clean demo account |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Turbotax_Leftover_Folder.png` | /Users/adamwolson and TurboTax contents | Recapture with a neutral app; name it Leftover_App_Support_Folder.png |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Login_Items_Panel.png` | Account name and photo in the sidebar | Blur the account block |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Sound_Output_List.png` | Account name and photo | Blur the account block |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_General_Settings.png` | Account name in the sidebar | Blur the account block |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Mixing__Focus_and_Balance/Technical_Ear_Trainer_Settings.png` | Student name Owen Peterson visible | Blur the name (file already renamed) |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Mixing__Essential_Groundwork/Dashboard_New_Session.png` | Probably /Users/name in the Location field | Check and blur |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Pro_Tools__Fundamentals/Dashboard_New_Session.png` | Same as above | Check and blur |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics/Pro_Tools_Dashboard_Key.png` | Location path may show a username | Check and blur |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Master_to_ADM_Dialog.png` | /Users/ekuehnl path | Blur the path |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Master_to_IMF_IAB_Dialog.png` | /Users/ekuehnl path | Blur the path |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Master_to_MP_Four_Dialog.png` | /Users/ekuehnl path | Blur the path |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Re_Renders_Dialog.png` | /Users/ekuehnl path | Blur the path |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Final_Project_and_Final_Exam/Export_Master_to_ADM_Dialog.png` | /Users/ekuehnl path (copy) | Replace with the blurred copy |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mixing_and_Surround_Plugins/Export_Selected_Dialog_High_Sample_Rate.png` | Users:ekuehnl path | Blur the path |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mixing_and_Surround_Plugins/Export_Selected_Dialog_Video_Sample_Rate.png` | Users:ekuehnl path | Blur the path |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/CS_623a_BOAA_Lab/Users_Folder_With_Shared_Selected.png` | /Users listing may show real account names | Check and blur |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/CS_623a_BOAA_Lab/Finder_Step_10.jpg` | Same /Users listing | Check and blur |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Introduce_Yourself/Canvas_Upload_Dialog.png` | Browser address bar and tabs | Crop to the dialog |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Introduce_Yourself/Example_Headshot.jpg` | Photo of a real looking person | Confirm consent or AI origin |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Introduce_Yourself/Example_Headshot.jpg` | Photo of a real looking person | Confirm consent or AI origin, or swap for your own headshot |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Home_Folder_Contents.png` | Blurred, but a lot of the picture is now blur | Optional: recapture on a clean demo account |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Turbotax_Leftover_Folder.png` | Blurred, still names a tax app in the title | Optional: recapture with a neutral app as Leftover_App_Support_Folder.png |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Monitoring__Psychoacoustics/Sound_Field_Speaker_Placement.png` | 740 x 359 heat map, labels unreadable | Re-export larger from the source |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Studio_Use_and_Care/Power_Up_Sequence_Alt.png` | Different power up order than Power_Up_Sequence.png | Your call: which order is right for the studio |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Schematics/Logic_Gates.png` | 24 tiny gates, unreadable | Larger chart from the source |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Symbol_Inductor.png` | International symbol cut off | Re-export the full strip from the source |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Rendered_Triangles_With_Banded_Resistors.png` | Right circuit: the ground resistor sits on top of the input wire | Use Rendered_Triangles_With_Tan_Resistors.png on the page, or redraw |
 
-## Fix by hand
+## Finished on 2026-09-23
 
-Small edits to existing files.
+Nothing to do. Listed so nobody edits these again.
 
-| File (full path) | Problem | Fix |
-|---|---|---|
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics/Filter_Curve_4.png` | Red spell check squiggle under dB/oct (also 5 and 6) | Re-export from the slide with spell check off |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency/Diagram_Nondispersive_Arrival.jpg` | Top label clipped | Re-export with margins |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency/Diagram_Stiffness_vs_Density.jpg` | Labels and axis title cut off | Re-export with padding |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Monitoring__Psychoacoustics/Sound_Field_Speaker_Placement.png` | 740 x 359 heat map, labels unreadable | Re-export larger |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Orientation/Course_Card.png` | Gemini sparkle mark bottom right | Crop or paint it out |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Orientation__Course_Orientation_and_Feedback/Course_Outline_Banner_Alt.png` | Gemini sparkle mark bottom right | Crop or paint it out |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Course_Orientation/Course_Card_Alt.png` | Visible seam in the bottom band | Crop the band off |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Studio_Use_and_Care/Power_Up_Sequence_Alt.png` | Gives a different power up order than Power_Up_Sequence.png | Decide the order; keep the one that matches |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Evolution_and_Extended_Protocols/OSC_Address_Anatomy.png` | Two labels print on top of each other | Space the labels |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Multimeters/Jack_Selection.png` | COM label garbled | Fix the label |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Diodes_and_LEDs/Series_Resistor_Method.png` | Step 4 text cut off | Re-layout |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Transistors/As_a_Switch.png` | NPN drawn without base bar or emitter arrow; label overprinted | Redraw the symbol |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Schematics/Logic_Gates.png` | 24 tiny gates, unreadable | Larger chart |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Symbol_Inductor.png` | International symbol cut off | Re-export the full strip |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Rendered_Triangles_With_Banded_Resistors.png` | Right op amp has plus and minus swapped | Use the Tan_Resistors version, or fix |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Networking__Industry_Network_Audio_Protocols/Descending_Labeled_Bandwidth_Bars.png` | NDI HX3 labeled lowest bandwidth; order is wrong | Fix the labels or put the numbers in a page table |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Recording/Direct_Early_Late_Reflections_Timeline.png` | Early and late ms labels look reversed | Fix the labels |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mastering_and_Surround_Encoding/Short_Chain_of_Boxed_Processor_Icons.jpg` | Label cut to Dynamics Processin (also Full_Chain_of_Boxed_Processor_Icons.png) | Re-export with the full label |
+| File (full path) | What was done |
+|---|---|
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_This_MAC.png` | Serial hidden |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_This_MAC_M5.png` | Serial hidden |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_General_Settings.png` | Account block and serial blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Audio_Devices_Window.png` | Device name blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/External_Drive_Sidebar.png` | Drive name blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Home_Folder_Contents.png` | Path and personal folders blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Turbotax_Leftover_Folder.png` | Path and app names blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Login_Items_Panel.png` | Account block blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Sound_Output_List.png` | Account block blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Mixing__Focus_and_Balance/Technical_Ear_Trainer_Settings.png` | Student name blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Mixing__Essential_Groundwork/Dashboard_New_Session.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Pro_Tools__Fundamentals/Dashboard_New_Session.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics/Pro_Tools_Dashboard_Key.png` | Checked: shows /Users/student, nothing to hide |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Master_to_ADM_Dialog.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Master_to_IMF_IAB_Dialog.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Master_to_MP_Four_Dialog.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Export_Re_Renders_Dialog.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Final_Project_and_Final_Exam/Export_Master_to_ADM_Dialog.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mixing_and_Surround_Plugins/Export_Selected_Dialog_High_Sample_Rate.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mixing_and_Surround_Plugins/Export_Selected_Dialog_Video_Sample_Rate.png` | User path blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/CS_623a_BOAA_Lab/Users_Folder_With_Shared_Selected.png` | Student ID folder names blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/CS_623a_BOAA_Lab/Finder_Step_10.jpg` | Student ID folder names blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Introduce_Yourself/Canvas_Upload_Dialog.png` | Address bar, bookmarks and avatar blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Orientation/Course_Card.png` | Gemini mark painted out |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Orientation__Course_Orientation_and_Feedback/Course_Outline_Banner_Alt.png` | Gemini mark painted out |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Course_Orientation/Course_Card_Alt.png` | Seam band cropped off |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics/Filter_Curve_4.png` | Spell check squiggle removed (also 5 and 6) |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency/Diagram_Nondispersive_Arrival.jpg` | Clipped labels redrawn with a top margin |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency/Diagram_Stiffness_vs_Density.jpg` | Rebuilt as a clean chart with real values and full axis titles |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Evolution_and_Extended_Protocols/OSC_Address_Anatomy.png` | Labels spaced (ChatGPT) |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Multimeters/Jack_Selection.png` | COM label no longer crossed by the lead line |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Diodes_and_LEDs/Series_Resistor_Method.png` | Redrawn: battery and LED symbols, all four steps fit, 467 ohms |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Transistors/As_a_Switch.png` | NPN symbol redrawn (ChatGPT) |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Networking__Industry_Network_Audio_Protocols/Descending_Labeled_Bandwidth_Bars.png` | Order fixed: NDI, then NDI HX3, then NDI HX2 |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Recording/Direct_Early_Late_Reflections_Timeline.png` | Early under 50 ms, late over 50 ms |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mastering_and_Surround_Encoding/Short_Chain_of_Boxed_Processor_Icons.jpg` | Dynamics Processing spelled out (also Full_Chain) |

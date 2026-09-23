@@ -1,18 +1,21 @@
 #!/usr/bin/env python3
 """
-image_reference.py - regenerate a course's Image Reference page from its Images folder.
+image_reference.py - regenerate a course's Image Reference page from its module folders.
 
     python3 image_reference.py /path/to/Classes/DAPR-2255--Audio_Hardware_I
 
 Standards 8.1: the Image Reference is a mandatory build artifact and no cartridge
-ships without it. It mirrors Images/ exactly, so it is generated from disk, never
-edited by hand. Folders whose name starts with an underscore are working folders
-(_briefs, _review, _superseded, _duplicates) and are left out on purpose.
+ships without it. It mirrors the course's module folders exactly
+(Classes/<Course_Folder>/<Module_Folder>/<File>), so it is generated from disk,
+never edited by hand. Folders whose name starts with an underscore are working
+folders (_unused, _briefs, _review, _superseded) and are left out on purpose.
+The page is written next to the course folder as <Course_Folder>--Image-Reference.html.
 """
 import os, sys, datetime
+from urllib.parse import quote
 
-RAW = "https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/%s/Images/%s/%s"
-EXT = (".png", ".jpg", ".jpeg", ".svg", ".webp")
+RAW = "https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/%s/%s/%s"
+EXT = (".png", ".jpg", ".jpeg", ".gif")
 
 HEAD = """<!DOCTYPE html>
 <html lang="en">
@@ -35,7 +38,7 @@ word-break:break-all;margin-top:6px;user-select:all}
 <body>
 <div class="wrap">
 <h1>%(pretty)s - Image Reference</h1>
-<p class="sub">Generated %(date)s. %(count)d images across %(folders)d topic folders. Mirrors <span style="font-family:monospace">Images/</span> exactly.</p>
+<p class="sub">Generated %(date)s. %(count)d images across %(folders)d topic folders. Mirrors the module folders exactly.</p>
 """
 
 
@@ -45,10 +48,7 @@ def main():
         return 2
     course_dir = os.path.abspath(sys.argv[1].rstrip("/"))
     course = os.path.basename(course_dir)
-    images = os.path.join(course_dir, "Images")
-    if not os.path.isdir(images):
-        print("no Images folder under " + course_dir)
-        return 2
+    images = course_dir
 
     topics = sorted(d for d in os.listdir(images)
                     if os.path.isdir(os.path.join(images, d)) and not d.startswith("_"))
@@ -65,7 +65,7 @@ def main():
         for f in files:
             body.append('<div class="img-item"><img src="%s" alt="%s" loading="lazy">'
                         '<div class="cap">%s</div></div>'
-                        % (RAW % (course, topic, f), f, f))
+                        % (RAW % (quote(course), quote(topic), quote(f)), f, f))
         body.append("</div>")
 
     pretty = course.replace("--", " ").replace("_", " ").replace("-", " ")
@@ -73,8 +73,8 @@ def main():
     head = HEAD % {"pretty": pretty,
                    "date": datetime.date.today().isoformat(),
                    "count": total,
-                   "folders": len(topics)}
-    out = os.path.join(course_dir, course + "--Image-Reference.html")
+                   "folders": sum(1 for b in body if b.startswith("<h2>"))}
+    out = os.path.join(os.path.dirname(course_dir), course + "--Image-Reference.html")
     with open(out, "w", encoding="utf-8") as fh:
         fh.write(head + "\n".join(body) + "\n</div>\n</body>\n</html>\n")
     print("%d images, %d folders -> %s" % (total, len(topics), out))
