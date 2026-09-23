@@ -14,9 +14,9 @@ Written 2026-09-23. Every image below is on disk now but looks wrong: a watermar
 
 **Status on 2026-09-23 evening**
 
-* Done: Images 18, 19 and 20 (GM_Channel_10, Alkaline_Cross_Section, Assignment_Bench). Checked and kept.
-* Still to run: Images 01 through 17.
-* Claude and ChatGPT were editing the same files at the same time tonight. From now on ChatGPT works only on Images 01 to 17 in Part 1. Everything in Part 2 is either finished or needs Adam.
+* Done: Images 01 through 20. Images 01 to 17 went in with the 12:38 push; 18 to 20 later that evening. The Switch_SPST and DAW banner versions Adam approved are the keepers.
+* Still to run: Image 21 only (both op amp renders).
+* Everything else left is in Part 2 and needs real photos, real screenshots, or source files from Adam.
 
 ---
 
@@ -378,6 +378,32 @@ Create a 1600 x 900 pixel photorealistic bench photograph on a light gray anti s
 
 ---
 
+## Image 21. DAPR 3255: Inverting and non inverting op amp renders (the ground resistor sits on the input wire)
+
+Run this twice, once per file. The first run uses resistors with color bands, the second plain tan bodies.
+
+**Save as (run 1, banded):**
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Rendered_Triangles_With_Banded_Resistors.png
+```
+
+**Save as (run 2, tan):**
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Rendered_Triangles_With_Tan_Resistors.png
+```
+
+**Prompt:**
+
+```
+Create a 1600 x 900 pixel PNG with a fully transparent background. Two op amp circuits side by side, rendered as clean glossy 3D objects: blue #0D47A1 triangle op amps, rounded black wires, small black solder dots at every junction, axial resistors (run 1: tan bodies with brown, black, red and gold color bands; run 2: plain tan bodies with silver end caps). LEFT circuit, inverting amplifier: an input wire from the far left passes through one resistor into a junction dot, the junction connects to the upper input of the op amp, a second resistor runs over the top from that junction to the output junction on the right, and the lower input drops straight down to a ground symbol. RIGHT circuit, non inverting amplifier: an input wire from the far left runs straight into the lower input of the op amp with no resistor and touches nothing else; the upper input connects to a junction dot that sits above and to the left of the op amp; from that junction one resistor runs over the top to the output junction, and a second resistor hangs straight down from that junction to a ground symbol. That ground resistor must stay entirely above the input wire and must not touch or cross it; route the input wire underneath with clear space. On each op amp mark the upper input with a white minus sign and the lower input with a white plus sign. No other text, no numbers, no labels, no logos, no brand marks, no watermark, no signature, no border or frame, no caption.
+```
+
+Check before you keep it: on the right circuit the input wire goes only to the plus input, and the ground resistor connects only the minus junction to ground.
+
+---
+
 # Part 2: not for ChatGPT
 
 Found in the full image audit on 2026-09-23. Replace each file at the same path and name unless the Fix says otherwise.
@@ -430,13 +456,9 @@ Real hardware, real software, and third party figures are sourced, never generat
 | File (full path) | Problem | Fix |
 |---|---|---|
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Introduce_Yourself/Example_Headshot.jpg` | Photo of a real looking person | Confirm consent or AI origin, or swap for your own headshot |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Home_Folder_Contents.png` | Blurred, but a lot of the picture is now blur | Optional: recapture on a clean demo account |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Turbotax_Leftover_Folder.png` | Blurred, still names a tax app in the title | Optional: recapture with a neutral app as Leftover_App_Support_Folder.png |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Monitoring__Psychoacoustics/Sound_Field_Speaker_Placement.png` | 740 x 359 heat map, labels unreadable | Re-export larger from the source |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Studio_Use_and_Care/Power_Up_Sequence_Alt.png` | Different power up order than Power_Up_Sequence.png | Your call: which order is right for the studio |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Schematics/Logic_Gates.png` | 24 tiny gates, unreadable | Larger chart from the source |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Symbol_Inductor.png` | International symbol cut off | Re-export the full strip from the source |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Electronics/Rendered_Triangles_With_Banded_Resistors.png` | Right circuit: the ground resistor sits on top of the input wire | Use Rendered_Triangles_With_Tan_Resistors.png on the page, or redraw |
 
 ## Finished on 2026-09-23
 
@@ -446,13 +468,13 @@ Nothing to do. Listed so nobody edits these again.
 |---|---|
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_This_MAC.png` | Serial hidden |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_This_MAC_M5.png` | Serial hidden |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_General_Settings.png` | Account block and serial blurred |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Audio_Devices_Window.png` | Device name blurred |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/External_Drive_Sidebar.png` | Drive name blurred |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Home_Folder_Contents.png` | Path and personal folders blurred |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Turbotax_Leftover_Folder.png` | Path and app names blurred |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Login_Items_Panel.png` | Account block blurred |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Sound_Output_List.png` | Account block blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/About_General_Settings.png` | Serial blurred; account block left as is |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Audio_Devices_Window.png` | Left as is: your name is fine (Adam, 2026-09-23) |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/External_Drive_Sidebar.png` | Left as is: your name is fine |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Home_Folder_Contents.png` | Left as is: your name and folder names are fine |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Turbotax_Leftover_Folder.png` | Left as is: your name and file names are fine |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Login_Items_Panel.png` | Left as is: your name is fine |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/macOS__Foundations/Sound_Output_List.png` | Left as is: your name is fine |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Mixing__Focus_and_Balance/Technical_Ear_Trainer_Settings.png` | Student name blurred |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Mixing__Essential_Groundwork/Dashboard_New_Session.png` | User path blurred |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Pro_Tools__Fundamentals/Dashboard_New_Session.png` | User path blurred |
@@ -466,7 +488,7 @@ Nothing to do. Listed so nobody edits these again.
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mixing_and_Surround_Plugins/Export_Selected_Dialog_Video_Sample_Rate.png` | User path blurred |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/CS_623a_BOAA_Lab/Users_Folder_With_Shared_Selected.png` | Student ID folder names blurred |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/CS_623a_BOAA_Lab/Finder_Step_10.jpg` | Student ID folder names blurred |
-| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Introduce_Yourself/Canvas_Upload_Dialog.png` | Address bar, bookmarks and avatar blurred |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/DAPR_Introduce_Yourself/Canvas_Upload_Dialog.png` | Left as is: your own browser |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Orientation/Course_Card.png` | Gemini mark painted out |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2020--Core_Mixing/Orientation__Course_Orientation_and_Feedback/Course_Outline_Banner_Alt.png` | Gemini mark painted out |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2010--Core_Recording/Course_Orientation/Course_Card_Alt.png` | Seam band cropped off |
@@ -480,3 +502,4 @@ Nothing to do. Listed so nobody edits these again.
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3255--Audio_Hardware_II/Networking__Industry_Network_Audio_Protocols/Descending_Labeled_Bandwidth_Bars.png` | Order fixed: NDI, then NDI HX3, then NDI HX2 |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Recording/Direct_Early_Late_Reflections_Timeline.png` | Early under 50 ms, late over 50 ms |
 | `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-3340--Spatial_Audio_I/Surround_Mastering_and_Surround_Encoding/Short_Chain_of_Boxed_Processor_Icons.jpg` | Dynamics Processing spelled out (also Full_Chain) |
+| `/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Schematics/Logic_Gates.png` | Rebuilt as an eight gate ANSI chart (ChatGPT). On OR, NOR, XOR and XNOR the input leads stop short of the curved back; fine to teach from, touch up if you want |
