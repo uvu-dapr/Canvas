@@ -42,7 +42,8 @@ Read the current standards first: `2026-09-24 DAPR Canvas Standards.md` (older c
 2. Real products and real software screens are sourced or captured, never generated. A generated image with a fake software screen can be kept if the screen is defocused so it shows no software.
 3. If an image is weak but nothing better is on hand, keep it and add it to `Classes/_briefs/Image Fixes For Later - DAPR All Courses.md`. Do not stop the build for it.
 4. Personal information: my own name, account and folder names are fine to show. Blur only other people's names, usernames and student IDs, and Mac serial numbers.
-5. Every student visible page carries at least one real image (photo, diagram, screenshot, chart or banner for that page's topic). Target is 100 percent of pages. Icons do not count. If nothing fitting exists yet, use the best placeholder and log it in Image Fixes For Later; never ship a bare page.
+5. Every student visible page carries at least one image for that page's topic, 100 percent of pages. Icons and logos do not count. Order of choice: a real photo, screenshot, diagram or chart; a chart drawn in code where values matter; a useful ChatGPT concept image; at minimum a decorative ChatGPT banner. Decorative is allowed, bare is not. Generated images: no real products, no software screens, no baked in text, numbers, logos or brand marks.
+6. For a page waiting on ChatGPT: pick the final filename in the page's module folder, link it now, put a code drawn placeholder PNG at that exact path, and write the prompt in `Classes/_briefs/ChatGPT Image Prompts - DAPR ####.md` (Save as full path, then the prompt). Adam saves the result over the placeholder under the same name. Report two counts every build: finished images, placeholders waiting on ChatGPT.
 
 ## 5. Auxiliary Resources (replaces Audio & Sessions)
 
