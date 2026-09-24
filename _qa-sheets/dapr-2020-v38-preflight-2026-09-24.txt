@@ -1,0 +1,73 @@
+XML/QTI parsed: 157  failures: 0
+quiz resources in the manifest: 12   qti files on disk: 12   metas resolved: 12
+cc quizzes (imsqti_xmlv1p2) with no non_cc_assessments copy (must be 0): 0
+canvas_export.txt declared: True
+declared files missing on disk: 0
+unresolvable placeholders: 0
+canvas media/link defects in content bodies: 0
+pages: 103  no head: 0  identifier mismatch: 0  not unpublished: 0
+organizations items: 160  dangling: 0
+assignments: 33  not unpublished: 0
+instructor only items carried verbatim, not scored as student pages: 4
+modules: 21  not unpublished: 0
+quizzes: 12  available=true: 0
+graded quizzes whose gradebook column disagrees with the quiz (must be 0): 0
+quizzes with answer shuffling off (must be 0): 0
+quizzes over the true/false cap: 0   quizzes off the standard question count: 2
+    Mixing: Quiz - Comping & Arranging | 22 questions, the standard is 25
+    Effects: Quiz - Balancing & Reverb | 22 questions, the standard is 25
+rubrics defined: 31   assignments declaring one: 31 of 33
+quizzes with no questions in the imported file: 0   point mismatches: 0
+LTI files: 5   Roll Call configs: 0   credentials: 0   dangling external_tool refs: 0
+Cloudflare student downloads checked live: 27   dead: 0
+quiz files with non-ASCII: 0   with named entities: 0
+question group refs: 0  unresolved: 0
+quiz images on an external host (must be 0): 0
+images with no alt attribute: 0   inline <svg>: 0
+modules with fewer than four pages (must be 0): 1
+    Core Mixing - DAPR 2020 - Instructor Use Only - [Do Not Publish] (3)
+attachment module items with no file and no URL (must be 0): 0
+module titles carrying a (Week NN) suffix (must be 0): 0
+page URLs carrying a module or week number (must be 0): 0
+page cross-links: 29   pointing at a page that does not exist: 0
+pages describing a graded object the package does not contain (must be 0): 0
+manifest item titles disagreeing with module_meta (must be 0): 0
+titles carrying a sequence number (must be 0): 0
+titles carrying a pipe character (must be 0): 0
+student pages carrying an instructor-only section (must be 0): 0
+graded objects with a due date: 42   without: 1   date defects: 0
+    no due date: Lab Template
+
+7a / 11b assignment page conformance, 32 assignment pages
+   instructor only, not scored: 1 (lab-template.html)
+   no DAPR icon reference             0
+   no What to Submit section          0
+   point value never stated           0
+   no printed rubric table            0
+   sends the student off the page     0
+accessibility, all 132 pages
+   assignment page with 2+ <h2>       0
+   heading level skipped              0
+   page with no heading at all        0
+   bare alt=""                        0
+   numbered <p> outside 11b worksheet 0
+   contrast under 4.5:1               0
+quizzes off the 11a point tier (must be 0): 0
+tables with no header cell (must be 0): 0
+tables with no caption text (must be 0): 0
+header cells with no scope (must be 0): 0
+captions carrying a style attribute (must be 0): 0
+layout tables, role="presentation" (must be 0): 0
+files emulating a table with display:table (must be 0): 0
+text on its INHERITED background under 4.5:1 (2b, must be 0): 0
+module items: 284  pointing at an undeclared resource: 0
+pages whose figure captions do not run 1..n (must be 0): 0
+alt attributes over the 120 character cap (must be 0): 0
+pages with no real image (Standards 0, must be 0): 0
+figures in use that lost labels to an older generation (must be 0): 0
+    note: no OCR label census found, rule 20.5d could not run
+retired orange #E65100 / rgb(230, 81, 0) (must be 0): 0 files, 0 uses
+
+scored quiz items whose key does not resolve (9.3a, must be 0): 0  (in 0 file copies)
+question stems asking history or naming (9.3a, must be 0): 0
+RESULT: FAIL | hard fails: ['modules under four pages: 1', 'graded objects with no due date: 1'] | warnings: ['quizzes off the 25 question standard: 2', 'no OCR label census; rule 20.5d did not run']
