@@ -33,7 +33,7 @@ These images live in Classes/All and show up in every DAPR course through the Bl
 
 Page: Essentials: 1B) How Much Time Your Classes Take
 
-Status: Needs prompt (new figure, no file yet)
+Status: Done 24 September 2026 (saved, resized to 1600 by 900, 0.5 MB). Commit and push.
 
 Where on the page: directly under the "Build the Week in This Order" checklist, before the Tip box. It becomes Figure 2 on the page.
 
