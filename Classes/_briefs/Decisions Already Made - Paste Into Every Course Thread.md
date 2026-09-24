@@ -54,10 +54,10 @@ Read the current standards first: `2026-09-24 DAPR Canvas Standards.md` (older c
 5. Place the module last in the module list, after the Final, and publish it with the rest of the course (it opens with week 00).
 6. Move anything currently in an Audio & Sessions module into Auxiliary Resources, and show Adam the move table first.
 
-## 6. Never in the cartridge
+## 6. Never in the cartridge, and what always is
 
-1. No course outline pages of any kind (Course Outline, Course Module Outline, Schedule & Module Outline, Outline, Week by Week, Outline of Classes). Do not use old outline files as a source. Dates come from the Term Spine and 11d; module order from the kit's module_meta.xml.
-2. No Student Essentials module.
+1. Nothing from the Blueprint: any module whose Canvas title says (Unified Class Content). That is the Student Essentials module with its Essentials pages, its quizzes and the 2A) Introduce Yourself discussion. The Blueprint gets its own cartridge.
+2. Course Orientation IS in every cartridge (correction, 2026-09-24). Its own module, right after Instructor Use Only, with: Orientation: Prerequisites; Orientation: Course Description, Learning Outcomes, and Requirements; Orientation: Schedule & Module Outline. The outline page lists every module in order with its opening Monday and due Friday, built from this cartridge's dates (Term Spine and 11d), never copied from an old outline file.
 3. No CS 623a BOAA Lab module and no LC 623a Studio Proficiency Assessment.
 4. No Student Rating of Instructor (SRI) bonus. Drop the Bonus group if nothing else is in it.
 5. If your current build has any of these, remove them in the next version and tell me what you removed.
