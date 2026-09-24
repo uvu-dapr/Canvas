@@ -20,7 +20,7 @@ Page: Syllabus (course syllabus tool and the Syllabus wiki page)
 **Save as:**
 
 ```
-/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Info__Schedule_and_Outline/Syllabus_Banner.png
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Orientation/Syllabus_Banner.png
 ```
 
 **Prompt:**
@@ -38,7 +38,7 @@ Page: Roll Call Attendance (assignment)
 **Save as:**
 
 ```
-/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Info__Schedule_and_Outline/Roll_Call_Check_In.png
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Orientation/Roll_Call_Check_In.png
 ```
 
 **Prompt:**

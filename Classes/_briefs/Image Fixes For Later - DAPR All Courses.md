@@ -41,6 +41,7 @@ Parked 2026-09-23 so the course builds can move. Nothing here blocks a rebuild; 
 | `All/DAPR_Introduce_Yourself/Example_Headshot.jpg` | Confirm consent or AI origin, or swap in your own |
 | `DAPR-3345--Spatial_Audio_II/Interactive_Audio__Foundations_of_Interactive_Spatial_Audio/Workstation_Banner.jpg` and `_Alt` | Made up DAW screens; replace with real FMOD or Wwise captures when you have them |
 | `DAPR-2255--Audio_Hardware_I/Power/Wattmeter.jpg` | Optional: page link for the plug in meter photo, for the credit line |
+| DAPR 2255 Instructor Use Only page `M06: Overview Voltage Regulators - [Do Not Publish]` (no file) | Dropped in v83. The page embedded `dept.png` (235 x 133, marked decorative, the department logo) from old course 520146, file 104813911. Neither the 2026-09-23 export nor the repo has the file. If you want it back, send `dept.png` and it goes in `DAPR-2255--Audio_Hardware_I/` under the Instructor Use Only folder as `Department_Logo.png` |
 | `DAPR-2020--Core_Mixing/Orientation__Course_Orientation_and_Feedback/Core_Recording_DAPR_2010_002.png` | A DAPR 2010 title card sitting in the DAPR 2020 folder. Moving it is on the v31 approval table; say yes there and it goes to `DAPR-2010--Core_Recording/Course_Orientation/` |
 
 | `DAPR-2010--Core_Recording/Studio_Use_and_Care/Control_Room.png` | Photo of the Studio B control room in its resting state, as a session should find it |

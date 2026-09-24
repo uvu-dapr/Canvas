@@ -1,0 +1,82 @@
+XML/QTI parsed: 145  failures: 0
+quiz resources in the manifest: 12   qti files on disk: 12   metas resolved: 12
+canvas_export.txt declared: True
+declared files missing on disk: 0
+unresolvable placeholders: 0
+canvas media/link defects in content bodies: 0
+pages: 105  no head: 0  identifier mismatch: 0  not unpublished: 0
+organizations items: 162  dangling: 0
+assignments: 33  not unpublished: 0
+instructor only pages carried verbatim, not scored as student pages: 5
+modules: 21  not unpublished: 0
+quizzes: 12  available=true: 0
+graded quizzes whose gradebook column disagrees with the quiz (must be 0): 0
+quizzes with answer shuffling off (must be 0): 0
+quizzes over the true/false cap: 0   quizzes off the standard question count: 11
+    DAPR 2020: Core Mixing - Final Exam | 71 questions, the standard is 100
+    Mixing: Quiz - Focus & Balance | 18 questions, the standard is 25
+    Effects: Quiz - Dynamic Effects | 14 questions, the standard is 25
+    Mixing: Quiz - Essential Groundwork | 14 questions, the standard is 25
+    Mixing: Quiz - Comping & Arranging | 17 questions, the standard is 25
+    Mixing: Quiz - Timing & Tuning | 17 questions, the standard is 25
+    Effects: Quiz - Balancing & Reverb | 8 questions, the standard is 25
+    Effects: Quiz - Delay & Stereo Enhancements | 17 questions, the standard is 25
+    Effects: Quiz - Spectral Effects | 19 questions, the standard is 25
+    Effects: Quiz - Distortion | 23 questions, the standard is 25
+    Acoustics: Quiz - Mix Room Setup | 22 questions, the standard is 25
+rubrics defined: 31   assignments declaring one: 31 of 33
+quizzes with no questions in the imported file: 0   point mismatches: 0
+LTI files: 5   Roll Call configs: 0   credentials: 0   dangling external_tool refs: 0
+Cloudflare student downloads checked live: 27   dead: 0
+quiz files with non-ASCII: 0   with named entities: 0
+question group refs: 0  unresolved: 0
+quiz images on an external host (must be 0): 0
+images with no alt attribute: 0   inline <svg>: 0
+modules with fewer than four pages (must be 0): 0
+attachment module items with no file and no URL (must be 0): 0
+module titles carrying a (Week NN) suffix (must be 0): 0
+page URLs carrying a module or week number (must be 0): 0
+page cross-links: 29   pointing at a page that does not exist: 0
+pages describing a graded object the package does not contain (must be 0): 0
+manifest item titles disagreeing with module_meta (must be 0): 0
+titles carrying a sequence number (must be 0): 0
+titles carrying a pipe character (must be 0): 0
+student pages carrying an instructor-only section (must be 0): 0
+graded objects with a due date: 11   without: 0   date defects: 0
+
+7a / 11b assignment page conformance, 33 assignment pages
+   no DAPR icon reference             1
+      assignments/lab-template.html
+   no What to Submit section          1
+      assignments/lab-template.html
+   point value never stated           1
+      assignments/lab-template.html
+   no printed rubric table            1
+      assignments/lab-template.html
+   sends the student off the page     0
+accessibility, all 133 pages
+   assignment page with 2+ <h2>       0
+   heading level skipped              0
+   page with no heading at all        0
+   bare alt=""                        0
+   manually numbered <p> run          0
+   contrast under 4.5:1               0
+quizzes off the 11a point tier (must be 0): 0
+tables with no header cell (must be 0): 0
+tables with no caption text (must be 0): 0
+header cells with no scope (must be 0): 0
+captions carrying a style attribute (must be 0): 0
+layout tables, role="presentation" (must be 0): 0
+files emulating a table with display:table (must be 0): 0
+text on its INHERITED background under 4.5:1 (2b, must be 0): 0
+module items: 286  pointing at an undeclared resource: 0
+pages whose figure captions do not run 1..n (must be 0): 0
+alt attributes over the 120 character cap (must be 0): 0
+pages with no real image (Standards 0, must be 0): 1
+    lab-template.html
+figures in use that lost labels to an older generation (must be 0): 0
+    note: no OCR label census found, rule 20.5d could not run
+
+scored quiz items whose key does not resolve (9.3a, must be 0): 0
+question stems asking history or naming (9.3a, must be 0): 0
+RESULT: FAIL | hard fails: ['assignments with no icons (7a): 1', 'assignments with no What to Submit (7a): 1', 'assignments not stating points (11): 1', 'assignments with no printed rubric (11b-1): 1', 'pages with no real image: 1'] | warnings: ['quizzes off the 25 question standard: 11', 'no OCR label census; rule 20.5d did not run']

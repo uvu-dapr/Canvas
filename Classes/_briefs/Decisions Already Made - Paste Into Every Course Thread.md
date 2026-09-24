@@ -18,6 +18,7 @@ Read the current standards first: `2026-09-24 DAPR Canvas Standards.md` (older c
 3. Never replace an image I already have unless you show me the before and after first and I say yes. Keep images I have approved.
 4. Ask at most one question at a time, and only when you are truly blocked.
 5. No dashes in prose. Full paths in code blocks.
+6. Sandbox yes, live never. You may import into this course's sandbox (the ODS_ course I name; ask if unsure), browser included. Never import into, edit or drive a live course. Report every sandbox import in your next message: course name and ID, cartridge version and path, time, and what Canvas said. I do every live import, commit, push and rclone myself.
 
 ## 2. File layout (GitHub repo and Cloudflare Canvas Links)
 

@@ -248,15 +248,40 @@ if _ns:
 # the student page gates below (image on every page, content drift, headings, tables,
 # contrast) do not score them. Resolved from module_meta, never matched by a phrase. Each
 # page must still be unpublished, or it is scored like any other page.
-_INSTR=set()
+# Amended 2026-09-24 [Adam, from the DAPR 2020 v35 Lab Template]. Only a wiki page states its
+# own publish state (content="unpublished" in its head). An assignment's state lives in its
+# settings XML: assignments/<slug>.xml in an export, g<hash>/assignment_settings.xml in a
+# course copy, as <workflow_state>unpublished</workflow_state>. Reading only the page meant no
+# assignment in the module was ever exempted. The module itself must also be unpublished; a
+# published Instructor Use Only module is student visible and is scored like any other.
+def _instr_xml(_res,_h):
+    _c=[f for f in _res.get('files',[]) if f.endswith('.xml')]
+    _c+=[os.path.join(os.path.dirname(_h),'assignment_settings.xml')]
+    if _h.endswith('.html'): _c.append(_h[:-5]+'.xml')
+    for _f in _c:
+        if not os.path.exists(_f): continue
+        _x=open(_f,encoding='utf-8',errors='ignore').read()
+        _root=re.sub(r'<\?xml[^>]*\?>\s*','',_x,count=1).lstrip()
+        if _root.startswith('<assignment'): return _f,_x
+    return None,None
+_INSTR=set(); _INSTR_IDS=set(); _INSTR_FILES=set()
 for _blk in re.findall(r'<module identifier="[^"]+">(.*?)</module>',mm,re.S):
     _tt=re.search(r'<title>([^<]*)</title>',_blk)
-    if _tt and 'Instructor Use Only' in _tt.group(1):
-        for _r in re.findall(r'<identifierref>([^<]+)</identifierref>',_blk):
-            _h=RES.get(_r,{}).get('href')
-            if _h and os.path.exists(_h) and 'content="unpublished"' in open(_h,encoding='utf-8',errors='ignore').read():
-                _INSTR.add(_h)
-L('instructor only pages carried verbatim, not scored as student pages: %d'%len(_INSTR))
+    if not (_tt and 'Instructor Use Only' in _tt.group(1)): continue
+    if '<workflow_state>unpublished</workflow_state>' not in _blk.split('<items>',1)[0]: continue
+    for _r in re.findall(r'<identifierref>([^<]+)</identifierref>',_blk):
+        _res=RES.get(_r,{}); _h=_res.get('href')
+        if not _h or not os.path.exists(_h): continue
+        _unpub='content="unpublished"' in open(_h,encoding='utf-8',errors='ignore').read()
+        _ax,_axt=_instr_xml(_res,_h)
+        if _ax:
+            _ws=re.search(r'<workflow_state>([^<]*)</workflow_state>',_axt)
+            _unpub=bool(_ws and _ws.group(1).strip()=='unpublished')
+        if _unpub:
+            _INSTR.add(_h); _INSTR_IDS.add(_r)
+            _INSTR_FILES.update(os.path.normpath(f) for f in _res.get('files',[])+[_h])
+            if _ax: _INSTR_FILES.add(os.path.normpath(_ax))
+L('instructor only items carried verbatim, not scored as student pages: %d'%len(_INSTR))
 # module-level state only. Module ITEMS legitimately stay 'active' (standards 22.6).
 mods=re.findall(r'<module identifier="[^"]+">(.*?)(?=<module identifier=|</modules>)',mm,re.S)
 mp=0
@@ -604,7 +629,9 @@ if wk: fails.append('module titles with week suffix: %d'%wk)
 # 12b a page's filename IS its Canvas URL. A module or week number in a page URL is a
 #     promise about teaching order that a course taught in any order cannot keep.
 slugs=[f[:-5] for f in os.listdir('wiki_content') if f.endswith('.html')] if os.path.isdir('wiki_content') else []
-numbered=sorted(x for x in slugs if re.match(r'm\d|wk\d|week[-_]?\d|module[-_]?\d',x))
+# Instructor Use Only pages in the unpublished module are exempt (2255 v82, Adam 2026-09-24).
+numbered=sorted(x for x in slugs if re.match(r'm\d|wk\d|week[-_]?\d|module[-_]?\d',x)
+                and os.path.join('wiki_content',x+'.html') not in _INSTR)
 L('page URLs carrying a module or week number (must be 0): %d'%len(numbered))
 if numbered:
     for x in numbered[:8]: L('    %s'%x)
@@ -669,6 +696,14 @@ NUMBERED=re.compile(r'(?:^|[:\s(])(?:M-?\d{1,2}\b|Q\d{1,2}\b|Module\s*\d|Week\s*
 EXEMPT=re.compile(r'\b(?:DAPR|MUSC|THEA)\s*\d{3,4}\b|\bWwise\s*\d{3}\b|\bCLO\s*\d\b|\b\d{3,4}\s*Hz\b'
                   r'|\bMix\s*\d[AB]?\b|\bLayer\s*\d\b|\d+(?:\.\d+)?\s*%|\d+(?:\.\d+)?\s*(?:pts?|points)\b', re.I)
 titles=set()
+# Instructor Use Only items in the unpublished module are exempt (2255 v82, Adam 2026-09-24):
+# their module item titles, manifest item titles and their own assignment or quiz XML.
+_INSTR_T=set()
+for m in re.finditer(r'<item identifier="[^"]+">(.*?)</item>',mm,re.S):
+    _t=re.search(r'<title>([^<]*)</title>',m.group(1)); _r=re.search(r'<identifierref>([^<]*)</identifierref>',m.group(1))
+    if _t and _r and _r.group(1) in _INSTR_IDS: _INSTR_T.add(html.unescape(_t.group(1)))
+for m in re.finditer(r'<item identifier="[^"]+" identifierref="([^"]+)"><title>([^<]*)</title>',man):
+    if m.group(1) in _INSTR_IDS: _INSTR_T.add(html.unescape(m.group(2)))
 for m in re.finditer(r'<title>([^<]*)</title>',mm): titles.add(('module_meta',html.unescape(m.group(1))))
 # 12e-2 [2026-09-24]: the manifest organizations block carries its own copy of every
 #   module item title. Canvas imports module structure from module_meta.xml, so drift
@@ -691,11 +726,13 @@ if _drift: fails.append('manifest and module_meta item titles disagree: %d'%len(
 #   quizzes/<id>_meta.xml. Only the course-copy names were listed, so no assignment or
 #   quiz title was ever checked for sequence numbering on a real export.
 for _p in glob.glob('assignments/*.xml')+glob.glob('quizzes/*_meta.xml'):
+    if os.path.normpath(_p) in _INSTR_FILES: continue
     _t=open(_p,encoding='utf-8').read()
     for m in re.finditer(r'<title>([^<]*)</title>',_t): titles.add((os.path.basename(_p),html.unescape(m.group(1))))
 for dp,dn,fn in os.walk('.'):
     for f in fn:
         if f not in ('assessment_meta.xml','assignment_settings.xml'): continue
+        if os.path.normpath(os.path.join(dp,f)) in _INSTR_FILES: continue
         t=open(os.path.join(dp,f),encoding='utf-8').read()
         for m in re.finditer(r'<title>([^<]*)</title>',t): titles.add((f,html.unescape(m.group(1))))
 for dp,dn,fn in os.walk('.'):
@@ -721,7 +758,8 @@ def _unformat(s):
     s=_CH3.sub(' ',s)
     if len(_CH2.findall(s))>=2 or _CHCTX.search(s): s=_CH2.sub(' ',s)
     return s
-numbered=sorted({(w,t) for w,t in titles if NUMBERED.search(EXEMPT.sub('',_unformat(t)))})
+numbered=sorted({(w,t) for w,t in titles if NUMBERED.search(EXEMPT.sub('',_unformat(t)))
+                  and not (w in ('module_meta','manifest') and t in _INSTR_T)})
 L('titles carrying a sequence number (must be 0): %d'%len(numbered))
 piped=sorted({(w,t) for w,t in titles if '|' in t})
 L('titles carrying a pipe character (must be 0): %d'%len(piped))
@@ -947,6 +985,23 @@ for _af in a:
     elif _d=='assignments':
         _h=_af[:-4]+'.html'
         if os.path.exists(_h): _assign_pages.add(_h)
+# Amended 2026-09-24 [Adam, DAPR 2020 v35 Lab Template]: assignment pages inside the unpublished
+# Instructor Use Only module are exempt from the 7a and 11b checks and the page checks, exactly
+# as its wiki pages already were. Nothing outside that module is exempted.
+_assign_instr=sorted(p for p in _assign_pages if p in _INSTR)
+_assign_pages=set(p for p in _assign_pages if p not in _INSTR)
+# 11 point value stated [amended 2026-09-24, Adam, DAPR 2255 v82]: the page must state the
+# assignment's OWN total, the points_possible in its settings XML, followed by "pts" or
+# "points". A per problem "(5 pts)" does not count as the total unless 5 is the total.
+_page_pts={}
+for _af in a:
+    try: _ax=open(_af,encoding='utf-8',errors='ignore').read()
+    except Exception: continue
+    _pp=re.search(r'<points_possible>\s*([\d.]+)\s*</points_possible>',_ax)
+    if not _pp: continue
+    _d=os.path.dirname(_af)
+    for _h in ([_af[:-4]+'.html'] if _d=='assignments' else glob.glob(os.path.join(_d,'*.html'))):
+        _page_pts[_h]=float(_pp.group(1))
 _pages = sorted(_assign_pages) + sorted(p for p in glob.glob('wiki_content/*.html') if p not in _INSTR)
 for _p in _pages:
     _t = open(_p,encoding='utf-8',errors='ignore').read()
@@ -994,10 +1049,11 @@ for _p in _pages:
         _bg=re.search(r'background-color:\s*(#[0-9a-fA-F]{3,6})',_st)
         if _fg and _bg:
             # WCAG AA is 4.5:1 for body text and 3:1 for large text, which is 18.66px
-            # bold or 24px plain. A module banner is font-size:1.4em bold, so white on
-            # the orange #E65100 header scores 3.79:1 and PASSES as large text. Standards
-            # 3 records that colour as a Panorama false positive and says keep it; before
-            # this correction the gate condemned it on four pages. Fixed 2026-09-21.
+            # bold or 24px plain. Large text needs 3:1, body text 4.5:1.
+            # History: this once let white on the orange #E65100 pass as large text
+            # (3.79:1). #E65100 is RETIRED as of 2026-09-24 [Adam]: every orange is #BF360C
+            # with white text, and #E65100 anywhere is now a hard fail of its own (see the
+            # retired orange gate below), whatever its size or contrast here.
             _fs=re.search(r'font-size:\s*([\d.]+)\s*(em|px|rem)',_st)
             _px=None
             if _fs:
@@ -1007,8 +1063,9 @@ for _p in _pages:
             # style when the page is saved, so a pair that passed only because the text
             # was 18.66px BOLD fails the moment Adam edits the page in Canvas. Verified
             # 2026-09-21: four Major findings on the outline page, all of them white on
-            # #E65100 at 1.25em, where the build had written font-weight:bold and the
+            # the old orange at 1.25em, where the build had written font-weight:bold and the
             # saved page no longer had it. Large text here means 24px or more, full stop.
+            # (That orange, #E65100, is retired and now fails on its own; see below.)
             _large=bool(_px and _px>=24)
             _need=3.0 if _large else 4.5
             _r=_ratio(_fg.group(1),_bg.group(1))
@@ -1021,23 +1078,29 @@ for _p in _pages:
     # --- 7a / 11b, assignment pages only
     if ICONREF not in _t: _noicon.append(_p)
     if 'What to Submit' not in _t: _nosubmit.append(_p)
-    if not re.search(r'\b\d+\s*points?\b',_txt,re.I): _nopoints.append(_p)
+    _tot=_page_pts.get(_p)
+    if _tot is not None:
+        _ok=re.search(r'(?<![\d.])%s(?:\.0+)?\s*(?:pts?\b|points?\b)'%re.escape('%g'%_tot),_txt,re.I)
+    else:
+        _ok=re.search(r'(?<![(\d.])\d+\s*(?:pts?\b|points?\b)(?!\s*\))',_txt,re.I)
+    if not _ok: _nopoints.append(_p)
     if not re.search(r'Criterion|What earns full credit',_t): _norubric.append(_p)
     if re.search(r'Content and Resources|download .{0,40}Template|found in the module',_txt,re.I):
         _offpage.append(_p)
 
 L('')
 L('7a / 11b assignment page conformance, %d assignment pages'%len(_assign_pages))
+if _assign_instr: L('   instructor only, not scored: %d (%s)'%(len(_assign_instr),', '.join(os.path.basename(x) for x in _assign_instr[:4])))
 if a and not _assign_pages: fails.append('7a: %d assignments resolved but no assignment body page found; the conformance checks saw nothing'%len(a))
 for _lab,_lst in [('no DAPR icon reference',_noicon),('no What to Submit section',_nosubmit),
                   ('point value never stated',_nopoints),('no printed rubric table',_norubric),
                   ('sends the student off the page',_offpage)]:
     L('   %-34s %d'%(_lab,len(_lst)))
-    for _x in _lst[:4]: L('      %s'%_x)
+    for _x in _lst[:4]: L('      %s%s'%(_x,'  (total %g)'%_page_pts[_x] if _lab=='point value never stated' and _x in _page_pts else ''))
 L('accessibility, all %d pages'%len(_pages))
 for _lab,_lst in [('assignment page with 2+ <h2>',_multi_h2),('heading level skipped',_heading_skip),
                   ('page with no heading at all',_noheading),
-                  ('bare alt=""',_emptyalt),('manually numbered <p> run',_numbered_p),
+                  ('bare alt=""',_emptyalt),('numbered <p> outside 11b worksheet',_numbered_p),
                   ('contrast under 4.5:1',_lowcontrast)]:
     L('   %-34s %d'%(_lab,len(_lst)))
     for _x in _lst[:4]: L('      %s'%_x)
@@ -1050,7 +1113,10 @@ if _offpage:     fails.append('assignments sending the student off the page (11b
 if _heading_skip: fails.append('heading level skipped (2): %d'%len(_heading_skip))
 if _noheading:   fails.append('pages with no heading at all (2): %d'%len(_noheading))
 if _emptyalt:    fails.append('bare alt="" (2): %d'%len(_emptyalt))
-if _numbered_p:  fails.append('manually numbered paragraphs (2): %d'%len(_numbered_p))
+if _numbered_p:
+    L('      fix: put numbered questions in the 11b worksheet block (the user-select:all div),')
+    L('      which keeps its numbers when pasted into Word and is exempt from this check')
+    fails.append('manually numbered paragraphs outside an 11b worksheet block: %d'%len(_numbered_p))
 if _lowcontrast: fails.append('contrast under 4.5:1 (2): %d'%len(_lowcontrast))
 if _multi_h2:    fails.append('assignment pages with more than one h2 (7a): %d'%len(_multi_h2))
 
@@ -1291,6 +1357,25 @@ elif _nocensus:
     L('    note: %d figures in use are missing from the census'%len(_nocensus))
     warns.append('figures missing from the OCR label census: %d'%len(_nocensus))
 
+# Retired orange [Adam 2026-09-24, from DAPR 2255 v82]. #E65100 is retired; every orange is
+#   #BF360C with white text. Any #E65100 (any letter case) or rgb(230, 81, 0) in any page,
+#   settings file or quiz is a hard fail, including inside HTML-escaped quiz XML, which is
+#   unescaped twice before matching. Instructor Use Only pages are NOT exempt: a retired
+#   colour is a find and replace, not a content decision.
+_ORANGE=re.compile(r'#e65100(?![0-9a-f])|rgba?\(\s*230\s*,\s*81\s*,\s*0\s*[,)]',re.I)
+_orange=[]
+for dp,dn,fn in os.walk('.'):
+    for f in fn:
+        if not f.lower().endswith(('.html','.htm','.xml','.qti','.css','.js')): continue
+        _fp=os.path.join(dp,f)
+        try: _x=open(_fp,encoding='utf-8',errors='ignore').read()
+        except Exception: continue
+        _n=len(_ORANGE.findall(html.unescape(html.unescape(_x))))
+        if _n: _orange.append((os.path.relpath(_fp),_n))
+L('retired orange #E65100 / rgb(230, 81, 0) (must be 0): %d files, %d uses'%(len(_orange),sum(n for _,n in _orange)))
+for _f,_n in sorted(_orange)[:8]: L('    %s: %d'%(_f,_n))
+if _orange: fails.append('retired orange #E65100: %d files'%len(_orange))
+
 L('')
 # 9.3a-1 every scored key resolves (Adam, 2026-09-24; Standards 9.3a, Decisions 9)
 #   A DAPR 2255 student chose the right answers on the Resistors quiz three times and was
@@ -1299,28 +1384,56 @@ L('')
 #   true/false item must key a response_label ident that exists IN THAT ITEM, and must
 #   carry a 100 point condition. Checked in every QTI file the manifest resolves AND in
 #   every non_cc_assessments copy, because the two copies drift independently.
-_keyfails=[]
-_qfiles=set(QTI_FILES)|set(glob.glob('non_cc_assessments/*.qti'))|set(glob.glob('non_cc_assessments/*.xml'))
+# Amended 2026-09-24 [Adam, DAPR 2255 v82]: the live 2255 export had 72 broken keys and this
+#   gate reported 0, for two reasons. (1) The broken items carry an EMPTY, self closing
+#   <varequal respident="response1"/>. The key regex only read <varequal>text</varequal>, so it
+#   never saw them, and the item still counted as keyed because its setvar said 100. An empty
+#   or self closing varequal inside a scored respcondition is now a hard fail, and a 100 point
+#   condition only counts as a key when it names an answer that exists. (2) A Canvas export
+#   types each item in assessment_qti.xml by cc_profile (cc.multiple_choice.v0p1), not by
+#   question_type, so the cc copy was skipped entirely. Both copies are read now. The same
+#   question appears in both copies, so failures are counted once per quiz and stem.
+_keyfails={}; _keyocc=0
+_qfiles=set(QTI_FILES)|set(glob.glob('non_cc_assessments/*.qti'))|set(glob.glob('non_cc_assessments/*.xml'))|set(glob.glob('*/assessment_qti.xml'))
 _SCORED=('multiple_choice_question','multiple_answers_question','true_false_question')
-for _qf in sorted(_qfiles):
+_CCTYPE={'cc.multiple_choice.v0p1':'multiple_choice_question','cc.multiple_response.v0p1':'multiple_answers_question',
+         'cc.true_false.v0p1':'true_false_question'}
+_VAREQ=re.compile(r'<varequal\b[^>]*?(/?)>(?:([^<]*)</varequal>)?',re.S)
+for _qf in sorted(_qfiles,key=lambda f:(not f.startswith('non_cc_assessments'),f)):
     try: _qt=open(_qf,encoding='utf-8',errors='replace').read()
     except Exception: continue
     for _im in re.finditer(r'<item\b[^>]*\bident="([^"]+)"[^>]*>(.*?)</item>',_qt,re.S):
         _ib=_im.group(2)
         _ty=re.search(r'question_type</fieldlabel>\s*<fieldentry>([^<]+)',_ib)
-        if not _ty or _ty.group(1).strip() not in _SCORED: continue
+        _ty=_ty.group(1).strip() if _ty else None
+        if not _ty:
+            _cp=re.search(r'cc_profile</fieldlabel>\s*<fieldentry>([^<]+)',_ib)
+            _ty=_CCTYPE.get(_cp.group(1).strip()) if _cp else None
+        if _ty not in _SCORED: continue
         _labels=set(re.findall(r'<response_label\b[^>]*\bident="([^"]+)"',_ib))
-        _full=False
+        _full=False; _why=[]
         for _rc in re.findall(r'<respcondition\b.*?</respcondition>',_ib,re.S):
             _sv=re.search(r'<setvar\b[^>]*>\s*([-\d.]+)\s*</setvar>',_rc)
             if not _sv or float(_sv.group(1))<=0: continue
-            if float(_sv.group(1))>=100: _full=True
-            for _k in re.findall(r'<varequal\b[^>]*>([^<]*)</varequal>',_rc):
-                if _k.strip() not in _labels:
-                    _keyfails.append('%s %s key %s is not an answer in that item'%(_qf,_im.group(1),_k.strip()))
-        if not _full: _keyfails.append('%s %s has no 100 point key'%(_qf,_im.group(1)))
-L('scored quiz items whose key does not resolve (9.3a, must be 0): %d'%len(_keyfails))
-for _x in _keyfails[:8]: L('    %s'%_x)
+            _good=0
+            for _sc,_k in _VAREQ.findall(_rc):
+                _k=(_k or '').strip()
+                if _sc=='/' or not _k: _why.append('empty key (self closing or blank varequal)')
+                elif _k not in _labels: _why.append('key %s is not an answer in that item'%_k)
+                else: _good+=1
+            if float(_sv.group(1))>=100 and _good: _full=True
+        if not _full and not _why: _why.append('has no 100 point key')
+        if _why:
+            _keyocc+=1
+            # Key on quiz + stem text, not on the item ident: a Canvas export's cc copy gives
+            # EVERY item in assessment_qti.xml the same ident, so an ident key collapsed a
+            # whole quiz's worth of broken items into one.
+            _qid=os.path.basename(_qf).split('.')[0] if _qf.startswith('non_cc_assessments') else os.path.dirname(_qf) or _qf
+            _stm=re.search(r'<mattext[^>]*>(.*?)</mattext>',_ib,re.S)
+            _sk=re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',html.unescape(_stm.group(1))))).strip() if _stm else _im.group(1)
+            _keyfails.setdefault((_qid,_sk),'%s %s %s: %s'%(_qf,_im.group(1),_why[0],_sk[:60]))
+L('scored quiz items whose key does not resolve (9.3a, must be 0): %d  (in %d file copies)'%(len(_keyfails),_keyocc))
+for _x in sorted(_keyfails.values())[:8]: L('    %s'%_x)
 if _keyfails: fails.append('quiz keys that do not resolve to an answer (9.3a): %d'%len(_keyfails))
 
 # 9.3a-2 no history or naming questions (Adam, 2026-09-24). A stem that asks who, when,
