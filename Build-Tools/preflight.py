@@ -786,6 +786,20 @@ def _mountain(z):
     return u - _dt.timedelta(hours=6 if start <= u < end else 7)
 
 _dated, _undated, _dbad = [], [], []
+# Amended 2026-09-24 (DAPR 3255 v11). The last day of classes is not always a Friday.
+# Spring 2027 ends on Tue Apr 27, and Adam set the last Electronics quizzes, the Talkback
+# Box and the bonus builds to close there at 9:00 AM. That is the one date allowed to break
+# the Friday rule. It is read from the term spine files beside this script, never typed.
+_LAST_CLASS_DAYS = set()
+for _spine in ('spring_2027_spine.py', 'fall_2026_spine.py'):
+    _sp = os.path.join(os.path.dirname(os.path.abspath(__file__)), _spine)
+    if os.path.exists(_sp):
+        try:
+            import runpy as _rp
+            _lc = _rp.run_path(_sp).get('LAST_CLASS')
+            if _lc: _LAST_CLASS_DAYS.add(_lc)
+        except Exception:
+            pass
 #     Amended again 2026-09-20. This loop used to walk for files literally named
 #     assessment_meta.xml. A flat-layout package names them quizzes/quiz_<slug>_meta.xml,
 #     so on DAPR 2255 it saw 14 of 36 graded objects and called the other 22 clean.
@@ -822,7 +836,8 @@ for _own, p in _targets:
         except Exception:
             _dbad.append((ti, 'due_at is not a Zulu timestamp: %s' % du.group(1)))
             continue
-        if d.weekday() != 4 or (d.hour, d.minute) != (9, 0):
+        _end_of_term_ok = d.date() in _LAST_CLASS_DAYS and (d.hour, d.minute) == (9, 0)
+        if not _end_of_term_ok and (d.weekday() != 4 or (d.hour, d.minute) != (9, 0)):
             _dbad.append((ti, 'due %s Mountain, house rule is Friday 9:00 AM' %
                           d.strftime('%a %Y-%m-%d %H:%M')))
         if un:

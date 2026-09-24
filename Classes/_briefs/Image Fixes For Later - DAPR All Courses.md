@@ -254,3 +254,27 @@ The four captures that would clear most of this table: FMOD Studio, Wwise Author
 There is no `Photo_Hero_Utah_Valley_Dawn.jpg` beside it, and no other copy anywhere under `Classes/`. It is the only version of that photo, so it must not go to `_unused`. It is also the only conflicted copy left in the whole repo. Nothing references it.
 
 Proposed, needs a yes: rename in place to `Photo_Hero_Utah_Valley_Dawn.jpg`, dropping the conflicted-copy suffix. No move, no delete.
+
+## DAPR 3255 Audio Hardware II, v11 update (2026-09-24)
+
+The seventeen bare pages listed above are closed in v11. Eight of them (the MOO pages) left
+the cartridge: six are Student Essentials that live in the Unified Class Content module, and
+the other two became Orientation: Prerequisites and Orientation: Course Description, Learning
+Outcomes, and Requirements. Every student visible page now has an image. None is a
+placeholder, so nothing waits on ChatGPT for this course.
+
+| Page | Image now on it |
+|---|---|
+| Orientation: Prerequisites | `Course_Orientation/Course_Sequence_Prerequisites.png`, drawn in code |
+| Orientation: Course Description, Learning Outcomes, and Requirements | `Course_Orientation/Points_By_Course_Area.png`, drawn in code |
+| Orientation: Schedule & Module Outline | `Course_Orientation/Term_Schedule_Gantt.png`, drawn in code |
+| Syllabus, Roll Call Attendance | `Course_Orientation/Grade_Weighting.png`, drawn in code |
+| Networking: Layer 1: Point-to-Point Protocols | `Networking__Foundations_of_Audio_Networking/Layer_1_Point_to_Point_vs_Switched.png`, drawn in code |
+| Networking: Layer 5, Layer 6, Layer 7 pages | `Networking__Foundations_of_Audio_Networking/OSI_Stack_*.png`, three stacks drawn in code |
+| Networking: Assignment - Terminate a Working Network Cable | `Networking__Foundations_of_Audio_Networking/T568a_T568b_Pin_Order.png`, existing, pin order checked |
+| The four Software Tools pages | `Software_Tools/*.png`, four diagrams drawn in code |
+| Wireless: RF Spectrum Fundamentals | `Wireless_Systems/Wireless_Audio_Bands.png`, drawn in code |
+
+Still worth doing later: a real Dante Controller routing grid capture and a real Wireshark
+capture would beat the drawn diagrams on the Software Tools pages. Both are real software
+screens, so Adam captures them; they are never generated.

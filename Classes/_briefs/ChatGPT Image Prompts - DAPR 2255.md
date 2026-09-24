@@ -126,3 +126,41 @@ Currently shares `Course_Orientation/Bench_Overview.jpg` with the syllabus. The 
 ```
 Create a 1600 x 600 pixel PNG with an opaque background. A photorealistic close up of a dark wooden desk with two plain unbranded portable hard drives stacked loosely, a short braided USB cable coiled beside them, and a small plain USB flash drive standing in front. A closed laptop lid and a coil of test leads sit softly out of focus behind. Cool, even light. No text, no numbers, no labels, no stickers, no logos, no brand marks, no model numbers, no watermark, no screens, no people, no hands.
 ```
+
+---
+
+## Image 07. Orientation: Prerequisites (added for v82)
+
+Page: Orientation: Prerequisites (`orientation-prerequisites.html`)
+This page is new in v82 and had no image. A code drawn placeholder (a gray panel with one sine wave, no text) is already saved at the path below and already linked from the page, so nothing needs relinking. Save over it under the same name.
+
+**Save as:**
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Course_Orientation/Prerequisites_Bench.png
+```
+
+**Prompt:**
+
+```
+Create a 1600 x 600 pixel PNG with an opaque background. A photorealistic wide shot of a clean workbench from a low three quarter angle: a loose coil of black audio cable with its outer jacket stripped back a short way at one end, a pair of red handled wire strippers, a few short pieces of black heat shrink tubing, and a soldering iron resting in its stand with a small damp sponge. No connectors of any kind are visible. Warm light from the left, shallow depth of field on the cable end. No text, no numbers, no labels, no printing on any tool or cable, no logos, no brand marks, no model numbers, no watermark, no screens, no people, no hands.
+```
+
+---
+
+## Image 08. Syllabus (added for v82)
+
+Page: DAPR 2255 Audio Hardware I: Syllabus (Syllabus tool)
+Currently shares `Course_Orientation/Bench_Overview.jpg` with Orientation: Course Description and with Auxiliary Resources. Bench_Overview belongs to Course Orientation, so the Course Description page keeps it. Not linked yet; tell me when it is pushed.
+
+**Save as:**
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2255--Audio_Hardware_I/Course_Orientation/Syllabus_Banner.png
+```
+
+**Prompt:**
+
+```
+Create a 1600 x 600 pixel PNG with an opaque background. A photorealistic wide banner of a bare printed circuit board lying flat on a dark desk, seen from a low angle, its copper traces and empty solder pads catching warm light from the right, with a closed spiral notebook and a plain pencil resting beside it. Shallow depth of field so the far end of the board falls soft. No text, no numbers, no labels, no silkscreen printing on the board, no component markings, no logos, no brand marks, no watermark, no screens, no people, no hands.
+```
