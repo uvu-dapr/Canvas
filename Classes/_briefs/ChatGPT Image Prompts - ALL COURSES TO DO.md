@@ -73,7 +73,7 @@ Status: Update. The current image shows only lecture credits. The page now teach
 
 Exception to the no text rule: this is a labeled diagram. The words and numbers are fixed below and must be checked letter for letter.
 
-Final size: 1600 by 900, solid white background
+Final size: 1600 by 900, transparent background (PNG with alpha), like the current file
 
 Save as (same name, replaces the old file, so the page HTML does not change):
 
