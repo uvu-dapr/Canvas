@@ -1,0 +1,2191 @@
+{
+ "v34": {
+  "comping-and-arrangement-procedure-guide.html": {
+   "title": "Comping and Arrangement: Procedure Guide",
+   "imgs": [
+    "Mixing__Comping_and_Arrangement/Pro_Tools_Playlist_Selector_New_Playlist.png",
+    "Mixing__Comping_and_Arrangement/Vocal_Comping_Crossfade_Workflow.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Comping_and_Arrangement/Pro_Tools_Playlist_Selector_New_Playlist.png",
+     1
+    ],
+    [
+     "Mixing__Comping_and_Arrangement/Vocal_Comping_Crossfade_Workflow.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p1-finder-smart-folders.html": {
+   "title": "macOS: P1: Finder Smart Folders",
+   "imgs": [
+    "macOS__Foundations/New_Smart_Folder_Menu.png",
+    "macOS__Foundations/Smart_Folder_Icon.png",
+    "macOS__Foundations/Smart_Folder_Results.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "effects-delay-stereo-enhancements-overview.html": {
+   "title": "Effects: Delay &amp; Stereo Enhancements: Module Overview",
+   "imgs": [
+    "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png",
+    "Effects__Delay_and_Stereo_Enhancements/Stereo_Delay_Mono_Compatibility.png"
+   ],
+   "figs": [
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Stereo_Delay_Mono_Compatibility.png",
+     1
+    ],
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p1-getting-around-your-mac.html": {
+   "title": "macOS: P1: Getting Around Your Mac",
+   "imgs": [
+    "macOS__Foundations/Function_Keys_Panel.png",
+    "macOS__Foundations/Sound_Output_List.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "macos-p3-installing-software-dmg-app-and-pkg.html": {
+   "title": "macOS: P3: Installing Software - DMG, APP, and PKG",
+   "imgs": [
+    "macOS__Foundations/Air_Effects_Pkg_Installer.png",
+    "macOS__Foundations/Apogee_Installer_Example.png",
+    "macOS__Foundations/DMG_PKG_EXE_Flow.png",
+    "macOS__Foundations/Dropbox_Installer.png",
+    "macOS__Foundations/Skim_Dmg_Drag_to_Applications.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "master-buss-processing-endgame-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Master-Buss Processing &amp; Endgame: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Mixing__Master-Buss_Processing_and_Endgame/Headroom_on_Delivery.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Headroom_on_Delivery.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p4-external-drives-volumes-and-file-systems.html": {
+   "title": "macOS: P4: External Drives, Volumes, and File Systems",
+   "imgs": [
+    "macOS__Foundations/Disk_Utility_Erase_Dialog.png",
+    "macOS__Foundations/Disk_Utility_Macintosh_Hd.png",
+    "macOS__Foundations/External_Drive_Sidebar.png",
+    "macOS__Foundations/File_System_Timeline.png",
+    "macOS__Foundations/Macintosh_Hd_Get_Info.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "macos-p1-mac-interface-and-application-behavior.html": {
+   "title": "macOS: P1: Mac Interface and Application Behavior",
+   "imgs": [
+    "macOS__Foundations/Cmd_Opt_H_After.jpg",
+    "macOS__Foundations/Cmd_Opt_H_Before.jpg"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "calibration-reference-noise-files.html": {
+   "title": "Calibration: Reference Noise Files",
+   "imgs": [
+    "Monitoring__Calibration_and_Monitoring/Headphone_Seal_Cross_Section.png"
+   ],
+   "figs": [
+    [
+     "Monitoring__Calibration_and_Monitoring/Headphone_Seal_Cross_Section.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p4-system-diagnostic-tools.html": {
+   "title": "macOS: P4: System Diagnostic Tools",
+   "imgs": [
+    "macOS__Foundations/Activity_Monitor_CPU_Tab.png",
+    "macOS__Foundations/Console_No_Messages.png",
+    "macOS__Foundations/System_Information_USB.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "pro-tools-fundamentals-course-learning-outcomes.html": {
+   "title": "Pro Tools Fundamentals: Course Learning Outcomes",
+   "imgs": [
+    "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg"
+   ],
+   "figs": [
+    [
+     "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mixing-tuning-overview.html": {
+   "title": "Mixing: Tuning: Module Overview",
+   "imgs": [
+    "Mixing__Tuning/Correction_Speed_Scoop.png",
+    "Mixing__Tuning/Scale_and_Target_Notes_Boxed.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Tuning/Scale_and_Target_Notes_Boxed.png",
+     1
+    ],
+    [
+     "Mixing__Tuning/Correction_Speed_Scoop.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p4-hardware-software-and-firmware.html": {
+   "title": "macOS: P4: Hardware, Software, and Firmware",
+   "imgs": [
+    "macOS__Foundations/Hardware_Software_Firmware_Stack.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "sessions-accessing-course-files-on-the-network-drive-dgm-assets.html": {
+   "title": "Sessions: Accessing Course Files on the Network Drive (DGM Assets)",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Network_Drive_Path.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Network_Drive_Path.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "comping-arrangement-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Comping &amp; Arrangement: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Mixing__Comping_and_Arrangement/Gray_Clips_with_Star_and_Crossfade.png",
+    "Mixing__Comping_and_Arrangement/Green_to_Blue_Waveform_Splice_Pair.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Comping_and_Arrangement/Green_to_Blue_Waveform_Splice_Pair.png",
+     1
+    ],
+    [
+     "Mixing__Comping_and_Arrangement/Gray_Clips_with_Star_and_Crossfade.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "frequency-dynamics-and-side-chains-additional-tips-and-tricks.html": {
+   "title": "Frequency Dynamics and Side-Chains: Additional Tips and Tricks",
+   "imgs": [
+    "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png"
+   ],
+   "figs": [
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "tuning-a-horse-is-not-a-home-the-semester-project.html": {
+   "title": "Tuning: A Horse Is Not a Home, the Semester Project",
+   "imgs": [
+    "Mixing__Tuning/Correction_Speed_Scoop.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Tuning/Correction_Speed_Scoop.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "monitoring-calibration-monitoring-overview.html": {
+   "title": "Monitoring: Calibration &amp; Monitoring: Module Overview",
+   "imgs": [
+    "Monitoring__Calibration_and_Monitoring/Metering_Preferences.png"
+   ],
+   "figs": [
+    [
+     "Monitoring__Calibration_and_Monitoring/Metering_Preferences.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "course-orientation-course-schedule-week-by-week.html": {
+   "title": "Course Orientation: Course Schedule, Week by Week",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Weekly_Rhythm.png"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Weekly_Rhythm.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mixing-master-buss-processing-endgame-overview.html": {
+   "title": "Mixing: Master-Buss Processing &amp; Endgame: Module Overview",
+   "imgs": [
+    "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png",
+    "Mixing__Master-Buss_Processing_and_Endgame/Master_Bus_Delivery_Workflow.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Master_Bus_Delivery_Workflow.png",
+     1
+    ],
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "frequency-dynamics-and-side-chains-how-they-work.html": {
+   "title": "Frequency Dynamics and Side-Chains: How They Work",
+   "imgs": [
+    "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png",
+    "Effects__Frequency_Dynamics_and_Side-Chains/Sidechain_Ducking.png"
+   ],
+   "figs": [
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png",
+     1
+    ],
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Sidechain_Ducking.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "focus-and-balance-mix-window-procedure-guide.html": {
+   "title": "Focus and Balance: Mix-Window Procedure Guide",
+   "imgs": [
+    "Mixing__Focus_and_Balance/Channel_Strip_Anatomy.png",
+    "Mixing__Focus_and_Balance/Multi_System_Playback_Check.png",
+    "Mixing__Focus_and_Balance/Technical_Ear_Trainer_Settings.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Focus_and_Balance/Channel_Strip_Anatomy.png",
+     1
+    ],
+    [
+     "Mixing__Focus_and_Balance/Multi_System_Playback_Check.png",
+     2
+    ],
+    [
+     "Mixing__Focus_and_Balance/Technical_Ear_Trainer_Settings.png",
+     3
+    ]
+   ],
+   "kind": "page"
+  },
+  "professional-practice-presentations-sessions-overview.html": {
+   "title": "Professional Practice: Presentations &amp; Sessions: Module Overview",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Core_Mixing_Lab_DAPR_2020L.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Core_Mixing_Lab_DAPR_2020L.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p3-privacy-and-security.html": {
+   "title": "macOS: P3: Privacy and Security",
+   "imgs": [
+    "macOS__Foundations/Privacy_Security_Pane.png",
+    "macOS__Foundations/Sharing_Permissions.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "mix-acoustics-room-acoustics-and-monitoring.html": {
+   "title": "Mix Acoustics: Room Acoustics and Monitoring",
+   "imgs": [
+    "Acoustics__Mix_Acoustics/Listening_Triangle_Overhead.png"
+   ],
+   "figs": [
+    [
+     "Acoustics__Mix_Acoustics/Listening_Triangle_Overhead.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "balancing-and-reverb-procedure-guide.html": {
+   "title": "Balancing and Reverb: Procedure Guide",
+   "imgs": [
+    "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png"
+   ],
+   "figs": [
+    [
+     "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "comping-and-arrangement-the-controls-and-the-decisions.html": {
+   "title": "Comping and Arrangement: The Controls and the Decisions",
+   "imgs": [
+    "Mixing__Comping_and_Arrangement/Playlist_Comp_Lanes.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Comping_and_Arrangement/Playlist_Comp_Lanes.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mixing-in-class-mixing-overview.html": {
+   "title": "Mixing: In-Class Mixing: Module Overview",
+   "imgs": [
+    "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png"
+   ],
+   "figs": [
+    [
+     "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mixing-focus-balance-overview.html": {
+   "title": "Mixing: Focus &amp; Balance: Module Overview",
+   "imgs": [
+    "Mixing__Focus_and_Balance/Single_Blue_Burst_beside_Stacked_Tracks.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Focus_and_Balance/Single_Blue_Burst_beside_Stacked_Tracks.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "sessions-free-daw-session-track-downloads.html": {
+   "title": "Sessions: Free DAW Session Track Downloads",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Multitrack_Download_Flow.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Multitrack_Download_Flow.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p1-spotlight-quick-look-and-screenshots.html": {
+   "title": "macOS: P1: Spotlight, Quick Look, and Screenshots",
+   "imgs": [
+    "macOS__Foundations/Quick_Look_Preview.png",
+    "macOS__Foundations/Screenshot_Options_Menu_over_System_Settings.jpg",
+    "macOS__Foundations/Spotlight_Audio_MIDI_Setup.jpg",
+    "macOS__Foundations/Spotlight_Pro_Tools.jpg"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "final-mix-and-final-exam-verifying-before-you-submit.html": {
+   "title": "Final Mix and Final Exam: Verifying Before You Submit",
+   "imgs": [
+    "Final__Final_Mix_and_Final_Exam/Professional_Practice_Delivery_Verification_Checklist.png"
+   ],
+   "figs": [
+    [
+     "Final__Final_Mix_and_Final_Exam/Professional_Practice_Delivery_Verification_Checklist.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "essential-groundwork-session-preparation-procedure.html": {
+   "title": "Essential Groundwork: Session Preparation Procedure",
+   "imgs": [
+    "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p3-terminal-basics.html": {
+   "title": "macOS: P3: Terminal Basics",
+   "imgs": [
+    "macOS__Foundations/Terminal_Pwd_Ls_Cd.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "macos-p3-removing-applications-and-leftovers.html": {
+   "title": "macOS: P3: Removing Applications and Leftovers",
+   "imgs": [
+    "macOS__Foundations/App_Leftover_Files.png",
+    "macOS__Foundations/Turbotax_Leftover_Folder.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "spectral-effects-and-eq-why-we-use-equalization.html": {
+   "title": "Spectral Effects and EQ: Why We Use Equalization",
+   "imgs": [
+    "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+    "Effects__Spectral_Effects_and_EQ/EQ_Frequency_Masking.png"
+   ],
+   "figs": [
+    [
+     "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+     1
+    ],
+    [
+     "Effects__Spectral_Effects_and_EQ/EQ_Frequency_Masking.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p2-copying-moving-and-archiving-files.html": {
+   "title": "macOS: P2: Copying, Moving, and Archiving Files",
+   "imgs": [
+    "macOS__Foundations/Compress_Context_Menu.png",
+    "macOS__Foundations/Compressed_Zip_Result.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "mixing-essential-groundwork-overview.html": {
+   "title": "Mixing: Essential Groundwork: Module Overview",
+   "imgs": [
+    "Mixing__Essential_Groundwork/Dashboard_New_Session.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Essential_Groundwork/Dashboard_New_Session.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "final-final-mix-final-exam-overview.html": {
+   "title": "Final: Final Mix &amp; Final Exam: Module Overview",
+   "imgs": [
+    "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Truncation.png"
+   ],
+   "figs": [
+    [
+     "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Truncation.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p1-mouse-and-trackpad-settings.html": {
+   "title": "macOS: P1: Mouse and Trackpad Settings",
+   "imgs": [
+    "macOS__Foundations/Mouse_Settings_Panel.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "macos-p4-force-quit-and-troubleshooting.html": {
+   "title": "macOS: P4: Force Quit and Troubleshooting",
+   "imgs": [
+    "macOS__Foundations/Force_Quit_Window.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "focus-and-balance-panning-diagrams.html": {
+   "title": "Focus and Balance: Panning Diagrams",
+   "imgs": [
+    "Mixing__Focus_and_Balance/Stereo_Field_Map.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Focus_and_Balance/Stereo_Field_Map.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "effects-dynamic-effects-overview.html": {
+   "title": "Effects: Dynamic Effects: Module Overview",
+   "imgs": [
+    "Effects__Dynamic_Effects/Compression_Dynamic_Range.png",
+    "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png"
+   ],
+   "figs": [
+    [
+     "Effects__Dynamic_Effects/Compression_Dynamic_Range.png",
+     1
+    ],
+    [
+     "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "final-mix-and-final-exam-study-guide.html": {
+   "title": "Final Mix and Final Exam: Study Guide",
+   "imgs": [
+    "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Specification.png"
+   ],
+   "figs": [
+    [
+     "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Specification.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p2-file-system-structure-and-paths.html": {
+   "title": "macOS: P2: File-System Structure and Paths",
+   "imgs": [
+    "macOS__Foundations/Home_Folder_Contents.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "effects-frequency-dynamics-side-chains-overview.html": {
+   "title": "Effects: Frequency Dynamics &amp; Side-Chains: Module Overview",
+   "imgs": [
+    "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png"
+   ],
+   "figs": [
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "acoustics-mix-acoustics-overview.html": {
+   "title": "Acoustics: Mix Acoustics: Module Overview",
+   "imgs": [
+    "Acoustics__Mix_Acoustics/Room_Acoustics_Monitoring_Triangle.png"
+   ],
+   "figs": [
+    [
+     "Acoustics__Mix_Acoustics/Room_Acoustics_Monitoring_Triangle.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "presentations-and-sessions-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Presentations and Sessions: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Session_Delivery_Package.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Session_Delivery_Package.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "dynamic-effects-compression-the-seven-controls.html": {
+   "title": "Dynamic Effects: Compression, The Seven Controls",
+   "imgs": [
+    "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png",
+    "Effects__Dynamic_Effects/Side_Chain_Filter_Kick_Pumping.png",
+    "Effects__Dynamic_Effects/Six_Rules_of_Compression.png"
+   ],
+   "figs": [
+    [
+     "Effects__Dynamic_Effects/Six_Rules_of_Compression.png",
+     1
+    ],
+    [
+     "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png",
+     2
+    ],
+    [
+     "Effects__Dynamic_Effects/Side_Chain_Filter_Kick_Pumping.png",
+     3
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p1-modifier-keys-and-essential-shortcuts.html": {
+   "title": "macOS: P1: Modifier Keys and Essential Shortcuts",
+   "imgs": [
+    "macOS__Foundations/Dark_Toolbar_with_Labeled_Capture_Buttons.png"
+   ],
+   "figs": [
+    [
+     "macOS__Foundations/Dark_Toolbar_with_Labeled_Capture_Buttons.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "spectral-effects-and-eq-procedure-guide.html": {
+   "title": "Spectral Effects and EQ: Procedure Guide",
+   "imgs": [
+    "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png"
+   ],
+   "figs": [
+    [
+     "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "delay-and-stereo-enhancements-procedure-guide.html": {
+   "title": "Delay and Stereo Enhancements: Procedure Guide",
+   "imgs": [
+    "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png"
+   ],
+   "figs": [
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "master-buss-processing-and-endgame-knowing-when-to-stop.html": {
+   "title": "Master-Buss Processing and Endgame: Knowing When to Stop",
+   "imgs": [
+    "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "effects-balancing-reverb-overview.html": {
+   "title": "Effects: Balancing &amp; Reverb: Module Overview",
+   "imgs": [
+    "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+    "Effects__Balancing_and_Reverb/Reverb_Depth_and_Distance.png"
+   ],
+   "figs": [
+    [
+     "Effects__Balancing_and_Reverb/Reverb_Depth_and_Distance.png",
+     1
+    ],
+    [
+     "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p5-library-vs-system-pro-tools-and-your-files.html": {
+   "title": "macOS: P5: Library vs. System - Pro Tools and Your Files",
+   "imgs": [
+    "macOS__Foundations/Aax_Plugins_Folder.png",
+    "macOS__Foundations/Application_Support_Folder.png",
+    "macOS__Foundations/Library_Audio_Folder.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "essential-groundwork-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Essential Groundwork: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Mixing__Essential_Groundwork/Gain_Staging_Chain.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Essential_Groundwork/Gain_Staging_Chain.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mix-acoustics-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Mix Acoustics: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Acoustics__Mix_Acoustics/Thin_Foam_versus_Broadband.png"
+   ],
+   "figs": [
+    [
+     "Acoustics__Mix_Acoustics/Thin_Foam_versus_Broadband.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "timing-the-controls-and-what-they-cost.html": {
+   "title": "Timing: The Controls and What They Cost",
+   "imgs": [
+    "Mixing__Timing/Elastic_Audio_Warp_Markers.png",
+    "Mixing__Timing/Marker_Rows_at_Varying_Offsets.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Timing/Elastic_Audio_Warp_Markers.png",
+     1
+    ],
+    [
+     "Mixing__Timing/Marker_Rows_at_Varying_Offsets.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p1-finder-deep-dive.html": {
+   "title": "macOS: P1: Finder Deep Dive",
+   "imgs": [
+    "macOS__Foundations/Finder_View_Options.png",
+    "macOS__Foundations/Go_to_Folder_Autocomplete.png",
+    "macOS__Foundations/Library_Audio_Folder.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "macos-p4-ram-storage-and-cpus.html": {
+   "title": "macOS: P4: RAM, Storage, and CPUs",
+   "imgs": [
+    "macOS__Foundations/About_General_Settings.png",
+    "macOS__Foundations/About_This_MAC_M5.png",
+    "macOS__Foundations/CPU_Architecture_Timeline.png",
+    "macOS__Foundations/Get_Info_Kind_Architecture.png",
+    "macOS__Foundations/System_Info_Memory.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "orientation-1a-prerequisites.html": {
+   "title": "Orientation: 1A) Prerequisites",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Avtech_Engage.jpg",
+    "Orientation__Course_Orientation_and_Feedback/Worksheet_to_PDF_Flow.png"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Avtech_Engage.jpg",
+     1
+    ],
+    [
+     "Orientation__Course_Orientation_and_Feedback/Worksheet_to_PDF_Flow.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "instructor-rubric-attachment-map.html": {
+   "title": "Instructor: Rubric Attachment Map",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Grade_Breakdown.png"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Grade_Breakdown.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "balancing-and-reverb-placing-a-source-in-a-space.html": {
+   "title": "Balancing and Reverb: Placing a Source in a Space",
+   "imgs": [
+    "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+    "Effects__Balancing_and_Reverb/Space_Scale_Comparison.png"
+   ],
+   "figs": [
+    [
+     "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+     1
+    ],
+    [
+     "Effects__Balancing_and_Reverb/Space_Scale_Comparison.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p2-files-folders-applications-packages-and-aliases.html": {
+   "title": "macOS: P2: Files, Folders, Applications, Packages, and Aliases",
+   "imgs": [
+    "macOS__Foundations/Cd_Alias_Icon.png",
+    "macOS__Foundations/Package_Contents_Folder.png",
+    "macOS__Foundations/Package_Contents_Menu.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "calibration-speaker-and-headphone-level-calibration.html": {
+   "title": "Calibration: Speaker and Headphone Level Calibration",
+   "imgs": [
+    "Monitoring__Calibration_and_Monitoring/Head_Torso_Measurement.png",
+    "Monitoring__Calibration_and_Monitoring/Headphone_Seal_Cross_Section.png"
+   ],
+   "figs": [
+    [
+     "Monitoring__Calibration_and_Monitoring/Headphone_Seal_Cross_Section.png",
+     1
+    ],
+    [
+     "Monitoring__Calibration_and_Monitoring/Head_Torso_Measurement.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "final-mix-delivery-and-verification-procedure.html": {
+   "title": "Final Mix: Delivery and Verification Procedure",
+   "imgs": [
+    "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Specification.png"
+   ],
+   "figs": [
+    [
+     "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Specification.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "presentations-and-sessions-building-a-ten-minute-presentation.html": {
+   "title": "Presentations and Sessions: Building a Ten Minute Presentation",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Core_Mixing_Lab_DAPR_2020L.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Core_Mixing_Lab_DAPR_2020L.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "delay-and-stereo-enhancements-width-without-losing-mono.html": {
+   "title": "Delay and Stereo Enhancements: Width Without Losing Mono",
+   "imgs": [
+    "Effects__Delay_and_Stereo_Enhancements/Figure_8_Null_Plane.png",
+    "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png"
+   ],
+   "figs": [
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png",
+     1
+    ],
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Figure_8_Null_Plane.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "essential-groundwork-what-to-set-before-you-touch-a-fader.html": {
+   "title": "Essential Groundwork: What to Set Before You Touch a Fader",
+   "imgs": [
+    "Mixing__Essential_Groundwork/Dashboard_New_Session.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Essential_Groundwork/Dashboard_New_Session.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "orientation-handing-work-in.html": {
+   "title": "Orientation: Handing Work In",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Worksheet_to_PDF_Flow.png"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Worksheet_to_PDF_Flow.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "frequency-dynamics-and-side-chains-procedure-guide.html": {
+   "title": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "imgs": [
+    "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png",
+    "Effects__Frequency_Dynamics_and_Side-Chains/Side_Chain_Trigger_and_Ducking.png"
+   ],
+   "figs": [
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png",
+     1
+    ],
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Side_Chain_Trigger_and_Ducking.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "pro-tools-fundamentals-lab-01-manual-procedure-guide.html": {
+   "title": "Pro Tools Fundamentals: Lab 01 Manual Procedure Guide",
+   "imgs": [
+    "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "focus-and-balance-mix-balancing.html": {
+   "title": "Focus and Balance: Mix Balancing",
+   "imgs": [
+    "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+    "Mixing__Focus_and_Balance/Drum_Mic_Path_Lengths.png",
+    "Mixing__Focus_and_Balance/Single_Clip_beside_Stacked_Track_Rows.png"
+   ],
+   "figs": [
+    [
+     "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+     1
+    ],
+    [
+     "Mixing__Focus_and_Balance/Drum_Mic_Path_Lengths.png",
+     2
+    ],
+    [
+     "Mixing__Focus_and_Balance/Single_Clip_beside_Stacked_Track_Rows.png",
+     3
+    ]
+   ],
+   "kind": "page"
+  },
+  "calibration-and-monitoring-ms-mid-side-matrix.html": {
+   "title": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "imgs": [
+    "Monitoring__Calibration_and_Monitoring/Ms_Matrix_Signal_Flow.png"
+   ],
+   "figs": [
+    [
+     "Monitoring__Calibration_and_Monitoring/Ms_Matrix_Signal_Flow.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "master-buss-processing-and-endgame-procedure-guide.html": {
+   "title": "Master-Buss Processing and Endgame: Procedure Guide",
+   "imgs": [
+    "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "auxiliary-resources.html": {
+   "title": "Auxiliary Resources",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Multitrack_Download_Flow.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Multitrack_Download_Flow.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "in-class-mixing-repeatable-workflow-guide.html": {
+   "title": "In-Class Mixing: Repeatable Workflow Guide",
+   "imgs": [
+    "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png"
+   ],
+   "figs": [
+    [
+     "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "in-class-mixing-common-mistakes-and-how-to-hear-them.html": {
+   "title": "In-Class Mixing: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png"
+   ],
+   "figs": [
+    [
+     "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mixing-timing-overview.html": {
+   "title": "Mixing: Timing: Module Overview",
+   "imgs": [
+    "Mixing__Timing/Elastic_Audio_Warp_Markers.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Timing/Elastic_Audio_Warp_Markers.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "dynamic-effects-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Dynamic Effects: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Effects__Dynamic_Effects/Attack_Too_Fast_Transient_Loss.png"
+   ],
+   "figs": [
+    [
+     "Effects__Dynamic_Effects/Attack_Too_Fast_Transient_Loss.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p2-file-extensions-and-file-types.html": {
+   "title": "macOS: P2: File Extensions and File Types",
+   "imgs": [
+    "macOS__Foundations/Finder_Settings_Advanced.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "delay-stereo-enhancements-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Delay &amp; Stereo Enhancements: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Effects__Delay_and_Stereo_Enhancements/Mono_Collapse_Check.png"
+   ],
+   "figs": [
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Mono_Collapse_Check.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "calibration-and-monitoring-procedure-guide.html": {
+   "title": "Calibration and Monitoring: Procedure Guide",
+   "imgs": [
+    "Monitoring__Calibration_and_Monitoring/Gain_Stages_Chain.png",
+    "Monitoring__Calibration_and_Monitoring/Metering_Preferences.png"
+   ],
+   "figs": [
+    [
+     "Monitoring__Calibration_and_Monitoring/Metering_Preferences.png",
+     1
+    ],
+    [
+     "Monitoring__Calibration_and_Monitoring/Gain_Stages_Chain.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "orientation-1b-course-description-learning-outcomes-and-requirements.html": {
+   "title": "Orientation: 1B) Course Description, Learning Outcomes, and Requirements",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Core_Mixing_DAPR_2020.png",
+    "Orientation__Course_Orientation_and_Feedback/Grade_Breakdown.png",
+    "Orientation__Course_Orientation_and_Feedback/Learning_Outcomes.png"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Core_Mixing_DAPR_2020.png",
+     1
+    ],
+    [
+     "Orientation__Course_Orientation_and_Feedback/Grade_Breakdown.png",
+     2
+    ],
+    [
+     "Orientation__Course_Orientation_and_Feedback/Learning_Outcomes.png",
+     3
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p4-icloud-cloud-files-and-backup.html": {
+   "title": "macOS: P4: iCloud, Cloud Files, and Backup",
+   "imgs": [
+    "macOS__Foundations/Cloud_Status_Icon.png",
+    "macOS__Foundations/Finder_Settings_General.png",
+    "macOS__Foundations/Time_Machine_Restore.jpg"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "macos-p3-login-items-launch-agents-and-launch-daemons.html": {
+   "title": "macOS: P3: Login Items, Launch Agents, and Launch Daemons",
+   "imgs": [
+    "macOS__Foundations/Launch_Agents_Daemons_Folders.png",
+    "macOS__Foundations/Launch_Agents_vs_Daemons.png",
+    "macOS__Foundations/Launchctl_List_Terminal.png",
+    "macOS__Foundations/Login_Items_Panel.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "spectral-effects-and-eq-filter-shapes-and-what-they-are-for.html": {
+   "title": "Spectral Effects and EQ: Filter Shapes and What They Are For",
+   "imgs": [
+    "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+    "Effects__Spectral_Effects_and_EQ/Boost_Wide_Cut_Narrow.png"
+   ],
+   "figs": [
+    [
+     "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+     1
+    ],
+    [
+     "Effects__Spectral_Effects_and_EQ/Boost_Wide_Cut_Narrow.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "pro-tools-fundamentals-prerequisites.html": {
+   "title": "Pro Tools Fundamentals: Prerequisites",
+   "imgs": [
+    "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg"
+   ],
+   "figs": [
+    [
+     "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "tuning-what-to-correct-and-what-to-leave.html": {
+   "title": "Tuning: What to Correct and What to Leave",
+   "imgs": [
+    "Mixing__Tuning/Correction_Amount_Comparison_Curves.png",
+    "Mixing__Tuning/Pitch_Correction_Natural_Contour.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Tuning/Correction_Amount_Comparison_Curves.png",
+     1
+    ],
+    [
+     "Mixing__Tuning/Pitch_Correction_Natural_Contour.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "mixing-comping-arrangement-overview.html": {
+   "title": "Mixing: Comping &amp; Arrangement: Module Overview",
+   "imgs": [
+    "Mixing__Comping_and_Arrangement/Playlist_Comp_Lanes.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Comping_and_Arrangement/Playlist_Comp_Lanes.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "timing-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Timing: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Mixing__Timing/Waveform_Rows_against_Grid_Lines.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Timing/Waveform_Rows_against_Grid_Lines.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "full-mix-sessions-in-reaper-from-the-cambridge-mix-website.html": {
+   "title": "Full Mix Sessions in Reaper from the Cambridge Mix Website",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Core_Mixing_DAPR_2020.png"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Core_Mixing_DAPR_2020.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "timing-elastic-audio-procedure-guide.html": {
+   "title": "Timing: Elastic Audio Procedure Guide",
+   "imgs": [
+    "Mixing__Timing/Elastic_Audio_Timing_Correction.png",
+    "Mixing__Timing/Pro_Tools_Tce_Plugin_Preferences.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Timing/Pro_Tools_Tce_Plugin_Preferences.png",
+     1
+    ],
+    [
+     "Mixing__Timing/Elastic_Audio_Timing_Correction.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "presentations-and-sessions-delivering-work-other-people-can-open.html": {
+   "title": "Presentations and Sessions: Delivering Work Other People Can Open",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Session_Delivery_Package.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Session_Delivery_Package.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "macos-p5-audio-midi-setup.html": {
+   "title": "macOS: P5: Audio MIDI Setup",
+   "imgs": [
+    "macOS__Foundations/Audio_Devices_Window.png",
+    "macOS__Foundations/Audio_MIDI_Setup_MIDI_Studio.png",
+    "macOS__Foundations/Dolby_Audio_Bridge_Speaker_Config.png"
+   ],
+   "figs": [],
+   "kind": "page"
+  },
+  "tuning-pitch-correction-procedure-guide.html": {
+   "title": "Tuning: Pitch-Correction Procedure Guide",
+   "imgs": [
+    "Mixing__Tuning/Correction_Amount_Comparison_Boxed.png",
+    "Mixing__Tuning/Scale_and_Target_Notes_Curves.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Tuning/Scale_and_Target_Notes_Curves.png",
+     1
+    ],
+    [
+     "Mixing__Tuning/Correction_Amount_Comparison_Boxed.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "effects-spectral-effects-eq-overview.html": {
+   "title": "Effects: Spectral Effects &amp; EQ: Module Overview",
+   "imgs": [
+    "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png"
+   ],
+   "figs": [
+    [
+     "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "balancing-reverb-common-mistakes-and-how-to-hear-them.html": {
+   "title": "Balancing &amp; Reverb: Common Mistakes and How to Hear Them",
+   "imgs": [
+    "Effects__Balancing_and_Reverb/Send_versus_Insert_Routing.png"
+   ],
+   "figs": [
+    [
+     "Effects__Balancing_and_Reverb/Send_versus_Insert_Routing.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "dynamic-effects-compression-procedure-guide.html": {
+   "title": "Dynamic Effects: Compression Procedure Guide",
+   "imgs": [
+    "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png"
+   ],
+   "figs": [
+    [
+     "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "in-class-mixing-a-repeatable-order-of-operations.html": {
+   "title": "In-Class Mixing: A Repeatable Order of Operations",
+   "imgs": [
+    "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png"
+   ],
+   "figs": [
+    [
+     "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mix-acoustics-what-the-room-does-to-what-you-hear.html": {
+   "title": "Mix Acoustics: What the Room Does to What You Hear",
+   "imgs": [
+    "Acoustics__Mix_Acoustics/First_Reflection_Points.png",
+    "Acoustics__Mix_Acoustics/Treatment_Types_Comparison.png"
+   ],
+   "figs": [
+    [
+     "Acoustics__Mix_Acoustics/First_Reflection_Points.png",
+     1
+    ],
+    [
+     "Acoustics__Mix_Acoustics/Treatment_Types_Comparison.png",
+     2
+    ]
+   ],
+   "kind": "page"
+  },
+  "pro-tools-fundamentals-overview.html": {
+   "title": "Pro Tools: Fundamentals: Module Overview",
+   "imgs": [
+    "Mixing__Essential_Groundwork/Dashboard_New_Session.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Essential_Groundwork/Dashboard_New_Session.png",
+     1
+    ]
+   ],
+   "kind": "page"
+  },
+  "mix-rough-balance-assignment.html": {
+   "title": "Mix Rough Balance Assignment",
+   "imgs": [
+    "Mixing__Focus_and_Balance/Pro_Tools_Mix_Window.png"
+   ],
+   "figs": [],
+   "kind": "assignment"
+  },
+  "roll-call-attendance.html": {
+   "title": "Roll Call Attendance",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Avtech_Engage.jpg"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Avtech_Engage.jpg",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "quick-mix-5.html": {
+   "title": "Quick Mix 5",
+   "imgs": [
+    "Mixing__Master-Buss_Processing_and_Endgame/Master_Bus_Delivery_Workflow.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Master_Bus_Delivery_Workflow.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "timing-lab.html": {
+   "title": "Timing Lab",
+   "imgs": [
+    "Mixing__Timing/Elastic_Audio_Timing_Correction.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Timing/Elastic_Audio_Timing_Correction.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "final-mix-a-horse-is-not-a-home-2.html": {
+   "title": "Final Mix: \"A Horse Is Not a Home\"",
+   "imgs": [
+    "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Specification.png"
+   ],
+   "figs": [
+    [
+     "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Specification.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-comping-and-arranging-assignment.html": {
+   "title": "Mix Comping and Arranging Assignment",
+   "imgs": [
+    "Mixing__Comping_and_Arrangement/Green_to_Blue_Waveform_Splice_Pair.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Comping_and_Arrangement/Green_to_Blue_Waveform_Splice_Pair.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "quick-mix-2.html": {
+   "title": "Quick Mix 2",
+   "imgs": [
+    "Mixing__Focus_and_Balance/Channel_Strip_Anatomy.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Focus_and_Balance/Channel_Strip_Anatomy.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "tuning-lab.html": {
+   "title": "Tuning Lab",
+   "imgs": [
+    "Mixing__Tuning/Correction_Amount_Comparison_Curves.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Tuning/Correction_Amount_Comparison_Curves.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-master-buss-processing-automation-and-endgame.html": {
+   "title": "Mix Master-buss Processing, Automation, &amp; Endgame",
+   "imgs": [
+    "Mixing__Master-Buss_Processing_and_Endgame/Headroom_on_Delivery.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Master-Buss_Processing_and_Endgame/Headroom_on_Delivery.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "essential-groundwork-lab.html": {
+   "title": "Essential Groundwork Lab",
+   "imgs": [
+    "Mixing__Essential_Groundwork/Gain_Staging_Chain.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Essential_Groundwork/Gain_Staging_Chain.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "eq-lab.html": {
+   "title": "EQ Lab",
+   "imgs": [
+    "Effects__Spectral_Effects_and_EQ/Vocal_EQ_Frequency_Band_Chart.jpg"
+   ],
+   "figs": [
+    [
+     "Effects__Spectral_Effects_and_EQ/Vocal_EQ_Frequency_Band_Chart.jpg",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-eq-assignment.html": {
+   "title": "Mix EQ Assignment",
+   "imgs": [
+    "Effects__Spectral_Effects_and_EQ/Boost_Wide_Cut_Narrow.png"
+   ],
+   "figs": [
+    [
+     "Effects__Spectral_Effects_and_EQ/Boost_Wide_Cut_Narrow.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "quick-mix-3.html": {
+   "title": "Quick Mix 3",
+   "imgs": [
+    "Effects__Balancing_and_Reverb/Send_versus_Insert_Routing.png"
+   ],
+   "figs": [
+    [
+     "Effects__Balancing_and_Reverb/Send_versus_Insert_Routing.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "song-analysis-lab.html": {
+   "title": "Song Analysis Lab",
+   "imgs": [
+    "Effects__Frequency_Dynamics_and_Side-Chains/Sidechain_Ducking.png"
+   ],
+   "figs": [
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Sidechain_Ducking.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "in-class-mix-02.html": {
+   "title": "In-Class Mix 02",
+   "imgs": [
+    "Final__Final_Mix_and_Final_Exam/Professional_Practice_Delivery_Verification_Checklist.png"
+   ],
+   "figs": [
+    [
+     "Final__Final_Mix_and_Final_Exam/Professional_Practice_Delivery_Verification_Checklist.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-balancing-and-reverb.html": {
+   "title": "Mix Balancing and Reverb",
+   "imgs": [
+    "Effects__Balancing_and_Reverb/Reverb_Depth_and_Distance.png"
+   ],
+   "figs": [
+    [
+     "Effects__Balancing_and_Reverb/Reverb_Depth_and_Distance.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "in-class-mix-01.html": {
+   "title": "In-Class Mix 01",
+   "imgs": [
+    "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png"
+   ],
+   "figs": [
+    [
+     "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-prep-assignment.html": {
+   "title": "Mix Prep Assignment",
+   "imgs": [
+    "Mixing__Essential_Groundwork/Gain_Staging_Chain.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Essential_Groundwork/Gain_Staging_Chain.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "m06-mix-tuning-assignment.html": {
+   "title": "Mixing: Mix Tuning Assignment",
+   "imgs": [
+    "Mixing__Tuning/Correction_Amount_Comparison_Boxed.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Tuning/Correction_Amount_Comparison_Boxed.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "quick-mix-4.html": {
+   "title": "Quick Mix 4",
+   "imgs": [
+    "Effects__Delay_and_Stereo_Enhancements/Mono_Collapse_Check.png"
+   ],
+   "figs": [
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Mono_Collapse_Check.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "pro-tools-lab-pro-tools-assignment.html": {
+   "title": "Pro Tools Lab: Pro Tools - Assignment",
+   "imgs": [
+    "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg"
+   ],
+   "figs": [
+    [
+     "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "compression-lab.html": {
+   "title": "Compression Lab",
+   "imgs": [
+    "Effects__Dynamic_Effects/Attack_Too_Fast_Transient_Loss.png"
+   ],
+   "figs": [
+    [
+     "Effects__Dynamic_Effects/Attack_Too_Fast_Transient_Loss.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "pro-tools-lab-02.html": {
+   "title": "Pro Tools Lab 02",
+   "imgs": [
+    "Monitoring__Calibration_and_Monitoring/Head_Torso_Measurement.png"
+   ],
+   "figs": [
+    [
+     "Monitoring__Calibration_and_Monitoring/Head_Torso_Measurement.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "final-mix-jeff-hirata-sunshine.html": {
+   "title": "Final Mix - Jeff Hirata \"Sunshine\"",
+   "imgs": [
+    "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Truncation.png"
+   ],
+   "figs": [
+    [
+     "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Truncation.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "comping-lab.html": {
+   "title": "Comping Lab",
+   "imgs": [
+    "Mixing__Comping_and_Arrangement/Gray_Clips_with_Star_and_Crossfade.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Comping_and_Arrangement/Gray_Clips_with_Star_and_Crossfade.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "presentations-mixing-topic-presentation-10-minutes.html": {
+   "title": "Presentations: Mixing Topic Presentation (10 Minutes)",
+   "imgs": [
+    "Professional_Practice__Presentations_and_Sessions/Core_Mixing_Lab_DAPR_2020L.png"
+   ],
+   "figs": [
+    [
+     "Professional_Practice__Presentations_and_Sessions/Core_Mixing_Lab_DAPR_2020L.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "calibration-mixing-space-assignment.html": {
+   "title": "Calibration: Mixing Space - Assignment",
+   "imgs": [
+    "Monitoring__Calibration_and_Monitoring/Gain_Stages_Chain.png"
+   ],
+   "figs": [
+    [
+     "Monitoring__Calibration_and_Monitoring/Gain_Stages_Chain.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-frequency-dynamics-and-side-chains-assignment.html": {
+   "title": "Mix Frequency, Dynamics and Side-chains Assignment",
+   "imgs": [
+    "Effects__Frequency_Dynamics_and_Side-Chains/Side_Chain_Trigger_and_Ducking.png"
+   ],
+   "figs": [
+    [
+     "Effects__Frequency_Dynamics_and_Side-Chains/Side_Chain_Trigger_and_Ducking.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "macos-p6-mac-navigation-deep-dive-assignment.html": {
+   "title": "macOS: P6: Mac Navigation Deep Dive - Assignment",
+   "imgs": [
+    "macOS__Foundations/About_This_MAC.png"
+   ],
+   "figs": [
+    [
+     "macOS__Foundations/About_This_MAC.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-dynamics-assignment.html": {
+   "title": "Mix Dynamics Assignment",
+   "imgs": [
+    "Effects__Dynamic_Effects/Compression_Dynamic_Range.png"
+   ],
+   "figs": [
+    [
+     "Effects__Dynamic_Effects/Compression_Dynamic_Range.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "quick-mix-01.html": {
+   "title": "Quick Mix 01",
+   "imgs": [
+    "Mixing__Essential_Groundwork/Dashboard_New_Session.png"
+   ],
+   "figs": [
+    [
+     "Mixing__Essential_Groundwork/Dashboard_New_Session.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "mix-delay-and-stereo-enhancements.html": {
+   "title": "Mix Delay and Stereo Enhancements",
+   "imgs": [
+    "Effects__Delay_and_Stereo_Enhancements/Figure_8_Null_Plane.png"
+   ],
+   "figs": [
+    [
+     "Effects__Delay_and_Stereo_Enhancements/Figure_8_Null_Plane.png",
+     1
+    ]
+   ],
+   "kind": "assignment"
+  },
+  "syllabus.html": {
+   "title": "Syllabus",
+   "imgs": [
+    "Orientation__Course_Orientation_and_Feedback/Core_Mixing_DAPR_2020.png"
+   ],
+   "figs": [
+    [
+     "Orientation__Course_Orientation_and_Feedback/Core_Mixing_DAPR_2020.png",
+     1
+    ]
+   ],
+   "kind": "syllabus"
+  }
+ },
+ "v31": {
+  "comping-and-arrangement-procedure-guide.html": [
+   "Mixing__Comping_and_Arrangement/Pro_Tools_Playlist_Selector_New_Playlist.png",
+   "Mixing__Comping_and_Arrangement/Vocal_Comping_Crossfade_Workflow.png"
+  ],
+  "macos-p1-finder-smart-folders.html": [
+   "macOS__Foundations/New_Smart_Folder_Menu.png",
+   "macOS__Foundations/Smart_Folder_Icon.png",
+   "macOS__Foundations/Smart_Folder_Results.png"
+  ],
+  "course-orientation-course-evaluations.html": [
+   "Orientation__Course_Orientation_and_Feedback/Open_Canvas_Page_in_New_Tab.png",
+   "Orientation__Course_Orientation_and_Feedback/Student_Course_Evaluations.png"
+  ],
+  "effects-delay-stereo-enhancements-overview.html": [
+   "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png",
+   "Effects__Delay_and_Stereo_Enhancements/Stereo_Delay_Mono_Compatibility.png"
+  ],
+  "macos-p1-getting-around-your-mac.html": [
+   "macOS__Foundations/Function_Keys_Panel.png",
+   "macOS__Foundations/Sound_Output_List.png"
+  ],
+  "macos-p3-installing-software-dmg-app-and-pkg.html": [
+   "macOS__Foundations/Air_Effects_Pkg_Installer.png",
+   "macOS__Foundations/Apogee_Installer_Example.png",
+   "macOS__Foundations/DMG_PKG_EXE_Flow.png",
+   "macOS__Foundations/Dropbox_Installer.png",
+   "macOS__Foundations/Skim_Dmg_Drag_to_Applications.png"
+  ],
+  "master-buss-processing-endgame-common-mistakes-and-how-to-hear-them.html": [
+   "Mixing__Master-Buss_Processing_and_Endgame/Headroom_on_Delivery.png"
+  ],
+  "macos-p4-external-drives-volumes-and-file-systems.html": [
+   "macOS__Foundations/Disk_Utility_Erase_Dialog.png",
+   "macOS__Foundations/Disk_Utility_Macintosh_Hd.png",
+   "macOS__Foundations/External_Drive_Sidebar.png",
+   "macOS__Foundations/File_System_Timeline.png",
+   "macOS__Foundations/Macintosh_Hd_Get_Info.png"
+  ],
+  "macos-p1-mac-interface-and-application-behavior.html": [
+   "macOS__Foundations/Cmd_Opt_H_After.jpg",
+   "macOS__Foundations/Cmd_Opt_H_Before.jpg"
+  ],
+  "calibration-reference-noise-files.html": [],
+  "macos-p4-system-diagnostic-tools.html": [
+   "macOS__Foundations/Activity_Monitor_CPU_Tab.png",
+   "macOS__Foundations/Console_No_Messages.png",
+   "macOS__Foundations/System_Information_USB.png"
+  ],
+  "pro-tools-fundamentals-course-learning-outcomes.html": [],
+  "mixing-tuning-overview.html": [
+   "Mixing__Tuning/Correction_Speed_Scoop.png",
+   "Mixing__Tuning/Scale_and_Target_Notes_Boxed.png"
+  ],
+  "macos-p4-hardware-software-and-firmware.html": [
+   "macOS__Foundations/Hardware_Software_Firmware_Stack.png"
+  ],
+  "sessions-accessing-course-files-on-the-network-drive-dgm-assets.html": [
+   "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Network_Drive_Path.png"
+  ],
+  "comping-arrangement-common-mistakes-and-how-to-hear-them.html": [
+   "Mixing__Comping_and_Arrangement/Gray_Clips_with_Star_and_Crossfade.png",
+   "Mixing__Comping_and_Arrangement/Green_to_Blue_Waveform_Splice_Pair.png"
+  ],
+  "frequency-dynamics-and-side-chains-additional-tips-and-tricks.html": [
+   "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png"
+  ],
+  "tuning-a-horse-is-not-a-home-the-semester-project.html": [],
+  "monitoring-calibration-monitoring-overview.html": [
+   "Monitoring__Calibration_and_Monitoring/Metering_Preferences.png"
+  ],
+  "course-orientation-course-schedule-week-by-week.html": [
+   "Orientation__Course_Orientation_and_Feedback/Weekly_Rhythm.png"
+  ],
+  "mixing-master-buss-processing-endgame-overview.html": [
+   "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png",
+   "Mixing__Master-Buss_Processing_and_Endgame/Master_Bus_Delivery_Workflow.png"
+  ],
+  "frequency-dynamics-and-side-chains-how-they-work.html": [
+   "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png",
+   "Effects__Frequency_Dynamics_and_Side-Chains/Sidechain_Ducking.png"
+  ],
+  "focus-and-balance-mix-window-procedure-guide.html": [
+   "Mixing__Focus_and_Balance/Channel_Strip_Anatomy.png",
+   "Mixing__Focus_and_Balance/Multi_System_Playback_Check.png",
+   "Mixing__Focus_and_Balance/Technical_Ear_Trainer_Settings.png"
+  ],
+  "professional-practice-presentations-sessions-overview.html": [],
+  "macos-p3-privacy-and-security.html": [
+   "macOS__Foundations/Privacy_Security_Pane.png",
+   "macOS__Foundations/Sharing_Permissions.png"
+  ],
+  "mix-acoustics-room-acoustics-and-monitoring.html": [
+   "Acoustics__Mix_Acoustics/Listening_Triangle_Overhead.png"
+  ],
+  "balancing-and-reverb-procedure-guide.html": [
+   "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png"
+  ],
+  "comping-and-arrangement-the-controls-and-the-decisions.html": [
+   "Mixing__Comping_and_Arrangement/Playlist_Comp_Lanes.png"
+  ],
+  "mixing-in-class-mixing-overview.html": [],
+  "mixing-focus-balance-overview.html": [
+   "Mixing__Focus_and_Balance/Single_Blue_Burst_beside_Stacked_Tracks.png"
+  ],
+  "sessions-free-daw-session-track-downloads.html": [
+   "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Multitrack_Download_Flow.png"
+  ],
+  "macos-p1-spotlight-quick-look-and-screenshots.html": [
+   "macOS__Foundations/Quick_Look_Preview.png",
+   "macOS__Foundations/Screenshot_Options_Menu_over_System_Settings.jpg",
+   "macOS__Foundations/Spotlight_Audio_MIDI_Setup.jpg",
+   "macOS__Foundations/Spotlight_Pro_Tools.jpg"
+  ],
+  "final-mix-and-final-exam-verifying-before-you-submit.html": [
+   "Final__Final_Mix_and_Final_Exam/Professional_Practice_Delivery_Verification_Checklist.png"
+  ],
+  "essential-groundwork-session-preparation-procedure.html": [
+   "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png"
+  ],
+  "macos-p3-terminal-basics.html": [
+   "macOS__Foundations/Terminal_Pwd_Ls_Cd.png"
+  ],
+  "macos-p3-removing-applications-and-leftovers.html": [
+   "macOS__Foundations/App_Leftover_Files.png",
+   "macOS__Foundations/Turbotax_Leftover_Folder.png"
+  ],
+  "spectral-effects-and-eq-why-we-use-equalization.html": [
+   "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+   "Effects__Spectral_Effects_and_EQ/EQ_Frequency_Masking.png"
+  ],
+  "macos-p2-copying-moving-and-archiving-files.html": [
+   "macOS__Foundations/Compress_Context_Menu.png",
+   "macOS__Foundations/Compressed_Zip_Result.png"
+  ],
+  "course-orientation-course-outline-week-by-week.html": [
+   "Orientation__Course_Orientation_and_Feedback/Course_Outline.png"
+  ],
+  "mixing-essential-groundwork-overview.html": [
+   "Mixing__Essential_Groundwork/Dashboard_New_Session.png"
+  ],
+  "final-final-mix-final-exam-overview.html": [
+   "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Truncation.png"
+  ],
+  "macos-p1-mouse-and-trackpad-settings.html": [
+   "macOS__Foundations/Mouse_Settings_Panel.png"
+  ],
+  "macos-p4-force-quit-and-troubleshooting.html": [
+   "macOS__Foundations/Force_Quit_Window.png"
+  ],
+  "focus-and-balance-panning-diagrams.html": [
+   "Mixing__Focus_and_Balance/Stereo_Field_Map.png"
+  ],
+  "effects-dynamic-effects-overview.html": [
+   "Effects__Dynamic_Effects/Compression_Dynamic_Range.png",
+   "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png"
+  ],
+  "final-mix-and-final-exam-study-guide.html": [],
+  "macos-p2-file-system-structure-and-paths.html": [
+   "macOS__Foundations/Home_Folder_Contents.png"
+  ],
+  "effects-frequency-dynamics-side-chains-overview.html": [
+   "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png"
+  ],
+  "acoustics-mix-acoustics-overview.html": [
+   "Acoustics__Mix_Acoustics/Room_Acoustics_Monitoring_Triangle.png"
+  ],
+  "dynamic-effects-compression-the-seven-controls.html": [
+   "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png",
+   "Effects__Dynamic_Effects/Side_Chain_Filter_Kick_Pumping.png",
+   "Effects__Dynamic_Effects/Six_Rules_of_Compression.png"
+  ],
+  "macos-p1-modifier-keys-and-essential-shortcuts.html": [],
+  "spectral-effects-and-eq-procedure-guide.html": [
+   "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png"
+  ],
+  "delay-and-stereo-enhancements-procedure-guide.html": [
+   "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png"
+  ],
+  "master-buss-processing-and-endgame-knowing-when-to-stop.html": [
+   "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png"
+  ],
+  "effects-balancing-reverb-overview.html": [
+   "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+   "Effects__Balancing_and_Reverb/Reverb_Depth_and_Distance.png"
+  ],
+  "macos-p5-library-vs-system-pro-tools-and-your-files.html": [
+   "macOS__Foundations/Aax_Plugins_Folder.png",
+   "macOS__Foundations/Application_Support_Folder.png",
+   "macOS__Foundations/Library_Audio_Folder.png"
+  ],
+  "essential-groundwork-common-mistakes-and-how-to-hear-them.html": [
+   "Mixing__Essential_Groundwork/Gain_Staging_Chain.png"
+  ],
+  "mix-acoustics-common-mistakes-and-how-to-hear-them.html": [
+   "Acoustics__Mix_Acoustics/Thin_Foam_versus_Broadband.png"
+  ],
+  "timing-the-controls-and-what-they-cost.html": [
+   "Mixing__Timing/Elastic_Audio_Warp_Markers.png",
+   "Mixing__Timing/Marker_Rows_at_Varying_Offsets.png"
+  ],
+  "macos-p1-finder-deep-dive.html": [
+   "macOS__Foundations/Finder_View_Options.png",
+   "macOS__Foundations/Go_to_Folder_Autocomplete.png",
+   "macOS__Foundations/Library_Audio_Folder.png"
+  ],
+  "macos-p4-ram-storage-and-cpus.html": [
+   "macOS__Foundations/About_General_Settings.png",
+   "macOS__Foundations/About_This_MAC_M5.png",
+   "macOS__Foundations/CPU_Architecture_Timeline.png",
+   "macOS__Foundations/Get_Info_Kind_Architecture.png",
+   "macOS__Foundations/System_Info_Memory.png"
+  ],
+  "orientation-1a-prerequisites.html": [
+   "Orientation__Course_Orientation_and_Feedback/Avtech_Engage.jpg",
+   "Orientation__Course_Orientation_and_Feedback/Worksheet_to_PDF_Flow.png"
+  ],
+  "instructor-rubric-attachment-map.html": [],
+  "balancing-and-reverb-placing-a-source-in-a-space.html": [
+   "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+   "Effects__Balancing_and_Reverb/Space_Scale_Comparison.png"
+  ],
+  "macos-p2-files-folders-applications-packages-and-aliases.html": [
+   "macOS__Foundations/Cd_Alias_Icon.png",
+   "macOS__Foundations/Package_Contents_Folder.png",
+   "macOS__Foundations/Package_Contents_Menu.png"
+  ],
+  "calibration-speaker-and-headphone-level-calibration.html": [
+   "Monitoring__Calibration_and_Monitoring/Head_Torso_Measurement.png",
+   "Monitoring__Calibration_and_Monitoring/Headphone_Seal_Cross_Section.png"
+  ],
+  "final-mix-delivery-and-verification-procedure.html": [
+   "Final__Final_Mix_and_Final_Exam/Professional_Practice_Bounce_Specification.png"
+  ],
+  "delay-and-stereo-enhancements-width-without-losing-mono.html": [
+   "Effects__Delay_and_Stereo_Enhancements/Figure_8_Null_Plane.png",
+   "Effects__Delay_and_Stereo_Enhancements/Moogerfooger_Analog_Delay.png"
+  ],
+  "essential-groundwork-what-to-set-before-you-touch-a-fader.html": [
+   "Mixing__Essential_Groundwork/Dashboard_New_Session.png"
+  ],
+  "frequency-dynamics-and-side-chains-procedure-guide.html": [
+   "Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png"
+  ],
+  "pro-tools-fundamentals-lab-01-manual-procedure-guide.html": [
+   "Pro_Tools__Fundamentals/PT_Identify_Beat_Bar_Beat_Markers.jpg"
+  ],
+  "focus-and-balance-mix-balancing.html": [
+   "Effects__Balancing_and_Reverb/D_Verb_Algorithms_and_Decay.png",
+   "Mixing__Focus_and_Balance/Drum_Mic_Path_Lengths.png",
+   "Mixing__Focus_and_Balance/Single_Clip_beside_Stacked_Track_Rows.png"
+  ],
+  "calibration-and-monitoring-ms-mid-side-matrix.html": [
+   "Monitoring__Calibration_and_Monitoring/Ms_Matrix_Signal_Flow.png"
+  ],
+  "master-buss-processing-and-endgame-procedure-guide.html": [
+   "Mixing__Master-Buss_Processing_and_Endgame/Channel_Strip_Full_Window.png"
+  ],
+  "in-class-mixing-repeatable-workflow-guide.html": [],
+  "in-class-mixing-common-mistakes-and-how-to-hear-them.html": [],
+  "mixing-timing-overview.html": [],
+  "dynamic-effects-common-mistakes-and-how-to-hear-them.html": [
+   "Effects__Dynamic_Effects/Attack_Too_Fast_Transient_Loss.png"
+  ],
+  "macos-p2-file-extensions-and-file-types.html": [
+   "macOS__Foundations/Finder_Settings_Advanced.png"
+  ],
+  "delay-stereo-enhancements-common-mistakes-and-how-to-hear-them.html": [
+   "Effects__Delay_and_Stereo_Enhancements/Mono_Collapse_Check.png"
+  ],
+  "calibration-and-monitoring-procedure-guide.html": [
+   "Monitoring__Calibration_and_Monitoring/Gain_Stages_Chain.png",
+   "Monitoring__Calibration_and_Monitoring/Metering_Preferences.png"
+  ],
+  "orientation-1b-course-description-learning-outcomes-and-requirements.html": [
+   "Orientation__Course_Orientation_and_Feedback/Core_Mixing_DAPR_2020.png",
+   "Orientation__Course_Orientation_and_Feedback/Grade_Breakdown.png",
+   "Orientation__Course_Orientation_and_Feedback/Learning_Outcomes.png"
+  ],
+  "macos-p4-icloud-cloud-files-and-backup.html": [
+   "macOS__Foundations/Cloud_Status_Icon.png",
+   "macOS__Foundations/Finder_Settings_General.png",
+   "macOS__Foundations/Time_Machine_Restore.jpg"
+  ],
+  "macos-p3-login-items-launch-agents-and-launch-daemons.html": [
+   "macOS__Foundations/Launch_Agents_Daemons_Folders.png",
+   "macOS__Foundations/Launch_Agents_vs_Daemons.png",
+   "macOS__Foundations/Launchctl_List_Terminal.png",
+   "macOS__Foundations/Login_Items_Panel.png"
+  ],
+  "spectral-effects-and-eq-filter-shapes-and-what-they-are-for.html": [
+   "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png",
+   "Effects__Spectral_Effects_and_EQ/Boost_Wide_Cut_Narrow.png"
+  ],
+  "pro-tools-fundamentals-prerequisites.html": [],
+  "tuning-what-to-correct-and-what-to-leave.html": [
+   "Mixing__Tuning/Correction_Amount_Comparison_Curves.png",
+   "Mixing__Tuning/Pitch_Correction_Natural_Contour.png"
+  ],
+  "mixing-comping-arrangement-overview.html": [],
+  "timing-common-mistakes-and-how-to-hear-them.html": [
+   "Mixing__Timing/Waveform_Rows_against_Grid_Lines.png"
+  ],
+  "full-mix-sessions-in-reaper-from-the-cambridge-mix-website.html": [],
+  "timing-elastic-audio-procedure-guide.html": [
+   "Mixing__Timing/Elastic_Audio_Timing_Correction.png",
+   "Mixing__Timing/Pro_Tools_Tce_Plugin_Preferences.png"
+  ],
+  "presentations-and-sessions-delivering-work-other-people-can-open.html": [
+   "Professional_Practice__Presentations_and_Sessions/Professional_Practice_Session_Delivery_Package.png"
+  ],
+  "macos-p5-audio-midi-setup.html": [
+   "macOS__Foundations/Audio_Devices_Window.png",
+   "macOS__Foundations/Audio_MIDI_Setup_MIDI_Studio.png",
+   "macOS__Foundations/Dolby_Audio_Bridge_Speaker_Config.png"
+  ],
+  "tuning-pitch-correction-procedure-guide.html": [
+   "Mixing__Tuning/Correction_Amount_Comparison_Boxed.png",
+   "Mixing__Tuning/Scale_and_Target_Notes_Curves.png"
+  ],
+  "effects-spectral-effects-eq-overview.html": [
+   "Effects__Spectral_Effects_and_EQ/304e_Equalizer_Window.png"
+  ],
+  "balancing-reverb-common-mistakes-and-how-to-hear-them.html": [
+   "Effects__Balancing_and_Reverb/Send_versus_Insert_Routing.png"
+  ],
+  "dynamic-effects-compression-procedure-guide.html": [
+   "Effects__Dynamic_Effects/Dyn3_Compressor_Controls.png"
+  ],
+  "in-class-mixing-a-repeatable-order-of-operations.html": [
+   "Mixing__In-Class_Mixing/Five_Pass_Mix_Order.png"
+  ],
+  "mix-acoustics-what-the-room-does-to-what-you-hear.html": [
+   "Acoustics__Mix_Acoustics/First_Reflection_Points.png",
+   "Acoustics__Mix_Acoustics/Treatment_Types_Comparison.png"
+  ],
+  "pro-tools-fundamentals-overview.html": [
+   "Mixing__Essential_Groundwork/Dashboard_New_Session.png"
+  ],
+  "mix-rough-balance-assignment.html": [
+   "Mixing__Focus_and_Balance/Pro_Tools_Mix_Window.png"
+  ],
+  "roll-call-attendance.html": [],
+  "quick-mix-5.html": [],
+  "timing-lab.html": [],
+  "final-mix-a-horse-is-not-a-home-2.html": [],
+  "mix-comping-and-arranging-assignment.html": [],
+  "quick-mix-2.html": [],
+  "tuning-lab.html": [],
+  "mix-master-buss-processing-automation-and-endgame.html": [],
+  "essential-groundwork-lab.html": [],
+  "eq-lab.html": [],
+  "mix-eq-assignment.html": [],
+  "quick-mix-3.html": [],
+  "song-analysis-lab.html": [],
+  "in-class-mix-02.html": [],
+  "mix-balancing-and-reverb.html": [],
+  "in-class-mix-01.html": [],
+  "mix-prep-assignment.html": [],
+  "m06-mix-tuning-assignment.html": [],
+  "quick-mix-4.html": [],
+  "pro-tools-lab-pro-tools-assignment.html": [],
+  "compression-lab.html": [],
+  "pro-tools-lab-02.html": [],
+  "final-mix-jeff-hirata-sunshine.html": [],
+  "comping-lab.html": [],
+  "presentations-mixing-topic-presentation-10-minutes.html": [],
+  "calibration-mixing-space-assignment.html": [],
+  "mix-frequency-dynamics-and-side-chains-assignment.html": [],
+  "macos-p6-mac-navigation-deep-dive-assignment.html": [],
+  "mix-dynamics-assignment.html": [],
+  "quick-mix-01.html": [],
+  "mix-delay-and-stereo-enhancements.html": [],
+  "syllabus.html": []
+ }
+}

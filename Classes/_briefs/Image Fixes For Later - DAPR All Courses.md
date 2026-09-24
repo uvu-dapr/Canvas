@@ -36,6 +36,7 @@ Parked 2026-09-23 so the course builds can move. Nothing here blocks a rebuild; 
 | `DAPR-2010--Core_Recording/Studio_Use_and_Care/Studio_Floor_Plan.png` | Send room names and rough layout; Claude draws it |
 | `DAPR-2010--Core_Recording/Studio_Use_and_Care/Power_Up_Sequence_Alt.png` | Decide which power up order is right (it disagrees with Power_Up_Sequence.png) |
 | `DAPR-2000--Digital_Audio_Essentials/Monitoring__Psychoacoustics/Sound_Field_Speaker_Placement.png` | Re-export larger from its source |
+| `DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques/Channel_Strip_with_Centered_Pan_Knobs.png` | Sharper recapture: the current file is 81 px wide. Pro Tools Mix window, one stereo channel strip with both pan knobs centered, captured at Retina resolution, same name. Its twin `Channel_Strip_with_Hard_Panned_Knobs.png` (also used as `DAW__Your_First_Mix/Pro_Tools_Hard_Panned_Channel.png`) is the same width, so capture both states in one sitting |
 | `DAPR-3255--Audio_Hardware_II/Electronics/Symbol_Inductor.png` | Re-export the full strip from its source |
 | `All/DAPR_Introduce_Yourself/Example_Headshot.jpg` | Confirm consent or AI origin, or swap in your own |
 | `DAPR-3345--Spatial_Audio_II/Interactive_Audio__Foundations_of_Interactive_Spatial_Audio/Workstation_Banner.jpg` and `_Alt` | Made up DAW screens; replace with real FMOD or Wwise captures when you have them |
@@ -122,21 +123,9 @@ images yet, only the Cloudflare download on the other side.
 
 ## DAPR 2000 - Digital Audio Essentials, logged 2026-09-24 (v63)
 
-**Seven quiz images do not exist anywhere in the repo.** `daw-exploring-the-daw.html` asks which Edit tool is outlined, one question per tool, and all seven screenshots are gone. The old paths `Images/daw-eq-dynamics/daw-eq-dynamics-edit-tools-tool-quiz-01..07.png` 404 and nothing in `DAW__EQ_and_Dynamics/` matches. These cannot be substituted: each question depends on a different tool being highlighted, so one generic toolbar shot would break all seven. They need re-capturing from the Pro Tools Edit toolbar with the Smart Tool, Zoomer, Trim, Selector, Grabber, Scrubber and Pencil outlined in turn. Until then those seven images are broken on that page.
+**Resolved in v65 (2026-09-24).** The seven Edit tool screenshots were never missing: the originals were in `apps/GitHub copy/Canvas/.../Images/daw-eq-dynamics/`. Copied, not moved, to `DAW__EQ_and_Dynamics/Edit_Tools_Smart_Tool.png` through `Edit_Tools_Pencil.png` and relinked. The sound supplemental page alt texts were never offset; the v61 filenames were mislabeled. All seven slots now carry the byte identical originals (Phase_Offset.png twice, on purpose), and the stereo mic techniques Center Panned slot carries `Channel_Strip_with_Centered_Pan_Knobs.png`.
 
-**Seven remaps on `sound-supplemental-sound-hearing-frequency-amplitude-decibel.html` are my best guess, not a verified match.** The old filenames had no surviving counterpart, so I paired them by name. Confirm or correct:
-
-| Old file | Mapped to |
-|---|---|
-| sound-hearing-frequency-amplitude-01.png | Sine_Wave_with_Wavelength_and_Amplitude.png |
-| sound-hearing-frequency-amplitude-02.png | Frequency_and_Wavelength.png |
-| sound-hearing-frequency-frequency-01.png | High_and_Low_Frequency_Wave_Comparison.png |
-| sound-hearing-frequency-phase-01.png | Phase_Cancellation.png |
-| sound-hearing-frequency-phase-shift-01.png | Phase_Offset.png |
-| sound-hearing-frequency-reflection-absorption-diffusion-01.png | Reflection_Absorption_and_Diffusion_Arrow_Panels.png |
-| sound-hearing-frequency-reflection-absorption-diffusion-02.png | Threshold_Labeled_Loudness_Contour_Curves.png |
-
-**That same page has its alt texts offset by one against its filenames.** `amplitude-02.png` carries alt "Frequency", `frequency-01.png` carries alt "Phase", and so on down the gallery. This predates v63 and I did not silently pick a side. The alt text and the picture need reconciling by eye.
+**Over the size cap.** `Sound__Wave_Properties_Hearing_and_Frequency/Time_Domain_vs_Frequency_Domain.png` is 1,054,804 bytes at 4010 x 2189, just over the 1 MB PNG cap. Claude can re-export it at 1600 wide under the same name; needs a yes because it replaces the file.
 
 **Placeholder or loose-fit images placed to satisfy the image-on-every-page rule.** Each works, none is ideal:
 
@@ -257,26 +246,6 @@ They are listed by the file doing the work, heaviest first.
 **One file in that table is not just weak, it is non compliant.** `Interactive_Audio__Foundations_of_Interactive_Spatial_Audio/Workstation_Banner.jpg` and its `_Alt` show a fabricated DAW timeline and a fabricated engine viewport, which Standards 20.1 rule 3 forbids. Adam asked on 2026-09-24 to keep them until a real capture exists. They are on the course overview, the orientation setup page and the syllabus.
 
 The four captures that would clear most of this table: FMOD Studio, Wwise Authoring, the engine editor, and one photograph of a DAW and an engine running side by side.
-
-### Needs Adam: seven Pro Tools Edit-tool screenshots, DAPR 2000
-
-For `daw-exploring-the-daw.html`. Each question shows the Edit toolbar with one tool outlined and asks which it is, so all seven must be the same shot with only the outline moving. A single generic toolbar image cannot stand in for them.
-
-**Shared setup for all seven.** Pro Tools Edit window, toolbar in the standard view, not expanded. Same window width, same crop, same zoom on every capture, so the seven line up when a student flips between questions. Edit mode does not matter but keep it the same in all seven. A session may be open behind the toolbar; nothing in it should carry a student name or an identifiable file path. Outline the named tool in green, matching the outline already described in the alt text. PNG, opaque background.
-
-| File to produce | Tool to outline | What must be visible |
-|---|---|---|
-| `Edit_Tools_Smart_Tool.png` | Smart Tool | The composite Smart Tool region at the right of the tool cluster, outlined as one area rather than a single button |
-| `Edit_Tools_Zoomer.png` | Zoomer | The magnifier button, un-selected, with the rest of the cluster visible for context |
-| `Edit_Tools_Trim.png` | Trim | The trim button. If the trim tool has a mode pop-up, leave it closed |
-| `Edit_Tools_Selector.png` | Selector | The I-beam button |
-| `Edit_Tools_Grabber.png` | Grabber | The hand button. If grabber has a mode pop-up, leave it closed |
-| `Edit_Tools_Scrubber.png` | Scrubber | The speaker button |
-| `Edit_Tools_Pencil.png` | Pencil | The pencil button. If pencil has a shape pop-up, leave it closed |
-
-Destination: `Classes/DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics/`
-
-Once they exist, the seven `<img>` tags on that page point at them and the page stops shipping broken images.
 
 ### Needs Adam: the conflicted copy has no twin, DAPR 2000
 

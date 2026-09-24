@@ -1,0 +1,78 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<title>Frequency Dynamics and Side-Chains: Procedure Guide</title>
+<meta name="identifier" content="g995e9ebf1a982406202fa2012705d5bf"/>
+<meta name="editing_roles" content="teachers"/>
+<meta name="workflow_state" content="unpublished"/>
+</head>
+<body>
+
+
+
+
+
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+<h2 style="background-color:#1b5e20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Frequency Dynamics and Side-Chains: Procedure Guide</h2>
+<div style="width:100%; background-color:#f3e5f5; border-left:4px solid #4a148c; margin:16px 0; border-radius:0 4px 4px 0;">
+
+<div style="display:flex; align-items:flex-start;">
+<div style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Required.png" alt="Required" width="44" height="44" loading="lazy"></div>
+<div style="padding:12px 14px 12px 4px;; flex:1 1 auto;">
+<p style="margin:0;"><strong>Follow this in order.</strong> Each step assumes the one before it is complete. If a step will not work, the cause is almost always something skipped earlier, not the step you are on.</p>
+</div>
+</div>
+
+</div>
+
+<figure style="margin:24px 0 32px 0;">
+<img style="max-width:100%; height:auto; display:block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains/Pro_Compressor_Side_Chain_Key_Input.png" alt="Pro Compressor with the side-chain section open and an external key input selected" loading="lazy">
+<figcaption style="color:#616161; font-size:0.9em; margin-top:8px;">Figure 1. Pro Compressor with its Side-Chain section open. The Source menu is set to an external bus, which is how one track ends up controlling the compression on another.</figcaption>
+</figure>
+
+<p>Use this self-contained guide before completing the assignment work in this module. It explains the operating workflow; the corresponding assignment provides the required project-specific settings and submission evidence.</p>
+<h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px;">The Signal Path, Before You Touch a Control</h2>
+<p style="font-family: Arial,Helvetica,sans-serif; font-size: 14px; color: #212121; line-height: 1.6;">A side-chain is two signal paths, not one. The trigger track does the pushing. A key send carries a copy of it to the side chain input on the compressor, and the compressor, inserted on the ducked track, turns that key signal into gain reduction. You never hear the trigger through the compressor; you hear the ducked track dip each time the trigger hits. Read the diagram in number order before you open a single menu.</p>
+<div style="display:flex; flex-wrap:wrap; gap:24px; align-items:flex-start; margin:16px 0 32px 0;">
+<figure style="flex:1 1 380px; margin:0;">
+<img style="max-width:100%; height:auto; display:block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains/Side_Chain_Trigger_and_Ducking.png" alt="Trigger track sent to a compressor side chain input, ducked track dipping on each hit" loading="lazy">
+<figcaption style="color:#616161; font-size:0.9em; margin-top:8px;">Figure 2. The trigger track (1) feeds a key send (2) into the side chain input (3). The compressor (4) sits on the ducked track, and its output (5) dips each time the trigger hits.</figcaption>
+</figure>
+<div style="flex:1 1 300px;">
+<table style="width:100%; border-collapse:collapse; margin:0;"><caption>The five numbered points in the diagram, in signal order</caption>
+<tbody>
+<tr><th scope="row" style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#1b5e20; background-color:#e8f5e9; padding:8px 12px; width:12%; border:1px solid #c8e6c9; vertical-align:top; text-align:center;">1</th><td style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#212121; padding:8px 12px; border:1px solid #c8e6c9; vertical-align:top;">Trigger track (the kick or voice that does the pushing)</td></tr>
+<tr><th scope="row" style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#1b5e20; background-color:#e8f5e9; padding:8px 12px; width:12%; border:1px solid #c8e6c9; vertical-align:top; text-align:center;">2</th><td style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#212121; padding:8px 12px; border:1px solid #c8e6c9; vertical-align:top;">Key send off the trigger track</td></tr>
+<tr><th scope="row" style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#1b5e20; background-color:#e8f5e9; padding:8px 12px; width:12%; border:1px solid #c8e6c9; vertical-align:top; text-align:center;">3</th><td style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#212121; padding:8px 12px; border:1px solid #c8e6c9; vertical-align:top;">Side chain (key) input on the compressor</td></tr>
+<tr><th scope="row" style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#1b5e20; background-color:#e8f5e9; padding:8px 12px; width:12%; border:1px solid #c8e6c9; vertical-align:top; text-align:center;">4</th><td style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#212121; padding:8px 12px; border:1px solid #c8e6c9; vertical-align:top;">The compressor, inserted on the ducked track</td></tr>
+<tr><th scope="row" style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#1b5e20; background-color:#e8f5e9; padding:8px 12px; width:12%; border:1px solid #c8e6c9; vertical-align:top; text-align:center;">5</th><td style="font-family:Arial,Helvetica,sans-serif; font-size:14px; color:#212121; padding:8px 12px; border:1px solid #c8e6c9; vertical-align:top;">The compressor&#39;s output: its gain reduction pulls the ducked track down each time the trigger hits</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<p style="font-family: Arial,Helvetica,sans-serif; font-size: 14px; color: #212121; line-height: 1.6;">In Pro Compressor, point 3 is the Source menu in the Side-Chain section, shown in the screenshot at the top of this page. Set it to the bus the key send feeds, not to the ducked track&#39;s own signal.</p>
+<h2 style="color:#1b5e20; font-size:1.3em; border-bottom:2px solid #1b5e20; padding-bottom:4px;">Step-by-Step Workflow</h2>
+
+<ol><li>Identify the masking relationship and decide which source should trigger control of the other source.</li><li>Insert a dynamics processor on the controlled track, enable its key input, and route the trigger source to that key or side-chain bus.</li><li>Filter the key signal when needed so only the frequency range causing the conflict drives gain reduction.</li><li>Adjust threshold, ratio, attack, and release while listening to the full mix. Confirm that gain reduction occurs only when the trigger is present.</li></ol>
+<div style="background-color:#e8f5e9; border-left:4px solid #1b5e20; padding:12px 16px; margin:16px 0; border-radius:0 4px 4px 0;"><strong>Reference:</strong> Apply the current Avid Pro Tools Reference Guide procedures that correspond to the tools used here. Keep an untouched playlist or session version before making destructive edits.</div>
+<p>This page is self-contained and does not rely on links to other Canvas pages.</p>
+
+<div style="width:100%; background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; border-radius:0 4px 4px 0;">
+
+<div style="display:flex; align-items:flex-start;">
+<div style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.png" alt="Tip" width="44" height="44" loading="lazy"></div>
+<div style="padding:12px 14px 12px 4px;; flex:1 1 auto;">
+<p style="margin:0;"><strong>Save before and after.</strong> Save the session before you start and again when you finish, with a version number in the name. It costs two seconds and it is the only undo that survives a crash.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
