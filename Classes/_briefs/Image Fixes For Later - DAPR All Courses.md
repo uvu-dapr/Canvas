@@ -42,6 +42,16 @@ Parked 2026-09-23 so the course builds can move. Nothing here blocks a rebuild; 
 | `DAPR-2255--Audio_Hardware_I/Power/Wattmeter.jpg` | Optional: page link for the plug in meter photo, for the credit line |
 | `DAPR-2020--Core_Mixing/Orientation__Course_Orientation_and_Feedback/Core_Recording_DAPR_2010_002.png` | A DAPR 2010 title card sitting in the DAPR 2020 folder. Moving it is on the v31 approval table; say yes there and it goes to `DAPR-2010--Core_Recording/Course_Orientation/` |
 
+| `DAPR-2010--Core_Recording/Studio_Use_and_Care/Control_Room.png` | Photo of the Studio B control room in its resting state, as a session should find it |
+| `DAPR-2010--Core_Recording/Studio_Use_and_Care/Live_Room.png` | Photo of the Studio B live room at the end of a session: stands down, cables hung, nothing on the floor |
+| `DAPR-2010--Core_Recording/Microphones/Mic_Locker.png` | Photo of the mic locker with the cabinet open |
+| `DAPR-2010--Core_Recording/Console_Operation/Cue_Station.png` | Photo of a headphone cue station as a performer sees it |
+| `DAPR-2010--Core_Recording/Patch_Bays/Studio_B_Bay_Installed.png` | Photo of the Studio B patch bay installed in the rack, close enough to read the labels |
+| `DAPR-2010--Core_Recording/Pro_Tools_for_Tracking/Course_Template_Session.png` | Screenshot of the course Pro Tools template session open, Edit window |
+| `All/DAPR_Canvas_Icon_Reference/Instructor.png` | Instructor portrait or avatar for the orientation page |
+
+Added 2026-09-24 during the DAPR 2010 v20 build. Seven placeholders the cartridge references and no file exists for. All are dropped cleanly, so nothing renders broken; each page simply carries one fewer figure until the photograph arrives.
+
 Added 2026-09-23 during the DAPR 2020 v31 build, under section 4 rule 3 of Decisions Already Made: keep the weak image, log it, do not stop the build.
 
 
@@ -69,3 +79,209 @@ Separately, 34 URLs in the DAPR 3340 cartridge pointed at real files under the w
 (`Dts_Neo_6` for `DTS_Neo_6`, `bounce-mix.jpg` for `Bounce_Mix.jpg`, `.png` where the file is
 `.jpg`). Those were corrected in the cartridge in v50. macOS hid them because it is case
 insensitive; raw.githubusercontent.com is not.
+
+
+## DAPR 3340 placeholder images placed to satisfy rule 2 (2026-09-24, v51)
+
+Rule 2 of Decisions Already Made says every student visible page carries a real image and
+no page ships bare. Twenty eight DAPR 3340 pages had none. Each now carries a real file
+already live in the repo. Twenty one of them are a genuine fit for the page. The seven
+below are honest placeholders: they satisfy the rule and read acceptably, but the page
+deserves a picture of its own subject.
+
+| Page | Placeholder now on it | What the page actually wants |
+|---|---|---|
+| `Orientation: Prerequisites` | `Course_Orientation/Campus_Waterfall_Behind_Concrete_Beams.jpg` | A shot of the lab or a Pro Tools splash, something about getting set up |
+| `Course Policies and Expectations` | same campus photo | The point-to-time scale drawn as a chart, which the page already describes in prose |
+| `Instructor Information and Office Hours` | same campus photo | A photo of Adam, or of the office door and its hours card |
+| `Auxiliary Resources` | same campus photo | A frame from the UVU Symphony session, or the session opened in Pro Tools |
+| `Roll Call Attendance` | same campus photo | Nothing pressing. It is an LTI stub students rarely open |
+| `Instructor: v35 Punch List` | `Final_Project_and_Final_Exam/Course_Concept_Map.png` | Instructor only, so low priority |
+| `Course Development Task List` | `Final_Project_and_Final_Exam/Course_Concept_Map.png` | Instructor only, so low priority |
+
+### Cross-module image references in DAPR 3340 v51
+
+Section 8.0.1 prefers a module-local copy over a cross-module URL. Seven pages now point at
+an image sitting in another module's folder, because the right picture already existed there
+and copying files into the repo is Adam's call, not the build's. Each one works today. To
+close them, copy the file into the page's own module folder under the same name and repoint
+the page.
+
+| Page, and the module it is in | Image it points at |
+|---|---|
+| `Assignment - Pro Tools Routing 1`, Introduction to Surround | `Surround_Mixing_and_Surround_Plugins/Color_Coded_Input_Output_and_Bus_Paths.png` |
+| `Assignment - Pro Tools Routing 2`, Introduction to Surround | `Surround_Mixing_and_Surround_Plugins/Aux_Input_Strip_Annotated.png` |
+| `Signal Routing: I/O Setup for Surround`, Introduction to Surround | `Surround_Mixing_and_Surround_Plugins/Bus_Tab_Listing_Surround_Busses.png` |
+| `Signal Routing: Multichannel Track Assignments`, Introduction to Surround | `Surround_Mixing_and_Surround_Plugins/Track_Assignment_Context_Menu.jpg` |
+| `Course Description, Learning Outcomes, and Requirements`, Course Orientation | `Final_Project_and_Final_Exam/Course_Concept_Map.png` |
+| `Syllabus`, Course Orientation | `Final_Project_and_Final_Exam/Course_Concept_Map.png` |
+| `Auxiliary Resources`, Auxiliary Resources | `Course_Orientation/Campus_Waterfall_Behind_Concrete_Beams.jpg` |
+
+`Classes/DAPR-3340--Spatial_Audio_I/Auxiliary_Resources/` is empty in the repo. It holds no
+images yet, only the Cloudflare download on the other side.
+
+## DAPR 2000 - Digital Audio Essentials, logged 2026-09-24 (v63)
+
+**Seven quiz images do not exist anywhere in the repo.** `daw-exploring-the-daw.html` asks which Edit tool is outlined, one question per tool, and all seven screenshots are gone. The old paths `Images/daw-eq-dynamics/daw-eq-dynamics-edit-tools-tool-quiz-01..07.png` 404 and nothing in `DAW__EQ_and_Dynamics/` matches. These cannot be substituted: each question depends on a different tool being highlighted, so one generic toolbar shot would break all seven. They need re-capturing from the Pro Tools Edit toolbar with the Smart Tool, Zoomer, Trim, Selector, Grabber, Scrubber and Pencil outlined in turn. Until then those seven images are broken on that page.
+
+**Seven remaps on `sound-supplemental-sound-hearing-frequency-amplitude-decibel.html` are my best guess, not a verified match.** The old filenames had no surviving counterpart, so I paired them by name. Confirm or correct:
+
+| Old file | Mapped to |
+|---|---|
+| sound-hearing-frequency-amplitude-01.png | Sine_Wave_with_Wavelength_and_Amplitude.png |
+| sound-hearing-frequency-amplitude-02.png | Frequency_and_Wavelength.png |
+| sound-hearing-frequency-frequency-01.png | High_and_Low_Frequency_Wave_Comparison.png |
+| sound-hearing-frequency-phase-01.png | Phase_Cancellation.png |
+| sound-hearing-frequency-phase-shift-01.png | Phase_Offset.png |
+| sound-hearing-frequency-reflection-absorption-diffusion-01.png | Reflection_Absorption_and_Diffusion_Arrow_Panels.png |
+| sound-hearing-frequency-reflection-absorption-diffusion-02.png | Threshold_Labeled_Loudness_Contour_Curves.png |
+
+**That same page has its alt texts offset by one against its filenames.** `amplitude-02.png` carries alt "Frequency", `frequency-01.png` carries alt "Phase", and so on down the gallery. This predates v63 and I did not silently pick a side. The alt text and the picture need reconciling by eye.
+
+**Placeholder or loose-fit images placed to satisfy the image-on-every-page rule.** Each works, none is ideal:
+
+| Page | Image used | Why it is a placeholder |
+|---|---|---|
+| roll-call-attendance.html | Course_Orientation/Course_Card.png | An attendance page has no topical image of its own |
+| ws-signal-flow.html | Signal_Flow__Cables_and_Connections/MIDI_5_Pin_DIN_Pin_Layout.png | A general cable overview would suit a worksheet better than one connector pinout |
+| m04-p2-daw-mix-1-six-of-one.html | Project__Mix_2_-_Six_of_One_Revision/Mix_Arc.png | Mix 1A has no image folder, so this reaches into the Mix 2 folder |
+| m08-mix-peer-review-submission-six-of-one.html | Project__Mix_2_-_Six_of_One_Revision/Mix_Arc.png | Mix 1B has no image folder, same reach |
+| sound-introducing-the-digital-audio-workstation-daw.html | DAW__EQ_and_Dynamics/Pro_Tools_Blank_Edit_Window.png | The DAW screenshots live in the EQ and Dynamics folder, not in Sound: The Decibel |
+| sound-watch-more-db-videos-if-you-wish.html | Sound__The_Decibel/Decibel_Log_Scale.jpg | Reused, the decibel module has only one spare image |
+
+**Unreferenced images worth a look.** `Sound__Wave_Properties_Hearing_and_Frequency/` holds 32 images nothing references, including 19 `Diagram_*` files and 8 `Photo_*` files. One of them is a Dropbox conflicted copy: `Photo_Hero_Utah_Valley_Dawn (Adam Olson's conflicted copy 2026-09-23).jpg`.
+
+---
+
+## DAPR 3255 Audio Hardware II, pages with no real image (2026-09-24, from v10)
+
+Seventeen student visible pages ship bare. Nothing in the course folder fits any of them, so
+none has a placeholder yet. Grouped by what would actually fix it.
+
+### Course Orientation, 8 pages
+`Course_Orientation/` is empty on both hosts for this course, and Standards 8.0.1 says that
+folder holds images only, never decks or handouts. These eight need one banner each, or one
+shared orientation banner copied into the folder.
+
+| Page | What would fit |
+|---|---|
+| MOO: a) Prerequisites | A banner, or a simple prerequisite chain graphic (DAPR 2250 to 2255 to 3255) |
+| MOO: b) Course Description, Learning Outcomes, and Requirements | A banner |
+| MOO: c) Universal Class Policies and Expectations | A banner |
+| MOO: d) Instructor Information and Office Hours | A photo of Adam, or the studio door |
+| MOO: b) Canvas Student Orientation | A captured Canvas dashboard screenshot |
+| MOO: c) Update Profile and Notifications | A captured Canvas notification settings screenshot |
+| MOO: a) Resources and Links | A banner |
+| MOO: c) How to Make a PDF | A captured macOS print dialog showing Save as PDF |
+
+The four captures are real software screens, so per rule 4.2 they must be captured, never
+generated. Adam is the only one who can take them.
+
+### Networking: Foundations of Audio Networking, 4 pages
+All four rescued renders for this module are already placed on other pages.
+
+| Page | What would fit |
+|---|---|
+| Networking: Layer 1: Point-to-Point Protocols | Two endpoints joined by one cable, no switch |
+| Networking: Layer 5: Session, Presentation, and Application | The top three layers of the stack lit, the lower four dim |
+| Networking: Layer 6 Presentation | The same frame encoded two ways, one readable |
+| Networking: Layer 7 Application | An application icon row sitting on top of the stack |
+
+### Software Tools, 4 pages
+`Software_Tools/` is empty on both hosts. Every page here is about a real software product, so
+every image must be a capture, not a render.
+
+| Page | What would fit |
+|---|---|
+| Software: Dante Controller and the Dante Essentials | A Dante Controller routing grid capture |
+| Software: Wireless System Management | A Shure Wireless Workbench or Sennheiser WSM capture |
+| Software: Network Capture and Analysis | A Wireshark capture window with an audio filter applied |
+| Software: DSP and System Configuration Platforms | A Q-SYS Designer or Symetrix Composer capture |
+
+### Wireless Systems, 1 page
+| Page | What would fit |
+|---|---|
+| Wireless: RF Spectrum Fundamentals | A spectrum plot with the UHF TV band and the usable gaps marked |
+
+## DAPR 2020 pages carrying a stand-in image (rule 2, added 2026-09-24)
+
+Rule 2 says every student visible page carries a real image, and to log the ones where nothing purpose-made existed yet. All 45 pages below now carry a real image from their own module folder. These are the ones where the same image had to cover more than one page, so a purpose-made figure would be better.
+
+| Image | Pages it now covers | Module short of figures |
+|---|---|---|
+| `Five_Pass_Mix_Order.png` | 4 | Mixing__In-Class_Mixing |
+| | in-class-mix-01.html, in-class-mixing-common-mistakes-and-how-to-hear-them.html, in-class-mixing-repeatable-workflow-guide.html, mixing-in-class-mixing-overview.html | |
+| `PT_Identify_Beat_Bar_Beat_Markers.jpg` | 3 | Pro_Tools__Fundamentals |
+| | pro-tools-lab-pro-tools-assignment.html, pro-tools-fundamentals-course-learning-outcomes.html, pro-tools-fundamentals-prerequisites.html | |
+| `Gain_Staging_Chain.png` | 2 | Mixing__Essential_Groundwork |
+| | essential-groundwork-lab.html, mix-prep-assignment.html | |
+| `Professional_Practice_Bounce_Specification.png` | 2 | Final__Final_Mix_and_Final_Exam |
+| | final-mix-a-horse-is-not-a-home-2.html, final-mix-and-final-exam-study-guide.html | |
+| `Core_Mixing_Lab_DAPR_2020L.png` | 2 | Professional_Practice__Presentations_and_Sessions |
+| | presentations-mixing-topic-presentation-10-minutes.html, professional-practice-presentations-sessions-overview.html | |
+
+---
+
+## DAPR 3345 Spatial Audio II, placeholders from the v10 build (2026-09-24)
+
+Standards 0 now requires a real image on every student visible page. DAPR 3345 had 79 pages with no
+image and 37 image files, so 50 pages carry an image reused from elsewhere in the same section. Each one
+is honest about what it shows and none of them is wrong, but none of them is about that page either.
+They are listed by the file doing the work, heaviest first.
+
+| Image doing placeholder duty | Pages carrying it | What those pages actually need |
+|---|---|---|
+| `Atmos_Room_Banner.jpg` | 12: dolby-certification-atmos-essentials, dolby-certification-content-creation-for-games, dolby-certification-course-links, dolby-certification-mix-room-design-and-dardt-bonus and more | A Dolby Learning Portal screen capture, and a certificate example |
+| `Implementation_Desk_Banner.jpg` | 5: fmod-assignment-1-setup-and-training, fmod-assignment-3-project-a-parameter-design, fmod-assignment-5-video-proof-and-written-reflection, fmod-buses-snapshots-and-the-mixer and more | Real FMOD Studio captures: event editor, mixer, bank build |
+| `Distance_Minimum_and_Maximum.jpg` | 3: fmod-assignment-4-project-b-your-choice, fmod-banks-building-and-engine-integration, fmod-parameters-and-real-time-control | FMOD parameter and bank captures |
+| `Angled_Stage_View_with_Boom_Array.jpg` | 3: orchestral-recording-1-2-stereo-mix, orchestral-recording-1-4-reflection, spatial-recording-from-multitrack-to-beds-and-objects | Session captures from the February recording: track layout, bed and object routing |
+| `Middleware_Desk_Banner.jpg` | 3: wwise-assignment-1-fundamentals-101, wwise-professional-submission-standards-for-assignments, wwise-the-project-hierarchy | Real Wwise Authoring captures: project hierarchy, events, SoundBanks, profiler |
+| `Listener_Placement.jpg` | 2: implementation-assignment-audio-scripting, implementation-section-overview | An engine editor capture showing the listener component |
+| `Rooms_and_Portals.jpg` | 2: orchestral-recording-1-3-spatial-mix, wwise-assignment-2-interactive-music-201-bonus | Wwise interactive music and optimization captures |
+| `Team_Room_Banner.jpg` | 2: asset-pipeline-asset-tracking-and-task-tracking, asset-pipeline-source-control-for-audio | A real repository view and a task board capture |
+| `Team_Room_Banner_Alt.jpg` | 2: asset-pipeline-git-and-git-lfs-in-practice, asset-pipeline-working-on-a-shared-repository | A real repository view and a task board capture |
+| `Crowded_Scene_Banner.jpg` | 2: implementation-debugging-and-remote-profiling, voice-budget-writing-a-prioritization-plan | A profiler capture of a busy scene showing the voice count |
+| `Controller_Position_Banner.jpg` | 2: interactive-mix-bus-structure-and-submixing, interactive-mix-loudness-and-platform-delivery | Middleware mixer and snapshot captures, and a loudness meter reading |
+| `Virtual_Voices_Alt.jpg` | 2: interactive-mix-ducking-and-dynamic-range, voice-budget-memory-streaming-and-prefetch | A memory and streaming view from a real profiler |
+| `Study_Guide_Banner_Alt.jpg` | 1: final-project-proposal-and-scope | A milestone or scope diagram for the final project |
+| `Crowded_Scene_Banner_Alt.jpg` | 1: voice-budget-assignment-voice-budget-audit-and-priority-plan | A profiler capture of a busy scene showing the voice count |
+| `Rooms_and_Portals_Alt.jpg` | 1: wwise-assignment-3-performance-optimization-251-bonus | Wwise interactive music and optimization captures |
+| `Study_Guide_Banner.jpg` | 1: final-project-scope-milestones-and-deliverables | A milestone or scope diagram for the final project |
+| `Listener_Placement_Alt.jpg` | 1: implementation-basic-scripting-for-audio | A script or code capture driving audio from gameplay |
+| `Emitter_Trigger_Zone_Alt.jpg` | 1: implementation-the-engine-editor-for-audio-people | An engine editor capture of the audio tools panel |
+| `Controller_Position_Banner_Alt.jpg` | 1: interactive-mix-snapshots-states-and-mix-changes | A figure for that page topic |
+| `Workstation_Banner.jpg` | 1: orientation-3d-software-and-hardware-setup | A real DAW and game engine side by side. This file fabricates both screens and breaks 20.1 rule 3 |
+| `Randomization_Dimensions_Banner.jpg` | 1: variation-how-much-variation-is-enough | A variation settings capture with ranges visible |
+| `Layered_Recombination_Alt.jpg` | 1: variation-sample-start-point-randomization | A sample start point randomization control, captured |
+
+**One file in that table is not just weak, it is non compliant.** `Interactive_Audio__Foundations_of_Interactive_Spatial_Audio/Workstation_Banner.jpg` and its `_Alt` show a fabricated DAW timeline and a fabricated engine viewport, which Standards 20.1 rule 3 forbids. Adam asked on 2026-09-24 to keep them until a real capture exists. They are on the course overview, the orientation setup page and the syllabus.
+
+The four captures that would clear most of this table: FMOD Studio, Wwise Authoring, the engine editor, and one photograph of a DAW and an engine running side by side.
+
+### Needs Adam: seven Pro Tools Edit-tool screenshots, DAPR 2000
+
+For `daw-exploring-the-daw.html`. Each question shows the Edit toolbar with one tool outlined and asks which it is, so all seven must be the same shot with only the outline moving. A single generic toolbar image cannot stand in for them.
+
+**Shared setup for all seven.** Pro Tools Edit window, toolbar in the standard view, not expanded. Same window width, same crop, same zoom on every capture, so the seven line up when a student flips between questions. Edit mode does not matter but keep it the same in all seven. A session may be open behind the toolbar; nothing in it should carry a student name or an identifiable file path. Outline the named tool in green, matching the outline already described in the alt text. PNG, opaque background.
+
+| File to produce | Tool to outline | What must be visible |
+|---|---|---|
+| `Edit_Tools_Smart_Tool.png` | Smart Tool | The composite Smart Tool region at the right of the tool cluster, outlined as one area rather than a single button |
+| `Edit_Tools_Zoomer.png` | Zoomer | The magnifier button, un-selected, with the rest of the cluster visible for context |
+| `Edit_Tools_Trim.png` | Trim | The trim button. If the trim tool has a mode pop-up, leave it closed |
+| `Edit_Tools_Selector.png` | Selector | The I-beam button |
+| `Edit_Tools_Grabber.png` | Grabber | The hand button. If grabber has a mode pop-up, leave it closed |
+| `Edit_Tools_Scrubber.png` | Scrubber | The speaker button |
+| `Edit_Tools_Pencil.png` | Pencil | The pencil button. If pencil has a shape pop-up, leave it closed |
+
+Destination: `Classes/DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics/`
+
+Once they exist, the seven `<img>` tags on that page point at them and the page stops shipping broken images.
+
+### Needs Adam: the conflicted copy has no twin, DAPR 2000
+
+`Sound__Wave_Properties_Hearing_and_Frequency/Photo_Hero_Utah_Valley_Dawn (Adam Olson's conflicted copy 2026-09-23).jpg`, 296,220 bytes, SHA-256 starting `1cf40617be707f83`.
+
+There is no `Photo_Hero_Utah_Valley_Dawn.jpg` beside it, and no other copy anywhere under `Classes/`. It is the only version of that photo, so it must not go to `_unused`. It is also the only conflicted copy left in the whole repo. Nothing references it.
+
+Proposed, needs a yes: rename in place to `Photo_Hero_Utah_Valley_Dawn.jpg`, dropping the conflicted-copy suffix. No move, no delete.

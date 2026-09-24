@@ -4,7 +4,14 @@ Written 2026-09-23 by Adam. These settle the questions the course threads keep a
 
 ---
 
+FOR: ALL COURSES (paste into every DAPR course thread)
+
+
+Read the current standards first: `2026-09-24 DAPR Canvas Standards.md` (older copies are superseded).
+
 ## 1. Working rules
+
+0. Start every report or message you write for me with the course number and name on the very first line, for example "DAPR 2010 - Core Recording".
 
 1. Before you move, rename, replace, or delete anything, show me one table (old path to new path, or old image to new image) and wait for my approval.
 2. Never commit or push. I review and commit in GitHub Desktop myself.
@@ -27,7 +34,7 @@ Written 2026-09-23 by Adam. These settle the questions the course threads keep a
 2. A 10 or 25 point item is due Friday of the FOLLOWING week (week N+1). Larger items follow the point value window in 11d.
 3. A due date that lands in a closure slides to the next open Friday. Nothing but the final exam is due in finals week. Use the Term Spine UTC times (daylight saving handled).
 4. Accept the collisions the Term Spine already names (for example Fall Break stacking two modules on one Friday). Flag them in the build notes; do not ask me.
-5. Never open new modules in the last days of classes. If the outline puts a module there, move it earlier into the lightest weeks and update the student outline to match.
+5. Never open new modules in the last days of classes. If a module lands there, move it earlier into the lightest weeks.
 
 ## 4. Images
 
@@ -35,7 +42,7 @@ Written 2026-09-23 by Adam. These settle the questions the course threads keep a
 2. Real products and real software screens are sourced or captured, never generated. A generated image with a fake software screen can be kept if the screen is defocused so it shows no software.
 3. If an image is weak but nothing better is on hand, keep it and add it to `Classes/_briefs/Image Fixes For Later - DAPR All Courses.md`. Do not stop the build for it.
 4. Personal information: my own name, account and folder names are fine to show. Blur only other people's names, usernames and student IDs, and Mac serial numbers.
-
+5. Every student visible page carries at least one real image (photo, diagram, screenshot, chart or banner for that page's topic). Target is 100 percent of pages. Icons do not count. If nothing fitting exists yet, use the best placeholder and log it in Image Fixes For Later; never ship a bare page.
 
 ## 5. Auxiliary Resources (replaces Audio & Sessions)
 
@@ -46,7 +53,23 @@ Written 2026-09-23 by Adam. These settle the questions the course threads keep a
 5. Place the module last in the module list, after the Final, and publish it with the rest of the course (it opens with week 00).
 6. Move anything currently in an Audio & Sessions module into Auxiliary Resources, and show Adam the move table first.
 
-## 6. Where things are
+## 6. Never in the cartridge
+
+1. No course outline pages of any kind (Course Outline, Course Module Outline, Schedule & Module Outline, Outline, Week by Week, Outline of Classes). Do not use old outline files as a source. Dates come from the Term Spine and 11d; module order from the kit's module_meta.xml.
+2. No Student Essentials module.
+3. No CS 623a BOAA Lab module and no LC 623a Studio Proficiency Assessment.
+4. No Student Rating of Instructor (SRI) bonus. Drop the Bonus group if nothing else is in it.
+5. If your current build has any of these, remove them in the next version and tell me what you removed.
+
+## 7. Icons and colors (Adam, 2026-09-24)
+
+1. Icons: link the PNG twin of every shared icon, never the SVG. `Classes/All/DAPR_Canvas_Icon_Reference/<Name>.png`, same size attributes as before (44x44, 66x66 for Submit_Upload).
+2. Yellow #fbc02d is a fill and border color only, never text.
+3. Orange #e65100 is retired everywhere. Use #BF360C (5.60:1 on white) for every orange: text of any size, table headers, and the module titlebar fill with white text on it. (Adam, 2026-09-24)
+4. Live Fall courses are fixed by importing the new cartridge, not by restoring old Images/ paths. Test each import in a sandbox course first.
+5. Text in a yellow module (headings, rules, labels) uses amber #856404; yellow #FBC02D stays for fills only. The warning callout left border is #BF360C.
+
+## 8. Where things are
 
 ```
 /Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes

@@ -303,11 +303,18 @@ for _i,_q,_m in QUIZ:
     def _g(_t,_k):
         _x=re.search(r'<%s>([^<]*)</%s>'%(_k,_k),_t)
         return _x.group(1) if _x else ''
-    _o,_n=_s[:_j],_s[_j:]
+    # 8.0.1 / Canvas layout: the quiz level dates sit AFTER </assignment>, never before it.
+    # Reading only _s[:_j] finds no date tags at all in a Canvas produced assessment_meta.xml,
+    # so the check fired on every quiz that had a date and passed only when none did.
+    _e=_s.find('</assignment>')
+    _o=_s[:_j]+(_s[_e+len('</assignment>'):] if _e>0 else '')
+    _n=_s[_j:_e] if _e>0 else _s[_j:]
     if (_g(_o,'due_at'),_g(_o,'unlock_at'))!=(_g(_n,'due_at'),_g(_n,'unlock_at')):
         _ti=re.search(r'<title>([^<]*)</title>',_o)
         _split.append((html.unescape(_ti.group(1)) if _ti else _m,
-                       'quiz due %s, gradebook column due %s'%(_g(_o,'due_at'),_g(_n,'due_at'))))
+                       'quiz due %s unlock %s, gradebook column due %s unlock %s'%(_g(_o,'due_at'),_g(_o,'unlock_at') or '(none)',_g(_n,'due_at'),_g(_n,'unlock_at') or '(none)')))
+        # Printing only due_at made a missing quiz-level unlock_at look like a gate bug:
+        # both sides showed the same due date. Found on DAPR 2000 v62, 2026-09-24.
 L('graded quizzes whose gradebook column disagrees with the quiz (must be 0): %d'%len(_split))
 for _t,_w in _split[:8]: L('    %s | %s'%(_t,_w))
 if _split: fails.append('quiz and gradebook column dates disagree: %d'%len(_split))
@@ -381,19 +388,26 @@ if os.path.exists('course_settings/rubrics.xml'):
         if _rats and _crit and max(_rats)>max(_crit)+0.01:
             fails.append('rubric %s: a rating exceeds its criterion points'%_i[:12])
 _withref=0
+# 8.0.1 / Canvas layout: a course export writes assignments/<slug>.xml, not
+# assignments/<slug>/assignment_settings.xml. Globbing only the folder form matched
+# nothing, so every rubric check below was skipped and the block could only report
+# "0 of n" - which read as a warning about the cartridge instead of about this glob.
+# Use the same resolved list the rest of the file uses.
 for _p in a:
+    if not os.path.isfile(_p): continue
+    _lbl=os.path.dirname(_p) if os.path.basename(_p)=='assignment_settings.xml' else os.path.basename(_p)
     _t=open(_p,encoding='utf-8').read()
     _r=re.search(r'<rubric_identifierref>([^<]+)</rubric_identifierref>',_t)
     if not _r: continue
     _withref+=1
     if _r.group(1) not in _rub:
-        fails.append('%s: rubric_identifierref resolves to nothing'%os.path.dirname(_p))
+        fails.append('%s: rubric_identifierref resolves to nothing'%_lbl)
         continue
     _ap=re.search(r'<points_possible>([\d.]+)</points_possible>',_t)
     if _ap and _rub[_r.group(1)]['pts'] is not None and abs(_rub[_r.group(1)]['pts']-float(_ap.group(1)))>0.01:
-        fails.append('%s: rubric is %g points, assignment is %s'%(os.path.dirname(_p),_rub[_r.group(1)]['pts'],_ap.group(1)))
+        fails.append('%s: rubric is %g points, assignment is %s'%(_lbl,_rub[_r.group(1)]['pts'],_ap.group(1)))
     if '<rubric_use_for_grading>true</rubric_use_for_grading>' not in _t:
-        fails.append('%s: rubric_use_for_grading is not true, so the rubric displays but does not score'%os.path.dirname(_p))
+        fails.append('%s: rubric_use_for_grading is not true, so the rubric displays but does not score'%_lbl)
 L('rubrics defined: %d   assignments declaring one: %d of %d'%(len(_rub),_withref,len(a)))
 if _rub and _withref==0: warns.append('rubrics are defined but no assignment references one')
 
@@ -532,6 +546,15 @@ for _blk in re.findall(r'<module identifier="[^"]+">(.*?)(?=<module identifier=|
     # is not a thin module. 6.8 is about reading too slight to support a quiz, not about a
     # module that was never meant to carry reading.
     if _pg==0: continue
+    # Nor is a module that carries no graded object at all. 6.8 measures reading
+    # against the quiz it has to support, so with no quiz and no assignment there
+    # is nothing to measure. Added 2026-09-22 for Course Orientation, which is
+    # three pages because the shared Student Essentials module in Canvas carries
+    # the rest. Stated by Adam the same day: none of those pages belong in the
+    # cartridge. This is deliberately a shape test, not a name test, so the next
+    # orientation-shaped module needs no further patch.
+    _graded68=re.findall(r'<content_type>(Quizzes::Quiz|Assignment|DiscussionTopic)</content_type>',_blk)
+    if not _graded68: continue
     if _pg<4: _thin.append('%s (%d)'%(_name,_pg))
 L('modules with fewer than four pages (must be 0): %d'%len(_thin))
 for _x in _thin[:12]: L('    %s'%_x)
@@ -628,12 +651,34 @@ EXEMPT=re.compile(r'\b(?:DAPR|MUSC|THEA)\s*\d{3,4}\b|\bWwise\s*\d{3}\b|\bCLO\s*\
                   r'|\bMix\s*\d[AB]?\b|\bLayer\s*\d\b|\d+(?:\.\d+)?\s*%|\d+(?:\.\d+)?\s*(?:pts?|points)\b', re.I)
 titles=set()
 for m in re.finditer(r'<title>([^<]*)</title>',mm): titles.add(('module_meta',html.unescape(m.group(1))))
+# 12e-2 [2026-09-24]: the manifest organizations block carries its own copy of every
+#   module item title. Canvas imports module structure from module_meta.xml, so drift
+#   here is invisible in Canvas and visible to every other reader of the cartridge, and
+#   it is where retired titles survive a rename ("M07: ... (classic)", "Quiz 03 - ...").
+_orgt={}
+for m in re.finditer(r'<item identifier="[^"]+" identifierref="([^"]+)"><title>([^<]*)</title>',man):
+    _orgt[m.group(1)]=html.unescape(m.group(2))
+    titles.add(('manifest',html.unescape(m.group(2))))
+_metat={}
+for m in re.finditer(r'<item identifier="[^"]+">(.*?)</item>',mm,re.S):
+    _b=m.group(1)
+    _t=re.search(r'<title>([^<]*)</title>',_b); _r=re.search(r'<identifierref>([^<]*)</identifierref>',_b)
+    if _t and _r: _metat[_r.group(1)]=html.unescape(_t.group(1))
+_drift=sorted(k for k in _orgt if k in _metat and _orgt[k]!=_metat[k])
+L('manifest item titles disagreeing with module_meta (must be 0): %d'%len(_drift))
+for k in _drift[:10]: L('   %s | manifest %r | module_meta %r'%(k[:10],_orgt[k][:46],_metat[k][:46]))
+if _drift: fails.append('manifest and module_meta item titles disagree: %d'%len(_drift))
+# 12e-3 [2026-09-24]: a cartridge export writes assignments/<slug>.xml and
+#   quizzes/<id>_meta.xml. Only the course-copy names were listed, so no assignment or
+#   quiz title was ever checked for sequence numbering on a real export.
+for _p in glob.glob('assignments/*.xml')+glob.glob('quizzes/*_meta.xml'):
+    _t=open(_p,encoding='utf-8').read()
+    for m in re.finditer(r'<title>([^<]*)</title>',_t): titles.add((os.path.basename(_p),html.unescape(m.group(1))))
 for dp,dn,fn in os.walk('.'):
     for f in fn:
         if f not in ('assessment_meta.xml','assignment_settings.xml'): continue
         t=open(os.path.join(dp,f),encoding='utf-8').read()
         for m in re.finditer(r'<title>([^<]*)</title>',t): titles.add((f,html.unescape(m.group(1))))
-        for m in re.finditer(r'<description>([^<]*)</description>',''): pass
 for dp,dn,fn in os.walk('.'):
     for f in fn:
         if not f.endswith('.xml'): continue
@@ -1056,6 +1101,122 @@ for _p,_ink,_bg,_r in _ink_bad: _seen.setdefault((_ink,_bg,_r),[]).append(_p)
 for (_ink,_bg,_r),_fs in sorted(_seen.items(), key=lambda x:-len(x[1]))[:8]:
     L('    %s on %s  %.2f:1  x%d   e.g. %s'%(_ink,_bg,_r,len(_fs),os.path.basename(_fs[0])))
 if _ink_bad: fails.append('inherited-background contrast under 4.5:1 (2b): %d'%len(_ink_bad))
+
+# 6b every module item resolves to a resource the manifest declares
+# Added 2026-09-22. Rule 6 above checks the manifest's own organizations tree.
+# Nothing checked module_meta, which is what Canvas actually builds the modules
+# from. A module item whose identifierref names nothing imports as a missing
+# item and its content disappears from the module without a word. A 25 point
+# assignment shipped that way in v6, v7 and v8. Subheaders and external items
+# carry no resource of their own and are exempt.
+_mitems=re.findall(r'<item identifier="[^"]*">(.*?)</item>',mm,re.S)
+_mdang=[]
+for _b in _mitems:
+    _r=re.search(r'<identifierref>\s*([^<\s]+)\s*</identifierref>',_b)
+    if not _r: continue
+    _c=re.search(r'<content_type>([^<]*)</content_type>',_b)
+    _ct=_c.group(1) if _c else ''
+    if _ct in ('ContextModuleSubHeader','ExternalUrl','ExternalTool'): continue
+    _t=re.search(r'<title>([^<]*)</title>',_b)
+    if _r.group(1) not in ids:
+        _mdang.append(((_t.group(1) if _t else '(untitled)'),_r.group(1)))
+L('module items: %d  pointing at an undeclared resource: %d'%(len(_mitems),len(_mdang)))
+for _t,_r in _mdang[:8]: L('    %s -> %s'%(_t,_r))
+if _mdang: fails.append('module items point at undeclared resources: %s'%[t for t,_ in _mdang][:5])
+
+# 11b figure captions on a page run 1..n
+# Added 2026-09-22. Captions were written from a global image brief, so a figure
+# that was seventh in the brief was captioned "Figure 7." on a page holding one
+# picture. Twenty one pages were wrong at once. The number a student reads has
+# to match the page they are reading, not the order I generated things in.
+_fignum=[]
+for _p in sorted(set(glob.glob('wiki_content/*.html'))|set(glob.glob('*/*.html'))):
+    try: _s=open(_p,encoding='utf-8',errors='replace').read()
+    except Exception: continue
+    _n=[int(_x) for _x in re.findall(r'Figure (\d+)\.',_s)]
+    if _n and _n!=list(range(1,len(_n)+1)):
+        _fignum.append((os.path.basename(_p),_n))
+L('pages whose figure captions do not run 1..n (must be 0): %d'%len(_fignum))
+for _n2,_v in _fignum[:8]: L('    %s %s'%(_n2,_v))
+if _fignum: fails.append('figure captions out of sequence on %d pages'%len(_fignum))
+
+# 11c alt text stays inside the Standards 2 cap of 120 characters
+# Added 2026-09-22. Rule 11 already counted images with no alt at all. Nothing
+# counted alt text that runs long, and eight tags were over at once, the worst
+# at 235 characters. A screen reader reads the whole string before the caption.
+_altlong=[]
+for _p in sorted(set(glob.glob('wiki_content/*.html'))|set(glob.glob('*/*.html'))):
+    try: _s=open(_p,encoding='utf-8',errors='replace').read()
+    except Exception: continue
+    for _a in re.findall(r'<img [^>]*alt="([^"]*)"',_s):
+        if len(_a)>120: _altlong.append((os.path.basename(_p),len(_a)))
+L('alt attributes over the 120 character cap (must be 0): %d'%len(_altlong))
+for _n,_c in _altlong[:8]: L('    %s (%d chars)'%(_n,_c))
+if _altlong: fails.append('alt text over the 120 character cap: %d'%len(_altlong))
+
+# 0 an image on every page (Adam, 2026-09-24): every student visible page carries at
+# least one real image. Icons, callout icons and logos do not count.
+_bare=[]
+for _p in sorted(set(glob.glob('wiki_content/*.html'))|set(glob.glob('assignments/*.html'))|set(glob.glob('*/*.html'))):
+    if '/' not in _p: continue
+    try: _s=open(_p,encoding='utf-8',errors='replace').read()
+    except Exception: continue
+    if 'Do Not Publish' in _s or 'Instructor_Use_Only' in _p: continue
+    _imgs=[m for m in re.findall(r'<img [^>]*src="([^"]+)"',_s)
+           if 'DAPR_Canvas_Icon_Reference' not in m and '/logo' not in m.lower()]
+    if not _imgs: _bare.append(os.path.basename(_p))
+L('pages with no real image (Standards 0, must be 0): %d'%len(_bare))
+for _n in _bare[:12]: L('    %s'%_n)
+if _bare: fails.append('pages with no real image: %d'%len(_bare))
+
+# 20.5d a figure must not lose its labels to a newer generation
+# Added 2026-09-22 after v9 moved 32 pages from -01 to -02 and 28 of them lost
+# the labels that were the teaching content: axis names, OSI layer names,
+# protocol names, the decisions in a decision tree. Standards 20.5 says ask for
+# no text at all, which is right for a figure whose subject is a shape and wrong
+# for one whose subject is its labels. Until 20.5 carries that distinction, the
+# gate carries it.
+_census=os.path.join('..','census.tsv')
+_repo=os.environ.get('DAPR_REPO_IMAGES')
+if _repo: _census=os.path.join(_repo,'_briefs','_review','ocr-label-census.tsv')
+_chars={}
+if os.path.exists(_census):
+    for _ln in open(_census,encoding='utf-8',errors='replace'):
+        _pt=_ln.rstrip('\n').split('\t')
+        if len(_pt)==2 and _pt[1].strip().isdigit():
+            _chars[os.path.basename(_pt[0])]=int(_pt[1].strip())
+_used=set()
+for _p in sorted(set(glob.glob('wiki_content/*.html'))|set(glob.glob('*/*.html'))):
+    try: _s=open(_p,encoding='utf-8',errors='replace').read()
+    except Exception: continue
+    for _m in re.finditer(r'/Images/[a-z-]+/([A-Za-z0-9._-]+\.(?:png|jpe?g))',_s):
+        _used.add(_m.group(1))
+_lostlab=[]; _nocensus=[]
+_FLOOR=10
+for _f in sorted(_used):
+    if _f not in _chars:
+        if _f.endswith('.png'): _nocensus.append(_f)
+        continue
+    _mine=_chars[_f]
+    if _mine>_FLOOR: continue
+    _mm=re.match(r'^(.*)-(\d\d)\.(png|jpe?g)$',_f)
+    if not _mm: continue
+    _stem,_gen,_ext=_mm.group(1),int(_mm.group(2)),_mm.group(3)
+    for _g in range(1,_gen):
+        _sib='%s-%02d.%s'%(_stem,_g,_ext)
+        _sc=_chars.get(_sib)
+        if _sc is not None and _sc>_FLOOR:
+            _lostlab.append((_f,_mine,_sib,_sc)); break
+L('figures in use that lost labels to an older generation (must be 0): %d'%len(_lostlab))
+for _a,_b,_c,_d in _lostlab[:8]:
+    L('    %s (%d chars) replaced %s (%d chars)'%(_a,_b,_c,_d))
+if _lostlab: fails.append('figures placed that lost their labels: %d'%len(_lostlab))
+if not os.path.exists(_census):
+    L('    note: no OCR label census found, rule 20.5d could not run')
+    warns.append('no OCR label census; rule 20.5d did not run')
+elif _nocensus:
+    L('    note: %d figures in use are missing from the census'%len(_nocensus))
+    warns.append('figures missing from the OCR label census: %d'%len(_nocensus))
 
 L('')
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))

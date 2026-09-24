@@ -4,6 +4,9 @@ Written 2026-09-24. Paste everything below the line into the Spatial Audio I (DA
 
 ---
 
+FOR: DAPR 3340 - Spatial Audio I only
+
+
 Add an **Auxiliary Resources** module to DAPR 3340 in the next cartridge build. It replaces any Audio & Sessions module or folder in this course. Rules are in section 5 of "Decisions Already Made".
 
 First resource to add:
