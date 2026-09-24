@@ -1483,5 +1483,30 @@ for _qf in sorted(_qfiles):
 L('question stems asking history or naming (9.3a, must be 0): %d'%len(_histfails))
 for _x in _histfails[:8]: L('    %s'%_x)
 if _histfails: fails.append('history or naming question stems (9.3a): %d'%len(_histfails))
+# 12j CREDIT HOUR BUDGET (Standards 11e and 11e-1). Added 2026-09-24 [Adam].
+#   Standards 11e-1 has said since 2026-09-21 that preflight runs gate 12j, and it never did:
+#   the only budget check was budget_check.py, which read assignments/*.xml and
+#   quizzes/*_meta.xml and so saw a 0 point course on every Canvas export (one folder per
+#   object). This gate imports budget_check.py from this same folder, so the two can never
+#   disagree. It states what it knows about the course before judging it: the course code
+#   found in the package, its credits and whether a lab is part of it (Folder Map 3.13), and
+#   the model and budget that follow (Standards 11e-1). Graded objects are resolved from the
+#   files the manifest declares. It ends with a block to paste back to an AI to fix the load.
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import budget_check as _bc
+    _bfails, _bwarns, _blines, _bai = _bc.run('.')
+    L('')
+    L('12j CREDIT HOUR BUDGET (Standards 11e, 11e-1)')
+    for _x in _blines: L('    %s'%_x)
+    for _x in _bfails: L('    FAIL  %s'%_x); fails.append('12j %s'%_x)
+    for _x in _bwarns: L('    warn  %s'%_x); warns.append('12j %s'%_x)
+    if _bai and (_bfails or _bwarns):
+        L('')
+        L(_bai)
+        L('')
+except Exception as _e:
+    fails.append('12j the credit hour gate could not run: %s'%_e)
+    L('12j the credit hour gate could not run: %s'%_e)
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
 sys.exit(1 if fails else 0)

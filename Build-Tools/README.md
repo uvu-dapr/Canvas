@@ -18,6 +18,7 @@ current checker. **The shim is not the checker. Editing it changes nothing.**
 | File | What it does |
 |---|---|
 | `preflight.py` | The build gate. Run it from inside an unzipped `.imscc`. It must print `RESULT: PASS` before anything ships |
+| `budget_check.py` | Gate 12j, the Standards §11e credit hour budget. States the course, its credits and lab (Folder Map §3.13) and its model (Standards §11e-1), resolves every graded object from the manifest, and ends with a block to paste to an AI. `preflight.py` imports it, so run either one |
 | `british_spelling_check.py` | US spelling sweep. Takes a path, walks html, xml, md, txt and csv |
 | `fall_2026_spine.py` | Fall 2026 term dates. Exports `W`, `due_fridays()` and `zulu()` |
 | `spring_2027_spine.py` | Spring 2027 term dates, same interface. Daylight saving runs the other way |
