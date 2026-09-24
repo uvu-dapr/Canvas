@@ -22,8 +22,8 @@ Every prompt already says: no text, no numbers, no labels, no logos, no brand ma
 | DAPR 3255 Audio Hardware II | 0 | 0 | 0 | 0 |
 | DAPR 3340 Spatial Audio I | 0 | 2 | 3 | 5 |
 | DAPR 3345 Spatial Audio II | 1 | 27 | 0 | 28 |
-| Shared: Classes/All (every course) | 0 | 0 | 1 | 1 |
-| All courses | | | | 56 |
+| Shared: Classes/All (every course) | 0 | 0 | 2 | 2 |
+| All courses | | | | 57 |
 
 # Shared: Classes/All (every course)
 
@@ -63,6 +63,27 @@ HTML once the file is saved and pushed (paste under the checklist):
 <p style="margin-top: 24px;"><img style="max-width: 100%; height: auto;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/Student_Essentials/Weekly_Planning_Desk.png" alt="Photo: an open weekly planner with color blocked days beside studio headphones and an audio interface" /></p>
 <p style="margin: 0 0 8px 0; color: #616161; font-style: italic;">Figure 2. Build the week on paper first: classes and labs, then work, then outside hours, then sleep.</p>
 ```
+
+
+## Shared Image 02. Credit Hour Rule, lecture and lab (update)
+
+Page: Essentials: 1B) How Much Time Your Classes Take (Figure 1)
+
+Status: Update. The current image shows only lecture credits. The page now teaches lecture and lab separately.
+
+Exception to the no text rule: this is a labeled diagram. The words and numbers are fixed below and must be checked letter for letter.
+
+Final size: 1600 by 900, solid white background
+
+Save as (same name, replaces the old file, so the page HTML does not change):
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/Student_Essentials/Credit_Hour_Rule.png
+```
+
+Attach the current Credit_Hour_Rule.png in ChatGPT as the style reference.
+
+Panels, left to right: 1 LECTURE CREDIT (1 blue, 2 green); 3 LECTURE CREDITS (3 blue over 6 green) then arrow to 9 HOURS PER WEEK; 1 LAB CREDIT (3 blue, no green) then arrow to 3 HOURS PER WEEK. Legend: blue IN CLASS OR LAB, green OUTSIDE OF CLASS.
 
 
 # DAPR 2000 Digital Audio Essentials
