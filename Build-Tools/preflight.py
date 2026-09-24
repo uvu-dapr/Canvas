@@ -645,7 +645,10 @@ for dp,dn,fn in os.walk('wiki_content'):
                 # a page may say the thing is gone; it may not schedule or assign it
                 VERBS=r'\b(due|opens|covers|worth|run the|assign|assigned|set it|scheduled for)\b'
                 CLEARED=('no '+needle,'not in this course','was deleted','does not exist',
-                         'gone','is not','are not','used to','no longer','never built')
+                         'gone','is not','are not','used to','no longer','never built',
+                         'is wrong')   # 2026-09-24 [Adam]: the shared *No Publish: How Much Time
+                                       # Classes Take page says legacy text calling it a midterm "is wrong"
+
                 for _v in [0]:
                     for m in re.finditer(re.escape(needle),txt):
                         near=txt[max(0,m.start()-90):m.start()+90]
@@ -701,7 +704,24 @@ for dp,dn,fn in os.walk('.'):
         t=open(os.path.join(dp,f),encoding='utf-8').read()
         if '<rubric ' not in t and 'rubricCriterion' not in t: continue
         for m in re.finditer(r'<title>([^<]*)</title>',t): titles.add(('rubric',html.unescape(m.group(1))))
-numbered=sorted({(w,t) for w,t in titles if NUMBERED.search(EXEMPT.sub('',t))})
+# Amended 2026-09-24 [Adam]. \d{1,2}\.\d above also matches speaker and channel formats, so
+# DAPR 3340 v52 failed on 7 titles such as "What Does 5.1 or 7.1 Refer To?" and
+# "Ambisonics and 9.0.4". A format is exempt only as a whole token (nothing but digits and
+# dots, no neighboring digit or dot), and only when it is unambiguously a layout:
+#   three part  bed.LFE.height, with bed 5/7/9/11/13, LFE 0 to 2, height 2/4/6/8  (7.1.4, 9.0.4)
+#   two part    a real layout (2.0 ... 22.2) AND the title is about channels: it names a
+#               second format, or says surround, Atmos, immersive, channel, multichannel,
+#               speaker, panning, bed, layout, format, LFE, Dolby, Ambisonics.
+# A section number such as "Electronics: 2.1 AC & DC" still fails, because it has no
+# channel context; so does "1.2 Intro", which is not a real layout at all.
+_CH3=re.compile(r'(?<![\w.])(?:5|7|9|11|13)\.[0-2]\.[2468](?![\w.])')
+_CH2=re.compile(r'(?<![\w.])(?:2\.0|2\.1|3\.0|3\.1|4\.0|4\.1|5\.0|5\.1|6\.1|7\.0|7\.1|9\.1|10\.2|11\.1|22\.2)(?![\w.])')
+_CHCTX=re.compile(r'surround|atmos|immersive|multichannel|channel|speaker|panning|\bpan\b|\bbeds?\b|layout|format|\blfe\b|dolby|ambisonic',re.I)
+def _unformat(s):
+    s=_CH3.sub(' ',s)
+    if len(_CH2.findall(s))>=2 or _CHCTX.search(s): s=_CH2.sub(' ',s)
+    return s
+numbered=sorted({(w,t) for w,t in titles if NUMBERED.search(EXEMPT.sub('',_unformat(t)))})
 L('titles carrying a sequence number (must be 0): %d'%len(numbered))
 piped=sorted({(w,t) for w,t in titles if '|' in t})
 L('titles carrying a pipe character (must be 0): %d'%len(piped))
