@@ -242,6 +242,21 @@ if _ns:
     _p=_ns[0]
     mm=re.sub(r'</?%s:'%re.escape(_p), lambda m: m.group(0).replace(_p+':',''), mm)
     print('    note: module_meta.xml is namespaced (%s:), prefixes stripped for matching'%_p)
+# Added 2026-09-24. The Instructor Use Only - [Do Not Publish] module now ships in every
+# cartridge (Standards 0), carrying the live course's *No Publish pages VERBATIM: Adam's rule
+# is copy them and change only dates and links. Those pages are never student visible, so
+# the student page gates below (image on every page, content drift, headings, tables,
+# contrast) do not score them. Resolved from module_meta, never matched by a phrase. Each
+# page must still be unpublished, or it is scored like any other page.
+_INSTR=set()
+for _blk in re.findall(r'<module identifier="[^"]+">(.*?)</module>',mm,re.S):
+    _tt=re.search(r'<title>([^<]*)</title>',_blk)
+    if _tt and 'Instructor Use Only' in _tt.group(1):
+        for _r in re.findall(r'<identifierref>([^<]+)</identifierref>',_blk):
+            _h=RES.get(_r,{}).get('href')
+            if _h and os.path.exists(_h) and 'content="unpublished"' in open(_h,encoding='utf-8',errors='ignore').read():
+                _INSTR.add(_h)
+L('instructor only pages carried verbatim, not scored as student pages: %d'%len(_INSTR))
 # module-level state only. Module ITEMS legitimately stay 'active' (standards 22.6).
 mods=re.findall(r'<module identifier="[^"]+">(.*?)(?=<module identifier=|</modules>)',mm,re.S)
 mp=0
@@ -622,6 +637,7 @@ drift=[]
 for dp,dn,fn in os.walk('wiki_content'):
     for f in sorted(fn):
         if not f.endswith('.html'): continue
+        if os.path.join(dp,f) in _INSTR: continue
         body=open(os.path.join(dp,f),encoding='utf-8').read()
         txt=html.unescape(re.sub(r'<[^>]+>',' ',body)).lower()
         for needle,label in GHOSTS:
@@ -883,11 +899,24 @@ def _ratio(a,b):
     hi,lo=max(la,lb),min(la,lb)
     return (hi+0.05)/(lo+0.05)
 
-_pages = sorted(glob.glob('assignments/*.html')) + sorted(glob.glob('wiki_content/*.html'))
+# Amended 2026-09-24 [Adam approved]. This block globbed assignments/*.html only. DAPR 2000
+# writes each assignment body as g<hash>/<slug>.html beside its assignment_settings.xml, so the
+# conformance block reported "0 assignment pages" on a package holding 15 and checked none of
+# them, and the accessibility checks below never saw an assignment body either. Resolve the
+# body pages from the assignment documents already resolved from the manifest (list a, rule 7).
+_assign_pages=set(glob.glob('assignments/*.html'))
+for _af in a:
+    _d=os.path.dirname(_af)
+    if _d and _d!='assignments':
+        _assign_pages.update(glob.glob(os.path.join(_d,'*.html')))
+    elif _d=='assignments':
+        _h=_af[:-4]+'.html'
+        if os.path.exists(_h): _assign_pages.add(_h)
+_pages = sorted(_assign_pages) + sorted(p for p in glob.glob('wiki_content/*.html') if p not in _INSTR)
 for _p in _pages:
     _t = open(_p,encoding='utf-8',errors='ignore').read()
     _txt = html.unescape(re.sub(r'<[^>]+>',' ',_t))
-    _is_assign = _p.startswith('assignments/')
+    _is_assign = _p in _assign_pages
 
     # --- accessibility, all pages
     # Headings. WCAG asks that levels are never SKIPPED on the way down. Returning
@@ -906,7 +935,7 @@ for _p in _pages:
                     _heading_skip.append('%s skips h%d to h%d'%(_p,_hs[_i-1],_hs[_i])); break
     # 7a assignment pages carry exactly one h2, the green banner, and h3 below it.
     # Content pages may carry as many h2 sections as they need.
-    if _p.startswith('assignments/') and _hs.count(2) > 1: _multi_h2.append(_p)
+    if _is_assign and _hs.count(2) > 1: _multi_h2.append(_p)
     # A bare alt="" is Severe (Standards 2). Canvas's Ally plugin writes its own
     # data-ally-user-updated-alt="" alongside a perfectly good alt, and the first
     # version of this check matched that substring and accused the syllabus, whose
@@ -963,7 +992,8 @@ for _p in _pages:
         _offpage.append(_p)
 
 L('')
-L('7a / 11b assignment page conformance, %d assignment pages'%len(glob.glob('assignments/*.html')))
+L('7a / 11b assignment page conformance, %d assignment pages'%len(_assign_pages))
+if a and not _assign_pages: fails.append('7a: %d assignments resolved but no assignment body page found; the conformance checks saw nothing'%len(a))
 for _lab,_lst in [('no DAPR icon reference',_noicon),('no What to Submit section',_nosubmit),
                   ('point value never stated',_nopoints),('no printed rubric table',_norubric),
                   ('sends the student off the page',_offpage)]:
@@ -1030,7 +1060,7 @@ if _tier: fails.append('quizzes off the 11a point tier: %d'%len(_tier))
 # text with no style attribute. Nothing in the build was checking any of it, and 176 of the
 # package's 217 tables had no caption at all. Six rules, each one proved by breaking it.
 _t_noth=[]; _t_nocap=[]; _t_noscope=[]; _t_capstyle=[]; _t_pres=[]; _t_emul=[]
-for _p in sorted(set(glob.glob('wiki_content/*.html')+glob.glob('*/*.html')+glob.glob('*.html'))):
+for _p in sorted(set(glob.glob('wiki_content/*.html')+glob.glob('*/*.html')+glob.glob('*.html'))-_INSTR):
     _t=open(_p,encoding='utf-8',errors='replace').read()
     if re.search(r'display:\s*table',_t): _t_emul.append(_p)
     for _tb in re.findall(r'<table\b.*?</table>',_t,re.S|re.I):
@@ -1090,7 +1120,7 @@ class _InkScan(_HP):
         if tag not in _VOID and len(self.stack)>1: self.stack.pop()
 
 _ink_bad=[]
-for _p in sorted(set(glob.glob('wiki_content/*.html')+glob.glob('*/*.html')+glob.glob('*.html'))):
+for _p in sorted(set(glob.glob('wiki_content/*.html')+glob.glob('*/*.html')+glob.glob('*.html'))-_INSTR):
     _sc=_InkScan()
     try: _sc.feed(open(_p,encoding='utf-8',errors='replace').read())
     except Exception: continue
@@ -1156,14 +1186,22 @@ if _altlong: fails.append('alt text over the 120 character cap: %d'%len(_altlong
 
 # 0 an image on every page (Adam, 2026-09-24): every student visible page carries at
 # least one real image. Icons, callout icons and logos do not count.
+# Amended 2026-09-24 [Adam approved]. The logo filter matched only a path containing '/logo',
+# so Instructor_Use_Only_(Hidden)/Uvu_Digital_Media_Logo.png counted as a real image and a
+# syllabus carrying nothing but the department logo passed as illustrated. Test the FILE NAME:
+# any name whose words include logo (Logo.png, Uvu_Digital_Media_Logo.png, logo-01.png).
+# Also 2026-09-24: the Instructor Use Only - [Do Not Publish] module now ships in every
+# cartridge (Standards 0). Its *No Publish pages are never student visible, so they are
+# resolved from module_meta and exempted, rather than matched by a phrase in the body.
+_islogo=lambda u: bool(re.search(r'(?:^|[_\-. ])logo(?:[_\-. ]|$)',os.path.basename(urllib.parse.unquote(u)).lower()))
 _bare=[]
 for _p in sorted(set(glob.glob('wiki_content/*.html'))|set(glob.glob('assignments/*.html'))|set(glob.glob('*/*.html'))):
     if '/' not in _p: continue
     try: _s=open(_p,encoding='utf-8',errors='replace').read()
     except Exception: continue
-    if 'Do Not Publish' in _s or 'Instructor_Use_Only' in _p: continue
+    if 'Do Not Publish' in _s or 'Instructor_Use_Only' in _p or _p in _INSTR: continue
     _imgs=[m for m in re.findall(r'<img [^>]*src="([^"]+)"',_s)
-           if 'DAPR_Canvas_Icon_Reference' not in m and '/logo' not in m.lower()]
+           if 'DAPR_Canvas_Icon_Reference' not in m and not _islogo(m)]
     if not _imgs: _bare.append(os.path.basename(_p))
 L('pages with no real image (Standards 0, must be 0): %d'%len(_bare))
 for _n in _bare[:12]: L('    %s'%_n)
@@ -1219,5 +1257,61 @@ elif _nocensus:
     warns.append('figures missing from the OCR label census: %d'%len(_nocensus))
 
 L('')
+# 9.3a-1 every scored key resolves (Adam, 2026-09-24; Standards 9.3a, Decisions 9)
+#   A DAPR 2255 student chose the right answers on the Resistors quiz three times and was
+#   marked wrong, because 8 of its 25 keys pointed at no answer (77 broken keys across 11
+#   quizzes in the v58 export). Every scored multiple choice, multiple answers and
+#   true/false item must key a response_label ident that exists IN THAT ITEM, and must
+#   carry a 100 point condition. Checked in every QTI file the manifest resolves AND in
+#   every non_cc_assessments copy, because the two copies drift independently.
+_keyfails=[]
+_qfiles=set(QTI_FILES)|set(glob.glob('non_cc_assessments/*.qti'))|set(glob.glob('non_cc_assessments/*.xml'))
+_SCORED=('multiple_choice_question','multiple_answers_question','true_false_question')
+for _qf in sorted(_qfiles):
+    try: _qt=open(_qf,encoding='utf-8',errors='replace').read()
+    except Exception: continue
+    for _im in re.finditer(r'<item\b[^>]*\bident="([^"]+)"[^>]*>(.*?)</item>',_qt,re.S):
+        _ib=_im.group(2)
+        _ty=re.search(r'question_type</fieldlabel>\s*<fieldentry>([^<]+)',_ib)
+        if not _ty or _ty.group(1).strip() not in _SCORED: continue
+        _labels=set(re.findall(r'<response_label\b[^>]*\bident="([^"]+)"',_ib))
+        _full=False
+        for _rc in re.findall(r'<respcondition\b.*?</respcondition>',_ib,re.S):
+            _sv=re.search(r'<setvar\b[^>]*>\s*([-\d.]+)\s*</setvar>',_rc)
+            if not _sv or float(_sv.group(1))<=0: continue
+            if float(_sv.group(1))>=100: _full=True
+            for _k in re.findall(r'<varequal\b[^>]*>([^<]*)</varequal>',_rc):
+                if _k.strip() not in _labels:
+                    _keyfails.append('%s %s key %s is not an answer in that item'%(_qf,_im.group(1),_k.strip()))
+        if not _full: _keyfails.append('%s %s has no 100 point key'%(_qf,_im.group(1)))
+L('scored quiz items whose key does not resolve (9.3a, must be 0): %d'%len(_keyfails))
+for _x in _keyfails[:8]: L('    %s'%_x)
+if _keyfails: fails.append('quiz keys that do not resolve to an answer (9.3a): %d'%len(_keyfails))
+
+# 9.3a-2 no history or naming questions (Adam, 2026-09-24). A stem that asks who, when,
+#   which company, what something is named after or what an acronym stands for fails the
+#   build. A year is 1800 to 2029 NOT followed by a unit, so "2000 Hz" and "1130 ft" pass.
+#   STEM_OVERRIDES holds stems Adam has approved; add the stem text (any unique substring),
+#   with his name and the date in a comment, and that one question passes.
+STEM_OVERRIDES=[
+]
+_HIST=re.compile(r"\binvent(?:s|ed|ion|or|ing)?\b|\bnamed (?:after|for)\b|\bname is the origin\b|\borigin of the name\b"
+                 r"|\bwho (?:invented|is credited|was credited|developed|created|founded|designed|coined)\b|\bcredited with\b"
+                 r"|\b(?:in )?(?:what|which) year\b|\bwhich compan(?:y|ies)\b|\bwhich organi[sz]ation\b|\bstands? for\b|\bacronym\b"
+                 r"|\b(?:18\d\d|19\d\d|20[0-2]\d)\b(?!\s*(?:k?Hz|Hertz|ms|seconds?|s\b|ohms?|Ω|&#937;|[kKmM]?W\b|watts?|V\b|volts?|dB|samples?|points?|pts|feet|foot|ft|inch|in\b|m\b|meters?|%|x\b|times|bits?|MB|GB|kbps|BPM|RPM|cycles?|degrees|°|&#176;)|[,.]\d)", re.I)
+_histfails=[]
+for _qf in sorted(_qfiles):
+    try: _qt=open(_qf,encoding='utf-8',errors='replace').read()
+    except Exception: continue
+    for _im in re.finditer(r'<item\b[^>]*\bident="([^"]+)"[^>]*>(.*?)</item>',_qt,re.S):
+        _st=re.search(r'<presentation>\s*<material>\s*<mattext[^>]*>(.*?)</mattext>',_im.group(2),re.S)
+        if not _st: continue
+        _stem=re.sub(r'\s+',' ',html.unescape(re.sub(r'<[^>]+>',' ',html.unescape(_st.group(1))))).strip()
+        _hm=_HIST.search(_stem)
+        if _hm and not any(_o in _stem for _o in STEM_OVERRIDES):
+            _histfails.append('%s %s "%s" in: %s'%(_qf,_im.group(1),_hm.group(0),_stem[:90]))
+L('question stems asking history or naming (9.3a, must be 0): %d'%len(_histfails))
+for _x in _histfails[:8]: L('    %s'%_x)
+if _histfails: fails.append('history or naming question stems (9.3a): %d'%len(_histfails))
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
 sys.exit(1 if fails else 0)
