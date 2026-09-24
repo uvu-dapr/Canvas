@@ -58,6 +58,8 @@ Read the current standards first: `2026-09-24 DAPR Canvas Standards.md` (older c
 
 1. Nothing from the Blueprint: any module whose Canvas title says (Unified Class Content). That is the Student Essentials module with its Essentials pages, its quizzes and the 2A) Introduce Yourself discussion. The Blueprint gets its own cartridge.
 2. Course Orientation IS in every cartridge (correction, 2026-09-24). Its own module, right after Instructor Use Only, with: Orientation: Prerequisites; Orientation: Course Description, Learning Outcomes, and Requirements; Orientation: Schedule & Module Outline. The outline page lists every module in order with its opening Monday and due Friday, built from this cartridge's dates (Term Spine and 11d), never copied from an old outline file.
+3. The Instructor Use Only - [Do Not Publish] module ships first in every cartridge, unpublished, with every page the live course has there, lock icon or not (How Much Time Classes Take, Canvas Naming Scheme, Outline of Classes, Course Development Task List, Instructor Notes, Feedback System, Syllabus, plus course specific pages).
+4. Source: for DAPR 2000, 2020, 2255 and 3340, Adam's 2026-09-23 Canvas export is the source for both modules; copy the pages and update only dates and links. DAPR 2010, 3255 and 3345 build the same set, using the shared pages from the DAPR 2000 export.
 3. No CS 623a BOAA Lab module and no LC 623a Studio Proficiency Assessment.
 4. No Student Rating of Instructor (SRI) bonus. Drop the Bonus group if nothing else is in it.
 5. If your current build has any of these, remove them in the next version and tell me what you removed.
@@ -79,3 +81,10 @@ Read the current standards first: `2026-09-24 DAPR Canvas Standards.md` (older c
 ```
 
 Rebuild kit for this course: `<course>/Claude outputs/Notes and Briefs/2026-09-23 <Course_Folder> Rebuild Kit/`
+
+## 9. Quizzes and finals: practical only (Adam, 2026-09-24)
+
+1. Every question on a 25 point quiz and on a final tests something students can use: diagnose, predict, choose and justify, read a meter or interface, do a bench calculation.
+2. Never ask who, when, where, which company or organization, what a unit is named after, or what an acronym stands for. History reading pages may stay; quizzes draw nothing from them.
+3. Every key resolves to an existing answer, matches the reading page, and is the only defensible option. A student should never have to check the key against the reading.
+4. Audit every existing quiz and final before the next build. Build notes carry a table per quiz: kept, rewritten, removed, and why. Rewrite to Standards 9.3a; if a quiz runs short, it ships short rather than padded.
