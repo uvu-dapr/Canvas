@@ -563,9 +563,9 @@ Create a 1600 x 600 pixel PNG with an opaque background. Quiet photograph of an 
 
 Page: Interactive Audio: Section Overview, and the course syllabus banner
 
-Concept: Linear and interactive work side by side: a fixed timeline on one desk, a player in control on the other
+Concept: Linear and interactive work side by side: a fixed timeline on one desk, a player in control on the other, monitors defocused
 
-Why: the current `Workstation_Banner.jpg` shows made up DAW and engine screens. This version keeps the comparison and shows no screens at all. It is saved under a new name so nothing is overwritten.
+Why: the current `Workstation_Banner.jpg` shows made up DAW and engine screens. This version keeps the comparison with the monitors defocused, so no software shows. It is saved under a new name so nothing is overwritten.
 
 **Save as:**
 
@@ -576,5 +576,5 @@ Why: the current `Workstation_Banner.jpg` shows made up DAW and engine screens. 
 **Prompt:**
 
 ```
-Create a 1600 x 667 pixel PNG with an opaque background. Wide cinematic photograph of two workstations side by side in one dim studio. The left desk is set up for linear mixing: a small unmarked fader controller, desktop speakers, and above it a long horizontal strip of warm light running left to right like a fixed timeline. The right desk is set up for interactive work: an unbranded game controller and closed-back headphones, and above it a strand of cool blue light that splits into several branching paths. Both monitors are dark and angled away so nothing on them can be seen. No text, no numbers, no letters, no labels, no logos, no brand marks, no model numbers, no watermark, no legible screens or writing anywhere in the image.
+Create a 1600 x 667 pixel PNG with an opaque background. Wide cinematic photograph of two workstations side by side in one dim studio. The left desk is set up for linear mixing: a small unmarked fader controller, desktop speakers, and above it a long horizontal strip of warm light running left to right like a fixed timeline. The right desk is set up for interactive work: an unbranded game controller and closed-back headphones, and above it a strand of cool blue light that splits into several branching paths. Both monitors are softly defocused, showing only blurred glowing color, so no software, text or interface can be read. No text, no numbers, no letters, no labels, no logos, no brand marks, no model numbers, no watermark, no legible screens or writing anywhere in the image.
 ```
