@@ -36,7 +36,17 @@ Written 2026-09-23 by Adam. These settle the questions the course threads keep a
 3. If an image is weak but nothing better is on hand, keep it and add it to `Classes/_briefs/Image Fixes For Later - DAPR All Courses.md`. Do not stop the build for it.
 4. Personal information: my own name, account and folder names are fine to show. Blur only other people's names, usernames and student IDs, and Mac serial numbers.
 
-## 5. Where things are
+
+## 5. Auxiliary Resources (replaces Audio & Sessions)
+
+1. Every course gets a Canvas module named **Auxiliary Resources**. It replaces the old Audio & Sessions module or folder in every course from now on.
+2. It holds reference material Adam pulls from while teaching a concept: example sessions, recordings, stems, reference tracks, extra reading. It is not for files that belong to a project or assignment students are already working on; those stay in that assignment's module.
+3. The module holds one page, **Auxiliary Resources**, with one row per resource: a short title, one sentence on what it is and when to use it, the file size for anything over 100 MB, and a download link. No due dates, no points, nothing graded.
+4. The matching folder is `Auxiliary_Resources` in both places: `Classes/<Course_Folder>/Auxiliary_Resources/` in the repo for images, and `Canvas Links/<Course_Folder>/Auxiliary_Resources/` on Cloudflare for downloads. Link to `https://uvu-files.adamo.workers.dev/<Course_Folder>/Auxiliary_Resources/<File>`.
+5. Place the module last in the module list, after the Final, and publish it with the rest of the course (it opens with week 00).
+6. Move anything currently in an Audio & Sessions module into Auxiliary Resources, and show Adam the move table first.
+
+## 6. Where things are
 
 ```
 /Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes

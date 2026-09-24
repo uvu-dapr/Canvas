@@ -14,7 +14,7 @@ Goal: every file on that list gets a usable image saved over the **exact same pa
 
 Rules:
 
-1. Read the Canvas Standards first: `/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Applications/AI Projects Standards/Work/Utah Valley University/2026-09-22 DAPR Canvas Standards.md` (section 8.0.1 for file naming and locations, 20.2 for formats: PNG or JPG only, never SVG, WebP or GIF).
+1. Read the Canvas Standards first: `/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Applications/AI Projects Standards/Work/Utah Valley University/2026-09-24 DAPR Canvas Standards.md` (section 8.0.1 for file naming and locations, 20.2 for formats: PNG or JPG only, never SVG, WebP or GIF).
 2. Keep each file's name and extension. If the name ends in .jpg, save a JPG.
 3. Look at every image you make before saving it. Check labels, pin counts, and signal flow for accuracy.
 4. Real product photos and real software screens are preferred. Search manufacturer pages, Wikimedia Commons, SparkFun (CC BY-SA), and official manuals (Avid, Apple) first. Only fall back to a drawn placeholder when nothing real can be found quickly.
