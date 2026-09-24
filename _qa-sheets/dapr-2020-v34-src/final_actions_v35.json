@@ -1,0 +1,4201 @@
+{
+ "macOS: Quiz - Mac Navigation #1": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student says zooming in the Pro Tools Edit window feels backwards compared with their Mac at home. What should they check first?",
+   "options": [
+    "The Natural scrolling setting for the mouse or trackpad",
+    "Reinstall Pro Tools, since its zoom preference is probably corrupted",
+    "The Function key toggle in System Settings > Keyboard",
+    "The Tracking speed setting for the mouse or trackpad"
+   ],
+   "key": [
+    "The Natural scrolling setting for the mouse or trackpad"
+   ]
+  },
+  "Key restates the page and distractors are nonsense; recast as a lab diagnosis.",
+  "FIX",
+  "Key visibly longer than distractors; trimmed to parallel wording."
+ ],
+ "macOS: Quiz - Mac Navigation #2": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student downloads a plug-in installer for the lab Mac and the file is named Setup.exe. What should they do?",
+   "options": [
+    "Get the Mac installer (DMG or PKG) instead, because macOS cannot run an EXE at all",
+    "Rename it to Setup.pkg so the Mac Installer can run it",
+    "Double-click it, then click Allow in Privacy & Security when it is blocked",
+    "Drag it into the Applications folder to install it"
+   ],
+   "key": [
+    "Get the Mac installer (DMG or PKG) instead, because macOS cannot run an EXE at all"
+   ]
+  },
+  "Distractors are nonsense; recast as a choose-the-action scenario.",
+  "PASS",
+  "Key matches page (macOS cannot run an EXE); distractors are real student mistakes."
+ ],
+ "macOS: Quiz - Mac Navigation #3": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Mid-session, plug-ins start crackling and Activity Monitor's Memory Pressure graph is red. What is happening?",
+   "options": [
+    "RAM is running short, so macOS is swapping to disk",
+    "The session drive is failing and should be replaced",
+    "A background process is using too much CPU",
+    "The audio interface's firmware is out of date"
+   ],
+   "key": [
+    "RAM is running short, so macOS is swapping to disk"
+   ]
+  },
+  "Topic is useful but distractors are nonsense; recast as reading Activity Monitor.",
+  "FIX",
+  "Key visibly longer than all distractors; shortened."
+ ],
+ "macOS: Quiz - Mac Navigation #4": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student sees 345 WAV files inside a Smart Folder and assumes they now have a second copy of each one as a backup. Are they right?",
+   "options": [
+    "No; the Smart Folder is a saved search, and each file exists only in its original location",
+    "Yes; a Smart Folder copies every matching file into itself",
+    "No; the files were moved into the Smart Folder, so there is still only one copy",
+    "Yes, but only for files that are on the same drive as the Smart Folder"
+   ],
+   "key": [
+    "No; the Smart Folder is a saved search, and each file exists only in its original location"
+   ]
+  },
+  "Key is correct but option length gives it away; recast as a practical misconception check.",
+  "PASS",
+  "Key matches page (Smart Folder copies nothing); distractors are realistic misconceptions."
+ ],
+ "macOS: Quiz - Mac Navigation #5": [
+  "KEEP",
+  null,
+  "Practical predict question, key matches the page, distractors are real misconceptions.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #6": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You drag a session folder from your internal drive onto an external drive in Finder with no keys held. What happens to the folder on the internal drive?",
+   "options": [
+    "It stays in place; Finder makes a separate, independent copy on the external drive",
+    "It is moved, so it no longer exists on the internal drive",
+    "It is replaced by an alias pointing to the external drive",
+    "It stays in place, and only an alias is created on the external drive"
+   ],
+   "key": [
+    "It stays in place; Finder makes a separate, independent copy on the external drive"
+   ]
+  },
+  "Key is right but two distractors are not real mistakes; recast with a session scenario.",
+  "PASS",
+  "Key matches page (cross-drive drag copies); distractors are plausible."
+ ],
+ "macOS: Quiz - Mac Navigation #7": [
+  "KEEP",
+  null,
+  "Practical troubleshooting order, key matches the page, distractors are real overreactions.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #8": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student unplugs their session drive while Pro Tools is still saving, without ejecting it. What is the most likely consequence?",
+   "options": [
+    "The volume can be corrupted, and the session may no longer open",
+    "Nothing is lost, because ejecting only removes the drive's icon from the sidebar",
+    "Nothing is lost, because macOS finishes pending writes when the drive is plugged back in",
+    "Only the unsaved edits are lost; everything already on the drive is guaranteed safe"
+   ],
+   "key": [
+    "The volume can be corrupted, and the session may no longer open"
+   ]
+  },
+  "Long key gives it away and distractors are nonsense; recast as predict.",
+  "PASS",
+  "Key matches page on unplugging mid-write; distractors realistic."
+ ],
+ "macOS: Quiz - Mac Navigation #9": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Pro Tools misbehaves only when you are logged in; a classmate's account on the same Mac, using the same plug-ins, works fine. Where is the problem most likely stored?",
+   "options": [
+    "In your per-user settings in ~/Library/Preferences or ~/Library/Application Support",
+    "In the AAX plug-ins in /Library/Application Support/Avid/Audio/Plug-Ins",
+    "In /System, the read-only operating system volume",
+    "In the audio interface's firmware"
+   ],
+   "key": [
+    "In your per-user settings in ~/Library/Preferences or ~/Library/Application Support"
+   ]
+  },
+  "Bare location recall duplicated by Q10; recast as a per-user vs shared diagnosis.",
+  "PASS",
+  "Per-user settings in ~/Library is the only defensible cause given a working classmate account."
+ ],
+ "macOS: Quiz - Mac Navigation #10": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You drag an app to the Trash, empty the Trash, and reinstall the app. It opens with all your old window sizes and settings. Why?",
+   "options": [
+    "The Trash drag removed only the .app bundle; its settings .plist in ~/Library/Preferences stayed behind",
+    "macOS keeps app settings in a registry that survives uninstalling",
+    "The settings are stored inside the .app bundle, and the installer reused the old bundle",
+    "Emptying the Trash does not actually delete the old app"
+   ],
+   "key": [
+    "The Trash drag removed only the .app bundle; its settings .plist in ~/Library/Preferences stayed behind"
+   ]
+  },
+  "Location recall with a nonsense distractor; recast as predicting leftover settings after reinstall.",
+  "PASS",
+  "Key matches page (Trash drag leaves settings behind); distractors comparable in detail."
+ ],
+ "macOS: Quiz - Mac Navigation #11": [
+  "REMOVE",
+  null,
+  "Bare folder-location recall with low job value; the shared vs per-user split is tested by Q9.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #12": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "On a lab Mac, an audio interface's helper process is already running before anyone has logged in. What kind of background item is it?",
+   "options": [
+    "A Launch Daemon, which runs as root and starts at boot",
+    "A Launch Agent, which starts at boot for every account",
+    "A Login Item that a student added to Open at Login",
+    "A Launch Agent stored in ~/Library/LaunchAgents"
+   ],
+   "key": [
+    "A Launch Daemon, which runs as root and starts at boot"
+   ]
+  },
+  "Key is right but distractors are nonsense; recast as a diagnosis.",
+  "PASS",
+  "Starting before login identifies a Launch Daemon per page; distractors realistic."
+ ],
+ "macOS: Quiz - Mac Navigation #13": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You run launchctl list in Terminal to check an interface driver's background daemon, but it is not in the list. What is the most likely reason?",
+   "options": [
+    "A plain launchctl list shows only Agents in your session; Daemons need sudo launchctl list",
+    "The daemon is not running, because launchctl list shows every running process",
+    "Daemons live in ~/Library/LaunchDaemons, which launchctl does not read",
+    "Daemons are started by Login Items, not by launchd, so launchctl cannot see them"
+   ],
+   "key": [
+    "A plain launchctl list shows only Agents in your session; Daemons need sudo launchctl list"
+   ]
+  },
+  "Bare folder recall; recast as reading Terminal output while troubleshooting.",
+  "PASS",
+  "Page states plain launchctl list omits Daemons; distractors are real misconceptions."
+ ],
+ "macOS: Quiz - Mac Navigation #14": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A plug-in that worked yesterday now fails to authorize, and the iLok is connected. What should you check first?",
+   "options": [
+    "Its Launch Agent or Launch Daemon",
+    "Reinstall Pro Tools",
+    "Delete everything in /Library/LaunchAgents",
+    "The Microphone list in Privacy & Security"
+   ],
+   "key": [
+    "Its Launch Agent or Launch Daemon"
+   ]
+  },
+  "Distractors are nonsense; recast as symptom in, first move out.",
+  "FIX",
+  "Key much longer and carries a giveaway justification; one distractor was unrelated filler."
+ ],
+ "macOS: Quiz - Mac Navigation #15": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You slowed the Tracking speed on your trackpad for fine automation edits, but the external mouse still feels too fast. Why?",
+   "options": [
+    "The mouse has its own separate tracking speed setting that you have not changed",
+    "Tracking speed changes only take effect after a restart",
+    "Pro Tools overrides the macOS tracking speed for external mice",
+    "Natural scrolling must be turned off before tracking speed applies"
+   ],
+   "key": [
+    "The mouse has its own separate tracking speed setting that you have not changed"
+   ]
+  },
+  "Settings-path recall that can change with a macOS update; recast as a diagnosis.",
+  "PASS",
+  "Page states each device has its own tracking speed; distractors plausible."
+ ],
+ "macOS: Quiz - Mac Navigation #16": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "While dragging automation on a trackpad, a student keeps triggering clicks just by lightly brushing the surface. Which setting should they turn off?",
+   "options": [
+    "Tap to Click",
+    "Natural scrolling",
+    "Force Click",
+    "Secondary click"
+   ],
+   "key": [
+    "Tap to Click"
+   ]
+  },
+  "Stem restates the setting name; recast as a diagnosis.",
+  "PASS",
+  "Tap to Click is the setting that registers light taps; practical diagnose shape."
+ ],
+ "macOS: Quiz - Mac Navigation #17": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You dragged an app from a mounted DMG onto the Applications shortcut. What can you now do with the DMG?",
+   "options": [
+    "Eject the mounted disk image and delete the .dmg file; the app is installed",
+    "Keep the DMG mounted, since the app runs from the disk image",
+    "Keep the .dmg file, since deleting it uninstalls the app",
+    "Double-click the DMG again to run the install script that finishes the install"
+   ],
+   "key": [
+    "Eject the mounted disk image and delete the .dmg file; the app is installed"
+   ]
+  },
+  "Define-style item with nonsense distractors; recast as predict.",
+  "PASS",
+  "Page says DMG can be ejected and deleted after drag install."
+ ],
+ "macOS: Quiz - Mac Navigation #18": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You open an audio driver's DMG and find only a .pkg file, with no app to drag. What should you do?",
+   "options": [
+    "Double-click the .pkg to run its scripted install and enter your admin password when asked",
+    "Drag the .pkg into the Applications folder",
+    "Use Show Package Contents on the .pkg and copy its files into /Library by hand",
+    "Eject the DMG, since a download with no .app inside is incomplete"
+   ],
+   "key": [
+    "Double-click the .pkg to run its scripted install and enter your admin password when asked"
+   ]
+  },
+  "Stem defines the answer; recast as an install scenario.",
+  "PASS",
+  "Page supports double-clicking a lone .pkg for a scripted admin install."
+ ],
+ "macOS: Quiz - Mac Navigation #19": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A 6 GB video bounce refuses to copy onto an SD card that has 64 GB free. What is the most likely cause?",
+   "options": [
+    "The card is formatted FAT32, which cannot hold any single file larger than 4GB",
+    "The card is faulty and should be replaced",
+    "The card is formatted exFAT, which cannot hold any single file larger than 4GB",
+    "The card needs First Aid in Disk Utility"
+   ],
+   "key": [
+    "The card is formatted FAT32, which cannot hold any single file larger than 4GB"
+   ]
+  },
+  "Stem gives the answer's defining spec; recast as a diagnosis.",
+  "PASS",
+  "FAT32 4GB file cap is correct and on the page; exFAT distractor is a real confusion."
+ ],
+ "macOS: Quiz - Mac Navigation #20": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You are formatting a new external SSD that will only ever be used with Macs for session work. Which format should you choose in Disk Utility?",
+   "options": [
+    "APFS",
+    "FAT32",
+    "NTFS",
+    "exFAT"
+   ],
+   "key": [
+    "APFS"
+   ]
+  },
+  "File-system naming with spec features; recast as choose the format.",
+  "FIX",
+  "FAT32 and MS-DOS (FAT) are the same format, a wasted distractor; replaced with exFAT."
+ ],
+ "macOS: Quiz - Mac Navigation #21": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You need one drive to carry 10 GB session bounces back and forth between a Mac and a Windows PC. Which format should you choose?",
+   "options": [
+    "exFAT",
+    "FAT32",
+    "NTFS",
+    "APFS"
+   ],
+   "key": [
+    "exFAT"
+   ]
+  },
+  "Practical, but FAT16 is not a real mistake; add file size so every distractor is a real choice error.",
+  "PASS",
+  "exFAT is the only option that is cross-platform read/write and holds files over 4GB."
+ ],
+ "macOS: Quiz - Mac Navigation #22": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Pro Tools does not see your USB interface, and the interface is also missing entirely from System Information's USB list. What does that tell you?",
+   "options": [
+    "The problem is the cable, the port, or power, not Pro Tools",
+    "Pro Tools' Playback Engine is set to the wrong device",
+    "The interface needs to be selected in System Settings > Sound",
+    "Console must be streaming for the device to appear"
+   ],
+   "key": [
+    "The problem is the cable, the port, or power, not Pro Tools"
+   ]
+  },
+  "App-naming item; recast as reading System Information to diagnose.",
+  "PASS",
+  "Page says a device missing from System Information is a cable, port, or power problem."
+ ],
+ "macOS: Quiz - Mac Navigation #23": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Pro Tools' meters spike and the interface glitches during playback. What is the best first check in Activity Monitor?",
+   "options": [
+    "Sort the CPU tab by % CPU",
+    "Sort the Energy tab by power impact",
+    "Sort the Network tab by data sent",
+    "Force Quit Pro Tools and relaunch it"
+   ],
+   "key": [
+    "Sort the CPU tab by % CPU"
+   ]
+  },
+  "Stem says CPU so the key is a giveaway; recast with the symptom only.",
+  "FIX",
+  "Key longer and more detailed than distractors; made options parallel."
+ ],
+ "macOS: Quiz - Mac Navigation #24": [
+  "REMOVE",
+  null,
+  "Windows tool naming; nothing practical for a Mac-based mixing course.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #25": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Input monitoring in Pro Tools silently does nothing, and macOS never asks for permission. Where should you look first?",
+   "options": [
+    "The Microphone list in System Settings > Privacy & Security",
+    "Get Info > Sharing & Permissions on the session folder",
+    "The input device in System Settings > Sound",
+    "Reinstall Pro Tools so macOS asks for permission again"
+   ],
+   "key": [
+    "The Microphone list in System Settings > Privacy & Security"
+   ]
+  },
+  "Settings-location recall duplicated by Q26; recast as a silent-denial diagnosis.",
+  "FIX",
+  "Key nearly twice as long as any distractor with a giveaway clause; shortened."
+ ],
+ "macOS: Quiz - Mac Navigation #26": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A new audio interface driver installs without any error, but the interface still does not appear in Pro Tools. What is the most common cause?",
+   "options": [
+    "The blocked driver was never approved in Privacy & Security",
+    "The interface is not selected in System Settings > Sound",
+    "The interface's firmware must be updated before any driver can load",
+    "The Playback Engine only lists interfaces after Pro Tools is reinstalled"
+   ],
+   "key": [
+    "The blocked driver was never approved in Privacy & Security"
+   ]
+  },
+  "Good diagnosis but the distractors are nonsense; replace them with real mistakes.",
+  "PASS",
+  "Page names unapproved driver as the common cause; distractors realistic."
+ ],
+ "macOS: Quiz - Mac Navigation #27": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You download a free plug-in installer from a forum post, and macOS says it cannot be opened because it is from an unidentified developer. What should you do?",
+   "options": [
+    "Do not bypass the warning; get the installer from the developer's own site",
+    "Allow it in Privacy & Security, since the warning appears for all plug-ins",
+    "Run it from Terminal with sudo to get around the block",
+    "Rename the file so macOS stops flagging it"
+   ],
+   "key": [
+    "Do not bypass the warning; get the installer from the developer's own site"
+   ]
+  },
+  "Names what a feature does; recast as choose the right action.",
+  "PASS",
+  "Page says never bypass Gatekeeper for unverified sources; get it from the developer."
+ ],
+ "macOS: Quiz - Mac Navigation #28": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A high track count session stutters on playback from an external spinning hard drive, while RAM and CPU look fine. What is the best fix?",
+   "options": [
+    "Move the session to an SSD",
+    "Reformat the hard drive as APFS",
+    "Partition the hard drive into two volumes",
+    "Close other apps to free up RAM"
+   ],
+   "key": [
+    "Move the session to an SSD"
+   ]
+  },
+  "Stem gives the answer and two distractors are file systems, not storage; recast as choose and justify.",
+  "FIX",
+  "Key carried a justification the distractors lacked; removed."
+ ],
+ "macOS: Quiz - Mac Navigation #29": [
+  "REMOVE",
+  null,
+  "Architecture naming trivia; the practical Intel vs Apple Silicon issue is tested by Q30.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #30": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Get Info on an older utility app shows Kind: Application (Intel). What should you expect when you open it on an Apple Silicon Mac?",
+   "options": [
+    "It runs through Rosetta 2, at some performance cost",
+    "It will not open at all on an Apple Silicon Mac",
+    "It runs at full native speed, the same as a Universal app",
+    "It must be approved in Privacy & Security before every launch"
+   ],
+   "key": [
+    "It runs through Rosetta 2, at some performance cost"
+   ]
+  },
+  "Asks what a named tool does; recast as reading Get Info and predicting the result.",
+  "FIX",
+  "Plug-in version is wrong in practice (an Intel-only plug-in will not load in native Pro Tools, and plug-ins do not show Kind: Application); recast on an app, which the page covers correctly."
+ ],
+ "macOS: Quiz - Mac Navigation #31": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Your audio interface keeps misbehaving even after you reinstalled its driver twice. What is the best next step?",
+   "options": [
+    "Check the manufacturer's site for a firmware update",
+    "Reinstall the driver a third time after a restart",
+    "Reinstall Pro Tools",
+    "Replace the interface, since it must be faulty"
+   ],
+   "key": [
+    "Check the manufacturer's site for a firmware update"
+   ]
+  },
+  "Key defines the term and gives itself away; recast as the troubleshooting decision the distinction exists for.",
+  "FIX",
+  "Key much longer with a giveaway justification; shortened."
+ ],
+ "macOS: Quiz - Mac Navigation #32": [
+  "REMOVE",
+  null,
+  "Answerable by reading the question back; the hardware vs firmware distinction is tested by Q31.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #33": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You drag a plug-in maker's app to the Trash and empty it, but its plug-ins still load in Pro Tools. Why?",
+   "options": [
+    "The plug-ins sit in separate folders the Trash drag never touched",
+    "Emptying the Trash does not actually remove the app",
+    "Pro Tools keeps its own copy of every plug-in inside its .app bundle",
+    "A Launch Agent reinstalled the plug-ins at login"
+   ],
+   "key": [
+    "The plug-ins sit in separate folders the Trash drag never touched"
+   ]
+  },
+  "Weak distractors and overlap with Q10; recast as a leftover plug-in diagnosis.",
+  "FIX",
+  "Key longer than distractors and stem wording unclear; tightened both."
+ ],
+ "macOS: Quiz - Mac Navigation #34": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You are removing audio interface software that installed a driver and a Launch Daemon, and its DMG included an uninstaller app. What is the right way to remove it?",
+   "options": [
+    "Run the manufacturer's uninstaller app",
+    "Drag the control app to the Trash",
+    "Drag the app to the Trash and let a cleanup utility like Hazel find the leftovers",
+    "Delete its files in /Library/LaunchDaemons by hand, then Trash the app"
+   ],
+   "key": [
+    "Run the manufacturer's uninstaller app"
+   ]
+  },
+  "Product-naming item; recast as choosing the right removal method.",
+  "PASS",
+  "Page says use the provided uninstaller instead of a Trash drag."
+ ],
+ "macOS: Quiz - Mac Navigation #35": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A new plug-in loads in Logic but is missing from Pro Tools. In Finder, its only file is in /Library/Audio/Plug-Ins/Components. What is the most likely reason?",
+   "options": [
+    "Only the AU version is installed, and Pro Tools loads only AAX",
+    "It is in the wrong Library and must be moved to ~/Library/Audio/Plug-Ins/Components",
+    "Its Launch Agent stalled, so the plug-in failed to authorize",
+    "Pro Tools must be run under Rosetta 2 to load it"
+   ],
+   "key": [
+    "Only the AU version is installed, and Pro Tools loads only AAX"
+   ]
+  },
+  "Bare path recall; recast as diagnosing a plug-in missing from Pro Tools.",
+  "FIX",
+  "Key far longer than any distractor and includes a full path; shortened."
+ ],
+ "macOS: Quiz - Mac Navigation #36": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student opens Audio MIDI Setup to check their interface's sample rate but only sees a grid of MIDI device icons. What should they do?",
+   "options": [
+    "Switch to Window > Show Audio Devices, since MIDI Studio does not control sample rate",
+    "Double-click the interface icon in MIDI Studio and set the sample rate there",
+    "Set the sample rate on the IAC Driver",
+    "Close Audio MIDI Setup and set the sample rate in System Settings > Sound"
+   ],
+   "key": [
+    "Switch to Window > Show Audio Devices, since MIDI Studio does not control sample rate"
+   ]
+  },
+  "Key about what the IAC Driver does is not stated on the page; recast as reading the Audio MIDI Setup interface.",
+  "PASS",
+  "Page separates MIDI Studio from Audio Devices; key only mildly longer."
+ ],
+ "macOS: Quiz - Mac Navigation #37": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You close every Pro Tools window with Command-W, but the Dock still shows a dot under the Pro Tools icon. What is going on?",
+   "options": [
+    "Pro Tools is still running, just with no windows open",
+    "Pro Tools has frozen and needs to be force quit",
+    "The dot only means Pro Tools is kept in the Dock",
+    "Pro Tools is still saving and will quit on its own when finished"
+   ],
+   "key": [
+    "Pro Tools is still running, just with no windows open"
+   ]
+  },
+  "Definition with a weak distractor; recast as reading the Dock.",
+  "FIX",
+  "Key restated the shortcut rule and was longest; shortened."
+ ],
+ "macOS: Quiz - Mac Navigation #38": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Mid-mix, plug-in windows, a browser, and Finder windows bury your Pro Tools session. You want only Pro Tools visible without quitting anything. What do you press?",
+   "options": [
+    "Command-Option-H",
+    "Command-H",
+    "Command-Q on each app",
+    "Option-Command-Escape"
+   ],
+   "key": [
+    "Command-Option-H"
+   ]
+  },
+  "Shortcut definition; recast as choose the tool for a mix-session situation.",
+  "PASS",
+  "Command-Option-H hides other apps without quitting; distractors are real shortcut confusions."
+ ],
+ "macOS: Quiz - Mac Navigation #39": [
+  "KEEP",
+  null,
+  "Practical how-to, key matches the page, distractors are the other modifiers students confuse.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #40": [
+  "REMOVE",
+  null,
+  "Generic copy vs cut definition with no realistic distractors and no mixing relevance.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #41": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A background helper with no window or Dock icon is hogging CPU and does not appear in the Force Quit Applications window. How do you stop it?",
+   "options": [
+    "Select it in Activity Monitor, click the X button, and choose Force Quit",
+    "Press Option-Command-Escape again and wait for it to appear",
+    "Hold the power button to restart the Mac",
+    "Press Command-Q while Activity Monitor is frontmost"
+   ],
+   "key": [
+    "Select it in Activity Monitor, click the X button, and choose Force Quit"
+   ]
+  },
+  "Shortcut recall duplicated by Q7; recast as the next troubleshooting step.",
+  "PASS",
+  "Page says end a background process not in Force Quit from Activity Monitor."
+ ],
+ "macOS: Quiz - Mac Navigation #42": [
+  "KEEP",
+  null,
+  "Choose-the-tool question, key matches the page, all distractors are real views.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #43": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You need to confirm whether a selected plug-in file sits in the shared /Library or in your own ~/Library. Which Finder feature shows this at a glance?",
+   "options": [
+    "The Path Bar",
+    "The Status Bar",
+    "Group By in the View menu",
+    "Quick Look"
+   ],
+   "key": [
+    "The Path Bar"
+   ]
+  },
+  "Define item whose key restates the page; recast as choose the tool.",
+  "FIX",
+  "Only the key carried a parenthetical menu path; made options parallel."
+ ],
+ "macOS: Quiz - Mac Navigation #44": [
+  "KEEP",
+  null,
+  "Practical how-to, key matches the page, distractors are real neighboring shortcuts.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #45": [
+  "REMOVE",
+  null,
+  "Menu-path recall that can change with a macOS update; Smart Folder behavior is tested by Q4.",
+  "",
+  ""
+ ],
+ "macOS: Quiz - Mac Navigation #46": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You have six vocal take WAVs with similar names and want to confirm which is the right take without opening Pro Tools. What is the fastest way?",
+   "options": [
+    "Select each file in Finder and press Space to Quick Look it",
+    "Double-click each file to open it",
+    "Press Command-I on each file and read Get Info",
+    "Press Command-Space and search for each file name"
+   ],
+   "key": [
+    "Select each file in Finder and press Space to Quick Look it"
+   ]
+  },
+  "Shortcut definition; recast as choose the fastest method for a real task.",
+  "PASS",
+  "Quick Look via Space is the page's fastest preview method."
+ ],
+ "macOS: Quiz - Mac Navigation #47": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You need to show your instructor a plug-in window that glitches for a few seconds during playback. What is the best way to capture it?",
+   "options": [
+    "A short screen recording from the Shift-Command-5 toolbar",
+    "A Shift-Command-3 screenshot of the whole screen",
+    "A Shift-Command-4 screenshot of the plug-in window",
+    "A written description of the glitch after it happens"
+   ],
+   "key": [
+    "A short screen recording from the Shift-Command-5 toolbar"
+   ]
+  },
+  "Shortcut recall; recast as choose and justify for documenting a problem.",
+  "PASS",
+  "Page says a screen recording shows a glitch over time; stills cannot."
+ ],
+ "macOS: Quiz - Mac Navigation #48": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "What is the fastest way to open Audio MIDI Setup when you know its name but not where it lives?",
+   "options": [
+    "Press Command-Space, type audio midi, and press Return",
+    "Press Shift-Command-G and type Audio MIDI Setup",
+    "Select any file in Finder and press Space",
+    "Open Finder and browse Applications until you find it"
+   ],
+   "key": [
+    "Press Command-Space, type audio midi, and press Return"
+   ]
+  },
+  "Shortcut naming; recast as choose the fastest method.",
+  "PASS",
+  "Spotlight by name is the page's fastest method; distractors realistic."
+ ],
+ "macOS: Quiz - Mac Navigation #49": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student renames song.wav to song.mp3 to make it smaller for email. What happens?",
+   "options": [
+    "No compression happens; it is still WAV data with a new label",
+    "The file is converted to MP3 and becomes smaller",
+    "macOS re-encodes the file to MP3 the next time it is opened",
+    "The file becomes an MP3 but loses some audio quality"
+   ],
+   "key": [
+    "No compression happens; it is still WAV data with a new label"
+   ]
+  },
+  "Key is right but distractors are not real mistakes; recast as predict.",
+  "FIX",
+  "Key much longer and more detailed; also dropped the playback-failure claim that real players often contradict."
+ ],
+ "macOS: Quiz - Mac Navigation #50": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A folder of bounces shows names like Final Mix with no format visible, and you need to tell WAV from MP3 for every file at a glance. What should you do?",
+   "options": [
+    "Turn on Show all filename extensions in Finder's settings",
+    "Rename each file to add .wav to the end",
+    "Press Shift-Command-. to show hidden files",
+    "Turn on the Path Bar"
+   ],
+   "key": [
+    "Turn on Show all filename extensions in Finder's settings"
+   ]
+  },
+  "Menu-path recall that can change with a macOS update; recast as choose the tool.",
+  "PASS",
+  "Show all filename extensions reveals format at a glance per page."
+ ],
+ "Mixing: Quiz - Essential Groundwork #1": [
+  "HOLD",
+  null,
+  "Textbook idea not on the course page; rewritten to the page's first step when handed someone else's session.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #2": [
+  "REMOVE",
+  null,
+  "Named-person trivia with a number answer; not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #3": [
+  "HOLD",
+  null,
+  "MIDI bouncing is not covered on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #4": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You record five takes on a track still named Audio 1, then rename the track Lead Vox. What are the recorded audio files called?",
+   "options": [
+    "They keep the Audio 1 name, since files are named when recorded",
+    "They are renamed Lead Vox automatically along with the track",
+    "They are renamed Lead Vox the next time the session is saved",
+    "They get generic take numbers with no track name at all"
+   ],
+   "key": [
+    "They keep the Audio 1 name, since files are named when recorded"
+   ]
+  },
+  "Page supports the point but the distractors are nonsense; rewritten as a consequence question.",
+  "FIX",
+  "Stem cued the answer (two 'Nothing' options eliminated by the premise) and it tested course opinion; replaced with a predict item on track naming from the same page."
+ ],
+ "Mixing: Quiz - Essential Groundwork #5": [
+  "HOLD",
+  null,
+  "Textbook layout habit not on the page; rewritten to the page's name-before-record rule, a real organization failure.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #6": [
+  "REMOVE",
+  null,
+  "Duplicates the color and track order question; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #7": [
+  "REMOVE",
+  null,
+  "Named-person trivia with a spec number answer; not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #8": [
+  "HOLD",
+  null,
+  "Generic layout claim is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #9": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You have placed markers for every section of the song form and named all the tracks. How does the procedure have you confirm that this organization will actually persist?",
+   "options": [
+    "Save, close, and reopen the session, then check it",
+    "Undo and redo the last marker to be sure it registered",
+    "Bounce a rough mix with the markers in place",
+    "Keep the session open until the mix is finished"
+   ],
+   "key": [
+    "Save, close, and reopen the session, then check it"
+   ]
+  },
+  "Markers for song form are on the page but the original key is unsupported and distractors are nonsense; rewritten to the page's check.",
+  "FIX",
+  "Key visibly longer than distractors; shortened."
+ ],
+ "Mixing: Quiz - Essential Groundwork #10": [
+  "HOLD",
+  null,
+  "MIDI playback topic is not on the page; rewritten to the page's mixdown problem, clipping found on the bounce.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #11": [
+  "REMOVE",
+  null,
+  "Named-person trivia; not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #12": [
+  "HOLD",
+  null,
+  "Bounced-audio start points are not covered on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #13": [
+  "REMOVE",
+  null,
+  "Named-person trivia; duplicates the organization question.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #14": [
+  "HOLD",
+  null,
+  "Project reconnaissance is not on the page; rewritten to the page's import check, a diagnose question.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #15": [
+  "REMOVE",
+  null,
+  "Editing silences is not on any course page; weak distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #16": [
+  "REMOVE",
+  null,
+  "Named-person trivia; not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #17": [
+  "REMOVE",
+  null,
+  "Vague outcome not on any course page; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #18": [
+  "HOLD",
+  null,
+  "Multing is not covered on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #19": [
+  "HOLD",
+  null,
+  "Multing is not on the page; rewritten to the page's method for a level that changes by section, clip gain before the compressor.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #20": [
+  "REMOVE",
+  null,
+  "Highlighting special moments is not on any course page; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #21": [
+  "REMOVE",
+  null,
+  "Key is wrong (it guarantees client approval) and the topic is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #22": [
+  "REMOVE",
+  null,
+  "Editing silences is not on any course page; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #23": [
+  "HOLD",
+  null,
+  "Reconnaissance noise cleanup is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #24": [
+  "HOLD",
+  null,
+  "Multing is not covered on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Essential Groundwork #25": [
+  "HOLD",
+  null,
+  "Multing is not covered on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #1": [
+  "REMOVE",
+  null,
+  "Naming question that duplicates the comping definition; the rewritten Q5 covers the concept.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #2": [
+  "REMOVE",
+  null,
+  "Naming a recording style that is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #3": [
+  "REMOVE",
+  null,
+  "Naming question; doubling is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #4": [
+  "REMOVE",
+  null,
+  "Named-person trivia; not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #5": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "With the playlist lanes showing, you select a range on one take lane and promote it. What happens?",
+   "options": [
+    "That range is written into the comp playlist",
+    "That whole take replaces the comp playlist",
+    "That range is cut from the take lane and moved into the comp",
+    "That range is looped for cycle playback so you can audition it"
+   ],
+   "key": [
+    "That range is written into the comp playlist"
+   ]
+  },
+  "Definition with giveaway distractors; rewritten to read the comp interface action the page describes.",
+  "PASS",
+  "Page says promoting writes the selected range into the comp playlist."
+ ],
+ "Mixing: Quiz - Comping & Arranging #6": [
+  "REMOVE",
+  null,
+  "Rationale is not on any course page; giveaway distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #7": [
+  "HOLD",
+  null,
+  "Recording-method content is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #8": [
+  "HOLD",
+  null,
+  "Recording-method content is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #9": [
+  "HOLD",
+  null,
+  "Recording-method recommendation is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #10": [
+  "HOLD",
+  null,
+  "Number-of-takes figure is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #11": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the mistakes page and distractors are real errors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #12": [
+  "REWRITE",
+  {
+   "type": "multiple_answers_question",
+   "stem": "Select every habit the procedure gives for keeping a comp edit inaudible.",
+   "options": [
+    "Place clip boundaries at quiet crossings",
+    "Put a fade or crossfade on every join",
+    "Listen through every edit in context, not only soloed",
+    "Place clip boundaries in the middle of a sustained note",
+    "Nudge each promoted phrase slightly early so it leads the beat",
+    "Leave joins between takes of the same phrase unfaded"
+   ],
+   "key": [
+    "Place clip boundaries at quiet crossings",
+    "Put a fade or crossfade on every join",
+    "Listen through every edit in context, not only soloed"
+   ]
+  },
+  "Two keyed options (musical position, short fade on every edit) are not about inaudibility or conflict with the longer-fade rule; tightened.",
+  "FIX",
+  "Two distractors are defensible (cutting at the attack hides edits; level-matching takes is standard comping), so a correct student could be marked wrong; replaced."
+ ],
+ "Mixing: Quiz - Comping & Arranging #13": [
+  "KEEP",
+  null,
+  "Predict question; key matches the controls page and distractors are real errors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #14": [
+  "KEEP",
+  null,
+  "Predict question on shared drum mics; the page states every mic hears the snare.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #15": [
+  "REMOVE",
+  null,
+  "Two keyed steps (grouping, hiding tracks) are not on any course page; the supported steps duplicate Q12 and Q19.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #16": [
+  "KEEP",
+  null,
+  "Predict question; key matches the mistakes page verbatim and distractors are real misconceptions.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #17": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the mistakes page and distractors are real habits.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #18": [
+  "REMOVE",
+  null,
+  "Key is not on any course page and the tuning option is also defensible.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #19": [
+  "KEEP",
+  null,
+  "Choose and justify; key matches the procedure figure caption.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #20": [
+  "KEEP",
+  null,
+  "Choose and justify; key matches the controls page and distractors are real habits.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #21": [
+  "HOLD",
+  null,
+  "One keyed step comes from the assignment, not the reading page; rewritten to the procedure's three steps.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #22": [
+  "HOLD",
+  null,
+  "Arrangement build rationale comes from the assignment; no course page supports the key.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #23": [
+  "HOLD",
+  null,
+  "Doubling is not covered on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #24": [
+  "HOLD",
+  null,
+  "Room tone at joins is not covered on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Comping & Arranging #25": [
+  "REMOVE",
+  null,
+  "Two keyed items are not on any course page; the supported items duplicate Q11 and Q16.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #1": [
+  "REWRITE",
+  {
+   "type": "multiple_answers_question",
+   "stem": "You are setting pans on a typical commercial pop mix. Select every source the course says to keep centered.",
+   "options": [
+    "Lead vocal",
+    "Kick",
+    "Snare",
+    "Bass",
+    "Backing vocal doubles",
+    "Rhythm guitar",
+    "Drum overheads",
+    "Strings"
+   ],
+   "key": [
+    "Lead vocal",
+    "Kick",
+    "Snare",
+    "Bass"
+   ]
+  },
+  "Count in the stem is a giveaway and 'Vocals' is ambiguous against the page's lead vocal; rewritten without the count.",
+  "PASS",
+  "Page names kick, snare, bass, lead vocal as centered; distractors are commonly panned wide."
+ ],
+ "Mixing: Quiz - Focus & Balance #2": [
+  "REMOVE",
+  null,
+  "Focus, balance and forward motion are not defined on any course page; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #3": [
+  "HOLD",
+  null,
+  "Focus changing through a song is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #4": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A rhythm guitar and the lead vocal fight in the same frequency range. What does the course say to try first?",
+   "options": [
+    "Pan the guitar away from the vocal",
+    "Cut the guitar with EQ where the vocal sits",
+    "Compress the vocal harder so it rides above the guitar",
+    "Raise the vocal fader until it wins"
+   ],
+   "key": [
+    "Pan the guitar away from the vocal"
+   ]
+  },
+  "True/false giveaway; rewritten as a choose question using the page's pan-first rule.",
+  "FIX",
+  "Key visibly longer than distractors; shortened."
+ ],
+ "Mixing: Quiz - Focus & Balance #5": [
+  "HOLD",
+  null,
+  "Kick and bass clarity claim is not on the page; rewritten as a diagnose question on the page's high pass step.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #6": [
+  "REMOVE",
+  null,
+  "Giveaway true/false; the centering rule is tested in Q1.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #7": [
+  "REMOVE",
+  null,
+  "Duplicates the rewritten Q4 on panning away from the vocal.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #8": [
+  "REMOVE",
+  null,
+  "Duplicates Q11; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #9": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Kick, snare, bass and lead vocal sit center in nearly every commercial mix. What reason does the course give?",
+   "options": [
+    "They carry the most energy, and mono compatibility matters most for them",
+    "It is only a genre convention and has no effect on mono playback",
+    "Centering them makes the whole mix sound wider",
+    "Centered tracks are easier to compress together on a bus"
+   ],
+   "key": [
+    "They carry the most energy, and mono compatibility matters most for them"
+   ]
+  },
+  "Key is not what the page says; rewritten to the page's stated reason.",
+  "FIX",
+  "Distractor 'mono tracks cannot be panned' is nonsense, not a real mistake; replaced."
+ ],
+ "Mixing: Quiz - Focus & Balance #10": [
+  "HOLD",
+  null,
+  "The 100 Hz figure is not on any course page; rewritten to the page's multi-system check.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #11": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Building a static balance, you set the lead vocal first. How far do you bring up each other track?",
+   "options": [
+    "Until it is audible, and no further",
+    "Until it matches the vocal on the meters",
+    "Until it sounds best when soloed",
+    "Until the master is just short of clipping"
+   ],
+   "key": [
+    "Until it is audible, and no further"
+   ]
+  },
+  "Widening the guitars is also defensible under the page's pan-first rule; distractor replaced.",
+  "FIX",
+  "Raising the vocal gives the same relative balance as lowering the others, so a correct student is marked wrong, and the page does not say to turn others down; recast on the page's anchor rule."
+ ],
+ "Mixing: Quiz - Focus & Balance #12": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Every element sounds excellent when you solo it, and the full mix sounds cluttered. What does that tell you?",
+   "options": [
+    "The balance decisions were made in solo, not in context",
+    "Each track needs more EQ so it cuts through the others",
+    "The master buss needs a compressor to glue the tracks together",
+    "The tracks need their input trim raised so each one is stronger"
+   ],
+   "key": [
+    "The balance decisions were made in solo, not in context"
+   ]
+  },
+  "Key is supported but the distractors are nonsense; replaced with real habits.",
+  "FIX",
+  "Key visibly longer than distractors; shortened."
+ ],
+ "Mixing: Quiz - Focus & Balance #13": [
+  "HOLD",
+  null,
+  "Unstable low end claim is not on any course page; the centering rule is tested in Q1 and Q9.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #14": [
+  "HOLD",
+  null,
+  "Pre-delay and top-end roll-off are not on the page; rewritten to read the panning diagram's depth axis.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #15": [
+  "HOLD",
+  null,
+  "Loud versus quiet listening is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #16": [
+  "HOLD",
+  null,
+  "Key is not on any course page; the solo idea is tested in Q12.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #17": [
+  "REMOVE",
+  null,
+  "Output routing check is not on any course page; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #18": [
+  "HOLD",
+  null,
+  "Phase cancellation explanation is not on the page; rewritten to the page's polarity step for shared-phase mics.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #19": [
+  "HOLD",
+  null,
+  "Metering content is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #20": [
+  "REMOVE",
+  null,
+  "Duplicates Q11; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #21": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student's mix does not work with faders and pans alone, so they add EQ and compression to every track. What does the course predict?",
+   "options": [
+    "The mix gets louder and is still wrong",
+    "The mix is fixed, because processing is what makes elements sit",
+    "The mix improves as long as the processing goes on the master",
+    "The mix loses some headroom but the balance problem is solved"
+   ],
+   "key": [
+    "The mix gets louder and is still wrong"
+   ]
+  },
+  "Key is supported but distractors are nonsense (Canvas, CPU); rewritten as a predict question.",
+  "PASS",
+  "Page states processing a wrong balance makes it louder and still wrong."
+ ],
+ "Mixing: Quiz - Focus & Balance #22": [
+  "HOLD",
+  null,
+  "Section automation is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #23": [
+  "HOLD",
+  null,
+  "Low-level listening is not on any course page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #24": [
+  "REMOVE",
+  null,
+  "Stereo width definition is not on any course page; nonsense distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Focus & Balance #25": [
+  "HOLD",
+  null,
+  "Key is not on any course page; depth is tested in Q14.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #1": [
+  "REMOVE",
+  null,
+  "Asks what was covered in class, not on the page, and every option is keyed.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #2": [
+  "REMOVE",
+  null,
+  "Reverb time is not covered in the page text and two distractors are nonsense.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #3": [
+  "HOLD",
+  null,
+  "Headphone strengths are not in the reading; the page supports a practical headphone seal diagnosis instead.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #4": [
+  "REMOVE",
+  null,
+  "Fill-in recall duplicating Q11 and Q22, and absorption and diffusion are not things a student would try to prevent.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #5": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You mix all week with your monitors turned well above your calibrated mark. When the mix is played back at a normal level, what do you predict?",
+   "options": [
+    "The mix will come out too quiet",
+    "The mix will come out too loud",
+    "The mix level will be unaffected, because monitor level does not change the file",
+    "The mix will clip, because the monitors were overloaded"
+   ],
+   "key": [
+    "The mix will come out too quiet"
+   ]
+  },
+  "Vague maxim with an inverse-logic key; the page supports a practical monitoring-level prediction instead.",
+  "PASS",
+  "Page states monitoring too loud yields a mix that is too quiet."
+ ],
+ "Acoustics: Quiz - Mix Room Setup #6": [
+  "HOLD",
+  null,
+  "Front to back symmetry is not covered in the page text.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #7": [
+  "HOLD",
+  null,
+  "Parallel walls are not covered in the page text.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #8": [
+  "HOLD",
+  null,
+  "Speaker ports are not covered and the statement is not a real decision.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #9": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You calibrated a pair of active monitors to 85 dB SPL using the level knobs on their rear panels. A week later a classmate turns those rear knobs down to make the room quieter. What is the result?",
+   "options": [
+    "The calibration is broken and must be redone",
+    "Nothing changes, because the rear knobs do not affect the mix file",
+    "The bounced mix file will now be quieter",
+    "Raising the master fader will restore the calibration"
+   ],
+   "key": [
+    "The calibration is broken and must be redone"
+   ]
+  },
+  "Recall of a spec fact; the page supports a practical question about amplifier level and calibration.",
+  "FIX",
+  "Key much longer and restates the rule; shortened."
+ ],
+ "Acoustics: Quiz - Mix Room Setup #10": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You hear strong bass at the listening position and almost none a step to the side. What is happening?",
+   "options": [
+    "Room modes are making the bass level change with position",
+    "The bass in the mix itself is uneven and needs EQ",
+    "The subwoofer is out of polarity",
+    "The monitors are miscalibrated"
+   ],
+   "key": [
+    "Room modes are making the bass level change with position"
+   ]
+  },
+  "Good diagnosis, but the sample rate distractor is not a real mistake; replaced it with EQing the room.",
+  "PASS",
+  "Position-dependent bass is room modes per page; distractors realistic."
+ ],
+ "Acoustics: Quiz - Mix Room Setup #11": [
+  "KEEP",
+  null,
+  "Defines a term students must not misuse; key matches the page and distractors are real confusions.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #12": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the page on thin foam.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #13": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You are mixing in an untreated small room. Which decision is most important to check on another system before you commit to it?",
+   "options": [
+    "The level and EQ of the kick drum and bass",
+    "The brightness of the hi-hat",
+    "The length of the fade-out at the end of the song",
+    "The order of the plug-ins on the vocal insert"
+   ],
+   "key": [
+    "The level and EQ of the kick drum and bass"
+   ]
+  },
+  "Recall of a frequency figure plus an unsupported wavelength rationale; rewritten as a practical trust decision.",
+  "FIX",
+  "An untreated room also misleads on highs via first reflections, so 'which decision' needs 'most important' to leave one defensible answer."
+ ],
+ "Acoustics: Quiz - Mix Room Setup #14": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the page on the back wall.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #15": [
+  "KEEP",
+  null,
+  "Defines a treatment term students must choose between; key matches the page.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #16": [
+  "HOLD",
+  null,
+  "The pressure rationale in the key is not on the page; rewritten as a placement choice the page supports.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #17": [
+  "HOLD",
+  null,
+  "Tweeter height is not on the page; rewritten as the triangle calculation the page supports.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #18": [
+  "KEEP",
+  null,
+  "Applies the first reflection definition to a real surface; distractors are real mistakes.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #19": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A mix made in an untreated room translates badly on every other system. What is the most likely reason?",
+   "options": [
+    "You balanced for the room's frequency errors, not the mix",
+    "The session was recorded at the wrong bit depth",
+    "The mix was bounced offline rather than in real time",
+    "The DAW pan law was set incorrectly"
+   ],
+   "key": [
+    "You balanced for the room's frequency errors, not the mix"
+   ]
+  },
+  "Key is supported but one distractor is nonsense; replaced it with a real misconception.",
+  "FIX",
+  "Key much longer than distractors; shortened."
+ ],
+ "Acoustics: Quiz - Mix Room Setup #20": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Your mixes translate badly and you cannot say why. You have never measured your room. What is the best first move?",
+   "options": [
+    "Measure the room with a sweep and an analyzer",
+    "Buy larger monitors with more low end",
+    "Cover the walls with thin foam",
+    "Turn the monitors up so problems are easier to hear"
+   ],
+   "key": [
+    "Measure the room with a sweep and an analyzer"
+   ]
+  },
+  "Recall with a nonsense distractor; rewritten as a first-move diagnosis the page supports.",
+  "FIX",
+  "Key much longer than distractors; shortened."
+ ],
+ "Acoustics: Quiz - Mix Room Setup #21": [
+  "HOLD",
+  null,
+  "Symmetry and image pull are not covered in the page text.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #22": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A helper slides a mirror along the side wall while you sit at the mix position. What are you finding?",
+   "options": [
+    "The first reflection points, wherever you can see a monitor in the mirror",
+    "The spots where low end builds up, so bass traps can go there",
+    "The correct tweeter height for your ears",
+    "The center of the listening triangle"
+   ],
+   "key": [
+    "The first reflection points, wherever you can see a monitor in the mirror"
+   ]
+  },
+  "Key is supported but the room modes distractor is invented; replaced with a real confusion.",
+  "PASS",
+  "Page says the mirror finds first reflection points; key only mildly longer."
+ ],
+ "Acoustics: Quiz - Mix Room Setup #23": [
+  "HOLD",
+  null,
+  "The headphone versus monitor comparison is not covered in the page text; Q3 rewrite covers headphones.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #24": [
+  "HOLD",
+  null,
+  "The still modal part of the key is not supported; rewritten as a treatment choice the page supports.",
+  "",
+  ""
+ ],
+ "Acoustics: Quiz - Mix Room Setup #25": [
+  "KEEP",
+  null,
+  "Choose question; key matches the page and distractors are real mistakes.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #1": [
+  "REMOVE",
+  null,
+  "Layer by layer editing is not in the page text and one distractor is nonsense.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #2": [
+  "REMOVE",
+  null,
+  "Asks what the text says about drummers; not on the page and not practical.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #3": [
+  "REMOVE",
+  null,
+  "Duplicates Q13 with giveaway distractors.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #4": [
+  "HOLD",
+  null,
+  "Live versus machine sync is not covered in the page text.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #5": [
+  "REMOVE",
+  null,
+  "Recall of an oversight claim not in the page text.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #6": [
+  "HOLD",
+  null,
+  "Reference waveform templates are not covered in the page text.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #7": [
+  "REMOVE",
+  null,
+  "Trivia about studio operators, not practical and not on the page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #8": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "After a manual timing pass on a bass track, you hear small clicks at several of the edit points. What is the fix?",
+   "options": [
+    "Add a short crossfade at each edit join",
+    "Lower the quantize strength and run the pass again",
+    "Switch the Elastic Audio algorithm to Polyphonic",
+    "Move each edit so it lands exactly on a grid line"
+   ],
+   "key": [
+    "Add a short crossfade at each edit join"
+   ]
+  },
+  "Topic is worth testing but distractors are nonsense; rewritten as a diagnosis.",
+  "PASS",
+  "Page says a join without a fade clicks; crossfade is the fix."
+ ],
+ "Mixing: Quiz - Timing & Tuning #9": [
+  "HOLD",
+  null,
+  "Hiding edits in gaps is not covered in the page text.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #10": [
+  "REMOVE",
+  null,
+  "Definition of a term not in the page text.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #11": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the page and distractors are real alternatives.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #12": [
+  "REWRITE",
+  {
+   "type": "multiple_answers_question",
+   "stem": "You are setting Elastic Audio algorithms before a timing pass. Select every pairing that matches the algorithm to the source.",
+   "options": [
+    "Rhythmic on the drum tracks",
+    "Monophonic on a single-line bass part",
+    "Polyphonic on a piano part playing chords",
+    "Rhythmic on sustained pads so they stay smooth",
+    "Monophonic on a strummed acoustic guitar"
+   ],
+   "key": [
+    "Rhythmic on the drum tracks",
+    "Monophonic on a single-line bass part",
+    "Polyphonic on a piano part playing chords"
+   ]
+  },
+  "Keyed Elastique Pro option is not on the page and depends on the lab and software version.",
+  "PASS",
+  "Keyed set matches the page's algorithm-to-source pairings and both distractors are real mismatches."
+ ],
+ "Mixing: Quiz - Timing & Tuning #13": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You quantize a drum performance at 100 percent strength and the groove dies. What should you do instead?",
+   "options": [
+    "Lower the strength to about 50 to 70 percent",
+    "Keep 100 percent, then shift the whole track slightly late",
+    "Keep 100 percent and switch the algorithm to Polyphonic",
+    "Redo it at 100 percent with a finer grid value"
+   ],
+   "key": [
+    "Lower the strength to about 50 to 70 percent"
+   ]
+  },
+  "Key is supported but the reverb distractor is not a real mistake; distractors replaced.",
+  "FIX",
+  "Key was the longest and most detailed option; trimmed key and replaced a weak distractor."
+ ],
+ "Mixing: Quiz - Timing & Tuning #14": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A bar has warp markers on beats 1, 2, 3 and 4. You drag the beat 3 marker slightly earlier. Which audio is stretched or squeezed?",
+   "options": [
+    "Only the audio between the beat 2 and beat 4 markers",
+    "The entire clip from its start to its end",
+    "Everything from beat 3 to the end of the clip",
+    "Only the single hit on beat 3; nothing around it changes"
+   ],
+   "key": [
+    "Only the audio between the beat 2 and beat 4 markers"
+   ]
+  },
+  "The whole-clip-slides behavior and key are not on the page and depend on software behavior; rewritten as a prediction.",
+  "PASS",
+  "Moving one marker between two anchors only changes the two adjacent segments, as the page states."
+ ],
+ "Mixing: Quiz - Timing & Tuning #15": [
+  "KEEP",
+  null,
+  "Predict and apply question; key follows from the page and distractors contradict it.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #16": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #17": [
+  "HOLD",
+  null,
+  "Samples versus ticks and the lab steps are not on the page; rewritten around the grid step the page gives.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #18": [
+  "HOLD",
+  null,
+  "Doubled vocal alignment points are not covered in the page text.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #19": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the page and the stem rules out vibrato.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #20": [
+  "KEEP",
+  null,
+  "Diagnose question; key matches the page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #21": [
+  "KEEP",
+  null,
+  "Predict question; key matches the page and the display-only distractor is a real misconception.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #22": [
+  "HOLD",
+  null,
+  "Refers to an assignment not in the reading and consonants and breaths are not on the page.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #23": [
+  "REMOVE",
+  null,
+  "Melodyne transfer depends on the installed version, which the page itself says.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #24": [
+  "REMOVE",
+  null,
+  "Undo behavior depends on software version and is not in the page text.",
+  "",
+  ""
+ ],
+ "Mixing: Quiz - Timing & Tuning #25": [
+  "HOLD",
+  null,
+  "Stack width from pitch spread is not on the page; rewritten as a full-correction prediction the page supports.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #1": [
+  "REMOVE",
+  null,
+  "Textbook category naming, not on the page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #2": [
+  "REMOVE",
+  null,
+  "Metaphor recall not on the page, with nonsense distractors.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #3": [
+  "REMOVE",
+  null,
+  "Duplicates Q4 with nonsense distractors.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #4": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A vocal's loud lines peak well above its quiet lines. You set a compressor so only the loud lines cross the threshold, then add makeup gain. What happens to the level gap between the loud and quiet lines?",
+   "options": [
+    "It gets smaller, because only the loud lines are turned down",
+    "It stays the same, because makeup gain lifts both lines equally",
+    "It gets larger, because makeup gain lifts the loud lines most",
+    "It stays the same, because the quiet lines never cross the threshold"
+   ],
+   "key": [
+    "It gets smaller, because only the loud lines are turned down"
+   ]
+  },
+  "Recall with nonsense distractors; rewritten as a prediction the page supports.",
+  "FIX",
+  "With makeup gain matched to peaks, 'only the quiet lines change' is defensible; reframed as a prediction about the level gap."
+ ],
+ "Effects: Quiz - Dynamic Effects #5": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You insert a compressor on a vocal and the gain reduction meter shows nothing, even on the loudest words you want controlled. What do you change first?",
+   "options": [
+    "Lower the threshold",
+    "Raise the ratio",
+    "Shorten the attack",
+    "Raise the makeup gain"
+   ],
+   "key": [
+    "Lower the threshold"
+   ]
+  },
+  "Naming question; rewritten as reading the gain reduction meter and acting on it.",
+  "FIX",
+  "Key carried a justification the short distractors lacked; equalized option length."
+ ],
+ "Effects: Quiz - Dynamic Effects #6": [
+  "REMOVE",
+  null,
+  "Redundant with the rewritten Q5 on threshold.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #7": [
+  "HOLD",
+  null,
+  "Input gain compressors are not covered in the page text.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #8": [
+  "REMOVE",
+  null,
+  "Textbook phrase recall, not on the page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #9": [
+  "REMOVE",
+  null,
+  "Guitarist generalization not in the page text and not practical.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #10": [
+  "HOLD",
+  null,
+  "Live musician generalization not in the page text.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #11": [
+  "HOLD",
+  null,
+  "Singer generalization not in the page text.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #12": [
+  "HOLD",
+  null,
+  "Auto makeup is not on the page; the loudness bias it points at is, so rewritten as a choice.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #13": [
+  "HOLD",
+  null,
+  "Group compression is not covered in the page text.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #14": [
+  "REMOVE",
+  null,
+  "Asks what the text says about slap bass; not on the page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #15": [
+  "REMOVE",
+  null,
+  "Redundant threshold recall with nonsense distractors.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #16": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A compressor on a vocal you want gently shaped is set to 12:1, and the loud words are being flattened hard. What do you change?",
+   "options": [
+    "Bring the ratio down toward 2:1",
+    "Lower the threshold so more of the vocal is caught",
+    "Switch to a hard knee",
+    "Raise the makeup gain"
+   ],
+   "key": [
+    "Bring the ratio down toward 2:1"
+   ]
+  },
+  "Key is supported but two distractors are nonsense; rewritten as a diagnosis.",
+  "FIX",
+  "'Raise the ratio further so the flattening is smoother' is a nonsense distractor; replaced with a real mistake."
+ ],
+ "Effects: Quiz - Dynamic Effects #17": [
+  "REMOVE",
+  null,
+  "Redundant threshold recall with nonsense distractors.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #18": [
+  "REMOVE",
+  null,
+  "Redundant with the rewritten Q16 and distractors are nonsense.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #19": [
+  "HOLD",
+  null,
+  "Compressors in series are not covered in the page text.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #20": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You patch a compressor onto the kick and it goes soft, losing its front end. What do you change?",
+   "options": [
+    "Slow the attack until the transient comes back",
+    "Speed up the attack so it catches the hit sooner",
+    "Raise the makeup gain until the kick is as loud as before",
+    "Lower the threshold so more of the kick is compressed"
+   ],
+   "key": [
+    "Slow the attack until the transient comes back"
+   ]
+  },
+  "Key is backwards; a slow attack preserves the transient per the page.",
+  "PASS",
+  "Page states a softened kick means the attack is too fast; distractors are real mistakes."
+ ],
+ "Effects: Quiz - Dynamic Effects #21": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You want a compressor on an acoustic guitar to control level without the listener noticing it engage. Which setting fits, and why?",
+   "options": [
+    "Soft knee, because the ratio engages gradually around the threshold",
+    "Hard knee, because it engages abruptly and gives more control",
+    "Soft knee, because it lengthens the attack time",
+    "Knee does not matter; only the ratio changes how audible compression is"
+   ],
+   "key": [
+    "Soft knee, because the ratio engages gradually around the threshold"
+   ]
+  },
+  "Enhances natural sound distractor is also defensible; rewritten as a choose and justify.",
+  "PASS",
+  "Soft knee for transparency matches the page and the distractors are plausible misreadings."
+ ],
+ "Effects: Quiz - Dynamic Effects #22": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A compressor on your mix bus pumps the whole mix on every kick hit. What removes the pumping without cutting bass from the mix?",
+   "options": [
+    "High pass the side chain detector at about 100 Hz",
+    "High pass the bus audio itself at about 100 Hz",
+    "Speed up the attack so it catches the kick sooner",
+    "Raise the ratio to 10:1 or above"
+   ],
+   "key": [
+    "High pass the side chain detector at about 100 Hz"
+   ]
+  },
+  "Fast attack as a pumping cause is not on the page and one distractor is defensible; rewritten around the side chain filter.",
+  "FIX",
+  "Key was far longer and more detailed than every distractor; trimmed."
+ ],
+ "Effects: Quiz - Dynamic Effects #23": [
+  "REMOVE",
+  null,
+  "The 50 ms figure contradicts the page and duplicates Q20.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #24": [
+  "HOLD",
+  null,
+  "Parallel compression is not covered in the page text.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Dynamic Effects #25": [
+  "HOLD",
+  null,
+  "Initial gain reduction layer is not on the page; rewritten around reading the meter against the problem.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #1": [
+  "REMOVE",
+  null,
+  "Definition question whose keyed phase-based option is not supported by any page; practical EQ use is covered elsewhere.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #2": [
+  "REMOVE",
+  null,
+  "Naming question with nonsense distractors; masking is already tested practically by questions 10 and 19.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #3": [
+  "REMOVE",
+  null,
+  "Phaser naming trivia not covered by any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #4": [
+  "REMOVE",
+  null,
+  "Flanger naming trivia not covered by any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #5": [
+  "REWRITE",
+  {
+   "type": "true_false_question",
+   "stem": "A kick drum has one boomy resonance around 100 Hz that you want gone without thinning the rest of the low end. A low shelf cut is the right filter shape for this job.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "key": [
+    "False"
+   ]
+  },
+  "Topic is worth testing but the abstract wording is awkward; rewritten as a choose-the-shape scenario.",
+  "PASS",
+  "A bell, not a shelf, fixes a single resonance, as the page states."
+ ],
+ "Effects: Quiz - Spectral Effects #6": [
+  "KEEP",
+  null,
+  "Practical sweep technique; page says to sweep with a narrow boost, so the wide-boost statement is false.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #7": [
+  "REMOVE",
+  null,
+  "Definition trivia about what a parametric EQ is called; nothing practical to test.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #8": [
+  "REMOVE",
+  null,
+  "Semi-parametric naming trivia not covered by any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #9": [
+  "HOLD",
+  null,
+  "EQ versus dynamics order is not covered by any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #10": [
+  "KEEP",
+  null,
+  "Diagnose question; page supports cutting the buildup that masks detail rather than boosting.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #11": [
+  "KEEP",
+  null,
+  "Procedure step stated directly on the page; distractors are real mistakes.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #12": [
+  "KEEP",
+  null,
+  "Choose and justify; the reason is stated on the page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #13": [
+  "KEEP",
+  null,
+  "Diagnose question supported by the do-not-EQ-in-solo warning.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #14": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You are setting a high-pass filter on a rhythm guitar. How do you choose the corner frequency?",
+   "options": [
+    "Sweep up until it thins, then back off until full",
+    "Set it to 80 Hz, since that is the standard number",
+    "Use the same frequency as the other tracks",
+    "Leave it off unless a meter shows rumble"
+   ],
+   "key": [
+    "Sweep up until it thins, then back off until full"
+   ]
+  },
+  "Distractor about setting it just below the lowest note is a defensible real practice, so two options are right.",
+  "FIX",
+  "Stem was 'how does the course have you' recall and the key was visibly longest; reframed as a task with balanced options."
+ ],
+ "Effects: Quiz - Spectral Effects #15": [
+  "KEEP",
+  null,
+  "Choose and justify filter shape; page supports shelf for a whole region.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #16": [
+  "KEEP",
+  null,
+  "Diagnose a narrow tonal boost; page states the wide versus narrow Q rule.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #17": [
+  "KEEP",
+  null,
+  "Classifying real moves as corrective or tonal matches the page lists exactly.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #18": [
+  "KEEP",
+  null,
+  "Choose the right fix; page lists source, room and fader as better first moves than EQ.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #19": [
+  "KEEP",
+  null,
+  "Practical masking fix supported by Figure 2 caption and the carving line.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #20": [
+  "KEEP",
+  null,
+  "Level-matched comparison is stated directly in the procedure guide.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #21": [
+  "HOLD",
+  null,
+  "Depends on ear training lab anchors that do not appear on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #22": [
+  "HOLD",
+  null,
+  "Depends on ear training lab anchors that do not appear on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #23": [
+  "HOLD",
+  null,
+  "Depends on ear training lab instructions that do not appear on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #24": [
+  "KEEP",
+  null,
+  "Predict question; the page says raising the high pass too far thins the track.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Spectral Effects #25": [
+  "HOLD",
+  null,
+  "Good decision question but it cites the assignment, which is not reading; rewritten to rest on the EQ-is-a-decision rule.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #1": [
+  "REMOVE",
+  null,
+  "Textbook recall with no support on any course reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #2": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A vocal jumps in level from line to line and never quite sits with the band. A student sends it to a hall reverb to glue it in. What should they do first?",
+   "options": [
+    "Fix the dry vocal level before adding reverb",
+    "Lengthen the decay so the tail covers the jumps",
+    "Give the vocal its own reverb on an insert",
+    "Raise the pre-delay so the quiet lines stand out"
+   ],
+   "key": [
+    "Fix the dry vocal level before adding reverb"
+   ]
+  },
+  "Balance-first is worth testing, but the original key and distractors are vague recall; rewritten as a diagnose question.",
+  "FIX",
+  "Key was visibly longer than the distractors; trimmed and tightened distractors."
+ ],
+ "Effects: Quiz - Balancing & Reverb #3": [
+  "REMOVE",
+  null,
+  "Definition of confirmation bias is not on any reading page and is not a mixing skill as asked.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #4": [
+  "REMOVE",
+  null,
+  "Textbook recall with no support on any course reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #5": [
+  "REMOVE",
+  null,
+  "Asks about a named third-party product, which is naming trivia not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #6": [
+  "REMOVE",
+  null,
+  "Asks what a named engineer said; who-said-it trivia is banned.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #7": [
+  "REMOVE",
+  null,
+  "Textbook recall with no support on any course reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #8": [
+  "REMOVE",
+  null,
+  "Not on any reading page, and the key is doubtful since high-pass, not low-pass, manages low-end problems.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #9": [
+  "REMOVE",
+  null,
+  "Opinion recall with nonsense distractors; nothing practical.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #10": [
+  "REMOVE",
+  null,
+  "Opinion recall with nonsense distractors; nothing practical.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #11": [
+  "REMOVE",
+  null,
+  "Textbook recall with no support on any course reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #12": [
+  "REMOVE",
+  null,
+  "Opinion recall with nonsense distractors; nothing practical.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #13": [
+  "REMOVE",
+  null,
+  "Vague definition with nonsense distractors, not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #14": [
+  "REMOVE",
+  null,
+  "Asks what a named engineer compared effects to; banned who-said-it trivia.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #15": [
+  "REMOVE",
+  null,
+  "Asks what a named engineer does; banned who-said-it trivia.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #16": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Two acoustic guitars sit at the same level and both feel right up front. You want one of them to sit further back in the room while keeping its level about where it is. Which move does that?",
+   "options": [
+    "Raise its send to the shared reverb",
+    "Add more pre-delay to its reverb",
+    "Boost a high shelf on it for more air",
+    "Pan it to the center behind the vocal"
+   ],
+   "key": [
+    "Raise its send to the shared reverb"
+   ]
+  },
+  "Depth placement is worth testing; original is vague recall with a giveaway antonym distractor.",
+  "PASS",
+  "More send to the shared reverb pushes a source back without a fader move; longer pre-delay would keep it forward."
+ ],
+ "Effects: Quiz - Balancing & Reverb #17": [
+  "REMOVE",
+  null,
+  "Vague textbook recall with giveaway distractors, not supported by the reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #18": [
+  "REMOVE",
+  null,
+  "Vague textbook recall with giveaway distractors, not supported by the reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #19": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A mix has a separate D-Verb inserted on each of eight tracks, and the whole thing has turned to mud. EQ on the reverbs has not helped. What fixes the underlying problem?",
+   "options": [
+    "Replace them with one or two shared send reverbs",
+    "Shorten the decay on all eight by the same amount",
+    "Pan the eight reverbs to different positions",
+    "Lower the wet mix on each insert by the same amount"
+   ],
+   "key": [
+    "Replace them with one or two shared send reverbs"
+   ]
+  },
+  "Multiple-reverb problem is worth testing; original is vague with giveaway distractors.",
+  "FIX",
+  "'Lower the wet mix until the mud goes away' is self-fulfilling and defensible, and the EQ distractor is ruled out by the stem."
+ ],
+ "Effects: Quiz - Balancing & Reverb #20": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "D-Verb sits on an aux return fed by sends from several tracks. How do you set the plugin wet and dry mix?",
+   "options": [
+    "Fully wet, and use each send level to set how much reverb each track gets",
+    "Halfway, so each track gets an even blend of dry and wet",
+    "Mostly dry, so the reverb cannot overwhelm the tracks",
+    "Different on every song section, automated to follow the arrangement"
+   ],
+   "key": [
+    "Fully wet, and use each send level to set how much reverb each track gets"
+   ]
+  },
+  "Wet and dry setting is practical, but the original key is wrong as a general claim and the distractors are nonsense.",
+  "PASS",
+  "Fully wet on a send return matches the page and standard practice; option lengths are comparable."
+ ],
+ "Effects: Quiz - Balancing & Reverb #21": [
+  "REMOVE",
+  null,
+  "Reverb technology history and recall, not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #22": [
+  "HOLD",
+  null,
+  "Not on any reading page and nothing practical to salvage.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #23": [
+  "HOLD",
+  null,
+  "The reading says to verify in mono but never says why, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #24": [
+  "HOLD",
+  null,
+  "Hearing decay is worth testing; original key is not on the page, rewritten around decay against tempo.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Balancing & Reverb #25": [
+  "HOLD",
+  null,
+  "Pre-delay is worth testing, but the original key is not on the page; rewritten as a diagnose question.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #1": [
+  "REMOVE",
+  null,
+  "Naming the controls with nonsense distractors; the answer is also in the figure caption.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #2": [
+  "HOLD",
+  null,
+  "Delay versus reverb comparison is not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #3": [
+  "HOLD",
+  null,
+  "Series versus parallel wording is not on any reading page; aux routing is tested by question 13.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #4": [
+  "REMOVE",
+  null,
+  "Vague key not on any page; practical version is tested by question 14.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #5": [
+  "HOLD",
+  null,
+  "Slapback behavior is not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #6": [
+  "REMOVE",
+  null,
+  "Vague benefit recall with nonsense distractors.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #7": [
+  "REMOVE",
+  null,
+  "Vague recall with nonsense distractors, not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #8": [
+  "REMOVE",
+  null,
+  "Opinion recall with nonsense distractors, not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #9": [
+  "REMOVE",
+  null,
+  "Vague recall with nonsense distractors.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #10": [
+  "REMOVE",
+  null,
+  "Recall with giveaway distractors; width with an opposite-side delay is tested by questions 16 and 17.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #11": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "At 120 BPM a quarter note lasts 500 ms, an eighth note is half a quarter, and a dotted note lasts one and a half times its plain value. Your delay plugin has no tempo sync. What do you type in for a dotted eighth note delay?",
+   "options": [
+    "250 ms",
+    "375 ms",
+    "500 ms",
+    "750 ms"
+   ],
+   "key": [
+    "375 ms"
+   ]
+  },
+  "Useful calculation, but the page gives no conversion, so the stem now supplies the quarter note value.",
+  "FIX",
+  "The page never gives the note-value arithmetic, so the needed relationships must be stated in the stem."
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #12": [
+  "HOLD",
+  null,
+  "Key reasoning about where a dotted eighth lands is not on the page; rewritten around feedback, which the page covers.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #13": [
+  "KEEP",
+  null,
+  "Practical routing choice; page puts the delay on an aux return.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #14": [
+  "KEEP",
+  null,
+  "Diagnose question; page says darker repeats sit behind and full-range repeats compete.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #15": [
+  "HOLD",
+  null,
+  "Keyed option about thinner sound comes from a different page than the rest; rewritten to match one page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #16": [
+  "KEEP",
+  null,
+  "Diagnose and fix; page gives the 15 to 30 ms one-side delay for width.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #17": [
+  "KEEP",
+  null,
+  "Choose and justify; page states delay survives mono and a phase-inverting imager does not.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #18": [
+  "KEEP",
+  null,
+  "Diagnose question; page says width comes from difference, not level.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #19": [
+  "KEEP",
+  null,
+  "Procedure for setting return level is on the page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #20": [
+  "HOLD",
+  null,
+  "The reason in the key is not on the page; rewritten as an apply-the-procedure question.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #21": [
+  "KEEP",
+  null,
+  "Diagnose question; page says tap it and a value off the grid often sits better.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #22": [
+  "REMOVE",
+  null,
+  "Keyed double-take option is not supported by any page, and the rest duplicates questions 17 and 18.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #23": [
+  "HOLD",
+  null,
+  "Post-fader send behavior is not covered on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #24": [
+  "HOLD",
+  null,
+  "The riskiest-to-widen claim and weight are not on the page; rewritten as a diagnose question the page supports.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Delay & Stereo Enhancements #25": [
+  "HOLD",
+  null,
+  "Tempo maps and tempo sync are not on any reading page, and the fix depends on the plugin.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #1": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #2": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #3": [
+  "REMOVE",
+  null,
+  "Naming question about drum replacement, not on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #4": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #5": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #6": [
+  "HOLD",
+  null,
+  "Gain staging is worth testing but distortion is not in the reading. Rewritten to the module master-buss reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #7": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #8": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #9": [
+  "HOLD",
+  null,
+  "Matched-loudness comparison is worth testing but distortion is not in the reading. Rewritten to the module master-buss reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #10": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #11": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #12": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #13": [
+  "HOLD",
+  null,
+  "Buss compression is worth testing but distortion is not in the reading. Rewritten to the module master-buss reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #14": [
+  "HOLD",
+  null,
+  "Overdriving the full mix is worth testing but distortion is not in the reading. Rewritten to the module master-buss reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #15": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #16": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported. Matched-loudness judging is already covered by the rewrite of question 9.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #17": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #18": [
+  "HOLD",
+  null,
+  "Chain placement is worth testing but distortion is not in the reading. Rewritten to the module master-buss reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #19": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #20": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #21": [
+  "HOLD",
+  null,
+  "Knowing when to stop is worth testing but distortion is not in the reading. Rewritten to the module master-buss reading.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #22": [
+  "REMOVE",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported. Duplicates question 9.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #23": [
+  "HOLD",
+  null,
+  "Clip gain versus distortion is not covered on any reading page.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #24": [
+  "HOLD",
+  null,
+  "No reading page in the module covers distortion or saturation, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "Effects: Quiz - Distortion #25": [
+  "HOLD",
+  null,
+  "Limiting and level is worth testing but distortion is not in the reading. Rewritten to the module master-buss reading.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #1": [
+  "REMOVE",
+  null,
+  "Canvas navigation admin fact, not a mixing skill, and no reading page covers it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #2": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Two students log in to the same lab Mac with their own accounts. Student A builds a custom Pro Tools key command set. Student B opens Pro Tools and does not see it, but both can load the same AAX plug-ins. Why?",
+   "options": [
+    "Key commands are per user in ~/Library; AAX plug-ins are shared in /Library",
+    "Key commands are saved inside the session file, which Student B has not opened",
+    "Key commands live in /System, which only an admin account can load",
+    "Student B's Pro Tools install is damaged and needs reinstalling"
+   ],
+   "key": [
+    "Key commands are per user in ~/Library; AAX plug-ins are shared in /Library"
+   ]
+  },
+  "Location recall; recast as a diagnosis of the per-user vs shared Library split.",
+  "FIX",
+  "Key was much longer and more detailed than every distractor; balanced lengths."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #3": [
+  "REMOVE",
+  null,
+  "Grading policy fact with no reading page support; not a mixing skill.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #4": [
+  "REWRITE",
+  {
+   "type": "multiple_answers_question",
+   "stem": "Your rough mix feels lopsided and has no solid middle, and you find several tracks panned off center. Which of these should go back to the center? (mark all that apply)",
+   "options": [
+    "Kick",
+    "Snare",
+    "Bass",
+    "Lead vocal",
+    "Doubled rhythm guitar pair",
+    "Stereo synth pad",
+    "Tambourine",
+    "Backing vocal stack"
+   ],
+   "key": [
+    "Kick",
+    "Snare",
+    "Bass",
+    "Lead vocal"
+   ]
+  },
+  "Recall list with an ambiguous 'Vocals' option; recast as a mono-collapse diagnosis naming the lead vocal.",
+  "FIX",
+  "Premise is wrong: a mono source panned off center does not lose punch or low end in a mono sum; restated symptom."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #5": [
+  "HOLD",
+  null,
+  "'Envelope shaper' framing is not in the reading; recast as choosing problems a compressor is meant to solve.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #6": [
+  "HOLD",
+  null,
+  "The 'blank slate' idea appears on no reading page, so the key cannot be supported.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #7": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Every join in your vocal comp has a small click or a doubled consonant. What is the fix?",
+   "options": [
+    "Move each edit just before the transient, then crossfade",
+    "Place each edit exactly on the transient so takes line up",
+    "Remove the crossfades so the joins are sample accurate",
+    "Lower the clip gain on each comped phrase"
+   ],
+   "key": [
+    "Move each edit just before the transient, then crossfade"
+   ]
+  },
+  "Term definition with distractors not on the page; recast as a comp-edit diagnosis.",
+  "FIX",
+  "Key was the longest and most detailed option; trimmed."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #8": [
+  "HOLD",
+  null,
+  "Keyed rationale is not in the reading; recast as an Elastic Audio algorithm diagnosis.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #9": [
+  "HOLD",
+  null,
+  "Keyed phrase is not in the reading and distractors are weak; recast as a faders-first diagnosis.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #10": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Your vocal delay has piled up so many repeats that it blurs into the next line. Which control is the most direct fix?",
+   "options": [
+    "Lower the feedback",
+    "Raise the feedback",
+    "Raise the Mix control",
+    "Add pre-delay"
+   ],
+   "key": [
+    "Lower the feedback"
+   ]
+  },
+  "Control-name recall; recast as choosing the control that fixes too many repeats.",
+  "PASS",
+  "Feedback sets the number of repeats per the page; distractors are real confusions."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #11": [
+  "REWRITE",
+  {
+   "type": "multiple_answers_question",
+   "stem": "A student's room sounds boomy and their mixes carry the wrong amount of low end on other systems. Which treatment moves does the reading recommend first? (mark all that apply)",
+   "options": [
+    "Broadband absorbers with real depth",
+    "Bass traps in the corners",
+    "Thin foam panels across the walls",
+    "Moving the mix position back against the rear wall"
+   ],
+   "key": [
+    "Broadband absorbers with real depth",
+    "Bass traps in the corners"
+   ]
+  },
+  "Depends on lecture content not in the reading and keys every option; recast from the acoustics mistakes table.",
+  "PASS",
+  "Keyed set is exactly the page's first moves; the two distractors are the page's named mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #12": [
+  "HOLD",
+  null,
+  "Keyed phase explanation is not in the reading; recast as when EQ is not the best first move.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #13": [
+  "HOLD",
+  null,
+  "Aliasing is on no reading page; the distortion topic is recast as a clipping diagnosis.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #14": [
+  "REMOVE",
+  null,
+  "Canvas profile policy, not a mixing skill, and no reading page covers it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #15": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You drag an app to the Trash, reinstall it a month later, and it opens with all your old settings and presets. Why?",
+   "options": [
+    "Deleting the app left its files in ~/Library behind",
+    "The settings live inside the .app bundle you reinstalled",
+    "A registry entry kept the settings, as on Windows",
+    "The settings are in /System, which the Trash cannot touch"
+   ],
+   "key": [
+    "Deleting the app left its files in ~/Library behind"
+   ]
+  },
+  "Location recall with invented distractors; recast as a leftover-preferences diagnosis.",
+  "FIX",
+  "Key far longer than distractors, and 'installer copied settings from the developer server' is defensible for cloud-synced apps."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #16": [
+  "REMOVE",
+  null,
+  "Attendance policy fact with no reading page support; not a mixing skill.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #17": [
+  "HOLD",
+  null,
+  "The focus, balance and forward-motion questions are on no reading page; recast as matching symptoms to mix passes.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #18": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "After you insert a compressor on the kick, the kick loses its front end and the mix loses punch. What should you change first?",
+   "options": [
+    "Slow the attack so the transient gets through before gain reduction starts",
+    "Speed up the attack so the compressor catches the transient sooner",
+    "Raise the ratio to 10:1",
+    "Add makeup gain until the kick is as loud as before"
+   ],
+   "key": [
+    "Slow the attack so the transient gets through before gain reduction starts"
+   ]
+  },
+  "Analogy is not in the reading and distractors are nonsense; recast as an attack-time diagnosis.",
+  "PASS",
+  "Slow attack restores the transient per the page; the fast-attack distractor is the real mistake and lengths are comparable."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #19": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You have been adjusting a mix for an hour. Your last three moves were all under 1 dB and you cannot say which one helped. What should you do?",
+   "options": [
+    "Bounce it, leave it a day, then listen once in the car",
+    "Add a limiter on the master buss to finish it",
+    "Keep making small moves until one clearly helps",
+    "Solo each track in turn and look for problems"
+   ],
+   "key": [
+    "Bounce it, leave it a day, then listen once in the car"
+   ]
+  },
+  "Asks who said what; the fresh-ears topic is recast from the knowing-when-to-stop page.",
+  "PASS",
+  "Page's stopping rule gives the key exactly; distractors are real endgame mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #20": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "After comping, a lead vocal sounds inhuman and the phrases run together. What did the student most likely do?",
+   "options": [
+    "Cut out the breaths between phrases",
+    "Put each edit right on a transient",
+    "Left the joins without crossfades",
+    "Comped each line from a different take"
+   ],
+   "key": [
+    "Cut out the breaths between phrases"
+   ]
+  },
+  "Term recall not in the reading; recast as a comping diagnosis.",
+  "FIX",
+  "All three distractors were good practices, so the only 'mistake' option was a giveaway; replaced with real comping mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #21": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A bass part felt good before your timing pass. After you tightened it, it feels stiff and you cannot say why. What is the most likely cause?",
+   "options": [
+    "The push or drag you removed was deliberate feel",
+    "The Elastic Audio algorithm was set to Monophonic",
+    "The quantize strength was left below 100 percent",
+    "The timing edits were left without crossfades"
+   ],
+   "key": [
+    "The push or drag you removed was deliberate feel"
+   ]
+  },
+  "Key is not in the reading and is insulting; recast as a timing decision about intentional push.",
+  "FIX",
+  "Stem said the push was 'on purpose', so it answered itself, and the key was longest; reframed as a diagnosis."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #22": [
+  "HOLD",
+  null,
+  "Key is not in the reading and distractors are weak; recast as where to start a static balance.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #23": [
+  "HOLD",
+  null,
+  "Keyed benefit is not in the reading; recast as choosing a width method that survives mono.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #24": [
+  "REWRITE",
+  {
+   "type": "multiple_answers_question",
+   "stem": "At your mix position the kick and bass change noticeably when you lean forward six inches. What should you do before trusting low-end decisions? (mark all that apply)",
+   "options": [
+    "Fix the listening position",
+    "Check the low end on another system",
+    "EQ the bass until it sounds right at the mix position",
+    "Add thin foam to the side walls"
+   ],
+   "key": [
+    "Fix the listening position",
+    "Check the low end on another system"
+   ]
+  },
+  "Reverb-time reasoning is not in the reading and distractors are nonsense; recast as a low-end trust diagnosis.",
+  "PASS",
+  "Page names exactly these two remedies; the distractors are its named mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #25": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "In the full mix the cymbals cover the vocal's upper range, but the vocal sounds fine soloed. Which move best addresses this?",
+   "options": [
+    "Cut the cymbals where the vocal lives, in the full mix",
+    "Boost the vocal's top end with the vocal soloed",
+    "Cut the vocal's upper range so it stops fighting the cymbals",
+    "Put a fast-attack compressor on the vocal"
+   ],
+   "key": [
+    "Cut the cymbals where the vocal lives, in the full mix"
+   ]
+  },
+  "Term definition with nonsense distractors; recast as choosing a masking fix.",
+  "FIX",
+  "Key was longest and carried the 'full mix' tell; the vocal high-pass distractor was not a realistic move."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #26": [
+  "HOLD",
+  null,
+  "Subharmonic synthesis appears on no reading page, so nothing can support a question.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #27": [
+  "REMOVE",
+  null,
+  "Canvas profile policy, not a mixing skill, and no reading page covers it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #28": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A classmate logged in as jlee says the practice session is at ~/Documents/Mix01. Which absolute path does that point to?",
+   "options": [
+    "/Users/jlee/Documents/Mix01",
+    "/Documents/Mix01",
+    "/Library/Documents/Mix01",
+    "/System/Users/jlee/Documents/Mix01"
+   ],
+   "key": [
+    "/Users/jlee/Documents/Mix01"
+   ]
+  },
+  "Folder-location recall; recast as reading a tilde path.",
+  "PASS",
+  "Tilde expands to /Users/<account>, exactly as the page states; distractors are real path mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #29": [
+  "REMOVE",
+  null,
+  "Attendance policy fact with no reading page support; not a mixing skill.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #30": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "On a snare compressor, the gain reduction meter never returns to zero between hits. What does this tell you?",
+   "options": [
+    "The release is too slow",
+    "The release is too fast",
+    "The attack is too slow",
+    "The makeup gain is too high"
+   ],
+   "key": [
+    "The release is too slow"
+   ]
+  },
+  "Keyed phrase is not in the reading and distractors are nonsense; recast as reading a gain reduction meter.",
+  "FIX",
+  "Key carried the full remedy while distractors did not; equalized."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #31": [
+  "HOLD",
+  null,
+  "CPU and sync rationale is not in the reading; recast as a session delivery diagnosis.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #32": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You are comping a percussive muted guitar part and a sustained string pad. How should your crossfade lengths differ?",
+   "options": [
+    "Short fades at the guitar joins, longer fades in the pad",
+    "Long fades on the guitar, short fades on the pad",
+    "The same long fade everywhere so nothing clicks",
+    "No fades on the pad, since it has no transients to click"
+   ],
+   "key": [
+    "Short fades at the guitar joins, longer fades in the pad"
+   ]
+  },
+  "Term recall not in the reading; recast as choosing crossfade length for the material.",
+  "FIX",
+  "Key was visibly longer than every distractor; trimmed."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #33": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You quantize a drummer's hi-hat at 100 percent strength and it now sounds dead on the grid and lifeless. What should you try?",
+   "options": [
+    "Requantize at about 50 to 70 percent strength",
+    "Keep 100 percent and switch the algorithm to Polyphonic",
+    "Keep 100 percent and add crossfades at every edit",
+    "Quantize the rest of the kit at 100 percent to match"
+   ],
+   "key": [
+    "Requantize at about 50 to 70 percent strength"
+   ]
+  },
+  "Key is roughly right but distractors are giveaways; recast as choosing quantize strength.",
+  "FIX",
+  "Key was far longer and more detailed than the distractors; trimmed."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #34": [
+  "HOLD",
+  null,
+  "Confirmation bias is on no reading page; the listening-perception topic is recast as a monitor-level prediction.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #35": [
+  "HOLD",
+  null,
+  "Keyed parallel and series wording is not in the reading; recast as fixing reverb on inserts.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #36": [
+  "HOLD",
+  null,
+  "Headphone strengths are on no reading page; recast as the course headphone reference method.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #37": [
+  "REMOVE",
+  null,
+  "Naming question; phasers are on no reading page.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #38": [
+  "REMOVE",
+  null,
+  "Naming question; drum triggers are on no reading page.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #39": [
+  "REMOVE",
+  null,
+  "Canvas profile setting, not a mixing skill, and no reading page covers it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #40": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Your audio interface driver installed a helper in /Library/LaunchDaemons. You run launchctl list in Terminal as yourself and do not see it. Why?",
+   "options": [
+    "Daemons run as root, so they only appear with sudo launchctl list",
+    "The driver failed to install and must be reinstalled",
+    "Daemons start only after you log in, so you must log out and back in",
+    "launchctl list shows only Apple's own processes"
+   ],
+   "key": [
+    "Daemons run as root, so they only appear with sudo launchctl list"
+   ]
+  },
+  "Key is supported but distractors are nonsense; recast as a launchctl troubleshooting question.",
+  "PASS",
+  "Page states root daemons only appear with sudo launchctl list; distractors are real misconceptions."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #41": [
+  "REMOVE",
+  null,
+  "Attendance policy fact with no reading page support; not a mixing skill.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #42": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A vocal compressor has its threshold at -20 dBFS, a 4:1 ratio, a hard knee and no makeup gain. A peak enters at -8 dBFS. Where does that peak leave the compressor?",
+   "options": [
+    "-17 dBFS",
+    "-11 dBFS",
+    "-8 dBFS",
+    "-20 dBFS"
+   ],
+   "key": [
+    "-17 dBFS"
+   ]
+  },
+  "Basic definition recall; recast as a ratio calculation.",
+  "PASS",
+  "12 dB over at 4:1 leaves 3 dB over, so -17 dBFS; distractors are the common arithmetic slips."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #43": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student's Audio Files folder is full of files named Audio 1-01 through Audio 47-03, even though every track in the session now has a proper name. What caused this?",
+   "options": [
+    "The tracks were named after recording, not before",
+    "The session was saved without a version number",
+    "The comped clips were never consolidated",
+    "Pro Tools renames files only when the session closes"
+   ],
+   "key": [
+    "The tracks were named after recording, not before"
+   ]
+  },
+  "Key is vague and distractors are weak; recast as a track-naming diagnosis.",
+  "FIX",
+  "Stem gave away the answer ('renamed after recording') and key was far longest; reframed as a symptom-first diagnosis."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #44": [
+  "REMOVE",
+  null,
+  "Asks what a named person said; the idea is on no reading page.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #45": [
+  "REMOVE",
+  null,
+  "Vague key on a topic no reading page covers; timing is already tested by stronger rewrites.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #46": [
+  "HOLD",
+  null,
+  "The bias framing is not in the reading; recast as level-matched compression judgment.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #47": [
+  "HOLD",
+  null,
+  "Keyed benefit is not in the reading; recast as filtering delay repeats.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #48": [
+  "HOLD",
+  null,
+  "Fill-in wording is not in the reading; recast as where the first absorption goes.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #49": [
+  "REMOVE",
+  null,
+  "Naming question; flangers are on no reading page.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #50": [
+  "REMOVE",
+  null,
+  "Canvas notification setting, not a mixing skill, and no reading page covers it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #51": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A license helper starts only when you log in to your own account and does not run for other accounts on the same Mac. Where would you look for its Launch Agent .plist?",
+   "options": [
+    "~/Library/LaunchAgents",
+    "/Library/LaunchAgents",
+    "/Library/LaunchDaemons",
+    "/System/Library/LaunchAgents"
+   ],
+   "key": [
+    "~/Library/LaunchAgents"
+   ]
+  },
+  "Bare path recall with a missing best distractor (/Library/LaunchAgents); reframed as a locate-the-helper scenario.",
+  "PASS",
+  "Only ~/Library/LaunchAgents holds agents for one account; the stem rules out the shared folder."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #52": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #53": [
+  "KEEP",
+  null,
+  "Defines a control students must not misuse; key matches the page and distractors are real control confusions.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #54": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You reopen your own session after two weeks and spend minutes hunting for the bass and vocal tracks before every move. Which prep step would have prevented this?",
+   "options": [
+    "Color coding and a consistent track order set before mixing",
+    "Saving the session with a version number in its name",
+    "Setting every fader to unity before the first pass",
+    "Raising clip gain on the tracks you use most"
+   ],
+   "key": [
+    "Color coding and a consistent track order set before mixing"
+   ]
+  },
+  "Distractors are nonsense and the key is a giveaway; reframed as a diagnose question.",
+  "PASS",
+  "Color coding and track order are the page's navigation step; distractors are unrelated prep moves."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #55": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You are about to build a lead vocal comp from five takes. What should you do first so the original performance stays available?",
+   "options": [
+    "Duplicate the source playlist before auditioning takes",
+    "Consolidate all five takes into one clip",
+    "Delete the weakest takes to reduce clutter",
+    "Add crossfades to every take before choosing phrases"
+   ],
+   "key": [
+    "Duplicate the source playlist before auditioning takes"
+   ]
+  },
+  "Bare definition with throwaway distractors; replaced with the first practical step of a comp.",
+  "PASS",
+  "Duplicating the source playlist is the page's first step; distractors are real destructive mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #56": [
+  "HOLD",
+  null,
+  "Key comes from an outside book, not the reading; replaced with a timing diagnosis the page supports.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #57": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You A/B an EQ move on a vocal. The EQ version sounds better, but it is also about 2 dB louder than the bypassed version. What should you do before deciding?",
+   "options": [
+    "Level-match the bypassed and active states, then compare again",
+    "Keep the EQ, since louder and better usually go together",
+    "Raise the bypassed track fader by 6 dB and compare",
+    "Solo the vocal so the comparison is not affected by the mix"
+   ],
+   "key": [
+    "Level-match the bypassed and active states, then compare again"
+   ]
+  },
+  "Names a specific product not in the reading; the underlying skill (unbiased comparison) is rewritten from the EQ procedure.",
+  "PASS",
+  "Level-matching bypass and active states is the page's instruction; distractors are real A/B mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #58": [
+  "HOLD",
+  null,
+  "Keyed \"muddy\" claim is not in the reading; rewritten as a choose-the-setting slapback question the study guide supports.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #59": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #60": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A plug-in with a valid license suddenly refuses to authorize after you log in to the lab Mac. What should you check first?",
+   "options": [
+    "Its Launch Agent or Launch Daemon",
+    "The Playback Engine buffer size",
+    "The session sample rate in the Dashboard",
+    "The macOS Sound output device"
+   ],
+   "key": [
+    "Its Launch Agent or Launch Daemon"
+   ]
+  },
+  "Cause-to-symptom item with nonsense distractors; flipped to a diagnose question with realistic wrong moves.",
+  "FIX",
+  "Key carried its own justification and a distractor ('pre-fader or post-fader insert') was not a real setting; rebalanced."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #61": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #62": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Your vocal peaks reach about -10 dBFS. On the compressor, the threshold is set to -4 dB and the gain reduction meter never moves. Why?",
+   "options": [
+    "The threshold is above every peak, so no signal crosses it",
+    "The ratio is set too high to register on the meter",
+    "The attack is too fast for the meter to show",
+    "The makeup gain is set to 0 dB"
+   ],
+   "key": [
+    "The threshold is above every peak, so no signal crosses it"
+   ]
+  },
+  "Predict item is sound in spirit but \"highest level\" is ambiguous; rewritten as a meter-reading diagnosis.",
+  "PASS",
+  "A -4 dB threshold sits above -10 dBFS peaks so nothing crosses it; distractors are real metering misconceptions."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #63": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Halfway through a mix you notice the session was created at 44.1 kHz, but the project spec requires a 48 kHz session. What does changing the session sample rate now involve?",
+   "options": [
+    "Converting every audio file in the session to the new rate",
+    "Changing one Dashboard setting; the files follow on their own",
+    "Changing the Playback Engine rate; the files never need converting",
+    "Nothing, because audio files do not store a sample rate"
+   ],
+   "key": [
+    "Converting every audio file in the session to the new rate"
+   ]
+  },
+  "Giveaway with nonsense distractors; rewritten to a session-organization consequence the page states.",
+  "FIX",
+  "Duplicates Final #43 (track names written at record time) in the same exam and key was longest; rewritten on the page's sample rate row."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #64": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Your vocal comp has no clicks and every join is crossfaded, but it sounds musically dead. What is the most likely cause?",
+   "options": [
+    "Takes were chosen by eye from the waveforms",
+    "The breaths were left in between phrases",
+    "Every join was crossfaded",
+    "Edits sat in the quiet before each transient"
+   ],
+   "key": [
+    "Takes were chosen by eye from the waveforms"
+   ]
+  },
+  "Key not in the reading and distractors are giveaways; rewritten as a comping diagnosis.",
+  "FIX",
+  "Key was twice the length of the distractors; trimmed."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #65": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A rhythm guitar feels slightly behind the beat in the chorus. Before you start moving transients, what should you do?",
+   "options": [
+    "Check against the kick whether the drag is deliberate",
+    "Quantize it at 100 percent so it can never drift again",
+    "Line each transient up with the grid by eye",
+    "Set Elastic Audio to Rhythmic for the strums"
+   ],
+   "key": [
+    "Check against the kick whether the drag is deliberate"
+   ]
+  },
+  "Reference-instrument idea comes from an outside book; rewritten to the reading's version (judge timing against the kick).",
+  "FIX",
+  "Setting Polyphonic on a chordal rhythm guitar is correct per the page and so defensible; key was longest."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #66": [
+  "REMOVE",
+  null,
+  "Asks what a named engineer said, which is banned, and the reading does not cover the idea.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #67": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "Your vocal delay is set exactly to an eighth note from the session tempo, yet the repeats feel rhythmically wrong against the groove. What does the reading recommend?",
+   "options": [
+    "Tap it in against the track, even off the grid",
+    "Add feedback until the repeats feel in time",
+    "Line the repeats up with the grid lines by eye",
+    "Recalculate the eighth note in ms from the tempo"
+   ],
+   "key": [
+    "Tap it in against the track, even off the grid"
+   ]
+  },
+  "Vague key with nonsense distractors; rewritten as a delay-timing diagnosis.",
+  "FIX",
+  "Key was longest and two distractors were absolutist giveaways ('never', 'by definition')."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #68": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #69": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You slowed the tracking speed on your MacBook trackpad at home for fine automation edits. In the lab, with an external mouse, the pointer is still too fast. Why?",
+   "options": [
+    "The mouse and the trackpad each have their own separate speed setting",
+    "Pro Tools overrides macOS tracking speed in the Edit window",
+    "Tracking speed only applies after the Mac restarts",
+    "Natural scrolling is turned off on the lab Mac"
+   ],
+   "key": [
+    "The mouse and the trackpad each have their own separate speed setting"
+   ]
+  },
+  "Menu-location recall that changes with macOS versions; rewritten as a diagnosis the page supports.",
+  "PASS",
+  "Page states each device has its own speed setting; distractors are plausible misconceptions."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #70": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #71": [
+  "HOLD",
+  null,
+  "Fixed-threshold design claim is not in the reading; replaced with a compressor diagnosis the page supports.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #72": [
+  "REMOVE",
+  null,
+  "Asks what a named engineer suggests and uses a track-count figure; banned naming and not in the reading.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #73": [
+  "HOLD",
+  null,
+  "Recording-session technique from an outside book; not covered by any reading page.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #74": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "After tightening a drum loop with Elastic Audio, the hits flam and smear. What is the most likely cause?",
+   "options": [
+    "The Elastic Audio algorithm does not suit the source",
+    "The quantize strength was left below 100 percent",
+    "The loop was not consolidated before editing",
+    "The loop's sample rate does not match the session"
+   ],
+   "key": [
+    "The Elastic Audio algorithm does not suit the source"
+   ]
+  },
+  "Trivia about small-studio operators; rewritten as an Elastic Audio algorithm diagnosis.",
+  "FIX",
+  "Key carried extra detail and two distractors (Tab to Transient, duplicated playlist) were not realistic causes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #75": [
+  "REMOVE",
+  null,
+  "Premixed loop adaptation is not covered by any reading page and the options are vague.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #76": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A mono rhythm guitar needs to sound wider, and the mix will be heard on phones and laptops. Which approach gives width that mostly survives a mono sum?",
+   "options": [
+    "A 15 to 30 ms delay on one side",
+    "A stereo imager that phase-inverts the sides",
+    "More level on one side than the other",
+    "A duplicate of the track panned hard opposite"
+   ],
+   "key": [
+    "A 15 to 30 ms delay on one side"
+   ]
+  },
+  "Key not supported and distractors are nonsense; rewritten as a read-the-interface delay question.",
+  "FIX",
+  "Tests the same feedback control as Final #10 in the same exam and names a plug-in model; rewritten on the page's width-versus-mono row."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #77": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #78": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "On a lab MacBook, clips keep getting selected by accident whenever you rest a finger lightly on the trackpad while editing. Which setting do you turn off?",
+   "options": [
+    "Tap to Click",
+    "Force Click",
+    "Natural scrolling",
+    "Tracking speed"
+   ],
+   "key": [
+    "Tap to Click"
+   ]
+  },
+  "Setting-name recall; rewritten as a diagnosis from the same page.",
+  "PASS",
+  "Tap to Click is the setting that turns light touches into clicks; distractors are neighboring settings."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #79": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #80": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "One word in a vocal line jumps out far louder than the rest and the compressor clamps hard on it. What does the reading recommend doing first?",
+   "options": [
+    "Lower that word with clip gain before the compressor",
+    "Ride the master fader down during that word",
+    "Raise the ratio to 20:1 for the whole vocal",
+    "Add makeup gain until the quiet words match the loud one"
+   ],
+   "key": [
+    "Lower that word with clip gain before the compressor"
+   ]
+  },
+  "Book phrase not in the reading, with nonsense distractors; rewritten to clip gain before compression.",
+  "PASS",
+  "Clip gain before the compressor is the page's instruction; distractors are real level-fixing mistakes."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #81": [
+  "HOLD",
+  null,
+  "Key (\"more creative thinking\") is not stated in the reading; rewritten to the repeatable-order mistake the page describes.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #82": [
+  "HOLD",
+  null,
+  "Recording-session technique from an outside book; not covered by any reading page.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #83": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You have four takes of a tricky vocal line on playlist lanes and need to pick the best one. How should you audition them?",
+   "options": [
+    "Loop the phrase and cycle the lanes, listening in context",
+    "Judge each take on its own with the rest of the band muted",
+    "Pick the take whose waveform looks the most even",
+    "Pick the loudest take so it cuts through the mix"
+   ],
+   "key": [
+    "Loop the phrase and cycle the lanes, listening in context"
+   ]
+  },
+  "Definition with nonsense distractors; rewritten as a choose-the-crossfade question.",
+  "FIX",
+  "Tests the same crossfade-length rule as Final #32 in the same exam; rewritten on the page's cycle-in-context row."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #84": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "An acoustic guitar adds low rumble under the bass, energy the part never needed. Which filter shape removes it?",
+   "options": [
+    "A high-pass filter on the guitar",
+    "A low-pass filter on the guitar",
+    "A narrow bell boost on the bass to lift it clear",
+    "A high shelf boost on the guitar"
+   ],
+   "key": [
+    "A high-pass filter on the guitar"
+   ]
+  },
+  "Key is not supported (low-pass does not manage low-end phase); rewritten as a filter-choice question.",
+  "FIX",
+  "A fixed 80 Hz high-pass also removes the rumble, so it is defensible, and the key was longest; reframed as a filter-shape choice."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #85": [
+  "HOLD",
+  null,
+  "Delay versus reverb claim is not in the reading; rewritten to a width choice the page supports.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #86": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #87": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A student says zooming in the Pro Tools Edit window feels backwards on a lab Mac. What should you check first?",
+   "options": [
+    "The macOS scroll direction setting",
+    "The Pro Tools Playback Engine device",
+    "The mouse tracking speed setting",
+    "Whether Pro Tools needs reinstalling"
+   ],
+   "key": [
+    "The macOS scroll direction setting"
+   ]
+  },
+  "Distractors are nonsense; rewritten as a first-check diagnosis.",
+  "FIX",
+  "Key carried a parenthetical detail the distractors lacked; balanced."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #88": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #89": [
+  "HOLD",
+  null,
+  "Key and \"They play chords\" distractor are not supported; rewritten to the compression procedure's first step.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #90": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "During session prep you want to jump instantly to each chorus and bridge while mixing. What should you set up?",
+   "options": [
+    "Memory Location markers at each section",
+    "Clip gain handles on each chorus clip",
+    "A separate playlist for each section",
+    "Tab to Transients on every track"
+   ],
+   "key": [
+    "Memory Location markers at each section"
+   ]
+  },
+  "Giveaway with nonsense distractors; rewritten as a choose-the-tool question.",
+  "FIX",
+  "Key was visibly longer than every distractor; trimmed."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #91": [
+  "HOLD",
+  null,
+  "Recording approach from an outside book; not covered by any reading page.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #92": [
+  "KEEP",
+  null,
+  "Practical edit placement; key matches the reading and distractors are real student mistakes.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #93": [
+  "HOLD",
+  null,
+  "Cites an outside text; no reading page states it and it is not a testable skill.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #94": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "The repeats of your vocal delay compete with the lead vocal for attention even at a modest return level. What change helps them sit behind the vocal?",
+   "options": [
+    "Filter the repeats so they are darker",
+    "Raise the feedback for more repeats",
+    "Brighten the repeats with a high shelf boost",
+    "Move the delay from an aux return to an insert"
+   ],
+   "key": [
+    "Filter the repeats so they are darker"
+   ]
+  },
+  "Vague key with nonsense distractors; rewritten as a delay diagnosis.",
+  "PASS",
+  "Darker repeats sit behind the source per the page; the stem rules out simply lowering the return."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #95": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #96": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "You double-clicked a downloaded DMG and ran the app straight from the mounted disk image. After you eject the DMG, the app is gone. What went wrong?",
+   "options": [
+    "The app was never copied into Applications",
+    "Ejecting a DMG uninstalls the apps it installed",
+    "Gatekeeper removed the app because it was unsigned",
+    "The app needed a Launch Daemon to stay installed"
+   ],
+   "key": [
+    "The app was never copied into Applications"
+   ]
+  },
+  "Distractors are Windows nonsense; rewritten as a diagnosis of a real install mistake.",
+  "FIX",
+  "Key was much longer and more detailed than every distractor; balanced."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #97": [
+  "REMOVE",
+  null,
+  "Course policy or Canvas logistics, not a practical skill, and no reading page states it.",
+  "",
+  ""
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #98": [
+  "REWRITE",
+  {
+   "type": "multiple_choice_question",
+   "stem": "A plug-in you know is installed no longer appears in the Pro Tools insert menu. Using Go to Folder, you find its .aaxplugin file in /Library/Application Support/Avid/Audio/Plug-Ins (Unused). What do you do?",
+   "options": [
+    "Move it back into the main Avid Plug-Ins folder",
+    "Move it into /Library/Audio/Plug-Ins/Components",
+    "Move it into ~/Library/Audio/Plug-Ins/VST3",
+    "Reinstall Pro Tools so it rescans plug-ins"
+   ],
+   "key": [
+    "Move it back into the main Avid Plug-Ins folder"
+   ]
+  },
+  "OS architecture fact tied to a macOS version; rewritten as a practical plug-in location check.",
+  "FIX",
+  "The folder name '(Unused)' in the stem gives away the False answer; reframed as a fix-it choice between real plug-in folders."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #99": [
+  "REWRITE",
+  {
+   "type": "true_false_question",
+   "stem": "You log out of every account on a lab Mac and leave it at the login window. A Launch Daemon your audio interface driver installed keeps running.",
+   "options": [
+    "True",
+    "False"
+   ],
+   "key": [
+    "True"
+   ]
+  },
+  "Supported but thin recall; rewritten as a troubleshooting fact students will actually hit.",
+  "FIX",
+  "Tests the same launchctl-list rule as Final #40 in the same exam; rewritten on the page's daemon-lifetime rule."
+ ],
+ "DAPR 2020: Core Mixing - Final Exam #100": [
+  "REMOVE",
+  null,
+  "OS preference definition with little job impact; the practical scroll-direction skill is covered by item 87.",
+  "",
+  ""
+ ]
+}

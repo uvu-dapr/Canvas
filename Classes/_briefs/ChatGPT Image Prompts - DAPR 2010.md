@@ -235,9 +235,9 @@ Create a 1600 x 600 pixel PNG with an opaque background. Close photograph of a v
 
 ---
 
-## Image 12. Policies
+## Image 12. Course requirements and policies
 
-Page: Orientation: Course Policies & Expectations
+Page: Orientation: Course Description, Learning Outcomes, and Requirements (its course requirements and policies section)
 
 Concept: The first rule of the room: a coffee cup waiting on the floor outside the control room door, never on the console
 

@@ -64,3 +64,39 @@ Page: Auxiliary Resources
 ```
 Create a 1600 x 600 pixel PNG with an opaque background. A photorealistic close up of a dark wooden studio desk with three plain unbranded portable hard drives stacked loosely, one short braided USB cable coiled beside them, and a small unbranded USB flash drive in front. A mixing console is softly out of focus behind them. Cool, even light. No text, no numbers, no labels, no stickers, no logos, no brand marks, no model numbers, no watermark, no people.
 ```
+
+---
+
+## Image 04. Orientation: Prerequisites
+
+Page: Orientation: Prerequisites
+
+**Save as:**
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Orientation/Prerequisites_Banner.png
+```
+
+**Prompt:**
+
+```
+Create a 1600 x 600 pixel PNG with an opaque background. A photorealistic close up of a sheet of pale green engineering graph paper on a wooden desk, with a smooth sine wave sketched across it in soft pencil, a sharpened yellow pencil and a pink eraser resting beside the drawing. Soft window light from the upper left, shallow depth of field. No text, no numbers, no axis labels, no equations, no logos, no brand marks, no watermark, no people.
+```
+
+---
+
+## Image 05. Orientation: Course Description, Learning Outcomes, and Requirements
+
+Page: Orientation: Course Description, Learning Outcomes, and Requirements
+
+**Save as:**
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/DAPR-2000--Digital_Audio_Essentials/Course_Orientation/Course_Requirements.png
+```
+
+**Prompt:**
+
+```
+Create a 1600 x 600 pixel PNG with an opaque background. A photorealistic top down flat lay on a dark desk: a pair of plain black closed back studio headphones, a closed silver laptop with no logo, a small unbranded portable hard drive with a short USB cable, and a closed notebook. Even, soft studio lighting, generous space between the objects. No text, no numbers, no labels, no logos, no brand marks, no stickers, no watermark, no people.
+```
