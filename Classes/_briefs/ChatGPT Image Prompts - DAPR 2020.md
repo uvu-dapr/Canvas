@@ -1,12 +1,12 @@
 # ChatGPT Image Prompts: DAPR 2020 Core Mixing
 
-Written 2026-09-24 for the v34 build. Run each prompt on its own in ChatGPT, one image per prompt. Save each result with the exact filename shown, into the exact folder shown. Do not rename.
+Written 2026-09-24 for the v34 build, updated for v35. Run each prompt on its own in ChatGPT, one image per prompt. Save each result with the exact filename shown, into the exact folder shown. Do not rename.
 
 Every target page already carries an image, so nothing here blocks a build. Each new file replaces a reused image on one page only; the reused image stays on its own home page. When a file lands at its path I link it on its target page in the next build and show you the page.
 
 **House rules for every prompt:** photorealistic, no text, no numbers, no labels, no logos, no brand marks, no real product you could name, no software window or screen interface. Labels belong in the caption or in a table beside the image, never in the pixels. Photographs are JPEG at quality 88 on their own background, under 500 KB. The six diagrams of things that are not things (Standards 20.5a) are transparent PNG, under 1 MB.
 
-**Count:** 24 ChatGPT prompts (Part A), 10 captures (Part B), 32 lower priority images as a table (Part C).
+**Count:** 24 ChatGPT prompts (Part A), 10 captures (Part B), 33 lower priority images as a table (Part C).
 
 ---
 
@@ -838,18 +838,17 @@ These were replacements in the last brief. Checked against v31, each one would h
 
 ---
 
-# Part C: 36 images still doing double duty after Parts A and B land
+# Part C: 33 images still doing double duty after Parts A and B land
 
 Lower priority than Part A. Each image below keeps its home page and is still borrowed by the page in the last column. Say the word and I will write these as prompts in the Part A shape.
 
 | Image | Keeps it (home) | Still borrowing it |
 |---|---|---|
 | `Attack_Too_Fast_Transient_Loss.png` | Dynamic Effects: Common Mistakes and How to Hear Them | Compression Lab |
-| `Avtech_Engage.jpg` | Orientation: 1A) Prerequisites | Roll Call Attendance |
+| `Avtech_Engage.jpg` | Orientation: Prerequisites | Roll Call Attendance |
 | `Boost_Wide_Cut_Narrow.png` | Spectral Effects and EQ: Filter Shapes and What They Are For | Mix EQ Assignment |
 | `Channel_Strip_Anatomy.png` | Focus and Balance: Mix-Window Procedure Guide | Quick Mix 2 |
 | `Compression_Dynamic_Range.png` | Effects: Dynamic Effects: Module Overview | Mix Dynamics Assignment |
-| `Core_Mixing_DAPR_2020.png` | Orientation: 1B) Course Description, Learning Outcomes, and Requirements | Full Mix Sessions in Reaper from the Cambridge Mix Website |
 | `Correction_Amount_Comparison_Boxed.png` | Tuning: Pitch-Correction Procedure Guide | Mixing: Mix Tuning Assignment |
 | `Correction_Amount_Comparison_Curves.png` | Tuning: What to Correct and What to Leave | Tuning Lab |
 | `Correction_Speed_Scoop.png` | Mixing: Tuning: Module Overview | Tuning: A Horse Is Not a Home, the Semester Project |
@@ -858,7 +857,6 @@ Lower priority than Part A. Each image below keeps its home page and is still bo
 | `Elastic_Audio_Warp_Markers.png` | Timing: The Controls and What They Cost | Mixing: Timing: Module Overview |
 | `Figure_8_Null_Plane.png` | Delay and Stereo Enhancements: Width Without Losing Mono | Mix Delay and Stereo Enhancements |
 | `Gain_Stages_Chain.png` | Calibration and Monitoring: Procedure Guide | Calibration: Mixing Space - Assignment |
-| `Grade_Breakdown.png` | Orientation: 1B) Course Description, Learning Outcomes, and Requirements | Instructor: Rubric Attachment Map |
 | `Gray_Clips_with_Star_and_Crossfade.png` | Comping & Arrangement: Common Mistakes and How to Hear Them | Comping Lab |
 | `Green_to_Blue_Waveform_Splice_Pair.png` | Comping & Arrangement: Common Mistakes and How to Hear Them | Mix Comping and Arranging Assignment |
 | `Head_Torso_Measurement.png` | Calibration: Speaker and Headphone Level Calibration | Pro Tools Lab 02 |
@@ -879,7 +877,6 @@ Lower priority than Part A. Each image below keeps its home page and is still bo
 | `Send_versus_Insert_Routing.png` | Balancing & Reverb: Common Mistakes and How to Hear Them | Quick Mix 3 |
 | `Side_Chain_Trigger_and_Ducking.png` | Frequency Dynamics and Side-Chains: Procedure Guide | Mix Frequency, Dynamics and Side-chains Assignment |
 | `Sidechain_Ducking.png` | Frequency Dynamics and Side-Chains: How They Work | Song Analysis Lab |
-| `Worksheet_to_PDF_Flow.png` | Orientation: 1A) Prerequisites | Orientation: Handing Work In |
 
 ---
 
