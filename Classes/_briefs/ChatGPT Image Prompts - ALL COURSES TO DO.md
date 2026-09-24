@@ -22,7 +22,48 @@ Every prompt already says: no text, no numbers, no labels, no logos, no brand ma
 | DAPR 3255 Audio Hardware II | 0 | 0 | 0 | 0 |
 | DAPR 3340 Spatial Audio I | 0 | 2 | 3 | 5 |
 | DAPR 3345 Spatial Audio II | 1 | 27 | 0 | 28 |
-| All courses | | | | 55 |
+| Shared: Classes/All (every course) | 0 | 0 | 1 | 1 |
+| All courses | | | | 56 |
+
+# Shared: Classes/All (every course)
+
+These images live in Classes/All and show up in every DAPR course through the Blueprint (Universal Class Content).
+
+## Shared Image 01. How Much Time Your Classes Take
+
+Page: Essentials: 1B) How Much Time Your Classes Take
+
+Status: Needs prompt (new figure, no file yet)
+
+Where on the page: directly under the "Build the Week in This Order" checklist, before the Tip box. It becomes Figure 2 on the page.
+
+Final size: 1600 by 900, to match Credit_Hour_Rule.png (Figure 1) on the same page
+
+Save as:
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/Student_Essentials/Weekly_Planning_Desk.png
+```
+
+Folder:
+
+```
+/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/Classes/All/Student_Essentials/
+```
+
+Prompt:
+
+```
+Photorealistic, wide landscape image. Overhead photograph of a college student's desk in a home studio corner, early morning light. In the center lies an open paper weekly planner, two pages spread flat, its seven day columns filled with neat hand colored blocks in blue, green, orange and soft gray, arranged like a planned week of classes, lab sessions, study time, work shifts and sleep. The blocks are solid color only with no writing in them. Around the planner: closed back studio headphones, a small unbranded audio interface, a cup of coffee, a set of colored highlighters, and a laptop pushed to the edge with its screen softly out of focus. Calm, organized, focused mood. No people. No text, no numbers, no letters, no labels, no logos, no brand marks, no model numbers, no watermark, no legible screens or writing anywhere in the image, including on the planner. No real product you could name.
+```
+
+HTML once the file is saved and pushed (paste under the checklist):
+
+```
+<p style="margin-top: 24px;"><img style="max-width: 100%; height: auto;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/Student_Essentials/Weekly_Planning_Desk.png" alt="Photo: an open weekly planner with color blocked days beside studio headphones and an audio interface" /></p>
+<p style="margin: 0 0 8px 0; color: #616161; font-style: italic;">Figure 2. Build the week on paper first: classes and labs, then work, then outside hours, then sleep.</p>
+```
+
 
 # DAPR 2000 Digital Audio Essentials
 
