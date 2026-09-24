@@ -85,6 +85,23 @@ L('quiz resources in the manifest: %d   qti files on disk: %d   metas resolved: 
   %(len(QUIZ),len(QTI_FILES),sum(1 for _,_q,m in QUIZ if m)))
 if not QUIZ: warns.append('the manifest declares no quiz resources at all')
 if _nometa: fails.append('quiz resources with no resolvable meta: %s'%[os.path.basename(x) for x in _nometa][:5])
+# Added 2026-09-24 [Adam, Course Decisions Log DAPR 2000 item 7]. Canvas builds a quiz's
+# questions from its non_cc_assessments/<id>.xml.qti copy. A cc quiz resource
+# (imsqti_xmlv1p2) with no such copy imports as an empty shell, or with only what the
+# cc profile carries, and nothing says so. Resolve the copy from the resource's own
+# files, its dependencies, then the conventional name.
+_nononcc=[]
+for _i,_q,_m in QUIZ:
+    _r=RES.get(_i,{})
+    if 'imsqti_xmlv1p2' not in _r.get('type',''): continue
+    _cands=list(_r.get('files',[]))
+    for _d in _r.get('deps',[]): _cands+=RES.get(_d,{}).get('files',[])+[RES.get(_d,{}).get('href') or '']
+    _has=any(c and c.startswith('non_cc_assessments/') and os.path.exists(c) for c in _cands) \
+         or bool(glob.glob('non_cc_assessments/%s.*'%_i))
+    if not _has: _nononcc.append(_i)
+L('cc quizzes (imsqti_xmlv1p2) with no non_cc_assessments copy (must be 0): %d'%len(_nononcc))
+for _x in _nononcc[:6]: L('    %s'%_x)
+if _nononcc: fails.append('cc quizzes with no non_cc_assessments copy: %d'%len(_nononcc))
 
 # 2 canvas_export.txt declared  (else Assignments import as Pages)
 ok='course_settings/canvas_export.txt' in man
@@ -1209,6 +1226,11 @@ class _InkScan(_HP):
         _HP.__init__(self, convert_charrefs=True)
         self.stack=['#ffffff']; self.bad=[]
     def handle_starttag(self, tag, attrs):
+        # An <hr> holds no text. Its color is the rule's line color (Standards 1 writes
+        # color:#bdbdbd on the 1px divider, and TinyMCE injects color on every hr it saves),
+        # so scoring it as text on the inherited background was a false failure.
+        # Skipped here [Adam 2026-09-24, Course Decisions Log DAPR 2000 item 7].
+        if tag=='hr': return
         st=dict(attrs).get('style','') or ''
         _b=_BGRE.search(st); _f=_FGRE.search(st)
         here=_b.group(1).lower() if _b else self.stack[-1]
