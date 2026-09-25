@@ -1,0 +1,497 @@
+{
+ "pages": [
+  {
+   "title": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+   "slug": "tuning-when-to-tune-graph-mode-and-automatic-mode",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Tuning: When to Tune, Graph Mode and Automatic Mode</h2>\n<div style=\"width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png\" alt=\"Note\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Tuning is a repair for the notes that distract.</strong> Tune the notes a listener will notice and leave everything else the way the singer sang it. Every note you touch is a chance to make the voice sound less human, so every note you touch needs a reason.</p>\n</div>\n</div>\n</div>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Finish the comp first</h3>\n<p>Tune after the comp and the timing edits are finished. Tuning work sits on the clips you chose, so if you change the comp afterward, the new phrases arrive untuned and you do the work twice.</p>\n<p>If most of a phrase needs correction, go back to the comp and look for a better take before you tune it. Tuning rescues a few notes. It does not rescue a performance.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">When to tune a note and when to leave it</h3>\n<p>Start by listening, not looking. Loop the section with the full band playing and note which moments pull your attention. Decide in the mix, not in solo. A note that sounds sour soloed often disappears under the band, and a note that sounds fine soloed can clash with the chord it sits on.</p>\n<p>The notes that need attention are the ones the ear has time to lock on to:</p>\n<ul>\n<li>Long held notes, especially the last note of a phrase.</li>\n<li>Notes held against a sustained chord, a pad or another voice, where any pitch difference turns into audible beating.</li>\n<li>Exposed notes with little else playing around them.</li>\n</ul>\n<p>Leave these alone:</p>\n<ul>\n<li>Short passing notes that go by before the ear settles on them. A quick note that is a little off almost never registers in the mix.</li>\n<li>Scoops, falls and bends into and out of notes. They are how the singer phrases the line.</li>\n<li>Deliberate notes outside the key, such as a bluesy flat third. They are choices, not errors.</li>\n<li>Notes that are already in tune with vibrato swinging around them.</li>\n</ul>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Reading the pitch display</h3>\n<p>Melodyne and Waves Tune both draw pitch against a grid of notes. Time runs left to right, pitch runs bottom to top, and each horizontal row is one semitone. A semitone is 100 cents, so a note 50 cents flat sits halfway between its own row and the row below. Melodyne draws each note as a blob placed at its pitch center, with a thin pitch curve running through it. Other editors draw the curve alone, or the curve over note segments. The reading is the same.</p>\n<p>Every sung note has parts you read separately:</p>\n<ul>\n<li><strong>Pitch center.</strong> The average pitch of the note, the pitch the ear hears as the note. This is what you judge the tuning by.</li>\n<li><strong>Scoop.</strong> The approach into the note, usually from below, in the first fraction of a second.</li>\n<li><strong>Drift.</strong> Slow wandering of the pitch across the note, such as a long note sagging flat as the singer runs out of breath.</li>\n<li><strong>Vibrato.</strong> A regular wave around the center, usually about 5 to 7 cycles per second. Vibrato is pitch modulation, and it is part of the sound of the voice.</li>\n</ul>\n<p>Judge a note by its pitch center, not by how far the curve swings. A steady vibrato that swings evenly above and below the note row, with its center on the row, is in tune. Do not tune it.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Tuning/Pitch_Center_Drift_And_Vibrato.png\" alt=\"Pitch curve of one held note on a semitone grid, with its scoop, pitch center, drift and vibrato labeled\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. One held note on the note grid. The scoop brings the singer in from below, the dashed line is the pitch center the ear hears, and the vibrato and the late drift move around it.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Graph mode: note by note</h3>\n<p>In graph mode you select one note and move its pitch center, and nothing else changes. Melodyne ARA works this way, and so does Waves Tune when you correct individual notes. When you move a pitch center, the whole note moves as one piece: the scoop, the drift and the vibrato keep their shape and ride along with it. The correction pulls the pitch toward the note and leaves the shape of the phrase alone.</p>\n<p>Graph mode is the right tool for a lead vocal, for any exposed part, and for any line where a few notes need help and the rest are fine. It takes longer, and every decision is yours, which is the point.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Automatic mode: real-time correction</h3>\n<p>In automatic mode the plug-in detects the pitch as the track plays and pulls it toward the nearest allowed note, all the time, on every note. Nothing is edited by hand. What it does depends entirely on its settings: the scale and key decide which notes are allowed, and the speed and amount decide how hard it pulls. Set the scale wrong and the corrector fights the singer.</p>\n<p>Automatic mode is the right tool when you want the correction to be heard, such as a hard-tuned vocal effect, and for a quick, gentle pass on background parts that sit low in the mix. It is the wrong tool for an exposed lead with a few problem notes, because it treats every note the same way and moves the notes you meant to leave. For Waves Tune, set the key or scale only when the song supports it, and correct individual notes rather than forcing every note to the grid.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Tuning/Graph_Mode_Versus_Automatic_Mode.png\" alt=\"One phrase three ways: original, automatic mode turning a slide into steps, graph mode fixing one flat note\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 2. The same phrase untouched, through fast automatic correction, and after graph editing. Automatic correction turned the slide into steps and froze the vibrato; graph editing moved only the flat note.</figcaption>\n</figure>\n<div style=\"width:100%; background-color:#fff8e1; border-left:4px solid #BF360C; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.png\" alt=\"Warning\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Put the tuner first in the chain.</strong> A real-time pitch corrector has to detect one clean pitch. Insert it before any delay, reverb, chorus or doubler on the track. Those effects add extra copies of the note at other times or pitches, the detector cannot find a single pitch, and the result glitches, jumping between notes or warbling.</p>\n</div>\n</div>\n</div>\n</div>\n",
+   "figures": [
+    "Pitch_Center_Drift_And_Vibrato.png",
+    "Graph_Mode_Versus_Automatic_Mode.png"
+   ]
+  },
+  {
+   "title": "Tuning: Speed, Retune, Formants and Sounding Natural",
+   "slug": "tuning-speed-retune-formants-and-sounding-natural",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Tuning: Speed, Retune, Formants and Sounding Natural</h2>\n<div style=\"width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png\" alt=\"Note\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Every pitch corrector asks the same three questions.</strong> How far should the note move, how fast should it get there, and what should survive the trip? Correction amount, retune speed and the controls around them are your answers.</p>\n</div>\n</div>\n</div>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Correction amount</h3>\n<p>Correction amount sets how far the note moves toward the target pitch. At 100 percent the note lands on the target; at 50 percent it moves half the distance. Full correction is an effect, not a repair. For a repair, pull the note most of the way and stop while it still sounds sung.</p>\n<p>Melodyne's pitch correction macro works the same way, as a percentage, with separate amounts for pitch center and for pitch drift. That lets you fix where a note sits without ironing out how it moves.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Retune speed</h3>\n<p>Retune speed, also called correction speed, sets how fast the correction arrives. Fast speeds remove the scoop into a note, which is often the performance. When the control is shown in milliseconds, the number is how long the correction takes to arrive, so a bigger number means a slower, gentler correction and a smaller number means a faster, harder one.</p>\n<p>Speed also decides what happens to vibrato. At the fastest settings the corrector follows every swing of the vibrato and flattens it. At slower settings the corrector cannot keep up with the quick swings, so the vibrato passes through while the center of a long note is still pulled toward the target over its length. When a note sits near the halfway point between two allowed notes, a fast setting can flip it back and forth between them, a warble you cannot miss.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Tuning/Fast_Versus_Slow_Retune_Speed.png\" alt=\"One scooped note with vibrato: raw pitch, fast correction and slow correction against the target line\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. The same scooped note with fast and slow retune speed. The fast setting snaps to the target, removes the scoop and flattens the vibrato. The slow setting keeps both and still pulls the center onto the note.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Note transition, humanize and vibrato</h3>\n<p>Some correctors add a note transition control that sets how quickly the pitch moves from one target note to the next. Set it short and a slide or a run between notes becomes a hard step, with the glide gone. Lengthen it and the glide survives while the notes at either end still land.</p>\n<p>A humanize-type control solves a common conflict. Short notes need a fast speed to land at all, but the same fast speed makes long notes sit dead still. A humanize-type control keeps the fast speed on short notes and relaxes it on sustained notes, so held notes keep their natural movement while quick notes still land.</p>\n<p>Vibrato is pitch modulation. Aggressive correction flattens it and the voice loses life. In graph mode, move pitch centers and leave the modulation alone. Reduce vibrato only when it is so wide that it sounds like a wobble, and then reduce it partway. Melodyne keeps pitch modulation as a separate control for exactly this reason.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Formants and why they matter when a note moves</h3>\n<p>Formants are the resonant peaks of the voice, set by the size and shape of the singer's throat and mouth. They give a voice its vowels and its identity, and they stay in roughly the same place when a singer sings higher or lower. What changes with pitch is the harmonics: the fundamental and its multiples move up and down underneath formants that stay put.</p>\n<p>A plain pitch shift moves everything, formants included. Shift up and the voice sounds smaller, thinner and younger; shift down and it sounds bigger, darker and muffled. Formant preservation keeps the voice sounding like the same person when the pitch moves: the harmonics move to the new note while the formant peaks stay where the singer's throat put them. On a move of a few tens of cents the formant shift is too small to hear. As the move grows toward a few semitones it becomes obvious, so leave formant preservation on for every vocal repair.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Tuning/Formant_Preservation_On_A_Pitch_Shift.png\" alt=\"Spectra of a sung note shifted up four semitones with and without formant preservation\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 2. A 220 Hz note moved up four semitones to about 277 Hz. With formant preservation the resonance peaks stay put. Without it they move up by the same ratio as the pitch, about 26 percent.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">What over-correction sounds like</h3>\n<p>Learn these sounds, because they are what a listener hears as fake:</p>\n<ul>\n<li>Hard steps between notes where the singer glided.</li>\n<li>Long notes that sit dead still, with no movement at all.</li>\n<li>A warble where a note flips between two neighboring pitches.</li>\n<li>A grainy, buzzy or phasey texture on breaths and s sounds.</li>\n<li>A voice that sounds smaller or hollow after a large move.</li>\n</ul>\n<p>The grainy texture has a specific cause. Breaths and consonants such as s, sh, f and t have no pitch, so the tracker has nothing to lock on to and processes noise as if it were a note. In graph mode, leave those segments where they are. In automatic mode, back the correction off until they are clean.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">How to hear it</h3>\n<p>Loop the phrase and switch the corrector in and out while it plays. Listen to the transitions between notes and to the long notes, because that is where correction shows. Turn away from the screen while you judge. A pitch display makes every wiggle look like a mistake, and you end up fixing notes by eye that nobody hears. Then check in the full mix. If you can pick the corrected version out by ear as tuned, back off.</p>\n<div style=\"width:100%; background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.png\" alt=\"Tip\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Go too far once, on purpose.</strong> Push a control past the point where it sounds fake so you learn exactly what that artifact sounds like on this voice. Then pull it back until the artifact is gone, and stop there.</p>\n</div>\n</div>\n</div>\n</div>\n",
+   "figures": [
+    "Fast_Versus_Slow_Retune_Speed.png",
+    "Formant_Preservation_On_A_Pitch_Shift.png"
+   ]
+  },
+  {
+   "title": "Tuning: Doubled Vocals and a Worked Example on a Lead Vocal",
+   "slug": "tuning-doubled-vocals-and-a-worked-example-on-a-lead-vocal",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Tuning: Doubled Vocals and a Worked Example on a Lead Vocal</h2>\n<p>Doubled and stacked vocals need a different target from the lead, and the lead needs a plan before you touch a note. This page covers tuning a double, then walks through one complete tuning pass on a lead vocal phrase.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Tune the lead first, then tune the double to the lead</h3>\n<p>A double exists to thicken the lead. Its target is the lead, not the grid. Tune the lead first and commit to it, then tune each double to the lead's pitch centers, note by note. If the lead holds a note 10 cents sharp and it sounds right in the track, a double pulled dead onto the grid now sits 10 cents away from the lead, and tuning it has made the pair less in tune with each other.</p>\n<p>Pitch differences between two voices show up as beating, a regular rise and fall in level. A difference of a few cents gives a slow, gentle movement that reads as thickness. As the difference grows, the movement speeds up into an obvious sour wobble. On A above middle C, 440 Hz, voices 10 cents apart beat about two and a half times per second; 30 cents apart, almost eight times per second.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Timing and pitch together</h3>\n<p>Line up the double's timing before you judge its pitch. A double that comes in late is still scooping up into the note while the lead is already on it, and that moment sounds like a tuning clash even when both pitch centers agree. Fix the timing first, then tune, then play the two together, because a pitch match you checked with one voice soloed tells you nothing about the pair.</p>\n<p>Leave some natural difference. Keep the double's own vibrato and a few cents of disagreement on long notes. Two voices that match perfectly in pitch and timing merge into one louder voice, and the thickness you recorded the double for disappears.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Tuning/Lead_And_Double_Tuning_Before_And_After.png\" alt=\"Lead and double pitch curves before and after: the double is aligned and tuned to the lead, not to the grid\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. A lead and its double before and after. The double came in late and sharp. After the pass it starts with the lead, follows the lead's slightly sharp center rather than the grid line, and keeps its own vibrato.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Worked example: one lead vocal phrase</h3>\n<p>The phrase is the last line of a chorus in G major, three notes long: a short D, a short E, and a long G held for two seconds on the word go. The band holds a G major chord under the long note. Melodyne ARA is on the track.</p>\n<p><strong>Step 1: Protect the original.</strong> Duplicate the playlist and save the session with a new version number. There is nothing to listen for yet. This step is what lets you back out of every decision that follows.</p>\n<p><strong>Step 2: Listen in the mix and name the problem.</strong> Loop the phrase with the band playing. The long G sounds flat against the chord and sags further at the end. The two short notes pass without drawing attention. Write that down before you open the editor, so the editor does not change your mind.</p>\n<p><strong>Step 3: Read the display.</strong> Analyze the clip in Melodyne. The G sits 35 cents flat at its pitch center, with a scoop up from below and a vibrato swinging about 25 cents either side, and its last 400 milliseconds drift down to about 70 cents flat. The E sits 15 cents sharp. The D is on pitch.</p>\n<p><strong>Step 4: Leave the E alone.</strong> Fifteen cents sharp on a short passing note did not bother you in the mix, so it stays. The display showed it; your ears did not flag it.</p>\n<p><strong>Step 5: Move the pitch center of the G.</strong> Move it up most of the way, to within about 5 cents of the note. Listen for the note settling against the chord while the scoop and the vibrato sound exactly as they did, because they moved with the note.</p>\n<p><strong>Step 6: Reduce the tail drift partway.</strong> The end still sags. Reduce the drift on that note by about half, so the fall at the end shrinks but does not vanish. Listen to the release: it should still sound like a singer letting go, not like a synth note that stops.</p>\n<p><strong>Step 7: Check the transition.</strong> Play from the E into the G. After a pitch center moves, the join with the note before it can pick up a small jump or bump. If you hear one, smooth the transition between the two notes rather than moving either note again.</p>\n<p><strong>Step 8: Compare and verify.</strong> Loop the phrase and switch between the original and the tuned version, first soloed, then in the full mix, with your eyes off the screen. If you can pick out the tuned version as tuned, back off the last change.</p>\n<p><strong>Step 9: Print and label.</strong> Print or commit the verified version, label the track so any engineer can see it is tuned, and keep the original playlist.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Tuning/Worked_Example_Lead_Phrase_Tuning.png\" alt=\"Three note phrase D, E, G before and after: only the long G moves up, keeping its vibrato, with less end sag\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 2. The worked example phrase before and after. Only the long G changed: its center moved up to within a few cents of the note, its scoop and vibrato came with it, and its end sag was cut about in half. The sharp E was left alone.</figcaption>\n</figure>\n<div style=\"width:100%; background-color:#fff8e1; border-left:4px solid #BF360C; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.png\" alt=\"Warning\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>One note, one reason.</strong> In this phrase, one note out of three changed. If your tuning pass touches every note in a line, stop and ask what each change fixed that a listener would have heard.</p>\n</div>\n</div>\n</div>\n</div>\n",
+   "figures": [
+    "Lead_And_Double_Tuning_Before_And_After.png",
+    "Worked_Example_Lead_Phrase_Tuning.png"
+   ]
+  }
+ ],
+ "quiz": {
+  "quiz": "Mixing: Quiz - Tuning",
+  "questions": [
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_answers_question",
+    "stem": "You have tuned the lead vocal with it soloed, and on its own it now sounds clean. Select every check the procedure guide has you make before you print or commit the tuned version.",
+    "options": [
+     "Compare the processed take to the original take",
+     "Listen to the tuned vocal in the full mix",
+     "Confirm every note sits exactly on its target line",
+     "Solo the vocal again at a louder monitoring level",
+     "Delete the original playlist so it cannot be confused"
+    ],
+    "key": [
+     "Compare the processed take to the original take",
+     "Listen to the tuned vocal in the full mix"
+    ],
+    "page": "Tuning: Pitch-Correction Procedure Guide",
+    "quote": "Compare the processed take to the original, listen in the full mix, then print or commit a verified version while retaining the original playlist.",
+    "why": "Verifying a tuning pass against the source and in context before committing it."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "Pro Tools crashes halfway through a tuning session and the undo history is gone when you reopen it. Which habit from the procedure guide would have protected the work?",
+    "options": [
+     "Saving the session with a version number before and after the pass",
+     "Relying on the Edit menu undo list to step back through changes",
+     "Leaving the tuning plug-in window open until the pass is done",
+     "Bouncing a quick reference mix once all the tuning is finished"
+    ],
+    "key": [
+     "Saving the session with a version number before and after the pass"
+    ],
+    "page": "Tuning: Pitch-Correction Procedure Guide",
+    "quote": "Save the session before you start and again when you finish, with a version number in the name. It costs two seconds and it is the only undo that survives a crash.",
+    "why": "Choosing the recovery habit that survives a crash, versioned saves, over undo."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You are working through the pitch-correction procedure in order and the step you are on will not work no matter how many times you retry it. Where should you look first?",
+    "options": [
+     "At the earlier steps, for something that was skipped",
+     "At the current step, repeating it with different settings",
+     "At the plug-in install, reinstalling the tuning tool",
+     "At the interface, restarting the audio hardware"
+    ],
+    "key": [
+     "At the earlier steps, for something that was skipped"
+    ],
+    "page": "Tuning: Pitch-Correction Procedure Guide",
+    "quote": "If a step will not work, the cause is almost always something skipped earlier, not the step you are on.",
+    "why": "Troubleshooting a stalled workflow by checking the prerequisite steps first."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You insert Melodyne ARA on a lead vocal track and want to start correcting pitch centers. Following the procedure guide, what has to happen to the clip before you can correct anything?",
+    "options": [
+     "Transfer or analyze the clip in Melodyne",
+     "Set the song key and scale in Melodyne",
+     "Commit the track so the audio is printed",
+     "Consolidate the clip and set the track to ticks"
+    ],
+    "key": [
+     "Transfer or analyze the clip in Melodyne"
+    ],
+    "page": "Tuning: Pitch-Correction Procedure Guide",
+    "quote": "For Melodyne ARA, insert Melodyne on the track, transfer or analyze the clip as required by the installed version, and correct pitch centers and transitions conservatively.",
+    "why": "Knowing the Melodyne ARA setup step that must come before any pitch edit."
+   },
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "You are about to tune a lead vocal line in which two held notes are flat and everything else sounds right. Which approach keeps the line sounding sung?",
+    "options": [
+     "Pull those two notes toward their targets and leave the shape of the phrase alone",
+     "Snap every note in the line to its row so the whole line is consistent",
+     "Straighten the pitch curve inside each note so the line reads cleanly",
+     "Correct the slides between the notes first, then pull the two flat notes"
+    ],
+    "key": [
+     "Pull those two notes toward their targets and leave the shape of the phrase alone"
+    ],
+    "page": "Tuning: What to Correct and What to Leave",
+    "quote": "The correction pulls the pitch toward the note and leaves the shape of the phrase alone. Flatten the shape too and it stops sounding sung.",
+    "why": "Choosing a correction that fixes pitch without flattening the contour of the phrase; the draft stem described slides turning into steps, which now overlaps the note transition item from the new speed page."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You print tuned versions of three vocal tracks in the semester project. A week later another engineer opens the session and cannot tell which tracks are tuned and which are the raw takes. Which project requirement was missed?",
+    "options": [
+     "Commit or clearly label the corrected tracks",
+     "Consolidate all tracks to one start and end time",
+     "Create an internal layback track for the print",
+     "Map the vocal tracks to their own VCA master"
+    ],
+    "key": [
+     "Commit or clearly label the corrected tracks"
+    ],
+    "page": "\"A Horse Is Not a Home\"",
+    "quote": "Commit or clearly label corrected tracks when appropriate.",
+    "why": "Keeping tuned tracks identifiable and recallable in a shared session."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_answers_question",
+    "stem": "You loop the chorus with the full band playing. Select every note that is a strong candidate for tuning.",
+    "options": [
+     "A long note held flat against a sustained pad",
+     "An exposed final note sung sharp with only piano under it",
+     "A quick passing note between two held notes, slightly sharp",
+     "A scoop up from below into the first word of a line",
+     "A bluesy flat third the singer chose on purpose"
+    ],
+    "key": [
+     "A long note held flat against a sustained pad",
+     "An exposed final note sung sharp with only piano under it"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "Long held notes, especially the last note of a phrase. Notes held against a sustained chord, a pad or another voice, where any pitch difference turns into audible beating. Exposed notes with little else playing around them.",
+    "why": "Prioritizing the notes a listener has time to lock on to and leaving passing notes, scoops and deliberate notes alone."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Soloed, a held note in the verse sounds slightly sour. With the band playing, it sits fine and nothing about it draws your attention. What do you do?",
+    "options": [
+     "Leave it, because the tuning decision is made in the mix",
+     "Tune it, because solo reveals the true pitch of the note",
+     "Tune it halfway, so it is safe in solo and in the mix",
+     "Turn the vocal up in the mix until the problem shows"
+    ],
+    "key": [
+     "Leave it, because the tuning decision is made in the mix"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "Decide in the mix, not in solo. A note that sounds sour soloed often disappears under the band, and a note that sounds fine soloed can clash with the chord it sits on.",
+    "why": "Deciding whether a note needs tuning by listening in context rather than in solo."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "In the pitch display, a held note's curve swings about 30 cents above and below the note row in a steady wave, and the note's center sits on the row. What do you do with it?",
+    "options": [
+     "Leave it, because the center is in tune and the swing is vibrato",
+     "Move it, because the curve spends most of its time 30 cents off",
+     "Flatten the swing, so the curve sits on the row for the whole note",
+     "Pull it down 30 cents, so the highest points land on the row"
+    ],
+    "key": [
+     "Leave it, because the center is in tune and the swing is vibrato"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "Judge a note by its pitch center, not by how far the curve swings. A steady vibrato that swings evenly above and below the note row, with its center on the row, is in tune.",
+    "why": "Reading the pitch display: judging tuning by pitch center, not by vibrato swing."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "In graph mode you drag the pitch center of a flat held note up 30 cents. What happens to that note's scoop and vibrato?",
+    "options": [
+     "They keep their shape and move up with the note",
+     "They are removed as the note snaps onto its row",
+     "They stay where they were while the center moves",
+     "They are flattened in proportion to the size of the move"
+    ],
+    "key": [
+     "They keep their shape and move up with the note"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "When you move a pitch center, the whole note moves as one piece: the scoop, the drift and the vibrato keep their shape and ride along with it.",
+    "why": "Predicting what a graph mode pitch center move does to the rest of the note."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_answers_question",
+    "stem": "Select every situation where automatic real-time correction is the right tool.",
+    "options": [
+     "A hard-tuned vocal effect the producer wants listeners to hear",
+     "A quick, gentle pass on background parts sitting low in the mix",
+     "An exposed lead vocal with three problem notes in the chorus",
+     "A lead line full of deliberate bends and expressive scoops",
+     "A ballad lead whose final held note is slightly flat"
+    ],
+    "key": [
+     "A hard-tuned vocal effect the producer wants listeners to hear",
+     "A quick, gentle pass on background parts sitting low in the mix"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "Automatic mode is the right tool when you want the correction to be heard, such as a hard-tuned vocal effect, and for a quick, gentle pass on background parts that sit low in the mix.",
+    "why": "Choosing between automatic and graph correction for the material."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "You insert a real-time pitch corrector after the chorus and delay plug-ins on a vocal track, and the corrected vocal glitches, jumping between notes. What is the fix?",
+    "options": [
+     "Move the pitch corrector ahead of the chorus and delay",
+     "Set a faster retune speed so the corrector locks on",
+     "Turn off formant preservation to clean up the result",
+     "Raise the correction amount to 100 percent on every note"
+    ],
+    "key": [
+     "Move the pitch corrector ahead of the chorus and delay"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "Insert it before any delay, reverb, chorus or doubler on the track. Those effects add extra copies of the note at other times or pitches, the detector cannot find a single pitch, and the result glitches, jumping between notes or warbling.",
+    "why": "Diagnosing a detection glitch caused by insert order."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "You tune the lead vocal before the comp is finished. Later you replace two lines with phrases from a different take. What is the result?",
+    "options": [
+     "The new phrases arrive untuned, so that tuning work is done twice",
+     "The new phrases pick up the tuning of the lines they replaced",
+     "The tuning on the rest of the track is lost and has to be redone",
+     "The new phrases are tuned automatically to the key that was set"
+    ],
+    "key": [
+     "The new phrases arrive untuned, so that tuning work is done twice"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "Tune after the comp and the timing edits are finished. Tuning work sits on the clips you chose, so if you change the comp afterward, the new phrases arrive untuned and you do the work twice.",
+    "why": "Ordering the workflow: comp and timing before tuning."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Most of the notes in the bridge of your comped lead vocal are clearly out of tune. What do you do first?",
+    "options": [
+     "Look in the comp for a better take of the bridge",
+     "Tune every note in the bridge in graph mode",
+     "Run automatic correction over the whole bridge",
+     "Tune only the longest notes and leave the rest"
+    ],
+    "key": [
+     "Look in the comp for a better take of the bridge"
+    ],
+    "page": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "quote": "If most of a phrase needs correction, go back to the comp and look for a better take before you tune it. Tuning rescues a few notes. It does not rescue a performance.",
+    "why": "Recognizing when a phrase is a comp problem rather than a tuning job."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "An automatic corrector's speed control is shown in milliseconds and set to 5. Long notes sound dead still. Which change makes the correction slower and gentler?",
+    "options": [
+     "Raise the value, because a bigger number is slower",
+     "Lower the value, because a smaller number is slower",
+     "Raise the value, because a bigger number is faster",
+     "Lower the value, because a smaller number is gentler"
+    ],
+    "key": [
+     "Raise the value, because a bigger number is slower"
+    ],
+    "page": "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "quote": "When the control is shown in milliseconds, the number is how long the correction takes to arrive, so a bigger number means a slower, gentler correction and a smaller number means a faster, harder one.",
+    "why": "Reading a retune speed control correctly to back off the correction."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "On an automatic corrector, a sung slide between two notes now sounds like a hard step, although both notes land well. Which control do you change?",
+    "options": [
+     "Lengthen the note transition time",
+     "Shorten the note transition time",
+     "Raise the overall correction amount",
+     "Switch formant preservation on"
+    ],
+    "key": [
+     "Lengthen the note transition time"
+    ],
+    "page": "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "quote": "Set it short and a slide or a run between notes becomes a hard step, with the glide gone. Lengthen it and the glide survives while the notes at either end still land.",
+    "why": "Using the note transition control to keep glides between notes."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "A vocal has fast runs that need a fast retune speed to land, but at that speed the long held notes sit dead still. Which control solves both problems?",
+    "options": [
+     "A humanize-type control that relaxes correction on sustained notes",
+     "A slower retune speed applied across the whole vocal performance",
+     "A longer note transition time applied to every note in the vocal",
+     "A full correction amount applied only to the long held notes"
+    ],
+    "key": [
+     "A humanize-type control that relaxes correction on sustained notes"
+    ],
+    "page": "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "quote": "A humanize-type control keeps the fast speed on short notes and relaxes it on sustained notes, so held notes keep their natural movement while quick notes still land.",
+    "why": "Choosing the control that separates short and sustained notes."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "You move a sung note up four semitones with formant preservation on and look at its spectrum. Compared with the original, what should you see?",
+    "options": [
+     "Harmonics moved up, with the resonance peaks at the same frequencies",
+     "Harmonics and resonance peaks both moved up by the same ratio",
+     "Resonance peaks moved up, with the harmonics at the same frequencies",
+     "Harmonics and resonance peaks both left at their original frequencies"
+    ],
+    "key": [
+     "Harmonics moved up, with the resonance peaks at the same frequencies"
+    ],
+    "page": "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "quote": "Formant preservation keeps the voice sounding like the same person when the pitch moves: the harmonics move to the new note while the formant peaks stay where the singer's throat put them.",
+    "why": "Predicting what formant preservation does to the spectrum of a moved note."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_answers_question",
+    "stem": "You are checking a tuned vocal for over-correction. Select every sound that tells you the correction has gone too far.",
+    "options": [
+     "Hard steps between notes where the singer glided",
+     "A warble where a note flips between two neighboring pitches",
+     "A grainy, buzzy or phasey texture on breaths and s sounds",
+     "A slight scoop up into the start of each long note",
+     "A steady vibrato swinging evenly around each note center",
+     "Small differences in pitch center from phrase to phrase"
+    ],
+    "key": [
+     "Hard steps between notes where the singer glided",
+     "A warble where a note flips between two neighboring pitches",
+     "A grainy, buzzy or phasey texture on breaths and s sounds"
+    ],
+    "page": "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "quote": "Hard steps between notes where the singer glided. Long notes that sit dead still, with no movement at all. A warble where a note flips between two neighboring pitches. A grainy, buzzy or phasey texture on breaths and s sounds.",
+    "why": "Recognizing the audible signs of over-correction."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "After a graph mode tuning pass, the s sounds and breaths in a vocal have turned grainy and phasey. What caused it?",
+    "options": [
+     "Segments with no pitch were moved as if they were notes",
+     "Formant preservation was left on for the moved notes",
+     "The retune speed was set too slow for the consonants",
+     "The vibrato was reduced on the notes on either side"
+    ],
+    "key": [
+     "Segments with no pitch were moved as if they were notes"
+    ],
+    "page": "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "quote": "Breaths and consonants such as s, sh, f and t have no pitch, so the tracker has nothing to lock on to and processes noise as if it were a note. In graph mode, leave those segments where they are.",
+    "why": "Diagnosing artifacts on unvoiced sounds."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Halfway through a tuning pass you realize you are correcting every note whose curve is not exactly on its row, including notes you never heard as wrong. What is the fix?",
+    "options": [
+     "Turn away from the screen and judge the notes by ear",
+     "Zoom in further so the smaller errors are easier to see",
+     "Switch to automatic mode so every note is treated alike",
+     "Set the correction amount to full on the notes you move"
+    ],
+    "key": [
+     "Turn away from the screen and judge the notes by ear"
+    ],
+    "page": "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "quote": "Turn away from the screen while you judge. A pitch display makes every wiggle look like a mistake, and you end up fixing notes by eye that nobody hears.",
+    "why": "Tuning by ear rather than by the display."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "The lead vocal holds a note 10 cents sharp, and it sounds right in the track. The double sits 25 cents sharp on the same note. Where do you put the double's pitch center?",
+    "options": [
+     "Close to the lead's center, about 10 cents sharp",
+     "Exactly on the grid line for the written note",
+     "Halfway between the grid line and the lead",
+     "Where it is now, 15 cents away from the lead"
+    ],
+    "key": [
+     "Close to the lead's center, about 10 cents sharp"
+    ],
+    "page": "Tuning: Doubled Vocals and a Worked Example on a Lead Vocal",
+    "quote": "A double exists to thicken the lead. Its target is the lead, not the grid. Tune the lead first and commit to it, then tune each double to the lead's pitch centers, note by note.",
+    "why": "Choosing the tuning target for a double: the lead, not the grid."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "A double comes in about 100 ms after the lead on every phrase, and the start of each note sounds like a tuning clash even though both pitch centers agree. What do you do first?",
+    "options": [
+     "Line up the double's timing with the lead",
+     "Tune the scoops on the double onto the note",
+     "Set a faster retune speed on the double",
+     "Pull the double's pitch centers further in"
+    ],
+    "key": [
+     "Line up the double's timing with the lead"
+    ],
+    "page": "Tuning: Doubled Vocals and a Worked Example on a Lead Vocal",
+    "quote": "A double that comes in late is still scooping up into the note while the lead is already on it, and that moment sounds like a tuning clash even when both pitch centers agree.",
+    "why": "Diagnosing a clash on a double as a timing problem before a pitch problem."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "After you move the pitch center of a long note, you hear a small bump in pitch right where the previous note hands over to it. What is the fix?",
+    "options": [
+     "Smooth the transition between the two notes",
+     "Move the previous note to match the new one",
+     "Move the long note back partway toward flat",
+     "Set a faster retune speed on the long note"
+    ],
+    "key": [
+     "Smooth the transition between the two notes"
+    ],
+    "page": "Tuning: Doubled Vocals and a Worked Example on a Lead Vocal",
+    "quote": "After a pitch center moves, the join with the note before it can pick up a small jump or bump. If you hear one, smooth the transition between the two notes rather than moving either note again.",
+    "why": "Repairing a transition artifact after a pitch center move."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "A long note's pitch center is now within a few cents of the note, but its last half second still sags steadily flat as the singer runs out of air. What is the right repair?",
+    "options": [
+     "Reduce the drift on that note partway and leave the center alone",
+     "Move the pitch center of the whole note up until the end is in tune",
+     "Apply full correction to the note so every part lands on the row",
+     "Flatten the vibrato on the note so the sag is easier to hear"
+    ],
+    "key": [
+     "Reduce the drift on that note partway and leave the center alone"
+    ],
+    "page": "Tuning: Doubled Vocals and a Worked Example on a Lead Vocal",
+    "quote": "The end still sags. Reduce the drift on that note by about half, so the fall at the end shrinks but does not vanish.",
+    "why": "Choosing drift correction rather than a center move for a sagging note end."
+   }
+  ],
+  "dropped": []
+ }
+}

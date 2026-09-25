@@ -1,0 +1,489 @@
+{
+ "pages": [
+  {
+   "title": "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+   "slug": "master-buss-processing-and-endgame-headroom-ceilings-and-meters",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Master-Buss Processing and Endgame: Headroom, Ceilings and Meters</h2>\n<div style=\"width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;\">\n\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png\" alt=\"Note\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px;; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Two targets, two jobs.</strong> The mix you send to mastering peaks near -6 dBFS, which leaves about 6 dB of peak headroom. The finished master that comes back has its ceiling below 0 dBFS, at about -1 dBTP. Keep the two numbers apart: one is how you deliver a mix, the other is where a finished master stops.</p>\n</div>\n</div>\n\n</div>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">What dBFS measures</h3>\n\n<p>dBFS means decibels relative to full scale. 0 dBFS is the largest value a sample in a 16 or 24 bit file can hold, so every level below it reads as a negative number. A waveform that asks for more than 0 dBFS gets its top cut flat, and you hear that as clipping. When this module says peaks near -6 dBFS, it means the single loudest instant of the whole song sits about 6 dB under that wall.</p>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Why the mix leaves about 6 dB of headroom</h3>\n\n<p>Leave about 6 dB of peak headroom, with peaks near -6 dBFS, in the mix that goes to mastering. Mastering is a separate stage with its own EQ, compression and limiting, and every boost it makes raises the peaks. A mix that already touches 0 dBFS gives the mastering engineer no room, so the first job becomes turning it down, and any limiting you printed into it cannot be taken back out.</p>\n\n<p>The headroom costs you nothing. A 24 bit file has roughly 144 dB of theoretical dynamic range, so moving the loudest peak down 6 dB leaves the quietest detail far above the noise floor. Headroom is not wasted level. It is room for the next person's work.</p>\n\n<p>Expect a mix at this level to sound quieter than a commercial release. That is correct, and it is not something to fix on the master buss.</p>\n\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Master-Buss_Processing_and_Endgame/Headroom_Level_Ladder.png\" alt=\"Level scale with 0 dBFS, a finished master ceiling near -1 dBTP, and mix peaks near -6 dBFS with headroom marked\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. The two targets on one scale. The mix sent to mastering peaks near -6 dBFS, leaving about 6 dB of headroom. A finished master stops at about -1 dBTP, keeping about 1 dB of margin below full scale.</figcaption>\n</figure>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">What dBTP means</h3>\n\n<p>A sample peak meter reads the highest stored sample. Your converter rebuilds a smooth waveform that passes through every sample, and between two samples that waveform can rise higher than either of them. Those are inter-sample peaks. A true peak meter oversamples the signal to estimate how high the rebuilt waveform really goes, and it reports the answer in dBTP, decibels true peak. Because it looks between the samples, a true peak reading can be higher than the sample peak reading of the same audio.</p>\n\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Master-Buss_Processing_and_Endgame/Inter_Sample_Peak.png\" alt=\"Sine wave whose samples all read 0 dBFS while the smooth waveform between them rises to about +3 dBTP\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 2. A worst case built on purpose: a sine at one quarter of the sample rate, sampled 45 degrees away from its peaks. Every sample reads 0.0 dBFS, yet the rebuilt waveform reaches about +3 dBTP. Real mixes overshoot by less, but they do overshoot.</figcaption>\n</figure>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Why a finished master sits near -1 dBTP</h3>\n\n<p>The finished master's ceiling sits below 0 dBFS, at about -1 dBTP. The ceiling leaves room for two things a sample peak meter cannot show you: inter-sample peaks when the file is played, and the higher peaks that lossy encoding creates. Lossy encoding, the conversion streaming and downloads use, changes the shape of the waveform, and a file with no overs as a WAV can come out of the encoder with peaks above full scale.</p>\n\n<p>When an assignment asks for a finished master with a limiter, set the limiter's ceiling to about -1 dBTP with its true peak detection turned on, then confirm the result on a true peak meter. Without a true peak mode, set the ceiling lower and let the true peak meter decide.</p>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Reading peak and loudness meters in Pro Tools</h3>\n\n<p>In its standard setting the master fader meter in Pro Tools is a peak meter, and it reads the signal that gets printed, so it is the meter you watch for headroom. Set clip indication to hold until you clear it. A lit clip indicator after a full playthrough then tells you something went over full scale somewhere in the song, even if you were looking at another window when it happened. Clear it before every full listen.</p>\n\n<p>A peak meter answers one question: how close did the loudest instant come to full scale? It says nothing about how loud the song sounds. A loudness meter reads in LUFS, weights the level the way your ear hears it, and shows momentary, short-term and integrated readings. The integrated reading covers the whole song, and it is the number streaming services use to turn songs up or down. Put the loudness meter in the last insert slot on the master so it reads what gets printed.</p>\n\n<p>Two mixes can both peak at -6 dBFS and sit several dB apart on the loudness meter. The heavily compressed one reads louder with the same peaks. So watch the peak reading for headroom, and use the loudness reading to level-match: when you compare against a commercial reference, turn the reference down until its loudness matches your mix. Never raise your mix to meet the reference.</p>\n\n<table style=\"width:100%;border-collapse:collapse;border:2px solid #1B5E20;margin:16px 0;\"><caption>Each reading, what it measures, and what you use it for</caption>\n<thead><tr><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">Reading</th><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">What it measures</th><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">What you use it for</th></tr></thead>\n<tbody>\n<tr style=\"background-color:#f5f5f5;\"><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">Sample peak, dBFS</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">The highest stored sample</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Headroom on the mix: peaks near -6 dBFS</td></tr>\n<tr><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">True peak, dBTP</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">The estimated peak of the rebuilt waveform</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">The finished master's ceiling: about -1 dBTP</td></tr>\n<tr style=\"background-color:#f5f5f5;\"><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">Integrated loudness, LUFS</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Average loudness over the whole song</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Level-matching references, never chasing a number</td></tr>\n<tr><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">Clip indicator</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Whether anything went over full scale</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Cleared before every full listen, checked after</td></tr>\n</tbody>\n</table>\n\n</div>",
+   "figures": [
+    "Headroom_Level_Ladder.png",
+    "Inter_Sample_Peak.png"
+   ]
+  },
+  {
+   "title": "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+   "slug": "master-buss-processing-and-endgame-the-master-chain-and-the-final-check",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Master-Buss Processing and Endgame: The Master Chain and the Final Check</h2>\n<div style=\"width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;\">\n\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png\" alt=\"Note\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px;; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>The rule for the master buss.</strong> Gentle master-buss compression can go on early and be mixed into. Everything else on the master buss comes last, after the mix already works. The master fader stays at unity the whole time.</p>\n</div>\n</div>\n\n</div>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">The chain has an order and a timeline</h3>\n\n<p>Every master chain answers two questions: which order the inserts sit in, and when each one goes on. Pro Tools processes inserts from the top slot down, so the top slot hears the mix first and the bottom slot has the last word.</p>\n\n<p>The order in this course is fixed. The buss compressor sits in the top slot. Broad EQ goes after it. A limiter goes after that, and only when the assignment asks for one. Meters sit at the very bottom, where they read what gets printed.</p>\n\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Master-Buss_Processing_and_Endgame/Master_Chain_Order.png\" alt=\"Master chain in insert order: buss compressor, broad EQ, optional limiter, meters, then bounce\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. The master chain in insert order, and when each piece goes on. The compressor goes on early and you mix into it. EQ and any limiter come last. The limiter is dashed because it is there only when the assignment asks for it.</figcaption>\n</figure>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">The compressor goes on early</h3>\n\n<p>Put the buss compressor on early, before you set the real balance, and mix into it. Every fader move you make from then on is heard through the compressor, so the balance you build is the balance that gets printed. Keep it gentle: a low ratio, an attack slow enough to let the drum hits through, a release that lets the gain reduction meter move with the groove, and a threshold that gives 1 to 2 dB of gain reduction on the loudest sections. 1 to 2 dB of gain reduction on the mix buss is a lot. If you do not want buss compression, leave it off. Adding it at the end undoes every balance you made without it.</p>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Everything else comes last</h3>\n\n<p>Add everything else on the master buss last, for the last few percent, after the mix already works. Broad EQ goes in the second slot, after the compressor, so a late tonal tilt does not change what the compressor reacts to. EQ in front of the compressor would change its gain reduction and shift the balance you already mixed into. Keep every EQ move broad and small, and level-match it: bypass it and compare at the same loudness, or the louder version wins by default. If you need a narrow cut on the master, it belongs on a track.</p>\n\n<p>No limiter on the master unless the assignment asks. When it does, the limiter is always the last processor, with only the meters below it: its job is to set the final peak ceiling, and anything after it that changes the sound could push peaks back over. At this stage it is for control, not loudness. It catches the odd peak and does nothing the rest of the time. For a finished master the ceiling goes at about -1 dBTP. For a mix going on to mastering the headroom rule still holds: peaks near -6 dBFS.</p>\n\n<div style=\"width:100%; background-color:#fff8e1; border-left:4px solid #BF360C; margin:16px 0; border-radius:0 4px 4px 0;\">\n\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.png\" alt=\"Warning\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px;; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>A limiter left on by habit.</strong> If a limiter is sitting on the master and the assignment does not ask for one, take it off before you print. A limiter hides peaks you should be fixing in the balance.</p>\n</div>\n</div>\n\n</div>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Automation in the endgame</h3>\n\n<p>Use automation to serve the arrangement, not to fix it. In the endgame that means rides that make transitions land: push the guitars up a touch into the final chorus, pull a pad back under the verse vocal, lift a word that drops under the band. Write rides on tracks and auxes, never on the master fader. Because the buss compressor is already in place, every ride goes through it, and you hear the real result as you write it.</p>\n\n<p>A section you lift with automation is now louder than it was. After any lift, play that section again and recheck the master peak and the gain reduction there, because the lifted section is usually the one that sets both. Then listen from start to finish for level jumps, clicks, clipped peaks and unintended changes.</p>\n\n\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Worked check before the bounce</h3>\n\n<p>Here is the check on a real session going to mastering, where the assignment does not ask for a limiter. The loudest section is the final chorus, where the guitars were just lifted 2 dB. Work down the table in order.</p>\n\n<table style=\"width:100%;border-collapse:collapse;border:2px solid #1B5E20;margin:16px 0;\"><caption>The pre-bounce check, the reading at each step, and what you do about it</caption>\n<thead><tr><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">Step</th><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">Reading</th><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">What you do</th></tr></thead>\n<tbody>\n<tr style=\"background-color:#f5f5f5;\"><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">1. Master fader</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">0.0 dB</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Nothing. It stays at unity.</td></tr>\n<tr><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">2. Buss compressor, final chorus</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">3 dB of gain reduction, master peak -4.0 dBFS</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Too much compression. Raise the threshold until the loudest hits show 1.5 dB of gain reduction.</td></tr>\n<tr style=\"background-color:#f5f5f5;\"><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">3. Master peak, final chorus</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">-2.5 dBFS after the threshold change</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">3.5 dB too hot. Lower the compressor's output gain by 3.5 dB. Gain reduction stays at 1.5 dB, so the balance you mixed into does not change.</td></tr>\n<tr><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">4. Full playthrough, clip indicator cleared</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Highest peak -6.0 dBFS, clip indicator dark</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">On target: about 6 dB of peak headroom.</td></tr>\n<tr style=\"background-color:#f5f5f5;\"><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">5. Insert list</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Compressor, broad EQ, meters, no limiter</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Correct for this assignment. Nothing to add.</td></tr>\n<tr><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">6. Loudness meter</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Integrated reading noted</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">For reference only. Do not push the level.</td></tr>\n</tbody>\n</table>\n\n<p>Only now make the bounce from an exact timeline selection, re-import it, and listen to the delivered file from start to finish before you submit it. You are listening for the same things as before, in the file that will actually be graded.</p>\n\n</div>",
+   "figures": [
+    "Master_Chain_Order.png"
+   ]
+  }
+ ],
+ "quiz": {
+  "quiz": "Mixing: Quiz - Master-Buss Processing & Endgame",
+  "questions": [
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "The kick is boomy and one rhythm guitar has a harsh ring. You are about to start processing on the master bus. What should you do first?",
+    "options": [
+     "Fix the kick and the guitar on their own tracks",
+     "Cut both problems with one broad master EQ move",
+     "Add master compression so the problems sit back",
+     "Add a master limiter to hold the boomy peaks down"
+    ],
+    "key": [
+     "Fix the kick and the guitar on their own tracks"
+    ],
+    "page": "Master-Buss Processing and Endgame: Procedure Guide",
+    "quote": "Finish corrective work on individual tracks before adding processing to the master bus.",
+    "why": "Rewritten stem: the old stem (start adding compression and EQ) read as if all master processing went on at once; the corrected rule puts gentle compression early and everything else last. Key and quote unchanged on the Procedure Guide."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "The whole mix sounds muddy, and to clean it up you find yourself cutting 4 dB in the low mids on the master EQ. What does that tell you?",
+    "options": [
+     "The mud is coming from a channel, so go back and find it",
+     "The master EQ is the right place, since it fixes everything at once",
+     "The cut should be split between two master EQ bands",
+     "The cut is fine as long as the master is level-matched"
+    ],
+    "key": [
+     "The mud is coming from a channel, so go back and find it"
+    ],
+    "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+    "quote": "The master buss is not where a mix gets fixed. If the mix needs 4 dB of master buss EQ, the problem is on a channel. Go back and find it.",
+    "why": "Diagnosis: a large master EQ move points to a problem on a channel. Rechecked against Knowing When to Stop."
+   },
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "Near the end of the mix you add a broad EQ to the master buss and bypass it to compare. The EQ version sounds better, but it is also about 2 dB louder. What should you do before you judge it?",
+    "options": [
+     "Match its output to the bypassed level, then compare again",
+     "Keep it, since the EQ version clearly sounds better",
+     "Add more EQ so the difference is easier to hear",
+     "Judge it on the meters rather than by ear"
+    ],
+    "key": [
+     "Match its output to the bypassed level, then compare again"
+    ],
+    "page": "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+    "quote": "Keep every EQ move broad and small, and level-match it: bypass it and compare at the same loudness, or the louder version wins by default.",
+    "why": "Rewritten: the old quote (insert in a deliberate order) is gone from the Procedure Guide; now scoped to the late EQ, which is what comes last under the corrected rule."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "Your mix buss compressor is showing 5 to 6 dB of gain reduction through the chorus. How should you read that meter?",
+    "options": [
+     "It is far too much, since 1 to 2 dB on the mix buss is already a lot",
+     "It is normal glue for a mix buss and can stay as it is",
+     "It is fine as long as the attack and release are slow",
+     "It is too little to hear on a full mix and needs more"
+    ],
+    "key": [
+     "It is far too much, since 1 to 2 dB on the mix buss is already a lot"
+    ],
+    "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+    "quote": "Small amounts. 1 to 2 dB of gain reduction on the mix buss is a lot.",
+    "why": "Meter reading: 1 to 2 dB of mix buss gain reduction is a lot. Rechecked against Knowing When to Stop."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "Which of these EQ moves is a good fit for the master buss at the mix stage?",
+    "options": [
+     "A gentle, broad shelf that tilts the whole mix",
+     "A narrow cut on one ringing snare frequency",
+     "A tight boost to pull the vocal presence forward",
+     "A deep notch on the hum from one guitar amp"
+    ],
+    "key": [
+     "A gentle, broad shelf that tilts the whole mix"
+    ],
+    "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+    "quote": "Broad moves only. If you need a narrow cut on the master, it belongs on a track.",
+    "why": "Tool choice: master EQ is broad; narrow work goes on tracks. Rechecked against Knowing When to Stop."
+   },
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "The assignment asks for a limiter on your master. While you are still mixing, what job should that limiter be doing?",
+    "options": [
+     "Catching the odd peak for control, not making the mix louder",
+     "Raising the mix to the level of commercial releases",
+     "Setting the final streaming loudness so mastering can skip it",
+     "Pushing the mix hard so it reaches mastering sounding finished"
+    ],
+    "key": [
+     "Catching the odd peak for control, not making the mix louder"
+    ],
+    "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+    "quote": "For control, not for loudness, at this stage. Mastering is a different job with different ears.",
+    "why": "Rewritten stem: the old stem had the student add a limiter unprompted, which contradicts the no-limiter-unless-asked rule on Knowing When to Stop."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "Your last three changes were all under 1 dB, and on playback you cannot say which of them helped. What should you do next?",
+    "options": [
+     "Call the mix done and bounce it",
+     "Undo all three and try larger moves",
+     "Keep adjusting until one change clearly helps",
+     "Add a new master plugin to find the missing lift"
+    ],
+    "key": [
+     "Call the mix done and bounce it"
+    ],
+    "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+    "quote": "You are done when your next three moves are all under 1 dB and you cannot say which one helped.",
+    "why": "Decision: the three-moves-under-1-dB stop rule. Rechecked against Knowing When to Stop."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You have been revising a mix for days, and each version is different but none is better. You leave it overnight, and the next morning you cannot name anything wrong with it. What should you do?",
+    "options": [
+     "Treat it as finished and deliver it",
+     "Start one more full revision pass to be safe",
+     "Rebalance it against a new reference track",
+     "Rework the automation from the top of the song"
+    ],
+    "key": [
+     "Treat it as finished and deliver it"
+    ],
+    "page": "Master-Buss Processing & Endgame: Common Mistakes and How to Hear Them",
+    "quote": "Leave it overnight. If you cannot name what is wrong the next morning, it is finished.",
+    "why": "Fresh-ears test for being finished. Rechecked against Common Mistakes."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "Which of these uses of automation fits the module's goal for automation?",
+    "options": [
+     "Pushing the guitars up a touch into the final chorus so the lift lands",
+     "Riding a vocal in every bar to cover a harsh EQ problem on its channel",
+     "Drawing a bass ride all song to hide one note that is out of tune",
+     "Automating the master down wherever the mix gets too loud"
+    ],
+    "key": [
+     "Pushing the guitars up a touch into the final chorus so the lift lands"
+    ],
+    "page": "Mixing: Master-Buss Processing & Endgame: Module Overview",
+    "quote": "Use automation to serve the arrangement rather than fix it",
+    "why": "Automation supports the arrangement instead of patching problems. Rechecked against the Module Overview."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_answers_question",
+    "stem": "You have just written automation for the song's section changes. On the full start-to-finish listen that follows, which problems are you listening for? Select all that apply.",
+    "options": [
+     "Level jumps where a ride starts or ends",
+     "Clicks at automation or edit points",
+     "Clipped peaks where a ride pushes too hot",
+     "Changes you did not mean to write",
+     "Whether the mix is as loud as a commercial release",
+     "Whether every track is named and colored consistently"
+    ],
+    "key": [
+     "Level jumps where a ride starts or ends",
+     "Clicks at automation or edit points",
+     "Clipped peaks where a ride pushes too hot",
+     "Changes you did not mean to write"
+    ],
+    "page": "Master-Buss Processing and Endgame: Procedure Guide",
+    "quote": "Use automation to support musical transitions, then listen from start to finish for level jumps, clicks, clipped peaks, and unintended changes.",
+    "why": "Critical listening after automation. Rechecked against the Procedure Guide."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "Your bounced file starts with two seconds of silence and cuts off before the last chord finishes. Which step went wrong?",
+    "options": [
+     "The bounce was not made from an exact timeline selection",
+     "The bounce was not re-imported before submission",
+     "The session was not saved with a version number",
+     "The master processing was not level-matched"
+    ],
+    "key": [
+     "The bounce was not made from an exact timeline selection"
+    ],
+    "page": "Master-Buss Processing and Endgame: Procedure Guide",
+    "quote": "Make the required bounce from an exact timeline selection, re-import it, and listen to the delivered file before submission.",
+    "why": "Diagnosis: wrong start and end points trace to the bounce selection. Rechecked against the Procedure Guide."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You have bounced your final mix and the file shows up in the folder with the right name. What should you do before you submit it?",
+    "options": [
+     "Re-import the bounce and listen to the delivered file",
+     "Submit it, since the bounce used the session settings",
+     "Play the session timeline once more from the top",
+     "Compare its file size with your last bounce"
+    ],
+    "key": [
+     "Re-import the bounce and listen to the delivered file"
+    ],
+    "page": "Master-Buss Processing and Endgame: Procedure Guide",
+    "quote": "Make the required bounce from an exact timeline selection, re-import it, and listen to the delivered file before submission.",
+    "why": "Delivery check: verify the printed file. Rechecked against the Procedure Guide."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You are about to make a destructive edit to the lead vocal. What should you keep first?",
+    "options": [
+     "An untouched playlist or session version",
+     "A screenshot of the plugin settings",
+     "A note of the edit in the track comments",
+     "A bounce of the full mix as it is now"
+    ],
+    "key": [
+     "An untouched playlist or session version"
+    ],
+    "page": "Master-Buss Processing and Endgame: Procedure Guide",
+    "quote": "Keep an untouched playlist or session version before making destructive edits.",
+    "why": "Session safety before destructive edits. Rechecked against the Procedure Guide."
+   },
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "Pro Tools crashes halfway through your endgame work and the session reopens with your last hour missing. Which habit would have protected you?",
+    "options": [
+     "Saving with a version number before you start and when you finish",
+     "Relying on the undo history in the Edit menu to get the work back",
+     "Saving once at the very end, always under the same session name",
+     "Bouncing a rough mix of the whole song before you start working"
+    ],
+    "key": [
+     "Saving with a version number before you start and when you finish"
+    ],
+    "page": "Master-Buss Processing and Endgame: Procedure Guide",
+    "quote": "Save the session before you start and again when you finish, with a version number in the name. It costs two seconds and it is the only undo that survives a crash.",
+    "why": "Rewritten distractors only: the key was much longer than the other options. Rechecked against the Procedure Guide."
+   },
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "You set every balance with nothing on the mix buss. At the end you add a buss compressor, and the balances you worked on fall apart. What is the better approach?",
+    "options": [
+     "Put gentle compression on early and mix into it, or leave it off",
+     "Keep it at the end and nudge the vocal back up where it was",
+     "Keep it at the end and bypass it each time you set a balance",
+     "Add it after the bounce, as a process on the printed file"
+    ],
+    "key": [
+     "Put gentle compression on early and mix into it, or leave it off"
+    ],
+    "page": "Master-Buss Processing & Endgame: Common Mistakes and How to Hear Them",
+    "quote": "Put gentle buss compression on early and mix into it, or leave it off.",
+    "why": "Rewritten: the Common Mistakes row now says gentle buss compression; key and quote updated to the corrected wording."
+   },
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "Your newest version is louder than the last one. It sounds exciting for a minute, then flat and tiring. You plan to push the master harder so it stands out on streaming. What is the better call?",
+    "options": [
+     "Mix for dynamics, since loudness normalization means the loud mix wins nothing",
+     "Push it harder, since streaming services favor the loudest mix they receive",
+     "Keep the loudness and brighten the top end to bring back some life",
+     "Add more buss compression to even out the parts that sound tiring"
+    ],
+    "key": [
+     "Mix for dynamics, since loudness normalization means the loud mix wins nothing"
+    ],
+    "page": "Master-Buss Processing & Endgame: Common Mistakes and How to Hear Them",
+    "quote": "Mix for dynamics. Loudness normalization means the loud mix wins nothing.",
+    "why": "Rewritten distractors only: the key was much longer than the other options. Rechecked against Common Mistakes."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Your finished master reads -0.2 dBTP on a true peak meter with no overs. It is going to a streaming service. Why lower the ceiling to about -1 dBTP anyway?",
+    "options": [
+     "Lossy encoding for streaming can push peaks above where they sit in the WAV",
+     "A true peak meter always reads about 1 dB lower than the real peak level",
+     "Streaming services add about 1 dB of gain to every file they receive",
+     "Mastering needs about 1 dB of room left to add its own final EQ"
+    ],
+    "key": [
+     "Lossy encoding for streaming can push peaks above where they sit in the WAV"
+    ],
+    "page": "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+    "quote": "Lossy encoding, the conversion streaming and downloads use, changes the shape of the waveform, and a file with no overs as a WAV can come out of the encoder with peaks above full scale.",
+    "why": "Predict: why a finished master keeps margin below full scale even with a clean true peak reading."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "A classmate will not deliver a mix with peaks near -6 dBFS, saying it throws away 6 dB of the 24 bit file's quality. What is the right answer?",
+    "options": [
+     "The 6 dB costs nothing audible, because a 24 bit file has so much dynamic range",
+     "The 6 dB is lost for good, so peak the mix as close to 0 dBFS as possible",
+     "The 6 dB is lost for now, but mastering wins it back with its limiter",
+     "The 6 dB only costs quality on quiet songs, so loud songs can peak higher"
+    ],
+    "key": [
+     "The 6 dB costs nothing audible, because a 24 bit file has so much dynamic range"
+    ],
+    "page": "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+    "quote": "A 24 bit file has roughly 144 dB of theoretical dynamic range, so moving the loudest peak down 6 dB leaves the quietest detail far above the noise floor.",
+    "why": "Justify a setting: headroom on a 24 bit mix costs nothing."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Two mixes of the same song both peak at -6 dBFS, but one sounds clearly louder. Which reading shows the difference?",
+    "options": [
+     "A loudness meter reading in LUFS",
+     "The sample peak reading on the master fader",
+     "The true peak reading in dBTP",
+     "The clip indicator on the master meter"
+    ],
+    "key": [
+     "A loudness meter reading in LUFS"
+    ],
+    "page": "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+    "quote": "Two mixes can both peak at -6 dBFS and sit several dB apart on the loudness meter. The heavily compressed one reads louder with the same peaks.",
+    "why": "Read a meter: peak meters show closeness to full scale, loudness meters show how loud it sounds."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "You compare your mix, peaking near -6 dBFS, with a commercial reference, and the reference sounds much louder. How do you make the comparison fair?",
+    "options": [
+     "Turn the reference down until its loudness matches your mix",
+     "Raise your mix until its peaks match the reference",
+     "Add a limiter to your master until it sounds as loud",
+     "Compare them as they are, since the louder one is the target"
+    ],
+    "key": [
+     "Turn the reference down until its loudness matches your mix"
+    ],
+    "page": "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+    "quote": "when you compare against a commercial reference, turn the reference down until its loudness matches your mix. Never raise your mix to meet the reference.",
+    "why": "Choose a method: level-match references without giving up the mix's headroom."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "You play the whole song while writing notes and never look at the meters. At the end, the master fader's clip indicator, set to hold until cleared, is lit. What does it tell you?",
+    "options": [
+     "Something went over full scale at some point in the song",
+     "The last note of the song is the part that is clipping",
+     "The mix is louder than the streaming loudness target",
+     "The buss compressor is showing too much gain reduction"
+    ],
+    "key": [
+     "Something went over full scale at some point in the song"
+    ],
+    "page": "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+    "quote": "A lit clip indicator after a full playthrough then tells you something went over full scale somewhere in the song, even if you were looking at another window when it happened.",
+    "why": "Read an interface: what a held clip indicator does and does not tell you."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "The assignment asks for a finished master, so you add a limiter. The master already has a buss compressor, a broad EQ and a loudness meter. Where does the limiter go?",
+    "options": [
+     "After the EQ as the last processor, with only the meter below it",
+     "In the top slot, so it hears the mix before the buss compressor",
+     "Between the buss compressor and the EQ, in the middle slot",
+     "Below the loudness meter, so it sits in the very last slot"
+    ],
+    "key": [
+     "After the EQ as the last processor, with only the meter below it"
+    ],
+    "page": "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+    "quote": "When it does, the limiter is always the last processor, with only the meters below it: its job is to set the final peak ceiling, and anything after it that changes the sound could push peaks back over.",
+    "why": "Signal flow: place the limiter in the master chain."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "The buss compressor has been on since the start of the mix. Now, at the end, you want a broad high shelf on the master. Why does the EQ go after the compressor instead of before it?",
+    "options": [
+     "So the tilt does not change what the compressor reacts to",
+     "So the compressor can smooth out any harshness the EQ adds",
+     "So the boost drives more gain reduction to glue the mix",
+     "So the compressor's makeup gain can level-match the EQ"
+    ],
+    "key": [
+     "So the tilt does not change what the compressor reacts to"
+    ],
+    "page": "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+    "quote": "Broad EQ goes in the second slot, after the compressor, so a late tonal tilt does not change what the compressor reacts to.",
+    "why": "Signal flow: why late EQ sits after a compressor you mixed into."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Your mix is going to mastering. In the final chorus the buss compressor shows 1.5 dB of gain reduction and the master peaks at -2.5 dBFS. What reaches the target without changing the balance?",
+    "options": [
+     "Lower the compressor's output gain by 3.5 dB",
+     "Lower the compressor's output gain by 6 dB",
+     "Lower the compressor's threshold by 3.5 dB",
+     "Insert a limiter with its ceiling at -6 dBFS"
+    ],
+    "key": [
+     "Lower the compressor's output gain by 3.5 dB"
+    ],
+    "page": "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+    "quote": "3.5 dB too hot. Lower the compressor's output gain by 3.5 dB. Gain reduction stays at 1.5 dB, so the balance you mixed into does not change.",
+    "why": "Calculation: -2.5 dBFS to about -6 dBFS is 3.5 dB, taken after the compressor so gain reduction is unchanged."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_answers_question",
+    "stem": "You automate the guitars up 2 dB into the final chorus. Before you move on, what do you recheck in that chorus? Select all that apply.",
+    "options": [
+     "The peak level on the master",
+     "The gain reduction on the buss compressor",
+     "The pan positions of the guitars",
+     "The integrated loudness of the song",
+     "The broad EQ on the master buss"
+    ],
+    "key": [
+     "The peak level on the master",
+     "The gain reduction on the buss compressor"
+    ],
+    "page": "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+    "quote": "After any lift, play that section again and recheck the master peak and the gain reduction there, because the lifted section is usually the one that sets both.",
+    "why": "Predict: an automation lift changes the loudest section, so peak and gain reduction need rechecking."
+   }
+  ],
+  "dropped": [
+   {
+    "stem": "You reach the bounce step of the procedure and it will not work the way the guid",
+    "reason": "Generic troubleshooting advice with no master-buss content; a test-wise student answers it without the reading. Replaced by a module-specific item from the new pages."
+   }
+  ]
+ }
+}

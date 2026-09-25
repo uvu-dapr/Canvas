@@ -1,0 +1,510 @@
+{
+ "pages": [
+  {
+   "title": "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+   "slug": "frequency-dynamics-and-side-chains-multiband-compression-or-dynamic-eq",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ</h2>\n<div style=\"width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png\" alt=\"Note\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Both tools are EQ that moves.</strong> A static EQ cuts the same amount all the time. Multiband compression and dynamic EQ cut only when a frequency range gets loud, so they fix problems that come and go. The choice between them comes down to one thing: how wide the problem is.</p>\n</div>\n</div>\n</div>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Static problem or dynamic problem</h3>\n<p>Start every frequency decision with one question: is the problem there all the time, or only sometimes? Loop the section and compare quiet passages with loud ones. If the problem is there all the time at the same strength, it is not a dynamic problem: use a static EQ cut and move on. A boxy 400 Hz resonance that is as strong on soft picking as on hard strumming is a static problem.</p>\n<p>Reach for frequency dependent dynamics only when the problem comes and goes with the performance: a bass whose low end swells in the chorus, a vocal that turns harsh only when the singer pushes, one bass note that rings out louder than its neighbors. Static EQ cannot fix these, because any cut deep enough for the loud moments also thins the quiet ones. Multiband compression gives you different compression per frequency band. It solves what static EQ cannot, and it causes what static EQ never would, so you use it on purpose and listen for the side effects.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">How multiband compression works</h3>\n<p>A multiband compressor splits the signal into bands with crossover filters, compresses each band on its own, and adds the bands back together. Each band has its own threshold, ratio, attack, release and gain, and each band's detector hears only its own range. When no band is compressing, the bands sum back to a flat frequency response. Pro Tools includes Pro Multiband Dynamics, which works this way: you set the crossover points between the bands, then set the dynamics for each band.</p>\n<p>The word that matters is band. Gain reduction in the low band turns down everything between the bottom of the spectrum and the first crossover, as one block. A multiband compressor is a broad brush. It is the right tool when a whole region of the spectrum rises and falls with the performance.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains/Multiband_Bands_Versus_Dynamic_EQ_Bell.png\" alt=\"Two gain curves: a multiband low band lowered 4 dB below 200 Hz, and a narrow dynamic EQ cut of 5 dB at 3 kHz\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. Top: crossovers at 200 Hz and 2.5 kHz, with 4 dB of gain reduction in the low band, so everything below 200 Hz drops together. Bottom: a dynamic EQ band at 3 kHz, Q 4, flat below threshold and cutting 5 dB above it.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">How dynamic EQ works</h3>\n<p>A dynamic EQ is an EQ band whose gain moves. You set the frequency, the width (Q) and the filter shape exactly as you would on a normal EQ band, then add a threshold, a ratio or range, and attack and release times. The detector listens to that same band. While the band stays below threshold, its gain sits at 0 dB and the EQ does nothing to the sound. When the band crosses threshold, the gain moves down, and it comes back up when the level falls again.</p>\n<p>Because the band has a Q, a dynamic EQ can be narrow. It can pull down a single resonance a fraction of an octave wide and leave the frequencies next to it untouched. That difference decides most choices between the two tools.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Which one to reach for</h3>\n<p>Match the width of the tool to the width of the problem. Sweep a narrow boost to find the problem first. If it lives in one narrow slice, use dynamic EQ. If a whole region swells, use multiband compression.</p>\n<table style=\"width:100%;border-collapse:collapse;border:2px solid #1B5E20;margin:16px 0;\"><caption>Choosing between static EQ, multiband compression and dynamic EQ</caption>\n<thead><tr><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">The problem</th><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">Reach for</th><th scope=\"col\" style=\"background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;\">Why</th></tr></thead>\n<tbody>\n<tr style=\"background-color:#f5f5f5;\"><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">Always present at the same strength</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Static EQ</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Nothing changes with level, so nothing needs to move.</td></tr>\n<tr><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">A broad region rises and falls, such as the whole low end swelling in the chorus</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Multiband compression</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">The problem is as wide as a band, so the whole band should move.</td></tr>\n<tr style=\"background-color:#f5f5f5;\"><th scope=\"row\" style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;\">One narrow resonance that appears only at certain levels, such as harshness near 3 kHz when the singer belts</th><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">Dynamic EQ</td><td style=\"padding:10px 12px;border-bottom:1px solid #e0e0e0;\">A narrow band catches the problem and leaves its neighbors alone.</td></tr>\n</tbody>\n</table>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Setting it up in Pro Tools</h3>\n<p>Insert the processor, loop the loudest passage that shows the problem, and set the frequency or crossover first. Then lower the threshold until the band's gain reduction moves only when you hear the problem and sits at zero the rest of the time. Toggle bypass in the full mix, at matched level, before you decide it helps.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">What overdone sounds like</h3>\n<p>Overdone multiband compression makes the tone of the track change with its level. The loud chorus comes out duller or thinner than the verse, because the bands that got loud got turned down. Hard compression in every band flattens the balance the arrangement built. A very fast release on the low band can follow the individual cycles of a bass note, which you hear as a gritty distortion.</p>\n<p>Overdone dynamic EQ opens a hole in the sound each time the band engages: the vocal turns hollow or scooped on the loud notes and full again on the quiet ones. Fast attack and release on a deep cut make the band flutter, which sounds like a filter wobbling. A band set too wide stops being precise and behaves like a multiband band.</p>\n<div style=\"width:100%; background-color:#fff8e1; border-left:4px solid #BF360C; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.png\" alt=\"Warning\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Do not use either tool to fix a static problem.</strong> If the gain reduction never returns to zero, the band is cutting all the time and you have built an unstable static EQ. Raise the threshold, or replace it with a plain EQ cut.</p>\n</div>\n</div>\n</div>\n</div>",
+   "figures": [
+    "Multiband_Bands_Versus_Dynamic_EQ_Bell.png"
+   ]
+  },
+  {
+   "title": "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+   "slug": "frequency-dynamics-and-side-chains-de-essing-as-a-side-chain",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain</h2>\n<div style=\"width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png\" alt=\"Note\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>A de-esser is a side-chain compressor.</strong> It listens to a filtered copy of the vocal that contains only the sibilant range, so S sounds trigger it and vowels do not. Everything on this page follows from that one idea.</p>\n</div>\n</div>\n</div>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">What sibilance is</h3>\n<p>Sibilance is the hiss in s, sh, z and ch sounds. It is noise made by air forced past the teeth, and its energy sits high, usually somewhere between about 4 kHz and 10 kHz. The exact band changes with the singer, the microphone and the word: an s sits higher than an sh. Some sibilance is what makes words understandable. Too much spits out of the speakers and stabs the listener on every line, and it gets worse with every bright EQ boost, every compressor with makeup gain and every reverb you add after it.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Why a de-esser is a keyed compressor</h3>\n<p>A plain compressor on a vocal reacts to overall level, and the loudest parts of a vocal are the vowels, not the S sounds. It would turn down the vowels and let the S sounds through. A de-esser fixes that with a side-chain. Inside the plug-in, a copy of the vocal goes through a high-pass or band-pass filter tuned to the sibilant range, and that filtered copy drives the detector. A loud vowel has little energy up there, so it stays under threshold. An S has most of its energy up there, so it crosses threshold and triggers gain reduction. It is the same idea as every side-chain in this module: a compressor keyed to the sibilant range, one band, one job.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains/Sibilance_Band_And_Key_Filter.png\" alt=\"Vowel and S sound spectra with a band-pass key filter at 7 kHz that passes the S energy and rejects the vowel\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. Simplified spectra of a vowel and an S sound, with a band-pass key filter centered at 7 kHz. The filter is down about 24 dB at 500 Hz, where the vowel is strongest, and passes the S energy almost untouched.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Split band or wideband</h3>\n<p>Once the detector fires, the de-esser has to turn something down. Wideband de-essing turns down the whole signal for the length of the S, so the body of the voice dips with it. Split band de-essing turns down only the frequencies above the split point, so the vowel body underneath keeps its level. Many de-essers offer both modes on a switch.</p>\n<p>Use split band as your default on a lead vocal, because an S often overlaps the end of a vowel and wideband reduction ducks that vowel too. You hear wideband going too far as the whole word dipping in level, like a tiny dropout. Wideband works well on short, isolated S sounds, and it keeps the tone of the S more natural, because the whole sound moves together.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains/Wideband_Versus_Split_Band_De_Essing.png\" alt=\"Two gain curves during an S: wideband cuts every frequency by 6 dB; split band cuts only above a 5 kHz split\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 2. The same 6 dB of de-essing in two modes. Wideband lowers every frequency, including the vowel body. Split band leaves everything below the 5 kHz split point alone and lowers only the highs.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Find the band with the listen function</h3>\n<p>Loop a line with plenty of S sounds. Turn on the de-esser's listen function, sometimes labeled key listen or side-chain monitor. It replaces the track's output with the filtered key, so you hear exactly what the detector hears. Sweep the frequency until the S sounds jump out loudest and the vowels almost vanish. That is your band.</p>\n<p>Turn listen off before you do anything else. Listen changes what comes out of the track, so if you leave it on, the vocal plays back as a thin, hissy ghost of its own highs, in the mix and in the bounce.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">Set the threshold or range</h3>\n<p>Lower the threshold until the gain reduction meter moves on the S sounds and stays still on the vowels. Some de-essers use a range control instead of, or as well as, a threshold; range sets the most reduction the de-esser is allowed to apply. Start with the worst S sounds getting about 4 to 6 dB of reduction, then judge by ear with the whole mix playing. The goal is S sounds that sit at the same level as the rest of the word, not S sounds that disappear.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">What a lisp sounds like</h3>\n<p>Too much de-essing turns S sounds into th sounds. Sing starts to sound like thing, and the singer sounds like they have a lisp. The words also lose definition, because the listener uses sibilance to tell sip from ship. When you hear a lisp, raise the threshold or reduce the range until the S comes back. A slightly bright S distracts the listener less than a lisp does.</p>\n<h3 style=\"color:#1B5E20; margin-top:28px;\">De-ess the reverb send</h3>\n<p>Reverb and delay make sibilance worse. A bright S going into a reverb comes back as a splash of hiss that hangs after the word, and a delay repeats every S as a separate tick. In Pro Tools, a send taps the track after its inserts, so a de-esser on the vocal already cleans what goes to the send. When the reverb still splashes on S sounds, insert a second de-esser on the reverb aux as the first insert, before the reverb plug-in, and de-ess harder there. Nobody hears a lisp inside a reverb tail, so this de-esser can take far more than the one on the dry vocal.</p>\n<div style=\"width:100%; background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.png\" alt=\"Tip\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Judge de-essing at the level the listener hears it.</strong> S sounds that seem harsh with the vocal soloed and loud are often fine in the mix. Set the de-esser with the band playing and the vocal at its mix level, then check once on quiet playback.</p>\n</div>\n</div>\n</div>\n</div>",
+   "figures": [
+    "Sibilance_Band_And_Key_Filter.png",
+    "Wideband_Versus_Split_Band_De_Essing.png"
+   ]
+  },
+  {
+   "title": "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick",
+   "slug": "frequency-dynamics-and-side-chains-worked-example-ducking-a-bass-from-the-kick",
+   "body_html": "<div style=\"font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;\">\n<h2 style=\"background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;\">Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick</h2>\n<p>This page builds one side-chain from start to finish. The song is at 120 BPM with a kick on every beat and a sustained bass line underneath it. Both live in the same low range, so on every beat they mask each other. The fix is to let the kick pull the bass down a few dB for the instant it hits, so the kick punches through and the bass fills the space between hits.</p>\n<div style=\"width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png\" alt=\"Note\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>The kick never passes through the compressor.</strong> It only tells the compressor when to pull the bass down. You hear the bass dip each time the kick hits; you never hear the kick through the bass channel.</p>\n</div>\n</div>\n</div>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 1: Name the trigger and the ducked track</h3>\n<p>Decide which source should trigger control of the other before you touch a plug-in. Here the kick is the trigger and the bass is the ducked track. The compressor goes on the bass. The kick only sends a copy of itself.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 2: Send the kick to a key bus, pre-fader</h3>\n<p>On the kick track, assign an empty send to a new internal bus and name it Kick Key. In the send window, click Pre to make the send pre-fader, and set the send level to 0 dB. A pre-fader send taps the kick before its fader, so when you rebalance or automate the kick fader later, the key level stays the same and the amount of ducking does not change.</p>\n<p>Do not create an aux track to listen to Kick Key. The compressor's key input is the only destination the bus needs. If you add an aux input fed by the key bus and route it to the mix, you hear a second copy of the kick. The send is a copy, so the kick keeps playing through its own channel exactly as before.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 3: Insert the compressor on the bass and key it</h3>\n<p>Insert Pro Compressor on the bass track. In the Side-Chain section, set the Source menu to Kick Key, the bus the key send feeds, not to the bass track's own signal. If your compressor has an external key switch, turn it on. Play the song and watch the gain reduction meter: it should move on every kick and stay still in a bar where the kick drops out, even when the bass plays loud.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 4: Filter the key</h3>\n<p>A kick mic also hears snare and hi-hat. If that bleed reaches the key, the bass dips between kicks for no reason. Turn on the side-chain filter and low-pass the key around 100 to 150 Hz, so only the kick's low end drives the detector. Engage the side-chain listen function for a moment: you should hear a dull thump on each beat and little else. Turn listen off again.</p>\n<p>Filtering the key changes only what the compressor listens to. It never changes the tone of the bass.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 5: Set ratio, attack and release</h3>\n<p>Start at a 4:1 ratio. Set the attack fast, around 1 ms, so the bass is already moving down as the kick's low end arrives. A slow attack lets the first part of each kick pass before the bass dips, which is exactly the moment you wanted cleared.</p>\n<p>The release sets how fast the bass comes back, and you set it to the kick's rhythm. At 120 BPM the kicks are 500 ms apart. Start around 100 ms and watch the meter: it must return to zero before the next kick. If the release is too long, the bass never fully recovers and the whole line just sits lower.</p>\n<figure style=\"margin:24px 0 32px 0;\">\n<img style=\"max-width:100%; height:auto; display:block;\" src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains/Kick_Keyed_Ducking_Envelopes.png\" alt=\"Kick hits every 500 ms above two gain curves: the bass dips 3 dB and recovers; the pad dips 8 dB and swells back\" loading=\"lazy\">\n<figcaption style=\"color:#616161; font-size:0.9em; margin-top:8px;\">Figure 1. Four kicks at 120 BPM. The bass compressor (4:1, 1 ms attack, 100 ms release) dips 3 dB on each hit and is back at 0 dB well before the next kick. The pad compressor dips 8 dB with a 150 ms release, so it is still swelling back when the next kick arrives.</figcaption>\n</figure>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 6: Set how much gain reduction</h3>\n<p>Lower the threshold until the meter shows 2 to 3 dB of reduction on each kick. The threshold is compared with the key, not with the bass, so the key send level, the key filter and the threshold set the amount together. Raise the kick's key send and the bass ducks more at the same threshold.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 7: Listen in the full mix</h3>\n<p>Adjust threshold, ratio, attack and release while listening to the full mix, not the soloed bass. In the mix, listen for three things: the kick's low end punches through more clearly, the low end sounds tighter on each beat, and the bass still sounds like a steady, even line. Toggle bypass and compare. You should feel the difference more than hear it. If you can hear the bass breathe as a separate event, it is too much: raise the threshold.</p>\n<h3 style=\"color:#1B5E20; font-size:1.2em; border-bottom:2px solid #1B5E20; padding-bottom:4px; margin-top:28px;\">Step 8: Duck a pad with the same key</h3>\n<p>The same bus can feed any number of key inputs. Insert a compressor on a sustained pad and set its side-chain source to Kick Key. For clarity alone, use the same settings as the bass. For the audible pumping heard in a lot of dance music, go deeper, about 6 to 10 dB, and lengthen the release so the pad swells back up across the beat and is nearly full again as the next kick lands. On that pad, pumping is a sound you chose; on a rock bass, it is a fault.</p>\n<div style=\"width:100%; background-color:#fff8e1; border-left:4px solid #BF360C; margin:16px 0; border-radius:0 4px 4px 0;\">\n<div style=\"display:flex; align-items:flex-start;\">\n<div style=\"width:38px; padding:12px 8px 12px 14px; vertical-align:top;\"><img src=\"https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.png\" alt=\"Warning\" width=\"44\" height=\"44\" loading=\"lazy\"></div>\n<div style=\"padding:12px 14px 12px 4px; flex:1 1 auto;\">\n<p style=\"margin:0;\"><strong>Save before and after.</strong> Save the session before you start and again when you finish, with a version number in the name.</p>\n</div>\n</div>\n</div>\n</div>",
+   "figures": [
+    "Kick_Keyed_Ducking_Envelopes.png"
+   ]
+  }
+ ],
+ "quiz": {
+  "quiz": "Effects: Quiz - Frequency Dynamics & Side-Chains",
+  "questions": [
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_answers_question",
+    "stem": "The kick and bass mask each other in the low end, and you decide the kick should duck the bass with a side-chain. Which parts belong in the setup? Select all that apply.",
+    "options": [
+     "A compressor inserted on the bass track",
+     "A key send on the kick track",
+     "A compressor inserted on the kick track",
+     "A key send on the bass track",
+     "A compressor inserted on the key bus"
+    ],
+    "key": [
+     "A compressor inserted on the bass track",
+     "A key send on the kick track"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+    "quote": "The trigger track does the pushing. A key send carries a copy of it to the side chain input on the compressor, and the compressor, inserted on the ducked track, turns that key signal into gain reduction.",
+    "why": "Builds a ducking side-chain: send on the trigger, compressor on the ducked track."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "A compressor on the bass has its key input enabled and the kick has a key send to Bus 1, but the bass dips on its own loud notes and ignores the kick. In Pro Compressor, what do you fix?",
+    "options": [
+     "Set the Source menu to Bus 1, the bus the key send feeds",
+     "Raise the kick's key send level until the kick triggers it",
+     "Lower the threshold so the kick crosses it more often",
+     "Move the compressor from the bass track to the kick track"
+    ],
+    "key": [
+     "Set the Source menu to Bus 1, the bus the key send feeds"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+    "quote": "In Pro Compressor, point 3 is the Source menu in the Side-Chain section, shown in the screenshot at the top of this page. Set it to the bus the key send feeds, not to the ducked track's own signal.",
+    "why": "Diagnoses a side-chain listening to its own track instead of the key bus."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "The bass compressor is keyed from the kick and set up correctly. In a bar where the kick is silent, the bassist plays a loud, sustained note. What does the compressor do to that note?",
+    "options": [
+     "Nothing, because the kick trigger is not present",
+     "Reduces it, because the note crosses the threshold",
+     "Reduces it by the same amount as on a kick hit",
+     "Mutes it until the next kick hit arrives"
+    ],
+    "key": [
+     "Nothing, because the kick trigger is not present"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+    "quote": "Confirm that gain reduction occurs only when the trigger is present.",
+    "why": "Predicts keyed compression behavior when the trigger is absent."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "The bass compressor is keyed from the kick and working as intended. Which describes the audio coming out of the bass channel?",
+    "options": [
+     "The bass alone, dipping each time the kick hits",
+     "The bass with the kick blended in through the key input",
+     "The kick alone, since it is what drives the compressor",
+     "The bass alone, dipping each time a bass note gets loud"
+    ],
+    "key": [
+     "The bass alone, dipping each time the kick hits"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+    "quote": "You never hear the trigger through the compressor; you hear the ducked track dip each time the trigger hits.",
+    "why": "Predicts what a keyed compressor outputs: the ducked track only, never the trigger."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "In a video mix, the music bed masks the narrator. To keep the narration clear, where do you insert the ducking compressor and what do you key it from?",
+    "options": [
+     "Insert it on the music and key it from the voice",
+     "Insert it on the voice and key it from the music",
+     "Insert it on the voice and key it from the voice",
+     "Insert it on the music and key it from the music"
+    ],
+    "key": [
+     "Insert it on the music and key it from the voice"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: How They Work",
+    "quote": "Using one source to pull another down. Voice over music is the obvious case, kick over bass is the useful one.",
+    "why": "Chooses trigger and controlled track for voice over music ducking."
+   },
+   {
+    "origin": "draft",
+    "action": "rewrite",
+    "type": "multiple_choice_question",
+    "stem": "A bass line's whole low end, everything below about 150 Hz, swells on the loud chorus while the verses sit right. A static low cut fixes the chorus but thins every verse. Which tool fits?",
+    "options": [
+     "Multiband compression acting on the low band only",
+     "A narrow dynamic EQ band on one low note",
+     "A deeper static low cut with a wider bandwidth",
+     "Ducking the bass from the kick on every hit"
+    ],
+    "key": [
+     "Multiband compression acting on the low band only"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+    "quote": "It is the right tool when a whole region of the spectrum rises and falls with the performance.",
+    "why": "Rewritten: the old stem (boom on a few notes) now points to dynamic EQ under the new page's decision guide, so the problem is made broad and a dynamic EQ distractor added."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_answers_question",
+    "stem": "Which of these jobs work by having the compressor respond to a signal other than the one you hear? Select all that apply.",
+    "options": [
+     "Ducking a music bed under a voice",
+     "De-essing a vocal's harsh S sounds",
+     "Letting one frequency range drive the compression",
+     "Blending a heavily compressed copy with the dry track",
+     "Adding makeup gain after the gain reduction"
+    ],
+    "key": [
+     "Ducking a music bed under a voice",
+     "De-essing a vocal's harsh S sounds",
+     "Letting one frequency range drive the compression"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: How They Work",
+    "quote": "The audio you hear and the audio that triggers the gain reduction do not have to be the same signal. That one idea covers ducking, de-essing and frequency selective control.",
+    "why": "Recognizes which tasks need a side-chain (key) setup."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "The lead vocal ducks the guitars, but the guitars also dip on the singer's low, boomy breath pops, while the real clash is in the vocal's upper midrange. What do you change?",
+    "options": [
+     "Filter the key signal so only the clashing range drives reduction",
+     "Filter the guitar track so it carries less of the clashing range",
+     "Raise the ratio so the guitars dip harder under the vocal",
+     "Move the compressor from the guitars onto the vocal track"
+    ],
+    "key": [
+     "Filter the key signal so only the clashing range drives reduction"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+    "quote": "Filter the key signal when needed so only the frequency range causing the conflict drives gain reduction.",
+    "why": "Uses a key filter to stop unwanted triggers in a ducking setup."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You are setting threshold, ratio, attack and release on a bass compressor keyed from the kick. How should you be listening?",
+    "options": [
+     "To the full mix, with everything playing",
+     "To the bass soloed, so the dips are easy to hear",
+     "To the kick soloed, so the trigger is easy to hear",
+     "To the key bus alone, so the trigger is clean"
+    ],
+    "key": [
+     "To the full mix, with everything playing"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+    "quote": "Adjust threshold, ratio, attack, and release while listening to the full mix.",
+    "why": "Sets side-chain controls in context rather than in solo."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You are setting up kick-triggered ducking on a bass. How much gain reduction should you aim for on each kick hit?",
+    "options": [
+     "About 0.5 dB",
+     "About 2 to 3 dB",
+     "About 6 to 8 dB",
+     "About 10 to 12 dB"
+    ],
+    "key": [
+     "About 2 to 3 dB"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: How They Work",
+    "quote": "Kick-triggered bass ducking is easy to overdo. Aim for 2 to 3 dB of reduction with a release that recovers before the next kick.",
+    "why": "Chooses a working starting amount for kick-bass ducking."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "Your kick-keyed ducking on the bass is running, and you can clearly hear the bass breathe in and out as its own rhythmic event. What does that tell you?",
+    "options": [
+     "The ducking is overdone, so back off the reduction",
+     "The ducking is working, so leave the settings alone",
+     "The key is too weak, so raise the kick's key send",
+     "The dips are too exposed, so add makeup gain to the bass"
+    ],
+    "key": [
+     "The ducking is overdone, so back off the reduction"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: How They Work",
+    "quote": "If you can hear the bass breathe as a separate event, it is too much.",
+    "why": "Diagnoses overdone ducking by ear."
+   },
+   {
+    "origin": "draft",
+    "action": "keep",
+    "type": "multiple_choice_question",
+    "stem": "You add a key send on the kick to feed the bass compressor's side chain input. What happens to the kick in the mix?",
+    "options": [
+     "It keeps playing through its own channel, since the send is a copy",
+     "It drops out of the mix, since its signal now goes to the key bus",
+     "It is ducked along with the bass, since it feeds the compressor",
+     "It loses level by the amount of signal sent to the key bus"
+    ],
+    "key": [
+     "It keeps playing through its own channel, since the send is a copy"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+    "quote": "A key send carries a copy of it to the side chain input on the compressor",
+    "why": "Predicts that a key send does not remove or change the trigger track."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "A lead vocal turns harsh in a narrow band near 3 kHz, but only on the lines the singer belts. The quiet lines sound right. Which tool fits best?",
+    "options": [
+     "A narrow dynamic EQ band cutting at the harsh frequency",
+     "A narrow static EQ cut at the harsh frequency",
+     "A multiband compressor band spanning 2 to 6 kHz",
+     "A wideband compressor on the vocal with a faster attack"
+    ],
+    "key": [
+     "A narrow dynamic EQ band cutting at the harsh frequency"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+    "quote": "Because the band has a Q, a dynamic EQ can be narrow. It can pull down a single resonance a fraction of an octave wide and leave the frequencies next to it untouched.",
+    "why": "Chooses dynamic EQ for a narrow, level-dependent resonance over static EQ or a broad band."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "An acoustic guitar has a boxy resonance near 400 Hz that is just as strong on soft picking as on hard strumming. Which fix fits?",
+    "options": [
+     "A static EQ cut at the boxy frequency",
+     "A dynamic EQ band cutting at the boxy frequency",
+     "Multiband compression on a band around 400 Hz",
+     "A compressor keyed from a 400 Hz filtered copy"
+    ],
+    "key": [
+     "A static EQ cut at the boxy frequency"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+    "quote": "If the problem is there all the time at the same strength, it is not a dynamic problem: use a static EQ cut and move on.",
+    "why": "Recognizes a static problem and does not reach for frequency dependent dynamics."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "A dynamic EQ band at 250 Hz is set to cut the bass's loud notes. During a quiet verse the band never reaches threshold. What does the band do to the bass in that verse?",
+    "options": [
+     "Nothing, because its gain sits at 0 dB",
+     "Cuts 250 Hz by the full range setting",
+     "Cuts 250 Hz by half the range setting",
+     "Boosts 250 Hz to make up for the cut"
+    ],
+    "key": [
+     "Nothing, because its gain sits at 0 dB"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+    "quote": "While the band stays below threshold, its gain sits at 0 dB and the EQ does nothing to the sound.",
+    "why": "Predicts dynamic EQ behavior below threshold."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_answers_question",
+    "stem": "You push multiband compression hard in every band of a full mix. Which results tell you it is overdone? Select all that apply.",
+    "options": [
+     "The loud chorus sounds duller or thinner than the verse",
+     "The balance the arrangement built gets flattened",
+     "The S sounds turn into th sounds, like a lisp",
+     "A narrow hollow scoop opens only on single loud notes"
+    ],
+    "key": [
+     "The loud chorus sounds duller or thinner than the verse",
+     "The balance the arrangement built gets flattened"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+    "quote": "The loud chorus comes out duller or thinner than the verse, because the bands that got loud got turned down. Hard compression in every band flattens the balance the arrangement built.",
+    "why": "Diagnoses overdone multiband compression and tells it apart from de-esser and dynamic EQ faults."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "You finish de-essing a lead vocal and bounce the mix. In the bounce, the vocal is thin and hissy, as if only its highs are playing. What was left engaged?",
+    "options": [
+     "The de-esser's listen function",
+     "The de-esser's split band mode",
+     "The de-esser's wideband mode",
+     "The de-esser's range at its maximum"
+    ],
+    "key": [
+     "The de-esser's listen function"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+    "quote": "Listen changes what comes out of the track, so if you leave it on, the vocal plays back as a thin, hissy ghost of its own highs, in the mix and in the bounce.",
+    "why": "Diagnoses a de-esser left in listen mode."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "After you de-ess a vocal, the word sing sounds like thing and the lyrics lose definition. What do you change?",
+    "options": [
+     "Raise the threshold or reduce the range",
+     "Lower the threshold so S sounds are caught sooner",
+     "Turn on listen so the S sounds come back",
+     "Switch the de-esser to wideband mode"
+    ],
+    "key": [
+     "Raise the threshold or reduce the range"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+    "quote": "When you hear a lisp, raise the threshold or reduce the range until the S comes back.",
+    "why": "Recognizes the lisp from over de-essing and backs it off."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Each time the de-esser catches an S at the end of a word, the whole word dips in level, including the vowel before the S. Which change keeps the vowel body at its level?",
+    "options": [
+     "Switch the de-esser to split band mode",
+     "Switch the de-esser to wideband mode",
+     "Turn on the de-esser's listen function",
+     "Move the key filter down to the vowel range"
+    ],
+    "key": [
+     "Switch the de-esser to split band mode"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+    "quote": "Split band de-essing turns down only the frequencies above the split point, so the vowel body underneath keeps its level.",
+    "why": "Chooses split band over wideband de-essing from what is heard."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "The dry vocal's S sounds are under control, but the vocal reverb still throws a splash of hiss after every S. Where do you put the extra de-esser?",
+    "options": [
+     "On the reverb aux, as the first insert before the reverb",
+     "On the reverb aux, as the last insert after the reverb",
+     "On the master fader, keyed from the vocal track",
+     "On the vocal track, as the insert after the send"
+    ],
+    "key": [
+     "On the reverb aux, as the first insert before the reverb"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+    "quote": "When the reverb still splashes on S sounds, insert a second de-esser on the reverb aux as the first insert, before the reverb plug-in, and de-ess harder there.",
+    "why": "Places a de-esser to clean a reverb return."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_answers_question",
+    "stem": "Which of these make a lead vocal's sibilance worse when you add them? Select all that apply.",
+    "options": [
+     "A bright high-frequency EQ boost",
+     "A compressor with makeup gain",
+     "A reverb on the vocal",
+     "A high-pass filter at 80 Hz",
+     "A lower vocal fader level"
+    ],
+    "key": [
+     "A bright high-frequency EQ boost",
+     "A compressor with makeup gain",
+     "A reverb on the vocal"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+    "quote": "Too much spits out of the speakers and stabs the listener on every line, and it gets worse with every bright EQ boost, every compressor with makeup gain and every reverb you add after it.",
+    "why": "Predicts which processing raises sibilance, so the de-esser is placed and set with that in mind."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "The bass is ducked from a pre-fader key send on the kick. Late in the mix you pull the kick fader down 3 dB. What happens to the ducking on the bass?",
+    "options": [
+     "It stays the same, since the send taps the kick before its fader",
+     "It gets shallower, since the key reaching the compressor is quieter",
+     "It stops, since the kick now falls under the threshold",
+     "It gets deeper, since the bass is now louder than the kick"
+    ],
+    "key": [
+     "It stays the same, since the send taps the kick before its fader"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick",
+    "quote": "A pre-fader send taps the kick before its fader, so when you rebalance or automate the kick fader later, the key level stays the same and the amount of ducking does not change.",
+    "why": "Predicts why the key send is pre-fader."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "Your bass ducks about 2 dB on each kick. Without touching the compressor, you raise the kick's key send by 4 dB. What happens?",
+    "options": [
+     "The bass ducks more, since the threshold is compared with the key",
+     "Nothing changes, since the threshold is compared with the bass",
+     "The kick plays 4 dB louder through its own channel",
+     "The bass ducks the same, since the ratio has not changed"
+    ],
+    "key": [
+     "The bass ducks more, since the threshold is compared with the key"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick",
+    "quote": "The threshold is compared with the key, not with the bass, so the key send level, the key filter and the threshold set the amount together. Raise the kick's key send and the bass ducks more at the same threshold.",
+    "why": "Predicts how key level changes gain reduction on a keyed compressor."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_choice_question",
+    "stem": "You key a pad from the same Kick Key bus and want the audible, rhythmic pumping heard in a lot of dance music. Compared with the bass settings, what do you change?",
+    "options": [
+     "Deeper reduction and a longer release, so the pad swells back across the beat",
+     "Less reduction and a shorter release, so the pad stays steady and even",
+     "A slower attack, so each kick passes fully before the pad dips",
+     "A second key bus, since one bus can feed only one key input"
+    ],
+    "key": [
+     "Deeper reduction and a longer release, so the pad swells back across the beat"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick",
+    "quote": "For the audible pumping heard in a lot of dance music, go deeper, about 6 to 10 dB, and lengthen the release so the pad swells back up across the beat and is nearly full again as the next kick lands.",
+    "why": "Adapts the ducking method to a deliberate pumping effect."
+   },
+   {
+    "origin": "new",
+    "action": "new",
+    "type": "multiple_answers_question",
+    "stem": "Your kick-keyed ducking on the bass is set to about 3 dB. In the full mix, which results tell you it is working as intended? Select all that apply.",
+    "options": [
+     "The kick's low end punches through more clearly",
+     "The low end sounds tighter on each beat",
+     "The bass still sounds like a steady, even line",
+     "The kick's peak level rises on its channel meter",
+     "The bass sits 3 dB lower through the whole song"
+    ],
+    "key": [
+     "The kick's low end punches through more clearly",
+     "The low end sounds tighter on each beat",
+     "The bass still sounds like a steady, even line"
+    ],
+    "page": "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick",
+    "quote": "In the mix, listen for three things: the kick's low end punches through more clearly, the low end sounds tighter on each beat, and the bass still sounds like a steady, even line.",
+    "why": "Judges a working duck by ear in the mix."
+   }
+  ],
+  "dropped": [
+   {
+    "stem": "A lead vocal sits well in the mix, but its S sounds are harsh and spit out on ev",
+    "reason": "Overlaps the draft multiple-answer item that already keys de-essing as a side-chain job; the new de-essing page supports more practical items (listen, split band, lisp, reverb aux)."
+   },
+   {
+    "stem": "In the chorus, the lead vocal and a wall of guitars fight for the same space. Fo",
+    "reason": "Tests the same choose-the-trigger fact as the kept kick-and-bass setup and voice-over-music items; slot used for new page coverage."
+   },
+   {
+    "stem": "You reach the threshold step on a bass compressor meant to be keyed from the kic",
+    "reason": "Keys a generic troubleshooting sentence rather than a side-chain skill; a dead key is already covered by the Source menu diagnosis item."
+   }
+  ]
+ }
+}

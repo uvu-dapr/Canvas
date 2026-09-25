@@ -1,0 +1,761 @@
+{
+ "title_matches": [
+  [
+   "page",
+   "macOS: P4: RAM, Storage, and CPUs",
+   "RAM, Storage, and CPU",
+   "gc7fb61afd148b137388384fd0da9f2f1"
+  ],
+  [
+   "quiz",
+   "macOS: Quiz - Mac Navigation",
+   "Core Mixing Mac Navigation Quiz",
+   "g272d911ba3cb644cac942e316111b87e"
+  ],
+  [
+   "module",
+   "Effects: Frequency Dynamics & Side-Chains",
+   "Module 10: Frequency, Dynamics and Side-chains (was matched to Module 10: Dynamics and Side-chain Lab)",
+   "gd9c81dfaf44a4dbbd196ff616f05fc68"
+  ]
+ ],
+ "item_remaps": [
+  [
+   "Pro Tools: Fundamentals",
+   "Pro Tools Lab: Rod_Alexander-Tears_In_The_Rain-Full.zip",
+   "g0a370c20a0aeedb38d6a0ec64256cdfc",
+   "gb75435f2148548a975bc18098d796801",
+   "fresh"
+  ],
+  [
+   "macOS: Foundations",
+   "macOS: P4: RAM, Storage, and CPUs",
+   "g54d140ff3e7b5a5982b09f0d85596ce3",
+   "gea8cee44e2a803324c14643f224b94e5",
+   "live"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "Swinging_Steaks-Lost_My_Way-Full.zip",
+   "g229f2462ae40ef5acd86234c49456740",
+   "g825342078a98f646df71748d9ed165db",
+   "fresh"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "CONTENT AND RESOURCES",
+   "g8a07bc106a4e16a04e085ad2048ce081",
+   "ga705ff4fbbe3e580d0c14c3ada8a0f33",
+   "fresh"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "Triviul_ToSamRawfers_Full.zip",
+   "g0a9988c57889a5dcac0ccac35a4b52dc",
+   "g978e7e2401d7af30f56bbb44bcf35d67",
+   "fresh"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "Strobe_Nostalgic_Full.zip",
+   "g594711d4e31b2ff2726868d88eee7012",
+   "g482c70145de9500af61536458ba6365e",
+   "fresh"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "Salon_8_Gokyuzu-Full.zip",
+   "g6adc2284c8e422665d82af95720960ca",
+   "g02dd3d8a2a988765951e33cf472f6252",
+   "fresh"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "QUIZZES AND ASSIGNMENTS",
+   "ge6347fb6535aff56989443b28711ddc0",
+   "gc104bd479c85de06084ab5280e7c6b75",
+   "fresh"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "Essential Groundwork Lab",
+   "g188ec87c829392b3dfe3a8b3df560549",
+   "g7aa2b7c3168277c40cd10f02a33824a1",
+   "fresh"
+  ],
+  [
+   "Mixing: Essential Groundwork",
+   "Mixing: Quick Mix",
+   "g44046bd848a3da950c9a50894ca9a9e5",
+   "gffff3e6c5014272ddaf18657a32e2ec7",
+   "fresh"
+  ],
+  [
+   "Mixing: Comping & Arrangement",
+   "Mixing: Comping and Arrangement.pptx",
+   "gb6d673b6a7a1e71388f483e343ea08ce",
+   "g4124c5508d26c7207e39d22e23a5cd47",
+   "fresh"
+  ],
+  [
+   "Mixing: Comping & Arrangement",
+   "CONTENT AND RESOURCES",
+   "g305a3c7945cfe56c7f1c7082a86038bf",
+   "gc474cb1bdbb7dceb776a94c53f2503d5",
+   "fresh"
+  ],
+  [
+   "Mixing: Comping & Arrangement",
+   "QUIZZES AND ASSIGNMENTS",
+   "g27c4dbfbbfd5053322090cf45ff0d2c4",
+   "gfa1c504808ba4cb6885d2f80bdf5fd6a",
+   "fresh"
+  ],
+  [
+   "Mixing: Comping & Arrangement",
+   "Comping Lab",
+   "g0be7b8b3774d54588cfc9cd006c1639d",
+   "g5e25d3372b6a902d42e8ee2b1073432e",
+   "fresh"
+  ],
+  [
+   "Mixing: Focus & Balance",
+   "Mixing: Focus, Balance and Interest.pptx",
+   "gcfc348d9546afa82dea90b73b6f5106c",
+   "g26778caa587557a2cfb603e605a582ae",
+   "fresh"
+  ],
+  [
+   "Mixing: Focus & Balance",
+   "CONTENT AND RESOURCES",
+   "gdb3b31381efbdf5d3a4e128108c12c2e",
+   "gb98d7cf98ea244eb2d67f01f08b98615",
+   "fresh"
+  ],
+  [
+   "Mixing: Focus & Balance",
+   "Billy_Morgan_and_Friends-Nowhere-Full.zip",
+   "g6e55225ee1785adb8ac1fa4246b67a48",
+   "g14b001daa8ab002da2637c3ad8a80124",
+   "fresh"
+  ],
+  [
+   "Mixing: Focus & Balance",
+   "QUIZZES AND ASSIGNMENTS",
+   "g20ba4553a20695c1a7eb520be9539087",
+   "g999875db715d3289f8e5b46e280cb039",
+   "fresh"
+  ],
+  [
+   "Mixing: Focus & Balance",
+   "Quick Mix 2",
+   "g52d1210b3cfdddc799bbbebf55465021",
+   "g0b9eec88c522b179fc9d114369aede9c",
+   "fresh"
+  ],
+  [
+   "Mixing: In-Class Mixing",
+   "CONTENT AND RESOURCES",
+   "g94140ee5e75c1dd22aeffaec44bc9573",
+   "g51e8d2092b978d481f32b0468e751a9b",
+   "fresh"
+  ],
+  [
+   "Mixing: In-Class Mixing",
+   "Al_James-Full.zip",
+   "g37e11c1b329ee798ef60e9781f809d1a",
+   "g74af89ef3276f08765a63100514d41d6",
+   "fresh"
+  ],
+  [
+   "Mixing: In-Class Mixing",
+   "QUIZZES AND ASSIGNMENTS",
+   "g873af337c3da1117bd438a0ab9a11d8f",
+   "g09265102bb00b4a0ab9fa90b66af663c",
+   "fresh"
+  ],
+  [
+   "Mixing: In-Class Mixing",
+   "Mixing: In-Class Mix",
+   "g87c50caabb6b9f0f9b9cc25025359dc7",
+   "g15e3635978271d77b4811bf38f8b4e7e",
+   "fresh"
+  ],
+  [
+   "Acoustics: Mix Acoustics",
+   "Acoustics: Mix Room Setup.pptx",
+   "g9913b25f187d463f663be51840f470f1",
+   "g5d6c0eb24317a72d75364f536c733b10",
+   "fresh"
+  ],
+  [
+   "Acoustics: Mix Acoustics",
+   "Mix Acoustics: Bobby Owsinski - Improve the Sound of Your Room_Watch From 25:30 - 58:00",
+   "g34c81b0e71989b079552a911b5555d8b",
+   "g8154a276157cdffc8f1c85a0c001cbe5",
+   "fresh"
+  ],
+  [
+   "Acoustics: Mix Acoustics",
+   "Mix Acoustics: Room Mode Calculator",
+   "gbd59ecb1ae26ef39ac74aa815b676d6e",
+   "g4a047ca702271ce7ddccb0482836a342",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Monitoring: Calibration.pptx",
+   "gc73b9194557a76e6493c973cbf62b74c",
+   "g8ea23c8220a619db86a308ebd2c42e8e",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Monitoring: Mix Space Assessment Template.xlsx",
+   "g324d5d21a36bf7961883e5fc377ac6ec",
+   "gdf5ddd00da1b3e1b1ff156d59090acbf",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration: MNoise",
+   "gf2faaf24fdaa7dcc2f65dd76840af760",
+   "g87bff3cc30e46dce817a477b3abd1757",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration: Pink Noise",
+   "g514bffa0ca5e035d1bf4a12ed8b9c085",
+   "g96133006f601e7d572973a6eb6226028",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration: Establishing Project Studio Reference Monitoring Levels",
+   "gb14bcf5c0670dd828cebe6770d4cd48f",
+   "g87d05e9f7fc4bc91fd767c79be3475b0",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration: How Do I Calibrate My Studio Monitors?",
+   "g66a815f54eb00241d2177eb95226a09a",
+   "gac1b12713668df277aec2f346e12fa40",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration: Best Practices for Dolby Atmos Music Studios",
+   "gcef517942348a87ec3a22847fa0a6a1e",
+   "gba6a770f82b5ec1afd413c3cf7a890a6",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration: Loudness Basics",
+   "g04063dfced6075983667467f267117bf",
+   "g1fb203a2009084634b8fbac4c19ecd72",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration: Multichannel sound technology in home and broadcasting applications",
+   "gc13202459a6926683060eb3aa7cee999",
+   "g0793d53935246a64412ab0be754f4dd6",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "g3674ee6b9ed419866e9d2ca9634099bf",
+   "geb753f8ecea893bc655572c8ef2e360d",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "CONTENT AND RESOURCES",
+   "ge173f4ff53590a661f617956b1ba595b",
+   "gab55a873dc32c59e53d4c48fe461cefc",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Asam_Classical_Soloists-Jesu_Joy-Full.zip",
+   "g36932e61a2ce575e035bcb29feed8cbe",
+   "g102876a23d904fa58e688298de5b2e26",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "MNoise_MSPN_90_916_049_15.wav",
+   "g8727b2444cd7d2bc086a8d231c475995",
+   "g9ea2f00017de7f66492639c4dde1f0ff",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Pink_From_DMU_01.wav",
+   "g4ac4871aa9517cf20d684d1b69b8563f",
+   "gae8eb10060039f30f4462257cd8b8c91",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "QUIZZES AND ASSIGNMENTS",
+   "g82a4ed12ab96fdb7379adb24a6630027",
+   "g9107ca15d71850039b74457bf05106b1",
+   "fresh"
+  ],
+  [
+   "Monitoring: Calibration & Monitoring",
+   "Pro Tools Lab 02",
+   "gfed58a563d2e3e6aec64e2a8c1c01695",
+   "gc1e1850c4581260124624827cfcf558c",
+   "fresh"
+  ],
+  [
+   "Mixing: Timing",
+   "Pro Tools: How to Quantize Multitrack Drums With Elastic Audio",
+   "g0dd74b42767753d62bd9a1c4059cab45",
+   "g165d8415b6d7b39aecb56fa478aa0d3a",
+   "fresh"
+  ],
+  [
+   "Mixing: Timing",
+   "Pro Tools: Unique Audio Quantize",
+   "g03dcd257093a5ae7af5ab6f20b01a7ed",
+   "ge0b696f0c30ab21e60761b5259aed3de",
+   "fresh"
+  ],
+  [
+   "Mixing: Timing",
+   "Mixing: Focus, Balance and Interest.pptx",
+   "g12dfec44687cfc63a246a861a9737994",
+   "g95ee6bf5973d000f8a140f480d3d099a",
+   "fresh"
+  ],
+  [
+   "Mixing: Timing",
+   "CONTENT AND RESOURCES",
+   "gd18a93eb470ef434bbce81b473b25bc6",
+   "gd5a8be5ee85f163d177797125947f2cb",
+   "fresh"
+  ],
+  [
+   "Mixing: Timing",
+   "QUIZZES AND ASSIGNMENTS",
+   "g2c6778e4a7cd81e7343b6e6cb3ac17a6",
+   "g7abe9bce64760fd9da04ce9779359bf1",
+   "fresh"
+  ],
+  [
+   "Mixing: Timing",
+   "Timing Lab",
+   "g48349f6746aadf7088cb7e43e156d3e6",
+   "ga3e86cf672fb2b1a872b249ed701ffa5",
+   "fresh"
+  ],
+  [
+   "Mixing: Tuning",
+   "Waves Tune Pitch Correction Plugin - Tips & Tricks",
+   "g3acd4681d09d886bbc606ef804d35663",
+   "gc970f3c4acc6366c741fb2dc01619ebf",
+   "fresh"
+  ],
+  [
+   "Mixing: Tuning",
+   "Waves Tune Manual",
+   "gb4965af5b808a9ff2e7c249b4cd688a3",
+   "gd5dd5f741264f20e2ee48a5770536d7b",
+   "fresh"
+  ],
+  [
+   "Mixing: Tuning",
+   "CONTENT AND RESOURCES",
+   "g86a6133a257eec5a5f1c78d2b208f9e1",
+   "g689c7798cb83d30c8663df7d4f34a8f1",
+   "fresh"
+  ],
+  [
+   "Mixing: Tuning",
+   "QUIZZES AND ASSIGNMENTS",
+   "g46116e6a7ccf06533a3035d7b2e96021",
+   "g7869e548dad7c1173765417e7e3668f7",
+   "fresh"
+  ],
+  [
+   "Mixing: Tuning",
+   "Tuning Lab",
+   "ge5f26f0ed2112cf3b3f6a2d9e5ed4f7f",
+   "gbb2cfd5e39e43a1d8eaf5ee1be243a4b",
+   "fresh"
+  ],
+  [
+   "Mixing: Tuning",
+   "\"A Horse Is Not a Home\"",
+   "gb8ad581b3f1cc8757867fa852227a170",
+   "g652209c016979b02d33ceda5524e6dc4",
+   "fresh"
+  ],
+  [
+   "Effects: Dynamic Effects",
+   "Effects: Dynamic Effects.pptx",
+   "ge13e69a04ede6a90bd54195591a103ac",
+   "g1261c4ef8843b85f85c16c69ef88666c",
+   "fresh"
+  ],
+  [
+   "Effects: Dynamic Effects",
+   "CONTENT AND RESOURCES",
+   "g68f6906e3744311ad4a0742e208dd9d6",
+   "gbd289d00bf7b57422be62ccffbe63705",
+   "fresh"
+  ],
+  [
+   "Effects: Dynamic Effects",
+   "Technical Ear Trainer - Compression",
+   "gd175e2aeff192b125f14d17e794ec69a",
+   "gd219632c3d5aab67b19739844d7db884",
+   "fresh"
+  ],
+  [
+   "Effects: Dynamic Effects",
+   "QUIZZES AND ASSIGNMENTS",
+   "gdc4b044e1108a2ce52528963de0a5eb7",
+   "g7ee89703e30d402f4b47d75c3b29addc",
+   "fresh"
+  ],
+  [
+   "Effects: Dynamic Effects",
+   "Compression Lab",
+   "g037a732c97d3e6519e9f7091efe94423",
+   "g71706b71f3a426fac222c1fb5ea8782b",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "VocalEQCheatSheet.JPG",
+   "g3273f1a63b172cdc8a97b0b45d02e3a0",
+   "ga75e2d6048f02d9b6febf0b8bba5e9d5",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "Effects: Serial and Parallel Processing.pptx",
+   "g30d8655f97bfec8a09d7cea1b9db511a",
+   "g62f63d7ff722682de1d00e822c493393",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "Effects: Spectral Effects.pptx",
+   "g5222a9b7a7fc47cf907b26ab35cb913e",
+   "g0fb2b32a5560d164749add2d09191dc1",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "Effects: Serial and Parallel Processing.pptx",
+   "g4184376a7df2a581b1c00ba5d1e59020",
+   "g5c6e1d73f855e92ef1c47ff4ed1a8f7f",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "CONTENT AND RESOURCES",
+   "g0d39e3cc45ae8cb9cd6711dfe8512b95",
+   "gd19f44da5f1396519900e872e080b817",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "Technical Ear Trainer - EQ",
+   "g9e8ad84f731fe4d40309c6d344270c72",
+   "gbf57101339f1ad9e56e9da3ac6aabb11",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "QUIZZES AND ASSIGNMENTS",
+   "g9c1b1d62265cd60a9959f0fb8cb71011",
+   "g8d115dc7dba241cad56e5a088999c78d",
+   "fresh"
+  ],
+  [
+   "Effects: Spectral Effects & EQ",
+   "EQ Lab",
+   "g11c3773d7aa88d15cda443f34bac98cb",
+   "g6f7c37eac34632724b4ecb73dd48311e",
+   "fresh"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "CONTENT AND RESOURCES",
+   "g822bd051bdcc06c2ac4e155d64b94427",
+   "gf84ea8353c42af54fb54598d13f0dbed",
+   "live"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "Stitch Up",
+   "gacea770a6e288d8de3b14c8607bbcf23",
+   "g5daf8635927d2ca8c4a5879968fcb395",
+   "fresh"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "Rock Show",
+   "g9a643ee79fd3500cb9ae4f678489dc42",
+   "g702a5547d9920cac58cf02b777624616",
+   "fresh"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "Side Effects",
+   "g9e14d5d762e4277a83252300207958a7",
+   "ga1875b381e50d662cf9758105311fbe0",
+   "fresh"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "QUIZZES AND ASSIGNMENTS",
+   "gffe0146c4f749df307e9a1f195a08797",
+   "ga64d0cf221974b38eb3f1e500e82f140",
+   "live"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "Song Analysis Lab",
+   "g2256cb7fd322f14da6fcfc1c40eae56d",
+   "gd55b5f60612a27c5807600022df78376",
+   "fresh"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "CONTENT AND RESOURCES",
+   "gf84ea8353c42af54fb54598d13f0dbed",
+   "g725a07ecfb32fc0bea221792abb08145",
+   "fresh"
+  ],
+  [
+   "Effects: Frequency Dynamics & Side-Chains",
+   "QUIZZES AND ASSIGNMENTS",
+   "ga64d0cf221974b38eb3f1e500e82f140",
+   "g8415676963b1b35794b6f2697a05a871",
+   "fresh"
+  ],
+  [
+   "Effects: Balancing & Reverb",
+   "Effects: Time-based Effects.pptx",
+   "gf09f2d4dbc06e06b08ce42d911cb78f7",
+   "gd4b776a089937acec906870c814d3339",
+   "fresh"
+  ],
+  [
+   "Effects: Balancing & Reverb",
+   "CONTENT AND RESOURCES",
+   "g6853c7afd1faadc8cc849ba38963d640",
+   "gf762f2c3c08e20c2f9212ca0112c7edc",
+   "fresh"
+  ],
+  [
+   "Effects: Balancing & Reverb",
+   "QUIZZES AND ASSIGNMENTS",
+   "ge4975b67b2b31fd7498bd1111958aa80",
+   "g0749c5d3873407c51f79536a45ee195c",
+   "fresh"
+  ],
+  [
+   "Effects: Balancing & Reverb",
+   "Quick Mix 3",
+   "g5f37217b144922c3c6a2a99e96bd2a99",
+   "g7bbdd354d0a49c47be9310fc0d9135a5",
+   "fresh"
+  ],
+  [
+   "Effects: Delay & Stereo Enhancements",
+   "Effects: Delay and Chorus.pptx",
+   "ge8b4f7905b541c0632495d2365deb832",
+   "g5171659be1c11b0a1e0e76840a5775f3",
+   "fresh"
+  ],
+  [
+   "Effects: Delay & Stereo Enhancements",
+   "CONTENT AND RESOURCES",
+   "gedf2250dabd69151a89a0f7bd1398c2a",
+   "g7ffc8ccaa120f0154ce0db8fcac78feb",
+   "fresh"
+  ],
+  [
+   "Effects: Delay & Stereo Enhancements",
+   "Blue_Lit_Moon-Full.zip",
+   "gda8ce4f657abf0527e2b73e648a0eaf9",
+   "g76081e9ea5645101e764e2d9a876a24c",
+   "fresh"
+  ],
+  [
+   "Effects: Delay & Stereo Enhancements",
+   "QUIZZES AND ASSIGNMENTS",
+   "g58eeda30d64b5d28962a4c9fe1b348b2",
+   "gfb1d26905b65e799df6aec63c59c0771",
+   "fresh"
+  ],
+  [
+   "Effects: Delay & Stereo Enhancements",
+   "Quick Mix 4",
+   "ge579ae26776273ec825c60cd84bb83dd",
+   "gf5dfe2d29825f97f1cb17c1221b4ae44",
+   "fresh"
+  ],
+  [
+   "Mixing: Master-Buss Processing & Endgame",
+   "You Don't Understand Saturation: Harmonics",
+   "g86d45a82af2fc6e658587ff87a1113cd",
+   "g99ce77319c414f3f501fdaeab72a94ef",
+   "fresh"
+  ],
+  [
+   "Mixing: Master-Buss Processing & Endgame",
+   "History of Distortion",
+   "gd2055ae8cc6ee47baef19ed0a975221f",
+   "g2f22bdf268303e0bb5de67453d670b6d",
+   "fresh"
+  ],
+  [
+   "Mixing: Master-Buss Processing & Endgame",
+   "Mixing: Distortion.pptx",
+   "gef14987faf74f69562c3daf59c812565",
+   "ga404f7e39fa5720505a2c4f0dfbcd350",
+   "fresh"
+  ],
+  [
+   "Mixing: Master-Buss Processing & Endgame",
+   "CONTENT AND RESOURCES",
+   "gf59932ecc9cb25fe33557e9c810d0eaf",
+   "g359b10f607a307474836efcd3332beac",
+   "fresh"
+  ],
+  [
+   "Mixing: Master-Buss Processing & Endgame",
+   "North_To_Alaska-Full.zip",
+   "gef57587e0e8972a601413e140981e986",
+   "gaf94b16425e981388ec202f0468c782d",
+   "fresh"
+  ],
+  [
+   "Mixing: Master-Buss Processing & Endgame",
+   "QUIZZES AND ASSIGNMENTS",
+   "ge3ffdeacaf47b87c42f4abccd99ce1f5",
+   "g9725d95b549eb3f745db45e51f3bb367",
+   "fresh"
+  ],
+  [
+   "Mixing: Master-Buss Processing & Endgame",
+   "Quick Mix 5",
+   "g800ee019672382e576df2c251d4ade0b",
+   "g919f0f218029fe5c77bcbc21b5c025de",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "CONTENT AND RESOURCES",
+   "g82a1bcb3afe3c4e89764b6e36e5a49eb",
+   "ge805b04c09cd4a0b65cb853591fa3f6b",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "Signe-Jakobsen-Full.zip",
+   "g25afdb1565efd754c84880368f3dbf74",
+   "gbb7bed333dbb9a382795c9cfd3d01bf7",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "QUIZZES AND ASSIGNMENTS",
+   "g16f356e5aad95c3d9e2169a31b566431",
+   "g6ed5a7394ca51fd290e097c8442177a3",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "Final: In-Class Mix",
+   "g88f6866e86b45936e861882aed0f9129",
+   "gf6daa6cdd85235c08a1a7004cfcc614f",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "CONTENT AND RESOURCES",
+   "g18ea0adb28a66819579897378179d10e",
+   "g4c405eebb6a596d8761a89eaf976f490",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "Jeff_Hirata-Sunshine-Full.zip",
+   "gd2d0e5f3011fed861858846b7b3fd542",
+   "gdd6b83ab262f0abd440d77fd6ddba0fc",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "A_Horse_is_Not_a_Home-Consolidated.zip",
+   "gf79336b952c57b4fb5801041f7e18fbf",
+   "g59e697f66cb626f602f2b1a617089d26",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "QUIZZES AND ASSIGNMENTS",
+   "ga7048a30990e7833c07102a94bd59c03",
+   "g7341bb006fe94a361a7a2dc6728de6ca",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "Final Mix - Jeff Hirata \"Sunshine\"",
+   "gedfe7949f3885bcde13c1c5b23738833",
+   "gea4a830123ea3faf9b3cadbb2b5e8650",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "Final Mix: \"A Horse Is Not a Home\"",
+   "g1dc78f1ba9bf15675ef41d72e1b8fc39",
+   "gd78d15bac9ddea0832a35b670564c0e8",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "Final Mix and Final Exam: Study Guide",
+   "g2c16832e5f28e001258a58d9026e9c46",
+   "g765a55d308ae2283cf69d431ded80720",
+   "fresh"
+  ],
+  [
+   "Final: Final Mix & Final Exam",
+   "DAPR 2020: Core Mixing - Final Exam",
+   "g0a0970c74af2d08764414204328abde5",
+   "g4784ea6e964535ebe615000adc509e5f",
+   "fresh"
+  ],
+  [
+   "Auxiliary Resources",
+   "Sessions: Accessing Course Files on the Network Drive (DGM Assets)",
+   "g36180ca6a020ab572a52f45ec7d7518a",
+   "g80adae7e0c55407a88456a0650675832",
+   "fresh"
+  ],
+  [
+   "Auxiliary Resources",
+   "Sessions: Free DAW Session Track Downloads",
+   "g9296d50602b699a74b38141079d343f2",
+   "g945fbedbe1bb64e39e07c71e11d0a334",
+   "fresh"
+  ]
+ ],
+ "files_changed": 6,
+ "map_size": 109
+}

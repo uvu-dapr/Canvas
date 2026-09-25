@@ -1,0 +1,499 @@
+{
+ "weblinks": [
+  {
+   "module": "Mixing: Comping & Arrangement",
+   "link_text": "Comping & Arrangement Reading",
+   "url": "https://cambridge-mt.com/ms/ch7/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Monitoring: Calibration & Monitoring",
+   "link_text": "Calibration: the reading for this module - Staying Objective",
+   "url": "https://cambridge-mt.com/ms/ch4/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Dynamic Effects",
+   "link_text": "Beyond Compression Reading",
+   "url": "https://cambridge-mt.com/ms/ch10/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Acoustics: Mix Acoustics",
+   "link_text": "Mix Acoustics: the reading for this module - Nearfield Monitors",
+   "url": "https://cambridge-mt.com/ms/ch1/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Frequency Dynamics & Side-Chains",
+   "link_text": "Frequency-selective Dynamics Reading",
+   "url": "https://cambridge-mt.com/ms/ch13/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Spectral Effects & EQ",
+   "link_text": "Beyond EQ Reading",
+   "url": "https://cambridge-mt.com/ms/ch12/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Dynamic Effects",
+   "link_text": "Compressing For A Reason Reading",
+   "url": "https://cambridge-mt.com/ms/ch9/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Balancing & Reverb",
+   "link_text": "Fluent Balancing Reading",
+   "url": "https://cambridge-mt.com/ms/ch15/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Mixing: Master-Buss Processing & Endgame",
+   "link_text": "Master-buss Processing, Automation, & Endgame Reading",
+   "url": "https://cambridge-mt.com/ms/ch19/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Delay & Stereo Enhancements",
+   "link_text": "Stereo Enhancements Reading",
+   "url": "https://cambridge-mt.com/ms/ch18/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Mixing: Focus & Balance",
+   "link_text": "Balance Reading",
+   "url": "https://cambridge-mt.com/ms/ch8/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Monitoring: Calibration & Monitoring",
+   "link_text": "Calibration: the reading for this module - Low-end Damage Limitation",
+   "url": "https://cambridge-mt.com/ms/ch3/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Spectral Effects & EQ",
+   "link_text": "Equalizing For A Reason Reading",
+   "url": "https://cambridge-mt.com/ms/ch11/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Balancing & Reverb",
+   "link_text": "Mixing with Reverb Reading",
+   "url": "https://cambridge-mt.com/ms/ch16/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Frequency Dynamics & Side-Chains",
+   "link_text": "Side-chains Reading",
+   "url": "https://cambridge-mt.com/ms/ch14/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Effects: Delay & Stereo Enhancements",
+   "link_text": "Mixing With Delays Reading",
+   "url": "https://cambridge-mt.com/ms/ch17/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Acoustics: Mix Acoustics",
+   "link_text": "Mix Acoustics: the reading for this module - Supplementary Monitors",
+   "url": "https://cambridge-mt.com/ms/ch2/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Mixing: Tuning",
+   "link_text": "Timing & Tuning Reading",
+   "url": "https://cambridge-mt.com/ms/ch6/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  },
+  {
+   "module": "Mixing: Essential Groundwork",
+   "link_text": "Essential Groundwork Reading",
+   "url": "https://cambridge-mt.com/ms/ch5/",
+   "replaced_by": "nothing (module item removed); the module reading pages are already in the module"
+  }
+ ],
+ "assign": [
+  {
+   "assignment": "Mix Balancing and Reverb",
+   "file": "g4b76d94334b51d478bee1b48fdb1e92d/mix-balancing-and-reverb.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "Chapter 15, Fluent Balancing",
+      "Chapter 16, Mixing With Reverb"
+     ],
+     "after": [
+      "Balancing and Reverb: Procedure Guide",
+      "Balancing and Reverb: Placing a Source in a Space",
+      "Balancing & Reverb: Common Mistakes and How to Hear Them",
+      "Balancing and Reverb: Reverb Controls in Depth",
+      "Balancing and Reverb: Worked Example, Three Sources at Three Depths"
+     ]
+    },
+    {
+     "where": "step",
+     "before": "Work through Chapter 15, Fluent Balancing and Chapter 16, Mixing With Reverb with the session open",
+     "after": "Work through Balancing and Reverb: Procedure Guide ..."
+    },
+    {
+     "where": "text",
+     "before": "Apply all of the techniques demonstrated to your own mix.",
+     "after": "Apply the techniques from this module's reading pages to your own mix."
+    },
+    {
+     "where": "text",
+     "before": "Work out why he uses that setting",
+     "after": "Work out why the reading calls for that setting"
+    }
+   ]
+  },
+  {
+   "assignment": "Mix EQ Assignment",
+   "file": "g4c9e6390c0d6f21b9729c114e66417b2/mix-eq-assignment.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "Chapter 11, Equalizing For A Reason",
+      "Chapter 12, Beyond EQ"
+     ],
+     "after": [
+      "Spectral Effects and EQ: Why We Use Equalization",
+      "Spectral Effects and EQ: Procedure Guide",
+      "Spectral Effects and EQ: Filter Shapes and What They Are For"
+     ]
+    },
+    {
+     "where": "step",
+     "before": "Work through Chapter 11, Equalizing For A Reason and Chapter 12, Beyond EQ with the session open",
+     "after": "Work through Spectral Effects and EQ: Procedure Guide ..."
+    },
+    {
+     "where": "text",
+     "before": "Apply all of the techniques demonstrated to your own mix.",
+     "after": "Apply the techniques from this module's reading pages to your own mix."
+    },
+    {
+     "where": "text",
+     "before": "Work out why he uses that setting",
+     "after": "Work out why the reading calls for that setting"
+    }
+   ]
+  },
+  {
+   "assignment": "Mix Frequency, Dynamics and Side-chains Assignment",
+   "file": "g81112ca5b6e74528d55111ff927dec8d/mix-frequency-dynamics-and-side-chains-assignment.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "Chapter 13, Frequency-selective Dynamics",
+      "Chapter 14, Side-chains"
+     ],
+     "after": [
+      "Frequency Dynamics and Side-Chains: Additional Tips and Tricks",
+      "Frequency Dynamics and Side-Chains: Procedure Guide",
+      "Frequency Dynamics and Side-Chains: How They Work",
+      "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+      "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+      "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick"
+     ]
+    },
+    {
+     "where": "step",
+     "before": "Work through Chapter 13, Frequency-selective Dynamics and Chapter 14, Side-chains with the session open",
+     "after": "Work through Frequency Dynamics and Side-Chains: Procedure Guide ..."
+    },
+    {
+     "where": "text",
+     "before": "Apply all of the techniques demonstrated to your own mix.",
+     "after": "Apply the techniques from this module's reading pages to your own mix."
+    },
+    {
+     "where": "text",
+     "before": "Work out why he uses that setting",
+     "after": "Work out why the reading calls for that setting"
+    }
+   ]
+  },
+  {
+   "assignment": "Mix Master-buss Processing, Automation, & Endgame",
+   "file": "g8addf8a0df98330114f0ae537a2cb265/mix-master-buss-processing-automation-and-endgame.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "the reading for this module: Master-buss Processing & Referencing"
+     ],
+     "after": [
+      "Master-Buss Processing and Endgame: Procedure Guide",
+      "Master-Buss Processing and Endgame: Knowing When to Stop",
+      "Master-Buss Processing & Endgame: Common Mistakes and How to Hear Them",
+      "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+      "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+      "Distortion: What Is Actually Happening",
+      "Distortion: Digital Clipping, Analog Saturation and Blown Speakers",
+      "Distortion: Overdrive, Distortion, Fuzz, Buzz and Other Pedals",
+      "Distortion: Guitars, Pickups and Using Distortion in a Mix"
+     ]
+    },
+    {
+     "where": "text",
+     "before": "The required video",
+     "after": "The required reading"
+    },
+    {
+     "where": "text",
+     "before": "Work through the required video and apply the techniques it demonstrates to your mix. Match every track and plugin adjustment to the settings shown in the tutorial.",
+     "after": "Work through the required reading and apply its techniques to your mix. Make every track and plugin adjustment for a reason you can name from the reading."
+    }
+   ]
+  },
+  {
+   "assignment": "Mix Prep Assignment",
+   "file": "ga5c56565fd42dbfab1eaca62efe36608/mix-prep-assignment.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "the reading for this module: Essential Groundwork"
+     ],
+     "after": [
+      "Essential Groundwork: Session Preparation Procedure",
+      "Essential Groundwork: What to Set Before You Touch a Fader",
+      "Essential Groundwork: Common Mistakes and How to Hear Them"
+     ]
+    }
+   ]
+  },
+  {
+   "assignment": "Mix Dynamics Assignment",
+   "file": "gcc84cdd0c3d4e56f5e8b742a2f941cf5/mix-dynamics-assignment.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "Chapter 9, Compressing For A Reason",
+      "Chapter 10, Beyond Compression"
+     ],
+     "after": [
+      "Dynamic Effects: Compression Procedure Guide",
+      "Dynamic Effects: Compression, The Seven Controls",
+      "Dynamic Effects: Common Mistakes and How to Hear Them"
+     ]
+    },
+    {
+     "where": "step",
+     "before": "Work through Chapter 9, Compressing For A Reason and Chapter 10, Beyond Compression with the session open",
+     "after": "Work through Dynamic Effects: Compression Procedure Guide ..."
+    },
+    {
+     "where": "text",
+     "before": "Apply all of the techniques demonstrated to your own mix.",
+     "after": "Apply the techniques from this module's reading pages to your own mix."
+    },
+    {
+     "where": "text",
+     "before": "Work out why he uses that setting",
+     "after": "Work out why the reading calls for that setting"
+    },
+    {
+     "where": "text",
+     "before": "the way the one in the videos does",
+     "after": "the way some compressors do"
+    }
+   ]
+  },
+  {
+   "assignment": "Mix Rough Balance Assignment",
+   "file": "gddc1eb04a0af88d5e8e091e1d4615fb6/mix-rough-balance-assignment.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "Chapter 8, Balance"
+     ],
+     "after": [
+      "Focus and Balance: Panning Diagrams",
+      "Focus and Balance: Mix Balancing",
+      "Focus and Balance: Mix-Window Procedure Guide"
+     ]
+    },
+    {
+     "where": "step",
+     "before": "Work through Chapter 8, Balance with the session open",
+     "after": "Work through Focus and Balance: Mix-Window Procedure Guide ..."
+    },
+    {
+     "where": "text",
+     "before": "Apply all of the techniques demonstrated to your own mix.",
+     "after": "Apply the techniques from this module's reading pages to your own mix."
+    }
+   ]
+  },
+  {
+   "assignment": "Mix Delay and Stereo Enhancements",
+   "file": "gf845d607c8f241d8eb87d4077cbdc1cc/mix-delay-and-stereo-enhancements.html",
+   "changes": [
+    {
+     "where": "readings callout",
+     "before": [
+      "Chapter 17, Mixing With Delays",
+      "Chapter 18, Stereo Enhancements"
+     ],
+     "after": [
+      "Delay and Stereo Enhancements: Procedure Guide",
+      "Delay and Stereo Enhancements: Width Without Losing Mono",
+      "Delay & Stereo Enhancements: Common Mistakes and How to Hear Them"
+     ]
+    },
+    {
+     "where": "step",
+     "before": "Work through Chapter 17, Mixing With Delays and Chapter 18, Stereo Enhancements with the session open",
+     "after": "Work through Delay and Stereo Enhancements: Procedure Guide ..."
+    },
+    {
+     "where": "text",
+     "before": "Apply all of the techniques demonstrated to your own mix.",
+     "after": "Apply the techniques from this module's reading pages to your own mix."
+    },
+    {
+     "where": "text",
+     "before": "Work out why he uses that setting",
+     "after": "Work out why the reading calls for that setting"
+    }
+   ]
+  }
+ ],
+ "pages": [
+  {
+   "module": "Mixing: Tuning",
+   "title": "Tuning: When to Tune, Graph Mode and Automatic Mode",
+   "file": "wiki_content/tuning-when-to-tune-graph-mode-and-automatic-mode.html",
+   "figures": [
+    "Pitch_Center_Drift_And_Vibrato.png",
+    "Graph_Mode_Versus_Automatic_Mode.png"
+   ]
+  },
+  {
+   "module": "Mixing: Tuning",
+   "title": "Tuning: Speed, Retune, Formants and Sounding Natural",
+   "file": "wiki_content/tuning-speed-retune-formants-and-sounding-natural.html",
+   "figures": [
+    "Fast_Versus_Slow_Retune_Speed.png",
+    "Formant_Preservation_On_A_Pitch_Shift.png"
+   ]
+  },
+  {
+   "module": "Mixing: Tuning",
+   "title": "Tuning: Doubled Vocals and a Worked Example on a Lead Vocal",
+   "file": "wiki_content/tuning-doubled-vocals-and-a-worked-example-on-a-lead-vocal.html",
+   "figures": [
+    "Lead_And_Double_Tuning_Before_And_After.png",
+    "Worked_Example_Lead_Phrase_Tuning.png"
+   ]
+  },
+  {
+   "module": "Effects: Frequency Dynamics & Side-Chains",
+   "title": "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+   "file": "wiki_content/frequency-dynamics-and-side-chains-multiband-compression-or-dynamic-eq.html",
+   "figures": [
+    "Multiband_Bands_Versus_Dynamic_EQ_Bell.png"
+   ]
+  },
+  {
+   "module": "Effects: Frequency Dynamics & Side-Chains",
+   "title": "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+   "file": "wiki_content/frequency-dynamics-and-side-chains-de-essing-as-a-side-chain.html",
+   "figures": [
+    "Sibilance_Band_And_Key_Filter.png",
+    "Wideband_Versus_Split_Band_De_Essing.png"
+   ]
+  },
+  {
+   "module": "Effects: Frequency Dynamics & Side-Chains",
+   "title": "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick",
+   "file": "wiki_content/frequency-dynamics-and-side-chains-worked-example-ducking-a-bass-from-the-kick.html",
+   "figures": [
+    "Kick_Keyed_Ducking_Envelopes.png"
+   ]
+  },
+  {
+   "module": "Mixing: Master-Buss Processing & Endgame",
+   "title": "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+   "file": "wiki_content/master-buss-processing-and-endgame-headroom-ceilings-and-meters.html",
+   "figures": [
+    "Headroom_Level_Ladder.png",
+    "Inter_Sample_Peak.png"
+   ]
+  },
+  {
+   "module": "Mixing: Master-Buss Processing & Endgame",
+   "title": "Master-Buss Processing and Endgame: The Master Chain and the Final Check",
+   "file": "wiki_content/master-buss-processing-and-endgame-the-master-chain-and-the-final-check.html",
+   "figures": [
+    "Master_Chain_Order.png"
+   ]
+  }
+ ],
+ "quizzes": [
+  {
+   "quiz": "Mixing: Quiz - Tuning",
+   "id": "g750eb63f5ab542949c8418b570878cc8",
+   "opens": "2026-10-05T06:00:00Z",
+   "due": "2026-10-23T15:00:00Z",
+   "questions": 25
+  },
+  {
+   "quiz": "Effects: Quiz - Frequency Dynamics & Side-Chains",
+   "id": "g4d17df2514bd7039eaf1edd5e9dab172",
+   "opens": "2026-10-26T06:00:00Z",
+   "due": "2026-11-06T16:00:00Z",
+   "questions": 25
+  },
+  {
+   "quiz": "Mixing: Quiz - Master-Buss Processing & Endgame",
+   "id": "gdc6e0eb1b833185a3396147c3e4f8941",
+   "opens": "2026-11-16T07:00:00Z",
+   "due": "2026-12-04T16:00:00Z",
+   "questions": 25
+  }
+ ],
+ "overview": [
+  {
+   "page": "mixing-tuning-overview.html",
+   "added_reading": [
+    "Tuning: When to Tune, Graph Mode and Automatic Mode",
+    "Tuning: Speed, Retune, Formants and Sounding Natural",
+    "Tuning: Doubled Vocals and a Worked Example on a Lead Vocal"
+   ],
+   "added_quiz": "Mixing: Quiz - Tuning"
+  },
+  {
+   "page": "effects-frequency-dynamics-side-chains-overview.html",
+   "added_reading": [
+    "Frequency Dynamics and Side-Chains: Multiband Compression or Dynamic EQ",
+    "Frequency Dynamics and Side-Chains: De-Essing as a Side-Chain",
+    "Frequency Dynamics and Side-Chains: Worked Example, Ducking a Bass from the Kick"
+   ],
+   "added_quiz": "Effects: Quiz - Frequency Dynamics & Side-Chains"
+  },
+  {
+   "page": "mixing-master-buss-processing-endgame-overview.html",
+   "added_reading": [
+    "Master-Buss Processing and Endgame: Headroom, Ceilings and Meters",
+    "Master-Buss Processing and Endgame: The Master Chain and the Final Check"
+   ],
+   "added_quiz": "Mixing: Quiz - Master-Buss Processing & Endgame"
+  },
+  {
+   "page": "monitoring-calibration-monitoring-overview.html",
+   "added_reading": [],
+   "added_quiz": "Monitoring: Quiz - Calibration & Monitoring"
+  }
+ ]
+}

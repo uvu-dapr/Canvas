@@ -88,7 +88,8 @@ def course_facts(code):
     facts = dict(code=code, name='', credits=None, lab=None, lab_credits=0, model=None, sources=[])
     std = _newest('DAPR Canvas Standards.md')
     fmap = _newest('Folder Map & CLOs.md')
-    # Standards §11e-1 table: | DAPR 2000 Digital Audio Essentials | lecture + DAPR 2000L, one cartridge | **B** | 135 h | 2,250 | 2,025 to 2,250 | 1,800 | 150 pts |
+    # Standards §11e-1 table: | DAPR 2010 Core Recording | lecture + DAPR 2010L, one cartridge | **B** | 135 h | 2,250 | 2,025 to 2,250 | 1,800 | 150 pts |
+    # (DAPR 2000 has no lab from Fall 2026 and is Model A, §11e-0 and §11e-1.)
     if std:
         for line in _txt(std).splitlines():
             if not line.startswith('| ' + code + ' '):
@@ -242,8 +243,74 @@ def graded_objects(root):
 
 
 # ---------------------------------------------------------------- the check
-def run(root='.'):
-    """Returns (fails, warns, report_lines, ai_block). Never exits, never changes directory."""
+# ---------------------------------------------------------------- accepted decisions
+# Added 2026-09-25 [Adam]. A collision Adam has looked at and accepted (DAPR 2020's Fri 4 Dec,
+# three items above 75 points) should not keep failing every build, and a term Adam has
+# decided to run under the floor (DAPR 2000 Fall 2026, decided mid-term) should not either.
+# Each decision is one line in accepted-decisions.md, kept beside the cartridges in the
+# course's -Canvas Entire Course folder, never inside a cartridge:
+#   collision: 2026-12-04 | Final Mix: "A Horse Is Not a Home"; Final Mix - Jeff Hirata; Mixing Topic Presentation | Adam, 2026-09-24
+#   budget: Fall 2026 | work total under the floor, live course mid-term | Adam, 2026-09-25
+# A collision line matches only when its date falls in the colliding week AND every item in
+# that collision is named (a title or any unique part of one). A budget line matches only the
+# term the package's own due dates fall in. Anything not listed still fails.
+def _accepted_file(root, code):
+    if os.environ.get('DAPR_ACCEPTED'):
+        return os.environ['DAPR_ACCEPTED']
+    d = os.path.abspath(root)
+    for _ in range(3):
+        p = os.path.join(d, 'accepted-decisions.md')
+        if os.path.exists(p): return p
+        d = os.path.dirname(d)
+    if not code: return None
+    here = os.path.dirname(os.path.abspath(__file__))
+    roots, d = [], here
+    for _ in range(10):
+        roots.append(os.path.join(d, 'Miscellaneous', '4-Work', 'UVU', 'UVU Courses'))
+        roots.append(os.path.join(d, 'UVU Courses'))
+        up = os.path.dirname(d)
+        if up == d: break
+        d = up
+    roots += ['/Users/adamwolson/Library/CloudStorage/Dropbox/Miscellaneous/4-Work/UVU/UVU Courses',
+              os.path.expanduser('~/mnt/UVU Courses'),
+              os.path.expanduser('~/mnt/Dropbox/Miscellaneous/4-Work/UVU/UVU Courses')]
+    for r in roots:
+        for p in sorted(glob.glob(os.path.join(r, code + ' - *', 'Canvas', 'Canvas Templates',
+                                               '-Canvas Entire Course', 'accepted-decisions.md'))):
+            return p
+    return None
+
+def _term_of(items):
+    ds = sorted(i['due'] for i in items if i.get('due'))
+    if not ds: return None
+    d = ds[len(ds) // 2]
+    return ('Spring' if d.month <= 5 else 'Summer' if d.month <= 7 else 'Fall') + ' %d' % d.year
+
+def accepted_decisions(root, code):
+    p = _accepted_file(root, code)
+    out = dict(path=p, collision=[], budget=[])
+    if not p or not os.path.exists(p): return out
+    for line in _txt(p).splitlines():
+        m = re.match(r'\s*[-*]?\s*(collision|budget)\s*:\s*(.+)$', line, re.I)
+        if not m: continue
+        parts = [x.strip() for x in m.group(2).split('|')]
+        if m.group(1).lower() == 'collision' and len(parts) >= 2:
+            try:
+                day = dt.datetime.strptime(parts[0], '%Y-%m-%d').date()
+            except ValueError:
+                continue
+            out['collision'].append(dict(day=day, titles=[t.strip().strip('"').lower() for t in parts[1].split(';') if t.strip()],
+                                         who=parts[2] if len(parts) > 2 else 'accepted'))
+        elif m.group(1).lower() == 'budget':
+            out['budget'].append(dict(term=parts[0].lower(), why=parts[1] if len(parts) > 1 else '',
+                                      who=parts[2] if len(parts) > 2 else 'accepted'))
+    return out
+
+
+def run(root='.', exclude=None):
+    """Returns (fails, warns, report_lines, ai_block). Never exits, never changes directory.
+    exclude: package paths of Instructor Use Only items (preflight passes its exemption list);
+    they are not student work and are left out of every 12j count."""
     fails, warns, L = [], [], []
     code, is_lab_code, where = identify_course(root)
     forced = os.environ.get('DAPR_POINT_MODEL', '').strip().upper()
@@ -282,6 +349,11 @@ def run(root='.'):
         L.append('  Source:               %s' % s)
 
     items = graded_objects(root)
+    # Added 2026-09-25 [Adam, DAPR 2020 v39]: the unpublished Lab Template in Instructor Use Only
+    # failed the tier check at 30 points. Instructor Use Only items are not student work.
+    _ex = {os.path.normpath(x) for x in (exclude or ())}
+    instr = [i for i in items if os.path.normpath(i['file']) in _ex]
+    items = [i for i in items if os.path.normpath(i['file']) not in _ex]
     live = [i for i in items if not i['alt']]
     held = [i for i in items if i['alt']]
     published = sum(i['pts'] for i in live)
@@ -351,6 +423,31 @@ def run(root='.'):
     L.append('Weeks over capacity:      %d of %d' % (len(over), len(weekload)))
     L.append('Items above 75 pts sharing a due week: %d' % sum(len(l) for _, l in collisions))
     L.append('Graded objects resolved:  %d (%d held alternates left out: %s)' % (len(items), len(held), ', '.join(i['title'] for i in held) or 'none'))
+    if instr:
+        L.append('Instructor Use Only:      %d left out: %s' % (len(instr), ', '.join(i['title'] for i in instr)))
+    # accepted decisions turn their one matching fail into a warning that names the decision
+    acc = accepted_decisions(root, code)
+    term = _term_of(live)
+    if acc['path']:
+        L.append('Accepted decisions:       %s (%d collision, %d budget)' % (acc['path'], len(acc['collision']), len(acc['budget'])))
+    def _monday(x): return x - dt.timedelta(days=x.weekday())
+    for w, lst in collisions:
+        msg = [f for f in fails if f.startswith('collision: week of %s ' % w)]
+        if not msg: continue
+        hit = next((a for a in acc['collision'] if _monday(a['day']) == w and
+                    all(any(t in x['title'].lower() for t in a['titles']) for x in lst)), None)
+        if hit:
+            fails.remove(msg[0])
+            warns.append('accepted collision (%s): %s' % (hit['who'], msg[0][len('collision: '):]))
+    floor = [f for f in fails if 'thin floor' in f or 'over the Model' in f]
+    for f in floor:
+        hit = next((a for a in acc['budget'] if term and a['term'] == term.lower()), None)
+        if hit:
+            fails.remove(f)
+            warns.append('accepted budget exception for %s (%s, %s): %s' % (term, hit['why'], hit['who'], f))
+    for k, v in enumerate(L):
+        if v.startswith('Result: '):
+            L[k] = 'Result: FAIL' if fails else ('Result: inside the thin floor, below the build range' if warns else 'Result: inside the build range')
     if fails:
         L.append('Result: FAIL')
     elif warns:

@@ -1,0 +1,32 @@
+[
+ {
+  "page": "calibration-and-monitoring-ms-mid-side-matrix.html",
+  "before": "Sum MS L and MS R together (both soloed). If the Side signal is correctly inverted, the Side components cancel and you are left with only the Mid signal, the same as MS C alone.",
+  "after": "Mute MS L and MS R. You should hear only the Mid signal, the same as MS C alone. Then solo MS L and MS R together. You hear only the Side information, wide and diffuse, and it cancels to silence when the mix is folded to mono. If it does not cancel, the polarity invert is missing from MS R."
+ },
+ {
+  "page": "master-buss-processing-and-endgame-knowing-when-to-stop.html",
+  "before": "Master buss processing is for the last few percent, after the mix already works.",
+  "after": "Gentle master buss compression can go on early and be mixed into. Everything else on the master buss comes last, for the last few percent, after the mix already works."
+ },
+ {
+  "page": "master-buss-processing-and-endgame-knowing-when-to-stop.html",
+  "before": "Leave the peaks under 0 dBFS. What you deliver is not what a streaming service will play back.",
+  "after": "Leave about 6 dB of peak headroom: peaks near -6 dBFS when the mix goes to mastering. The finished master&#39;s ceiling sits below 0 dBFS, at about -1 dBTP."
+ },
+ {
+  "page": "master-buss-processing-endgame-common-mistakes-and-how-to-hear-them.html",
+  "before": "Mix buss processing added at the end",
+  "after": "Mix buss compression added at the end"
+ },
+ {
+  "page": "master-buss-processing-endgame-common-mistakes-and-how-to-hear-them.html",
+  "before": "Put it on early and mix into it, or leave it off.",
+  "after": "Put gentle buss compression on early and mix into it, or leave it off. Everything else on the master buss comes last."
+ },
+ {
+  "page": "master-buss-processing-and-endgame-procedure-guide.html",
+  "before": "Insert master-bus processing in a deliberate order and make small, level-matched changes. Leave headroom for the final bounce.",
+  "after": "Put gentle master-bus compression on early and mix into it. Add everything else on the master bus last, with small, level-matched changes. Leave about 6 dB of peak headroom, with peaks near -6 dBFS, in the mix that goes to mastering."
+ }
+]

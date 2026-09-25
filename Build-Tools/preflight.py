@@ -590,9 +590,13 @@ for _blk in re.findall(r'<module identifier="[^"]+">(.*?)(?=<module identifier=|
     _t=re.search(r'<title>([^<]*)</title>',_blk)
     if not _t: continue
     _name=_t.group(1)
-    # a hidden instructor-only module is exempt
+    # a hidden instructor-only module is exempt. Amended 2026-09-25 [Adam, DAPR 2020 v39]: that
+    # includes the unpublished Instructor Use Only - [Do Not Publish] module (Standards 0b.6.3),
+    # which this name test never matched, so a Lab Template in it made it a "thin module".
     if ('Instructor Resources' in _name or 'Instructor Notes' in _name
             or '(Hidden)' in _name): continue
+    if ('Instructor Use Only' in _name and
+            '<workflow_state>unpublished</workflow_state>' in _blk.split('<items>', 1)[0]): continue
     # A final exam module is not a thin module. The comment below already says
     # so; the zero-page test underneath only exempted one that carries no study
     # guide at all, which penalised the better-built version. 6.8 is about
@@ -880,10 +884,22 @@ for _spine in ('spring_2027_spine.py', 'fall_2026_spine.py'):
 #     so on DAPR 2255 it saw 14 of 36 graded objects and called the other 22 clean.
 #     Resolve the objects from the manifest inventory instead of matching filenames,
 #     and take each object's owning identifier from the resource, not from its folder.
-_targets = [(os.path.basename(os.path.dirname(_p)), _p)
+# Amended 2026-09-25: in the flat layout (assignments/<slug>.xml) the folder name is
+# "assignments" for every assignment, which is never a module item identifier, so the
+# "not in any module" skip below silently skipped EVERY assignment's date check. Take the
+# owner from the manifest resource that declares the file; fall back to the folder name.
+_file_owner = {}
+for _rid, _r in RES.items():
+    for _f in _r.get('files', []) + ([_r['href']] if _r.get('href') else []):
+        _file_owner.setdefault(os.path.normpath(_f), _rid)
+_targets = [(_file_owner.get(os.path.normpath(_p), os.path.basename(os.path.dirname(_p))), _p)
             for _p in a]
 _targets += [(_qid, _mp) for _qid, _qp, _mp in QUIZ if _mp and os.path.exists(_mp)]
 for _own, p in _targets:
+        # Amended 2026-09-25 [Adam, DAPR 2020 v39]: Instructor Use Only items are exempt here too.
+        # The unpublished Lab Template has no due date because no student ever submits it.
+        if os.path.normpath(p) in _INSTR_FILES or _own in _INSTR_IDS:
+            continue
         f = os.path.basename(p)
         t = open(p, encoding='utf-8').read()
         if f.endswith('_meta.xml') and '<assignment identifier=' not in t:
@@ -1495,7 +1511,12 @@ if _histfails: fails.append('history or naming question stems (9.3a): %d'%len(_h
 try:
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import budget_check as _bc
-    _bfails, _bwarns, _blines, _bai = _bc.run('.')
+    # Amended 2026-09-25 [Adam]: pass the Instructor Use Only exemption, so an instructor
+    # template (DAPR 2020's 30 point Lab Template) is not counted as student work.
+    try:
+        _bfails, _bwarns, _blines, _bai = _bc.run('.', exclude=_INSTR_FILES)
+    except TypeError:                     # an older budget_check.py without the parameter
+        _bfails, _bwarns, _blines, _bai = _bc.run('.')
     L('')
     L('12j CREDIT HOUR BUDGET (Standards 11e, 11e-1)')
     for _x in _blines: L('    %s'%_x)

@@ -1,0 +1,32 @@
+[
+ {
+  "file": "wiki_content/frequency-dynamics-and-side-chains-worked-example-ducking-a-bass-from-the-kick.html",
+  "before": "Insert Pro Compressor on the bass track. In the Side-Chain section, set the Source menu to Kick Key, the bus the key send feeds, not to the bass track's own signal. If your compressor has an external key switch, turn it on.",
+  "after": "Insert Pro Compressor on the bass track. In the key input selector at the top of the plug-in window (the key icon), choose Kick Key, the bus the key send feeds. Then, in the Side-Chain section, set the Source menu to an external source, not to the bass track's own signal. If your compressor has an external key switch instead, turn it on."
+ },
+ {
+  "file": "wiki_content/frequency-dynamics-and-side-chains-worked-example-ducking-a-bass-from-the-kick.html",
+  "before": "Insert a compressor on a sustained pad and set its side-chain source to Kick Key.",
+  "after": "Insert a compressor on a sustained pad and set its key input to Kick Key."
+ },
+ {
+  "file": "g4d17df2514bd7039eaf1edd5e9dab172/assessment_qti.xml",
+  "before": "A compressor on the bass has its key input enabled and the kick has a key send to Bus 1,",
+  "after": "A compressor on the bass should be keyed from the kick, which has a key send to Bus 1,"
+ },
+ {
+  "file": "g4d17df2514bd7039eaf1edd5e9dab172/assessment_qti.xml",
+  "before": "Set the Source menu to Bus 1, the bus the key send feeds",
+  "after": "Choose Bus 1 in the key input selector and set the Source menu to external"
+ },
+ {
+  "file": "non_cc_assessments/g4d17df2514bd7039eaf1edd5e9dab172.xml.qti",
+  "before": "A compressor on the bass has its key input enabled and the kick has a key send to Bus 1,",
+  "after": "A compressor on the bass should be keyed from the kick, which has a key send to Bus 1,"
+ },
+ {
+  "file": "non_cc_assessments/g4d17df2514bd7039eaf1edd5e9dab172.xml.qti",
+  "before": "Set the Source menu to Bus 1, the bus the key send feeds",
+  "after": "Choose Bus 1 in the key input selector and set the Source menu to external"
+ }
+]
