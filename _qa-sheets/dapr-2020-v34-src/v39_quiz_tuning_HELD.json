@@ -1,0 +1,119 @@
+{
+ "quiz": "Mixing: Quiz - Tuning",
+ "target": 25,
+ "reachable": 6,
+ "shortfall_reason": "The four tuning pages (the song page contributes only its short Pitch Correction and Editing list) carry about a dozen distinct practical tuning facts, and most of them are already tested by the related Timing & Tuning quiz: correction speed removing the scoop, formant control on large pitch moves, a wrong key or scale fighting the singer, pulling to the nearest scale note, full correction flattening vibrato and held notes, identifying the distracting notes after duplicating the playlist, handling out of key notes in Waves Tune, and keeping the original playlist for later revisions. What is left without overlap is six items: checking the tuned take against the original and in the full mix, versioned saves as crash recovery, fixing a stalled step by checking earlier steps, the Melodyne ARA transfer or analyze step, the flattened phrase shape, and labeling or committing corrected tracks. A separate Melodyne item on correcting pitch centers and transitions conservatively was cut because it overlaps the phrase shape item and the related quiz's over correction item. A transparency item from the song page was cut because it repeats the related quiz's fix only the distracting notes item, and its only supporting line is under 8 words. The song page's non-tuning content (tempo mapping, VCAs, immersive routing, stems, delivery, archiving) is practical but belongs to other modules and falls outside this quiz's tuning objectives, so it was not used to pad the count. No Distortion: pages were in the input.",
+ "questions": [
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "You have tuned the lead vocal with it soloed, and on its own it now sounds clean. Select every check the procedure guide has you make before you print or commit the tuned version.",
+   "options": [
+    "Compare the processed take to the original take",
+    "Listen to the tuned vocal in the full mix",
+    "Confirm every note sits exactly on its target line",
+    "Solo the vocal again at a louder monitoring level",
+    "Delete the original playlist so it cannot be confused"
+   ],
+   "key": [
+    "Compare the processed take to the original take",
+    "Listen to the tuned vocal in the full mix"
+   ],
+   "page": "Tuning: Pitch-Correction Procedure Guide",
+   "quote": "Compare the processed take to the original, listen in the full mix, then print or commit a verified version while retaining the original playlist.",
+   "why": "Verifying a tuning pass against the source and in context before committing it."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Pro Tools crashes halfway through a tuning session and the undo history is gone when you reopen it. Which habit from the procedure guide would have protected the work?",
+   "options": [
+    "Saving the session with a version number before and after the pass",
+    "Relying on the Edit menu undo list to step back through changes",
+    "Leaving the tuning plug-in window open until the pass is done",
+    "Bouncing a quick reference mix once all the tuning is finished"
+   ],
+   "key": [
+    "Saving the session with a version number before and after the pass"
+   ],
+   "page": "Tuning: Pitch-Correction Procedure Guide",
+   "quote": "Save the session before you start and again when you finish, with a version number in the name. It costs two seconds and it is the only undo that survives a crash.",
+   "why": "Choosing the recovery habit that survives a crash, versioned saves, over undo."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You are working through the pitch-correction procedure in order and the step you are on will not work no matter how many times you retry it. Where should you look first?",
+   "options": [
+    "At the earlier steps, for something that was skipped",
+    "At the current step, repeating it with different settings",
+    "At the plug-in install, reinstalling the tuning tool",
+    "At the interface, restarting the audio hardware"
+   ],
+   "key": [
+    "At the earlier steps, for something that was skipped"
+   ],
+   "page": "Tuning: Pitch-Correction Procedure Guide",
+   "quote": "If a step will not work, the cause is almost always something skipped earlier, not the step you are on.",
+   "why": "Troubleshooting a stalled workflow by checking the prerequisite steps first."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You insert Melodyne ARA on a lead vocal track and want to start correcting pitch centers. Following the procedure guide, what has to happen to the clip before you can correct anything?",
+   "options": [
+    "Transfer or analyze the clip in Melodyne",
+    "Set the song key and scale in Melodyne",
+    "Commit the track so the audio is printed",
+    "Consolidate the clip and set the track to ticks"
+   ],
+   "key": [
+    "Transfer or analyze the clip in Melodyne"
+   ],
+   "page": "Tuning: Pitch-Correction Procedure Guide",
+   "quote": "For Melodyne ARA, insert Melodyne on the track, transfer or analyze the clip as required by the installed version, and correct pitch centers and transitions conservatively.",
+   "why": "Knowing the Melodyne ARA setup step that must come before any pitch edit."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "After a tuning pass, each note of a vocal line lands on pitch, but the slides and curves between the notes have been straightened into flat steps and the line no longer sounds sung. What went wrong?",
+   "options": [
+    "The shape of the phrase was flattened along with the notes",
+    "The formants were preserved, so the voice kept its character",
+    "The correction was left short of the target on each note",
+    "The scale was set to chromatic instead of the song key"
+   ],
+   "key": [
+    "The shape of the phrase was flattened along with the notes"
+   ],
+   "page": "Tuning: What to Correct and What to Leave",
+   "quote": "The correction pulls the pitch toward the note and leaves the shape of the phrase alone. Flatten the shape too and it stops sounding sung.",
+   "why": "Diagnosing an in-tune but unsung result as a flattened phrase contour."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You print tuned versions of three vocal tracks in the semester project. A week later another engineer opens the session and cannot tell which tracks are tuned and which are the raw takes. Which project requirement was missed?",
+   "options": [
+    "Commit or clearly label the corrected tracks",
+    "Consolidate all tracks to one start and end time",
+    "Create an internal layback track for the print",
+    "Map the vocal tracks to their own VCA master"
+   ],
+   "key": [
+    "Commit or clearly label the corrected tracks"
+   ],
+   "page": "\"A Horse Is Not a Home\"",
+   "quote": "Commit or clearly label corrected tracks when appropriate.",
+   "why": "Keeping tuned tracks identifiable and recallable in a shared session."
+  }
+ ],
+ "dropped": []
+}

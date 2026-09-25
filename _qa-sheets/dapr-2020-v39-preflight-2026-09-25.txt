@@ -1,0 +1,176 @@
+XML/QTI parsed: 158  failures: 0
+quiz resources in the manifest: 13   qti files on disk: 13   metas resolved: 13
+cc quizzes (imsqti_xmlv1p2) with no non_cc_assessments copy (must be 0): 0
+canvas_export.txt declared: True
+declared files missing on disk: 0
+unresolvable placeholders: 0
+canvas media/link defects in content bodies: 0
+pages: 111  no head: 0  identifier mismatch: 0  not unpublished: 0
+organizations items: 162  dangling: 0
+assignments: 33  not unpublished: 0
+instructor only items carried verbatim, not scored as student pages: 4
+modules: 21  not unpublished: 0
+quizzes: 13  available=true: 0
+graded quizzes whose gradebook column disagrees with the quiz (must be 0): 0
+quizzes with answer shuffling off (must be 0): 0
+quizzes over the true/false cap: 0   quizzes off the standard question count: 0
+rubrics defined: 31   assignments declaring one: 31 of 33
+quizzes with no questions in the imported file: 0   point mismatches: 0
+LTI files: 5   Roll Call configs: 0   credentials: 0   dangling external_tool refs: 0
+Cloudflare student downloads checked live: 27   dead: 0
+quiz files with non-ASCII: 0   with named entities: 0
+question group refs: 0  unresolved: 0
+quiz images on an external host (must be 0): 0
+images with no alt attribute: 0   inline <svg>: 0
+modules with fewer than four pages (must be 0): 1
+    Core Mixing - DAPR 2020 - Instructor Use Only - [Do Not Publish] (3)
+attachment module items with no file and no URL (must be 0): 0
+module titles carrying a (Week NN) suffix (must be 0): 0
+page URLs carrying a module or week number (must be 0): 0
+page cross-links: 29   pointing at a page that does not exist: 0
+pages describing a graded object the package does not contain (must be 0): 0
+manifest item titles disagreeing with module_meta (must be 0): 0
+titles carrying a sequence number (must be 0): 0
+titles carrying a pipe character (must be 0): 0
+student pages carrying an instructor-only section (must be 0): 0
+graded objects with a due date: 43   without: 1   date defects: 0
+    no due date: Lab Template
+
+7a / 11b assignment page conformance, 32 assignment pages
+   instructor only, not scored: 1 (lab-template.html)
+   no DAPR icon reference             0
+   no What to Submit section          0
+   point value never stated           0
+   no printed rubric table            0
+   sends the student off the page     0
+accessibility, all 140 pages
+   assignment page with 2+ <h2>       0
+   heading level skipped              0
+   page with no heading at all        0
+   bare alt=""                        0
+   numbered <p> outside 11b worksheet 0
+   contrast under 4.5:1               0
+quizzes off the 11a point tier (must be 0): 0
+tables with no header cell (must be 0): 0
+tables with no caption text (must be 0): 0
+header cells with no scope (must be 0): 0
+captions carrying a style attribute (must be 0): 0
+layout tables, role="presentation" (must be 0): 0
+files emulating a table with display:table (must be 0): 0
+text on its INHERITED background under 4.5:1 (2b, must be 0): 0
+module items: 293  pointing at an undeclared resource: 0
+pages whose figure captions do not run 1..n (must be 0): 0
+alt attributes over the 120 character cap (must be 0): 0
+pages with no real image (Standards 0, must be 0): 0
+figures in use that lost labels to an older generation (must be 0): 0
+    note: no OCR label census found, rule 20.5d could not run
+retired orange #E65100 / rgb(230, 81, 0) (must be 0): 0 files, 0 uses
+
+scored quiz items whose key does not resolve (9.3a, must be 0): 0  (in 0 file copies)
+question stems asking history or naming (9.3a, must be 0): 0
+
+12j CREDIT HOUR BUDGET (Standards 11e, 11e-1)
+    COURSE
+      Package course code:  DAPR 2020: Core Mixing 002 | 2026 Fall - Full Term
+      Course:               DAPR 2020 Core Mixing, 3 credits, lecture
+      Lab:                  DAPR 2020L, 1 credit, part of this course and built into this one cartridge (§11e-1)
+      Total credits:        4
+      Model:                B, 3 credit lecture plus 1 credit lab
+      Why that many hours:  3 credit lecture: 6 outside hours a week x 15 weeks = 90 h, plus 1 credit lab: about 3 scheduled lab hours a week and 0 outside hours x 15 weeks = 45 h, the time students use to finish the lecture practical work (Standards 11e-0), total 135 h
+      Budget:               135 h, ceiling 2,250, build range 2,025 to 2,250, thin below 1,800, 150 points a week
+      Source:               built-in fallback table in budget_check.py (a standards file could not be read)
+    
+    11e POINT BUDGET
+    Published course total:   1,930
+    Attendance and bonus:     100
+    Work time total:          1,830
+    Median student hours:     109.8 of 135 h  (81 percent of budget, 7.3 h per week)
+    Student range:            fastest 73 h, median 110 h, slowest 146 h  (25 pts = 1 h, 90 min, 2 h)
+    Model:                    B, 3 credit lecture plus 1 credit lab
+    Weeks over capacity:      0 of 17
+    Items above 75 pts sharing a due week: 3
+    Graded objects resolved:  48 (0 held alternates left out: none)
+    Result: FAIL
+    FAIL  off tier: Lab Template is 30 points (tiers: 10, 25, 50, 75, 100, 150, 200)
+    FAIL  collision: week of 2026-11-30 has 3 items above 75 points due: Presentations: Mixing Topic Presentation (100); Final Mix: "A Horse Is Not a Home" (150); Final Mix - Jeff Hirata "Sunshine" (150)
+    warn  work time total 1830 is above the thin floor but under the build range of 2025 to 2250
+
+===== COPY FROM HERE TO GIVE TO AI =====
+Update this Canvas cartridge so its student workload meets the credit hour standard.
+
+Package (unzipped): /sessions/rcw-01hebs46qpebfpjpevcv8dyi/v39check
+Course: DAPR 2020 Core Mixing, 3 credit lecture plus DAPR 2020L lab, 1 credit, built into the same cartridge. Model B.
+Budget: 135 median student hours (3 credit lecture: 6 outside hours a week x 15 weeks = 90 h, plus 1 credit lab: about 3 scheduled lab hours a week and 0 outside hours x 15 weeks = 45 h, the time students use to finish the lecture practical work (Standards 11e-0), total 135 h). Build range 2,025 to 2,250 work time points, thin below 1,800, at most 150 points of spread load in any week.
+Read first: DAPR Canvas Standards sections 11, 11a, 11d, 11e and 11e-1.
+
+Where it stands now:
+- Published total 1,930, attendance and bonus 100, work time 1,830.
+- Median student 110 h of 135 h (81%); fastest 73 h, slowest 146 h.
+- Short of the build range by 195 to 420 points (12 to 25 median hours).
+- Busiest week carries 140 of 150 points.
+- FAIL: off tier: Lab Template is 30 points (tiers: 10, 25, 50, 75, 100, 150, 200)
+- FAIL: collision: week of 2026-11-30 has 3 items above 75 points due: Presentations: Mixing Topic Presentation (100); Final Mix: "A Horse Is Not a Home" (150); Final Mix - Jeff Hirata "Sunshine" (150)
+- warn: work time total 1830 is above the thin floor but under the build range of 2025 to 2250
+
+Graded items now (points, opens, due, file):
+- Pro Tools Lab: Pro Tools - Assignment: 25 pts, opens 2026-08-17, due 2026-08-28, gab65aaf3eeed625267e188bf51025f2d/assignment_settings.xml
+- macOS: P6: Mac Navigation Deep Dive - Assignment: 150 pts, opens 2026-08-17, due 2026-09-04, g513bf3a80090add61fe09fe9ae7842d0/assignment_settings.xml
+- macOS: Quiz - Mac Navigation: 50 pts, opens 2026-08-24, due 2026-09-04, g1ead896269fc0bacc0326f07ea9048a6/assessment_meta.xml
+- Essential Groundwork Lab: 25 pts, opens 2026-08-31, due 2026-09-11, g72067b261a598a244021c03317607604/assignment_settings.xml
+- Mix Prep Assignment: 25 pts, opens 2026-08-31, due 2026-09-11, ga5c56565fd42dbfab1eaca62efe36608/assignment_settings.xml
+- Mixing: Quiz - Essential Groundwork: 25 pts, opens 2026-08-31, due 2026-09-11, g438ff9861ffe8d3070e0efec683d19bf/assessment_meta.xml
+- Quick Mix 01: 25 pts, opens 2026-08-31, due 2026-09-11, ga4ac86cd8b492a8fdd16a27b636d39d9/assignment_settings.xml
+- Comping Lab: 25 pts, opens 2026-09-07, due 2026-09-18, gdc45d60b36de17dec15fbbd46978d2bd/assignment_settings.xml
+- Mix Comping and Arranging Assignment: 25 pts, opens 2026-09-07, due 2026-09-18, g686a331099cdfe95bfe7c58823e1f398/assignment_settings.xml
+- Mixing: Quiz - Comping & Arranging: 25 pts, opens 2026-09-07, due 2026-09-18, g97a7ccbbd4e7214e0345661ea884093c/assessment_meta.xml
+- Mix Rough Balance Assignment: 25 pts, opens 2026-09-14, due 2026-09-25, gddc1eb04a0af88d5e8e091e1d4615fb6/assignment_settings.xml
+- Mixing: Quiz - Focus & Balance: 25 pts, opens 2026-09-14, due 2026-09-25, g30b0fcc4e0853196426d10e56532ffea/assessment_meta.xml
+- Quick Mix 2: 25 pts, opens 2026-09-14, due 2026-09-25, ga0b3f9afa3d3f02f4aa366b43f20339d/assignment_settings.xml
+- In-Class Mix 01: 75 pts, opens 2026-09-21, due 2026-10-02, g6692b337a1ed87ab329e5e6aa6f99d71/assignment_settings.xml
+- In-Class Mix 01 Feedback: 25 pts, opens 2026-09-21, due 2026-10-02, discussions/gc309ee59512601fd2ae5637eb27db7cd.xml
+- Acoustics: Quiz - Mix Room Setup: 25 pts, opens 2026-09-28, due 2026-10-09, g9c5aa743a2ad7cce45a5ed2df9bdad4f/assessment_meta.xml
+- Calibration: Mixing Space - Assignment: 25 pts, opens 2026-09-28, due 2026-10-09, gedf6fbe54f39c99875079df0045eb980/assignment_settings.xml
+- Monitoring: Quiz - Calibration & Monitoring: 25 pts, opens 2026-09-28, due 2026-10-09, gcbd71ca2a6134135adc0099a4ecff8c6/assessment_meta.xml
+- Pro Tools Lab 02: 25 pts, opens 2026-09-28, due 2026-10-09, g6987fe3ee72f4ce94c97a831736057a2/assignment_settings.xml
+- Compression Lab: 25 pts, opens 2026-10-12, due 2026-10-23, gb7e190c05b62bfb29720dcd64206f9d5/assignment_settings.xml
+- Effects: Quiz - Dynamic Effects: 25 pts, opens 2026-10-12, due 2026-10-23, g5e9915964070660b09e6ba114134e819/assessment_meta.xml
+- Mix Dynamics Assignment: 25 pts, opens 2026-10-12, due 2026-10-23, gcc84cdd0c3d4e56f5e8b742a2f941cf5/assignment_settings.xml
+- Mixing: Mix Tuning Assignment: 25 pts, opens 2026-10-05, due 2026-10-23, ga540d20e72e5501e21c3cec49f03ea8e/assignment_settings.xml
+- Mixing: Quiz - Timing & Tuning: 25 pts, opens 2026-10-05, due 2026-10-23, gaeb88c8dd3d3d0f7a62abea51c3938b5/assessment_meta.xml
+- Timing Lab: 25 pts, opens 2026-10-05, due 2026-10-23, g99f7b5da6c84e4fe7b77c8bbe75d835d/assignment_settings.xml
+- Tuning Lab: 25 pts, opens 2026-10-05, due 2026-10-23, gd1ba68216d808d7127d78f54ad673edb/assignment_settings.xml
+- EQ Lab: 25 pts, opens 2026-10-19, due 2026-10-30, g3b1913fb8ea55b169d2e500f2102c928/assignment_settings.xml
+- Effects: Quiz - Spectral Effects: 25 pts, opens 2026-10-19, due 2026-10-30, gf8a06b84e8fa86b3cbc672b42f042621/assessment_meta.xml
+- Mix EQ Assignment: 25 pts, opens 2026-10-19, due 2026-10-30, g4c9e6390c0d6f21b9729c114e66417b2/assignment_settings.xml
+- Mix Frequency, Dynamics and Side-chains Assignment: 25 pts, opens 2026-10-26, due 2026-11-06, g81112ca5b6e74528d55111ff927dec8d/assignment_settings.xml
+- Song Analysis Lab: 25 pts, opens 2026-10-26, due 2026-11-06, gc75347c3f2c724d0c66314a187f14448/assignment_settings.xml
+- Effects: Quiz - Balancing & Reverb: 25 pts, opens 2026-11-02, due 2026-11-13, g63d516c3d0eb4ffdba6eefe1c89ca7b6/assessment_meta.xml
+- Mix Balancing and Reverb: 25 pts, opens 2026-11-02, due 2026-11-13, g4b76d94334b51d478bee1b48fdb1e92d/assignment_settings.xml
+- Quick Mix 3: 25 pts, opens 2026-11-02, due 2026-11-13, g12c2d19a1be8d670c5d8566218c3d755/assignment_settings.xml
+- Effects: Quiz - Delay & Stereo Enhancements: 25 pts, opens 2026-11-09, due 2026-11-20, g66be2e6845710c9c9e625a166f47f7cd/assessment_meta.xml
+- Mix Delay and Stereo Enhancements: 25 pts, opens 2026-11-09, due 2026-11-20, gf845d607c8f241d8eb87d4077cbdc1cc/assignment_settings.xml
+- Quick Mix 4: 25 pts, opens 2026-11-09, due 2026-11-20, g69c97d34408656acbf70bd66f703aea4/assignment_settings.xml
+- Effects: Quiz - Distortion: 25 pts, opens 2026-11-16, due 2026-12-04, g9e8cf53d7742d5e9b9dac7c49dca1468/assessment_meta.xml
+- Final Mix - Jeff Hirata "Sunshine": 150 pts, opens 2026-10-05, due 2026-12-04, gf65b47ed32b0bbcaa3113764dd43d03f/assignment_settings.xml
+- Final Mix: "A Horse Is Not a Home": 150 pts, opens 2026-09-28, due 2026-12-04, ga79ca20d9a518855b083e5c4c0f29513/assignment_settings.xml
+- In-Class Mix 02: 75 pts, opens 2026-11-02, due 2026-12-04, g64d3e395c14185d080ad6d9947c67c28/assignment_settings.xml
+- Mix Master-buss Processing, Automation, & Endgame: 25 pts, opens 2026-11-16, due 2026-12-04, g8addf8a0df98330114f0ae537a2cb265/assignment_settings.xml
+- Presentations: Mixing Topic Presentation (10 Minutes): 100 pts, opens 2026-10-26, due 2026-12-04, g9db47538f7879f9cee89d5470a8be683/assignment_settings.xml
+- Quick Mix 5: 25 pts, opens 2026-11-16, due 2026-12-04, g6b09e4b739f721d5c361e4de2fd3eb35/assignment_settings.xml
+- DAPR 2020: Core Mixing - Final Exam: 100 pts, opens 2026-12-09, due 2026-12-09, g9be3f42682ccc914dd33150d4fa7c4cd/assessment_meta.xml
+- Final Mix Review - "A Horse Is Not A Home": 25 pts, opens 2026-12-07, due 2026-12-09, discussions/g22fa15bc0c932e18da52f0dbee8713dc.xml
+- Lab Template: 30 pts, opens -, due -, g669da9aa9e3b8e04f89254dab2935c9b/assignment_settings.xml
+- Roll Call Attendance: 100 pts, opens -, due -, gb62083d32db5836a2b7ba00cb80a1691/assignment_settings.xml [attendance, not counted]
+
+How to fix it (from the Standards):
+- Add or rescope graded work; never raise the points on an existing item just to hit the number (section 11a, Course total).
+- Small modules follow Pattern A: one 25 point assignment and one 25 point quiz, 50 per module; reading-only modules get a quiz only (11a).
+- Integrative work follows Pattern B: projects at 75, 100, 150 or 200 points, opened one week per 50 points (11a, 11e).
+- Every item sits on the tier scale 10, 25, 50, 75, 100, 150, 200 (11). Open Monday, due Friday 9:00 AM Mountain, never in a closure (11d).
+- Never two items above 75 points due the same week; no week over 150 points of spread load (11e).
+- The final stays 100 questions and 100 points (9.1a); there is no midterm (9.1).
+
+Before editing any file, show me the plan: a table of every item to add, rescope or remove, with module, points, open week and due week, and the new budget math. Ask me to choose using Standards 0.5 (multiple choice with your recommendation). After I approve, build it, re-run preflight.py on a fresh unzip, and report gate 12j.
+===== END =====
+
+RESULT: FAIL | hard fails: ['modules under four pages: 1', 'graded objects with no due date: 1', '12j off tier: Lab Template is 30 points (tiers: 10, 25, 50, 75, 100, 150, 200)', '12j collision: week of 2026-11-30 has 3 items above 75 points due: Presentations: Mixing Topic Presentation (100); Final Mix: "A Horse Is Not a Home" (150); Final Mix - Jeff Hirata "Sunshine" (150)'] | warnings: ['no OCR label census; rule 20.5d did not run', '12j work time total 1830 is above the thin floor but under the build range of 2025 to 2250']

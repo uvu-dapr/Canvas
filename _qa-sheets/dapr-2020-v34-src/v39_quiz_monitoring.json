@@ -1,0 +1,475 @@
+{
+ "quiz": "Monitoring: Quiz - Calibration & Monitoring",
+ "target": 25,
+ "reachable": 25,
+ "shortfall_reason": "",
+ "questions": [
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "To keep the room quieter while you work, you pull the Pro Tools master fader down 8 dB and leave it there. You then bounce the mix. What do you predict?",
+   "options": [
+    "The bounced mix file is changed, coming out about 8 dB lower",
+    "The bounced mix file is unchanged, since the master only sets room level",
+    "The bounced mix file is unchanged, since bounces are always written at unity",
+    "The bounced mix file is changed, but only in its low frequency balance"
+   ],
+   "key": [
+    "The bounced mix file is changed, coming out about 8 dB lower"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "Using it as a volume control changes your final mix file, sometimes for the worse.",
+   "why": "Predict the consequence of using the master fader as a listening volume control."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your active monitors connect to an audio interface that has an output knob. You have no monitor controller. Which control should be your main overall listening volume?",
+   "options": [
+    "The output volume control on the interface",
+    "The master fader in your Pro Tools session",
+    "The level knobs on the back of each monitor",
+    "A gain plug-in on the master track"
+   ],
+   "key": [
+    "The output volume control on the interface"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "This is sometimes a knob on the front of the interface, and it is sometimes controlled digitally through software. It functions like a small monitor section, similar to what you would find on an analog console.",
+   "why": "Choose the correct overall volume control in a setup with no monitor controller."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You mix on headphones plugged straight into your laptop headphone jack, with no interface. Which control should set your overall listening level?",
+   "options": [
+    "The system volume control of the computer",
+    "The master fader in your Pro Tools session",
+    "A trim plug-in on the master track",
+    "The channel faders on every track equally"
+   ],
+   "key": [
+    "The system volume control of the computer"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "If you are listening on headphones plugged directly into the computer, this is likely the last gain stage before your ears.",
+   "why": "Choose a listening control that does not alter the mix file in a headphone-only setup."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "During speaker calibration your left monitor, playing alone, reads 85 dB SPL at the mix position. What is the correct next step?",
+   "options": [
+    "Play the right monitor alone and match it to the same meter reading",
+    "Play both monitors together and set the pair to read 85 dB SPL",
+    "Mark the controller position now, since one speaker sets the level",
+    "Adjust the right monitor with the pair playing until it sounds even"
+   ],
+   "key": [
+    "Play the right monitor alone and match it to the same meter reading"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "Test one speaker at a time. Confirm both speakers measure exactly the same before moving on.",
+   "why": "Carry out the one-speaker-at-a-time matching step correctly."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your speakers are rated for 105 dB SPL, your calibration noise averages -20 dBFS, and you want 20 dB of headroom. What should the SPL meter read at the mix position when you finish?",
+   "options": [
+    "85 dB SPL",
+    "105 dB SPL",
+    "65 dB SPL",
+    "95 dB SPL"
+   ],
+   "key": [
+    "85 dB SPL"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "if you want 20 dB of headroom, your test signal averages -20 dBFS, and your speakers are rated for 105 dB SPL or higher, aim for 85 dB SPL on your meter at the mix position.",
+   "why": "Work out the target SPL from headroom and test signal level."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "A classmate calibrates the studio monitors by playing a favorite commercial song and reading the SPL meter. Why is this the weakest choice of test signal?",
+   "options": [
+    "Loudness and frequency content vary widely from song to song",
+    "Songs are mastered too quietly to give a usable meter reading",
+    "Music has equal energy per frequency, which tilts the reading bright",
+    "Stereo music cannot be sent to one speaker at a time"
+   ],
+   "key": [
+    "Loudness and frequency content vary widely from song to song"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "Frequency content and overall loudness vary greatly between songs, which makes music the least reliable of the three test signals.",
+   "why": "Judge why music is an unreliable calibration signal."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You try to balance your monitors using white noise, and it sounds brighter and louder toward the top of the spectrum. What explains this?",
+   "options": [
+    "Each higher octave holds more frequencies, so it carries more energy",
+    "White noise falls about 3 dB per octave, so the lows are masked",
+    "White noise is shaped to match how human ears hear loudness",
+    "White noise has equal energy per octave, which favors the highs"
+   ],
+   "key": [
+    "Each higher octave holds more frequencies, so it carries more energy"
+   ],
+   "page": "Calibration: Reference Noise Files",
+   "quote": "Since white noise has equal energy per frequency, an octave with twice as many frequencies in it ends up with twice as much total energy.",
+   "why": "Diagnose why white noise is a poor, bright calibration signal."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You play pink noise into an analyzer that displays the total energy in each octave band. What should the display show?",
+   "options": [
+    "About the same level in every octave band",
+    "Level rising about 3 dB with each higher octave",
+    "Level falling about 6 dB with each higher octave",
+    "Level peaking in the midrange and falling at both ends"
+   ],
+   "key": [
+    "About the same level in every octave band"
+   ],
+   "page": "Calibration: Reference Noise Files",
+   "quote": "That means the low octaves and the high octaves each carry the same total power, which matches how we perceive loudness across the frequency range far better than white noise does.",
+   "why": "Predict how pink noise reads on an octave-band display."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your monitors measure correctly with pink noise, yet level matching during real mixing sessions still feels inconsistent. Which test signal is designed to close that gap?",
+   "options": [
+    "M Noise, built from music that keeps its loudness and crest factor",
+    "White noise, since equal energy per frequency is more neutral",
+    "Brown noise, since its steeper tilt resembles a finished mix",
+    "A 1 kHz reference tone, since one frequency is easier to read"
+   ],
+   "key": [
+    "M Noise, built from music that keeps its loudness and crest factor"
+   ],
+   "page": "Calibration: Reference Noise Files",
+   "quote": "M Noise is built from real musical program material that has been processed to retain the statistical loudness and crest-factor characteristics of actual music while remaining repeatable and measurable like a test tone.",
+   "why": "Choose a calibration signal that behaves like real program material."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You need the meters in two different studios to agree on what a given digital level reads. Which test signal fits this job?",
+   "options": [
+    "A steady 1 kHz tone at a defined dBFS level",
+    "A sine sweep through the full audio range",
+    "Pink noise played at a comfortable level",
+    "A well mixed song that holds a steady level"
+   ],
+   "key": [
+    "A steady 1 kHz tone at a defined dBFS level"
+   ],
+   "page": "Calibration: Reference Noise Files",
+   "quote": "a steady single-frequency tone at a defined digital level, used to align meter calibration between different pieces of gear or different rooms, rather than to test frequency response.",
+   "why": "Choose the right signal for aligning meters between rooms."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "A classmate presses a handheld SPL meter against a headphone earcup, reads 85 dB, and calls the headphones calibrated. Which reasons show why this reading is not valid? (Mark all that apply.)",
+   "options": [
+    "The pad seal changes the pressure that reaches the ear",
+    "Headphone placement on the head changes the pressure",
+    "Your own pinna and ear canal shape the level at the eardrum",
+    "Headphone drivers are too quiet for a handheld meter to detect",
+    "The meter must be set to read dBFS instead of dB SPL",
+    "Pink noise cannot be played through headphones at 85 dB"
+   ],
+   "key": [
+    "The pad seal changes the pressure that reaches the ear",
+    "Headphone placement on the head changes the pressure",
+    "Your own pinna and ear canal shape the level at the eardrum"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "The pressure at your eardrum depends on the enclosed ear volume, pad seal, headphone placement, your pinna, and your ear canal, none of which a handheld meter accounts for.",
+   "why": "Diagnose why a handheld SPL meter cannot calibrate headphones."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "Using the loudness-matching method this course teaches, which actions are part of setting your headphone reference level? (Mark all that apply.)",
+   "options": [
+    "Calibrate the monitors first, before touching the headphones",
+    "Match the headphone loudness to the calibrated monitors by ear",
+    "Set the headphones to read 85 dB SPL on a handheld meter",
+    "Calibrate the headphones first, then match the monitors to them",
+    "Use a mixing level a friend finds comfortable on their headphones"
+   ],
+   "key": [
+    "Calibrate the monitors first, before touching the headphones",
+    "Match the headphone loudness to the calibrated monitors by ear"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "calibrate your monitors first, then match the headphones to that calibrated sound field by ear.",
+   "why": "Apply the order and method for a repeatable headphone reference."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "During loudness matching, the headphones sound quieter than the calibrated monitors on the same pink noise. What do you change?",
+   "options": [
+    "Only the headphone amplifier or headphone output level",
+    "The clip gain on the pink noise region in Pro Tools",
+    "The master fader, then recalibrate the monitors to match",
+    "The monitor controller, lowering it until the two match"
+   ],
+   "key": [
+    "Only the headphone amplifier or headphone output level"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "Adjust only the headphone amplifier or headphone output level until the headphones sound approximately equal in loudness to the calibrated monitors.",
+   "why": "Choose the one gain stage allowed to move while matching headphones."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "A classmate says the headphone mixing target is 80 dBA because a guideline allows 80 dBA for up to 40 hours a week. What is wrong with that reasoning?",
+   "options": [
+    "That figure is a hearing-safety exposure limit, not a mixing target",
+    "That figure is the loudspeaker target, so headphones need 85 dBA",
+    "That figure is correct, but only when read on a handheld meter",
+    "That figure is too low, since all mixing must be done at 85 dB SPL"
+   ],
+   "key": [
+    "That figure is a hearing-safety exposure limit, not a mixing target"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "That is a hearing-safety recommendation, not a mixing calibration target.",
+   "why": "Separate hearing-safety limits from calibration targets."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "You mix on closed-back headphones. Which conditions will likely cost you low end at the ear and tempt you to add too much bass? (Mark all that apply.)",
+   "options": [
+    "Wearing glasses under the earpads",
+    "Long hair caught under the earpads",
+    "Earpads that are badly worn",
+    "Earpads that seal fully around the ear",
+    "A fresh set of earpads fitted today",
+    "Headphones sitting evenly on the head"
+   ],
+   "key": [
+    "Wearing glasses under the earpads",
+    "Long hair caught under the earpads",
+    "Earpads that are badly worn"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "A broken seal loses the low end first. Glasses, long hair and a worn earpad all cost you bass you will then try to fix in the mix.",
+   "why": "Diagnose headphone seal problems that skew bass decisions."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You calibrated to 85 dB SPL, but that is far too loud for the quiet acoustic project you are mixing. How do you set a comfortable working level without losing your reference?",
+   "options": [
+    "Play a similar reference song, lower the main controller, and mark that spot",
+    "Pull the master fader down until the mix feels comfortable to hear",
+    "Recalibrate the monitors with pink noise to a lower SPL for this project",
+    "Keep mixing at 85 dB SPL, since any other level breaks calibration"
+   ],
+   "key": [
+    "Play a similar reference song, lower the main controller, and mark that spot"
+   ],
+   "page": "Calibration: Speaker and Headphone Level Calibration",
+   "quote": "Turn the main level down until it feels comfortable, then mark that new position so you know exactly what to return to.",
+   "why": "Set a practical working level while keeping a repeatable reference."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "You are building the three-track MS decode in Pro Tools. Which settings belong on the MS R track? (Mark all that apply.)",
+   "options": [
+    "Pan it hard right",
+    "Activate polarity invert on an EQ 3 1-Band insert",
+    "Carry only the Side signal on it",
+    "Pan it center with the Mid",
+    "Insert a short delay to offset the Side",
+    "Carry only the Mid signal on it"
+   ],
+   "key": [
+    "Pan it hard right",
+    "Activate polarity invert on an EQ 3 1-Band insert",
+    "Carry only the Side signal on it"
+   ],
+   "page": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "quote": "The duplicate Side track. Pan hard right. Insert EQ 3 1-Band and activate the polarity invert button. This track carries the inverted Side signal only.",
+   "why": "Configure the inverted Side track of an MS decode."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "A classmate decodes MS using a phase shift plug-in on MS R instead of a polarity invert. Why is polarity invert the right tool?",
+   "options": [
+    "It flips the whole waveform at every frequency at the same time",
+    "It shifts only the low frequencies and leaves the highs alone",
+    "It delays the signal slightly, which widens the stereo image",
+    "It lowers the Side level by 6 dB, which balances the decode"
+   ],
+   "key": [
+    "It flips the whole waveform at every frequency at the same time"
+   ],
+   "page": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "quote": "Polarity invert flips the entire waveform 180 degrees at all frequencies simultaneously. This is what MS decoding requires.",
+   "why": "Choose and justify polarity invert over phase shift."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You duplicate the Side track with Option + Shift + D, and the new track appears with no audio regions on it. What went wrong?",
+   "options": [
+    "Playlist was not checked in the Duplicate Track dialog",
+    "Insert After Last Selected Track was left checked",
+    "The stereo track was split into mono before duplicating",
+    "The Side track was still in a group with the Mid track"
+   ],
+   "key": [
+    "Playlist was not checked in the Duplicate Track dialog"
+   ],
+   "page": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "quote": "If Playlist is not checked in the Duplicate Track dialog, the new track will be empty.",
+   "why": "Diagnose an empty duplicate track in Pro Tools."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your decoded MS orchestra recording sounds too wide against the rest of the mix. What is the right adjustment?",
+   "options": [
+    "Lower both Side track faders together by the same amount",
+    "Lower the MS C fader so the Mid sits further back",
+    "Lower only the MS R fader until the image narrows",
+    "Raise both Side track faders together by the same amount"
+   ],
+   "key": [
+    "Lower both Side track faders together by the same amount"
+   ],
+   "page": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "quote": "pull both Side tracks down together for a narrower image, push them up for a wider one. Keep them matched, or the image pulls to one side.",
+   "why": "Control MS width without pulling the image off center."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "After building the MS matrix you solo MS C and hear a wide stereo spread. What does this tell you?",
+   "options": [
+    "The routing is wrong, since MS C should give a stable center image",
+    "The routing is right, since MS C should carry the full stereo spread",
+    "The Side faders are too low, so the center has lost its focus",
+    "MS C also needs polarity invert to pull its image to center"
+   ],
+   "key": [
+    "The routing is wrong, since MS C should give a stable center image"
+   ],
+   "page": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "quote": "Solo MS C and listen. You should hear a clear, stable center image with no stereo spread. If it sounds wide, the routing is incorrect.",
+   "why": "Verify an MS decode by listening to the Mid track."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "A client asks why you recorded a location session in Mid-Side. Which are real advantages of MS? (Mark all that apply.)",
+   "options": [
+    "The recording stays mono compatible",
+    "Stereo width can be adjusted after recording",
+    "The raw file plays back as normal stereo with no decoding",
+    "The Side mic removes room ambience from the recording",
+    "Width is locked in by the mic angle at the session"
+   ],
+   "key": [
+    "The recording stays mono compatible",
+    "Stereo width can be adjusted after recording"
+   ],
+   "page": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "quote": "MS gives you mono-compatible recordings and lets you adjust the stereo width after recording by changing the level of the Side signal.",
+   "why": "Justify choosing MS for a recording."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You import 02_Pair_FrontMS and play it as an ordinary stereo track. The source sits hard left and the right side sounds diffuse and odd. Why?",
+   "options": [
+    "The file holds raw Mid and Side signals that must be decoded first",
+    "The file was recorded out of polarity and needs flipping on the left",
+    "The pan law on the stereo track is set too low for playback",
+    "The left mic was a figure-8 aimed away from the source"
+   ],
+   "key": [
+    "The file holds raw Mid and Side signals that must be decoded first"
+   ],
+   "page": "Calibration and Monitoring: MS (Mid-Side) Matrix",
+   "quote": "These are raw signals. They cannot be listened to directly as a stereo pair without decoding them first.",
+   "why": "Diagnose an undecoded MS file on playback."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You are measuring monitor level at the listening position and the reading is 3 dB low. What is the disciplined way to proceed?",
+   "options": [
+    "Make one controlled adjustment, then measure again before anything else",
+    "Raise the controller and interface output together, then measure",
+    "Raise the master fader 3 dB so the meter reads on target",
+    "Adjust by ear until it sounds right, then skip the second reading"
+   ],
+   "key": [
+    "Make one controlled adjustment, then measure again before anything else"
+   ],
+   "page": "Calibration and Monitoring: Procedure Guide",
+   "quote": "Measure the playback level at the listening position, make one controlled adjustment, then measure again.",
+   "why": "Apply the measure, adjust, measure loop during calibration."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You play the calibration noise from a media player app, while your mixes play from Pro Tools through a different output. What is the problem?",
+   "options": [
+    "The noise must run through the same output path you mix through",
+    "The noise must be played at 0 dBFS to give a valid reading",
+    "Media player apps cannot play back 24-bit reference files",
+    "Nothing, since any playback source gives the same level reading"
+   ],
+   "key": [
+    "The noise must run through the same output path you mix through"
+   ],
+   "page": "Calibration and Monitoring: Procedure Guide",
+   "quote": "Open the supplied reference-noise file and route it through the same output path used for mixing.",
+   "why": "Diagnose a calibration done through the wrong signal path."
+  }
+ ],
+ "dropped": []
+}

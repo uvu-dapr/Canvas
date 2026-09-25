@@ -1,0 +1,320 @@
+{
+ "quiz": "Mixing: Quiz - Master-Buss Processing & Endgame",
+ "target": 25,
+ "reachable": 17,
+ "shortfall_reason": "The four pages (after excluding the master fader and print-level facts already tested by the Distortion quiz) support only 17 distinct practical facts: track fixes before master processing, 4 dB master EQ as a channel problem, level-matching, 1 to 2 dB buss compression, broad buss EQ, limiting for control, the three-moves-under-1-dB stop rule, the overnight test, automation for transitions, the post-automation listening pass, exact-selection bounce, re-import check, untouched playlist, versioned saves, early buss processing, loudness normalization, and tracing a failed step back. The master fader at unity and the -6 dBFS / no-limiter delivery rule are already covered by avoid_overlap_with stems, the pages give no insert order for the master chain, no specific automation technique, and no metering method, so any further question would repeat one of these facts or need outside material.",
+ "questions": [
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "The kick is boomy and one rhythm guitar has a harsh ring. You want to start adding compression and EQ to the master bus. What should you do first?",
+   "options": [
+    "Fix the kick and the guitar on their own tracks",
+    "Cut both problems with one broad master EQ move",
+    "Add master compression so the problems sit back",
+    "Add a master limiter to hold the boomy peaks down"
+   ],
+   "key": [
+    "Fix the kick and the guitar on their own tracks"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "Finish corrective work on individual tracks before adding processing to the master bus.",
+   "why": "Workflow order: corrective work happens on tracks before any master processing."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "The whole mix sounds muddy, and to clean it up you find yourself cutting 4 dB in the low mids on the master EQ. What does that tell you?",
+   "options": [
+    "The mud is coming from a channel, so go back and find it",
+    "The master EQ is the right place, since it fixes everything at once",
+    "The cut should be split between two master EQ bands",
+    "The cut is fine as long as the master is level-matched"
+   ],
+   "key": [
+    "The mud is coming from a channel, so go back and find it"
+   ],
+   "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+   "quote": "The master buss is not where a mix gets fixed. If the mix needs 4 dB of master buss EQ, the problem is on a channel. Go back and find it.",
+   "why": "Diagnosis: a large master EQ move points to a problem on a channel."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You insert EQ and compression on the master and bypass them to compare. The processed version sounds better, but it is also about 2 dB louder. What should you do before you judge it?",
+   "options": [
+    "Match its output to the bypassed level, then compare again",
+    "Keep it, since the processed version clearly sounds better",
+    "Add more processing so the difference is easier to hear",
+    "Judge it on the meters rather than by ear"
+   ],
+   "key": [
+    "Match its output to the bypassed level, then compare again"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "Insert master-bus processing in a deliberate order and make small, level-matched changes.",
+   "why": "Choose-and-justify: level-match master processing before deciding it helps."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your mix buss compressor is showing 5 to 6 dB of gain reduction through the chorus. How should you read that meter?",
+   "options": [
+    "It is far too much, since 1 to 2 dB on the mix buss is already a lot",
+    "It is normal glue for a mix buss and can stay as it is",
+    "It is fine as long as the attack and release are slow",
+    "It is too little to hear on a full mix and needs more"
+   ],
+   "key": [
+    "It is far too much, since 1 to 2 dB on the mix buss is already a lot"
+   ],
+   "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+   "quote": "Small amounts. 1 to 2 dB of gain reduction on the mix buss is a lot.",
+   "why": "Meter reading: judge mix buss gain reduction against a sensible amount."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Which of these EQ moves is a good fit for the master buss at the mix stage?",
+   "options": [
+    "A gentle, broad shelf that tilts the whole mix",
+    "A narrow cut on one ringing snare frequency",
+    "A tight boost to pull the vocal presence forward",
+    "A deep notch on the hum from one guitar amp"
+   ],
+   "key": [
+    "A gentle, broad shelf that tilts the whole mix"
+   ],
+   "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+   "quote": "Broad moves only. If you need a narrow cut on the master, it belongs on a track.",
+   "why": "Choose a tool setting: master EQ is for broad moves; narrow work goes on tracks."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "While mixing, you put a limiter on the master. What job should it be doing at this stage?",
+   "options": [
+    "Catching the odd peak for control, not making the mix louder",
+    "Raising the mix to the level of commercial releases",
+    "Setting the final streaming loudness so mastering can skip it",
+    "Pushing the mix hard so it reaches mastering sounding finished"
+   ],
+   "key": [
+    "Catching the odd peak for control, not making the mix louder"
+   ],
+   "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+   "quote": "For control, not for loudness, at this stage. Mastering is a different job with different ears.",
+   "why": "Tool purpose: a mix-stage limiter is for control; loudness is mastering's job."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your last three changes were all under 1 dB, and on playback you cannot say which of them helped. What should you do next?",
+   "options": [
+    "Call the mix done and bounce it",
+    "Undo all three and try larger moves",
+    "Keep adjusting until one change clearly helps",
+    "Add a new master plugin to find the missing lift"
+   ],
+   "key": [
+    "Call the mix done and bounce it"
+   ],
+   "page": "Master-Buss Processing and Endgame: Knowing When to Stop",
+   "quote": "You are done when your next three moves are all under 1 dB and you cannot say which one helped.",
+   "why": "Decision: recognize the point where further moves stop improving the mix."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You have been revising a mix for days, and each version is different but none is better. You leave it overnight, and the next morning you cannot name anything wrong with it. What should you do?",
+   "options": [
+    "Treat it as finished and deliver it",
+    "Start one more full revision pass to be safe",
+    "Rebalance it against a new reference track",
+    "Rework the automation from the top of the song"
+   ],
+   "key": [
+    "Treat it as finished and deliver it"
+   ],
+   "page": "Master-Buss Processing & Endgame: Common Mistakes and How to Hear Them",
+   "quote": "Leave it overnight. If you cannot name what is wrong the next morning, it is finished.",
+   "why": "Diagnosis of endless revisions and the fresh-ears test for being finished."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Which of these uses of automation fits the module's goal for automation?",
+   "options": [
+    "Pushing the guitars up a touch into the final chorus so the lift lands",
+    "Riding a vocal in every bar to cover a harsh EQ problem on its channel",
+    "Drawing a bass ride all song to hide one note that is out of tune",
+    "Automating the master down wherever the mix gets too loud"
+   ],
+   "key": [
+    "Pushing the guitars up a touch into the final chorus so the lift lands"
+   ],
+   "page": "Mixing: Master-Buss Processing & Endgame: Module Overview",
+   "quote": "Use automation to serve the arrangement rather than fix it",
+   "why": "Choose-and-justify: automation supports transitions instead of patching problems."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "You have just written automation for the song's section changes. On the full start-to-finish listen that follows, which problems are you listening for? Select all that apply.",
+   "options": [
+    "Level jumps where a ride starts or ends",
+    "Clicks at automation or edit points",
+    "Clipped peaks where a ride pushes too hot",
+    "Changes you did not mean to write",
+    "Whether the mix is as loud as a commercial release",
+    "Whether every track is named and colored consistently"
+   ],
+   "key": [
+    "Level jumps where a ride starts or ends",
+    "Clicks at automation or edit points",
+    "Clipped peaks where a ride pushes too hot",
+    "Changes you did not mean to write"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "Use automation to support musical transitions, then listen from start to finish for level jumps, clicks, clipped peaks, and unintended changes.",
+   "why": "Critical listening: what an automation pass can break and how to catch it."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your bounced file starts with two seconds of silence and cuts off before the last chord finishes. Which step went wrong?",
+   "options": [
+    "The bounce was not made from an exact timeline selection",
+    "The bounce was not re-imported before submission",
+    "The session was not saved with a version number",
+    "The master processing was not level-matched"
+   ],
+   "key": [
+    "The bounce was not made from an exact timeline selection"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "Make the required bounce from an exact timeline selection, re-import it, and listen to the delivered file before submission.",
+   "why": "Diagnosis: wrong start and end points trace back to the bounce selection."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You have bounced your final mix and the file shows up in the folder with the right name. What should you do before you submit it?",
+   "options": [
+    "Re-import the bounce and listen to the delivered file",
+    "Submit it, since the bounce used the session settings",
+    "Play the session timeline once more from the top",
+    "Compare its file size with your last bounce"
+   ],
+   "key": [
+    "Re-import the bounce and listen to the delivered file"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "Make the required bounce from an exact timeline selection, re-import it, and listen to the delivered file before submission.",
+   "why": "Delivery check: verify the actual printed file, not the session."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You are about to make a destructive edit to the lead vocal. What should you keep first?",
+   "options": [
+    "An untouched playlist or session version",
+    "A screenshot of the plugin settings",
+    "A note of the edit in the track comments",
+    "A bounce of the full mix as it is now"
+   ],
+   "key": [
+    "An untouched playlist or session version"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "Keep an untouched playlist or session version before making destructive edits.",
+   "why": "Session safety: keep a way back before an edit that cannot be undone."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Pro Tools crashes halfway through your endgame work and the session reopens with your last hour missing. Which habit would have protected you?",
+   "options": [
+    "Saving with a version number before you start and when you finish",
+    "Relying on the undo history in the Edit menu",
+    "Saving once at the very end under the same name",
+    "Bouncing a rough mix before you start working"
+   ],
+   "key": [
+    "Saving with a version number before you start and when you finish"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "Save the session before you start and again when you finish, with a version number in the name. It costs two seconds and it is the only undo that survives a crash.",
+   "why": "Session safety: versioned saves are the only recovery that survives a crash."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You set every balance with nothing on the mix buss. At the end you add a buss compressor, and the balances you worked on fall apart. What is the better approach?",
+   "options": [
+    "Put it on early and mix into it, or leave it off",
+    "Keep it at the end and nudge the vocal back up",
+    "Keep it at the end and bypass it while you balance",
+    "Add it after the bounce, on the printed file"
+   ],
+   "key": [
+    "Put it on early and mix into it, or leave it off"
+   ],
+   "page": "Master-Buss Processing & Endgame: Common Mistakes and How to Hear Them",
+   "quote": "Put it on early and mix into it, or leave it off.",
+   "why": "Diagnosis and fix: late buss processing undoes balance decisions."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your newest version is louder than the last one. It sounds exciting for a minute, then flat and tiring. You plan to push the master harder so it stands out on streaming. What is the better call?",
+   "options": [
+    "Mix for dynamics, since loudness normalization means the loud mix wins nothing",
+    "Push it harder, since streaming favors the loudest mix",
+    "Keep the loudness and brighten the top end to add life",
+    "Add more buss compression to even out the tiring parts"
+   ],
+   "key": [
+    "Mix for dynamics, since loudness normalization means the loud mix wins nothing"
+   ],
+   "page": "Master-Buss Processing & Endgame: Common Mistakes and How to Hear Them",
+   "quote": "Mix for dynamics. Loudness normalization means the loud mix wins nothing.",
+   "why": "Listening cue and fix: loud, flat, tiring means you are chasing loudness."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You reach the bounce step of the procedure and it will not work the way the guide describes. Where should you look first?",
+   "options": [
+    "At an earlier step that was skipped",
+    "At the bounce settings for the step you are on",
+    "At the Pro Tools preference files",
+    "At the playback engine buffer size"
+   ],
+   "key": [
+    "At an earlier step that was skipped"
+   ],
+   "page": "Master-Buss Processing and Endgame: Procedure Guide",
+   "quote": "If a step will not work, the cause is almost always something skipped earlier, not the step you are on.",
+   "why": "Troubleshooting: trace a failing step back to what was skipped."
+  }
+ ],
+ "dropped": []
+}

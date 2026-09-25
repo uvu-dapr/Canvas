@@ -1,0 +1,284 @@
+{
+ "quiz": "Effects: Quiz - Frequency Dynamics & Side-Chains",
+ "target": 25,
+ "reachable": 15,
+ "shortfall_reason": "The pages support only 15 distinct practical questions. Only two pages carry teaching content (Procedure Guide and How They Work, roughly 700 words together); the Additional Tips and Tricks page is empty apart from a repeated figure caption, and the Module Overview has only objectives and links. The 'Analyze a released mix' objective has no supporting text, multiband compression gets one sentence, and the side-chain filter is covered only briefly. Several remaining page facts are excluded because they duplicate the related Dynamic Effects quiz: high-passing the key to stop kick pumping, a release that recovers before the next hit, and saving versioned sessions before and after. Going past 15 would mean restating the same routing fact in new wording, asking recall about the page layout or diagram numbering, or keying answers that are not on the pages.",
+ "questions": [
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "The kick and bass mask each other in the low end, and you decide the kick should duck the bass with a side-chain. Which parts belong in the setup? Select all that apply.",
+   "options": [
+    "A compressor inserted on the bass track",
+    "A key send on the kick track",
+    "A compressor inserted on the kick track",
+    "A key send on the bass track",
+    "A compressor inserted on the key bus"
+   ],
+   "key": [
+    "A compressor inserted on the bass track",
+    "A key send on the kick track"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "The trigger track does the pushing. A key send carries a copy of it to the side chain input on the compressor, and the compressor, inserted on the ducked track, turns that key signal into gain reduction.",
+   "why": "Builds a ducking side-chain: send on the trigger, compressor on the ducked track."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "A compressor on the bass has its key input enabled and the kick has a key send to Bus 1, but the bass dips on its own loud notes and ignores the kick. In Pro Compressor, what do you fix?",
+   "options": [
+    "Set the Source menu to Bus 1, the bus the key send feeds",
+    "Raise the kick's key send level until the kick triggers it",
+    "Lower the threshold so the kick crosses it more often",
+    "Move the compressor from the bass track to the kick track"
+   ],
+   "key": [
+    "Set the Source menu to Bus 1, the bus the key send feeds"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "In Pro Compressor, point 3 is the Source menu in the Side-Chain section, shown in the screenshot at the top of this page. Set it to the bus the key send feeds, not to the ducked track's own signal.",
+   "why": "Diagnoses a side-chain listening to its own track instead of the key bus."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "The bass compressor is keyed from the kick and set up correctly. In a bar where the kick is silent, the bassist plays a loud, sustained note. What does the compressor do to that note?",
+   "options": [
+    "Nothing, because the kick trigger is not present",
+    "Reduces it, because the note crosses the threshold",
+    "Reduces it by the same amount as on a kick hit",
+    "Mutes it until the next kick hit arrives"
+   ],
+   "key": [
+    "Nothing, because the kick trigger is not present"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "Confirm that gain reduction occurs only when the trigger is present.",
+   "why": "Predicts keyed compression behavior when the trigger is absent."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "The bass compressor is keyed from the kick and working as intended. Which describes the audio coming out of the bass channel?",
+   "options": [
+    "The bass alone, dipping each time the kick hits",
+    "The bass with the kick blended in through the key input",
+    "The kick alone, since it is what drives the compressor",
+    "The bass alone, dipping each time a bass note gets loud"
+   ],
+   "key": [
+    "The bass alone, dipping each time the kick hits"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "You never hear the trigger through the compressor; you hear the ducked track dip each time the trigger hits.",
+   "why": "Predicts what a keyed compressor outputs: the ducked track only, never the trigger."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "In a video mix, the music bed masks the narrator. To keep the narration clear, where do you insert the ducking compressor and what do you key it from?",
+   "options": [
+    "Insert it on the music and key it from the voice",
+    "Insert it on the voice and key it from the music",
+    "Insert it on the voice and key it from the voice",
+    "Insert it on the music and key it from the music"
+   ],
+   "key": [
+    "Insert it on the music and key it from the voice"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: How They Work",
+   "quote": "Using one source to pull another down. Voice over music is the obvious case, kick over bass is the useful one.",
+   "why": "Chooses trigger and controlled track for voice over music ducking."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "A lead vocal sits well in the mix, but its S sounds are harsh and spit out on every line. Which processor targets just that problem?",
+   "options": [
+    "A compressor keyed to the vocal's sibilant range",
+    "A compressor on the vocal keyed from the kick",
+    "A compressor on the music keyed from the vocal",
+    "A compressor keyed to the vocal's low-frequency range"
+   ],
+   "key": [
+    "A compressor keyed to the vocal's sibilant range"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: How They Work",
+   "quote": "A compressor keyed to the sibilant range. The same idea, one band, one job.",
+   "why": "Chooses a de-esser for sibilance and knows it is a keyed compressor."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "A bass guitar booms on a few low notes, but its other notes and its upper range sound right. A static low cut fixes the boom but thins every other note. Which tool fits?",
+   "options": [
+    "Multiband compression acting on the low band only",
+    "A deeper static low cut with a wider bandwidth",
+    "A de-esser keyed to the bass's sibilant range",
+    "Ducking the bass from the kick on every hit"
+   ],
+   "key": [
+    "Multiband compression acting on the low band only"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: How They Work",
+   "quote": "Different compression per frequency band. Solves what static EQ cannot, and causes what static EQ never would.",
+   "why": "Chooses frequency-dependent dynamics where static EQ fails."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_answers_question",
+   "stem": "Which of these jobs work by having the compressor respond to a signal other than the one you hear? Select all that apply.",
+   "options": [
+    "Ducking a music bed under a voice",
+    "De-essing a vocal's harsh S sounds",
+    "Letting one frequency range drive the compression",
+    "Blending a heavily compressed copy with the dry track",
+    "Adding makeup gain after the gain reduction"
+   ],
+   "key": [
+    "Ducking a music bed under a voice",
+    "De-essing a vocal's harsh S sounds",
+    "Letting one frequency range drive the compression"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: How They Work",
+   "quote": "The audio you hear and the audio that triggers the gain reduction do not have to be the same signal. That one idea covers ducking, de-essing and frequency selective control.",
+   "why": "Recognizes which tasks need a side-chain (key) setup."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "In the chorus, the lead vocal and a wall of guitars fight for the same space. Following the procedure guide, what do you decide before inserting any processor?",
+   "options": [
+    "Which source should trigger control of the other",
+    "How much makeup gain the guitars will need",
+    "Which ratio preset suits the guitar compressor",
+    "How far to high-pass the vocal's key signal"
+   ],
+   "key": [
+    "Which source should trigger control of the other"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "Identify the masking relationship and decide which source should trigger control of the other source.",
+   "why": "Plans a side-chain fix by naming the trigger before touching controls."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "The lead vocal ducks the guitars, but the guitars also dip on the singer's low, boomy breath pops, while the real clash is in the vocal's upper midrange. What do you change?",
+   "options": [
+    "Filter the key signal so only the clashing range drives reduction",
+    "Filter the guitar track so it carries less of the clashing range",
+    "Raise the ratio so the guitars dip harder under the vocal",
+    "Move the compressor from the guitars onto the vocal track"
+   ],
+   "key": [
+    "Filter the key signal so only the clashing range drives reduction"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "Filter the key signal when needed so only the frequency range causing the conflict drives gain reduction.",
+   "why": "Uses a key filter to stop unwanted triggers in a ducking setup."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You are setting threshold, ratio, attack and release on a bass compressor keyed from the kick. How should you be listening?",
+   "options": [
+    "To the full mix, with everything playing",
+    "To the bass soloed, so the dips are easy to hear",
+    "To the kick soloed, so the trigger is easy to hear",
+    "To the key bus alone, so the trigger is clean"
+   ],
+   "key": [
+    "To the full mix, with everything playing"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "Adjust threshold, ratio, attack, and release while listening to the full mix.",
+   "why": "Sets side-chain controls in context rather than in solo."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You are setting up kick-triggered ducking on a bass. How much gain reduction should you aim for on each kick hit?",
+   "options": [
+    "About 0.5 dB",
+    "About 2 to 3 dB",
+    "About 6 to 8 dB",
+    "About 10 to 12 dB"
+   ],
+   "key": [
+    "About 2 to 3 dB"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: How They Work",
+   "quote": "Kick-triggered bass ducking is easy to overdo. Aim for 2 to 3 dB of reduction with a release that recovers before the next kick.",
+   "why": "Chooses a working starting amount for kick-bass ducking."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "Your kick-keyed ducking on the bass is running, and you can clearly hear the bass breathe in and out as its own rhythmic event. What does that tell you?",
+   "options": [
+    "The ducking is overdone, so back off the reduction",
+    "The ducking is working, so leave the settings alone",
+    "The key is too weak, so raise the kick's key send",
+    "The dips are too exposed, so add makeup gain to the bass"
+   ],
+   "key": [
+    "The ducking is overdone, so back off the reduction"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: How They Work",
+   "quote": "If you can hear the bass breathe as a separate event, it is too much.",
+   "why": "Diagnoses overdone ducking by ear."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You add a key send on the kick to feed the bass compressor's side chain input. What happens to the kick in the mix?",
+   "options": [
+    "It keeps playing through its own channel, since the send is a copy",
+    "It drops out of the mix, since its signal now goes to the key bus",
+    "It is ducked along with the bass, since it feeds the compressor",
+    "It loses level by the amount of signal sent to the key bus"
+   ],
+   "key": [
+    "It keeps playing through its own channel, since the send is a copy"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "A key send carries a copy of it to the side chain input on the compressor",
+   "why": "Predicts that a key send does not remove or change the trigger track."
+  },
+  {
+   "origin": "new",
+   "action": "new",
+   "type": "multiple_choice_question",
+   "stem": "You reach the threshold step on a bass compressor meant to be keyed from the kick. Even with the threshold all the way down, the gain reduction meter never moves when the kick hits. Where is the fault most likely?",
+   "options": [
+    "In an earlier step, such as the key send or Source setting",
+    "In the release, which is too short to show any reduction",
+    "In the attack, which is too slow to catch the kick at all",
+    "In the makeup gain, which is hiding the gain reduction"
+   ],
+   "key": [
+    "In an earlier step, such as the key send or Source setting"
+   ],
+   "page": "Frequency Dynamics and Side-Chains: Procedure Guide",
+   "quote": "If a step will not work, the cause is almost always something skipped earlier, not the step you are on.",
+   "why": "Troubleshoots a dead side-chain by checking earlier routing steps."
+  }
+ ],
+ "dropped": []
+}

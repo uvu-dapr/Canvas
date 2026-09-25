@@ -16,7 +16,7 @@ files the manifest declares, whatever folder they sit in.
 What it has to know, and where it learns it (course facts are never typed into this file
 twice; the built-in table is only a fallback when the documents cannot be found):
 
-    credits, and whether a lab is part of the course   Folder Map & CLOs §3.13
+    credits, and whether a lab is part of the course   Folder Map & CLOs §2b (§3.13 for courses §2b leaves out)
     which model (A or B), budget, ceiling, range       DAPR Canvas Standards §11e-1
 """
 import os, re, sys, glob, datetime as dt
@@ -106,28 +106,36 @@ def course_facts(code):
                                       low=_num(rng[0]) if rng else None, thin=_num(cols[6]), weekly=_num(cols[7]))
                 facts['sources'].append('model and budget: %s §11e-1' % os.path.basename(std))
                 break
-    # Folder Map §3.13 table: | DAPR 2000 | 3 | Fa, Sp, Su | 8 | ... |   and   | DAPR 2000L | 1 | ...
+    # Credits: Folder Map §2b is authoritative ("| Course | Title | Credits | Type | ..."). §2b leaves out
+    # DAPR 2080 and 3010R on purpose and points to §3.13 ("| Course | Credits | Term | ..."), so fall back to it.
     if fmap:
-        # Only the table whose header reads "| Course | Credits |", never the first number found
-        rows, in_table = {}, False
-        for line in _txt(fmap).splitlines():
-            if re.match(r'\|\s*Course\s*\|\s*Credits\s*\|', line):
-                in_table = True
-                continue
-            if in_table:
-                if not line.startswith('|'):
-                    if rows: break
+        def table(header, credit_col):
+            rows, in_table = {}, False
+            for line in _txt(fmap).splitlines():
+                if re.match(header, line):
+                    in_table = True
                     continue
-                m = re.match(r'\|\s*(DAPR \d{4}[A-Z]?)\s*\|\s*(\d+)', line)
-                if m:
-                    rows[m.group(1)] = int(m.group(2))
-        if code in rows:
-            facts['credits'] = rows[code]
-            if facts['lab'] is None and (code + 'L') in rows:
-                facts['lab'] = code + 'L'
-            if facts['lab']:
-                facts['lab_credits'] = rows.get(facts['lab'], 1)
-            facts['sources'].append('credits: %s §3.13' % os.path.basename(fmap))
+                if in_table:
+                    if not line.startswith('|'):
+                        if rows: break
+                        continue
+                    cols = [c.strip() for c in line.strip().strip('|').split('|')]
+                    if len(cols) > credit_col and re.match(r'DAPR \d{4}[A-Z]?$', cols[0]):
+                        n = re.match(r'(\d+)', cols[credit_col])
+                        if n: rows[cols[0]] = int(n.group(1))
+            return rows
+        for section, header, col in (('§2b', r'\|\s*Course\s*\|\s*Title\s*\|\s*Credits\s*\|', 2),
+                                     ('§3.13', r'\|\s*Course\s*\|\s*Credits\s*\|', 1)):
+            rows = table(header, col)
+            if code in rows:
+                facts['credits'] = rows[code]
+                if facts['lab'] is None and (code + 'L') in rows:
+                    facts['lab'] = code + 'L'
+                if facts['lab']:
+                    facts['lab_credits'] = rows.get(facts['lab'], 1)
+                facts['credits_section'] = section
+                facts['sources'].append('credits: %s %s' % (os.path.basename(fmap), section))
+                break
     fb = FALLBACK.get(code)
     if fb:
         if not facts['name']: facts['name'] = fb[0]
@@ -368,7 +376,7 @@ def ai_block(root, code, facts, M, key, live, published, excluded, work, hours, 
         B.append('Course: %s %s, %s credit lecture%s. Model %s.' % (code, facts['name'], facts['credits'], lab, key))
     B.append('Budget: %d median student hours (%s). Build range %s to %s work time points, thin below %s, at most %d points of spread load in any week.'
              % (M['hours'], M['basis'], format(int(lo), ','), format(int(hi), ','), format(int(M['thin']), ','), M['weekly']))
-    B.append('Read first: %s sections 11, 11a, 11d, 11e and 11e-1%s%s.' % (std or 'DAPR Canvas Standards', ('; credits: %s section 3.13' % fmap) if fmap else '', ('; dates: %s' % spine) if spine else ''))
+    B.append('Read first: %s sections 11, 11a, 11d, 11e and 11e-1%s%s.' % (std or 'DAPR Canvas Standards', ('; credits: %s section %s' % (fmap, facts.get('credits_section', '§2b').lstrip('§'))) if fmap else '', ('; dates: %s' % spine) if spine else ''))
     B.append('')
     B.append('Where it stands now:')
     B.append('- Published total %s, attendance and bonus %s, work time %s.' % (format(int(published), ','), format(int(excluded), ','), format(int(work), ',')))

@@ -1,0 +1,98 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>Distortion: What Is Actually Happening</title>
+<meta name="identifier" content="g2227d8bc216224bdf98b52ca388823f8">
+<meta name="editing_roles" content="teachers">
+<meta name="workflow_state" content="unpublished">
+</head>
+<body>
+<div style="font-family:Arial, Helvetica, sans-serif; max-width:900px; margin:0 auto; color:#212121; line-height:1.6; background-color:#ffffff; padding:0 12px;">
+<h2 style="background-color:#1B5E20; color:#ffffff; padding:16px 20px; font-size:1.4em; border-radius:4px;">Distortion: What Is Actually Happening</h2>
+<div style="width:100%; background-color:#e3f2fd; border-left:4px solid #0d47a1; margin:16px 0; border-radius:0 4px 4px 0;">
+
+<div style="display:flex; align-items:flex-start;">
+<div style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Note.png" alt="Note" width="44" height="44" loading="lazy"></div>
+<div style="padding:12px 14px 12px 4px;; flex:1 1 auto;">
+<p style="margin:0;"><strong>Distortion is a change in the shape of the waveform.</strong> Every distortion box, plugin and pedal does the same basic job: it bends the wave. Once you understand what that bending adds, you can predict what any distortion will do before you insert it.</p>
+</div>
+</div>
+
+</div>
+
+
+<h3 style="color:#1B5E20; margin-top:28px;">Clipping and waveshaping</h3>
+
+<p>Every amplifier, converter and plugin can only swing so far. When the input asks for more than the circuit can deliver, the tops of the wave get squashed or cut off. That is clipping. Waveshaping is the general name for any process that maps each input value to a new output value through a curve, called a transfer curve. A clipper is simply a waveshaper whose curve bends over at the top and the bottom.</p>
+
+<p>Here is the key fact. A pure sine wave contains one frequency. Change its shape at all and you create new frequencies. When the same change happens on every cycle, the new frequencies land at whole number multiples of the original. Those are harmonics. A 100 Hz sine that gets clipped comes out with new energy at 200 Hz, 300 Hz, 400 Hz and up. On a single note, distortion adds harmonics above the fundamental, never below it.</p>
+
+<figure style="margin:24px 0 32px 0;">
+<img style="max-width:100%; height:auto; display:block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Master-Buss_Processing_and_Endgame/Distortion_Soft_vs_Hard_Clipping.png" alt="Three waveforms: a clean sine, a soft clipped sine with rounded peaks, and a hard clipped sine with flat tops" loading="lazy">
+<figcaption style="color:#616161; font-size:0.9em; margin-top:8px;">Figure 1. The same sine wave clean, soft clipped and hard clipped. Soft clipping rounds the peaks as they approach the ceiling. Hard clipping follows the wave exactly until the ceiling, then cuts it flat.</figcaption>
+</figure>
+
+<h3 style="color:#1B5E20; margin-top:28px;">Soft clipping versus hard clipping</h3>
+
+<p>Soft clipping bends the peaks gradually. Small signals pass almost untouched, and the curve flattens more as the level climbs. Hard clipping is a straight line right up to a ceiling and then a flat wall. The difference you hear is how far up the spectrum the new harmonics reach.</p>
+
+<p>Soft clipping adds harmonics that fall away quickly, so most of the new energy sits in the low order harmonics close to the fundamental. It sounds thicker and warmer rather than obviously distorted. Hard clipping cuts sharp corners into the wave, and a sharp corner can only be drawn with strong high harmonics. The added energy reaches far up the spectrum, so hard clipping sounds brighter, buzzier and harsher.</p>
+
+<figure style="margin:24px 0 32px 0;">
+<img style="max-width:100%; height:auto; display:block;" src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/DAPR-2020--Core_Mixing/Mixing__Master-Buss_Processing_and_Endgame/Distortion_Harmonic_Spectra.png" alt="Bar chart of harmonics 1 to 11 for soft symmetric, hard symmetric and soft asymmetric clipping of a sine wave" loading="lazy">
+<figcaption style="color:#616161; font-size:0.9em; margin-top:8px;">Figure 2. Harmonics measured from a clipped sine. Hard clipping keeps its upper harmonics much stronger: here the 11th harmonic is about 1.3 percent of the fundamental with hard clipping and under 0.2 percent with soft clipping. Only the asymmetric curve produces even harmonics.</figcaption>
+</figure>
+
+<h3 style="color:#1B5E20; margin-top:28px;">Even and odd harmonics</h3>
+
+<p>Which harmonics appear depends on symmetry. If a circuit clips the top and the bottom of the wave the same way, it produces only odd harmonics: the 3rd, 5th, 7th and so on. If it treats the top and bottom differently, for example a single tube stage that runs out of room sooner on one side, it adds even harmonics as well: the 2nd, 4th, 6th and so on.</p>
+
+<p>The 2nd harmonic is one octave above the fundamental and the 4th is two octaves above, so even harmonics blend into the note and tend to sound warm, full and musical. The 3rd harmonic is an octave and a fifth up, still consonant, but the 5th, 7th and higher odd harmonics sit further from the notes of the scale, so strong odd order content tends to sound edgy, aggressive or harsh. Treat this as a tendency, not a law. A little 3rd harmonic from tape or a transformer sounds great, and heavy even order distortion can still sound nasty. How far up the harmonics reach matters as much as whether they are even or odd.</p>
+
+<table style="width:100%;border-collapse:collapse;border:2px solid #1B5E20;margin:16px 0;"><caption>Clipping shape, the harmonics it adds, and how it tends to sound</caption>
+<thead><tr><th scope="col" style="background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;">Clipping shape</th><th scope="col" style="background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;">Harmonics added</th><th scope="col" style="background-color:#1B5E20;color:#ffffff;padding:10px 12px;text-align:left;">Typical sound</th></tr></thead>
+<tbody>
+<tr style="background-color:#f5f5f5;"><th scope="row" style="padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;">Soft, symmetric</th><td style="padding:10px 12px;border-bottom:1px solid #e0e0e0;">Odd harmonics that fall away quickly</td><td style="padding:10px 12px;border-bottom:1px solid #e0e0e0;">Smooth thickening with a gentle edge</td></tr>
+<tr><th scope="row" style="padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;">Hard, symmetric</th><td style="padding:10px 12px;border-bottom:1px solid #e0e0e0;">Odd harmonics that stay strong far up the spectrum</td><td style="padding:10px 12px;border-bottom:1px solid #e0e0e0;">Bright, buzzy, aggressive</td></tr>
+<tr style="background-color:#f5f5f5;"><th scope="row" style="padding:10px 12px;border-bottom:1px solid #e0e0e0;text-align:left;width:22%;">Asymmetric</th><td style="padding:10px 12px;border-bottom:1px solid #e0e0e0;">Even and odd harmonics</td><td style="padding:10px 12px;border-bottom:1px solid #e0e0e0;">Warm, full, rounder</td></tr>
+</tbody>
+</table>
+
+<h3 style="color:#1B5E20; margin-top:28px;">Input level and gain staging drive it</h3>
+
+<p>A distortion stage does not care what its knob is called. What matters is how hard the signal hits the curve. Turn up the input, or feed it a hotter track, and more of each cycle lands on the bent part of the curve, so more harmonics come out. Turn the input down and the same plugin gets cleaner. That means every level change upstream changes the character of every nonlinear stage downstream. If you raise a vocal 6 dB with clip gain before a saturation plugin, you did not just make it louder, you made it more distorted.</p>
+
+<p>This is why distortion plugins have separate drive and output controls. Drive sets how much the signal distorts. Output only sets how loud the result is. After you set the drive, use the output control to bring the level back to where it was, so you judge the tone and not the volume.</p>
+
+<div style="width:100%; background-color:#fff8e1; border-left:4px solid #BF360C; margin:16px 0; border-radius:0 4px 4px 0;">
+
+<div style="display:flex; align-items:flex-start;">
+<div style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Warning.png" alt="Warning" width="44" height="44" loading="lazy"></div>
+<div style="padding:12px 14px 12px 4px;; flex:1 1 auto;">
+<p style="margin:0;"><strong>Louder fools you.</strong> Added harmonics increase perceived loudness without raising peak level. Clipping also flattens the peaks, so a distorted signal can read the same or lower on a peak meter and still sound louder. Match loudness before you decide the distorted version is better.</p>
+</div>
+</div>
+
+</div>
+
+
+<h3 style="color:#1B5E20; margin-top:28px;">Intermodulation distortion: chords versus single notes</h3>
+
+<p>Feed a single note into a distortion and every new frequency is a harmonic of that note, so it still sounds like one note, only thicker. Feed it two or more notes at once and the circuit also creates sum and difference frequencies between them. This is intermodulation distortion. Play 200 Hz and 300 Hz together through a clipper and you also get 100 Hz, 500 Hz and a web of other products.</p>
+
+<p>With simple intervals those products line up with the notes. A root and a fifth have a 3:2 ratio, so their difference tone lands an octave below the root, which is why power chords survive heavy gain and even sound bigger. A full major or minor chord contains thirds that do not line up so neatly, especially in equal temperament, so the intermodulation products land between the notes and the chord turns into mud and beating. When a heavily distorted chord sounds like mush, the fix is fewer notes or less gain, not more EQ.</p>
+
+<div style="width:100%; background-color:#e8f5e9; border-left:4px solid #1b5e20; margin:16px 0; border-radius:0 4px 4px 0;">
+
+<div style="display:flex; align-items:flex-start;">
+<div style="width:38px; padding:12px 8px 12px 14px; vertical-align:top;"><img src="https://raw.githubusercontent.com/uvu-dapr/Canvas/main/Classes/All/DAPR_Canvas_Icon_Reference/Callout_Tip.png" alt="Tip" width="44" height="44" loading="lazy"></div>
+<div style="padding:12px 14px 12px 4px;; flex:1 1 auto;">
+<p style="margin:0;"><strong>Test with a single note, then a chord.</strong> If a single note sounds great and a full chord sounds muddy, you are hearing intermodulation. Back off the drive or simplify the voicing before you reach for an EQ.</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</body>
+</html>
