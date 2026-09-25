@@ -20,6 +20,7 @@ DST_END      = dt.date(2026,11,1)
 
 CLOSURES = {
  dt.date(2026,9,7): 'Labor Day, campus closed',
+ dt.date(2026,9,10): 'A Day for Healing, Service, and Connection Thursday 10 September, campus closed',   # added 2026-09-24, on UVU's calendar
 }
 FALL_BREAK    = (dt.date(2026,10,15), dt.date(2026,10,18))   # Thu to Sun
 THANKSGIVING  = (dt.date(2026,11,23), dt.date(2026,11,29))   # Mon to Sun

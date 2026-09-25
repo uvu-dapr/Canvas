@@ -29,11 +29,11 @@ MODELS = {
     'A': dict(label='A, 3 credit lecture', hours=90, ceiling=1500, low=1350, thin=1200, weekly=100,
               basis='3 credit lecture: 6 outside hours a week x 15 weeks = 90 h'),
     'B': dict(label='B, 3 credit lecture plus 1 credit lab', hours=135, ceiling=2250, low=2025, thin=1800, weekly=150,
-              basis='3 credit lecture: 6 outside hours a week x 15 weeks = 90 h, plus 1 credit lab: 3 lab contact hours a week x 15 weeks = 45 h (a lab meets 3 hours, not 1, and carries no outside work), total 135 h'),
+              basis='3 credit lecture: 6 outside hours a week x 15 weeks = 90 h, plus 1 credit lab: about 3 scheduled lab hours a week and 0 outside hours x 15 weeks = 45 h, the time students use to finish the lecture practical work (Standards 11e-0), total 135 h'),
 }
 # Fallback only. The live values come from the Standards and Folder Map files above.
 FALLBACK = {
-    'DAPR 2000': ('Digital Audio Essentials', 3, 'DAPR 2000L', 1, 'B'),
+    'DAPR 2000': ('Digital Audio Essentials', 3, None, 0, 'A'),   # no lab beginning Fall 2026 (Standards 11e-0)
     'DAPR 2010': ('Core Recording', 3, 'DAPR 2010L', 1, 'B'),
     'DAPR 2020': ('Core Mixing', 3, 'DAPR 2020L', 1, 'B'),
     'DAPR 2080': ('Podcast and Radio Production', 3, None, 0, 'A'),
