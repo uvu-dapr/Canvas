@@ -1499,6 +1499,64 @@ for _qf in sorted(_qfiles):
 L('question stems asking history or naming (9.3a, must be 0): %d'%len(_histfails))
 for _x in _histfails[:8]: L('    %s'%_x)
 if _histfails: fails.append('history or naming question stems (9.3a): %d'%len(_histfails))
+# 12k LIVE COURSE MATCH. Added 2026-09-28 [Adam]. Runs only with --live <Canvas export .imscc>.
+#   Canvas matches an imported module, module item, page, assignment or quiz to the live one by
+#   identifier. DAPR 2000 v75 and DAPR 2255 v90 gave 116 of 121 and 160 of 164 live items new
+#   identifiers, so importing them would have put a second copy beside each one while students kept
+#   seeing the old copy (the Decibel assignment still had its drag wording and "the lab"). A LIVE
+#   cartridge must also never hide what students can see now: 2255 v91 carried eight live modules
+#   as unpublished because its module_meta puts <position> before <workflow_state>. Two hard fails.
+if '--live' in sys.argv:
+    import zipfile as _zf
+    _lz = _zf.ZipFile(sys.argv[sys.argv.index('--live') + 1])
+    def _lmods(t):
+        out = {}
+        for m in re.finditer(r'<module identifier="([^"]+)">(.*?)</module>', t, re.S):
+            head = m.group(2).split('<items>')[0]
+            ti = html.unescape((re.search(r'<title>([^<]*)', head) or [0, ''])[1]).strip()
+            st = (re.search(r'<workflow_state>([^<]*)', head) or [0, ''])[1]
+            items = []
+            for it in re.finditer(r'<item identifier="([^"]+)">(.*?)</item>', m.group(2), re.S):
+                g = lambda k: html.unescape((re.search(r'<%s>([^<]*)' % k, it.group(2)) or [0, ''])[1]).strip()
+                items.append((it.group(1), g('title'), g('content_type'), g('identifierref')))
+            out[m.group(1)] = (ti, st, items)
+        return out
+    _mine = _lmods(open('course_settings/module_meta.xml', encoding='utf-8').read())
+    _live = _lmods(_lz.read('course_settings/module_meta.xml').decode('utf-8', 'ignore'))
+    _lbytitle = {}
+    for _i, (_t, _s, _its) in _live.items(): _lbytitle.setdefault(_t, set()).add(_i)
+    _second = []
+    for _i, (_t, _s, _its) in _mine.items():
+        if _t in _lbytitle and _i not in _lbytitle[_t]: _second.append('module ' + _t)
+        _tgt = _live.get(_i)
+        if not _tgt: continue
+        _mine_ids = {x[0] for x in _its}
+        for (_ii, _it, _ct, _ref) in _its:
+            _c = [x for x in _tgt[2] if x[1] == _it and x[2] == _ct]
+            # A title repeated on purpose (a second "CONTENT AND RESOURCES" section) is new, not a copy: a second copy
+            # is when none of this module's items with that title carries the live one's id
+            if len(_c) == 1 and _c[0][0] != _ii and _c[0][0] not in _mine_ids: _second.append('module item %s' % _it)
+            elif len(_c) == 1 and _ct not in ('ExternalUrl', 'ContextModuleSubHeader') and _ref and _c[0][3] and _ref != _c[0][3]:
+                _second.append('%s (the module shows %s, this package updates %s)' % (_it, _c[0][3], _ref))
+    _hidden = ['module ' + _t for _i, (_t, _s, _its) in _mine.items() if _live.get(_i, ('', ''))[1] == 'active' and _s != 'active']
+    _lnames = set(_lz.namelist())
+    for _p in glob.glob('wiki_content/*.html'):
+        _ident = (re.search(r'name="identifier" content="([^"]+)"', open(_p, encoding='utf-8', errors='ignore').read()) or [0, ''])[1]
+        _lh = re.search(r'<resource\b[^>]*identifier="%s"[^>]*href="([^"]+)"' % re.escape(_ident), _lz.read('imsmanifest.xml').decode('utf-8', 'ignore')) if _ident else None
+        if _lh and _lh.group(1) in _lnames and 'content="active"' in re.sub(r'(?s)<body.*', '', _lz.read(_lh.group(1)).decode('utf-8', 'ignore')) \
+           and 'name="workflow_state" content="active"' not in open(_p, encoding='utf-8', errors='ignore').read():
+            _hidden.append('page ' + _p)
+    for _p in glob.glob('*/assignment_settings.xml'):
+        _n = _p.replace('\\', '/')
+        if _n in _lnames and '<workflow_state>published</workflow_state>' in _lz.read(_n).decode('utf-8', 'ignore') \
+           and '<workflow_state>published</workflow_state>' not in open(_p, encoding='utf-8').read():
+            _hidden.append('assignment ' + _p)
+    L('12k LIVE COURSE MATCH (against %s)' % os.path.basename(sys.argv[sys.argv.index('--live') + 1]))
+    L('    would arrive as a second copy: %d' % len(_second)); [L('      ' + x) for x in _second[:15]]
+    L('    published in live, hidden by this import: %d' % len(_hidden)); [L('      ' + x) for x in _hidden[:15]]
+    if _second: fails.append('12k %d item(s) would arrive as a second copy of a live item' % len(_second))
+    if _hidden: fails.append('12k %d live published item(s) would be hidden by this import' % len(_hidden))
+
 # 12j CREDIT HOUR BUDGET (Standards 11e and 11e-1). Added 2026-09-24 [Adam].
 #   Standards 11e-1 has said since 2026-09-21 that preflight runs gate 12j, and it never did:
 #   the only budget check was budget_check.py, which read assignments/*.xml and

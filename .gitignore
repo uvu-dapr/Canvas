@@ -3,3 +3,6 @@
 *.imscc
 __pycache__/
 *.pyc
+
+# ChatGPT image briefs and capture sheets: working notes for Canvas Preview, kept on this Mac only (Adam, 2026-09-28)
+_briefs/
