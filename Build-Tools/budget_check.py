@@ -507,12 +507,41 @@ def ai_block(root, code, facts, M, key, live, published, excluded, work, hours, 
     return '\n'.join(B)
 
 
+def instructor_only_files(root='.'):
+    """Package paths of the unpublished items in an unpublished Instructor Use Only module: the same exemption
+    preflight passes to run() as gate 12j. Added 2026-09-29 [Adam]: run on its own, this script had no exemption and
+    failed DAPR 2020's 30 point Lab Template (an empty instructor template) that preflight rightly passed, so the two
+    disagreed about the same package."""
+    try:
+        mm = _txt(os.path.join(root, 'course_settings', 'module_meta.xml'))
+        man = _txt(os.path.join(root, 'imsmanifest.xml'))
+    except OSError:
+        return set()
+    files = {}
+    for rid, body in re.findall(r'<(?:\w+:)?resource\b[^>]*\bidentifier="([^"]+)"[^>]*>(.*?)</(?:\w+:)?resource>', man, re.S):
+        files[rid] = [h.replace('&amp;', '&') for h in re.findall(r'\bhref="([^"]+)"', body)]
+    out = set()
+    for blk in re.findall(r'<module identifier="[^"]+">(.*?)</module>', mm, re.S):
+        head = blk.split('<items>', 1)[0]
+        t = re.search(r'<title>([^<]*)</title>', head)
+        if not (t and 'Instructor Use Only' in t.group(1)) or '<workflow_state>unpublished</workflow_state>' not in head:
+            continue
+        for ref in re.findall(r'<identifierref>([^<]+)</identifierref>', blk):
+            for f in files.get(ref, []):
+                if f.endswith('.xml') and re.search(r'<workflow_state>\s*unpublished\s*</workflow_state>', _txt(os.path.join(root, f))):
+                    out.add(os.path.normpath(f))
+    return out
+
+
 def main():
     root = sys.argv[1] if len(sys.argv) > 1 else '.'
     if not os.path.exists(os.path.join(root, 'imsmanifest.xml')):
         print('FAIL  no imsmanifest.xml in %s; run this inside an unzipped .imscc' % os.path.abspath(root))
         sys.exit(2)
-    fails, warns, lines, block = run(root)
+    ex = instructor_only_files(root)
+    if ex:
+        print('Instructor Use Only items left out (not student work, as in preflight gate 12j): %d' % len(ex))
+    fails, warns, lines, block = run(root, exclude=ex)
     for l in lines: print(l)
     for f in fails: print('  FAIL  %s' % f)
     for w in warns: print('  warn  %s' % w)

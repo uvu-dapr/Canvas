@@ -31,6 +31,33 @@ if _mns:
 ids=set(re.findall(r'identifier="([^"]+)"',man))
 pages={os.path.basename(p)[:-5] for p in glob.glob('wiki_content/*.html')}
 
+# LIVE-Import (--live <Canvas export>), added 2026-09-28 [Adam]. A LIVE-Import updates a running course, so three
+# things the template rules forbid are correct here, and only when the live course agrees: an item published in
+# Canvas stays published; a module item may point at a live item left out of the package (a quiz, assignment or
+# discussion students took, placed in its module without being replaced); a link may name that live item's id.
+# Anything else still fails.
+LIVE_IDS=set(); LIVE_PUB=set()
+if '--live' in sys.argv:
+    import zipfile as _lzf
+    _L=_lzf.ZipFile(sys.argv[sys.argv.index('--live') + 1])
+    def _lrd(n):
+        try: return _L.read(n).decode('utf-8','ignore')
+        except KeyError: return ''
+    LIVE_IDS=set(re.findall(r'identifier="([^"]+)"',_lrd('imsmanifest.xml')))
+    for _n in _L.namelist():
+        if _n.startswith('wiki_content/') and _n.endswith('.html'):
+            _s=_lrd(_n)
+            if re.search(r'name="workflow_state" content="active"',_s):
+                _i=re.search(r'<meta name="identifier" content="([^"]+)"',_s)
+                if _i: LIVE_PUB.add(_i.group(1))
+        elif _n.endswith('assignment_settings.xml') and '<workflow_state>published</workflow_state>' in _lrd(_n):
+            LIVE_PUB.add(_n.split('/')[0])
+        elif _n.endswith('assessment_meta.xml') and '<available>true</available>' in _lrd(_n):
+            LIVE_PUB.add(_n.split('/')[0])
+    for _i,_b in re.findall(r'<module identifier="([^"]+)">(.*?)(?=<module identifier=|</modules>)',_lrd('course_settings/module_meta.xml'),re.S):
+        _w=re.search(r'<workflow_state>([^<]+)</workflow_state>',re.sub(r'<items>.*?</items>','',_b,flags=re.S))
+        if _w and _w.group(1)=='active': LIVE_PUB.add(_i)
+
 # 1b QUIZ INVENTORY, RESOLVED FROM THE MANIFEST, NEVER FROM A FOLDER GLOB.
 #   Canvas writes two different layouts for the same kind of object:
 #     one folder per quiz   <id>/assessment_qti.xml   + <id>/assessment_meta.xml
@@ -147,7 +174,7 @@ for p in glob.glob('**/*',recursive=True):
         elif t.startswith('$WIKI_REFERENCE$/pages/'):
             if t.split('/pages/',1)[1].split('?')[0] not in pages: probs.append((p,t[:90],'page missing'))
         elif t.startswith('$CANVAS_OBJECT_REFERENCE$/'):
-            if t.rsplit('/',1)[1] not in ids: probs.append((p,t[:90],'object missing'))
+            if t.rsplit('/',1)[1] not in ids and t.rsplit('/',1)[1] not in LIVE_IDS: probs.append((p,t[:90],'object missing'))
         elif t.startswith('$CANVAS_COURSE_REFERENCE$'):
             probs.append((p,t[:90],'bare course reference, resolves to the Files index'))
 L('unresolvable placeholders: %d'%len(probs))
@@ -204,7 +231,7 @@ for p in glob.glob('wiki_content/*.html'):
     i=re.search(r'<meta name="identifier" content="([^"]+)"',s)
     if not i or i.group(1) not in ids: idmm+=1
     w=re.search(r'<meta name="workflow_state" content="([^"]+)"',s)
-    if not w or w.group(1)!='unpublished': pub+=1
+    if (not w or w.group(1)!='unpublished') and not (i and i.group(1) in LIVE_PUB): pub+=1
 L('pages: %d  no head: %d  identifier mismatch: %d  not unpublished: %d'%(len(pages),nohead,idmm,pub))
 for n,v in (('pages with no head',nohead),('identifier mismatch',idmm),('pages not unpublished',pub)):
     if v: fails.append('%s: %d'%(n,v))
@@ -245,7 +272,7 @@ def _resolve_assignments():
                 out.append(_f)
     return sorted(set(out))
 a=_resolve_assignments() or [p for p in glob.glob('*/assignment_settings.xml')]
-ap=sum(1 for p in a if '<workflow_state>unpublished</workflow_state>' not in open(p,encoding='utf-8').read())
+ap=sum(1 for p in a if '<workflow_state>unpublished</workflow_state>' not in open(p,encoding='utf-8').read() and p.split('/')[0] not in LIVE_PUB)
 L('assignments: %d  not unpublished: %d'%(len(a),ap))
 if ap: fails.append('assignments not unpublished: %d'%ap)
 mm=open('course_settings/module_meta.xml',encoding='utf-8').read()
@@ -302,14 +329,14 @@ L('instructor only items carried verbatim, not scored as student pages: %d'%len(
 # module-level state only. Module ITEMS legitimately stay 'active' (standards 22.6).
 mods=re.findall(r'<module identifier="[^"]+">(.*?)(?=<module identifier=|</modules>)',mm,re.S)
 mp=0
-for b in mods:
+for _mid,b in re.findall(r'<module identifier="([^"]+)">(.*?)(?=<module identifier=|</modules>)',mm,re.S):
     b=re.sub(r'<items>.*?</items>','',b,flags=re.S)
     w=re.search(r'<workflow_state>([^<]+)</workflow_state>',b)
-    if not w or w.group(1)!='unpublished': mp+=1
+    if (not w or w.group(1)!='unpublished') and _mid not in LIVE_PUB: mp+=1
 L('modules: %d  not unpublished: %d'%(len(mods),mp))
 if mp: fails.append('modules not unpublished: %d'%mp)
 q=[m for _i,_q,m in QUIZ if m and os.path.exists(m)]
-qa=sum(1 for p in q if '<available>true</available>' in open(p,encoding='utf-8').read())
+qa=sum(1 for p in q if '<available>true</available>' in open(p,encoding='utf-8').read() and p.split('/')[0] not in LIVE_PUB)
 L('quizzes: %d  available=true: %d'%(len(q),qa))
 if qa: fails.append('quizzes available: %d'%qa)
 
@@ -1279,7 +1306,7 @@ if _ink_bad: fails.append('inherited-background contrast under 4.5:1 (2b): %d'%l
 # assignment shipped that way in v6, v7 and v8. Subheaders and external items
 # carry no resource of their own and are exempt.
 _mitems=re.findall(r'<item identifier="[^"]*">(.*?)</item>',mm,re.S)
-_mdang=[]
+_mdang=[]; _mlive=[]
 for _b in _mitems:
     _r=re.search(r'<identifierref>\s*([^<\s]+)\s*</identifierref>',_b)
     if not _r: continue
@@ -1288,8 +1315,10 @@ for _b in _mitems:
     if _ct in ('ContextModuleSubHeader','ExternalUrl','ExternalTool'): continue
     _t=re.search(r'<title>([^<]*)</title>',_b)
     if _r.group(1) not in ids:
+        if _r.group(1) in LIVE_IDS: _mlive.append(_t.group(1) if _t else '(untitled)'); continue
         _mdang.append(((_t.group(1) if _t else '(untitled)'),_r.group(1)))
 L('module items: %d  pointing at an undeclared resource: %d'%(len(_mitems),len(_mdang)))
+if _mlive: L('    placed live items (left out, Canvas finds them by id): %d'%len(_mlive))
 for _t,_r in _mdang[:8]: L('    %s -> %s'%(_t,_r))
 if _mdang: fails.append('module items point at undeclared resources: %s'%[t for t,_ in _mdang][:5])
 
@@ -1525,9 +1554,14 @@ if '--live' in sys.argv:
     _live = _lmods(_lz.read('course_settings/module_meta.xml').decode('utf-8', 'ignore'))
     _lbytitle = {}
     for _i, (_t, _s, _its) in _live.items(): _lbytitle.setdefault(_t, set()).add(_i)
-    _second = []
+    _second = []; _oldcopy = []
     for _i, (_t, _s, _its) in _mine.items():
-        if _t in _lbytitle and _i not in _lbytitle[_t]: _second.append('module ' + _t)
+        if _t in _lbytitle and _i not in _lbytitle[_t]:
+            # This module carries a live module's id (it updates that one and renames it), so the live module that
+            # already has this title is an old copy to delete afterwards, not a second copy (DAPR 3340's short-title
+            # set, 2026-09-28). Only a module whose id Canvas has never seen would arrive as a second copy.
+            if _i in _live: _oldcopy.append('module ' + _t)
+            else: _second.append('module ' + _t)
         _tgt = _live.get(_i)
         if not _tgt: continue
         _mine_ids = {x[0] for x in _its}
@@ -1554,6 +1588,9 @@ if '--live' in sys.argv:
     L('12k LIVE COURSE MATCH (against %s)' % os.path.basename(sys.argv[sys.argv.index('--live') + 1]))
     L('    would arrive as a second copy: %d' % len(_second)); [L('      ' + x) for x in _second[:15]]
     L('    published in live, hidden by this import: %d' % len(_hidden)); [L('      ' + x) for x in _hidden[:15]]
+    if _oldcopy:
+        L('    old copies with the same title, to delete after the import: %d' % len(_oldcopy)); [L('      ' + x) for x in _oldcopy[:15]]
+        warns.append('12k %d old module(s) in Canvas share a title with an updated module; delete the old ones after importing: %s' % (len(_oldcopy), ', '.join(x[7:] for x in _oldcopy[:5])))
     if _second: fails.append('12k %d item(s) would arrive as a second copy of a live item' % len(_second))
     if _hidden: fails.append('12k %d live published item(s) would be hidden by this import' % len(_hidden))
 
@@ -1578,7 +1615,12 @@ try:
     L('')
     L('12j CREDIT HOUR BUDGET (Standards 11e, 11e-1)')
     for _x in _blines: L('    %s'%_x)
-    for _x in _bfails: L('    FAIL  %s'%_x); fails.append('12j %s'%_x)
+    for _x in _bfails:
+        if LIVE_IDS and 'thin floor' in _x:
+            # Items students took are left out of a LIVE-Import, so its own total is short by design; the course
+            # total is judged on the full package
+            L('    warn  %s (LIVE-Import: taken items are left out; judge the total on the full package)'%_x); warns.append('12j LIVE-Import total without taken items: %s'%_x); continue
+        L('    FAIL  %s'%_x); fails.append('12j %s'%_x)
     for _x in _bwarns: L('    warn  %s'%_x); warns.append('12j %s'%_x)
     if _bai and (_bfails or _bwarns):
         L('')

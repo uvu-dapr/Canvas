@@ -11,6 +11,14 @@ Every module, module item, page, assignment, quiz, discussion, assignment group 
 live course gets its live identifier, matched by title, so the import updates it instead of adding a copy.
 Quizzes students have already reached (unlocked or past due) are left out: Adam never replaces those.
 Items published in live stay published; everything else keeps the package's (unpublished) state.
+
+Restructure (Adam 2026-09-28, the default): the course is rebuilt to its outline as if from the first day. Anything
+students have taken or can submit (quizzes they reached, published assignments that are open or past due, published
+discussions) is left out, so its content, grades and submissions are never touched, but its module item stays: Canvas
+finds the live item by its id and places it in the correct module (context_module_importer looks up quizzes,
+assignments, pages and discussions by migration_id, whether or not they are in the package). Pages left out for their
+quiz links are placed the same way. New modules for past weeks come in unpublished. --no-restructure drops those
+module items instead (the 2026-09-28 morning behaviour).
 """
 import zipfile, re, html, sys, os, shutil, json, argparse
 from collections import defaultdict
@@ -19,6 +27,9 @@ ap = argparse.ArgumentParser()
 ap.add_argument("--pkg"); ap.add_argument("--export"); ap.add_argument("--out"); ap.add_argument("--work")
 ap.add_argument("--tiebreak", action="append", default=[])
 ap.add_argument("--rename", action="append", default=[], help="package title=>live title (modules or items)")
+ap.add_argument("--no-restructure", dest="restructure", action="store_false")
+ap.add_argument("--outline", help="the full package, when --pkg is an earlier LIVE-Import that already left items out: every "
+                "module item the outline has and --pkg lacks is placed back, pointing at the live copy (DAPR 2020, 2026-09-28)")
 import datetime
 ap.add_argument("--now", default=datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M"))
 a = ap.parse_args()
@@ -62,6 +73,10 @@ def modules(z):
         out.append(dict(id=m.group(1), title=U(m.group(2)), state=st, items=items))
     return out
 pmods, emods = modules(P), modules(E)
+live_home = defaultdict(list)   # live resource id -> titles of the live modules that show it
+for _m in emods:
+    for _it in _m["items"]:
+        if _it["ref"]: live_home[_it["ref"]].append(_m["title"])
 
 # A quiz's settings file, whichever layout: <id>/assessment_meta.xml (Canvas export) or quizzes/quiz_<name>_meta.xml
 _names = {}
@@ -194,8 +209,18 @@ def write(p, s): open(rp(p), "w", encoding="utf8").write(s)
 
 alt0 = "|".join(re.escape(k) for k in sorted(mp, key=len, reverse=True))
 rx0 = re.compile(r"(?<![A-Za-z0-9_])(%s)(?![A-Za-z0-9_])" % alt0) if mp else None
-left_out = []; left_ids = set()
+left_out = []; left_ids = set(); placed = []; graded_differs = []
 man = read("imsmanifest.xml"); mm = read("course_settings/module_meta.xml")
+def drop_items(rid, kind, title):
+    """The resource is out of the package. Restructure: its module items stay, pointing at the live copy (by its live
+    id after the rewrite), so Canvas places the live item in this module; otherwise the items go too."""
+    global man, mm
+    man = re.sub(r'\s*<item identifier="[^"]+" identifierref="%s">\s*<title>[^<]*</title>\s*</item>' % re.escape(rid), "", man)
+    if a.restructure and mp.get(rid, rid) in eres:
+        n = len(re.findall(r'<identifierref>%s</identifierref>' % re.escape(rid), mm))
+        if n: placed.append(f"{kind} {title}")
+        return
+    mm = re.sub(r'\s*<item identifier="[^"]+">(?:(?!</item>).)*?<identifierref>%s</identifierref>.*?</item>' % re.escape(rid), "", mm, flags=re.S)
 for rid, r in pres.items():
     if "assessment" not in r["type"]: continue
     meta = rd(P, meta_path(P, pres, rid))
@@ -209,13 +234,15 @@ for rid, r in pres.items():
     lg = lambda k: (re.search(r"<%s>([^<]*)</%s>" % (k, k), lmeta) or [None, ""])[1]
     live_seen = bool(lmeta) and ("<available>true</available>" in lmeta or (lg("due_at") and lg("due_at") < a.now))
     if live_seen:
-        left_out.append((title, un[:10], due[:10])); left_ids.add(rid)
+        lpts = (re.search(r"<points_possible>([^<]*)", lmeta) or [0, ""])[1]; ppts = (re.search(r"<points_possible>([^<]*)", meta) or [0, ""])[1]
+        diff = [f"points {lpts} live, {ppts} correct"] if lpts and ppts and float(lpts) != float(ppts) else []
+        if lg("due_at")[:16] and due[:16] and lg("due_at")[:16] != due[:16]: diff.append(f"due {lg('due_at')[:10]} live, {due[:10]} correct")
+        left_out.append((title, un[:10], due[:10])); left_ids.add(rid); graded_differs.append(dict(kind="quiz", title=title, differs=diff, lid=lid))
         for f in r["files"]:
             if os.path.exists(rp(f)): os.remove(rp(f))
         for x in [rid] + r["deps"]:
             man = re.sub(r'\s*<resource\b[^>]*identifier="%s"[^>]*>.*?</resource>' % re.escape(x), "", man, flags=re.S)
-        man = re.sub(r'\s*<item identifier="[^"]+" identifierref="%s">\s*<title>[^<]*</title>\s*</item>' % re.escape(rid), "", man)
-        mm = re.sub(r'\s*<item identifier="[^"]+">(?:(?!</item>).)*?<identifierref>%s</identifierref>.*?</item>' % re.escape(rid), "", mm, flags=re.S)
+        drop_items(rid, "quiz", title)
         shutil.rmtree(rp(rid), ignore_errors=True)
         for f in [f"non_cc_assessments/{rid}.xml.qti"]:
             if os.path.exists(rp(f)): os.remove(rp(f))
@@ -223,29 +250,64 @@ for rid, r in pres.items():
             for f in pres.get(d, {}).get("files", []):
                 if os.path.exists(rp(f)): os.remove(rp(f))
 
+# Assignments and discussions students can reach in live (published there, and open or past due): left out, placed
+graded_out = []
+for rid, r in pres.items():
+    lid = mp.get(rid, rid); er = eres.get(lid)
+    if not er or rid in left_ids or "assessment" in r["type"]: continue
+    lf = next((f for f in er["files"] if f.endswith("assignment_settings.xml")), None)
+    kind = None
+    if lf:
+        ls = rd(E, lf); lg = lambda k: (re.search(r"<%s>([^<]*)</%s>" % (k, k), ls) or [None, ""])[1]
+        if lg("workflow_state") == "published" and (not lg("unlock_at") or lg("unlock_at") < a.now or (lg("due_at") and lg("due_at") < a.now)): kind = "assignment"
+        title = U(lg("title"))
+    elif r["type"] == "imsdt_xmlv1p1":
+        ls = "".join(rd(E, f) for d in er["deps"] for f in eres.get(d, {}).get("files", []))
+        if re.search(r"<workflow_state>active</workflow_state>", ls): kind = "discussion"
+        title = U((re.search(r"<title>([^<]*)", rd(E, er["files"][0]) if er["files"] else "") or [0, rid])[1])
+    if not kind: continue
+    # What would have changed, had it been imported (for Adam to copy by hand if he wants it)
+    mine = "".join(rd(P, f) for f in r["files"] + [f for d in r["deps"] for f in pres.get(d, {}).get("files", [])])
+    live = "".join(rd(E, f) for f in er["files"] + [f for d in er["deps"] for f in eres.get(d, {}).get("files", [])])
+    pts = lambda x: (re.search(r"<points_possible>([^<]*)", x) or [0, ""])[1]
+    due = lambda x: (re.search(r"<due_at>([^<]*)", x) or [0, ""])[1][:16]
+    diff = []
+    if pts(mine) and pts(live) and float(pts(mine)) != float(pts(live)): diff.append(f"points {pts(live)} live, {pts(mine)} correct")
+    if due(mine) and due(live) and due(mine) != due(live): diff.append(f"due {due(live)[:10]} live, {due(mine)[:10]} correct")
+    graded_differs.append(dict(kind=kind, title=title, differs=diff, lid=lid))
+    left_ids.add(rid)
+    for x in [rid] + r["deps"]:
+        man = re.sub(r'\s*<resource\b[^>]*identifier="%s"[^>]*>.*?</resource>' % re.escape(x), "", man, flags=re.S)
+        for f in pres.get(x, {}).get("files", []):
+            if os.path.exists(rp(f)): os.remove(rp(f))
+    drop_items(rid, kind, title)
+    shutil.rmtree(rp(rid), ignore_errors=True)
+
 # Pages that link to a left-out quiz: unchanged from live, they stay out too (the live page already links to it);
 # changed ones stay in and are reported, because their quiz link may not resolve
 def words(s): return " ".join(html.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"(?s)<head.*?</head>", "", s))).split())
-kept_with_links, dropped_pages = [], []
+kept_with_links, dropped_pages, check_links = [], [], []
 for rid, r in pres.items():
     if not r["href"].startswith("wiki_content/") or not os.path.exists(rp(r["href"])): continue
     s = read(r["href"])
     # A real quiz link to a left-out quiz ($CANVAS_OBJECT_REFERENCE$/quizzes/<id>), by its id here or its live id
-    hits = [q for q in left_ids if re.search(r"quizzes/(%s)(?![A-Za-z0-9_])" % "|".join(re.escape(x) for x in {q, mp.get(q, q)}), s)]
+    hits = [q for q in left_ids if re.search(r"(?:quizzes|assignments|discussion_topics)/(%s)(?![A-Za-z0-9_])" % "|".join(re.escape(x) for x in {q, mp.get(q, q)}), s)]
     if not hits: continue
     er = eres.get(mp.get(rid, rid)); live = rd(E, er["href"]) if er and er["href"] else ""
     title = U((re.search(r"<title>([^<]*)", s) or [0, rid])[1])
+    if a.restructure and not er:
+        # A new page (not in Canvas yet): it has to come in. Its link names the live item's id, which Canvas resolves
+        # against the course after the import; listed so the link can be clicked once afterwards
+        check_links.append(title); continue
     if live and words(live) == words(rx0.sub(lambda m: mp[m.group(1)], s) if rx0 else s):
         man = re.sub(r'\s*<resource\b[^>]*identifier="%s"[^>]*>.*?</resource>' % re.escape(rid), "", man, flags=re.S)
-        man = re.sub(r'\s*<item identifier="[^"]+" identifierref="%s">\s*<title>[^<]*</title>\s*</item>' % re.escape(rid), "", man)
-        mm = re.sub(r'\s*<item identifier="[^"]+">(?:(?!</item>).)*?<identifierref>%s</identifierref>.*?</item>' % re.escape(rid), "", mm, flags=re.S)
+        drop_items(rid, "page", title)
         os.remove(rp(r["href"])); dropped_pages.append(title)
     else:
         # Changed since live, but its quiz link could not resolve without the quiz: the live page (whose link works)
         # stays, and the page is listed so the change can be made by hand
         man = re.sub(r'\s*<resource\b[^>]*identifier="%s"[^>]*>.*?</resource>' % re.escape(rid), "", man, flags=re.S)
-        man = re.sub(r'\s*<item identifier="[^"]+" identifierref="%s">\s*<title>[^<]*</title>\s*</item>' % re.escape(rid), "", man)
-        mm = re.sub(r'\s*<item identifier="[^"]+">(?:(?!</item>).)*?<identifierref>%s</identifierref>.*?</item>' % re.escape(rid), "", mm, flags=re.S)
+        drop_items(rid, "page", title)
         os.remove(rp(r["href"])); kept_with_links.append(title)
 
 # Publish state: what students can see in live stays visible
@@ -296,6 +358,38 @@ for p in sorted(paths, key=lambda x: -x.count(os.sep)):
 for root, dirs, files in os.walk(w):
     for f in files:
         if f == ".DS_Store": os.remove(os.path.join(root, f))
+# Items the outline has that --pkg left out earlier: placed in their module, pointing at the live copy by title
+if a.outline and a.restructure:
+    OL = zipfile.ZipFile(a.outline); omm = rd(OL, "course_settings/module_meta.xml")
+    mm = open(rp("course_settings/module_meta.xml"), encoding="utf8").read()
+    for m in re.finditer(r'<module identifier="[^"]+">\s*<title>([^<]*)</title>(.*?)</module>', omm, re.S):
+        mt = m.group(1)
+        mine = re.search(r'(<module identifier="[^"]+">\s*<title>%s</title>.*?)(</items>)' % re.escape(mt), mm, re.S)
+        if not mine: continue
+        have = {(U(t), c) for t, c in re.findall(r"<title>([^<]*)</title>\s*(?:<[^>]+>[^<]*</[^>]+>\s*)*?<content_type>([^<]*)", mine.group(1))}
+        have |= {(U(t), c) for c, t in re.findall(r"<content_type>([^<]*)</content_type>(?:(?!</item>).)*?<title>([^<]*)</title>", mine.group(1), re.S)}
+        adds = []
+        for it in re.finditer(r'<item identifier="([^"]+)">(.*?)</item>', m.group(2), re.S):
+            b = it.group(2); t = U((re.search(r"<title>([^<]*)", b) or [0, ""])[1]); c = (re.search(r"<content_type>([^<]*)", b) or [0, ""])[1]
+            if (t, c) in have or c in ("ContextModuleSubHeader", "ExternalUrl", "ContextExternalTool"): continue
+            cands = [x for x in etit.get(live_title(t), set()) if x in eres]
+            lid = choose(set(cands), "wiki_content/" if c == "WikiPage" else "") if cands else None
+            if not lid and cands:   # several live copies: the one a live module shows, best the module with this title
+                inmod = [x for x in cands if live_home.get(x)]
+                same = [x for x in inmod if U(mt) in live_home[x] or live_module(U(mt)) in live_home[x]]
+                lid = (same if len(same) == 1 else inmod if len(inmod) == 1 else [None])[0]
+            if not lid: skipped.append(f'Outline item "{t}" in "{U(mt)}": no single live copy, not placed'); continue
+            b2 = re.sub(r"<identifierref>[^<]*</identifierref>", "<identifierref>%s</identifierref>" % lid, b)
+            pos = int((re.search(r"<position>(\d+)", b) or [0, "9999"])[1])
+            adds.append((pos, '<item identifier="%s">%s</item>\n      ' % (it.group(1), b2))); placed.append(f"outline {c} {t}")
+        # In outline order: before the first item here whose <position> is higher (Canvas orders by <position>)
+        for pos, x in sorted(adds, reverse=True):
+            mine = re.search(r'(<module identifier="[^"]+">\s*<title>%s</title>.*?)(</items>)' % re.escape(mt), mm, re.S)
+            at = next((i.start() for i in re.finditer(r'<item identifier="[^"]+">(?:(?!</item>).)*?<position>(\d+)</position>', mine.group(1), re.S)
+                       if int(re.search(r"<position>(\d+)</position>", i.group(0)).group(1)) > pos), None)
+            k = mine.start() + at if at is not None else mine.start(2)
+            mm = mm[:k] + x + mm[k:]
+    open(rp("course_settings/module_meta.xml"), "w", encoding="utf8").write(mm)
 import subprocess
 subprocess.run(["zip", "-q", "-r", "-D", "-X", a.out, ".", "-x", "*.DS_Store", "__MACOSX/*"], cwd=w, check=True)
 
@@ -303,6 +397,65 @@ subprocess.run(["zip", "-q", "-r", "-D", "-X", a.out, ".", "-x", "*.DS_Store", "
 out_titles = set(res_titles(zipfile.ZipFile(a.out), resources(rd(zipfile.ZipFile(a.out), "imsmanifest.xml")), modules(zipfile.ZipFile(a.out))))
 not_in = sorted(t for t in etit if t not in out_titles and t not in {live_title(x) for x in out_titles})
 live_mods_not_in = sorted({e["title"] for e in emods} - {live_title(m["title"]) for m in modules(zipfile.ZipFile(a.out))})
-json.dump(dict(dropped_unchanged_pages=dropped_pages, changed_pages_left_out_for_quiz_links=kept_with_links, mapped=len(mp), changed_files=changed, skipped=skipped, left_out=left_out, published=published,
+# Per course, for Adam: where each item students took now sits, which old modules and pages can go
+OZ = zipfile.ZipFile(a.out); omods = modules(OZ); ores = resources(rd(OZ, "imsmanifest.xml"))
+home = {}
+for m in omods:
+    for it in m["items"]:
+        if it["ref"]: home.setdefault(it["ref"], m["title"])
+taken = []
+for g in graded_differs:
+    lid = g.pop("lid")
+    taken.append(dict(g, module=home.get(lid, "(not in the outline: stays where it is)"), was=live_home.get(lid, [])))
+# What students can reach in live: a published assignment, an available quiz, a published discussion, page, module
+live_pub = set()
+for rid, r in eres.items():
+    txt = "".join(rd(E, f) for f in r["files"] + [f for d in r["deps"] for f in eres.get(d, {}).get("files", [])])
+    if r["href"].startswith("wiki_content/"): txt += rd(E, r["href"])
+    if re.search(r"<workflow_state>(published|active)</workflow_state>|<available>true</available>|name=\"workflow_state\" content=\"active\"", txt): live_pub.add(rid)
+BLUEPRINT = "(Unified Class Content)"   # synced by Adam's Blueprint course into every class, never in a cartridge
+def instructor(t): return bool(re.search(r"(?i)do not publish|no publish|instructor use|instructor notes|development task", t))
+out_mod_ids = {m["id"] for m in omods}
+old_modules = []
+for m in emods:
+    if m["id"] in out_mod_ids: continue
+    items = []
+    for it in m["items"]:
+        if it["type"] in ("ContextModuleSubHeader",): continue
+        where = home.get(it["ref"]) if it["ref"] else None
+        items.append(dict(title=it["title"], type=it["type"], now_in=where, live=it["ref"] in live_pub))
+    # Deleting a module removes its links only; what matters is a published graded item left with no module
+    stranded = [i for i in items if not i["now_in"] and i["live"] and i["type"] in ("Quizzes::Quiz", "Assignment", "DiscussionTopic")]
+    kind = "blueprint" if BLUEPRINT in m["title"] else "instructor" if instructor(m["title"]) else "course"
+    old_modules.append(dict(title=m["title"], kind=kind, published=m["state"] == "active", items=len(items),
+                            safe_to_delete=kind == "course" and not stranded, graded_not_placed=[i["title"] for i in stranded]))
+# Live pages the outline no longer uses: not a resource here, not in any module here, not linked from a page here
+used = set(ores) | set(home)
+linked = set()
+for n in OZ.namelist():
+    if n.endswith(".html"):
+        linked |= set(re.findall(r"\$WIKI_REFERENCE\$/pages/([^\"'?#<\s]+)", rd(OZ, n)))
+bp_pages = {it["ref"] for m in emods if BLUEPRINT in m["title"] for it in m["items"]}
+old_pages = []
+for rid, r in eres.items():
+    if not r["href"].startswith("wiki_content/") or rid in used: continue
+    if os.path.basename(r["href"])[:-5] in linked: continue
+    t = U((re.search(r"<title>([^<]*)", rd(E, r["href"])) or [0, rid])[1])
+    kind = "blueprint" if rid in bp_pages or re.match(r"(Essentials|BOAA Lab|Bonus):", t) else "instructor" if instructor(t) else "course"
+    # The page's own address in Canvas (the export names each page file by it): two live pages can share a title,
+    # and only the address tells the old copy from the one that stays (Adam, 2026-09-29)
+    old_pages.append(dict(title=t, kind=kind, published=rid in live_pub, modules=live_home.get(rid, []), url=os.path.basename(r["href"])[:-5], rid=rid))
+old_rids = {x["rid"] for x in old_pages}
+live_page_titles = {}
+for rid, r in eres.items():
+    if r["href"].startswith("wiki_content/"):
+        live_page_titles.setdefault(U((re.search(r"<title>([^<]*)", rd(E, r["href"])) or [0, rid])[1]), []).append(rid)
+for x in old_pages:
+    twins = [o for o in live_page_titles.get(x["title"], []) if o != x["rid"]]
+    x["same_name_stays"] = sum(1 for o in twins if o not in old_rids)      # a page with this title that is kept
+    x["same_name_old"] = sum(1 for o in twins if o in old_rids)             # another old copy with this title
+    del x["rid"]
+old_pages.sort(key=lambda x: (x["kind"], x["title"], x["url"]))
+json.dump(dict(new_pages_linking_taken_items=check_links, taken_items=taken, old_modules=old_modules, old_pages=old_pages, placed=placed, dropped_unchanged_pages=dropped_pages, changed_pages_left_out_for_quiz_links=kept_with_links, mapped=len(mp), changed_files=changed, skipped=skipped, left_out=left_out, published=published,
                live_items_not_in=not_in, live_modules_not_in=live_mods_not_in), open(a.out + ".report.json", "w"), indent=1)
-print(f"mapped {len(mp)} ids in {changed} files; skipped {len(skipped)}; quizzes left out {len(left_out)}; kept published {len(published)}")
+print(f"mapped {len(mp)} ids in {changed} files; skipped {len(skipped)}; quizzes left out {len(left_out)}; taken items placed {len(placed)}; kept published {len(published)}")
