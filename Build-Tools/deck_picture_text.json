@@ -1694,6 +1694,13 @@
    "decorative": false,
    "deck": "Calibration",
    "slide": 10
+  },
+  "bd56d384e9eb58d8744fe7584a3aafa359c41a80": {
+   "alt": "Series circuit: a 5 V battery with 180, 240 and 330 ohm resistors that drop 1.2, 1.6 and 2.2 V.",
+   "subject": "Three_Resistor_Series_Voltage_Drops",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 7
   }
  }
 }

@@ -125,8 +125,11 @@ def set_text(sp, new):
 
 def fix_text(xml, find, repl):
     """Replaces text inside one run, or across the runs of one paragraph"""
-    f, r = html.escape(find, quote=False), html.escape(repl, quote=False)
-    if f in xml: return xml.replace(f, r), True
+    r = html.escape(repl, quote=False)
+    # PowerPoint writes quote marks either as they are or as &apos; and &quot;
+    for f in (html.escape(find, quote=False), html.escape(find, quote=False).replace("'", "&apos;").replace('"', "&quot;")):
+        if f in xml: return xml.replace(f, r), True
+    f = html.escape(find, quote=False)
     for m in re.finditer(r"(?s)<a:p>.*?</a:p>", xml):
         para = m.group(0); whole = "".join(re.findall(r"<a:t>([^<]*)</a:t>", para))
         if f in whole:
@@ -172,6 +175,89 @@ def old_parts(xml):
     if not title and paras and len(paras[0][1]) <= 70:
         title = paras.pop(0)[1]
     return title, paras, pics
+
+TOP = re.compile(r"<(/?)(p:(?:sp|pic|grpSp|graphicFrame|cxnSp))\b[^>]*?(/?)>")
+
+def top_level(tree):
+    """The top-level shapes of a spTree body, as (start, end) spans"""
+    out = []; depth = 0; start = None
+    for m in TOP.finditer(tree):
+        closing, selfclose = m.group(1) == "/", m.group(3) == "/"
+        if selfclose: continue
+        if not closing:
+            if depth == 0: start = m.start()
+            depth += 1
+        else:
+            depth -= 1
+            if depth == 0 and start is not None: out.append((start, m.end())); start = None
+    return out
+
+def is_simple(xml):
+    """A slide the rebuild can carry whole: no tables, charts, groups or connectors, and few text boxes"""
+    if re.search(r"<p:graphicFrame|<p:grpSp>|<p:cxnSp", xml): return False
+    texts = [m.group(0) for m in shapes(xml) if re.search(r"<a:t>[^<]+</a:t>", m.group(0)) and not re.search(r'<p:ph [^>]*type="(title|ctrTitle|sldNum|ftr|dt)"', m.group(0))]
+    return len(texts) <= 2 and len(re.findall(r"<p:sp>", xml)) <= 5
+
+def keep_layout(xml, tpl, ph_xfrm, old_size, title_override=None):
+    """A diagram or table slide keeps every shape as drawn: the drawing is scaled as one into the newer content area,
+    the title and footer take the newer look, and white text left on the new white background turns dark."""
+    title, _, _ = old_parts(xml)
+    if title_override: title = title_override
+    body = re.search(r"(?s)<p:spTree>(.*)</p:spTree>", xml).group(1)
+    body = re.sub(r"(?s)^.*?</p:grpSpPr>|^.*?<p:grpSpPr/>", "", body, count=1)
+    items = []
+    for a, b in top_level(body):
+        el = body[a:b]
+        ph = re.search(r'<p:ph\b([^>]*)/?>', el)
+        if ph:
+            t = re.search(r'type="(\w+)"', ph.group(1)); t = t.group(1) if t else "body"
+            if t in ("title", "ctrTitle", "sldNum", "ftr", "dt"): continue          # the newer title and footer replace these
+            if "<a:xfrm" not in el:
+                x = ph_xfrm(t, re.search(r'idx="(\d+)"', ph.group(1)))
+                if not x: continue
+                el = re.sub(r"<p:spPr/>|<p:spPr>", "<p:spPr>" + x, el, count=1) if re.search(r"<p:spPr/>|<p:spPr>", el) else el
+        if not re.search(r"<a:t>[^<]+</a:t>|r:embed|<a:tbl|<c:chart|<a:graphicData", el) and "<a:prstGeom" not in el and "<a:custGeom" not in el: continue
+        g = re.search(r'<a:off x="(-?\d+)" y="(-?\d+)"/>\s*<a:ext cx="(\d+)" cy="(\d+)"', el)
+        if not g: continue
+        gx, gy, gw, gh = (int(v) for v in g.groups()); W0, H0 = old_size
+        words = " ".join(html.unescape(x) for x in re.findall(r"<a:t>([^<]*)</a:t>", el)).strip()
+        has_text, has_media = bool(words), bool(re.search(r"r:embed|<a:tbl|<c:chart|<a:graphicData", el))
+        # the old title, footer and page number, and design panels, belong to the old look: the newer title and footer replace them
+        if words and title and re.sub(r"\W+", "", words.lower()) == re.sub(r"\W+", "", title.lower()): continue
+        if gy > H0 * 0.88 and gh < H0 * 0.1 and not has_media and (not has_text or re.search(r'sz="(\d+)"', el) and int(re.search(r'sz="(\d+)"', el).group(1)) <= 1400): continue
+        if not has_text and not has_media:
+            if gw * gh > W0 * H0 * 0.3: continue                               # a background panel
+            if gy < H0 * 0.2 and gw > W0 * 0.5: continue                      # a title bar or rule
+            if gh < H0 * 0.012 and gw > W0 * 0.5: continue                    # a full-width line
+        if gx >= W0 or gy >= H0 or gx + gw <= 0 or gy + gh <= 0: continue     # off the slide
+        items.append((el, (gx, gy, gw, gh)))
+    ids = iter(range(10, 9999))
+    def newid(sp): return re.sub(r'<p:cNvPr id="\d+"', '<p:cNvPr id="%d"' % next(ids), sp)
+    x0, top, full_w, bottom = 548640, 1417320, 11094415, 6217920
+    out = ""
+    if items:
+        bx0 = min(g[0] for _, g in items); by0 = min(g[1] for _, g in items)
+        bw = max(g[0] + g[2] for _, g in items) - bx0 or 1; bh = max(g[1] + g[3] for _, g in items) - by0 or 1
+        k = min(full_w / float(bw), (bottom - top) / float(bh))
+        ox = x0 + int((full_w - bw * k) / 2)
+        fs = max(0.6, min(1.0, k))                                              # text shrinks with the drawing, never grows
+        for el, g in items:
+            nx, ny = ox + int((g[0] - bx0) * k), top + int((g[1] - by0) * k)
+            el = re.sub(r'<a:off x="-?\d+" y="-?\d+"/>(\s*)<a:ext cx="\d+" cy="\d+"', '<a:off x="%d" y="%d"/>\\1<a:ext cx="%d" cy="%d"' % (nx, ny, int(g[2] * k), int(g[3] * k)), el, count=1)
+            if abs(fs - 1) > 0.05: el = re.sub(r'\bsz="(\d+)"', lambda m: 'sz="%d"' % max(900, int(int(m.group(1)) * fs)), el)
+            # white text on no fill of its own would vanish on the white slide
+            own_fill = re.search(r"(?s)<p:spPr>.*?<a:solidFill>.*?</p:spPr>", el)
+            if not own_fill:
+                el = re.sub(r'(<a:rPr[^>]*>(?:(?!</a:rPr>).)*?<a:solidFill>)\s*<a:(srgbClr val="(?:FFFFFF|FEFEFE|FAFAFA|F2F2F2|EEEEEE|F8FAFC|F1F5F9)"|schemeClr val="(?:bg1|lt1)")\s*/>', r'\1<a:srgbClr val="1F2A25"/>', el, flags=re.S | re.I)
+            out += newid(el)
+    t = tpl["title"]; runs = list(re.finditer(r"<a:t>[^<]*</a:t>", t))
+    t = t[:runs[0].start()] + "<a:t>%s</a:t>" % html.escape(title_case(title or ""), quote=False) + t[runs[0].end():]
+    foot = "".join(newid(f) for f in tpl["foot"])
+    head = re.search(r"(?s)^.*?<p:cSld[^>]*>", xml).group(0)
+    tail = re.search(r"(?s)</p:cSld>.*$", xml).group(0)
+    tail = re.sub(r"(?s)<p:transition.*?</p:transition>|<p:timing>.*?</p:timing>|<mc:AlternateContent.*?</mc:AlternateContent>", "", tail)
+    tree = '<p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr/>%s%s%s</p:spTree>' % (foot, newid(t), out)
+    return head + tpl["bg"] + tree + tail
 
 def restyle(xml, tpl, title_override=None):
     title, paras, pics = old_parts(xml)
@@ -231,6 +317,29 @@ def merge(newer, older, plan, out):
     lab_sp, num_sp = newer_footer(N, n_order); tg, tsz, tcol = newer_title_geom(N, n_order); div_tpl = newer_divider(N, n_order)
     fixes = p.get("text_fixes", []); fixed = []
     tpl = content_template(N, n_order) if p.get("restyle") else None
+    o_size = tuple(int(v) for v in re.search(r'<p:sldSz cx="(\d+)" cy="(\d+)"', O["ppt/presentation.xml"].decode()).groups())
+    def ph_xfrm_for(src):
+        """where an older placeholder sat: its layout's (else its master's) placeholder of the same type or index"""
+        chain = []
+        rl = O.get(rels_name(src), b"").decode()
+        m = re.search(r'Target="(\.\./slideLayouts/[^"]+)"', rl)
+        if m:
+            lay = posixpath.normpath(posixpath.join("ppt/slides", m.group(1))); chain.append(lay)
+            mm = re.search(r'Target="(\.\./slideMasters/[^"]+)"', O.get(rels_name(lay), b"").decode())
+            if mm: chain.append(posixpath.normpath(posixpath.join(posixpath.dirname(lay), mm.group(1))))
+        def find(t, idx):
+            for part in chain:
+                x = O.get(part, b"").decode("utf-8", "ignore")
+                for sp in re.findall(r"(?s)<p:sp>.*?</p:sp>", x):
+                    ph = re.search(r"<p:ph\b([^>]*)>", sp)
+                    if not ph: continue
+                    pt = re.search(r'type="(\w+)"', ph.group(1)); pt = pt.group(1) if pt else "body"
+                    pi = re.search(r'idx="(\d+)"', ph.group(1))
+                    if (idx and pi and pi.group(1) == idx.group(1)) or pt == t:
+                        xf = re.search(r"(?s)<a:xfrm>.*?</a:xfrm>", sp)
+                        if xf: return xf.group(0)
+            return None
+        return find
     n_layout = sorted(k for k in N if re.match(r"ppt/slideLayouts/slideLayout\d+\.xml$", k))[0]
     n_notesmaster = next((k for k in N if re.match(r"ppt/notesMasters/notesMaster\d+\.xml$", k)), None)
     ct = N["[Content_Types].xml"].decode(); oct_ = O["[Content_Types].xml"].decode()
@@ -281,7 +390,10 @@ def merge(newer, older, plan, out):
         xml = N[new].decode("utf-8")
         if tpl:
             # another design: the slide is rebuilt in the newer look (title, bullets, pictures, notes kept)
-            N[new] = restyle(xml, tpl, (p.get("titles") or {}).get(str(i))).encode("utf-8"); final.append(new); continue
+            over = (p.get("titles") or {}).get(str(i))
+            orig = O[src].decode("utf-8")
+            N[new] = (restyle(xml, tpl, over) if is_simple(orig) else keep_layout(xml, tpl, ph_xfrm_for(src), o_size, over)).encode("utf-8")
+            final.append(new); continue
         if div_tpl and is_old_divider(xml):
             # the newer deck's divider, carrying the older divider's title and line
             words = [text(m.group(0)).strip() for m in shapes(xml) if text(m.group(0)).strip() and not text(m.group(0)).strip().isdigit()]

@@ -85,6 +85,30 @@ def title_of(xml):
         if g and sz and t and g[1] < 1300000 and int(sz.group(1)) >= 2400 and (best is None or int(sz.group(1)) > best[0]): best = (int(sz.group(1)), html.unescape(t))
     return best[1] if best else ""
 
+def real_kind(blob):
+    """What a picture file really is, whatever its name says"""
+    head = blob[:300]
+    if head.startswith(b"\x89PNG"): return ".png"
+    if head[:3] == b"\xff\xd8\xff": return ".jpg"
+    if head[:4] == b"GIF8": return ".gif"
+    if b"<svg" in head or head.lstrip().startswith(b"<?xml"): return ".svg"
+    return None
+
+def svg_to_png(blob):
+    """An SVG rendered to PNG at three times its size (svg2png.swift beside this file, built once into the cache).
+    Some generated decks store an SVG where the PNG copy should be (2000 Polar Patterns, 2026-09-30)."""
+    tool = os.path.expanduser("~/Library/Caches/CanvasPreview/svg2png")
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "svg2png.swift")
+    if not os.path.exists(tool) or os.path.getmtime(tool) < os.path.getmtime(src):
+        os.makedirs(os.path.dirname(tool), exist_ok=True)
+        subprocess.run(["swiftc", "-O", src, "-o", tool], capture_output=True)
+    d = tempfile.mkdtemp(); i = os.path.join(d, "in.svg"); o = os.path.join(d, "out.png")
+    t = blob.decode("utf-8", "ignore").replace(" \u2014 ", ": ").replace("\u2014", ": ").replace("\u2013", "-")
+    open(i, "w", encoding="utf-8").write(t)
+    subprocess.run([tool, i, o, "3"], capture_output=True)
+    out = open(o, "rb").read() if os.path.exists(o) else None
+    shutil.rmtree(d, ignore_errors=True); return out
+
 def to_png(blob, ext):
     """TIFF, GIF, BMP and WebP pictures become PNG (Standards: PNG or JPG only)"""
     d = tempfile.mkdtemp(); src = os.path.join(d, "in" + ext); dst = os.path.join(d, "out.png")
@@ -132,6 +156,12 @@ def split(deck, dry=False):
             media = posixpath.normpath(posixpath.join(posixpath.dirname(sx), target[m.group(1)]))
             if media not in data: return el
             blob = data[media]; ext = os.path.splitext(media)[1].lower()
+            kind = real_kind(blob)
+            if kind == ".svg":
+                png = svg_to_png(blob)
+                if png is None: not_linked.append("slide %d: %s (an SVG that could not be drawn as PNG)" % (pos, os.path.basename(media))); return el
+                blob, ext = png, ".png"
+            elif kind and kind != ext and not (kind == ".jpg" and ext == ".jpeg"): ext = kind       # a JPG named .png keeps what it is
             known = PICTURE_TEXT.get(sha(blob))
             if known:
                 # the picture had no alt text: the written one goes into the deck (both versions), and names the file

@@ -1714,5 +1714,34 @@ try:
 except Exception as _e:
     fails.append('12j the credit hour gate could not run: %s'%_e)
     L('12j the credit hour gate could not run: %s'%_e)
+# 12m NOTHING NEW ARRIVES PUBLISHED (Standards 0, S0; Adam 2026-09-30)
+# "They should all be inactive so I can make them live myself." The 30 Sep DAPR 2000 import published new slide links
+# in modules whose pages were still unpublished, because Slides > Update Canvas Links and relink_slides.py wrote new
+# items as active. A LIVE-Import may keep published only what Canvas already has published (live_import.py does that
+# on purpose, so an import never hides work students are using); every module or module item that is new to the live
+# course arrives unpublished. A template package ships everything unpublished.
+try:
+    _new_pub = []
+    for _mid, _mb in re.findall(r'<module identifier="([^"]+)">(.*?)(?=<module identifier=|</modules>)', mm, re.S):
+        _head = re.sub(r'<items>.*?</items>', '', _mb, flags=re.S)
+        _mt = re.search(r'<title>([^<]*)</title>', _head); _mt = html.unescape(_mt.group(1)) if _mt else _mid
+        if re.search(r'<workflow_state>active</workflow_state>', _head) and LIVE_IDS and _mid not in LIVE_IDS:
+            _new_pub.append('module "%s"' % _mt)
+        for _iid, _ib in re.findall(r'<item identifier="([^"]+)">(.*?)</item>', _mb, re.S):
+            if not re.search(r'<workflow_state>active</workflow_state>', _ib): continue
+            _it = re.search(r'<title>([^<]*)</title>', _ib); _it = html.unescape(_it.group(1)) if _it else _iid
+            _ct = re.search(r'<content_type>([^<]*)</content_type>', _ib); _ct = _ct.group(1) if _ct else ''
+            if LIVE_IDS:
+                if _iid in LIVE_IDS: continue
+                _new_pub.append('%s "%s"' % (_ct or 'item', _it))
+            elif _ct in ('ExternalUrl', 'ExternalTool', 'Attachment'):
+                _new_pub.append('%s "%s"' % (_ct, _it))
+    L('')
+    L('12m NOTHING NEW ARRIVES PUBLISHED')
+    L('    %d new module(s) or item(s) would arrive published' % len(_new_pub))
+    for _x in _new_pub[:10]: L('    %s' % _x)
+    if _new_pub: fails.append('12m %d new module(s) or item(s) would arrive published, e.g. %s' % (len(_new_pub), _new_pub[:3]))
+except Exception as _e:
+    fails.append('12m the publish gate could not run: %s' % _e)
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
 sys.exit(1 if fails else 0)
