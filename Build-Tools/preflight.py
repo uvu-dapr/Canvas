@@ -2,7 +2,7 @@
 """DAPR Canvas cartridge preflight. Run from inside an unzipped .imscc folder."""
 import html as html_mod
 html=html_mod
-import re,os,glob,sys,urllib.parse
+import re,os,glob,sys,urllib.parse,collections
 import xml.etree.ElementTree as ET
 
 fails=[]; warns=[]; L=print
@@ -57,6 +57,18 @@ if '--live' in sys.argv:
     for _i,_b in re.findall(r'<module identifier="([^"]+)">(.*?)(?=<module identifier=|</modules>)',_lrd('course_settings/module_meta.xml'),re.S):
         _w=re.search(r'<workflow_state>([^<]+)</workflow_state>',re.sub(r'<items>.*?</items>','',_b,flags=re.S))
         if _w and _w.group(1)=='active': LIVE_PUB.add(_i)
+    # The ids Canvas stored for these items (match_ids.py, 2026-09-29): a package that uses them is the same live item
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import match_ids as _mi0
+        _e0 = sys.argv[sys.argv.index('--live') + 1]
+        _ex0, _lv0, _u0 = _mi0.lineage(_e0, [sys.argv[sys.argv.index('--older') + 1] if '--older' in sys.argv else _mi0.class_folder(_e0)])
+        for _lab, _v in _lv0.items():
+            if _v['stored']:
+                LIVE_IDS.add(_v['stored'])
+                if _lab in LIVE_PUB: LIVE_PUB.add(_v['stored'])
+    except Exception:
+        pass
 
 # 1b QUIZ INVENTORY, RESOLVED FROM THE MANIFEST, NEVER FROM A FOLDER GLOB.
 #   Canvas writes two different layouts for the same kind of object:
@@ -1417,9 +1429,14 @@ L('figures in use that lost labels to an older generation (must be 0): %d'%len(_
 for _a,_b,_c,_d in _lostlab[:8]:
     L('    %s (%d chars) replaced %s (%d chars)'%(_a,_b,_c,_d))
 if _lostlab: fails.append('figures placed that lost their labels: %d'%len(_lostlab))
-if not os.path.exists(_census):
-    L('    note: no OCR label census found, rule 20.5d could not run')
-    warns.append('no OCR label census; rule 20.5d did not run')
+# The numbered generations this rule compares (-01, -02) belong to the old Images/ layout, retired 2026-09-23 (Standards
+# 8.0.1): with none in use there is nothing to compare, so no census is needed (2026-09-30)
+_numbered=[_f for _f in _used if re.match(r'^.*-\d\d\.(png|jpe?g)$',_f)]
+if not _numbered:
+    L('    note: no numbered figure generations in use; rule 20.5d has nothing to compare')
+elif not os.path.exists(_census):
+    L('    note: no OCR label census found, rule 20.5d could not run for %d numbered figure(s)' % len(_numbered))
+    warns.append('no OCR label census; rule 20.5d did not run for %d numbered figure(s)' % len(_numbered))
 elif _nocensus:
     L('    note: %d figures in use are missing from the census'%len(_nocensus))
     warns.append('figures missing from the OCR label census: %d'%len(_nocensus))
@@ -1550,11 +1567,47 @@ if '--live' in sys.argv:
                 items.append((it.group(1), g('title'), g('content_type'), g('identifierref')))
             out[m.group(1)] = (ti, st, items)
         return out
-    _mine = _lmods(open('course_settings/module_meta.xml', encoding='utf-8').read())
+    # 2026-09-29 [Adam]: an export labels each live item with a hash of its own database id; an import matches only
+    # the id stored when the item was created (the identifier of the package whose import made it). match_ids.py
+    # recovers that stored id from the older packages beside the export. This gate translates each stored id back to
+    # the item's export label before comparing, and fails when the package uses an export label for an item whose
+    # stored id is known: that item would arrive as a copy while students keep the old one (DAPR 2000 v83).
+    _exp = sys.argv[sys.argv.index('--live') + 1]
+    _to_label, _copies, _originals, _dropped = {}, [], [], []
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import match_ids as _mi
+        _olddir = sys.argv[sys.argv.index('--older') + 1] if '--older' in sys.argv else _mi.class_folder(_exp)
+        _ex, _lv, _used = _mi.lineage(_exp, [_olddir])
+        _to_label = {v['stored']: e for e, v in _lv.items() if v['stored']}
+        _mine_ids = set(re.findall(r'identifier="([^"]+)"', open('imsmanifest.xml', encoding='utf-8', errors='ignore').read())) | \
+                    set(re.findall(r'<(?:module|item) identifier="([^"]+)"', open('course_settings/module_meta.xml', encoding='utf-8', errors='ignore').read()))
+        for _i in sorted(_mine_ids & set(_lv)):
+            # an id that is also the stored id of a copy an earlier import made updates that copy (a relink), not a new copy
+            if _lv[_i]['stored'] and _lv[_i]['stored'] not in _mine_ids and _i not in _to_label: _copies.append('%s %s' % (_lv[_i]['kind'], _lv[_i]['title']))
+            elif not _lv[_i]['candidates'] and _i not in _to_label: _originals.append('%s %s' % (_lv[_i]['kind'], _lv[_i]['title']))
+        # A module item linking a live item by a label Canvas can't match (no stored id, or one shared by two copies)
+        # is dropped on import, and a taken quiz disappears from its module (2255 Ohm's Law, 2026-09-29)
+        _sh = collections.Counter(v['stored'] for v in _lv.values() if v['stored'])
+        _res_ids = set(re.findall(r'<resource identifier="([^"]+)"', open('imsmanifest.xml', encoding='utf-8', errors='ignore').read()))
+        _mmx = open('course_settings/module_meta.xml', encoding='utf-8', errors='ignore').read()
+        for _it in re.finditer(r'(?s)<item identifier="[^"]+">(.*?)</item>', _mmx):
+            _r = re.search(r'<identifierref>([^<]+)</identifierref>', _it.group(1)); _tt = re.search(r'<title>([^<]*)</title>', _it.group(1))
+            if not _r or _r.group(1) in _res_ids: continue
+            if _r.group(1) in _to_label and _sh[_r.group(1)] == 1: continue      # a stored id: Canvas finds that item
+            if _r.group(1) not in _lv: continue
+            _v = _lv[_r.group(1)]
+            if _v['kind'] in ('page', 'assignment', 'quiz', 'discussion') and (not _v['stored'] or _sh[_v['stored']] > 1):
+                _dropped.append('%s %s' % (_v['kind'], html.unescape(_tt.group(1)) if _tt else _r.group(1)))
+    except Exception as _e:
+        L('    note: stored ids could not be recovered (%s); comparing export labels only' % _e)
+    _T = lambda i: _to_label.get(i, i)
+    _mine = _lmods(re.sub(r'<identifierref>([^<]+)</identifierref>', lambda m: '<identifierref>%s</identifierref>' % _T(m.group(1)),
+                          re.sub(r'identifier="([^"]+)"', lambda m: 'identifier="%s"' % _T(m.group(1)), open('course_settings/module_meta.xml', encoding='utf-8').read())))
     _live = _lmods(_lz.read('course_settings/module_meta.xml').decode('utf-8', 'ignore'))
     _lbytitle = {}
     for _i, (_t, _s, _its) in _live.items(): _lbytitle.setdefault(_t, set()).add(_i)
-    _second = []; _oldcopy = []
+    _second = []; _oldcopy = []; _relink = []
     for _i, (_t, _s, _its) in _mine.items():
         if _t in _lbytitle and _i not in _lbytitle[_t]:
             # This module carries a live module's id (it updates that one and renames it), so the live module that
@@ -1571,17 +1624,22 @@ if '--live' in sys.argv:
             # is when none of this module's items with that title carries the live one's id
             if len(_c) == 1 and _c[0][0] != _ii and _c[0][0] not in _mine_ids: _second.append('module item %s' % _it)
             elif len(_c) == 1 and _ct not in ('ExternalUrl', 'ContextModuleSubHeader') and _ref and _c[0][3] and _ref != _c[0][3]:
-                _second.append('%s (the module shows %s, this package updates %s)' % (_it, _c[0][3], _ref))
+                # The package updates a copy an earlier import made from the page the module shows (its stored id is that
+                # page's label): the import relinks the module to the updated copy and the shown page becomes an old one
+                if _lv.get(_ref, {}).get('stored') == _c[0][3] if '_lv' in dir() else False:
+                    _relink.append('%s (the module will show the updated copy; delete the old page afterwards)' % _it)
+                else:
+                    _second.append('%s (the module shows %s, this package updates %s)' % (_it, _c[0][3], _ref))
     _hidden = ['module ' + _t for _i, (_t, _s, _its) in _mine.items() if _live.get(_i, ('', ''))[1] == 'active' and _s != 'active']
     _lnames = set(_lz.namelist())
     for _p in glob.glob('wiki_content/*.html'):
-        _ident = (re.search(r'name="identifier" content="([^"]+)"', open(_p, encoding='utf-8', errors='ignore').read()) or [0, ''])[1]
+        _ident = _T((re.search(r'name="identifier" content="([^"]+)"', open(_p, encoding='utf-8', errors='ignore').read()) or [0, ''])[1])
         _lh = re.search(r'<resource\b[^>]*identifier="%s"[^>]*href="([^"]+)"' % re.escape(_ident), _lz.read('imsmanifest.xml').decode('utf-8', 'ignore')) if _ident else None
         if _lh and _lh.group(1) in _lnames and 'content="active"' in re.sub(r'(?s)<body.*', '', _lz.read(_lh.group(1)).decode('utf-8', 'ignore')) \
            and 'name="workflow_state" content="active"' not in open(_p, encoding='utf-8', errors='ignore').read():
             _hidden.append('page ' + _p)
     for _p in glob.glob('*/assignment_settings.xml'):
-        _n = _p.replace('\\', '/')
+        _n = _p.replace('\\', '/'); _n = _T(_n.split('/')[0]) + '/' + _n.split('/', 1)[1]
         if _n in _lnames and '<workflow_state>published</workflow_state>' in _lz.read(_n).decode('utf-8', 'ignore') \
            and '<workflow_state>published</workflow_state>' not in open(_p, encoding='utf-8').read():
             _hidden.append('assignment ' + _p)
@@ -1591,6 +1649,33 @@ if '--live' in sys.argv:
     if _oldcopy:
         L('    old copies with the same title, to delete after the import: %d' % len(_oldcopy)); [L('      ' + x) for x in _oldcopy[:15]]
         warns.append('12k %d old module(s) in Canvas share a title with an updated module; delete the old ones after importing: %s' % (len(_oldcopy), ', '.join(x[7:] for x in _oldcopy[:5])))
+    L('    carries an export label instead of the id Canvas stored (arrives as a copy): %d' % len(_copies)); [L('      ' + x) for x in _copies[:15]]
+    if _originals:
+        L('    original to the course (no import can update them; they arrive as copies): %d' % len(_originals)); [L('      ' + x) for x in _originals[:15]]
+        warns.append('12k %d item(s) are original to the course and arrive as copies: %s' % (len(_originals), '; '.join(_originals[:4])))
+    if _relink:
+        L('    relinked to an updated copy (old page to delete afterwards): %d' % len(_relink)); [L('      ' + x) for x in _relink[:15]]
+        warns.append('12k %d module item(s) relink to the updated copy of a page; delete the old pages afterwards: %s' % (len(_relink), '; '.join(x.split(' (')[0] for x in _relink[:5])))
+    # Grading weights: a group the import updates must keep the weight it has in Canvas (2255 v100 would have set the
+    # live 75% Assignments group to 0, 2026-09-30)
+    _wchg = []
+    try:
+        _lg = {m.group(1): (re.search(r'<title>([^<]*)', m.group(2)) or [0, ''])[1] for m in re.finditer(r'(?s)<assignmentGroup identifier="([^"]+)">(.*?)</assignmentGroup>', _lz.read('course_settings/assignment_groups.xml').decode('utf-8', 'ignore'))}
+        _lw = {m.group(1): (re.search(r'<group_weight>([^<]*)', m.group(2)) or [0, ''])[1] for m in re.finditer(r'(?s)<assignmentGroup identifier="([^"]+)">(.*?)</assignmentGroup>', _lz.read('course_settings/assignment_groups.xml').decode('utf-8', 'ignore'))}
+        if os.path.exists('course_settings/assignment_groups.xml'):
+            for m in re.finditer(r'(?s)<assignmentGroup identifier="([^"]+)">(.*?)</assignmentGroup>', open('course_settings/assignment_groups.xml', encoding='utf-8').read()):
+                _t = _T(m.group(1)); _w = (re.search(r'<group_weight>([^<]*)', m.group(2)) or [0, ''])[1]
+                if _t in _lw and _w and _lw[_t] and float(_w) != float(_lw[_t]):
+                    _wchg.append('%s: %s%% in Canvas, %s%% in this package' % (_lg.get(_t, _t), _lw[_t], _w))
+    except Exception as _e:
+        L('    note: grading weights not compared (%s)' % _e)
+    if _wchg:
+        L('    grading weights this import would change: %d' % len(_wchg)); [L('      ' + x) for x in _wchg]
+        fails.append('12k the import would change live grading weights: %s' % '; '.join(_wchg))
+    if _dropped:
+        L('    module links Canvas cannot match (dropped on import): %d' % len(_dropped)); [L('      ' + x) for x in _dropped[:15]]
+        fails.append('12k %d module link(s) point at a live item by a label Canvas cannot match, so the import drops them (leave that module out: match_ids.py does)' % len(_dropped))
+    if _copies: fails.append('12k %d item(s) use the export label, not the id Canvas matches: they arrive as copies (Workbench > Use the IDs Canvas Matches, or match_ids.py)' % len(_copies))
     if _second: fails.append('12k %d item(s) would arrive as a second copy of a live item' % len(_second))
     if _hidden: fails.append('12k %d live published item(s) would be hidden by this import' % len(_hidden))
 

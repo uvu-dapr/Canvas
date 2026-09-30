@@ -60,6 +60,24 @@ KIND = {"WikiPage": "Page", "Assignment": "Assignment", "Quizzes::Quiz": "Quiz",
 
 def preview(pkg, export, report=None):
     P, L = load(pkg), load(export)
+    # 2026-09-29: an import matches the id Canvas stored when it made an item, not the export's label for it.
+    # Translate each package id to the live item it really updates; an export label Canvas can't match becomes a copy.
+    copy = set()
+    try:
+        import match_ids
+        _, lv, _ = match_ids.lineage(export, [match_ids.class_folder(export)], skip=[pkg])
+        to_label = {v["stored"]: e for e, v in lv.items() if v["stored"]}
+        def T(i):
+            if not i: return i
+            if i in to_label: return to_label[i]
+            if i in lv: copy.add(i); return "copy:" + i
+            return i
+        for m in P["mods"]:
+            m["id"] = T(m["id"])
+            for it in m["items"]: it["orig"] = it["id"]; it["id"] = T(it["id"]); it["ref"] = T(it["ref"]) if it["ref"] else it["ref"]
+        P["objs"] = {T(k): v for k, v in P["objs"].items()}
+    except Exception:
+        pass
     taken = set()
     rep = report or pkg + ".report.json"
     if os.path.exists(rep):
@@ -72,9 +90,15 @@ def preview(pkg, export, report=None):
     c = out["counts"]
     for m in sorted(P["mods"], key=lambda m: m["position"] or 999):
         lm = live_mod.get(m["id"])
-        mod = dict(id=m["id"], title=m["title"], status="new" if not lm else "updated", live_title=lm["title"] if lm else None,
+        # A module made in Canvas (original to the course): the import can't update it and adds a second one beside it
+        orig = live_mod.get(m["id"][5:]) if not lm and m["id"].startswith("copy:") else None
+        mod = dict(id=m["id"], title=m["title"], status="copy" if orig else "new" if not lm else "updated", live_title=lm["title"] if lm else None,
                    live_state=lm["state"] if lm else None, pkg_state=m["state"], unlock=m["unlock"], live=[], after=[], stays=[], notes=[])
-        c["new_modules" if not lm else "updated_modules"] += 1
+        c["copy_modules" if orig else "new_modules" if not lm else "updated_modules"] = c.get("copy_modules" if orig else "new_modules" if not lm else "updated_modules", 0) + 1
+        if orig:
+            mod["live"] = [dict(title=i["title"], kind=KIND.get(i["type"], i["type"])) for i in orig["items"]]
+            mod["live_title"], mod["live_state"] = orig["title"], orig["state"]
+            mod["notes"].append("Canvas already has \"%s\", but it was made in Canvas, so no import can update it: this import adds a second module beside it. Delete the old one after the import (Standards 16a)." % orig["title"])
         if lm:
             mod["live"] = [dict(title=i["title"], kind=KIND.get(i["type"], i["type"])) for i in lm["items"]]
             if lm["title"] != m["title"]: mod["notes"].append("Module renamed from \"%s\"." % lm["title"])
@@ -86,6 +110,8 @@ def preview(pkg, export, report=None):
             lo = L["objs"].get((was[1]["ref"] if was else i["ref"]) or "")
             if i["ref"] and not po and i["type"] in ("Assignment", "Quizzes::Quiz", "DiscussionTopic", "WikiPage") and (lo or i["title"] in taken):
                 e["marks"].append("placed: students took it, so it is never replaced (name, points and grades stay)"); c["placed"] += 1
+            elif not was and (i.get("orig") in copy or (i["ref"] or "").startswith("copy:")):
+                e["marks"].append("arrives as a copy: Canvas can't match it to the live one"); c["copies"] = c.get("copies", 0) + 1
             elif not was:
                 e["marks"].append("new"); c["items_new"] += 1
             else:

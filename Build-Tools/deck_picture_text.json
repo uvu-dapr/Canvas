@@ -1,0 +1,1699 @@
+{
+ "_about": "Alt text and file name subjects for deck pictures that had none, keyed by the picture's SHA-1 (written 2026-09-30 after viewing each picture). deck_pair.py puts the alt text into the deck and names the file <Base>-<subject>; decorative pictures stay inside the deck.",
+ "pictures": {
+  "7a9260f55387372de0ffbebddfcdb8f057e25f3a": {
+   "alt": "Exploded diagram of a dynamic mic: windscreen, diaphragm, coil, magnet, capsule, transformer and XLR output.",
+   "subject": "Dynamic_Mic_Exploded_Anatomy",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 3
+  },
+  "997121a4c5579a3edea5bfa423e2e5428eb8e9a7": {
+   "alt": "Color-coded cutaway of a handheld dynamic mic showing the capsule behind the grille and the parts in the handle.",
+   "subject": "Dynamic_Mic_Color_Cutaway",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 5
+  },
+  "63f2f1a6682993bf36b208469519a31ddc67299f": {
+   "alt": "Ribbon mic diagram: a pleated ribbon between the poles of a U-shaped magnet, wired to a transformer and output.",
+   "subject": "Ribbon_Mic_Magnet_Transformer",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 7
+  },
+  "0f9b38568bddb3617b65f6df2db1655139693ef9": {
+   "alt": "Vintage gray pencil condenser microphone with a diamond badge next to its detached swivel mount.",
+   "subject": "Vintage_Pencil_Mic_And_Mount",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 8
+  },
+  "7815cc951b66d6d8e39c2b240f02f78b116bca02": {
+   "alt": "Labeled condenser capsule with a white clamping ring, showing diaphragm, backplates, center terminal and wires.",
+   "subject": "Condenser_Capsule_White_Ring",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 9
+  },
+  "97e7b7182f8563cb9cd1695e73c19a1e3d20e28c": {
+   "alt": "Labeled condenser capsule with a gold clamping ring, showing diaphragm, backplates and diaphragm wire.",
+   "subject": "Condenser_Capsule_Gold_Ring",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 9
+  },
+  "1436124839b65a1ef526feaae1063b10139de118": {
+   "alt": "Condenser mic internals: capsule on top, a circuit board with switches, an output transformer and XLR pins.",
+   "subject": "Condenser_Mic_Circuit_Board",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 10
+  },
+  "a7a8340effb32f53b1932e1036337c99767349a1": {
+   "alt": "Neumann U87Ai condenser microphone schematic showing the capsule, preamp, output transformer and phantom supply.",
+   "subject": "Neumann_U87Ai_Schematic",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 11
+  },
+  "a640b11b6f05b9915f52450395dd22949b90cb1f": {
+   "alt": "Tube preamp schematic for one channel: XLR input transformer, two tube stages and an output transformer.",
+   "subject": "Tube_Preamp_Channel_Schematic",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 12
+  },
+  "04118101a6ff1a726c4a843c0c9f21501bbc8484": {
+   "alt": "Front of a tube mic power supply with a multipin U 67 mic input and an XLR audio output.",
+   "subject": "U67_Power_Supply_Front",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 13
+  },
+  "87a275f9793a3a045477b681191ce8c5de7f8a50": {
+   "alt": "Angled view of a Neumann tube mic power supply with multipin mic input and XLR out, case behind it.",
+   "subject": "Neumann_Power_Supply_Angled",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 14
+  },
+  "0f402f8798082222f76994fc70b102bb68ccdc03": {
+   "alt": "Back panel of a Neumann tube mic power supply with power switch, pilot lamp, AC inlet and two fuses.",
+   "subject": "Neumann_Power_Supply_Rear",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 15
+  },
+  "25ae3f51323ec99566eed5649d0f70fc4edc5e11": {
+   "alt": "Lucas CS-1 tube mic power supply front with a pattern selector knob, XLR output and multipin mic input.",
+   "subject": "Lucas_CS1_Power_Supply_Front",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 16
+  },
+  "bc24c860cbfefbd69a635e1d22fe5455bb027fb2": {
+   "alt": "Rear of a black tube mic power supply with a toggle switch, pilot lamp, fuse holder and AC power inlet.",
+   "subject": "Tube_Power_Supply_Rear_Panel",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 17
+  },
+  "6601ef307e399b22ed549989803342d632b7bdb2": {
+   "alt": "Mojave tube mic power supply with a pattern knob, XLR audio output and multipin microphone input.",
+   "subject": "Mojave_Power_Supply",
+   "decorative": false,
+   "deck": "Microphone_Components",
+   "slide": 18
+  },
+  "7dad28b07f1e409868a7d02723cbb57f856742bf": {
+   "alt": "Omnidirectional polar pattern: a full circle, equally sensitive at every angle around the mic.",
+   "subject": "Omnidirectional_Polar_Pattern",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 3
+  },
+  "08fde8717bbcff4fa5fc72c219f4a41df583d98b": {
+   "alt": "Wide cardioid polar pattern: full pickup in front, only a few dB less at the rear, no deep null.",
+   "subject": "Wide_Cardioid_Polar_Pattern",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 4
+  },
+  "ea9eec630c92ddb40f141267b7cd6e5b768cbf29": {
+   "alt": "Cardioid polar pattern: heart shape with full pickup in front and a deep null at 180 degrees.",
+   "subject": "Cardioid_Polar_Pattern",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 5
+  },
+  "7257904b1ffdbd0f68e009d5cf9860d4fb8ad8aa": {
+   "alt": "Supercardioid polar pattern: a narrow front lobe with a small rear lobe and nulls near 125 degrees.",
+   "subject": "Supercardioid_Polar_Pattern",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 6
+  },
+  "b02b276f0b1832b08fb0d79ae25b7a765eabb823": {
+   "alt": "Hypercardioid polar pattern: a narrower front lobe with a larger rear lobe and side nulls near 110 degrees.",
+   "subject": "Hypercardioid_Polar_Pattern",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 7
+  },
+  "0e7741bc2388a0f98ef27674adcdb27db14d8ad0": {
+   "alt": "Figure-8 polar pattern: equal front and rear lobes with deep nulls at 90 and 270 degrees.",
+   "subject": "Figure_8_Polar_Pattern",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 8
+  },
+  "e0a7b876e31fc2a40e4ced1f07b1acf203a28d04": {
+   "alt": "All six polar patterns overlaid, from omni to figure-8, showing how rear pickup changes with each.",
+   "subject": "Polar_Patterns_Overlay_Comparison",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 9
+  },
+  "dddc009a3e996e450ae7957bd58b239a2d6e57c0": {
+   "alt": "One mic's polar pattern at five frequencies: near omni at 100 Hz, narrowing with rear lobes at 4 and 10 kHz.",
+   "subject": "Polar_Pattern_By_Frequency",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 11
+  },
+  "ea5830168f3d9d00ec2ee8607985cf8ddd1f8ebe": {
+   "alt": "Proximity effect graph: bass boost up to about 10 dB at 2 cm, shrinking with distance, flat at 100 cm.",
+   "subject": "Proximity_Effect_Bass_Boost_Graph",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 13
+  },
+  "b1e80a91481622d003e8ac0ece44036e4a50516a": {
+   "alt": "Microscope view of a Knowles MEMS microphone chip showing its round perforated diaphragm.",
+   "subject": "Knowles_MEMS_Chip_Closeup",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 15
+  },
+  "3599f8c3ed01017ea9e8da76c2894889efd33a8d": {
+   "alt": "MEMS mic cross section with sensor, ASIC and chambers, a diagram of membrane bending, and three packaged mics.",
+   "subject": "MEMS_Mic_Cross_Section_Packages",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 16
+  },
+  "e9166c045dac901138c9312048cd21f9f072535e": {
+   "alt": "Bottom port and top port MEMS mics side by side, showing how the front and back chambers swap places.",
+   "subject": "MEMS_Top_Vs_Bottom_Port",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 17
+  },
+  "e6006b1e6e9712ea5e7516685bd987f776bee625": {
+   "alt": "MEMS mic signal chain: sound pressure, diaphragm, buffer, charge pump, delta-sigma ADC, then PDM or I2S output.",
+   "subject": "MEMS_Mic_Signal_Chain",
+   "decorative": false,
+   "deck": "Polar_Patterns_and_MEMS",
+   "slide": 18
+  },
+  "17cb9aea20a5bd9c294dee7e67783c41b7ef3cdd": {
+   "alt": "Graph of SPL versus distance: 100 dB at 1 m drops about 6 dB each time distance doubles, to 76 dB at 16 m.",
+   "subject": "Inverse_Square_Distance_Graph",
+   "decorative": false,
+   "deck": "Audio_dB_RMS_Headroom_Masterclass",
+   "slide": 22
+  },
+  "cbf5468c78916de1688cdd9957188f017d614069": {
+   "alt": "Calculator line: 60 plus 20 times log10 of 4 divided by 1 equals 72.04.",
+   "subject": "Inverse_Square_Calculator_Result",
+   "decorative": false,
+   "deck": "Decibels_Training",
+   "slide": 22
+  },
+  "dac92f5d98387a3055d216f02fe7c14c2926dc8d": {
+   "alt": "Inverse square law calculator: 60 dB SPL at 4 ft becomes 72 dB SPL at 1 ft, with the formula explained.",
+   "subject": "Inverse_Square_Web_Calculator",
+   "decorative": false,
+   "deck": "Decibels_Training",
+   "slide": 22
+  },
+  "7197a08609dc52633e5b3cd178f3cab293305b75": {
+   "alt": "Step 1 math: P2 over P1 equals 200 over 0.5, or 400, so output power is 400 times the input.",
+   "subject": "Power_Ratio_Step_One",
+   "decorative": false,
+   "deck": "Decibels_Training",
+   "slide": 25
+  },
+  "02276384ee32a97e30c3a6bbbae351a7b4137d11": {
+   "alt": "Step 2 math: log10 of 400 splits into log10 of 4 plus 2, giving 2.602, a unitless ratio.",
+   "subject": "Log_Base_Ten_Step_Two",
+   "decorative": false,
+   "deck": "Decibels_Training",
+   "slide": 26
+  },
+  "373d27a385b83f064138b4fe265c6cef324ddedb": {
+   "alt": "Step 3 math: dB equals 10 times log10 of P2 over P1, so 10 times 2.602 equals about 26.02 dB.",
+   "subject": "Decibel_Conversion_Step_Three",
+   "decorative": false,
+   "deck": "Decibels_Training",
+   "slide": 27
+  },
+  "c8027d6a70002f9d3e8129699bc8996e8b27aefd": {
+   "alt": "Peak SPL equals sensitivity plus 10 log10 of power, so a 90 dB speaker with 80 W reaches about 109 dB.",
+   "subject": "Peak_SPL_Sensitivity_Formula",
+   "decorative": false,
+   "deck": "Decibels_Training",
+   "slide": 37
+  },
+  "93c9cc6bde753dbe74e74e9fd96da07c7fe44458": {
+   "alt": "Room modes: parallel walls tied to a wavelength boost that frequency; wavelength equals velocity over frequency.",
+   "subject": "Room_Modes_Wavelength_Notes",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 14
+  },
+  "52f6c519b5203d830b551335d6e80c1f62fd58e6": {
+   "alt": "Inside a dome of many small loudspeakers on a metal frame surrounding the listener for immersive playback.",
+   "subject": "Loudspeaker_Dome_Array",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 9
+  },
+  "7aaf28aa2f982c85c85cba9b532af036a560dc82": {
+   "alt": "Close-up of a human outer ear, whose folds shape how we hear the direction of sound.",
+   "subject": "Human_Outer_Ear_Closeup",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 19
+  },
+  "6b38b9c48ad3a53830afb15de93dc69354ce8bab": {
+   "alt": "3Dio Free Space Pro II binaural microphone with a silicone ear shape on each side of a small body.",
+   "subject": "3Dio_Binaural_Ear_Mic",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 20
+  },
+  "2d20178a86d314484fea2e0c26c17b20e48878f6": {
+   "alt": "Dummy head binaural microphone: a gray mannequin head on a stand with molded ears holding mics.",
+   "subject": "Dummy_Head_Binaural_Mic",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 21
+  },
+  "92eec2e69bb26e1c7fdd1c3b347630b06627efac": {
+   "alt": "Diagram of speech reaching a listener's ear, filtered by the head related transfer function into altered speech",
+   "subject": "HRTF_Filtering_Effect",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 22
+  },
+  "b47a1a6a19baf1eb7531e074f6dfe0a20f74cb90": {
+   "alt": "Title art for Audio Defence Zombie Arena, a binaural audio game, with headphones in the letter O",
+   "subject": "Audio_Defence_Zombie_Arena_Title",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 24
+  },
+  "fa055c0e5393cc790247738aa4de79019097383f": {
+   "alt": "Black and white pattern of four overlapping circles inside a larger circle, suggesting ambisonic pickup lobes",
+   "subject": "Ambisonic_Lobes_Circle_Pattern",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 27
+  },
+  "5ed85297ca15a1b1ecb919c92cd34d4eacb5046f": {
+   "alt": "Ambisonic B format diagram: omni W plus figure 8 lobes for front and rear X, left and right Y, and height Z",
+   "subject": "Ambisonic_B_Format_XYZ_Axes",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 28
+  },
+  "893e1587a93dc727a4a57a5f51e4b541075083d4": {
+   "alt": "Faint gauge and dial line art in the slide corners, used as a background overlay.",
+   "subject": "Gauge_Line_Art_Overlay",
+   "decorative": true,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 3
+  },
+  "0b21fb9506e33ec999e324e417ac161bf55523a2": {
+   "alt": "Zylia spherical microphone array covered in many capsule pads, standing on a small tripod",
+   "subject": "Zylia_Spherical_Mic_Array",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 30
+  },
+  "628eacee4d85c1a99a40f0658678b6dd2529d6e0": {
+   "alt": "Animated polar plot of a virtual microphone steered around 360 degrees, morphing from omni to cardioid",
+   "subject": "Virtual_Mic_Polar_Animation",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 31
+  },
+  "8e67afcf8a07d33566f98ca8e1419b775efeaeff": {
+   "alt": "Polar plot of four virtual cardioid microphones aimed at front left, front right, rear left and rear right",
+   "subject": "Four_Virtual_Cardioids_Polar",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 32
+  },
+  "2d02788d5599a44376531bbbba072e623bcb4b37": {
+   "alt": "Equations decoding W, X and Y into four speaker feeds: left front, left back, right back and right front",
+   "subject": "B_Format_Quad_Decode_Equations",
+   "decorative": false,
+   "deck": "Sonic_Reality_in_a_Virtual_World",
+   "slide": 32
+  },
+  "5a85c79d705cf08e0d29853f1509b3ab871d13d6": {
+   "alt": "Rack mount audio interface with rows of input and output level meters on its front panel",
+   "subject": "Rackmount_Interface_Level_Meters",
+   "decorative": false,
+   "deck": "Console_Review",
+   "slide": 2
+  },
+  "8457ec3d4af0d0cf1a4128fe7324383820089dc5": {
+   "alt": "Magma rack mount PCIe expansion chassis, a black box with a vented front panel and handles",
+   "subject": "Magma_PCIe_Expansion_Chassis",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 26
+  },
+  "8ae23c369213a26758be9f33727aa86a76043ff9": {
+   "alt": "Faint gauge and dial line art along the left side, used as a background overlay.",
+   "subject": "Gauge_Line_Art_Overlay_Left",
+   "decorative": true,
+   "deck": "Studio_Etiquette",
+   "slide": 9
+  },
+  "8d4df04c65521742503b89c41f49dab5d9c38799": {
+   "alt": "Blurry numeral 6 used as a callout label",
+   "subject": "Numeral_6_Callout_Label",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 22
+  },
+  "2705e8bf20f4f0dac005ea6557107e7f0ecc5bc4": {
+   "alt": "Blurry numeral 8 used as a callout label",
+   "subject": "Numeral_8_Callout_Label",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 22
+  },
+  "741e7c7bdcdf5d84675acc8f36f7f1313106b57d": {
+   "alt": "Gray speckled noise texture tile",
+   "subject": "Gray_Noise_Texture",
+   "decorative": true,
+   "deck": "Mixers_vs_Recorders",
+   "slide": 4
+  },
+  "0a8d16c98ab1850e2e09abde67a2d422e564a4a3": {
+   "alt": "Condenser mic diagram: sound wave hits diaphragm and backplate, 48 volt phantom power in, signal out to preamp",
+   "subject": "Condenser_Mic_Numbered_Parts",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 4
+  },
+  "bead505fe63c72e88127bcf426b57e0a2ecfefc5": {
+   "alt": "Dynamic mic diagram: sound wave moves a diaphragm attached to a coil around a magnet, parts numbered 1 to 4",
+   "subject": "Dynamic_Mic_Numbered_Parts",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 5
+  },
+  "22c210ea8cf264a54dd538129399e65f40d58526": {
+   "alt": "Omnidirectional polar pattern: a full circle at 0 dB, picking up sound equally from every direction",
+   "subject": "Omnidirectional_Polar_Pattern",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 13
+  },
+  "1b34e27ecf4389f717cfa5c038ade52dddf74287": {
+   "alt": "Cardioid polar pattern: heart shape, strongest at 0 degrees with a deep null at the rear, 180 degrees",
+   "subject": "Cardioid_Polar_Pattern",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 17
+  },
+  "553a508f48f74d004c95a77e98b9f416564a68bd": {
+   "alt": "Supercardioid polar pattern: narrower front pickup with a small rear lobe and nulls near the back sides",
+   "subject": "Supercardioid_Polar_Pattern",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 18
+  },
+  "0c776fbb990ba815ddd9df201609263dd59ebc35": {
+   "alt": "Hypercardioid polar pattern: tighter front pickup than supercardioid with a larger rear lobe",
+   "subject": "Hypercardioid_Polar_Pattern",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 19
+  },
+  "2ddc7ed4242ea8d6ce7c0774eef08d8cc5498fa3": {
+   "alt": "Bidirectional figure 8 polar pattern: equal pickup front and rear with nulls at 90 and 270 degrees",
+   "subject": "Figure_8_Polar_Pattern",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 20
+  },
+  "78dd5cfa187b2de8d963cf60b67d2066c2248188": {
+   "alt": "Purple to blue starry gradient background texture.",
+   "subject": "Purple_Blue_Starry_Background",
+   "decorative": true,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 2
+  },
+  "17a3fde69468318fa7db784f463619532df38314": {
+   "alt": "Frequency response chart showing bass boost of up to about 12 dB as the mic moves closer, proximity effect",
+   "subject": "Proximity_Effect_Response_Curves",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 30
+  },
+  "f77ab3d5905ccb3dc3ea78c37dffb2d5e5082c20": {
+   "alt": "3 to 1 rule diagram: two mics 1 unit from their singers must sit 3 units from the other singer",
+   "subject": "Three_To_One_Rule_Diagram",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 31
+  },
+  "290bbcdd6c1dc24765e094fd5d3f56153a398b2b": {
+   "alt": "Outline of a head seen from above, part of a mic placement diagram",
+   "subject": "Head_Top_View_Outline",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 32
+  },
+  "be4dbb92dfce5403ab18823a0c23f7628a44d445": {
+   "alt": "Polar plot of two cardioid mics crossed at 90 degrees for XY stereo, their patterns overlapping at center",
+   "subject": "XY_Overlapping_Cardioid_Polar",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 3
+  },
+  "46fc12488644f3d2483f670bfa87bb1920b4f2ee": {
+   "alt": "Two pencil mics on a stereo bar with capsules crossed at a 90 degree angle for XY stereo",
+   "subject": "XY_Pencil_Mics_Stereo_Bar",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 3
+  },
+  "07908ff40769011449c0459cd017b0da01c94950": {
+   "alt": "Blumlein pair pattern: two figure 8 mics crossed at 90 degrees, colored lobes showing in and out of phase areas",
+   "subject": "Blumlein_Crossed_Figure_8_Lobes",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 4
+  },
+  "4f961347e1bcab5ec8ed79ff50b7f07a267463ee": {
+   "alt": "Blumlein pair: two stacked ribbon mics beside a diagram of lobes labeled left front, right front and rears",
+   "subject": "Blumlein_Stacked_Ribbon_Mics",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 4
+  },
+  "9b2116b612670f71b345b240b7c4d34507632acf": {
+   "alt": "Mid side pattern: a red cardioid M facing forward over a blue figure 8 with S plus and S minus lobes",
+   "subject": "Mid_Side_Pickup_Pattern",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 5
+  },
+  "db263ad22dd93863f928c41ffda976ce80782c8b": {
+   "alt": "Black pattern of four overlapping circles inside a larger circle, suggesting ambisonic pickup lobes",
+   "subject": "Ambisonic_Lobes_Circle_Pattern",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 6
+  },
+  "e9c1c7554d7001e6e3cea945896d0e49642aae0a": {
+   "alt": "Spaced pair plan: three mics 3 feet in front of a choir and 9 feet apart, following the 3 to 1 rule",
+   "subject": "Spaced_Mics_Choir_Distances",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 8
+  },
+  "1e4ce6d5cf24084fef1dc80271654ad4c00e7bad": {
+   "alt": "Two DPA pencil mics on a stereo bar, pointing forward, with arrows showing they slide apart and rotate",
+   "subject": "DPA_Spaced_Pair_Stereo_Bar",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 8
+  },
+  "e6806d3d556af9e618b5bd5b1d441f83c9d9542f": {
+   "alt": "ORTF pair: two cardioid mics on a stereo bar with capsules 17 cm apart, angled 110 degrees",
+   "subject": "ORTF_17cm_110_Degree_Pair",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 9
+  },
+  "782450838c0d3c54a2997da0a564daf25295198c": {
+   "alt": "Decca Tree layout: left and right mics 2 meters apart with a center mic 1.5 meters forward",
+   "subject": "Decca_Tree_Spacing_Layout",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 10
+  },
+  "1f150d054d69cb8063eaec2b830e0edc54aaef0f": {
+   "alt": "Surround Decca Tree array: five mics on a black star shaped boom, three in front and two at the rear",
+   "subject": "Surround_Decca_Tree_Array",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 11
+  },
+  "df98ec7c3bdf6a99695fa89971f7b0c28cd3a62a": {
+   "alt": "Holophone spherical surround microphone head on a stand, front view with its logo badge.",
+   "subject": "Holophone_Surround_Mic_Front",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 12
+  },
+  "3f4c12575f484486bf8ab378c9e5f7659694c788": {
+   "alt": "Spherical surround microphone head seen from above, with a green band holding small capsule ports.",
+   "subject": "Holophone_Surround_Mic_Top",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 12
+  },
+  "9d091763f1fe847764c222112ed8009a972e145f": {
+   "alt": "3Dio FS Pro II binaural microphone with two molded silicone ears on either side of a black body.",
+   "subject": "3Dio_FS_Pro_II_Binaural_Ears",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 13
+  },
+  "f9fb0bbdc58ff640cf679aa044bd096062ca4031": {
+   "alt": "Gray dummy head binaural microphone on a stand with a molded ear housing a capsule.",
+   "subject": "Dummy_Head_Binaural_Mic",
+   "decorative": false,
+   "deck": "Multi_Mic_Setups",
+   "slide": 13
+  },
+  "cc62ef382bb922abffc77f12b258db846bc3d2f2": {
+   "alt": "Patch bay layout software showing two rows of 48 labeled jacks for gear outputs, tie lines and inputs.",
+   "subject": "Patchbay_Labeling_Software_Layout",
+   "decorative": false,
+   "deck": "Patch_Bay",
+   "slide": 3
+  },
+  "c4b67312549e870adf06f3d307885f3a560a7c0a": {
+   "alt": "Meme of a stern boss holding a cigar with the caption You're Fired.",
+   "subject": "Youre_Fired_Boss_Meme",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 4
+  },
+  "c09f90ca622434166e19e1739e2d0276a4b99617": {
+   "alt": "Chart comparing VCA, opto, vari mu, FET, PWM and diode compressors by coloring, speed and flexibility.",
+   "subject": "Compressor_Types_Comparison_Chart",
+   "decorative": false,
+   "deck": "Dynamic_Effects",
+   "slide": 4
+  },
+  "ff74f4f2c2289231721d794b173aad940ce2f676": {
+   "alt": "Dark brown marble tile texture.",
+   "subject": "Brown_Marble_Texture",
+   "decorative": true,
+   "deck": "Comping_and_Arrangement",
+   "slide": 24
+  },
+  "073ecef4fb201d351c04445f2896b34bc036011d": {
+   "alt": "Light blue water droplet tile texture.",
+   "subject": "Water_Droplets_Texture",
+   "decorative": true,
+   "deck": "Comping_and_Arrangement",
+   "slide": 24
+  },
+  "d707811571b0418987ae2ea74339c0ada02195da": {
+   "alt": "Crumpled brown paper tile texture.",
+   "subject": "Crumpled_Paper_Texture",
+   "decorative": true,
+   "deck": "Comping_and_Arrangement",
+   "slide": 24
+  },
+  "b3dfc30fe9d512ed4ec059f42a0aaba84e6fa5e5": {
+   "alt": "Blue woven fabric tile texture.",
+   "subject": "Blue_Woven_Fabric_Texture",
+   "decorative": true,
+   "deck": "Comping_and_Arrangement",
+   "slide": 24
+  },
+  "7641fe0c2be1d808169b165cb5a3f1dd2d742918": {
+   "alt": "White marble tile texture.",
+   "subject": "White_Marble_Texture",
+   "decorative": true,
+   "deck": "Comping_and_Arrangement",
+   "slide": 24
+  },
+  "665de92896fee439042674bc4919ed74dbe6b5dd": {
+   "alt": "Brown wood grain tile texture.",
+   "subject": "Wood_Grain_Texture",
+   "decorative": true,
+   "deck": "Comping_and_Arrangement",
+   "slide": 24
+  },
+  "8e9c389cdab80ac59df6cc4484671e2cf14e7247": {
+   "alt": "Tan woven straw tile texture.",
+   "subject": "Tan_Woven_Straw_Texture",
+   "decorative": true,
+   "deck": "Comping_and_Arrangement",
+   "slide": 24
+  },
+  "aed9031bb42388d01108dfc3fd7003a0bfab0ed2": {
+   "alt": "Chart defining frequency and period with sine waves, showing f equals 1 over T and T equals 1 over f.",
+   "subject": "Frequency_Period_Reciprocal_Chart",
+   "decorative": false,
+   "deck": "AC_and_DC_Electricity",
+   "slide": 19
+  },
+  "18407acef7713bb6ea7a0e13a4f80a4032eb7b29": {
+   "alt": "Galvanic cell with copper and zinc electrodes in sulfate solutions, joined by a salt bridge and a voltmeter.",
+   "subject": "Galvanic_Cell_Salt_Bridge",
+   "decorative": false,
+   "deck": "Batteries",
+   "slide": 8
+  },
+  "61621f8692748b2f8a280049fb758e5a26d5125e": {
+   "alt": "Energizer CR2032 lithium coin cell marked 3 volts.",
+   "subject": "Energizer_CR2032_Coin_Cell",
+   "decorative": false,
+   "deck": "Batteries",
+   "slide": 12
+  },
+  "13de2b481e87c1078fa7369ac3aea29b19f3baa8": {
+   "alt": "Runtime equals capacity over current draw; a 2,800 mAh battery at 150 mA runs a Shure transmitter 18.7 hours.",
+   "subject": "Battery_Runtime_Estimation_Chart",
+   "decorative": false,
+   "deck": "Batteries",
+   "slide": 21
+  },
+  "771b5bad69f8c609b0e7250aa723a0b759930fcb": {
+   "alt": "Twelve 9 volt batteries, each labeled 0.5 Ah, in three rows of four on a blue background.",
+   "subject": "Twelve_9V_Batteries_Grid",
+   "decorative": false,
+   "deck": "Battery_Capacity_Comparison",
+   "slide": 27
+  },
+  "6e76c8c51e374346d0d0d97cd6210ed7b306e8da": {
+   "alt": "Capacitor kit drawers labeled by value, voltage and size, from 0.1 microfarad to 2200 microfarads.",
+   "subject": "Capacitor_Kit_Value_Labels",
+   "decorative": false,
+   "deck": "Capacitors",
+   "slide": 11
+  },
+  "18dd1dfafc0e7f424d1c2a600611e0af9a3d71d2": {
+   "alt": "Close up of large electrolytic capacitors, a filter choke and other parts on a power supply board.",
+   "subject": "Power_Supply_Electrolytic_Capacitors",
+   "decorative": false,
+   "deck": "Capacitors",
+   "slide": 32
+  },
+  "69fa5259e2ba7251e0be03225797faf0523b8858": {
+   "alt": "Axial lead diode beside a centimeter ruler, with a light band marking the cathode end.",
+   "subject": "Axial_Diode_Cathode_Band",
+   "decorative": false,
+   "deck": "Diodes_and_LEDs",
+   "slide": 8
+  },
+  "933220222f252d829a573677fa6ee5cbcaa41eb7": {
+   "alt": "Frosted RGB LED with four leads, one common lead and one each for red, green and blue.",
+   "subject": "RGB_LED_Four_Leads",
+   "decorative": false,
+   "deck": "Diodes_and_LEDs",
+   "slide": 17
+  },
+  "75495fdb4ea99091495e1837dbd2a08dfb843b34": {
+   "alt": "HAHN board mount transformer marked 230 V in, 9 V out, 1.5 VA, with pins for soldering to a board.",
+   "subject": "HAHN_PCB_Mount_Transformer",
+   "decorative": false,
+   "deck": "Inductors_and_Transformers",
+   "slide": 17
+  },
+  "cab9f0be8537673360d0ae3e56dbe92acd6b7268": {
+   "alt": "Chart: transformer voltage follows the turns ratio, current goes inversely, impedance by the ratio squared.",
+   "subject": "Transformer_Turns_Ratio_Chart",
+   "decorative": false,
+   "deck": "Inductors_and_Transformers",
+   "slide": 21
+  },
+  "e07ebd15ce59bbac456da3fd3fb130f7527f12ad": {
+   "alt": "Wheatstone bridge schematic with R1, R2 variable, R3 and unknown Rx, and a voltmeter across nodes C and B.",
+   "subject": "Wheatstone_Bridge_Schematic",
+   "decorative": false,
+   "deck": "Multimeters",
+   "slide": 22
+  },
+  "1229768cdba6afdbc5878b2505ca225b6b0afba5": {
+   "alt": "Two copper surface mount shunt resistors marked BVE R0002 soldered to a green circuit board.",
+   "subject": "SMD_Shunt_Resistors_Closeup",
+   "decorative": false,
+   "deck": "Resistors",
+   "slide": 15
+  },
+  "f2dce0903712d553bc4c9c155a9d3e7d352a661b": {
+   "alt": "Table of reference designators: R resistor, C capacitor, L inductor, Q transistor, D diode, U chip and more.",
+   "subject": "Reference_Designators_Table",
+   "decorative": false,
+   "deck": "Schematics",
+   "slide": 22
+  },
+  "ecb1c00e0614250100d7d67125bc07ed4a3b6b81": {
+   "alt": "A 9 V source with 1k, 2k and 3k resistors in series draws 1.5 mA; drops of 1.5, 3 and 4.5 V sum to 9 V.",
+   "subject": "Series_Resistor_Worked_Example",
+   "decorative": false,
+   "deck": "Series_and_Parallel_Circuits",
+   "slide": 8
+  },
+  "31137061fcdf14b76da48c8e63dcb17c99864a9d": {
+   "alt": "A 12 V source across 4k and 12k parallel resistors gives 3 kilohms total, 4 mA split into 3 mA and 1 mA.",
+   "subject": "Parallel_Resistor_Worked_Example",
+   "decorative": false,
+   "deck": "Series_and_Parallel_Circuits",
+   "slide": 13
+  },
+  "6845b5e1228ff8b23bbfea18124a869f61c7ecd2": {
+   "alt": "Two 500 ohm resistors: in series each drops 4.5 V at 9 mA; in parallel each gets 9 V, 18 mA, 36 mA total.",
+   "subject": "Series_Vs_Parallel_Meter_Readings",
+   "decorative": false,
+   "deck": "Series_and_Parallel_Circuits",
+   "slide": 15
+  },
+  "891cf21766c651656cf0d8d0c1cf5bbdbdbeb01f": {
+   "alt": "Chart of SPST, SPDT, DPST, DPDT and 4PDT switches with symbols, lug counts and audio uses.",
+   "subject": "Switch_Poles_Throws_Chart",
+   "decorative": false,
+   "deck": "Switches",
+   "slide": 12
+  },
+  "fa5e04920e5b646e05aaa4680db5f5343d4c1f08": {
+   "alt": "Metal toggle switch with two solder lugs, showing a single pole, single throw design.",
+   "subject": "Two_Lug_Toggle_Switch",
+   "decorative": false,
+   "deck": "Switches",
+   "slide": 14
+  },
+  "0eae902ee74a99cbfd7e4a64b489ec5b095903b6": {
+   "alt": "Pile of black tactile momentary pushbutton switches with four metal pins each.",
+   "subject": "Tactile_Pushbutton_Switches",
+   "decorative": false,
+   "deck": "Switches",
+   "slide": 25
+  },
+  "a44d31d1c8a518d6612b06972c6503f02779b897": {
+   "alt": "TO-92, TO-220, TO-3 and SOT-23 transistor packages, each with a different base, collector, emitter order.",
+   "subject": "Transistor_Package_Pinouts",
+   "decorative": false,
+   "deck": "Transistors",
+   "slide": 14
+  },
+  "83766dad6fd90461f901acf0c68de30a354e9a5f": {
+   "alt": "2N3904 NPN transistor switching a relay coil from 9 V, with a 4.7k base resistor and 1N4148 flyback diode.",
+   "subject": "NPN_Relay_Switch_Schematic",
+   "decorative": false,
+   "deck": "Transistors",
+   "slide": 20
+  },
+  "cab1d5c5ab5c17f4c9ac7f12114c9da9c5a802d1": {
+   "alt": "Three BJT setups: common emitter gives inverted high gain, common collector buffers, common base suits high frequency.",
+   "subject": "BJT_Amplifier_Configurations_Table",
+   "decorative": false,
+   "deck": "Transistors",
+   "slide": 23
+  },
+  "230d2b501f6be6f9ff3882e3bdef31692decf794": {
+   "alt": "Red and black multimeter test leads with metal probe tips and raised finger guards.",
+   "subject": "Multimeter_Test_Leads_Finger_Guards",
+   "decorative": false,
+   "deck": "Voltage_and_Current",
+   "slide": 28
+  },
+  "19aa07af3b44e231fb6bd9b97c0f1b4fb211c09b": {
+   "alt": "Graphs compare an AC sine wave that swings between positive and negative peaks with flat, constant DC voltage.",
+   "subject": "AC_Sine_Wave_Versus_DC_Line",
+   "decorative": false,
+   "deck": "Voltage_and_Current",
+   "slide": 34
+  },
+  "fb6a1117dfafe1adb5b75a9362f0bcef073b2584": {
+   "alt": "Soldering iron with a red handle beside a coiled holder stand, a yellow cleaning sponge and a small tube of solder.",
+   "subject": "Soldering_Iron_Stand_Sponge",
+   "decorative": false,
+   "deck": "Wiring_and_Safety",
+   "slide": 27
+  },
+  "b487501c9e0e24b33bc402ad8b92875c9840ff63": {
+   "alt": "Three spools of solder wire, one labeled lead free Sn95 Ag5 and one labeled Sn60 tin lead solder.",
+   "subject": "Leaded_And_Lead_Free_Solder_Spools",
+   "decorative": false,
+   "deck": "Wiring_and_Safety",
+   "slide": 29
+  },
+  "d2b8dbcf8a8e5b8f0c46c22d0c5a57761bdb594c": {
+   "alt": "Helping hands tool with two alligator clips on adjustable arms and a magnifying glass on a heavy base.",
+   "subject": "Helping_Hands_Magnifier_Clips",
+   "decorative": false,
+   "deck": "Wiring_and_Safety",
+   "slide": 32
+  },
+  "18223340c60ec834b796e587d4f345b2206de756": {
+   "alt": "Ohm's law triangle with V on top and I and R below, showing V equals I times R.",
+   "subject": "Ohms_Law_Triangle",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 2
+  },
+  "c8635dedacbefaa3efc4146959c4e952ef8e1c3e": {
+   "alt": "Power formulas P equals I squared R, V times I and V squared over R; 100 ohms at 50 mA dissipates 0.25 W.",
+   "subject": "Resistor_Power_Dissipation_Formulas",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 3
+  },
+  "e79d8e659b101511812e921f6569c0a24e57d6ed": {
+   "alt": "Circuit with a 12 V source and one 240 ohm resistor: 50 mA flows and the full 12 V drops across the resistor.",
+   "subject": "Single_Resistor_12V_Drop_Circuit",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 4
+  },
+  "ab487dc258184bf847764b217abea5762f587698": {
+   "alt": "Series circuit with a battery, R1 and R2, and a voltmeter's probes measuring the voltage drop across R2.",
+   "subject": "Voltmeter_Measuring_Drop_Across_R2",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 4
+  },
+  "5436b2b6ade6ad58123acbde64b200707eafdafc": {
+   "alt": "Voltage divider: 18 V across 6k and 3k ohm resistors gives 2 mA, 12 V and 6 V drops, and a 6 V output.",
+   "subject": "Two_Resistor_Voltage_Divider_18V",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 6
+  },
+  "f48338e17288001de8198e6af8ba63c5d64f884a": {
+   "alt": "Two equal 10k ohm resistors split 15 V to a 7.5 V reference feeding an op amp's positive input.",
+   "subject": "Divider_Op_Amp_Reference_Voltage",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 7
+  },
+  "2af3177c882da46469e98bc998aa3e6cb61a5cc6": {
+   "alt": "9 V series circuit with 67, 100 and 470 ohm resistors and a 560 ohm bulb; the bulb takes the largest 4.08 V drop.",
+   "subject": "Three_Resistors_And_Bulb_9V_Series",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 8
+  },
+  "5807aad5b701b9fc1aa4decbc067040be4fd4b03": {
+   "alt": "30 V series circuit with 5, 10 and 15 ohm resistors at 1 A, dropping 5, 10 and 15 V that add up to 30 V.",
+   "subject": "Three_Resistor_Drops_Add_To_30V",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 10
+  },
+  "d4a00a6fcef7467d4f66a95c85c038e8dc890ee7": {
+   "alt": "5 V LED circuit where a 150 ohm resistor drops 3 V so the LED gets 2 V at a safe 20 mA.",
+   "subject": "LED_Current_Limiting_Resistor",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 12
+  },
+  "e7f54a4d9ae6998586672b161ac5716ff4911812": {
+   "alt": "L pad speaker attenuator: 8 ohm series and 16 ohm shunt resistors cut a 100 V amp output to 66.7 V, about 3.5 dB.",
+   "subject": "L_Pad_Speaker_Attenuator_Circuit",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 13
+  },
+  "fea59b59407a24325bfeace982021eacef45bbff": {
+   "alt": "48 V phantom power feeds XLR pins 2 and 3 through 6.81k ohm resistors; a 2 mA mic sees about 34.4 V.",
+   "subject": "Phantom_Power_6k81_Resistor_Network",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 14
+  },
+  "839ffa46902e6cb0fd8559a692c714a7e3ce96eb": {
+   "alt": "Mixer trim pot acts as a variable voltage divider setting how much signal reaches the op amp input before the DAW.",
+   "subject": "Mixer_Trim_Pot_Variable_Divider",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 15
+  },
+  "17b94a78a4a180e65ea02fc00995afc861bc5728": {
+   "alt": "Circuit simplification: series resistors R1 to Rn add up, and voltage at point B equals Vs minus their drop.",
+   "subject": "Series_Resistance_Circuit_Simplification",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 16
+  },
+  "6b2fe0278bfaafc184b1d2856dd432d5e448f527": {
+   "alt": "12 V across parallel 12, 6 and 4 ohm resistors: each branch sees 12 V, currents of 1, 2 and 3 A total 6 A.",
+   "subject": "Parallel_Resistors_Same_Voltage",
+   "decorative": false,
+   "deck": "Voltage_Drop_Resistors",
+   "slide": 17
+  },
+  "75248b52ba9ca5ba319072ea9f6b7f2f71a9fc34": {
+   "alt": "LM741 op amp circuit schematic with two 100k ohm resistors, two 0.01 uF capacitors and plus and minus supply rails.",
+   "subject": "LM741_Op_Amp_Circuit_Schematic",
+   "decorative": false,
+   "deck": "LM741_Op_Amp",
+   "slide": 12
+  },
+  "6d74613aa00d4b73d8b2fad23f28a16d8f2b3b02": {
+   "alt": "Recording studio with a large mixing console, monitors, outboard racks and electric guitars hanging on the wall.",
+   "subject": "Studio_Console_And_Guitar_Wall",
+   "decorative": true,
+   "deck": "Op_Amps__Bench_Day_On_the_Bench",
+   "slide": 1
+  },
+  "ad16f417df7dcc9a8202bd4a9e21a8537ab7a7cf": {
+   "alt": "Hands using tweezers and an electric screwdriver to fit a heat sink on an audio amplifier circuit board.",
+   "subject": "Technician_Fitting_Heat_Sink",
+   "decorative": true,
+   "deck": "Op_Amps__Bench_Day_On_the_Bench",
+   "slide": 3
+  },
+  "d79d1ecb0d1d1806a0ed8daa85a9e5c0c3b293b9": {
+   "alt": "Arduino Uno board surrounded by LEDs, trim pots, transistors, a relay module and other loose components.",
+   "subject": "Arduino_Uno_And_Components",
+   "decorative": true,
+   "deck": "Op_Amps__Bench_Day_On_the_Bench",
+   "slide": 5
+  },
+  "f95a46509af1347bcdbba6c7b6323c7272acac0e": {
+   "alt": "Close view of a dense circuit board with chips, capacitors and surface mount parts.",
+   "subject": "Circuit_Board_Closeup",
+   "decorative": true,
+   "deck": "Op_Amps__Bench_Day_On_the_Bench",
+   "slide": 7
+  },
+  "ff2fb4b2ed02731ea3a05aae1a7a3c7733ca4dc0": {
+   "alt": "Black JBL portable Bluetooth speaker lying on a wooden table.",
+   "subject": "JBL_Portable_Bluetooth_Speaker",
+   "decorative": false,
+   "deck": "Op_Amps__Bench_Day_On_the_Bench",
+   "slide": 15
+  },
+  "0b93fe33647e290af3287153887ad6c9d7501a2e": {
+   "alt": "Orange lightning bolt icon.",
+   "subject": "Lightning_Bolt_Icon",
+   "decorative": true,
+   "deck": "CLO1_Electrical_Safety",
+   "slide": 1
+  },
+  "38f912d18ad3ff7e3d53dad641e9c773937963e3": {
+   "alt": "Blue gauge meter icon.",
+   "subject": "Gauge_Meter_Icon",
+   "decorative": true,
+   "deck": "CLO1_Electrical_Safety",
+   "slide": 2
+  },
+  "3c38e6f9a5ed5cf32cf7e4d176ebe3055cb23a38": {
+   "alt": "Orange warning triangle icon with an exclamation mark.",
+   "subject": "Warning_Triangle_Icon",
+   "decorative": true,
+   "deck": "CLO1_Electrical_Safety",
+   "slide": 2
+  },
+  "010a5c3833886ebc20c921de0f19b4239b79c750": {
+   "alt": "Green safety shield icon.",
+   "subject": "Safety_Shield_Icon",
+   "decorative": true,
+   "deck": "CLO1_Electrical_Safety",
+   "slide": 2
+  },
+  "dca30a5f34ebf9edb152819ad47c4290d51ce3f6": {
+   "alt": "Purple integrated circuit chip icon.",
+   "subject": "IC_Chip_Icon",
+   "decorative": true,
+   "deck": "CLO1_Electrical_Safety",
+   "slide": 2
+  },
+  "d2b1b0c8c03d8a3ffdbe2db0b6101e61d3dd3789": {
+   "alt": "Blue circle with a white check mark icon.",
+   "subject": "Check_Mark_Icon",
+   "decorative": true,
+   "deck": "CLO1_Electrical_Safety",
+   "slide": 2
+  },
+  "a5ea6309d6e46ee39904ec71ba278089b05edf8c": {
+   "alt": "Soft white radial glow overlay on a transparent background.",
+   "subject": "White_Radial_Glow_Overlay",
+   "decorative": true,
+   "deck": "Network_RJ45_Construction",
+   "slide": 2
+  },
+  "2ae2d375881bb99971ad637d59ab6a1a40390f38": {
+   "alt": "A tangled mass of colored wires on the left straightens into five neat parallel wires on the right.",
+   "subject": "Tangled_Wires_Into_Straight_Lines",
+   "decorative": true,
+   "deck": "Network_RJ45_Construction",
+   "slide": 8
+  },
+  "853b8efac6b035ea531b6ccd63fc2237bf805a1c": {
+   "alt": "Straight through cable uses 568B on both ends; crossover cable uses 568A on one end and 568B on the other.",
+   "subject": "Straight_Through_Vs_Crossover_Cable",
+   "decorative": false,
+   "deck": "Network_RJ45_Construction",
+   "slide": 17
+  },
+  "2933048a12a42765fd631c2a42c9365db3a5de46": {
+   "alt": "RJ45 pin 1 to 8 wire colors for T568A and T568B; the orange and green pairs swap places between them.",
+   "subject": "T568A_Vs_T568B_Wire_Order",
+   "decorative": false,
+   "deck": "Network_RJ45_Construction",
+   "slide": 18
+  },
+  "564fe79d17eb1e6245eb37f4c01fefbf0a482f1e": {
+   "alt": "Surround control room with an Avid console, a large DAW screen and five speakers on wooden stands around the chair.",
+   "subject": "Surround_Control_Room_Speakers",
+   "decorative": false,
+   "deck": "Surround_Monitoring",
+   "slide": 1
+  },
+  "938ca5b3a82c2f63b083c8e433530dfbe37c0382": {
+   "alt": "Schoeps surround array: four CCM 41 microphones on a bar in a shock mount, angled in an ORTF surround layout.",
+   "subject": "Schoeps_ORTF_Surround_Array",
+   "decorative": false,
+   "deck": "Surround_Recording",
+   "slide": 1
+  },
+  "ae1d3f1c2c6f9da308e27ec61b2dfe03709fafea": {
+   "alt": "Black game controller icon.",
+   "subject": "Game_Controller_Icon",
+   "decorative": true,
+   "deck": "Gamedev_Tools_Processes_Asset_Tracking",
+   "slide": 1
+  },
+  "a2fd488c6b526523e1bcaab90247e5ac1adcadc0": {
+   "alt": "Final exam finder showing Thursday 23 April, 11am to 12:50pm for a Spring class starting 11am on Tuesday.",
+   "subject": "Final_Exam_Day_Time_Finder",
+   "decorative": false,
+   "deck": "Gamedev_Tools_Processes_Asset_Tracking",
+   "slide": 2
+  },
+  "01faeafc022b166b0b028ba764b07e307486dc57": {
+   "alt": "Behringer channel strip: pan, solo, mute, low cut, channel fader and subgroup 1-2 to 7-8 and main mix buttons.",
+   "subject": "Channel_Strip_Pan_Mute_and_Fader",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 10
+  },
+  "575ebec8711f42ca6146b8b7bde93f00626fc4fc": {
+   "alt": "Behringer subgroup section: eight subgroup faders with pan, solo and main mix buttons, the main L-R faders and talkback mic.",
+   "subject": "Subgroup_and_Main_Mix_Faders",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 18
+  },
+  "cd4b33b1263b956e52655f3ab6c4c91c90a65b56": {
+   "alt": "Project studio control room with a DAW monitor, two studio speakers, outboard gear rack and wall acoustic panels.",
+   "subject": "Project_Studio_Control_Room",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 6
+  },
+  "6428508620c3b44b0c174aa46b7ac9b1b751a31b": {
+   "alt": "Four wall builds by STC: single stud 37, staggered stud 46, double stud 56, QuietClips with Green Glue 62.",
+   "subject": "Wall_Assembly_STC_Comparison",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 10
+  },
+  "fac23869f080880893369a79d72696f3dff39157": {
+   "alt": "Floating floor under construction: wood joists on rubber isolation pads over concrete blocks, with insulation below.",
+   "subject": "Floating_Floor_Isolation_Pads",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 12
+  },
+  "252cec8efbb156d3be2610483d24cf367e54c004": {
+   "alt": "Studio floor plan with a symmetrical angled control room beside a drum room, vocal booth and lounge area.",
+   "subject": "Studio_Floor_Plan_Symmetry",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 13
+  },
+  "84ea3cd7fbec7e5a59757ea68e83afe8ed95949c": {
+   "alt": "Dimensioned studio floor plan: symmetrical control room with centered desk, plus vocal booth, amp booth and main room.",
+   "subject": "Symmetrical_Control_Room_Plan",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 13
+  },
+  "699add76af64de86e0761f7b7b429b61c1567280": {
+   "alt": "Standing waves between two walls at F, 2F, 3F and 4F, each higher mode adding one more loop between the walls.",
+   "subject": "Room_Mode_Standing_Waves",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 14
+  },
+  "1354bf28b7ac97334d7118c6801d35ae571c90fb": {
+   "alt": "Graph of absorption versus frequency for foams, mineral wool and sheep wool; most absorb poorly below 400 Hz.",
+   "subject": "Absorption_Coefficient_Graph",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 16
+  },
+  "a9389acfeb92208cfad1d1c5e0d7c73e846ceffe": {
+   "alt": "SpongeBob meme with a rainbow and the caption I don't care, a joke that low frequencies ignore treatment.",
+   "subject": "SpongeBob_Dont_Care_Meme",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 18
+  },
+  "bbcf738f9ac06a055392693addf07594d05637c3": {
+   "alt": "Gray triangular acoustic foam bass trap with vertical ridges, made to sit in a room corner.",
+   "subject": "Foam_Corner_Bass_Trap",
+   "decorative": false,
+   "deck": "Acoustics_Review",
+   "slide": 19
+  },
+  "88a38e341897adb0674bcad3dc8d50d494e3ff10": {
+   "alt": "Console channel input panel with an XLR mic input plus DAW and line insert jacks for in, send and return.",
+   "subject": "Channel_Mic_Line_Inputs",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 5
+  },
+  "9bbd9a2dbb03c08b11bdd8fe24401873fdffc90e": {
+   "alt": "Console channel strip top with DAW and mic meters, insert buttons, trim and gain knobs, and the 48V phantom button.",
+   "subject": "Channel_Gain_48V_Section",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 7
+  },
+  "d50b24d4160ea09fb80c9e8d416d24b1c6728b6f": {
+   "alt": "Console channel EQ section with HF and LF shelves plus high and low mid bands with frequency, Q and gain knobs.",
+   "subject": "Channel_Equalizer_Section",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 12
+  },
+  "f4de40e75540ea5a307e695118cd262774fb60b7": {
+   "alt": "Console channel routing buttons for buses 1 to 16 above aux sends 1 to 6 and Cue A and Cue B send knobs.",
+   "subject": "Channel_Aux_Cue_Sends",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 18
+  },
+  "a40cd966ef9bb98a3f868cc239e7a060d65dab5a": {
+   "alt": "Console short fader section with source switch, pan knob, mix button, fader, solo and cut buttons.",
+   "subject": "Short_Fader_Section",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 21
+  },
+  "24138f5970716123611986a767ba5edeef67ddba": {
+   "alt": "Row of 16 bus master trim knobs, each ranging from minus 10 to plus 10 dB.",
+   "subject": "Bus_Master_Trim_Knobs",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 23
+  },
+  "7863c07b3149c050fac9375addca7f8dc206c1de": {
+   "alt": "Three D-sub connectors on the console rear: sub group 17 to 24, group 1 to 8 and group 9 to 16 outputs.",
+   "subject": "Group_Bus_DSub_Outputs",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 24
+  },
+  "8648c001400fbd9753dacceda77bde9c94e32e48": {
+   "alt": "Avid HD I/O rack interface front panel with sample rate lights, sync mode lights and 16 input and output meters.",
+   "subject": "Avid_HD_IO_Front_Panel",
+   "decorative": false,
+   "deck": "Console_Review",
+   "slide": 23
+  },
+  "90f2fdec6cc46b5bdb2490f226c025f1cae51bb2": {
+   "alt": "Audient ASP4816 channel strip section with Flip button, DAW and Mic labels, Pan knob, Mix button, Solo and Cut",
+   "subject": "Audient_Channel_Pan_Knob",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 28
+  },
+  "71209b2f75462f6d597fa4ac4b7b1bcd82ffe58e": {
+   "alt": "Audient master fader with a scale from 0 at the top down to infinity at the bottom",
+   "subject": "Audient_Master_Fader",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 30
+  },
+  "034f382a5514d1194ef674ef7603ea064d8199c9": {
+   "alt": "Audient control room section with source select, speaker select, main monitor level, Mono, Cut and Dim",
+   "subject": "Audient_Control_Room_Source_Select",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 31
+  },
+  "ea7dcdb8a69114f586e5ba9676406ac03c7b3aca": {
+   "alt": "Row of XLR speaker outputs, left and right pairs for Main, Alt 1, Alt 2 and Alt 3",
+   "subject": "Speaker_Outputs_XLR_Panel",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 34
+  },
+  "a38b294ebae910e6bfbb029bf663193a66cb937e": {
+   "alt": "Audient auxiliary masters for Cue A, Cue B and Aux 1 to 6, with numbered callouts for level, solo and link",
+   "subject": "Audient_Auxiliary_Masters",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 41
+  },
+  "05d55e5f482ba8209e2394b7d0d8d40e003f4eaf": {
+   "alt": "Audient speaker and Foldback A and B selectors for Ext 1, Ext 2, control room and Cue A or B, each with a level knob",
+   "subject": "Audient_Foldback_Cue_Selectors",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 42
+  },
+  "de049402f538d78ec048fb046976f4c24b58356f": {
+   "alt": "XLR outputs, left and right pairs for Studio, Foldback A and Foldback B",
+   "subject": "Studio_Foldback_XLR_Outputs",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 43
+  },
+  "ac6c0b9a74adb8aef87e396abde87055aa6d8905": {
+   "alt": "Audient long channel fader with unity at 0, up to 10 dB of gain above and infinity at the bottom",
+   "subject": "Audient_Long_Channel_Fader",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 47
+  },
+  "2817de77dd40fd86e011ead780c721008349491c": {
+   "alt": "Focusrite Red 16Line audio interface, front panel with screens and knobs above the rear panel with its connectors.",
+   "subject": "Focusrite_Red_16Line_Interface",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 2
+  },
+  "09c4566cb582c3fb23030dbe9249765c09686691": {
+   "alt": "Front of a silver Apple Mac Studio computer with two USB-C ports, an SD card slot and a power light.",
+   "subject": "Apple_Mac_Studio_Computer",
+   "decorative": false,
+   "deck": "Audient_ASP4816",
+   "slide": 2
+  },
+  "31aec4d8af2f99cf3cdfded1797b926b267ffb40": {
+   "alt": "Behringer mono input 14 with an XLR mic input, a balanced line input jack and an insert jack, tip out, ring in",
+   "subject": "Behringer_Mono_Input_Jacks",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 3
+  },
+  "66470c60ce5a0a7d6d5ae912be0cd1be623893fc": {
+   "alt": "Mixer rear panel with a numbered phantom power switch and a DC power connector next to caution labels",
+   "subject": "Phantom_Power_Switch_Rear_Panel",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 4
+  },
+  "9f8e3e3719866ea60c555bcbfa2dcf0ca2845a0d": {
+   "alt": "Behringer channel 14 top with a mic and line gain knob above high, high mid, low EQ knobs and a low cut switch",
+   "subject": "Behringer_Gain_And_EQ_Knobs",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 7
+  },
+  "a824b5312eec7fe659e3edeb366a5bb872546fbf": {
+   "alt": "Behringer stereo aux returns with level, balance, solo and subgroup buttons 1-2, 3-4, 5-6, 7-8 and Main Mix",
+   "subject": "Behringer_Subgroup_Assign_Buttons",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 10
+  },
+  "3edfd39d82304ccfdb904c78c01983bcb16350e3": {
+   "alt": "Eight quarter inch aux send output jacks numbered 1 to 8",
+   "subject": "Behringer_Aux_Send_Jacks",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 12
+  },
+  "30ceaca6bb28143d3b4e25f44ee4cab0faa97351": {
+   "alt": "Four pairs of stereo aux return jacks, right and left, with the left jack used for mono",
+   "subject": "Behringer_Stereo_Aux_Return_Jacks",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 13
+  },
+  "0d0101dcc754605da39ddd47e49169ed54ce5cef": {
+   "alt": "Behringer 2 track in and out, phones and monitor outs, and main section with left and right XLR main outs and inserts",
+   "subject": "Behringer_Main_Outputs_Section",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 19
+  },
+  "620332dd440d44afce8007c13dfe8fa5fd2b4d78": {
+   "alt": "Behringer channel aux send knobs 1 to 8 with Pre labels on sends 1 and 2, plus Shift and Pre buttons",
+   "subject": "Behringer_Aux_Pre_Buttons",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 22
+  },
+  "4b393766f934ff200afed06ad0ed2d774a942692": {
+   "alt": "Behringer aux send master section, level knobs for sends 1 to 6, each with a solo button",
+   "subject": "Behringer_Aux_Send_Masters",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 23
+  },
+  "ea837da0e04e77e82989ee09724d6bce17ba39ad": {
+   "alt": "Eight quarter inch subgroup output jacks numbered 1 to 8",
+   "subject": "Behringer_Subgroup_Output_Jacks",
+   "decorative": false,
+   "deck": "Behringer",
+   "slide": 26
+  },
+  "241e9d80b504e433bc3ec8df40de576ce5f0fd7c": {
+   "alt": "Diagram: a voice goes through a mic to an ADC, into a digital system as binary, then a DAC back to analog at a speaker",
+   "subject": "ADC_DAC_Signal_Chain",
+   "decorative": false,
+   "deck": "Mixers_vs_Recorders",
+   "slide": 2
+  },
+  "8e67c632cd403a28e860a6965c8a37857342aa1a": {
+   "alt": "Three graphs: a smooth analog signal, then digital versions where smaller time divisions follow the curve more closely",
+   "subject": "Analog_vs_Digital_Sampling",
+   "decorative": false,
+   "deck": "Mixers_vs_Recorders",
+   "slide": 3
+  },
+  "2414c39f1674e6e8e6c9f3e21be60369ddf523ea": {
+   "alt": "Sine wave sampled at 22, 16 and 8 bits, showing fewer bits give a coarser, more stepped waveform",
+   "subject": "Bit_Depth_Waveform_Steps",
+   "decorative": false,
+   "deck": "Mixers_vs_Recorders",
+   "slide": 3
+  },
+  "c232455e5ef882e2b4097f6b8773cb4afce77aa2": {
+   "alt": "Signal flow diagram from mic and line inputs through gain, EQ, fader and sends to speakers and a computer interface",
+   "subject": "Console_Signal_Flow_Diagram",
+   "decorative": false,
+   "deck": "Mixers_vs_Recorders",
+   "slide": 5
+  },
+  "683e8249f8e34a9ea95beb1f48a636b4446f384d": {
+   "alt": "Retro art print of overlapping microphone polar patterns: omni, cardioid, figure 8 and others on a polar grid",
+   "subject": "Polar_Patterns_Art_Print",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 12
+  },
+  "e5253d8031d18215260f3158e6bd990cae2e4379": {
+   "alt": "Polar plot of an omnidirectional mic at 1K, 5K, 10K and 20K Hz; pickup narrows at the rear as frequency rises",
+   "subject": "Omni_Polar_Plot_By_Frequency",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 14
+  },
+  "7058642de2595ed3c72e7ea05fb178b4957ae240": {
+   "alt": "Polar plot from 1 to 20 kHz; high frequencies drop off at the sides and rear, so the mic gets more directional",
+   "subject": "Polar_Plot_High_Frequency_Narrowing",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 15
+  },
+  "27330e945b29284747eeacf125aa9e1b240e9f28": {
+   "alt": "Audio-Technica AT4050ST stereo mic with its casing removed, showing two capsules above a circuit board",
+   "subject": "Audio_Technica_AT4050ST_Internals",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 21
+  },
+  "dc9eb8081bf44b1a1f88750fc563b894dc37af03": {
+   "alt": "Audio-Technica AT2022 handheld stereo mic with two capsules angled in an X/Y pattern and a low cut switch",
+   "subject": "Audio_Technica_AT2022_XY_Mic",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 21
+  },
+  "665aaab358a36794066f968390c3f7f1626ee0bf": {
+   "alt": "Audio-Technica video still: a dynamic mic on a stand aimed at a snare drum head as a hand holds a drumstick",
+   "subject": "Snare_Drum_Mic_Placement",
+   "decorative": false,
+   "deck": "Microphones",
+   "slide": 35
+  },
+  "26da245de6dd5306d153d4de3dea75cda9d7212e": {
+   "alt": "Hosa balanced cable with a TT bantam plug on one end and a quarter inch TRS plug on the other",
+   "subject": "Hosa_TT_To_TRS_Cable",
+   "decorative": false,
+   "deck": "Patch_Bay",
+   "slide": 4
+  },
+  "93065b08b6d9b12b2bc1d1599d53d59b85238ce2": {
+   "alt": "Studio rack with Focusrite Red 8Line interfaces and a Warm Audio WA-412 preamp above labeled patch bays with cables",
+   "subject": "Studio_Rack_Patch_Bays",
+   "decorative": false,
+   "deck": "Patch_Bay",
+   "slide": 6
+  },
+  "bb7e1522cf07d49bdffeff27f592bb0fa9ce0117": {
+   "alt": "Front panel of a Universal Audio 1176LN limiting amplifier with input, output, attack, release, ratio and meter",
+   "subject": "Universal_Audio_1176LN_Front_Panel",
+   "decorative": false,
+   "deck": "Patch_Bay",
+   "slide": 12
+  },
+  "738ddf3fec0239494689eed7e5113863f68c61dd": {
+   "alt": "Person pointing at an alarm clock showing 6 o'clock, a reminder to arrive on time",
+   "subject": "Alarm_Clock_Arrive_Early",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 3
+  },
+  "69643eebad548a0e564dba14582a0e0df0354c04": {
+   "alt": "Poster reading Keep Calm and Write It Down under a crown",
+   "subject": "Keep_Calm_Write_It_Down",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 8
+  },
+  "9e4cf38f4a2aa9639d128f5489320f3540140ff0": {
+   "alt": "Man in glasses writing notes in a paper notebook with a pen",
+   "subject": "Man_Writing_In_Notebook",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 9
+  },
+  "e43a449a896206dceedbca64c6ec7e2e3582b773": {
+   "alt": "Cartoon hand tapping a green phone call button on a smartphone screen.",
+   "subject": "Smartphone_Call_Button",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 10
+  },
+  "eb39097ae90c52e37b3d9faffcbdfb1d3a8a63df": {
+   "alt": "Calvin and Hobbes comic of Calvin zipping up in noisy snow pants, which go zip zop with every step.",
+   "subject": "Calvin_Snow_Pants_Comic",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 15
+  },
+  "054031d8747dd8f1209cc76c7becd810084c2551": {
+   "alt": "Stack of folded paper store receipts showing totals and dates.",
+   "subject": "Stack_Of_Paper_Receipts",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 16
+  },
+  "ddd67c0a548ae6e807d9036a056ae6fd98c6c468": {
+   "alt": "Four arrow steps in a row, a generic process graphic borrowed from a legal document service.",
+   "subject": "Stepwise_Process_Arrows",
+   "decorative": false,
+   "deck": "Studio_Etiquette",
+   "slide": 19
+  },
+  "4beffd7e478575c453d113c1748d06ec224e6811": {
+   "alt": "Close-up of a row of computer drive bays with glowing green and pink status lights.",
+   "subject": "Computer_Drive_Bay_Lights",
+   "decorative": false,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 3
+  },
+  "0c0e2685ec03ea526d35795d31c001bedb1d522d": {
+   "alt": "Abstract network of glowing nodes and connecting lines curving around a globe.",
+   "subject": "Abstract_Network_Connections",
+   "decorative": true,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 7
+  },
+  "1d7730840436e037778f2e141e5151b7fd56652f": {
+   "alt": "Icon of a laptop with a red arrow pointing down into its screen from a circuit, representing a driver install.",
+   "subject": "Laptop_Driver_Install_Icon",
+   "decorative": false,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 9
+  },
+  "4f30b76bc778118d3ab36929347865cd6e8c011e": {
+   "alt": "Large digital mixing control surface with rows of faders, knobs, meter screens and a central DAW display.",
+   "subject": "Large_Digital_Control_Surface",
+   "decorative": false,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 11
+  },
+  "b09507f82bafe663b1fa9f21b5c049ff97ab4cb4": {
+   "alt": "Alesis V25 USB MIDI keyboard controller with 25 keys, eight backlit pads, four knobs and two wheels.",
+   "subject": "Alesis_V25_MIDI_Keyboard",
+   "decorative": false,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 11
+  },
+  "5a066588ee643131e9c86c04d188baa33ee6e3fb": {
+   "alt": "Computer port settings showing a Thunderbolt port icon next to a matching Mini DisplayPort icon.",
+   "subject": "Thunderbolt_Mini_DisplayPort_Icons",
+   "decorative": false,
+   "deck": "Digital_Audio_Workstations",
+   "slide": 19
+  },
+  "a148f5889f128eaac13f89743ec679c0d5e1e76c": {
+   "alt": "Abstract blue ripple pattern of rings spreading outward like vibrations through water.",
+   "subject": "Blue_Vibration_Ripples",
+   "decorative": true,
+   "deck": "Mix_Room_Setup",
+   "slide": 4
+  },
+  "37cc136741b7a31f35fa54886eeca00ed687aed1": {
+   "alt": "Mix room floor plan: foam panels on walls and ceiling absorb first reflections traveling from monitors to listener.",
+   "subject": "Early_Reflection_Panel_Placement",
+   "decorative": false,
+   "deck": "Mix_Room_Setup",
+   "slide": 8
+  },
+  "67aece03d5082473d01c82ceb84e7a091714e065": {
+   "alt": "Side-by-side studio monitors from Yamaha, KRK, Focal and JBL showing different woofer and tweeter designs.",
+   "subject": "Studio_Monitor_Brand_Lineup",
+   "decorative": false,
+   "deck": "Mix_Room_Setup",
+   "slide": 12
+  },
+  "331578d226897d8e0bbe89eadf3a5be7cfda43ab": {
+   "alt": "Group of studio monitors including KRK, ADAM, Avantone, Dynaudio, Neumann and Focal models.",
+   "subject": "Studio_Monitor_Collection",
+   "decorative": false,
+   "deck": "Mix_Room_Setup",
+   "slide": 29
+  },
+  "9e6e50629014bc6b9543e284ce04b3c649229a7b": {
+   "alt": "Sonnox Oxford Envolution plugin with separate transient and sustain controls boosting attacks on a drum waveform.",
+   "subject": "Sonnox_Oxford_Envolution_Plugin",
+   "decorative": false,
+   "deck": "Dynamic_Effects",
+   "slide": 2
+  },
+  "54e82adda3179f3dc3c64745a25f4be7eb3b1a2a": {
+   "alt": "Signal flow: an audio track passes through a chain of inserts, then on to the main output.",
+   "subject": "Serial_Insert_Signal_Flow",
+   "decorative": false,
+   "deck": "Serial_and_Parallel_Processing",
+   "slide": 2
+  },
+  "98a42aa3d275b38d2e95e70ac8e310873448d524": {
+   "alt": "Signal flow: track inserts come before sends, which feed an aux track with its own inserts to the main output.",
+   "subject": "Inserts_Before_Sends_Flow",
+   "decorative": false,
+   "deck": "Serial_and_Parallel_Processing",
+   "slide": 4
+  },
+  "b3ccadba63d64ba791380924e49cd44dd3551e56": {
+   "alt": "Meme of a person mixing on a laptop in blue light with the caption I am clipping tastefully.",
+   "subject": "Clipping_Tastefully_Meme",
+   "decorative": false,
+   "deck": "Serial_and_Parallel_Processing",
+   "slide": 10
+  },
+  "580037db0c5502d4d96ef5829d85f84efc3091d3": {
+   "alt": "3D spectrogram showing regular valleys across frequency, the comb filtering pattern.",
+   "subject": "Comb_Filter_3D_Spectrogram",
+   "decorative": false,
+   "deck": "Serial_and_Parallel_Processing",
+   "slide": 12
+  },
+  "d13685fe0948a82ab96ac8d7426847f60b3a415e": {
+   "alt": "Spectrum analyzer showing evenly spaced notches rising in frequency, the comb filtering pattern.",
+   "subject": "Comb_Filter_Spectrum_Analyzer",
+   "decorative": false,
+   "deck": "Serial_and_Parallel_Processing",
+   "slide": 12
+  },
+  "b2377f4311442ddd19088a311766e1658f9d6e19": {
+   "alt": "DigiRack EQ III seven-band parametric EQ with frequency, gain and Q for each band and its curve display.",
+   "subject": "DigiRack_EQ_III_Parametric",
+   "decorative": false,
+   "deck": "Spectral_Effects",
+   "slide": 4
+  },
+  "2ffc1e91c58e219c47a495ea9ec42dbd60ab793c": {
+   "alt": "G-Sonique GSXL4070 plugin EQ with bands each offering gain, frequency and Q knobs.",
+   "subject": "GSonique_GSXL4070_Equalizer",
+   "decorative": false,
+   "deck": "Spectral_Effects",
+   "slide": 4
+  },
+  "88351a928cb2426dba8ddbf4589c549f643e42d9": {
+   "alt": "Mixer channel EQ strips with sweepable frequency and cut or boost knobs, a semiparametric design.",
+   "subject": "Semiparametric_EQ_Channel_Strips",
+   "decorative": false,
+   "deck": "Spectral_Effects",
+   "slide": 6
+  },
+  "e0e25ce41e5ae0d790467e9560c07e48f3d028dd": {
+   "alt": "GEQ Classic graphic EQ plugin with fixed-frequency sliders from 25 Hz to 20 kHz above an analyzer display.",
+   "subject": "GEQ_Classic_Graphic_EQ",
+   "decorative": false,
+   "deck": "Spectral_Effects",
+   "slide": 8
+  },
+  "2a1b6b5e4c30788a66e050c590c9fe4c1b96f4b7": {
+   "alt": "Frequency response graph with a flat red phase line at 0 degrees, meaning no phase shift.",
+   "subject": "EQ_Phase_Flat_Response",
+   "decorative": false,
+   "deck": "Spectral_Effects",
+   "slide": 10
+  },
+  "fdc3096a8f59d434fbd053ff2ff42f9dd5849b88": {
+   "alt": "Frequency response graph with the red phase line dipping to minus 180 degrees near 1 kHz.",
+   "subject": "EQ_Phase_Shift_Dip",
+   "decorative": false,
+   "deck": "Spectral_Effects",
+   "slide": 10
+  },
+  "e239bbe4f2538508706d826f00b1c3bb64a16223": {
+   "alt": "Graph where a phase shift near 1 kHz also cuts the level there, showing how phase affects EQ.",
+   "subject": "EQ_Phase_Level_Cut",
+   "decorative": false,
+   "deck": "Spectral_Effects",
+   "slide": 11
+  },
+  "3b00aa60c82bda141753ea36b8318f186eef5732": {
+   "alt": "Dim film still of a hand reaching toward a wine glass as the camera focus shifts.",
+   "subject": "Film_Focus_Shift_Scene",
+   "decorative": false,
+   "deck": "Focus_Balance_and_Forward_Motion",
+   "slide": 6
+  },
+  "d8c881930c8cb935f1c7e23bddb5a9a2edecd536": {
+   "alt": "Graph showing a fundamental plus 3rd, 5th and 7th harmonics adding up to a distorted, squared-off wave.",
+   "subject": "Harmonics_Summing_Waveform",
+   "decorative": false,
+   "deck": "Distortion",
+   "slide": 3
+  },
+  "027c6d57c062d61a21b4c14b4104716a5c2612f5": {
+   "alt": "Cartoon swarm of angry bees, a visual for fuzzy, buzzing guitar distortion.",
+   "subject": "Cartoon_Bee_Swarm",
+   "decorative": false,
+   "deck": "Distortion",
+   "slide": 7
+  },
+  "acb7b0f2c704f6c463dbb4761439f6eaae511da5": {
+   "alt": "Focusrite Scarlett 2i2 USB audio interface with two mic and instrument inputs, gain knobs and a monitor knob.",
+   "subject": "Focusrite_Scarlett_2i2_Interface",
+   "decorative": false,
+   "deck": "Calibration",
+   "slide": 8
+  },
+  "c51665f895e469b8f0608dce29490d8c95846ea7": {
+   "alt": "Mackie Onyx Producer 2-2 USB audio interface with two gain knobs, mix knob and monitor volume.",
+   "subject": "Mackie_Onyx_Producer_Interface",
+   "decorative": false,
+   "deck": "Calibration",
+   "slide": 8
+  },
+  "2d0abba9bda81aa8370c4c759acc172cfb66b44a": {
+   "alt": "Back of a Sterling MX5 active studio monitor showing its input level knob and power switch.",
+   "subject": "Sterling_MX5_Monitor_Back",
+   "decorative": false,
+   "deck": "Calibration",
+   "slide": 10
+  },
+  "fc0daffb239d5050dea7c4c91b6f055974a6daf1": {
+   "alt": "QSC CX1102 two-channel power amplifier with an attenuation knob for each channel.",
+   "subject": "QSC_CX1102_Power_Amplifier",
+   "decorative": false,
+   "deck": "Calibration",
+   "slide": 10
+  }
+ }
+}
