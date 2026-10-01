@@ -19,6 +19,12 @@ date until it is built again.
     python3 deck_pair.py embed  <Base-Linked.pptx | folder>     build the Embedded deck again from the Linked deck
     python3 deck_pair.py status <folder>                         which Embedded decks are out of date, and why
     python3 deck_pair.py verify <Base-Linked.pptx | folder>      check a pair against the rules
+    python3 deck_pair.py uncopy <Base-Linked.pptx | folder>      take out picture copies put inside a Linked deck
+
+Links only (Adam, 2026-09-30): a copy of each picture inside the Linked deck made PowerPoint show pictures, but the deck
+became Embedded-size and a replaced picture never showed until the copy was refreshed, so copies are not used. On the
+Mac, PowerPoint's sandbox cannot follow these links (its Grant File Access panel grants one file at a time); the
+pictures show in the Embedded deck and the PDF.
 
 Never touches a deck open in PowerPoint, or anything in Archive, _unused, PDF or Images.
 """
@@ -283,10 +289,27 @@ def add_reference_slides(data, course, module, base, listing, design, not_linked
                 '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="%s"/></Relationships>' % layout.group(1)).encode("utf-8")
         prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8"); rid = "rIdRef%d" % num
         data["ppt/_rels/presentation.xml.rels"] = prels.replace("</Relationships>", '<Relationship Id="%s" Type="%s" Target="slides/slide%d.xml"/></Relationships>' % (rid, REL_SLIDE, num)).encode("utf-8")
-        pres = data["ppt/presentation.xml"].decode("utf-8"); ids = [int(x) for x in re.findall(r'<p:sldId id="(\d+)"', pres)]
+        pres = data["ppt/presentation.xml"].decode("utf-8"); ids = [int(x) for x in re.findall(r'<p:sldId\b[^>]*?\bid="(\d+)"', pres)]
         data["ppt/presentation.xml"] = pres.replace("</p:sldIdLst>", '<p:sldId id="%d" r:id="%s"/></p:sldIdLst>' % (max(ids) + 1, rid)).encode("utf-8")
         ct = data["[Content_Types].xml"].decode("utf-8")
         data["[Content_Types].xml"] = ct.replace("</Types>", '<Override PartName="/ppt/slides/slide%d.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/></Types>' % num).encode("utf-8")
+
+# ---------------------------------------------------------------- uncopy
+
+def uncopy(linked):
+    """Takes out the copies a Linked deck carried next to its links (2026-09-30), keeping the file's date."""
+    if is_open(linked): return dict(linked=linked, skipped="open in PowerPoint; close it and run again")
+    infos, data = read(linked); k = 0
+    for n in list(data):
+        m = re.match(r"ppt/slides/(slide\d+\.xml)$", n)
+        if not m: continue
+        body = data[n].decode("utf-8")
+        body2, c = re.subn(r'<a:blip r:embed="[^"]+" (r:link=")', r"<a:blip \1", body)
+        if c: data[n] = body2.encode("utf-8"); k += c
+    if not k: return dict(linked=linked, copies_removed=0)
+    drop_unused_media(data)                         # the copies' relationships and files leave with them
+    st = os.stat(linked); write(linked, infos, data); os.utime(linked, (st.st_atime, st.st_mtime))
+    return dict(linked=linked, copies_removed=k)
 
 # ---------------------------------------------------------------- embed
 
@@ -359,7 +382,7 @@ def verify(linked):
     refs = len(slide_order(L)) - len(lo)
     if refs == 0: problems.append("the Linked deck has no reference slide")
     if len(lo) != len(eo): problems.append("slide counts differ: Linked %d (without reference slides), Embedded %d" % (len(lo), len(eo)))
-    strip = lambda x: re.sub(r'r:(embed|link)="[^"]+"', "", x)
+    strip = lambda x: re.sub(r'\s*r:(embed|link)="[^"]+"', "", x)
     for a, b in zip(lo, eo):
         if strip(L[a].decode("utf-8")) != strip(E[b].decode("utf-8")): problems.append("%s differs from its Embedded slide beyond picture storage" % posixpath.basename(a))
         na, nb = rels_name(a), rels_name(b)
@@ -392,10 +415,11 @@ def decks(target, pattern):
 
 if __name__ == "__main__":
     a = sys.argv[1:]
-    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean"): print(__doc__); sys.exit(2)
+    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy"): print(__doc__); sys.exit(2)
     t = a[1]
     if a[0] == "split": res = [split(d, "--dry" in a) for d in decks(t, r"(?<!-Linked)(?<!-Embedded)\.pptx$")]
     elif a[0] == "embed": res = [embed(d) for d in decks(t, r"-Linked\.pptx$")]
+    elif a[0] == "uncopy": res = [uncopy(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "clean":
         res = []
         for d in decks(t, r"-Linked\.pptx$"):

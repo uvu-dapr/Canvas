@@ -38,7 +38,8 @@ def deck_base(stem, module_folder=None):
     s = re.sub(r"(^|[_-])(Lesson|Part|Week|Module|Unit|Day)_\d+(?=[_-]|$)", r"\1", s, flags=re.I)
     s = re.sub(r"[_-]20\d\d(?=[_-]|$)", "", s)                              # years
     s = re.sub(r"_Lecture$", "", s)
-    s = re.sub(r"(?<!Layer)(?<!Layers)(?<!Mix)_\d+$", "", s)                  # counters (not OSI Layer 1 or Mix 2)
+    s = re.sub(r"(?<!Layer)(?<!Layers)(?<!Mix)_\d{1,2}$", "", s)             # counters (not OSI Layer 1 or Mix 2; a model
+                                                                                # number like 1176 is 3+ digits and stays)
     s = re.sub(r"__+", "__", s).strip("_-")
     parts = re.split(r"(__|-)", s)
     out = []

@@ -122,7 +122,19 @@ QTI_FILES=sorted({q for _,q,_m in QUIZ if os.path.exists(q)})
 _nometa=[q for _,q,m in QUIZ if m is None]
 L('quiz resources in the manifest: %d   qti files on disk: %d   metas resolved: %d'
   %(len(QUIZ),len(QTI_FILES),sum(1 for _,_q,m in QUIZ if m)))
-if not QUIZ: warns.append('the manifest declares no quiz resources at all')
+# A pages-only package (LIVE-Add pages, Adam 2026-09-30; Standards 16b): no course_settings.xml and no quiz, assignment
+# or discussion declared. Its graded work stays in Canvas, so the quiz count and gate 12j judge the full course, not it.
+PAGES_ONLY = (not os.path.exists('course_settings/course_settings.xml')
+              and not QUIZ
+              and not any('imsdt' in _r['type'] for _r in RES.values())
+              and not any(_f.endswith('assignment_settings.xml') for _r in RES.values() for _f in _r['files']))
+if PAGES_ONLY: L('pages-only package: no course settings and no graded items on purpose; 12j and the quiz count judge the full course')
+# A partial LIVE package (Adam, 2026-10-01): no course_settings.xml, checked against the live course (--live). It may carry
+# the graded work too, brought in from the full package so the Week Planner can move due dates (bring_graded.py); it still
+# never changes course settings, and its new modules arrive beside the live ones on purpose (Standards 16b).
+PARTIAL_LIVE = not os.path.exists('course_settings/course_settings.xml') and '--live' in sys.argv
+if PARTIAL_LIVE and not PAGES_ONLY: L('partial LIVE package: no course settings on purpose, graded work carried so its dates update in place')
+if not QUIZ and not PAGES_ONLY: warns.append('the manifest declares no quiz resources at all')
 if _nometa: fails.append('quiz resources with no resolvable meta: %s'%[os.path.basename(x) for x in _nometa][:5])
 # Added 2026-09-24 [Adam, Course Decisions Log DAPR 2000 item 7]. Canvas builds a quiz's
 # questions from its non_cc_assessments/<id>.xml.qti copy. A cc quiz resource
@@ -1380,6 +1392,9 @@ for _p in sorted(set(glob.glob('wiki_content/*.html'))|set(glob.glob('assignment
     try: _s=open(_p,encoding='utf-8',errors='replace').read()
     except Exception: continue
     if 'Do Not Publish' in _s or 'Instructor_Use_Only' in _p or _p in _INSTR: continue
+    # The outline page's generated schedule table is its visual (Standards 0b.4 exception and 16b, Adam 2026-10-01:
+    # "I do not want an image"): Canvas Preview writes it between <!-- cp-live-schedule --> markers
+    if '<!-- cp-live-schedule -->' in _s: continue
     _imgs=[m for m in re.findall(r'<img [^>]*src="([^"]+)"',_s)
            if 'DAPR_Canvas_Icon_Reference' not in m and not _islogo(m)]
     if not _imgs: _bare.append(os.path.basename(_p))
@@ -1676,6 +1691,11 @@ if '--live' in sys.argv:
         L('    module links Canvas cannot match (dropped on import): %d' % len(_dropped)); [L('      ' + x) for x in _dropped[:15]]
         fails.append('12k %d module link(s) point at a live item by a label Canvas cannot match, so the import drops them (leave that module out: match_ids.py does)' % len(_dropped))
     if _copies: fails.append('12k %d item(s) use the export label, not the id Canvas matches: they arrive as copies (Workbench > Use the IDs Canvas Matches, or match_ids.py)' % len(_copies))
+    # A pages-only package adds a fresh copy of each module beside the old one on purpose; Adam moves the graded work in
+    # and deletes the old module afterwards (Standards 16b, 2026-09-30: 3340 v66 showed 5 such modules as red)
+    _secmods = [x for x in _second if x.startswith('module ')] if (PAGES_ONLY or PARTIAL_LIVE) else []
+    _second = [x for x in _second if x not in _secmods]
+    if _secmods: warns.append('12k %d module(s) arrive beside the live module of the same name (partial package: delete the old ones after moving the graded work): %s' % (len(_secmods), '; '.join(_secmods[:5])))
     if _second: fails.append('12k %d item(s) would arrive as a second copy of a live item' % len(_second))
     if _hidden: fails.append('12k %d live published item(s) would be hidden by this import' % len(_hidden))
 
@@ -1689,6 +1709,10 @@ if '--live' in sys.argv:
 #   the model and budget that follow (Standards 11e-1). Graded objects are resolved from the
 #   files the manifest declares. It ends with a block to paste back to an AI to fix the load.
 try:
+    if PAGES_ONLY:
+        L('')
+        L('12j CREDIT HOUR BUDGET: skipped, pages-only package (its graded work is in Canvas; judge the full course)')
+        raise StopIteration
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
     import budget_check as _bc
     # Amended 2026-09-25 [Adam]: pass the Instructor Use Only exemption, so an instructor
@@ -1711,6 +1735,8 @@ try:
         L('')
         L(_bai)
         L('')
+except StopIteration:
+    pass
 except Exception as _e:
     fails.append('12j the credit hour gate could not run: %s'%_e)
     L('12j the credit hour gate could not run: %s'%_e)
