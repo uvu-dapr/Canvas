@@ -11,19 +11,32 @@ plus two sections that are not ChatGPT work (Needs Adam captures, live pictures 
 Every item carries Standards 20.5b's five details together: Action (REPLACE or ADD NEW), file name,
 full save path, the old image (path, thumbnail in the HTML, what is wrong) and what to create.
 
-Usage:  python3 image_work_list.py [--rev N]
-Writes into UVU Courses/Claude outputs/Notes and Briefs/ (the 2026-09-30 list; a re-check bumps --rev).
+Canvas Preview's Images to Fix page (Images mode, ⌥⇧⌘I) runs this tool, so the app and these files always agree:
+  --extra FILE   what only the app knows, as a JSON list: {"kind": "canvasNote" | "deckNote" | "fixNote", "path", "note",
+                 "source"}, {"kind": "temp", "path", "title", "prompt", "width", "height", "made"},
+                 {"kind": "keep", "path", "backup"} (made in the app, waiting for Adam's review) and {"kind": "done", "path"}
+  --json FILE    writes the list as JSON for the app and nothing else
+  --name NAME    file names: "<NAME> - All Classes.md/.html" and "<NAME> - For ChatGPT.md" (Save Fix List for ChatGPT)
+
+Usage:  python3 image_work_list.py [--rev N] [--name NAME] [--extra FILE] [--json FILE]
+Writes into UVU Courses/Claude outputs/Notes and Briefs/ (the 2026-09-30 list by default; a re-check bumps --rev).
 """
-import os, re, sys, html, datetime as dt
+import os, re, sys, html, json, subprocess, datetime as dt
 from urllib.parse import quote
 
 HOME = "/Users/adamwolson/Library/CloudStorage/Dropbox"
 CLASSES = HOME + "/apps/GitHub/Canvas/Classes"
 COURSES = HOME + "/Miscellaneous/4-Work/UVU/UVU Courses"
 NB = COURSES + "/Claude outputs/Notes and Briefs"
-OUT_MD = NB + "/2026-09-30 ChatGPT Image Work List - All Classes.md"
-OUT_HTML = NB + "/2026-09-30 ChatGPT Image Work List - All Classes.html"
-REV = sys.argv[sys.argv.index("--rev") + 1] if "--rev" in sys.argv else "2"
+def arg(name, default=None): return sys.argv[sys.argv.index(name) + 1] if name in sys.argv else default
+NAME = arg("--name", "2026-09-30 ChatGPT Image Work List")
+OUT_MD = NB + "/" + NAME + " - All Classes.md"
+OUT_HTML = NB + "/" + NAME + " - All Classes.html"
+REV = arg("--rev", "2")
+JSON_OUT = arg("--json")
+EXTRA = json.load(open(arg("--extra"))) if arg("--extra") else []
+KEEP = {e["path"]: e.get("backup", "") for e in EXTRA if e.get("kind") == "keep"}   # made in the app, waiting for review
+DONE = {e["path"] for e in EXTRA if e.get("kind") == "done"}                          # approved in the app
 
 def ts(s): return dt.datetime.strptime(s, "%Y-%m-%d %H:%M").timestamp()
 CUT_A = ts("2026-09-25 05:00")   # Tier 2 is done when its file changed after this
@@ -42,6 +55,10 @@ CF = {"2000": "DAPR-2000--Digital_Audio_Essentials", "2010": "DAPR-2010--Core_Re
       "3345": "DAPR-3345--Spatial_Audio_II"}
 # The schedule picture each outline page shows now (read from the newest package, 2026-10-01)
 B_OLD = {"3340": "Schedule_Module_Timeline.png", "3255": "Term_Schedule_Spring_2027.png", "3345": "Term_Schedule.png"}
+
+# What ChatGPT is told, in the Markdown for ChatGPT and on the HTML page (both are given to the ChatGPT desktop app)
+GPT_STEPS = ["1. Read the item's five details: Action, File name, Save path, Old image, What to create.", '2. Open the old image at its path on this Mac and look at it. For a REPLACE, see exactly what is wrong and fix that. For a New PowerPoint picture, make something clearly different from it. An item with no old image has nothing to open.', "3. Generate one image from the item's prompt exactly as written: its pixel size, format and background.", "4. Save it at the item's Save path with the exact File name (same spelling, case and extension). REPLACE: save over the file that is there. ADD NEW: save it as a new file, creating the folder if needed.", '5. Check the saved image against the prompt and the old image. If a fact is wrong, a quoted label is misspelled, or text appears that the prompt did not ask for, make it again and save over it.', '6. Write the item number, the file name and the path you saved to, then stop and wait. Adam says "next" to continue, or an item number to jump to.']
+GPT_RULES = ['Every image here is approved to be made. REPLACE items are corrections Adam asked for; do not refuse and do not ask for a photo.', 'No text, numbers, letters, logos, brand marks, model numbers, watermarks or readable screens in any image, unless the prompt quotes exact labels; then use only those labels, spelled exactly.', 'Nothing that claims to be a real named product. Equipment is generic and unbranded; screens are dark or out of focus.', 'A New PowerPoint picture must look clearly different from the old Canvas picture it stands beside: a different angle, setting and composition.']
 
 changes = {"alt_trunc": 0, "size_line": 0, "replace_header": 0, "alt_written": 0}
 problems = []
@@ -98,7 +115,7 @@ for m in re.finditer(r"^## Tier 2, (\d\d)\. (DAPR \d{4}|ALL COURSES): (\S+)\n(.*
     f = dict(re.findall(r"^(Image|File name|Save to \(overwrite\)|Size|Format|Used on|Fix): (.*)$", code, re.M))
     path = f["Save to (overwrite)"].strip()
     t = mtime(path)
-    if t and t > CUT_A:
+    if t and t > CUT_A and path not in KEEP:
         a_done.append(f["File name"]); continue
     if t is None: problems.append("A %02d %s: the file to replace is missing on disk" % (n, f["File name"]))
     changes["replace_header"] += 1
@@ -127,7 +144,7 @@ b_done = []
 for cls in ["3340", "3255", "3345"]:
     what, prompt, alt = B_ITEMS[cls]
     path = "%s/%s/Course_Orientation/Schedule_Banner.jpg" % (CLASSES, CF[cls])
-    if os.path.exists(path): b_done.append(cls); continue
+    if os.path.exists(path) and path not in KEEP: b_done.append(cls); continue
     items.append(dict(part="B", cls=cls, fname="Schedule_Banner.jpg", path=path, action="ADD NEW",
         old="%s/%s/Course_Orientation/%s" % (CLASSES, CF[cls], B_OLD[cls]),
         old_desc=("The outline page shows this schedule picture now. The Live Schedule replaces it, which leaves the page "
@@ -152,7 +169,7 @@ for sec in re.split(r"^(?=# )", pc, flags=re.M):
         save = re.search(r"Save as[^\n]*:\s*\n+```\n(.*?)\n```", body, re.S).group(1).strip()
         pm = re.search(r"Prompt:\s*\n+```\n(.*?)\n```", body, re.S)
         t = mtime(save)
-        if t and t > CUT_C:
+        if t and t > CUT_C and save not in KEEP:
             c_done.append(os.path.basename(save)); continue
         fname = os.path.basename(save); ext = fname.rsplit(".", 1)[1].upper()
         sm = re.search(r"(\d{3,4}) by (\d{3,4})", size)
@@ -203,7 +220,7 @@ for cls in CLASS_ORDER:
         if "Filename" not in fields: continue
         tot += 1
         path = fields["Destination folder"].rstrip("/") + "/" + fields["Filename"]
-        if os.path.exists(path): done += 1; continue
+        if os.path.exists(path) and path not in KEEP: done += 1; continue
         pm = re.search(r"```text\n(.*?)\n```", part, re.S)
         if not pm: problems.append("D %s %s: no prompt block" % (cls, fields["Filename"]))
         alt = fields.get("Alt text", "")
@@ -267,20 +284,126 @@ for cls in CLASS_ORDER:
     m = re.search(r"(\d+) picture links on its pages do not load \((\d+) addresses of (\d+)\)\. (\d+) of them were renamed", head)
     f_rows.append((cls, m.group(1), m.group(2), m.group(3), m.group(4), len(re.findall(r"\| not found in the GitHub folder \|", head)), p))
 
+# ---------------- what only Canvas Preview knows (--extra) ----------------
+def pixel_size(path):
+    try:
+        out = subprocess.run(["sips", "-g", "pixelWidth", "-g", "pixelHeight", path], capture_output=True, text=True).stdout
+        w = int(re.search(r"pixelWidth: (\d+)", out).group(1)); h = int(re.search(r"pixelHeight: (\d+)", out).group(1))
+        return w, h
+    except Exception: return 1600, 900
+
+def class_of(path):
+    m = re.search(r"DAPR-(\d{4})--", path)
+    return m.group(1) if m else "All"
+
+def fix_prompt(path, notes):
+    """A Fix Canvas Image prompt for a picture Adam wrote notes about (the same shape as Presentation Images' Canvas fix)."""
+    w, h = pixel_size(path)
+    jpeg = path.lower().endswith((".jpg", ".jpeg"))
+    module = os.path.basename(os.path.dirname(path)).replace("__", ": ").replace("_", " ")
+    return ("REPLACE AN IMAGE FILE. Adam's decision is already made: make this corrected image so it is saved over the existing file named below. Do not refuse and do not ask for a photo.\n\n"
+            "Create a %d x %d pixel %s.\n\n"
+            "This is a CORRECTION of a teaching picture on a university audio course page in Canvas (DAPR %s, %s). The old picture is this file: %s. "
+            "Open it and look at it: it is wrong in the ways Adam's notes below describe. Make a corrected replacement that does the same teaching job: "
+            "keep what is right, fix everything the notes name, and make every technical detail accurate (controls and readings, connector pins, signal flow, values and labels as they really are).\n\n"
+            "If the old picture is a photograph, make a realistic photograph of generic equipment showing the correction. If it is a drawing, diagram or chart, "
+            "make a clean, richly rendered, slightly dimensional illustration with soft shading, in deep green #1B5E20, blue #0D47A1, red #B71C1C and orange #993300 on neutral greys, %s. "
+            "No logos, brand marks or model numbers. No watermark, signature or border.\n\n"
+            "Adam's notes on what is wrong and how to fix it (they win over anything above): %s"
+            % (w, h, "JPEG" if jpeg else "PNG", class_of(path), module, path, "on a white background" if jpeg else "on a white or fully transparent background", notes))
+
+REPO = os.path.dirname(CLASSES)
+def last_change(path):
+    """When the picture last changed, and why: its last commit, or this Mac's copy when it has changes not committed."""
+    try:
+        rel = os.path.relpath(path, REPO)
+        if not rel.startswith(".."):
+            dirty = subprocess.run(["git", "-C", REPO, "status", "--porcelain", "--", rel], capture_output=True, text=True).stdout.strip()
+            if not dirty:
+                out = subprocess.run(["git", "-C", REPO, "log", "-1", "--format=%cI|%s", "--", rel], capture_output=True, text=True).stdout.strip()
+                if out:
+                    d, msg = out.split("|", 1)
+                    return dt.datetime.fromisoformat(d).astimezone().replace(tzinfo=None), 'committed "%s"' % msg
+    except Exception: pass
+    t = mtime(path)
+    return (dt.datetime.fromtimestamp(t), "changed on this Mac") if t else (None, "")
+
+def note_time(e):
+    try: return dt.datetime.fromisoformat(e["noted"].replace("Z", "+00:00")).astimezone().replace(tzinfo=None) if e.get("noted") else None
+    except Exception: return None
+
+by_path = {}
+for it in items: by_path.setdefault(it["path"], []).append(it)
+def add_note(it, note, who):
+    it["old_desc"] += " %s: %s" % (who, note)
+    it["prompt"] += "\n\n%s (they win over anything above): %s" % (who, note)
+    it["notes"] = (it.get("notes", "") + " " + note).strip()
+
+for e in EXTRA:
+    kind, path, note = e.get("kind"), e.get("path", ""), (e.get("note") or "").strip()
+    if kind in ("canvasNote", "fixNote", "deckNote") and note:
+        hits = by_path.get(path, [])
+        who = "Adam's notes" if kind != "deckNote" else "Adam's notes on this slide picture"
+        for it in hits:
+            add_note(it, note, who)
+            if "noted" in it: it["noted"].append(note_time(e))
+        if hits or kind != "canvasNote": continue
+        if not os.path.exists(path):
+            problems.append("Your note on %s: that file is not on this Mac, so it can't be fixed here (%s)" % (os.path.basename(path), e.get("source", "")))
+            continue
+        w, h = pixel_size(path)
+        it = dict(part="E", cls=class_of(path), fname=os.path.basename(path), path=path, action="REPLACE", old=path, olds=[path], noted=[],
+                  old_desc="This is the picture being replaced. Adam's notes (%s): %s" % (e.get("source", "Canvas Preview"), note), notes=note,
+                  what="Corrected " + os.path.basename(path).rsplit(".", 1)[0].replace("_", " "),
+                  size="%d x %d px, %s" % (w, h, "JPEG" if path.lower().endswith((".jpg", ".jpeg")) else "PNG"),
+                  used="the Canvas pages that show this picture", alt="Keep the page's current alt text unless the picture's subject changes",
+                  prompt=fix_prompt(path, note), chip="Fix Canvas Image: Adam's notes in Canvas Preview")
+        it["noted"].append(note_time(e))
+        items.append(it); by_path.setdefault(path, []).append(it)
+    elif kind == "temp" and os.path.exists(path) and path not in by_path:
+        w, h = int(e.get("width") or 1600), int(e.get("height") or 900)
+        it = dict(part="F", cls=class_of(path), fname=os.path.basename(path), path=path, action="REPLACE", old=path, olds=[path],
+                  old_desc="Claude drew this TEMPORARY stand-in%s while ChatGPT was out of image generations. Make the real image from the prompt and save it over the stand-in." % (" on " + e["made"][:10] if e.get("made") else ""),
+                  what=e.get("title") or os.path.basename(path), size="%d x %d px, %s" % (w, h, "JPEG" if path.lower().endswith((".jpg", ".jpeg")) else "PNG"),
+                  used="where the stand-in is used now", alt="Keep the current alt text", prompt=e.get("prompt", ""),
+                  chip="Standards 20.1: temporary stand-in, replaced by ChatGPT")
+        items.append(it); by_path.setdefault(path, []).append(it)
+# Check first: a picture changed after every note on it (or the notes have no date) may already be fixed. It stays out of
+# the ChatGPT list until Adam presses D (done) or writes a new note (Adam, 2026-10-01: Digital_Meter.jpg was fixed on
+# 2026-09-24 and its old note made ChatGPT draw it again).
+for it in items:
+    if it.get("part") != "E" or it["path"] in KEEP: continue
+    when, why = last_change(it["path"])
+    times = it.pop("noted", [])
+    fresh = [n for n in times if n and when and n > when]
+    if when and not fresh:
+        undated = all(n is None for n in times)
+        it["check"] = True
+        it["check_info"] = ("Your note has no date (it was written before notes were dated on 2026-10-01). " if undated else "Your note was written before the picture last changed. ") + \
+            "The picture %s on %s, so it may already be fixed. Look at it: D if it is done, N if it is still wrong." % (why, when.strftime("%Y-%m-%d %H:%M"))
+for it in items:
+    it.pop("noted", None)
+    it.setdefault("check", False)
+    it["state"] = "review" if it["path"] in KEEP else "open"
+    it["backup"] = KEEP.get(it["path"], "")
+items[:] = [it for it in items if it["path"] not in DONE]
+
 for row in items + e_items:
     for k, v in row.items():
         if isinstance(v, str): row[k] = straight(v)
 
 # ---------------- order and numbers ----------------
-items.sort(key=lambda it: ("ABCD".index(it["part"]), CLASS_ORDER.index(it["cls"]) if it["part"] in "CD" and it["cls"] in CLASS_ORDER else -1))
-groups = [("1", "Part A. Wrong facts in Canvas pictures", [i for i in items if i["part"] == "A"]),
+items.sort(key=lambda it: ("EFABCD".index(it["part"]), CLASS_ORDER.index(it["cls"]) if it["part"] in "CD" and it["cls"] in CLASS_ORDER else -1))
+groups = [("13", "Your notes: Canvas pictures to fix", [i for i in items if i["part"] == "E"]),
+          ("14", "Claude stand-ins to remake", [i for i in items if i["part"] == "F"]),
+          ("1", "Part A. Wrong facts in Canvas pictures", [i for i in items if i["part"] == "A"]),
           ("2", "Part B. New topic images for the outline pages", [i for i in items if i["part"] == "B"]),
           ("3", "Part C. Placeholders still on Canvas pages", [i for i in items if i["part"] == "C"])]
 for n, cls in enumerate(CLASS_ORDER):
     groups.append((str(4 + n), "Part D. New PowerPoint pictures: " + CLASS_NAME[cls], [i for i in items if i["part"] == "D" and i["cls"] == cls]))
 for g, _, its in groups:
     for k, it in enumerate(its, 1): it["num"] = "%s.%d" % (g, k)
-C = {p: sum(1 for i in items if i["part"] == p) for p in "ABCD"}
+C = {p: sum(1 for i in items if i["part"] == p) for p in "ABCDEF"}
 dper = {c: sum(1 for i in items if i["part"] == "D" and i["cls"] == c) for c in CLASS_ORDER}
 cper = {}
 for i in items:
@@ -288,6 +411,18 @@ for i in items:
 total = sum(C.values())
 folder = os.path.dirname
 short = lambda cls: "Shared" if cls == "All" else CLASS_NAME[cls].split(" - ")[0]
+
+if JSON_OUT:
+    json.dump({"generated": dt.datetime.now().isoformat(timespec="seconds"), "items": items,
+               "groups": [{"num": g, "title": title, "count": len(its)} for g, title, its in groups if its],
+               "needsAdam": e_items, "problems": problems}, open(JSON_OUT, "w"))
+    print("json", JSON_OUT, len(items)); sys.exit(0)
+
+CHECK = [it for it in items if it.get("check")]
+items[:] = [it for it in items if not it.get("check")]
+for g, title, its in groups: its[:] = [it for it in its if not it.get("check")]
+C = {p: sum(1 for i in items if i["part"] == p) for p in "ABCDEF"}
+total = sum(C.values())
 
 # ---------------- Markdown ----------------
 md = []; w = md.append
@@ -299,6 +434,8 @@ w("Rev %s, checked against the files on disk on %s. Written from the 2026-09-30 
 w(""); w("```"); w("'" + OUT_HTML + "'"); w("```"); w("")
 w("## Count"); w("")
 w("| Part | What | Open now | Already made, left out |"); w("|---|---|--:|--:|")
+if C["E"]: w("| | Your notes: Canvas pictures to fix (from Canvas Preview) | %d | |" % C["E"])
+if C["F"]: w("| | Claude stand-ins to remake | %d | |" % C["F"])
 w("| A | Wrong facts in Canvas pictures (Priorities Tier 2, items 08 to 29) | %d | %d |" % (C["A"], len(a_done)))
 w("| B | New topic images for the outline pages (3340, 3255, 3345) | %d | %d |" % (C["B"], len(b_done)))
 w("| C | Placeholders and missing files on Canvas pages | %d | %d |" % (C["C"], len(c_done)))
@@ -347,7 +484,7 @@ def md_item(it):
     w("```text"); w(it["prompt"]); w("```"); w("")
 
 for g, title, its in groups:
-    if g in ("1", "2", "3"):
+    if g in ("1", "2", "3", "13", "14"):
         w("# " + title); w("")
     if g == "4":
         w("# Part D. New PowerPoint pictures"); w("")
@@ -372,6 +509,11 @@ for r in f_rows: w("| %s | %s | %s | %s | %s | %d |" % (CLASS_NAME[r[0]], r[1], 
 w("")
 for r in f_rows: w("```"); w("'" + r[6] + "'"); w("```"); w("")
 w("DAPR 2010, 3255 and 3345 are not live this term, so they have no such list."); w("")
+if CHECK:
+    w("# Check first (not given to ChatGPT)"); w("")
+    w("These pictures changed after your note on them, so they may already be fixed. In Canvas Preview ▸ Images to Fix: D if done, N if still wrong (a new note puts it back on this list)."); w("")
+    for it in CHECK: w("- %s %s: %s" % (it["num"], it["fname"], it["check_info"]))
+    w("")
 w("# Could not be verified"); w("")
 w("- A file that exists is counted as made; outside Parts A and C (where the file date is checked) this cannot tell a finished ChatGPT picture from a Claude stand-in already at that path.")
 w("- Part D: where a deck is already a Linked and Embedded pair, the picture still needs Use New in Deck (or the deck's own picture name) to reach the slide.")
@@ -464,6 +606,7 @@ pre.copy{max-height:160px;overflow:auto}.copy.ok{background:#e8f5e9;border-color
 <header class="mast"><h1>ChatGPT Image Work List: All Classes</h1><p>Every DAPR picture still to make in ChatGPT, each with its action, file name, full save path, old image and what to create, checked against the files on disk on """ + dt.date.today().isoformat() + """. rev """ + REV + """.</p></header>
 <div class="bar"><div class="t"><span id="done">0</span> / <span id="tot">0</span> fixed</div><div class="track"><div class="fill" id="fill"></div></div></div>
 <div class="intro"><b>How to use.</b> Work top to bottom. Each item shows the old image beside what is wrong with it. <b>REPLACE</b> (red) means save over the file already at the path; <b>ADD NEW</b> (green) means nothing is there yet. Click the prompt to copy it into a new ChatGPT chat (one image per chat), then save the result at the full save path: click Folder, press Command Shift G in the Save dialog, and use the File name. Tick the box when it is saved; progress is kept in this browser. Then tell Claude which ones are saved. Groups 11 and 12 are not ChatGPT work.</div>
+""" + '<div class="intro"><b>Instructions for ChatGPT.</b> You are making images for Adam Olson\'s Utah Valley University audio courses (DAPR). Work through the items below in order, one image per item.<ol>' + "".join("<li>%s</li>" % E(re.sub(r"^\d+\. ", "", s)) for s in GPT_STEPS) + '</ol>Decisions already made by Adam, for every item:<ul>' + "".join("<li>%s</li>" % E(s) for s in GPT_RULES) + '</ul></div>' + """
 <div class="btns"><button id="ex">Expand All</button><button id="co">Collapse All</button></div>
 """ + "".join(hg) + """
 <footer>Owner: Adam Olson, UVU DAPR. Companion file: 2026-09-30 ChatGPT Image Work List - All Classes.md (Notes and Briefs). Built by Build-Tools/image_work_list.py from the Priorities, TO DO and seven Presentations briefs in the Canvas repo.</footer>
@@ -496,23 +639,15 @@ tally();
 gp = []; g_ = gp.append
 g_("All DAPR courses"); g_("")
 g_("# Image work list for ChatGPT: all DAPR classes"); g_("")
-g_("Rev %s, %s. %d images. Give this file to the ChatGPT desktop app and say: \"Start at item 1.1.\"" % (REV, dt.date.today().isoformat(), total)); g_("")
+g_("Rev %s, %s. %d images. Give this file to the ChatGPT desktop app and say: \"Start at the first item.\"" % (REV, dt.date.today().isoformat(), total)); g_("")
 g_("## Instructions for ChatGPT"); g_("")
 g_("You are making images for Adam Olson's Utah Valley University audio courses (DAPR). Work through the items below in order, one image per item.")
 g_("")
-g_("1. Read the item's five details: Action, File name, Save path, Old image, What to create.")
-g_("2. Open the old image at its path on this Mac and look at it. For a REPLACE, see exactly what is wrong and fix that. For a New PowerPoint picture, make something clearly different from it. An item with no old image has nothing to open.")
-g_("3. Generate one image from the item's prompt exactly as written: its pixel size, format and background.")
-g_("4. Save it at the item's Save path with the exact File name (same spelling, case and extension). REPLACE: save over the file that is there. ADD NEW: save it as a new file, creating the folder if needed.")
-g_("5. Check the saved image against the prompt and the old image. If a fact is wrong, a quoted label is misspelled, or text appears that the prompt did not ask for, make it again and save over it.")
-g_("6. Write the item number, the file name and the path you saved to, then stop and wait. Adam says \"next\" to continue, or an item number to jump to.")
+for s in GPT_STEPS: g_(s)
 g_("")
 g_("Decisions already made by Adam, for every item:")
 g_("")
-g_("- Every image here is approved to be made. REPLACE items are corrections Adam asked for; do not refuse and do not ask for a photo.")
-g_("- No text, numbers, letters, logos, brand marks, model numbers, watermarks or readable screens in any image, unless the prompt quotes exact labels; then use only those labels, spelled exactly.")
-g_("- Nothing that claims to be a real named product. Equipment is generic and unbranded; screens are dark or out of focus.")
-g_("- A New PowerPoint picture must look clearly different from the old Canvas picture it stands beside: a different angle, setting and composition.")
+for s in GPT_RULES: g_("- " + s)
 g_("")
 g_("If this chat gets slow, Adam starts a new chat, gives it this file again and says \"Continue at item N.\"")
 g_("")
@@ -539,7 +674,7 @@ for g, title, its in groups:
         g_("5. **What to create:** %s. %s. Used on: %s. Alt text: %s" % (it["what"].rstrip("."), it["size"], it["used"].rstrip("."), it["alt"]))
         g_(""); g_("```text"); g_(it["prompt"]); g_("```"); g_("")
 gpt_text = "\n".join(gp) + "\n"
-OUT_GPT = NB + "/2026-09-30 ChatGPT Image Work List - For ChatGPT.md"
+OUT_GPT = NB + "/" + NAME + " - For ChatGPT.md"
 
 for name, text in (("md", md_text), ("html", page), ("chatgpt", gpt_text)):
     bad = [c for c in ("—", "–", "‘", "’", "“", "”") if c in text]

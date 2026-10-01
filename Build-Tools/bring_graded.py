@@ -38,6 +38,15 @@ def main():
         labels = set(re.findall(r'identifier="([^"]+)"', z.read("imsmanifest.xml").decode("utf-8", "ignore")))
         if "course_settings/module_meta.xml" in z.namelist():
             labels |= set(re.findall(r'identifier="([^"]+)"', z.read("course_settings/module_meta.xml").decode("utf-8", "ignore")))
+        # an id an earlier import stored is one Canvas matches even when the export also shows it (Adam, 2026-10-01:
+        # "this file can contain the whole semester"; 3340's taken Introduction quiz could be placed after all)
+        try:
+            import subprocess, json
+            out = subprocess.run([sys.executable, os.path.join(os.path.dirname(os.path.abspath(__file__)), "match_ids.py"), "stored",
+                                  sys.argv[sys.argv.index("--live") + 1]], capture_output=True, text=True).stdout
+            labels -= set(json.loads(out or "[]"))
+        except Exception:
+            pass
     tmp = None
     if os.path.isfile(full):
         tmp = tempfile.mkdtemp(prefix="bring_graded_")
@@ -107,7 +116,7 @@ def run(work, src, dry, labels=set()):
                 prev_title = ititle; continue          # already linked here
             if ref in sres: copy_resource(ref); added.append(ititle)
             elif ref in labels:
-                skipped.append("%s (taken work linked by an export label Canvas cannot match: left where it is)" % ititle); prev_title = ititle; continue
+                skipped.append("%s (taken work Canvas knows only by an export label: move it into this module by hand in Canvas)" % ititle); prev_title = ititle; continue
             else: linked.append(ititle)
             iid = "i" + hashlib.md5((target + ref).encode()).hexdigest()[:12]
             item = '<item identifier="%s">%s</item>' % (iid, body)

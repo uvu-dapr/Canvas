@@ -1725,6 +1725,10 @@ try:
     L('12j CREDIT HOUR BUDGET (Standards 11e, 11e-1)')
     for _x in _blines: L('    %s'%_x)
     for _x in _bfails:
+        # A partial LIVE package (Adam, 2026-10-01) has no course settings, so no course code or model: its own total
+        # is not the course's; 12j is judged on the full package
+        if PARTIAL_LIVE and ('not in the' in _x or 'thin floor' in _x or 'build range' in _x):
+            L('    warn  %s (partial LIVE package: judge 12j on the full package)'%_x); warns.append('12j partial package: %s'%_x); continue
         if LIVE_IDS and 'thin floor' in _x:
             # Items students took are left out of a LIVE-Import, so its own total is short by design; the course
             # total is judged on the full package
