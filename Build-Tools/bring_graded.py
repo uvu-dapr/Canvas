@@ -12,14 +12,20 @@ followed in the full package:
 - Items the full package carries (files and manifest resource): copied with the same identifier, so the import
   updates the live item in place. A due date moved in the Week Planner then moves in Canvas.
 - Items the full package only links (taken work it left out on purpose): linked the same way, by the same id.
-- With --live, taken work whose link carries an export label (an id Canvas cannot match, so the import would drop
-  the link) is not linked; it stays where it is in the live course.
+- With --live, any item whose id Canvas knows only as an export label (an id an import cannot match) is left out,
+  copied or linked: importing it would add a second copy, or drop the link. It stays where it is in the live course
+  and its date is changed in Canvas. Without --live nothing can be checked, so always pass it.
 - Their assignment group and rubric references are dropped when the working folder has no assignment_groups.xml or
   rubrics.xml: Canvas then keeps each item's live group and rubric (a reference to a group the package does not
   carry would put the item in a new default group).
 - Each module item gets a new identifier (the item lands in the new module; the old module keeps its own link until
   it is deleted).
 
+- Modules are matched by title; when the live course still uses its older names ("Module 08: Dynamic Effects" for
+  "Effects: Dynamic Effects", 2020 on 2026-10-01), by topic: numbers and "Module NN:" or "Week NN:" dropped, the words
+  compared (best overlap wins), and a lab that matches nothing follows its numbered topic ("Module 08: Compression Lab"
+  with "Module 08: Dynamic Effects"). Shared modules (Unified Class Content, Bonus, Instructor Use Only) are never
+  matched. Every topic match is printed ("mapped: ... -> ...") so Adam can check it before the real run.
 Never overwrites an item already in the working folder. Prints what it added, then RESULT.
 """
 import os, re, sys, shutil, zipfile, tempfile, hashlib, html
@@ -59,6 +65,35 @@ def main():
     finally:
         if tmp: shutil.rmtree(tmp, ignore_errors=True)
 
+STOP = {"and", "the", "of", "with", "a", "an", "for", "in", "to", "on", "lab", "module", "week"}
+SHARED = ("unified class content", "bonus", "instructor use only", "do not publish")
+
+def words(t):
+    """A title's topic words: numbers, "Module NN:" and small words dropped."""
+    t = html.unescape(t).lower().replace("&", " and ")
+    t = re.sub(r"^\\s*(module|week)\\s*\\d+\\s*[:\\-]?\\s*", "", t)
+    return {w for w in re.findall(r"[a-z0-9]+", t) if w not in STOP and not w.isdigit()}
+
+def same_word(x, y):
+    """Mix and Mixing, Balance and Balancing, Arranging and Arrangement: one starts the other, or 5 letters agree."""
+    return x.startswith(y) or y.startswith(x) or (len(x) >= 5 and len(y) >= 5 and x[:5] == y[:5])
+
+def topic_match(title, wmods):
+    """The package module an older live module name means, or None: at least 60% of the live title's words found,
+    ties going to the module with the fewest other words ("Dynamic Effects" over "Frequency Dynamics & Side-Chains")."""
+    if any(k in title.lower() for k in SHARED): return None
+    a = words(title)
+    if not a: return None
+    scored = []
+    for t in wmods:
+        b = words(t)
+        if not b: continue
+        hit = sum(1 for x in a if any(same_word(x, y) for y in b))
+        scored.append((hit / len(a), hit / len(b), t))
+    scored.sort(reverse=True)
+    if not scored or scored[0][0] < 0.6 or (len(scored) > 1 and scored[1][:2] == scored[0][:2]): return None
+    return scored[0][2]
+
 def run(work, src, dry, labels=set()):
     sman, wman = read(os.path.join(src, "imsmanifest.xml")), read(os.path.join(work, "imsmanifest.xml"))
     smm, wmm_path = read(os.path.join(src, "course_settings/module_meta.xml")), os.path.join(work, "course_settings/module_meta.xml")
@@ -97,9 +132,22 @@ def run(work, src, dry, labels=set()):
         for other, ob in sres.items():
             if other != rid and other not in copied and re.search(r'<file href="%s/' % re.escape(rid), ob): copy_resource(other)
 
+    # older live names: by topic, and a lab that matches nothing follows the module with its number
+    smods = [U(m.group(2)) for m in re.finditer(r'(?s)<module identifier="([^"]+)">\s*<title>([^<]*)</title>', smm)]
+    def num(t): n = re.match(r"\s*(?:module|week)\s*(\d+)", t, re.I); return int(n.group(1)) if n else None
+    by_title = {}
+    for t in smods:
+        if t in wmods or any(k in t.lower() for k in SHARED): continue
+        hit = topic_match(t, wmods)
+        if hit: by_title[t] = hit
+    for t in smods:
+        if t in wmods or t in by_title or any(k in t.lower() for k in SHARED) or num(t) is None: continue
+        same = [by_title[o] for o in smods if o in by_title and num(o) == num(t)]
+        if same and all(x == same[0] for x in same): by_title[t] = same[0]
+    for t, w in by_title.items(): print("mapped: %s -> %s" % (t, w))
     out = wmm
     for m in re.finditer(r'(?s)<module identifier="([^"]+)">\s*<title>([^<]*)</title>(.*?)</module>', smm):
-        title = U(m.group(2)); target = wmods.get(title)
+        title = U(m.group(2)); target = wmods.get(title) or wmods.get(by_title.get(title, ""))
         items = list(re.finditer(r'(?s)<item identifier="([^"]+)">(.*?)</item>', m.group(3)))
         prev_title = None
         for it in items:
@@ -114,9 +162,12 @@ def run(work, src, dry, labels=set()):
             wmod = re.search(r'(?s)(<module identifier="%s">.*?)(</items>|</module>)' % re.escape(target), out)
             if re.search(r"<identifierref>%s</identifierref>" % re.escape(ref), wmod.group(1)):
                 prev_title = ititle; continue          # already linked here
+            # an id Canvas knows only as an export label can't be matched by an import: copying the item would add a
+            # second copy beside the live one (2026-10-01: none of 2020's 55 graded ids were stored, so bringing them
+            # in from the export would have added 48 copies). Checked before copying, not only for linked work.
+            if ref in labels:
+                skipped.append("%s (made in Canvas, so an import would add a copy: change its date in Canvas)" % ititle); prev_title = ititle; continue
             if ref in sres: copy_resource(ref); added.append(ititle)
-            elif ref in labels:
-                skipped.append("%s (taken work Canvas knows only by an export label: move it into this module by hand in Canvas)" % ititle); prev_title = ititle; continue
             else: linked.append(ititle)
             iid = "i" + hashlib.md5((target + ref).encode()).hexdigest()[:12]
             item = '<item identifier="%s">%s</item>' % (iid, body)

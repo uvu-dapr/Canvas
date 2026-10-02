@@ -11,6 +11,11 @@
    file name read as words (Music_Panner_Network_Address_Menu.png -> "Music Panner Network Address Menu"). File names
    follow Standards 8.0.1 and 20.4, so they already say what the picture shows.
 
+5. Numbered paragraphs ("This element should be formatted as a list"; Standards 17): three or more <p> in a row that
+   start 1., 2., 3. (bold or not) become one <ol> with the same words, bold and spacing, numbers dropped from the text
+   because the list numbers them. The 11b worksheet blocks keep their <p> (list markup pastes into Word badly).
+   Adam, 2026-10-02: the 2255 Series and Parallel assignment's five problems were <p> lines and Canvas flagged them.
+
 4. With --bold only (Adam decides, question of 2026-09-30): bold set by an inline font-weight, which Canvas removes on
    save, becomes <strong> around the same text, which Canvas keeps; a font-weight that is not bold is just removed.
 
@@ -161,6 +166,35 @@ def fix_worksheet_blocks(doc):
     return "".join(out), n
 
 
+NUM_P = re.compile(r'<p\b([^>]*)>(\s*(?:<(?:strong|b)>)?\s*)(\d{1,2})[.)]\s+(.*?)</p>', re.I | re.S)
+
+
+def fix_numbered_paragraphs(doc):
+    """Runs of 3+ consecutive numbered <p> become an <ol> (Standards 17). Worksheet blocks (11b) are left alone."""
+    keep = [(m.start(), m.end()) for m in re.finditer(r'<(div|section|p)\b[^>]*user-select\s*:\s*all[\s\S]*?</\1>', doc, re.I)]
+    out, pos, n, i = [], 0, 0, 0
+    ms = list(NUM_P.finditer(doc))
+    while i < len(ms):
+        run = [ms[i]]
+        while i + len(run) < len(ms):
+            nxt = ms[i + len(run)]
+            if doc[run[-1].end():nxt.start()].strip() or int(nxt.group(3)) != int(run[-1].group(3)) + 1: break
+            run.append(nxt)
+        inside = any(a <= run[0].start() < b for a, b in keep)
+        if len(run) >= 3 and not inside:
+            first = int(run[0].group(3))
+            lis = []
+            for m in run:
+                attrs = m.group(1)
+                lead = m.group(2)          # "" or "<strong>"
+                lis.append("<li%s>%s%s</li>" % (attrs, lead.strip(), m.group(4)))
+            ol = '<ol style="margin: 0; padding-left: 28px;"%s>\n%s\n</ol>' % ("" if first == 1 else ' start="%d"' % first, "\n".join(lis))
+            out.append(doc[pos:run[0].start()]); out.append(ol); pos = run[-1].end(); n += 1
+        i += len(run)
+    out.append(doc[pos:])
+    return "".join(out), n
+
+
 BOLD = re.compile(r"font-weight\s*:\s*(bold|bolder|[6-9]00)\s*;?", re.I)
 ANY_WEIGHT = re.compile(r"font-weight\s*:\s*[^;\"]*;?", re.I)
 
@@ -191,7 +225,7 @@ def main():
         sys.exit(__doc__)
     root, dry, bold = sys.argv[1], "--dry-run" in sys.argv, "--bold" in sys.argv
     bolds = 0
-    scopes = alts = files = heads = worksheets = 0
+    scopes = alts = files = heads = worksheets = lists = 0
     for d, _, fs in os.walk(root):
         for f in fs:
             if not f.endswith(".html"):
@@ -203,6 +237,7 @@ def main():
             new, hd = fix_long_headings(new)
             new, sk = fix_heading_skips(new); hd += sk
             new, wb = fix_worksheet_blocks(new); worksheets += wb
+            new, nl = fix_numbered_paragraphs(new); lists += nl
             if bold:
                 new, b = fix_bold(new); bolds += b
             if new != doc:
@@ -210,7 +245,7 @@ def main():
                 print("%s: %d scope, %d alt, %d long heading" % (os.path.relpath(p, root), s, a, hd))
                 if not dry:
                     open(p, "w", encoding="utf-8").write(new)
-    print("RESULT: %d file(s), %d header cell(s) given scope, %d file-name alt text(s) rewritten, %d long heading(s) made bold paragraphs, %d worksheet block(s) made one-click%s%s" % (files, scopes, alts, heads, worksheets, (", %d font-weight(s) made <strong>" % bolds) if bold else "", " (dry run)" if dry else ""))
+    print("RESULT: %d file(s), %d header cell(s) given scope, %d file-name alt text(s) rewritten, %d long heading(s) made bold paragraphs, %d worksheet block(s) made one-click, %d numbered paragraph run(s) made lists%s%s" % (files, scopes, alts, heads, worksheets, lists, (", %d font-weight(s) made <strong>" % bolds) if bold else "", " (dry run)" if dry else ""))
 
 
 if __name__ == "__main__":

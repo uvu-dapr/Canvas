@@ -20,6 +20,19 @@ date until it is built again.
     python3 deck_pair.py status <folder>                         which Embedded decks are out of date, and why
     python3 deck_pair.py verify <Base-Linked.pptx | folder>      check a pair against the rules
     python3 deck_pair.py uncopy <Base-Linked.pptx | folder>      take out picture copies put inside a Linked deck
+    python3 deck_pair.py addpics <Base-Linked.pptx> <spec.json>  pictures with captions onto one slide (see add_pictures)
+    python3 deck_pair.py mirror  <Base-Linked.pptx | folder> [--dry]  every link into the PowerPoint mirror; Canvas copies to GitHub
+    python3 deck_pair.py place   <Base-Linked.pptx> <slide> <new picture> [--old <file>]  a new picture onto a slide, by link
+    python3 deck_pair.py sync                                    refresh the mirror's clones whose files changed
+    python3 deck_pair.py unique [folder]                         slide pictures still linked to GitHub: ChatGPT's next work
+
+Mirror (Adam, 2026-10-02: "get them all working with the linked ... so they actually open and show the images").
+PowerPoint's sandbox may always read ~/Library/Application Support/Microsoft/, and nothing else without a Grant File
+Access click per folder. So every link points at an APFS clone of its picture in MIRROR (no extra disk space, nothing
+inside the deck): MIRROR/GitHub/<Classes path> for a Canvas picture, MIRROR/Canvas Links/<path> for the deck's own
+picture in Images. The real file is the truth: embed, status and verify read it, and `mirror` refreshes a clone whenever
+its file changes. A link into MIRROR/GitHub means the slide still repeats the Canvas picture: ChatGPT makes it a unique
+one, and `place` points the slide at the new file in Images (a GitHub picture is never written over).
 
 Links only (Adam, 2026-09-30): a copy of each picture inside the Linked deck made PowerPoint show pictures, but the deck
 became Embedded-size and a replaced picture never showed until the copy was refreshed, so copies are not used. On the
@@ -28,7 +41,7 @@ pictures show in the Embedded deck and the PDF.
 
 Never touches a deck open in PowerPoint, or anything in Archive, _unused, PDF or Images.
 """
-import sys, os, re, io, zipfile, hashlib, html, json, datetime, subprocess, urllib.parse, posixpath, shutil, tempfile
+import sys, os, re, io, glob, zipfile, hashlib, html, json, datetime, subprocess, urllib.parse, posixpath, shutil, tempfile
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from deck_names import deck_base, subject_candidates, is_design
@@ -47,6 +60,42 @@ MIME = {"png": "image/png", "jpg": "image/jpeg", "jpeg": "image/jpeg", "gif": "i
 def sha(b): return hashlib.sha1(b).hexdigest()
 def base_of(path): return re.sub(r"-(Linked|Embedded)$", "", os.path.splitext(os.path.basename(path))[0])
 def rels_name(part): return posixpath.join(posixpath.dirname(part), "_rels", posixpath.basename(part) + ".rels")
+
+# ---------------------------------------------------------------- the PowerPoint mirror (2026-10-02)
+
+MIRROR = os.path.expanduser("~/Library/Application Support/Microsoft/Canvas Preview Pictures")
+GITHUB_CLASSES = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "Classes")
+LINKS_ROOT = os.path.expanduser("~/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links")
+ROOTS = (("GitHub", GITHUB_CLASSES), ("Canvas Links", LINKS_ROOT))
+
+def mirror_path(real):
+    real = os.path.abspath(real)
+    for name, root in ROOTS:
+        if real.startswith(root + "/"): return os.path.join(MIRROR, name, real[len(root) + 1:])
+    return os.path.join(MIRROR, "Other", real.lstrip("/"))
+
+def real_path(p):
+    """A mirror clone's own file; any other path is already real."""
+    if not p.startswith(MIRROR + "/"): return p
+    rest = p[len(MIRROR) + 1:]
+    for name, root in ROOTS:
+        if rest.startswith(name + "/"): return os.path.join(root, rest[len(name) + 1:])
+    return "/" + rest[len("Other/"):] if rest.startswith("Other/") else p
+
+def mirror_sync(real):
+    """Clones the file into the mirror when the clone is missing or older; returns the clone's path."""
+    m = mirror_path(real)
+    if os.path.exists(real):
+        st = os.stat(real)
+        if not os.path.exists(m) or os.path.getsize(m) != st.st_size or abs(os.path.getmtime(m) - st.st_mtime) > 1:
+            os.makedirs(os.path.dirname(m), exist_ok=True)
+            tmp = m + ".part"
+            if subprocess.run(["cp", "-c", "-p", real, tmp]).returncode != 0: shutil.copy2(real, tmp)
+            os.replace(tmp, m)
+    return m
+
+def mirror_link(real): return "file://" + urllib.parse.quote(mirror_sync(real))
+def is_github(real): return os.path.abspath(real).startswith(GITHUB_CLASSES + "/")
 
 OPEN = None
 def is_open(deck):
@@ -199,7 +248,7 @@ def split(deck, dry=False):
             listing.append((pos, name))
             k[0] += 1; lid = "rIdLk%d" % k[0]
             while lid in rels: lid += "x"
-            new_rels.append('<Relationship Id="%s" Type="%s" Target="Images/%s" TargetMode="External"/>' % (lid, REL_IMG, urllib.parse.quote(name)))
+            new_rels.append('<Relationship Id="%s" Type="%s" Target="%s" TargetMode="External"/>' % (lid, REL_IMG, mirror_link(os.path.join(images, name))))
             el = re.sub(r'<a:blip r:embed="[^"]+"', '<a:blip r:link="%s"' % lid, el, count=1)
             # an SVG layered over the picture would stay embedded: the linked PNG or JPG is the picture
             return re.sub(r'(?s)<a:ext uri="\{96DAC541-7B7A-43D3-8B79-37D633B846F1\}">.*?</a:ext>', "", el)
@@ -294,6 +343,228 @@ def add_reference_slides(data, course, module, base, listing, design, not_linked
         ct = data["[Content_Types].xml"].decode("utf-8")
         data["[Content_Types].xml"] = ct.replace("</Types>", '<Override PartName="/ppt/slides/slide%d.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/></Types>' % num).encode("utf-8")
 
+# ---------------------------------------------------------------- addpics
+
+def slide_size(data):
+    m = re.search(r'<p:sldSz cx="(\d+)" cy="(\d+)"', data["ppt/presentation.xml"].decode("utf-8"))
+    return (int(m.group(1)), int(m.group(2))) if m else (9144000, 6858000)
+
+def title_bottom(data, sx):
+    """Where the slide's title ends: its own box, else its layout's, else a fifth of the way down"""
+    body = data[sx].decode("utf-8")
+    for xml in [body] + [data.get(posixpath.normpath(posixpath.join(posixpath.dirname(sx), t)), b"").decode("utf-8")
+                         for t in re.findall(r'Target="(\.\./slideLayouts/[^"]+)"', data.get(rels_name(sx), b"").decode("utf-8"))]:
+        for m in shapes(xml):
+            if re.search(r'<p:ph [^>]*type="(title|ctrTitle)"', m.group(0)):
+                g = re.search(r'<a:off x="\d+" y="(\d+)"/><a:ext cx="\d+" cy="(\d+)"', m.group(0))
+                if g: return int(g.group(1)) + int(g.group(2))
+    return slide_size(data)[1] // 5
+
+def body_top(data, sx):
+    """The top of the slide's body text placeholder: on the slide, else its layout, else the master"""
+    def find(xml, master=False):
+        for m in shapes(xml):
+            if re.search(r'<p:ph (?:type="body" )?idx="1"' if not master else r'<p:ph type="body"', m.group(0)):
+                g = re.search(r'<a:off x="\d+" y="(\d+)"/>', m.group(0))
+                if g: return int(g.group(1))
+        return None
+    y = find(data[sx].decode("utf-8"))
+    if y: return y
+    for t in re.findall(r'Target="(\.\./slideLayouts/[^"]+)"', data.get(rels_name(sx), b"").decode("utf-8")):
+        lay = posixpath.normpath(posixpath.join(posixpath.dirname(sx), t))
+        y = find(data.get(lay, b"").decode("utf-8"))
+        if y: return y
+        for mt in re.findall(r'Target="(\.\./slideMasters/[^"]+)"', data.get(rels_name(lay), b"").decode("utf-8")):
+            y = find(data.get(posixpath.normpath(posixpath.join(posixpath.dirname(lay), mt)), b"").decode("utf-8"), master=True)
+            if y: return y
+    return None
+
+def content_crop(path):
+    """The empty (transparent or near-white) margins around a picture, as a srcRect crop, so a generated diagram fills
+    its space (imgbounds.swift beside this file, built once into the cache). {} when there is nothing to trim."""
+    tool = os.path.expanduser("~/Library/Caches/CanvasPreview/imgbounds")
+    src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "imgbounds.swift")
+    if not os.path.exists(tool) or os.path.getmtime(tool) < os.path.getmtime(src):
+        os.makedirs(os.path.dirname(tool), exist_ok=True)
+        subprocess.run(["swiftc", "-O", src, "-o", tool], capture_output=True)
+    try: v = [int(x) for x in subprocess.run([tool, path], capture_output=True, text=True, timeout=60).stdout.split()]
+    except Exception: return {}
+    if len(v) != 4 or max(v) < 1500: return {}
+    return dict(zip(("l", "t", "r", "b"), v))
+
+def image_size(path):
+    r = subprocess.run(["sips", "-g", "pixelWidth", "-g", "pixelHeight", path], capture_output=True, text=True).stdout
+    w = re.search(r"pixelWidth: (\d+)", r); h = re.search(r"pixelHeight: (\d+)", r)
+    return (int(w.group(1)), int(h.group(1))) if w and h else (4, 3)
+
+def refresh_reference(data, deck):
+    """The reference slides again, from the links the deck has now (after pictures are added or removed)"""
+    design = 0; not_linked = []
+    pres = data["ppt/presentation.xml"].decode("utf-8"); prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8")
+    ct = data["[Content_Types].xml"].decode("utf-8")
+    for rid, sx in slide_order(data):
+        if sx in data and REF_MARK in data[sx].decode("utf-8"):
+            old = data[sx].decode("utf-8")
+            m = re.search(r"master and layout pictures\): (\d+)", old)
+            if m: design = int(m.group(1))
+            n = re.search(r"Not linked \(kept inside\): ([^<]*)", old)
+            if n: not_linked = [html.unescape(x) for x in n.group(1).split("; ")]
+            pres = re.sub(r'<p:sldId [^>]*r:id="%s"\s*/>' % re.escape(rid), "", pres)
+            prels = re.sub(r'<Relationship [^>]*Id="%s"[^>]*/>' % re.escape(rid), "", prels)
+            ct = ct.replace('<Override PartName="/%s" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>' % sx, "")
+            data.pop(sx, None); data.pop(rels_name(sx), None)
+    data["ppt/presentation.xml"] = pres.encode("utf-8"); data["ppt/_rels/presentation.xml.rels"] = prels.encode("utf-8"); data["[Content_Types].xml"] = ct.encode("utf-8")
+    listing = []
+    for pos, (rid, sx) in enumerate(slide_order(data), 1):
+        rels = data.get(rels_name(sx), b"").decode("utf-8"); body = data.get(sx, b"").decode("utf-8")
+        for r in re.findall(r"<Relationship [^>]*/>", rels):
+            if 'TargetMode="External"' in r and 'relationships/image"' in r:
+                lid = re.search(r'Id="([^"]+)"', r).group(1)
+                if re.search(r'r:link="%s"' % re.escape(lid), body):
+                    real = link_target_path(deck, re.search(r'Target="([^"]+)"', r).group(1))
+                    listing.append((pos, ("Canvas picture, make unique: " if is_github(real) else "") + os.path.basename(real)))
+    course, module = course_and_module(deck)
+    add_reference_slides(data, course, module, base_of(deck), listing, design, not_linked)
+    return listing
+
+def resize_body(body, xfrm, title_y, keep_y=False):
+    """Moves the slide's body text into xfrm: its body placeholder, else (decks built from text boxes) the text box
+    with the most words below the title"""
+    def place(sp):
+        x = xfrm
+        g = geom(sp)
+        if keep_y and g:   # a text box keeps its own top and height; only its width changes (subtitles above stay clear)
+            n = re.search(r'<a:off x="(\d+)" y="\d+"/><a:ext cx="(\d+)" cy="\d+"', xfrm)
+            x = '<a:xfrm><a:off x="%d" y="%d"/><a:ext cx="%d" cy="%d"/></a:xfrm>' % (g[0], g[1], int(n.group(1)) + int(n.group(2)) - g[0], g[3])
+        if re.search(r"<p:spPr\s*/>", sp): return re.sub(r"<p:spPr\s*/>", "<p:spPr>%s</p:spPr>" % x, sp, count=1)
+        if "<a:xfrm" in sp: return re.sub(r"(?s)<a:xfrm.*?</a:xfrm>", x, sp, count=1)
+        return sp.replace("<p:spPr>", "<p:spPr>" + x, 1)
+    m = re.search(r'(?s)<p:sp>(?:(?!</p:sp>).)*?<p:ph (?:type="body" )?idx="1"[^>]*/>.*?</p:sp>', body)
+    if m: return body[:m.start()] + place(m.group(0)) + body[m.end():]
+    m = text_body(body, title_y)
+    if m: return body[:m.start()] + place(m.group(0)) + body[m.end():]
+    return body
+
+def text_body(body, title_y):
+    """The bullets of a slide built from text boxes: the text box with the most words below the title"""
+    best = None
+    for m in shapes(body):
+        sp = m.group(0)
+        if not sp.startswith("<p:sp>") or re.search(r'<p:ph [^>]*type="(title|ctrTitle)"', sp): continue
+        g = geom(sp); words = len(" ".join(re.findall(r"<a:t>([^<]*)</a:t>", sp)).split())
+        if g and g[1] >= title_y * 0.8 and words > 3 and (best is None or words > best[0]): best = (words, m)
+    return best[1] if best else None
+
+def add_pictures(linked, spec, archive=True, build=True):
+    """Pictures onto one slide of a Linked deck (Adam, 2026-10-01: "Show a picture"). spec: {"slide": 7, "layout":
+    "rows" | "columns" | "side" (bullets kept on the left, pictures stacked on the right with a label) | "below" (bullets
+    kept on top, body_frac of the space, a wide picture under them), "trim": true (empty margins cropped), "replace_body": true, "pictures": [{"src": <image file>, "subject": "RODE_SoundField_NT_SF1",
+    "title": "RØDE SoundField NT-SF1", "text": "...", "alt": "...", "crop": {"t": 0, "b": 35000, "l": 0, "r": 0},
+    "source": "where it came from"}]}. Each picture is copied to Images/<Base>-<Subject>.<ext> (never over a
+    different file) and linked; with replace_body the slide's bullet text box gives way to the pictures and their
+    captions, which carry its facts. The deck before goes to Archive; the reference slides and the Embedded deck are
+    built again."""
+    if is_open(linked): return dict(deck=linked, skipped="open in PowerPoint; close it and run again")
+    infos, data = read(linked)
+    order = slide_order(data); n = spec["slide"]
+    if not 1 <= n <= len(order): return dict(deck=linked, error="no slide %d" % n)
+    sx = order[n - 1][1]; body = data[sx].decode("utf-8"); rn = rels_name(sx); rels = data.get(rn, b"").decode("utf-8")
+    base = base_of(linked); images = os.path.join(os.path.dirname(os.path.abspath(linked)), "Images")
+    W, H = slide_size(data)
+    pics = spec["pictures"]
+    # the files, one per deck: Images/<Base>-<Subject>.<ext>
+    names = []
+    for p in pics:
+        ext = os.path.splitext(p["src"])[1].lower().replace(".jpeg", ".jpg")
+        name = "%s-%s%s" % (base, p["subject"], ext); dst = os.path.join(images, name)
+        blob = open(p["src"], "rb").read()
+        if os.path.exists(dst) and sha(open(dst, "rb").read()) != sha(blob): return dict(deck=linked, error="%s already exists with a different picture" % name)
+        names.append((name, dst, blob))
+    # the area the slide's bullet text had (its body placeholder, from the slide, its layout or the master), else
+    # under the title: a design's banner can reach below the title box (3340's purple band, 2026-10-01)
+    bt = body_top(data, sx)
+    top = bt if bt else title_bottom(data, sx) + int(H * 0.03)
+    if not re.search(r'<p:ph (?:type="body" )?idx="1"', body):
+        # bullets in a text box: they start at their own top, not at the layout's or master's placeholder, which can
+        # sit above a subtitle line (3340 The_Dolby_Atmos_Renderer slide 19, 2026-10-01)
+        tb = text_body(body, top); g = geom(tb.group(0)) if tb else None
+        if g: top = max(top, g[1])
+    bottom = H - int(H * 0.06); left = int(W * 0.06); right = W - int(W * 0.06)
+    layout = spec.get("layout", "rows"); side = layout == "side"; below = layout == "below"; placed = layout == "place"
+    if below:
+        # the bullets stay on top; a wide picture (or two) goes under them, full width (a strip-shaped diagram)
+        body_h = int((bottom - top) * spec.get("body_frac", 0.5))
+        bx = '<a:xfrm><a:off x="%d" y="%d"/><a:ext cx="%d" cy="%d"/></a:xfrm>' % (left, top, right - left, body_h)
+        body = resize_body(body, bx, top)
+        ptop = top + body_h + int(H * 0.02)
+    if side:
+        # the bullets stay, in the left part; the pictures go on the right (one or two, each with a short label)
+        split_x = left + int((right - left) * 0.54)
+        bx = '<a:xfrm><a:off x="%d" y="%d"/><a:ext cx="%d" cy="%d"/></a:xfrm>' % (left, top, split_x - left - int(W * 0.02), bottom - top)
+        body = resize_body(body, bx, top, keep_y=bt is None)
+    elif not below and not placed and spec.get("replace_body", True):
+        body = re.sub(r'(?s)<p:sp>(?:(?!</p:sp>).)*?<p:ph (?:type="body" )?idx="1"[^>]*/>.*?</p:sp>', "", body, count=1)
+    ids = [int(x) for x in re.findall(r'<p:cNvPr id="(\d+)"', body)] or [1]
+    nid = max(ids) + 1
+    k = len(pics); gap = int(H * 0.02); xml = []; new_rels = []
+    rows = spec.get("layout", "rows") == "rows"
+    for i, (p, (name, dst, blob)) in enumerate(zip(pics, names)):
+        if placed:
+            # an exact spot (fractions of the slide) where the slide has room; nothing else on the slide moves
+            fx, fy, fw, fh = p.get("box", spec.get("box"))
+            cap = int(H * 0.05) if p.get("title") else 0
+            box = (int(W * fx), int(H * fy), int(W * fw), int(H * fh) - cap); tbox = (box[0], box[1] + box[3], box[2], cap)
+        elif below:
+            cw = (right - left - gap * (k - 1)) // k; cap = int(H * 0.055); x0 = left + i * (cw + gap)
+            box = (x0, ptop, cw, bottom - ptop - cap); tbox = (x0, bottom - cap, cw, cap)
+        elif side:
+            sh = (bottom - top - gap * (k - 1)) // k; y = top + i * (sh + gap); cap = int(H * 0.055)
+            box = (split_x, y, right - split_x, sh - cap); tbox = (split_x, y + sh - cap, right - split_x, cap)
+        elif rows:
+            ch = (bottom - top - gap * (k - 1)) // k; y = top + i * (ch + gap)
+            box = (left, y, int((right - left) * 0.5), ch); tbox = (left + int((right - left) * 0.53), y, int((right - left) * 0.47), ch)
+        else:
+            cw = (right - left - gap * (k - 1)) // k; x = left + i * (cw + gap); ih = int((bottom - top) * 0.62)
+            box = (x, top, cw, ih); tbox = (x, top + ih + gap, cw, bottom - top - ih - gap)
+        pw, ph = image_size(p["src"])
+        c = p["crop"] if "crop" in p else (content_crop(p["src"]) if spec.get("trim", True) else {})
+        vw = pw * (1 - (c.get("l", 0) + c.get("r", 0)) / 100000); vh = ph * (1 - (c.get("t", 0) + c.get("b", 0)) / 100000)
+        scale = min(box[2] / vw, box[3] / vh); w, h = int(vw * scale), int(vh * scale)
+        x = box[0] + (box[2] - w) // 2; y = box[1] + (box[3] - h) // 2
+        if side or below or placed:   # the label right under its picture, the two centered in their space
+            y = box[1] + max(0, (box[3] + tbox[3] - (h + tbox[3])) // 2)
+            tbox = (tbox[0], y + h, tbox[2], tbox[3])
+        lid = "rIdLk%d" % (i + 1)
+        while lid in rels or any(lid in r for r in new_rels): lid += "x"
+        new_rels.append('<Relationship Id="%s" Type="%s" Target="%s" TargetMode="External"/>' % (lid, REL_IMG, mirror_link(os.path.join(os.path.dirname(os.path.abspath(linked)), "Images", name))))
+        src_rect = ('<a:srcRect%s/>' % "".join(' %s="%d"' % (kk, vv) for kk, vv in c.items() if vv)) if c else ""
+        alt = html.escape(p.get("alt") or p.get("title", ""), quote=True)
+        xml.append('<p:pic><p:nvPicPr><p:cNvPr id="%d" name="Picture %d" descr="%s"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>'
+                   '<p:blipFill><a:blip r:link="%s"/>%s<a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="%d" y="%d"/><a:ext cx="%d" cy="%d"/></a:xfrm>'
+                   '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>' % (nid, nid, alt, lid, src_rect, x, y, w, h))
+        nid += 1
+        if side or below or placed:
+            paras = '<a:p><a:pPr algn="ctr"/><a:r><a:rPr lang="en-US" sz="%d" dirty="0"><a:solidFill><a:srgbClr val="595959"/></a:solidFill></a:rPr><a:t>%s</a:t></a:r></a:p>' % (spec.get("label_size", 1200), html.escape(p.get("title", ""), quote=False))
+        else:
+            paras = '<a:p><a:r><a:rPr lang="en-US" sz="%d" b="1" dirty="0"/><a:t>%s</a:t></a:r></a:p>' % (spec.get("title_size", 2000), html.escape(p.get("title", ""), quote=False))
+        if p.get("text") and not (side or below or placed): paras += '<a:p><a:spcBef><a:spcPts val="300"/></a:spcBef><a:r><a:rPr lang="en-US" sz="%d" dirty="0"/><a:t>%s</a:t></a:r></a:p>' % (spec.get("text_size", 1600), html.escape(american(p["text"]), quote=False))
+        if placed and not p.get("title"): continue
+        xml.append('<p:sp><p:nvSpPr><p:cNvPr id="%d" name="Caption %d"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="%d" y="%d"/><a:ext cx="%d" cy="%d"/></a:xfrm>'
+                   '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr wrap="square" anchor="%s"><a:normAutofit/></a:bodyPr><a:lstStyle/>%s</p:txBody></p:sp>'
+                   % (nid, nid, tbox[0], tbox[1], tbox[2], tbox[3], "ctr" if rows else "t", paras))
+        nid += 1
+    body = body.replace("</p:spTree>", "".join(xml) + "</p:spTree>", 1)
+    data[sx] = body.encode("utf-8")
+    data[rn] = (rels or '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>').replace("</Relationships>", "".join(new_rels) + "</Relationships>").encode("utf-8")
+    listing = refresh_reference(data, linked)
+    for name, dst, blob in names:
+        if not os.path.exists(dst): os.makedirs(images, exist_ok=True); open(dst, "wb").write(blob)
+    arch = os.path.join(os.path.dirname(os.path.abspath(linked)), "Archive"); os.makedirs(arch, exist_ok=True)
+    keep = os.path.join(arch, "%s (before pictures %s).pptx" % (os.path.splitext(os.path.basename(linked))[0], datetime.datetime.now().strftime("%Y-%m-%d %H%M")))
+    if archive and not os.path.exists(keep): shutil.copy2(linked, keep)
+    write(linked, infos, data)
+    return dict(deck=linked, slide=n, pictures=[x[0] for x in names], linked_now=len(listing), archived=keep if archive else None, embed=embed(linked) if build else None)
+
 # ---------------------------------------------------------------- uncopy
 
 def uncopy(linked):
@@ -314,7 +585,8 @@ def uncopy(linked):
 # ---------------------------------------------------------------- embed
 
 def link_target_path(deck, target):
-    if target.startswith("file://"): return urllib.parse.unquote(urllib.parse.urlparse(target).path)
+    """The real file a link shows: a mirror clone resolves to its own file."""
+    if target.startswith("file://"): return real_path(urllib.parse.unquote(urllib.parse.urlparse(target).path))
     return os.path.join(os.path.dirname(os.path.abspath(deck)), urllib.parse.unquote(target))
 
 def embed(linked, out=None):
@@ -388,22 +660,161 @@ def verify(linked):
         na, nb = rels_name(a), rels_name(b)
         la = re.findall(r'relationships/notesSlide" Target="([^"]+)"', L.get(na, b"").decode()); lb = re.findall(r'relationships/notesSlide" Target="([^"]+)"', E.get(nb, b"").decode())
         if la and lb and L[posixpath.normpath(posixpath.join("ppt/slides", la[0]))] != E[posixpath.normpath(posixpath.join("ppt/slides", lb[0]))]: problems.append("notes differ on " + posixpath.basename(a))
-    links = 0
+    links = github = 0
     for n, b in L.items():
         if not n.startswith("ppt/slides/_rels/"): continue
         for r in re.findall(r"<Relationship [^>]*/>", b.decode("utf-8", "ignore")):
             if 'relationships/image"' not in r or 'TargetMode="External"' not in r: continue
             t = re.search(r'Target="([^"]+)"', r).group(1); links += 1
-            if t.startswith("file:") or t.startswith("/"): problems.append("absolute link: " + t)
-            elif not t.startswith("Images/"): problems.append("link outside Images/: " + t)
-            elif not os.path.exists(link_target_path(linked, t)): problems.append("missing picture: " + t)
-            elif not urllib.parse.unquote(t[7:]).startswith(base + "-"): problems.append("picture name does not start with %s-: %s" % (base, t))
+            real = link_target_path(linked, t)
+            clone = urllib.parse.unquote(urllib.parse.urlparse(t).path) if t.startswith("file://") else ""
+            if not clone.startswith(MIRROR + "/"): problems.append("not through the PowerPoint mirror (red X in PowerPoint; run mirror): " + t)
+            elif not os.path.exists(real): problems.append("missing picture: " + real)
+            elif not os.path.exists(clone) or os.path.getsize(clone) != os.path.getsize(real): problems.append("mirror out of date (run mirror): " + os.path.basename(real))
+            elif not is_github(real) and not os.path.basename(real).startswith(base + "-"): problems.append("picture name does not start with %s-: %s" % (base, os.path.basename(real)))
+            if is_github(real): github += 1
     for n, b in E.items():
         if n.endswith(".rels") and re.search(r'relationships/image" Target="[^"]+" TargetMode="External"', b.decode("utf-8", "ignore")):
             problems.append("Embedded deck still links a picture: " + n)
     st = pair_state(linked)
     if st["state"] != "current": problems.append("Embedded deck out of date: " + st["state"])
-    return dict(linked=linked, embedded=emb, linked_pictures=links, reference_slides=refs, slides=len(lo), problems=problems)
+    return dict(linked=linked, embedded=emb, linked_pictures=links, canvas_pictures=github, reference_slides=refs, slides=len(lo), problems=problems)
+
+# ---------------------------------------------------------------- mirror and place (2026-10-02)
+
+SOURCES = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slide_picture_sources.json")
+
+def mirror_deck(linked, dry=False, sources=None):
+    """Every picture link into the PowerPoint mirror. A picture in Images that is a copy of a Canvas picture (Build-Tools/
+    slide_picture_sources.py, a sure match only) is linked to the Canvas picture in GitHub instead, so the link itself
+    says the slide still needs a unique picture. Slides, text and the deck's date stay as they are."""
+    if is_open(linked): return dict(linked=linked, skipped="open in PowerPoint; close it and run again")
+    sources = sources if sources is not None else (json.load(open(SOURCES)) if os.path.exists(SOURCES) else {})
+    infos, data = read(linked); changed = to_github = 0; freed = []; missing = []
+    for n in list(data):
+        if not re.match(r"ppt/slides/_rels/slide\d+\.xml\.rels$", n): continue
+        rels = data[n].decode("utf-8"); new = rels
+        for r in re.findall(r"<Relationship [^>]*/>", rels):
+            if 'relationships/image"' not in r or 'TargetMode="External"' not in r: continue
+            t = re.search(r'Target="([^"]+)"', r).group(1); real = link_target_path(linked, t)
+            canvas = (sources.get(real) or {}).get("canvas") or ""
+            if canvas and os.path.exists(canvas) and not is_github(real): freed.append(real); real = canvas; to_github += 1
+            if not os.path.exists(real): missing.append(os.path.basename(real)); continue
+            tgt = "file://" + urllib.parse.quote(mirror_path(real)) if dry else mirror_link(real)
+            if tgt != t: new = new.replace(r, r.replace('Target="%s"' % t, 'Target="%s"' % tgt)); changed += 1
+        data[n] = new.encode("utf-8")
+    if changed and not dry:
+        refresh_reference(data, linked)
+        st = os.stat(linked); write(linked, infos, data); os.utime(linked, (st.st_atime, st.st_mtime))   # same slides: same date
+    return dict(linked=linked, relinked=changed, to_github=to_github, freed=sorted(set(freed)), missing=missing)
+
+def sync_mirror():
+    """Refreshes every clone whose file changed (a picture fixed in GitHub, a new one saved over in Images), so the
+    Linked decks show it in PowerPoint at once. Fast: no deck is opened."""
+    fresh = 0
+    for d, _, fs in os.walk(MIRROR):
+        for f in fs:
+            if f.endswith(".part"): continue
+            m = os.path.join(d, f); real = real_path(m)
+            if not os.path.exists(real): continue
+            st = os.stat(real)
+            if os.path.getsize(m) != st.st_size or abs(os.path.getmtime(m) - st.st_mtime) > 1: mirror_sync(real); fresh += 1
+    return dict(refreshed=fresh)
+
+# Real things are never generated (Standards 20.1 rule 3): software screens, named products and gear, real people and
+# photos of real parts keep the Canvas picture. The briefs' Keep tables are Adam's own list (2026-09-26).
+REAL = re.compile(r"\b(screen ?shots?|screens?|window|windows|menu|menus|dialog|tab|toolbar|inspector|preferences|settings|"
+                  r"session|plug-?ins?|interface|ui|app|software|portrait|photo of|tesla|edison|faraday|ohm\b|volta\b|"
+                  r"pro ?tools|logic|ableton|reaper|cubase|nuendo|studio one|dolby|avid|waves|fabfilter|izotope|universal audio|uad|"
+                  r"neve|ssl|api|akg|neumann|shure|sennheiser|yamaha|behringer|focusrite|apogee|audient|rme|genelec|adam audio|krk|"
+                  r"auratone|logitech|maag|wwise|fmod|unity|unreal|macos|mac os|disk utility|finder|apple|iphone|ipad|dante|soundgrid|"
+                  r"midi ?controller|keyboard controller|2n2222a?|lm741|ne5532|tl07\d|model|logos?|renderer|panner|grids?|"
+                  r"indicators?|meter bank|layout map|room view|hand-?built|supercaps?|buttons?|playlists?|lanes|zoom h\d|marked)\b", re.I)
+
+def keep_tables():
+    """Canvas pictures the briefs' Keep tables say stay on their slides: {(course folder, picture name)}"""
+    out = set()
+    for bf in glob.glob(os.path.join(GITHUB_CLASSES, "*", "_briefs", "ChatGPT Image Creation - DAPR * Presentations.md")):
+        course = os.path.basename(os.path.dirname(os.path.dirname(bf))); txt = open(bf, encoding="utf-8").read()
+        for sec in re.findall(r"(?ms)^#+ Keep.*?(?=^# (?!Keep)|\Z)", txt):
+            for name in re.findall(r"Canvas pictures? `([^`]+)`", sec) + re.findall(r"\| `([^`]+\.(?:png|jpe?g|gif))`", sec, re.I): out.add((course, name))
+    return out
+
+def keep_reason(real, alt, title, kept):
+    course = os.path.relpath(real, GITHUB_CLASSES).split(os.sep)[0]
+    if (course, os.path.basename(real)) in kept: return "Keep table in the brief (Adam, 2026-09-26)"
+    words = " ".join([alt, title, os.path.splitext(os.path.basename(real))[0]]).replace("_", " ")
+    split = re.sub(r"(?<=[a-z])(?=[A-Z])|(?<=[A-Za-z])(?=\d)|(?<=\d)(?=[A-Za-z])", " ", words)   # NeumannKU100 -> Neumann KU 100
+    m = REAL.search(words) or REAL.search(split)          # both: iZotope and 2N2222A stay whole
+    return "real %s (20.1 rule 3)" % m.group(0).lower() if m else ""
+
+def unique(target):
+    """Every slide picture that is still the Canvas picture (its link goes into GitHub): what ChatGPT makes next so the
+    deck is its own. The new file reuses the name the deck's copy had (now in Images/Archive), else a name from the alt
+    text; the size keeps the Canvas picture's shape, because `place` only swaps the link and the frame stays."""
+    srcs = json.load(open(SOURCES)) if os.path.exists(SOURCES) else {}
+    kept = keep_tables()
+    by_canvas = {}
+    for copy, v in srcs.items():
+        if v.get("canvas"): by_canvas.setdefault(v["canvas"], []).append(copy)
+    out = []
+    for d in decks(target, r"-Linked\.pptx$"):
+        base = base_of(d); images = os.path.join(os.path.dirname(d), "Images")
+        z = zipfile.ZipFile(d); names = set(z.namelist())
+        order = [sx for _, sx in slide_order({n: z.read(n) for n in ("ppt/presentation.xml", "ppt/_rels/presentation.xml.rels")})]
+        for k, sx in enumerate(order, 1):
+            rn = rels_name(sx)
+            if rn not in names or sx not in names: continue
+            rels = z.read(rn).decode("utf-8", "ignore"); body = z.read(sx).decode("utf-8", "ignore")
+            if REF_MARK in body: continue
+            for r in re.findall(r"<Relationship [^>]*/>", rels):
+                if 'relationships/image"' not in r or 'TargetMode="External"' not in r: continue
+                lid = re.search(r'Id="([^"]+)"', r).group(1); real = link_target_path(d, re.search(r'Target="([^"]+)"', r).group(1))
+                if not is_github(real): continue
+                pic = re.search(r'<p:pic>(?:(?!</p:pic>).)*?r:link="%s"' % re.escape(lid), body, re.S)
+                alt = html.unescape(re.search(r'descr="([^"]*)"', pic.group(0)).group(1)) if pic and re.search(r'descr="([^"]*)"', pic.group(0)) else ""
+                old = [c for c in by_canvas.get(real, []) if os.path.basename(c).startswith(base + "-")]
+                name = os.path.basename(old[0]) if old else "%s-%s%s" % (base, subject_candidates(alt, title_of(body), None)[0] if alt or title_of(body) else "Picture_%d" % k, os.path.splitext(real)[1])
+                keep = keep_reason(real, alt, title_of(body), kept)
+                w, h = (1600, 900) if keep else (image_size(real) or (1600, 900))    # only ChatGPT's work needs the shape
+                W = 1920 if name.lower().endswith((".jpg", ".jpeg")) else 1600; H = int(round(W * h / float(w))) if w else 900
+                out.append(dict(deck=d, base=base, slide=k, title=title_of(body), alt=alt, github=real, new=os.path.join(images, name),
+                                width=W, height=H, made=os.path.exists(os.path.join(images, name)), keep=keep))
+    return out
+
+def archive_freed(results):
+    """Copies in Images that no deck links any more go to Images/Archive (kept, never deleted)."""
+    linked_now = set()
+    for d in decks(LINKS_ROOT, r"-Linked\.pptx$"):
+        z = zipfile.ZipFile(d)
+        for n in z.namelist():
+            if n.startswith("ppt/slides/_rels/"):
+                for t in re.findall(r'Target="([^"]+)" TargetMode="External"', z.read(n).decode("utf-8", "ignore")): linked_now.add(link_target_path(d, t))
+    moved = []
+    for r in results:
+        for f in r.get("freed", []):
+            if f in linked_now or not os.path.exists(f): continue
+            arch = os.path.join(os.path.dirname(f), "Archive"); os.makedirs(arch, exist_ok=True)
+            shutil.move(f, os.path.join(arch, os.path.basename(f))); moved.append(f)
+    return moved
+
+def place(linked, slide, new, old=None):
+    """Points one picture on a slide at a new file (in Images): the link whose file is `old`, else the slide's only link,
+    else its one link into GitHub. The old file is never written over; the Embedded deck is built again."""
+    if is_open(linked): return dict(linked=linked, skipped="open in PowerPoint; close it and run again")
+    infos, data = read(linked)
+    order = [sx for _, sx in slide_order(data)]
+    if not (1 <= slide <= len(order)): return dict(error="no slide %d" % slide)
+    rn = rels_name(order[slide - 1]); rels = data.get(rn, b"").decode("utf-8")
+    links = [(r, re.search(r'Target="([^"]+)"', r).group(1)) for r in re.findall(r"<Relationship [^>]*/>", rels)
+             if 'relationships/image"' in r and 'TargetMode="External"' in r]
+    pick = [x for x in links if old and os.path.abspath(link_target_path(linked, x[1])) == os.path.abspath(old)] or \
+           (links if len(links) == 1 else [x for x in links if is_github(link_target_path(linked, x[1]))])
+    if len(pick) != 1: return dict(error="slide %d has %d pictures that could be the one; name it with --old" % (slide, len(links)))
+    r, t = pick[0]; was = link_target_path(linked, t)
+    data[rn] = rels.replace(r, r.replace('Target="%s"' % t, 'Target="%s"' % mirror_link(new))).encode("utf-8")
+    refresh_reference(data, linked); write(linked, infos, data)
+    return dict(linked=linked, slide=slide, was=was, now=os.path.abspath(new), embed=embed(linked))
 
 def decks(target, pattern):
     if target.lower().endswith(".pptx"): return [target]
@@ -415,15 +826,30 @@ def decks(target, pattern):
 
 if __name__ == "__main__":
     a = sys.argv[1:]
-    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy"): print(__doc__); sys.exit(2)
+    if a[:1] == ["sync"]: print(json.dumps([sync_mirror()])); sys.exit(0)
+    if a[:1] == ["unique"]: print(json.dumps(unique(a[1] if len(a) > 1 else LINKS_ROOT), indent=1)); sys.exit(0)
+    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy", "addpics", "mirror", "place"): print(__doc__); sys.exit(2)
     t = a[1]
     if a[0] == "split": res = [split(d, "--dry" in a) for d in decks(t, r"(?<!-Linked)(?<!-Embedded)\.pptx$")]
     elif a[0] == "embed": res = [embed(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "uncopy": res = [uncopy(d) for d in decks(t, r"-Linked\.pptx$")]
+    elif a[0] == "addpics":
+        spec = json.load(open(a[2], encoding="utf-8")); specs = spec if isinstance(spec, list) else [spec]
+        # several slides in one go: one copy to Archive first, one Embedded build at the end
+        res = []
+        for i, sp in enumerate(specs):
+            r = add_pictures(t, sp, archive=(i == 0), build=(i == len(specs) - 1)); res.append(r)
+            if r.get("error") or r.get("skipped"): break
     elif a[0] == "clean":
         res = []
         for d in decks(t, r"-Linked\.pptx$"):
             infos, data = read(d); drop_unused_media(data); write(d, infos, data); res.append(dict(cleaned=d, embed=embed(d)))
+    elif a[0] == "mirror":
+        srcs = json.load(open(SOURCES)) if os.path.exists(SOURCES) else {}
+        res = [mirror_deck(d, "--dry" in a, srcs) for d in decks(t, r"-Linked\.pptx$")]
+        if "--dry" not in a: res.append(dict(archived=archive_freed(res)))
+    elif a[0] == "place":
+        res = [place(t, int(a[2]), a[3], a[a.index("--old") + 1] if "--old" in a else None)]
     elif a[0] == "status": res = [pair_state(d) for d in decks(t, r"-Linked\.pptx$")]
     else: res = [verify(d) for d in decks(t, r"-Linked\.pptx$")]
     print(json.dumps(res, indent=1))

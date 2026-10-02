@@ -58,7 +58,7 @@ B_OLD = {"3340": "Schedule_Module_Timeline.png", "3255": "Term_Schedule_Spring_2
 
 # What ChatGPT is told, in the Markdown for ChatGPT and on the HTML page (both are given to the ChatGPT desktop app)
 GPT_STEPS = ["1. Read the item's five details: Action, File name, Save path, Old image, What to create.", '2. Open the old image at its path on this Mac and look at it. For a REPLACE, see exactly what is wrong and fix that. For a New PowerPoint picture, make something clearly different from it. An item with no old image has nothing to open.', "3. Generate one image from the item's prompt exactly as written: its pixel size, format and background.", "4. Save it at the item's Save path with the exact File name (same spelling, case and extension). REPLACE: save over the file that is there. ADD NEW: save it as a new file, creating the folder if needed.", '5. Check the saved image against the prompt and the old image. If a fact is wrong, a quoted label is misspelled, or text appears that the prompt did not ask for, make it again and save over it.', '6. Write the item number, the file name and the path you saved to, then stop and wait. Adam says "next" to continue, or an item number to jump to.']
-GPT_RULES = ['Every image here is approved to be made. REPLACE items are corrections Adam asked for; do not refuse and do not ask for a photo.', 'No text, numbers, letters, logos, brand marks, model numbers, watermarks or readable screens in any image, unless the prompt quotes exact labels; then use only those labels, spelled exactly.', 'Nothing that claims to be a real named product. Equipment is generic and unbranded; screens are dark or out of focus.', 'A New PowerPoint picture must look clearly different from the old Canvas picture it stands beside: a different angle, setting and composition.']
+GPT_RULES = ['Every image here is approved to be made. REPLACE items are corrections Adam asked for; do not refuse and do not ask for a photo.', 'Keep every word and number: when an item has an old image, every label, number, address, value, unit and explanation it shows goes into the new image, spelled exactly, beside the part it describes; change only the wording the item calls wrong. This wins over any line in a prompt that says no text or no numbers (Standards 20.5c).', 'A picture with no old image: no text, numbers, letters, logos, brand marks, model numbers, watermarks or readable screens, unless the prompt quotes exact labels; then use only those labels, spelled exactly.', 'Nothing that claims to be a real named product. Equipment is generic and unbranded; screens are dark or out of focus.', 'A New PowerPoint picture must look clearly different from the old Canvas picture it stands beside: a different angle, setting and composition.']
 
 changes = {"alt_trunc": 0, "size_line": 0, "replace_header": 0, "alt_written": 0}
 problems = []
@@ -204,8 +204,34 @@ for sec in re.split(r"^(?=# )", pc, flags=re.M):
             size="%s x %s px, %s%s" % (w, h, "PNG" if ext == "PNG" else "JPEG", ", transparent" if transparent else ""),
             used=page, alt=alt[:119], prompt=p, chip="Standards 0b.4 rule 6: placeholder waits on ChatGPT"))
 
+# ---------------- Part C, continued: five-detail briefs (Standards 20.5b), such as Student Essentials ----------------
+import glob as _glob
+for bf in sorted(_glob.glob(CLASSES + "/*/_briefs/ChatGPT Image Creation - *.md")):
+    if bf.endswith("Presentations.md"): continue
+    for part in re.split(r"^(?=## Image )", open(bf, encoding="utf-8").read(), flags=re.M)[1:]:
+        f = dict((k.strip(), v.strip().strip("`")) for k, v in re.findall(r"^\| \d \| (Action|File name|Full save path|What to create) \| (.*?) \|$", part, re.M))
+        alt = (re.search(r"^\| Alt text \| `?(.*?)`? \|$", part, re.M) or [None, ""])[1]
+        pm = re.search(r"```text\n(.*?)\n```", part, re.S)
+        if "Full save path" not in f or not pm: continue
+        path = f["Full save path"]; t = mtime(path)
+        # done once a real picture is there: a gray placeholder is small (38 KB at 1600 x 900), a real picture is not
+        if t and not ("placeholder" in f.get("Action", "").lower() and os.path.getsize(path) < 80000): continue
+        _m = re.search(r"DAPR-(\d{4})--", path)
+        items.append(dict(part="C", cls=_m.group(1) if _m else "All", fname=os.path.basename(path), path=path, action="REPLACE" if t else "ADD NEW",
+            old=path if t else "", old_desc=("A gray placeholder sits here now; save over it." if t else "No file yet; the page links this name."),
+            what=re.sub(r"^## Image \d+ - ", "", part.splitlines()[0]).strip(), size=(re.search(r"(\d+ x \d+ px)", f.get("What to create", "")) or [None, "1600 x 900 px"])[1] + (", JPEG" if path.lower().endswith((".jpg", ".jpeg")) else ", PNG"),
+            used=os.path.basename(bf).replace("ChatGPT Image Creation - ", "").replace(".md", ""), alt=alt[:119] or os.path.basename(path), prompt=pm.group(1).strip(),
+            chip="Standards 20.5b brief: placeholder waits on ChatGPT"))
+
 # ---------------- Part D: new PowerPoint pictures ----------------
 d_counts = {}
+# What fills each new deck's picture slot now (Build-Tools/slide_picture_sources.py): a Claude stand-in is the old image;
+# a ChatGPT picture already on the slide means the item is done.
+SRC_JSON = os.path.join(os.path.dirname(os.path.abspath(__file__)), "slide_picture_sources.json")
+IN_SLOT = {}
+if os.path.exists(SRC_JSON):
+    for sp, sv in json.load(open(SRC_JSON)).items():
+        if sv.get("slot"): IN_SLOT[(os.path.dirname(sp), sv["slot"])] = (sp, sv["src"])
 for cls in CLASS_ORDER:
     bf = "%s/%s/_briefs/ChatGPT Image Creation - DAPR %s Presentations.md" % (CLASSES, CF[cls], cls)
     txt = open(bf).read()
@@ -221,6 +247,8 @@ for cls in CLASS_ORDER:
         tot += 1
         path = fields["Destination folder"].rstrip("/") + "/" + fields["Filename"]
         if os.path.exists(path) and path not in KEEP: done += 1; continue
+        held = IN_SLOT.get((fields["Destination folder"].rstrip("/"), fields["Filename"]))
+        if held and held[1] == "ChatGPT" and path not in KEEP: done += 1; continue
         pm = re.search(r"```text\n(.*?)\n```", part, re.S)
         if not pm: problems.append("D %s %s: no prompt block" % (cls, fields["Filename"]))
         alt = fields.get("Alt text", "")
@@ -244,6 +272,11 @@ for cls in CLASS_ORDER:
                   "The Canvas page keeps its picture; only the slide changes." %
                   ("this Canvas picture" if len(olds) + len(lost) == 1 else "these %d Canvas pictures together" % (len(olds) + len(lost)),
                    " (not found in the repo: " + ", ".join(lost) + ")" if lost else ""))
+        elif slot and held:
+            olds = [held[0]]
+            od = ("The slide shows Claude's TEMPORARY stand-in drawing now (Standards 20.1). Make the real picture the slide teaches, "
+                  "from its title and the prompt; it does not need to look like the stand-in. Save it under this new name; "
+                  "Swap In New Pictures puts it on the slide in place of the stand-in.")
         elif slot:
             od = ("No old picture: the slide has an empty picture slot (%s). Make the picture the slide teaches, "
                   "from its title and the prompt." % slot.group(1))
@@ -368,6 +401,48 @@ for e in EXTRA:
                   used="where the stand-in is used now", alt="Keep the current alt text", prompt=e.get("prompt", ""),
                   chip="Standards 20.1: temporary stand-in, replaced by ChatGPT")
         items.append(it); by_path.setdefault(path, []).append(it)
+# ---------------- Part G: unique pictures for slides that still show the Canvas picture ----------------
+# Adam, 2026-10-02: every deck works now with the Canvas pictures (each slide links its GitHub file through the
+# PowerPoint mirror); a link into GitHub means the slide still needs its own picture. Real things stay (keep).
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import deck_pair
+d_slides = set()
+for it in items:
+    if it["part"] == "D":
+        m = re.match(r"([^,]+?)\.pptx, slide (\d+)", it["used"])
+        if m: d_slides.add((m.group(1), int(m.group(2))))
+g_keep = 0
+for u in deck_pair.unique(deck_pair.LINKS_ROOT):
+    if u["keep"]: g_keep += 1; continue
+    if (u["base"], u["slide"]) in d_slides or (os.path.exists(u["new"]) and u["new"] not in KEEP): continue
+    jpeg = u["new"].lower().endswith((".jpg", ".jpeg")); title = straight(u["title"] or u["alt"] or "this slide")
+    prompt = ("Create a %d x %d pixel %s.\n\nA NEW presentation picture for the slide \"%s\" in %s (a university audio course). "
+              "The old image is the picture the Canvas page shows (%s); the slide repeats it now. Make a fresh picture of the same content "
+              "for the slide: for a diagram or chart, the same parts, order, values and labels in a new rendered look; for a photograph, the "
+              "same kind of subject as a new photograph with a different angle, setting and light. Generic equipment only.\n\n"
+              "Slide picture: %s\n\nStyle: clean, richly rendered and slightly dimensional, soft shading, solid color fills in deep green #1B5E20, "
+              "blue #0D47A1, red #B71C1C and orange #993300 on neutral greys, %s. No logos, brand marks or model numbers. No watermark, "
+              "signature, border or caption text." % (u["width"], u["height"], "JPEG at quality 88" if jpeg else "PNG",
+              title, CLASS_NAME[class_of(u["deck"])], u["github"], straight(u["alt"] or title), "on a white background" if jpeg else "on a white or fully transparent background"))
+    items.append(dict(part="G", cls=class_of(u["deck"]), fname=os.path.basename(u["new"]), path=u["new"], action="ADD NEW",
+        old=u["github"], olds=[u["github"]],
+        old_desc=("The slide shows the Canvas picture now, linked from GitHub: %s. Make a unique picture of the same content for the slide; "
+                  "the Canvas page keeps its picture. Approving it in Canvas Preview points slide %d of %s-Linked.pptx at the new file "
+                  "(the GitHub picture is never written over) and builds the Embedded deck again." % (u["github"], u["slide"], u["base"])),
+        what="%s, slide %d: %s" % (u["base"], u["slide"], title), size="%d x %d px, %s" % (u["width"], u["height"], "JPEG" if jpeg else "PNG"),
+        used="%s-Linked.pptx, slide %d" % (u["base"], u["slide"]), alt=straight(u["alt"] or title)[:119], prompt=straight(prompt),
+        chip="Standards 8: a GitHub link on a slide means it still needs its own picture"))
+
+# Keep every word and number (Adam, 2026-10-02: "it drops all the wording and the numbers ... I need all the explanations
+# that are there"). Canvas Preview adds the old picture's exact words; this line goes in every export (Standards 20.5c).
+KEEP_TEXT = ("KEEP EVERY WORD AND NUMBER (this wins over any line above that says no text, no numbers, no addresses or only one label): "
+             "open the old image at %s. Every label, number, address, value, unit and explanation it shows must be in the new picture, "
+             "spelled exactly, beside the part it describes, large and easy to read. Change only the wording this item calls wrong, and "
+             "write the corrected wording in its place. Never drop text to make the picture look cleaner.")
+for it in items:
+    olds = it.get("olds") or ([it["old"]] if it.get("old") else [])
+    if olds and "stand-in" not in it["old_desc"]:
+        it["prompt"] += "\n\n" + KEEP_TEXT % " and ".join(olds)
 # Check first: a picture changed after every note on it (or the notes have no date) may already be fixed. It stays out of
 # the ChatGPT list until Adam presses D (done) or writes a new note (Adam, 2026-10-01: Digital_Meter.jpg was fixed on
 # 2026-09-24 and its old note made ChatGPT draw it again).
@@ -386,14 +461,41 @@ for it in items:
     it.setdefault("check", False)
     it["state"] = "review" if it["path"] in KEEP else "open"
     it["backup"] = KEEP.get(it["path"], "")
-items[:] = [it for it in items if it["path"] not in DONE]
+# Twins: the same placeholder saved under the same name in another class (3340 Dolby_Certification repeats 3345's).
+# The picture made for one is copied to its twins, so ChatGPT makes it once (2026-10-02).
+import hashlib
+def _md5(f):
+    try: return hashlib.md5(open(f, "rb").read()).hexdigest()
+    except Exception: return ""
+by_base = {}
+for root, dirs, fs in os.walk(CLASSES):
+    dirs[:] = [d for d in dirs if d not in ("_unused", "_briefs")]
+    for f in fs:
+        if f.lower().endswith((".png", ".jpg", ".jpeg", ".gif")): by_base.setdefault(f, []).append(os.path.join(root, f))
+TWINS = set()
+for it in items:
+    if it["part"] != "C": continue
+    twins = [t for t in by_base.get(it["fname"], []) if t != it["path"] and (os.path.getsize(t) < 30000 or _md5(t) == _md5(it["path"]))]
+    if twins:
+        it["also"] = twins; TWINS.update(twins)
+        it["old_desc"] += " The same picture is also used at %s: Canvas Preview copies the new one there too." % ", ".join(twins)
+items[:] = [it for it in items if not (it["part"] == "F" and it["path"] in TWINS)]
+
+# A Claude stand-in stays on the list until ChatGPT makes the real picture, even after Adam approves it (Standards 20.1)
+TEMPS = {e["path"]: e.get("made", "")[:10] for e in EXTRA if e.get("kind") == "temp"}
+for it in items:
+    if it["path"] in TEMPS and os.path.exists(it["path"]):
+        it["temp"] = True
+        it["old_desc"] = ("Claude drew a TEMPORARY stand-in here%s while ChatGPT was out (Standards 20.1): it is the old image now. Make the real picture "
+                          "from the prompt and save it over the stand-in. " % (" on " + TEMPS[it["path"]] if TEMPS[it["path"]] else "")) + it["old_desc"]
+items[:] = [it for it in items if it["path"] not in DONE or it.get("temp")]
 
 for row in items + e_items:
     for k, v in row.items():
         if isinstance(v, str): row[k] = straight(v)
 
 # ---------------- order and numbers ----------------
-items.sort(key=lambda it: ("EFABCD".index(it["part"]), CLASS_ORDER.index(it["cls"]) if it["part"] in "CD" and it["cls"] in CLASS_ORDER else -1))
+items.sort(key=lambda it: ("EFABCDG".index(it["part"]), CLASS_ORDER.index(it["cls"]) if it["part"] in "CD" and it["cls"] in CLASS_ORDER else -1))
 groups = [("13", "Your notes: Canvas pictures to fix", [i for i in items if i["part"] == "E"]),
           ("14", "Claude stand-ins to remake", [i for i in items if i["part"] == "F"]),
           ("1", "Part A. Wrong facts in Canvas pictures", [i for i in items if i["part"] == "A"]),
@@ -401,9 +503,10 @@ groups = [("13", "Your notes: Canvas pictures to fix", [i for i in items if i["p
           ("3", "Part C. Placeholders still on Canvas pages", [i for i in items if i["part"] == "C"])]
 for n, cls in enumerate(CLASS_ORDER):
     groups.append((str(4 + n), "Part D. New PowerPoint pictures: " + CLASS_NAME[cls], [i for i in items if i["part"] == "D" and i["cls"] == cls]))
+groups.append(("15", "Part G. Unique pictures for slides that still show the Canvas picture", [i for i in items if i["part"] == "G"]))
 for g, _, its in groups:
     for k, it in enumerate(its, 1): it["num"] = "%s.%d" % (g, k)
-C = {p: sum(1 for i in items if i["part"] == p) for p in "ABCDEF"}
+C = {p: sum(1 for i in items if i["part"] == p) for p in "ABCDEFG"}
 dper = {c: sum(1 for i in items if i["part"] == "D" and i["cls"] == c) for c in CLASS_ORDER}
 cper = {}
 for i in items:
@@ -421,7 +524,7 @@ if JSON_OUT:
 CHECK = [it for it in items if it.get("check")]
 items[:] = [it for it in items if not it.get("check")]
 for g, title, its in groups: its[:] = [it for it in its if not it.get("check")]
-C = {p: sum(1 for i in items if i["part"] == p) for p in "ABCDEF"}
+C = {p: sum(1 for i in items if i["part"] == p) for p in "ABCDEFG"}
 total = sum(C.values())
 
 # ---------------- Markdown ----------------
@@ -440,6 +543,7 @@ w("| A | Wrong facts in Canvas pictures (Priorities Tier 2, items 08 to 29) | %d
 w("| B | New topic images for the outline pages (3340, 3255, 3345) | %d | %d |" % (C["B"], len(b_done)))
 w("| C | Placeholders and missing files on Canvas pages | %d | %d |" % (C["C"], len(c_done)))
 w("| D | New PowerPoint pictures | %d | %d |" % (C["D"], sum(v[1] for v in d_counts.values())))
+w("| G | Unique pictures for slides that still show the Canvas picture (real things kept: %d) | %d | |" % (g_keep, C["G"]))
 w("| | **All ChatGPT work** | **%d** | |" % total); w("")
 w("| Action | Items |"); w("|---|--:|")
 for a in ("REPLACE", "ADD NEW"): w("| %s | %d |" % (a, sum(1 for i in items if i["action"] == a)))
@@ -484,7 +588,7 @@ def md_item(it):
     w("```text"); w(it["prompt"]); w("```"); w("")
 
 for g, title, its in groups:
-    if g in ("1", "2", "3", "13", "14"):
+    if g in ("1", "2", "3", "13", "14", "15"):
         w("# " + title); w("")
     if g == "4":
         w("# Part D. New PowerPoint pictures"); w("")
