@@ -3,15 +3,18 @@
 deck_pair.py: every teaching deck as a Linked deck Adam edits and an Embedded deck built from it (Adam, 2026-09-30).
 
   <Base>-Linked.pptx    the one Adam edits. Each teaching picture is a relative link to Images/<Base>-<Subject>.<ext>
-                        (nothing embedded for it); the last slides document where the pictures live.
-  <Base>-Embedded.pptx  built from the Linked deck: every picture inside the file, no reference slides. Never edited by
-                        hand. Students get its PDF: PDF/<Base>.pdf.
+                        (nothing embedded for it).
+  <Base>-Embedded.pptx  built from the Linked deck: every picture inside the file. Never edited by hand. Students get
+                        its PDF: PDF/<Base>.pdf.
+  <Base>-README.txt     where the deck's pictures live, beside the deck. Never a slide, never uploaded (Adam,
+                        2026-10-03: "I don't need this kind of stuff in the PowerPoint"). Older Linked decks carried it
+                        as slides at the end; `strip` moves them into the README.
   Presentations/Images  shared by every deck in the module; each file starts with its deck's base name.
 
-The two decks are the same file apart from how pictures are stored and the reference slides: slides, order, text,
+The two decks are the same file apart from how pictures are stored: slides, order, text,
 notes, animations, transitions, crops, alt text and layout are copied, never rebuilt. Icons, checkmarks, warning marks
 and pictures in masters and layouts are design, not teaching pictures: they stay inside both decks (Adam, 2026-09-30),
-and the reference slide counts them. A picture's subject comes from its alt text, else its slide title; names are never
+and the README counts them. A picture's subject comes from its alt text, else its slide title; names are never
 numbered, and a picture Adam replaces keeps its exact name, so the Linked deck shows it and the Embedded deck is out of
 date until it is built again.
 
@@ -20,6 +23,7 @@ date until it is built again.
     python3 deck_pair.py status <folder>                         which Embedded decks are out of date, and why
     python3 deck_pair.py verify <Base-Linked.pptx | folder>      check a pair against the rules
     python3 deck_pair.py uncopy <Base-Linked.pptx | folder>      take out picture copies put inside a Linked deck
+    python3 deck_pair.py strip  <Base-Linked.pptx | folder>      reference slides out of the deck, into <Base>-README.txt
     python3 deck_pair.py addpics <Base-Linked.pptx> <spec.json>  pictures with captions onto one slide (see add_pictures)
     python3 deck_pair.py mirror  <Base-Linked.pptx | folder> [--dry]  every link into the PowerPoint mirror; Canvas copies to GitHub
     python3 deck_pair.py place   <Base-Linked.pptx> <slide> <new picture> [--old <file>]  a new picture onto a slide, by link
@@ -259,7 +263,6 @@ def split(deck, dry=False):
             data[rn] = rels.replace("</Relationships>", "".join(new_rels) + "</Relationships>").encode("utf-8")
     drop_unused_media(data)
     course, module = course_and_module(deck)
-    add_reference_slides(data, course, module, base, listing, design, not_linked)
     result = dict(deck=deck, base=base, linked=linked_path, embedded=emb_path, pictures_linked=len(listing), files=len(used),
                   design_marks_inside=design, not_linked=not_linked, kept_existing=kept_existing)
     if dry: result["dry"] = True; result["names"] = sorted(set(n for _, n in listing)); return result
@@ -267,6 +270,7 @@ def split(deck, dry=False):
     keep = os.path.join(arch, "%s (before Linked and Embedded %s).pptx" % (stem, datetime.date.today().isoformat()))
     if not os.path.exists(keep): shutil.move(deck, keep)
     write(linked_path, infos, data)
+    write_note(linked_path, course, module, base, listing, design, not_linked)
     result["archived"] = keep
     result["embed"] = embed(linked_path)
     return result
@@ -301,47 +305,58 @@ def drop_unused_media(data):
                 refs.add(posixpath.normpath(posixpath.join(d2, re.search(r'Target="([^"]+)"', r).group(1))))
     for n in [x for x in data if x.startswith("ppt/media/") and x not in refs]: data.pop(n)
 
-def add_reference_slides(data, course, module, base, listing, design, not_linked):
-    order = slide_order(data)
-    last = order[-1][1]
-    layout = re.search(r'Target="(\.\./slideLayouts/[^"]+)"', data.get(rels_name(last), b"").decode("utf-8"))
+NOTE_SUFFIX = "-README.txt"     # never uploaded: CloudflareChanges.localFiles skips it (Canvas Preview)
+
+def note_path(deck): return os.path.join(os.path.dirname(os.path.abspath(deck)), base_of(deck) + NOTE_SUFFIX)
+
+def write_note(deck, course, module, base, listing, design, not_linked):
+    """<Base>-README.txt beside the deck: where its pictures live. It is never a slide (Adam, 2026-10-03: "put it in a
+    note somewhere ... next to the PowerPoint in a read me"); students never see it and Canvas Preview never uploads it.
+    Written only when its words change, so Dropbox and the deck dates stay quiet."""
     readable = lambda s: s.replace("--", " - ").replace("__", ": ").replace("_", " ")
-    head = [("Linked Picture Reference", 2800, True),
-            ("Course: %s" % readable(course), 1400, False), ("Module: %s" % readable(module), 1400, False),
-            ("Presentation: %s-Linked.pptx (edit this one)" % base, 1400, False),
-            ("Built from it: %s-Embedded.pptx (all pictures inside) and PDF/%s.pdf (what students get)" % (base, base), 1400, False),
-            ("PowerPoint base name: %s" % base, 1400, False),
-            ("Image reference folder: Images/ beside this deck, linked by relative path (Images/<file name>)", 1400, False),
-            ("Full path: Canvas Links/%s/%s/Presentations/Images/" % (course, module), 1400, False),
-            ("Image file name prefix: %s-" % base, 1400, False),
-            ("Replace a picture by saving over its file under the same name. Canvas Preview then shows %s-Embedded.pptx as out of date: Update rebuilds it and its PDF." % base, 1400, False),
-            ("Pictures linked: %d, in %d file(s). Design marks kept inside the deck (icons, checkmarks, warning marks, master and layout pictures): %d." % (len(listing), len(set(n for _, n in listing)), design), 1400, False)]
-    if not_linked: head.append(("Not linked (kept inside): " + "; ".join(not_linked), 1200, False))
-    else: head.append(("Unusual dependencies: none. Every teaching picture is a linked file in Images/.", 1400, False))
-    pages = [head]
-    lines = ["Slide %d: %s" % (p, n) for p, n in listing]
-    for i in range(0, len(lines), 22):
-        pages.append([("Linked Pictures (%s)" % ("slides %d to %d" % (listing[i][0], listing[min(i + 21, len(lines) - 1)][0])), 2400, True)] + [(l, 1100, False) for l in lines[i:i + 22]])
-    for page in pages:
-        nums = [int(m) for m in re.findall(r"ppt/slides/slide(\d+)\.xml$", "\n".join(data), re.M)]
-        num = max(nums) + 1; sx = "ppt/slides/slide%d.xml" % num
-        paras = "".join('<a:p><a:r><a:rPr lang="en-US" sz="%d"%s dirty="0"><a:solidFill><a:srgbClr val="1F2A25"/></a:solidFill></a:rPr><a:t>%s</a:t></a:r></a:p>' % (sz, ' b="1"' if b else "", html.escape(t, quote=False)) for t, sz, b in page)
-        xml = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><p:sld xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" '
-               'xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships" xmlns:p="http://schemas.openxmlformats.org/presentationml/2006/main">'
-               '<p:cSld><p:bg><p:bgPr><a:solidFill><a:srgbClr val="FFFFFF"/></a:solidFill><a:effectLst/></p:bgPr></p:bg><p:spTree><p:nvGrpSpPr><p:cNvPr id="1" name=""/><p:cNvGrpSpPr/><p:nvPr/></p:nvGrpSpPr><p:grpSpPr/>'
-               '<p:sp><p:nvSpPr><p:cNvPr id="2" name="%s" descr="%s"/><p:cNvSpPr txBox="1"/><p:nvPr/></p:nvSpPr><p:spPr><a:xfrm><a:off x="457200" y="365760"/><a:ext cx="11277600" cy="6126480"/></a:xfrm>'
-               '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr><p:txBody><a:bodyPr wrap="square"><a:normAutofit/></a:bodyPr><a:lstStyle/>%s</p:txBody></p:sp></p:spTree></p:cSld>'
-               '<p:clrMapOvr><a:masterClrMapping/></p:clrMapOvr></p:sld>') % (REF_MARK, REF_MARK, paras)
-        data[sx] = xml.encode("utf-8")
-        if layout:
-            data[rels_name(sx)] = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">'
-                '<Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slideLayout" Target="%s"/></Relationships>' % layout.group(1)).encode("utf-8")
-        prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8"); rid = "rIdRef%d" % num
-        data["ppt/_rels/presentation.xml.rels"] = prels.replace("</Relationships>", '<Relationship Id="%s" Type="%s" Target="slides/slide%d.xml"/></Relationships>' % (rid, REL_SLIDE, num)).encode("utf-8")
-        pres = data["ppt/presentation.xml"].decode("utf-8"); ids = [int(x) for x in re.findall(r'<p:sldId\b[^>]*?\bid="(\d+)"', pres)]
-        data["ppt/presentation.xml"] = pres.replace("</p:sldIdLst>", '<p:sldId id="%d" r:id="%s"/></p:sldIdLst>' % (max(ids) + 1, rid)).encode("utf-8")
-        ct = data["[Content_Types].xml"].decode("utf-8")
-        data["[Content_Types].xml"] = ct.replace("</Types>", '<Override PartName="/ppt/slides/slide%d.xml" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/></Types>' % num).encode("utf-8")
+    lines = ["%s: linked picture reference" % base,
+             "Notes for Adam only. Not part of the deck, never uploaded, never seen by students. Canvas Preview rewrites this file.",
+             "",
+             "Course: %s" % readable(course), "Module: %s" % readable(module),
+             "Presentation: %s-Linked.pptx (edit this one)" % base,
+             "Built from it: %s-Embedded.pptx (all pictures inside) and PDF/%s.pdf (what students get)" % (base, base),
+             "PowerPoint base name: %s" % base,
+             "Image folder: Images/ beside this deck",
+             "Full path: Canvas Links/%s/%s/Presentations/Images/" % (course, module),
+             "Image file name prefix: %s-" % base,
+             "Replace a picture by saving over its file under the same name. Canvas Preview then shows %s-Embedded.pptx as out of date: Update rebuilds it and its PDF." % base,
+             "Pictures linked: %d, in %d file(s). Design marks kept inside the deck (icons, checkmarks, warning marks, master and layout pictures): %d." % (len(listing), len(set(n for _, n in listing)), design),
+             ("Not linked (kept inside): " + "; ".join(not_linked)) if not_linked else "Unusual dependencies: none. Every teaching picture is a linked file in Images/.",
+             "", "Linked pictures, by slide:"] + ["Slide %d: %s" % (p, n) for p, n in listing]
+    text = "\n".join(lines) + "\n"; path = note_path(deck)
+    try:
+        if open(path, encoding="utf-8").read() == text: return path
+    except OSError: pass
+    open(path, "w", encoding="utf-8").write(text)
+    return path
+
+def note_counts(deck):
+    """The design-mark count and not-linked list the README (or an older reference slide) recorded: only split can count them."""
+    try: old = open(note_path(deck), encoding="utf-8").read()
+    except OSError: return 0, []
+    m = re.search(r"master and layout pictures\): (\d+)", old); n = re.search(r"Not linked \(kept inside\): (.*)", old)
+    return (int(m.group(1)) if m else 0), (n.group(1).split("; ") if n else [])
+
+def remove_reference_slides(data):
+    """Takes the old reference slides out of a deck. Returns how many, with the counts they recorded (or None)."""
+    pres = data["ppt/presentation.xml"].decode("utf-8"); prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8")
+    ct = data["[Content_Types].xml"].decode("utf-8"); k = 0; counts = None
+    for rid, sx in slide_order(data):
+        if sx in data and REF_MARK in data[sx].decode("utf-8"):
+            old = data[sx].decode("utf-8"); k += 1
+            m = re.search(r"master and layout pictures\): (\d+)", old); n = re.search(r"Not linked \(kept inside\): ([^<]*)", old)
+            if m or n: counts = (int(m.group(1)) if m else 0, [html.unescape(x) for x in n.group(1).split("; ")] if n else [])
+            pres = re.sub(r'<p:sldId [^>]*r:id="%s"\s*/>' % re.escape(rid), "", pres)
+            prels = re.sub(r'<Relationship [^>]*Id="%s"[^>]*/>' % re.escape(rid), "", prels)
+            ct = ct.replace('<Override PartName="/%s" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>' % sx, "")
+            data.pop(sx, None); data.pop(rels_name(sx), None)
+    data["ppt/presentation.xml"] = pres.encode("utf-8"); data["ppt/_rels/presentation.xml.rels"] = prels.encode("utf-8"); data["[Content_Types].xml"] = ct.encode("utf-8")
+    return k, counts
 
 # ---------------------------------------------------------------- addpics
 
@@ -398,22 +413,10 @@ def image_size(path):
     return (int(w.group(1)), int(h.group(1))) if w and h else (4, 3)
 
 def refresh_reference(data, deck):
-    """The reference slides again, from the links the deck has now (after pictures are added or removed)"""
-    design = 0; not_linked = []
-    pres = data["ppt/presentation.xml"].decode("utf-8"); prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8")
-    ct = data["[Content_Types].xml"].decode("utf-8")
-    for rid, sx in slide_order(data):
-        if sx in data and REF_MARK in data[sx].decode("utf-8"):
-            old = data[sx].decode("utf-8")
-            m = re.search(r"master and layout pictures\): (\d+)", old)
-            if m: design = int(m.group(1))
-            n = re.search(r"Not linked \(kept inside\): ([^<]*)", old)
-            if n: not_linked = [html.unescape(x) for x in n.group(1).split("; ")]
-            pres = re.sub(r'<p:sldId [^>]*r:id="%s"\s*/>' % re.escape(rid), "", pres)
-            prels = re.sub(r'<Relationship [^>]*Id="%s"[^>]*/>' % re.escape(rid), "", prels)
-            ct = ct.replace('<Override PartName="/%s" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/>' % sx, "")
-            data.pop(sx, None); data.pop(rels_name(sx), None)
-    data["ppt/presentation.xml"] = pres.encode("utf-8"); data["ppt/_rels/presentation.xml.rels"] = prels.encode("utf-8"); data["[Content_Types].xml"] = ct.encode("utf-8")
+    """The README again, from the links the deck has now (after pictures are added or removed); any old reference
+    slide leaves the deck. Returns the listing."""
+    _, counts = remove_reference_slides(data)
+    design, not_linked = counts or note_counts(deck)
     listing = []
     for pos, (rid, sx) in enumerate(slide_order(data), 1):
         rels = data.get(rels_name(sx), b"").decode("utf-8"); body = data.get(sx, b"").decode("utf-8")
@@ -424,8 +427,20 @@ def refresh_reference(data, deck):
                     real = link_target_path(deck, re.search(r'Target="([^"]+)"', r).group(1))
                     listing.append((pos, ("Canvas picture, make unique: " if is_github(real) else "") + os.path.basename(real)))
     course, module = course_and_module(deck)
-    add_reference_slides(data, course, module, base_of(deck), listing, design, not_linked)
+    write_note(deck, course, module, base_of(deck), listing, design, not_linked)
     return listing
+
+def strip(linked):
+    """Old reference slides out of a Linked deck and into its README, keeping the deck's date: the slides students see
+    are unchanged, so the Embedded deck and PDF stay current."""
+    if is_open(linked): return dict(linked=linked, skipped="open in PowerPoint; close it and run again")
+    infos, data = read(linked)
+    refs = sum(1 for _, sx in slide_order(data) if REF_MARK in data.get(sx, b"").decode("utf-8", "ignore"))
+    if not refs and os.path.exists(note_path(linked)): return dict(linked=linked, slides_removed=0)    # nothing to do (every launch)
+    refresh_reference(data, linked)
+    if refs:
+        st = os.stat(linked); write(linked, infos, data); os.utime(linked, (st.st_atime, st.st_mtime))
+    return dict(linked=linked, slides_removed=refs, readme=note_path(linked))
 
 def resize_body(body, xfrm, title_y, keep_y=False):
     """Moves the slide's body text into xfrm: its body placeholder, else (decks built from text boxes) the text box
@@ -462,7 +477,7 @@ def add_pictures(linked, spec, archive=True, build=True):
     "title": "RØDE SoundField NT-SF1", "text": "...", "alt": "...", "crop": {"t": 0, "b": 35000, "l": 0, "r": 0},
     "source": "where it came from"}]}. Each picture is copied to Images/<Base>-<Subject>.<ext> (never over a
     different file) and linked; with replace_body the slide's bullet text box gives way to the pictures and their
-    captions, which carry its facts. The deck before goes to Archive; the reference slides and the Embedded deck are
+    captions, which carry its facts. The deck before goes to Archive; the README and the Embedded deck are
     built again."""
     if is_open(linked): return dict(deck=linked, skipped="open in PowerPoint; close it and run again")
     infos, data = read(linked)
@@ -590,7 +605,7 @@ def link_target_path(deck, target):
     return os.path.join(os.path.dirname(os.path.abspath(deck)), urllib.parse.unquote(target))
 
 def embed(linked, out=None):
-    """<Base>-Embedded.pptx from <Base>-Linked.pptx: each linked picture put inside, the reference slides left out."""
+    """<Base>-Embedded.pptx from <Base>-Linked.pptx: each linked picture put inside (any old reference slide left out)."""
     out = out or re.sub(r"-Linked\.pptx$", "-Embedded.pptx", linked)
     if out == linked: return dict(error="not a -Linked deck")
     infos, data = read(linked); missing = []; k = 0; exts = set()
@@ -646,14 +661,15 @@ def pair_state(linked):
 
 def verify(linked):
     """The rules, checked on the files: suffixes, links relative and resolving, nothing teaching embedded in Linked,
-    nothing external in Embedded, the same slides and notes apart from the reference slides."""
+    nothing external in Embedded, the same slides and notes, no reference slides, a README beside it."""
     emb = linked.replace("-Linked.pptx", "-Embedded.pptx"); base = base_of(linked); problems = []
     if not os.path.exists(emb): return dict(linked=linked, problems=["no Embedded deck"])
     _, L = read(linked); _, E = read(emb)
     lo = [sx for _, sx in slide_order(L) if REF_MARK not in L[sx].decode("utf-8", "ignore")]; eo = [sx for _, sx in slide_order(E)]
     refs = len(slide_order(L)) - len(lo)
-    if refs == 0: problems.append("the Linked deck has no reference slide")
-    if len(lo) != len(eo): problems.append("slide counts differ: Linked %d (without reference slides), Embedded %d" % (len(lo), len(eo)))
+    if refs: problems.append("%d reference slide(s) inside the Linked deck: they belong in %s (run strip)" % (refs, os.path.basename(note_path(linked))))
+    if not os.path.exists(note_path(linked)): problems.append("no %s beside the deck (run strip)" % os.path.basename(note_path(linked)))
+    if len(lo) != len(eo): problems.append("slide counts differ: Linked %d, Embedded %d" % (len(lo), len(eo)))
     strip = lambda x: re.sub(r'\s*r:(embed|link)="[^"]+"', "", x)
     for a, b in zip(lo, eo):
         if strip(L[a].decode("utf-8")) != strip(E[b].decode("utf-8")): problems.append("%s differs from its Embedded slide beyond picture storage" % posixpath.basename(a))
@@ -828,11 +844,12 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["sync"]: print(json.dumps([sync_mirror()])); sys.exit(0)
     if a[:1] == ["unique"]: print(json.dumps(unique(a[1] if len(a) > 1 else LINKS_ROOT), indent=1)); sys.exit(0)
-    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy", "addpics", "mirror", "place"): print(__doc__); sys.exit(2)
+    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy", "strip", "addpics", "mirror", "place"): print(__doc__); sys.exit(2)
     t = a[1]
     if a[0] == "split": res = [split(d, "--dry" in a) for d in decks(t, r"(?<!-Linked)(?<!-Embedded)\.pptx$")]
     elif a[0] == "embed": res = [embed(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "uncopy": res = [uncopy(d) for d in decks(t, r"-Linked\.pptx$")]
+    elif a[0] == "strip": res = [strip(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "addpics":
         spec = json.load(open(a[2], encoding="utf-8")); specs = spec if isinstance(spec, list) else [spec]
         # several slides in one go: one copy to Archive first, one Embedded build at the end
