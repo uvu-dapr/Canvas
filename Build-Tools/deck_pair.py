@@ -828,6 +828,15 @@ def place(linked, slide, new, old=None):
            (links if len(links) == 1 else [x for x in links if is_github(link_target_path(linked, x[1]))])
     if len(pick) != 1: return dict(error="slide %d has %d pictures that could be the one; name it with --old" % (slide, len(links)))
     r, t = pick[0]; was = link_target_path(linked, t)
+    # A brief's picture keeps its brief name (the Images to Fix list finds it there); the deck links a copy named
+    # Images/<Base>-<name>, as every deck picture is named (2026-10-03: 79 approved slide pictures had brief names only)
+    base = base_of(linked); images = os.path.join(os.path.dirname(os.path.abspath(linked)), "Images")
+    if not os.path.basename(new).startswith(base + "-"):
+        named = os.path.join(images, base + "-" + os.path.basename(new))
+        if os.path.exists(named) and sha(open(named, "rb").read()) != sha(open(new, "rb").read()):
+            return dict(error="%s already holds a different picture" % named)
+        if not os.path.exists(named): os.makedirs(images, exist_ok=True); shutil.copy2(new, named)
+        new = named
     data[rn] = rels.replace(r, r.replace('Target="%s"' % t, 'Target="%s"' % mirror_link(new))).encode("utf-8")
     refresh_reference(data, linked); write(linked, infos, data)
     return dict(linked=linked, slide=slide, was=was, now=os.path.abspath(new), embed=embed(linked))
