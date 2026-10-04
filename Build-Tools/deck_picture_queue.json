@@ -1,10 +1,5 @@
 [
   {
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Audio_dB_RMS_Headroom_Masterclass-Linked.pptx",
-    "check" : "same source in both panels; left small load, thick flow; right large load, thin flow; no text; cards end 0.46 and the footnote sits at 0.88 on a PowerPoint render",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Images\/Audio_dB_RMS_Headroom_Masterclass-Same_Voltage_Low_and_High_Impedance_Loads.png",
-    "brief_image" : 102,
-    "state" : "not made",
     "spec" : {
       "slide" : 12,
       "layout" : "place",
@@ -22,59 +17,16 @@
           "src" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Images\/Audio_dB_RMS_Headroom_Masterclass-Same_Voltage_Low_and_High_Impedance_Loads.png"
         }
       ]
-    }
-  },
-  {
-    "check" : "one crowned leader on each side of a glowing wall, pulses stop at the wall, generic unbranded devices, no text; bullets end about 0.47 on a PowerPoint render",
-    "state" : "not made",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Subnets_and_Address_Ranges\/Presentations\/Images\/Networking-Subnets_and_Address_Ranges-Subnet_Boundary_Splits_the_Clock_Leader.png",
-    "brief_image" : 172,
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Subnets_and_Address_Ranges\/Presentations\/Networking-Subnets_and_Address_Ranges-Linked.pptx",
-    "spec" : {
-      "slide" : 20,
-      "layout" : "place",
-      "pictures" : [
-        {
-          "box" : [
-            0.20000000000000001,
-            0.5,
-            0.59999999999999998,
-            0.41999999999999998
-          ],
-          "subject" : "Subnet_Boundary_Splits_the_Clock_Leader",
-          "title" : "",
-          "alt" : "Audio devices on one network split by a glowing boundary wall: each side has its own crowned leader clock sending pulses only to its own side, so the two groups tick out of step",
-          "src" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Subnets_and_Address_Ranges\/Presentations\/Images\/Networking-Subnets_and_Address_Ranges-Subnet_Boundary_Splits_the_Clock_Leader.png"
-        }
-      ]
-    }
-  },
-  {
-    "state" : "not made",
-    "check" : "blue straight line falling evenly; orange curve steep near the source then flattening; both start at the same point; no numbers or text; table ends about 0.57 on a PowerPoint render",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/FMOD__Implementation_in_FMOD_Studio\/Presentations\/Images\/FMOD-Implementation_in_FMOD_Studio-Linear_vs_Inverse_Rolloff.png",
-    "spec" : {
-      "slide" : 8,
-      "layout" : "place",
-      "pictures" : [
-        {
-          "box" : [
-            0.20000000000000001,
-            0.59999999999999998,
-            0.59999999999999998,
-            0.33000000000000002
-          ],
-          "subject" : "Linear_vs_Inverse_Rolloff",
-          "title" : "",
-          "alt" : "Two level-against-distance curves from the same starting level: a blue straight line falling evenly to silence, and an orange curve that drops steeply near the source and then flattens out far away",
-          "src" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/FMOD__Implementation_in_FMOD_Studio\/Presentations\/Images\/FMOD-Implementation_in_FMOD_Studio-Linear_vs_Inverse_Rolloff.png"
-        }
-      ]
     },
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/FMOD__Implementation_in_FMOD_Studio\/Presentations\/FMOD-Implementation_in_FMOD_Studio-Linked.pptx",
-    "brief_image" : 52
+    "check" : "same source in both panels; left small load, thick flow; right large load, thin flow; no text; cards end 0.46 and the footnote sits at 0.88 on a PowerPoint render",
+    "brief_image" : 102,
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Images\/Audio_dB_RMS_Headroom_Masterclass-Same_Voltage_Low_and_High_Impedance_Loads.png",
+    "state" : "not made",
+    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Audio_dB_RMS_Headroom_Masterclass-Linked.pptx"
   },
   {
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Monitoring__Psychoacoustics\/Presentations\/Images\/Monitoring-Psychoacoustics-One_Mix_Many_Playback_Systems.png",
+    "state" : "not made",
     "spec" : {
       "slide" : 12,
       "layout" : "place",
@@ -93,11 +45,9 @@
         }
       ]
     },
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Monitoring__Psychoacoustics\/Presentations\/Images\/Monitoring-Psychoacoustics-One_Mix_Many_Playback_Systems.png",
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Monitoring__Psychoacoustics\/Presentations\/Monitoring-Psychoacoustics-Linked.pptx",
+    "brief_image" : 103,
     "check" : "exactly one central waveform and five generic systems (car, phone, earbuds, club speakers, studio monitors), no logos, no text; bullets end about 0.53 on a PowerPoint render",
-    "state" : "not made",
-    "brief_image" : 103
+    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Monitoring__Psychoacoustics\/Presentations\/Monitoring-Psychoacoustics-Linked.pptx"
   },
   {
     "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Audio_Network_Architecture\/Presentations\/Networking-Audio_Network_Architecture-Linked.pptx",
@@ -119,16 +69,14 @@
         }
       ]
     },
-    "brief_image" : 173,
-    "check" : "exactly three generic switches in a triangle, three cables, two green and active, one gray with an orange block; no text or logos; table ends about 0.41 on a PowerPoint render, footnote at 0.92",
     "state" : "not made",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Audio_Network_Architecture\/Presentations\/Images\/Networking-Audio_Network_Architecture-Spanning_Tree_Blocks_One_Link.png"
+    "brief_image" : 173,
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Audio_Network_Architecture\/Presentations\/Images\/Networking-Audio_Network_Architecture-Spanning_Tree_Blocks_One_Link.png",
+    "check" : "exactly three generic switches in a triangle, three cables, two green and active, one gray with an orange block; no text or logos; table ends about 0.41 on a PowerPoint render, footnote at 0.92"
   },
   {
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Network_Configuration_and_Control\/Presentations\/Networking-Network_Configuration_and_Control-Linked.pptx",
-    "state" : "not made",
+    "brief_image" : "174",
     "check" : "one laptop, two cables: green to a wall jack and globe (general traffic, orange arrow along it), blue to one switch and two audio boxes on an isolated platform; no text or logos; table ends about 0.38, footnote at 0.92 on a PowerPoint render",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Network_Configuration_and_Control\/Presentations\/Images\/Networking-Network_Configuration_and_Control-Two_Adapters_Lower_Metric_Wins.png",
     "spec" : {
       "slide" : 6,
       "layout" : "place",
@@ -147,11 +95,11 @@
         }
       ]
     },
-    "brief_image" : "174"
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Network_Configuration_and_Control\/Presentations\/Images\/Networking-Network_Configuration_and_Control-Two_Adapters_Lower_Metric_Wins.png",
+    "state" : "not made",
+    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Networking__Network_Configuration_and_Control\/Presentations\/Networking-Network_Configuration_and_Control-Linked.pptx"
   },
   {
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Variation__Nonrepetitive_Design_Strategies\/Presentations\/Images\/Variation-Nonrepetitive_Design_Strategies-Identical_Repeats_vs_Varied_Footsteps.png",
-    "check" : "two lanes of eight blips each: top orange, all identical; bottom green, every blip a little different; no text; bullets end about 0.71 on a PowerPoint render, footer at 0.95",
     "spec" : {
       "slide" : 3,
       "layout" : "place",
@@ -170,11 +118,18 @@
         }
       ]
     },
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Variation__Nonrepetitive_Design_Strategies\/Presentations\/Variation-Nonrepetitive_Design_Strategies-Linked.pptx",
+    "brief_image" : "53",
+    "check" : "two lanes of eight blips each: top orange, all identical; bottom green, every blip a little different; no text; bullets end about 0.71 on a PowerPoint render, footer at 0.95",
     "state" : "not made",
-    "brief_image" : "53"
+    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Variation__Nonrepetitive_Design_Strategies\/Presentations\/Variation-Nonrepetitive_Design_Strategies-Linked.pptx",
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Variation__Nonrepetitive_Design_Strategies\/Presentations\/Images\/Variation-Nonrepetitive_Design_Strategies-Identical_Repeats_vs_Varied_Footsteps.png"
   },
   {
+    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Linked.pptx",
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Images\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Event_Instances_and_Voices.png",
+    "check" : "one blueprint card, three capsules, eight slots with exactly five lit, streams 2, 1, 2 from the capsules; no text; table ends about 0.27 on a PowerPoint render",
+    "state" : "not made",
+    "brief_image" : "54",
     "spec" : {
       "slide" : 3,
       "layout" : "place",
@@ -192,17 +147,10 @@
           "src" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Images\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Event_Instances_and_Voices.png"
         }
       ]
-    },
-    "check" : "one blueprint card, three capsules, eight slots with exactly five lit, streams 2, 1, 2 from the capsules; no text; table ends about 0.27 on a PowerPoint render",
-    "brief_image" : "54",
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Linked.pptx",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Images\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Event_Instances_and_Voices.png",
-    "state" : "not made"
+    }
   },
   {
-    "check" : "green line: plateau, dip, three spikes, only the tallest crosses the dashed orange budget line; fainter blue line above; no numbers or text; bullets end about 0.38 on a PowerPoint render",
     "brief_image" : "55",
-    "state" : "not made",
     "spec" : {
       "slide" : 16,
       "layout" : "place",
@@ -221,13 +169,16 @@
         }
       ]
     },
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Images\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Voice_Graph_Peaks_Over_Budget.png",
     "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Linked.pptx",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Voice_Budget__Sound_Prioritization_and_Voice_Budgets\/Presentations\/Images\/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Voice_Graph_Peaks_Over_Budget.png"
+    "check" : "green line: plateau, dip, three spikes, only the tallest crosses the dashed orange budget line; fainter blue line above; no numbers or text; bullets end about 0.38 on a PowerPoint render",
+    "state" : "not made"
   },
   {
-    "state" : "not made",
-    "check" : "one master torch on a blue pedestal with an orange emitter, thin blue lines to eight identical torches, each with the same orange emitter; no text; bullets end about 0.6 on a PowerPoint render",
     "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Implementation__Level_Implementation_and_Engine_Scripting\/Presentations\/Implementation-Level_Implementation_and_Engine_Scripting-Linked.pptx",
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Implementation__Level_Implementation_and_Engine_Scripting\/Presentations\/Images\/Implementation-Level_Implementation_and_Engine_Scripting-One_Prefab_Many_Torch_Emitters.png",
+    "brief_image" : "56",
+    "check" : "one master torch on a blue pedestal with an orange emitter, thin blue lines to eight identical torches, each with the same orange emitter; no text; bullets end about 0.6 on a PowerPoint render",
     "spec" : {
       "slide" : 5,
       "layout" : "place",
@@ -246,11 +197,10 @@
         }
       ]
     },
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Implementation__Level_Implementation_and_Engine_Scripting\/Presentations\/Images\/Implementation-Level_Implementation_and_Engine_Scripting-One_Prefab_Many_Torch_Emitters.png",
-    "brief_image" : "56"
+    "state" : "not made"
   },
   {
-    "state" : "not made",
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Implementation__Level_Implementation_and_Engine_Scripting\/Presentations\/Images\/Implementation-Level_Implementation_and_Engine_Scripting-Volume_Source_and_Multi_Position_Emitter.png",
     "spec" : {
       "slide" : 9,
       "layout" : "place",
@@ -269,12 +219,14 @@
         }
       ]
     },
+    "state" : "not made",
     "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Implementation__Level_Implementation_and_Engine_Scripting\/Presentations\/Implementation-Level_Implementation_and_Engine_Scripting-Linked.pptx",
-    "check" : "left: blue river, one figure, one orange point at the nearest bank spot; right: exactly four machines with green points joined to one node; no text; cards end about 0.69 on a PowerPoint render",
     "brief_image" : "57",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Implementation__Level_Implementation_and_Engine_Scripting\/Presentations\/Images\/Implementation-Level_Implementation_and_Engine_Scripting-Volume_Source_and_Multi_Position_Emitter.png"
+    "check" : "left: blue river, one figure, one orange point at the nearest bank spot; right: exactly four machines with green points joined to one node; no text; cards end about 0.69 on a PowerPoint render"
   },
   {
+    "check" : "op amp triangle, pot ends on the left pin labeled 1 and the right pin labeled 5, wiper line to the orange rail labeled -V; only those three labels, spelled exactly; lines light enough to read on the dark blue slide; bullets end about 0.58 on the September PDF; confirm on a PowerPoint render",
+    "state" : "not made",
     "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Electronics__Op_Amps_and_Filters\/Presentations\/LM741_Op_Amp_Offset_Null-Linked.pptx",
     "brief_image" : "175",
     "spec" : {
@@ -295,11 +247,13 @@
         }
       ]
     },
-    "state" : "not made",
-    "check" : "op amp triangle, pot ends on the left pin labeled 1 and the right pin labeled 5, wiper line to the orange rail labeled -V; only those three labels, spelled exactly; lines light enough to read on the dark blue slide; bullets end about 0.58 on the September PDF; confirm on a PowerPoint render",
     "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3255--Audio_Hardware_II\/Electronics__Op_Amps_and_Filters\/Presentations\/Images\/LM741_Op_Amp_Offset_Null-Offset_Null_Trim_Pot_Pins_1_and_5.png"
   },
   {
+    "check" : "same picture as Image 50 (three sources: orange overhead, green far behind, blue at the ear); place only after Image 50 is approved; table ends about 0.37 on the September PDF, confirm on a PowerPoint render",
+    "brief_image" : "50",
+    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Interactive_Mix-The_Immersive_Interactive_Mix-Linked.pptx",
+    "state" : "not made",
     "spec" : {
       "slide" : 14,
       "layout" : "place",
@@ -318,10 +272,6 @@
         }
       ]
     },
-    "check" : "same picture as Image 50 (three sources: orange overhead, green far behind, blue at the ear); place only after Image 50 is approved; table ends about 0.37 on the September PDF, confirm on a PowerPoint render",
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Interactive_Mix-The_Immersive_Interactive_Mix-Linked.pptx",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Images\/Interactive_Mix-The_Immersive_Interactive_Mix-Height_Rear_and_Close_Placement.png (a copy of brief Image 50, made for Interactive_Audio slide 18)",
-    "brief_image" : "50",
-    "state" : "not made"
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Images\/Interactive_Mix-The_Immersive_Interactive_Mix-Height_Rear_and_Close_Placement.png (a copy of brief Image 50, made for Interactive_Audio slide 18)"
   }
 ]
