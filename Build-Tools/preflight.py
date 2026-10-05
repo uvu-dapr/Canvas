@@ -310,6 +310,17 @@ if _ns:
     _p=_ns[0]
     mm=re.sub(r'</?%s:'%re.escape(_p), lambda m: m.group(0).replace(_p+':',''), mm)
     print('    note: module_meta.xml is namespaced (%s:), prefixes stripped for matching'%_p)
+# --module-labels [Adam, 2026-10-05]: Canvas Preview's Settings, Modules "Also put module names in packages" writes a
+#   label such as "Week 06: ", "(Week 06, 09/28/2026)" or "Module 01 - " into each MODULE title on purpose, so it uploads.
+#   The checks below read module titles without that label; item, page, assignment and quiz titles are checked as before.
+if '--module-labels' in sys.argv:
+    _LBL=r'(?:Module|Week|Wk|M|W) ?\d{1,2}(?:, [^()\[\]<]{1,24})?|\d{1,2}[-/]\d{1,2}(?:[-/]\d{2,4})?|[A-Z][a-z]{2,8},? [A-Z][a-z]{2} \d{1,2}(?:, \d{4})?|\d{4}-\d{2}-\d{2}'
+    def _unlabel(m):
+        t=m.group(2)
+        t=re.sub(r'^\s*(?:\(('+_LBL+r')\)|\[('+_LBL+r')\]|(?:'+_LBL+r')\s*[-:]?)\s+','',t)
+        t=re.sub(r'\s+(?:\(('+_LBL+r')\)|\[('+_LBL+r')\]|[-:]?\s*(?:'+_LBL+r'))\s*$','',t)
+        return m.group(1)+t+m.group(3)
+    mm=re.sub(r'(<module identifier="[^"]+">\s*<title>)([^<]*)(</title>)',_unlabel,mm)
 # Added 2026-09-24. The Instructor Use Only - [Do Not Publish] module now ships in every
 # cartridge (Standards 0), carrying the live course's *No Publish pages VERBATIM: Adam's rule
 # is copy them and change only dates and links. Those pages are never student visible, so
