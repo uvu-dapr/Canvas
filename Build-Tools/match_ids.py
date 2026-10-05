@@ -149,6 +149,12 @@ def plan(pkg, export, older):
     for lab, v in live.items():
         if v["kind"] in ("page", "assignment", "quiz", "discussion") and (not v["stored"] or shared0[v["stored"]] > 1): unsure_ids.add(lab)
     leave_out, carry = [], {}
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+        import taken_renames as _tr
+        reach = {k for k, v in _tr.graded(export).items() if v["reachable"]}
+    except Exception:
+        reach = set()
     rep = pkg + ".report.json"
     taken_titles = {" ".join(t.get("title", "").split()) for t in (json.load(open(rep)).get("taken_items", []) if os.path.exists(rep) else [])}
     if "course_settings/module_meta.xml" in z.namelist():
@@ -165,7 +171,9 @@ def plan(pkg, export, older):
             for it in re.finditer(r'(?s)<item identifier="[^"]+">(.*?)</item>', m.group(3)):
                 ref = re.search(r"<identifierref>([^<]+)</identifierref>", it.group(1))
                 if ref and ref.group(1) in unsure_ids and ref.group(1) not in pk and not (ref.group(1) in by_stored and shared0[ref.group(1)] == 1): badref[ref.group(1)] = live[ref.group(1)]["title"]
-            took = {r: t for r, t in badref.items() if t in taken_titles or (live[r]["stored"] and shared0[live[r]["stored"]] > 1)}
+            # taken: on the LIVE-Import's report, or published in the export (a Full package has no report; 3340 v83's
+            # Intro quiz was copied instead of left alone, 2026-10-05)
+            took = {r: t for r, t in badref.items() if t in taken_titles or (live[r]["stored"] and shared0[live[r]["stored"]] > 1) or r in reach}
             if took: leave_out.append(dict(id=m.group(1), title=U(m.group(2)), because=sorted(set(took.values()))))
             else: carry.update(badref)
     # Two live items made from the same id: Canvas takes whichever it finds first, so a swap to that id is not safe

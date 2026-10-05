@@ -183,6 +183,16 @@ for _m in re.finditer(r'<resource identifier="[^"]+" type="webcontent" href="([^
     _kids=re.findall(r'<file href="([^"]+)"\s*/>',_m.group(2))
     if len(_kids)>1:
         fails.append('resource %s bundles %d files; Canvas imports only its href'%(_m.group(1)[:60],len(_kids)))
+# [2026-10-05] With --live, a page link may name a page that is already in the live course and not in the package: the
+#   import keeps the link and Canvas resolves it to that page (blueprint_copies.py points a removed class copy of a
+#   Blueprint page at the Blueprint's synced page this way).
+LIVE_SLUGS=set()
+if '--live' in sys.argv:
+    try:
+        import zipfile as _zfl
+        for _n in _zfl.ZipFile(sys.argv[sys.argv.index('--live')+1]).namelist():
+            if _n.startswith('wiki_content/') and _n.endswith('.html'): LIVE_SLUGS.add(_n[13:-5])
+    except Exception: pass
 probs=[]
 for p in glob.glob('**/*',recursive=True):
     if not os.path.isfile(p): continue
@@ -196,7 +206,8 @@ for p in glob.glob('**/*',recursive=True):
             if not os.path.exists(f): probs.append((p,t[:90],'file missing'))
             elif f not in OWNED: probs.append((p,t[:90],'file is not the href of its own webcontent resource, so Canvas never imports it'))
         elif t.startswith('$WIKI_REFERENCE$/pages/'):
-            if t.split('/pages/',1)[1].split('?')[0] not in pages: probs.append((p,t[:90],'page missing'))
+            _sl=t.split('/pages/',1)[1].split('?')[0]
+            if _sl not in pages and _sl not in LIVE_SLUGS: probs.append((p,t[:90],'page missing'))
         elif t.startswith('$CANVAS_OBJECT_REFERENCE$/'):
             if t.rsplit('/',1)[1] not in ids and t.rsplit('/',1)[1] not in LIVE_IDS: probs.append((p,t[:90],'object missing'))
         elif t.startswith('$CANVAS_COURSE_REFERENCE$'):
@@ -729,7 +740,7 @@ for dp,dn,fn in os.walk('.'):
         except Exception: continue
         for m in re.findall(r'\$WIKI_REFERENCE\$/pages/([A-Za-z0-9._-]+)',t):
             xtot+=1
-            if m not in sset: dead.append((os.path.relpath(os.path.join(dp,f),'.'),m))
+            if m not in sset and m not in LIVE_SLUGS: dead.append((os.path.relpath(os.path.join(dp,f),'.'),m))
 L('page cross-links: %d   pointing at a page that does not exist: %d'%(xtot,len(dead)))
 if dead:
     for d in dead[:8]: L('    %s -> %s'%d)
@@ -1695,6 +1706,36 @@ if '--live' in sys.argv:
                     _wchg.append('%s: %s%% in Canvas, %s%% in this package' % (_lg.get(_t, _t), _lw[_t], _w))
     except Exception as _e:
         L('    note: grading weights not compared (%s)' % _e)
+    # Gradebook groups (J70, 2026-10-05): Canvas finds a group by the id it stored. A package group that doesn't carry it
+    #   becomes a SECOND group of the same name (2255 v111 would have made a second "Assignments"); an item naming a group
+    #   neither the package nor the live course (by stored id) has lands in "Imported Assignments", 0% in a weighted course
+    #   (Canvas AssignmentImporter's fallback; both DAPR 2020 and 2255 got one on 2026-10-05).
+    _grp2, _imp = [], []
+    try:
+        _pg = {}
+        if os.path.exists('course_settings/assignment_groups.xml'):
+            _pg = {m.group(1): html.unescape((re.search(r'<title>([^<]*)', m.group(2)) or [0, ''])[1]) for m in re.finditer(r'(?s)<assignmentGroup identifier="([^"]+)">(.*?)</assignmentGroup>', open('course_settings/assignment_groups.xml', encoding='utf-8').read())}
+        _livet = {" ".join(html.unescape(t).split()).lower() for t in _lg.values()}
+        _hit = lambda i: i in _to_label and _to_label[i] in _lg
+        _switch = []
+        for _i, _t in _pg.items():
+            if not _hit(_i) and " ".join(_t.split()).lower() in _livet:
+                # fixed_groups.py's planned one-time switch: the live group can't be matched, so this one replaces it
+                (_switch if _i.startswith('dapr-group-') else _grp2).append(_t)
+        if _switch:
+            L('    one-time group switch (fixed_groups.py): %s' % ', '.join(_switch))
+            warns.append('12k ONE-TIME GROUP SWITCH: the import adds %s with a fixed id. In Canvas, Assignments page: delete the OLD %s group and choose "Move its assignments to" the new one; every later import then matches it' % (' and '.join('"%s"' % x for x in _switch), ' and '.join('"%s"' % x for x in _switch)))
+        for _f in glob.glob('*/assignment_settings.xml'):
+            _x = open(_f, encoding='utf-8', errors='ignore').read()
+            _g = re.search(r'<assignment_group_identifierref>([^<]+)<', _x)
+            if _g and _g.group(1) not in _pg and not _hit(_g.group(1)):
+                _imp.append(html.unescape((re.search(r'<title>([^<]*)', _x) or [0, _f])[1]))
+    except Exception as _e:
+        L('    note: gradebook groups not compared (%s)' % _e)
+    L('    groups that would arrive as a second group of the same name (must be 0): %d' % len(_grp2)); [L('      ' + x) for x in _grp2]
+    if _grp2: fails.append('12k %d gradebook group(s) arrive as a SECOND group of the same name (no stored id): %s. Leave the group out and point its items at the live group (match_ids.py apply does)' % (len(_grp2), '; '.join(_grp2)))
+    L('    items that would land in Imported Assignments (must be 0): %d' % len(_imp)); [L('      ' + x) for x in _imp[:15]]
+    if _imp: fails.append('12k %d item(s) name a gradebook group Canvas cannot find, so they land in "Imported Assignments" (0%% in a weighted course): %s' % (len(_imp), '; '.join(_imp[:5])))
     if _wchg:
         L('    grading weights this import would change: %d' % len(_wchg)); [L('      ' + x) for x in _wchg]
         fails.append('12k the import would change live grading weights: %s' % '; '.join(_wchg))
@@ -1755,6 +1796,47 @@ except StopIteration:
 except Exception as _e:
     fails.append('12j the credit hour gate could not run: %s'%_e)
     L('12j the credit hour gate could not run: %s'%_e)
+# 12n NO CLASS COPIES OF BLUEPRINT CONTENT (Standards 0b.6; Adam 2026-10-05: "all the orientation stuff for course
+#   orientation gets thrown into from the blueprint course, which is wrong"). Renamed copies ("Orientation: Course Legend"
+#   for "Essentials: 3E) Course Legend") slip past a title check, so blueprint_copies.py compares words against the live
+#   course's Unified Class Content and the Blueprint export. Needs --live.
+if '--live' in sys.argv:
+    try:
+        import tempfile as _tf, zipfile as _zfb
+        sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+        import blueprint_copies as _bc
+        _tmp = _tf.NamedTemporaryFile(suffix='.imscc', delete=False).name
+        with _zfb.ZipFile(_tmp, 'w') as _zw:
+            for _r, _d, _f in os.walk('.'):
+                for _x in _f:
+                    _pp = os.path.join(_r, _x)
+                    if _pp.endswith(('.html', '.xml', '.qti')): _zw.write(_pp, os.path.relpath(_pp, '.'))
+        _cp = _bc.plan(_tmp, sys.argv[sys.argv.index('--live') + 1]); os.remove(_tmp)
+        L('12n class copies of Blueprint content (must be 0): %d' % len(_cp))
+        for _c in _cp[:20]: L('    %s %s  copies  %s (%.2f)' % (_c['kind'], _c['title'][:60], _c['copies'][:50], _c['share']))
+        if _cp: fails.append('Blueprint copies in the package: %d (python3 blueprint_copies.py apply takes them out)' % len(_cp))
+    except Exception as _e:
+        L('12n Blueprint copy check could not run: %s' % _e); warns.append('12n Blueprint copy check could not run')
+# 12o NO SECOND COPY OF TAKEN WORK UNDER A NEW NAME (Standards 16a; DAPR 2020 v82, 9 found by hand, 2026-10-05):
+#   taken_renames.py pairs each published live assignment, quiz or discussion the package has no title for with the
+#   package item that is its renamed copy. Needs --live.
+if '--live' in sys.argv:
+    try:
+        import tempfile as _tf2, zipfile as _zft
+        sys.path.insert(0, os.path.dirname(os.path.realpath(__file__)))
+        import taken_renames as _tr
+        _tmp2 = _tf2.NamedTemporaryFile(suffix='.imscc', delete=False).name
+        with _zft.ZipFile(_tmp2, 'w') as _zw2:
+            for _r, _d, _f in os.walk('.'):
+                for _x in _f:
+                    _pp = os.path.join(_r, _x)
+                    if _pp.endswith(('.html', '.xml', '.qti')): _zw2.write(_pp, os.path.relpath(_pp, '.'))
+        _tp = _tr.plan(_tmp2, sys.argv[sys.argv.index('--live') + 1]); os.remove(_tmp2)
+        L('12o taken work the package brings again under a new name (must be 0): %d' % len(_tp))
+        for _t in _tp[:20]: L('    %s %s  is live %s (%.2f)' % (_t['kind'], _t['package'][:55], _t['live'][:45], _t['share']))
+        if _tp: fails.append('second copies of taken work: %d (python3 taken_renames.py apply leaves them out)' % len(_tp))
+    except Exception as _e:
+        L('12o taken work check could not run: %s' % _e); warns.append('12o taken work check could not run')
 # 12m NOTHING NEW ARRIVES PUBLISHED (Standards 0, S0; Adam 2026-09-30)
 # "They should all be inactive so I can make them live myself." The 30 Sep DAPR 2000 import published new slide links
 # in modules whose pages were still unpublished, because Slides > Update Canvas Links and relink_slides.py wrote new

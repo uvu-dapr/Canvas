@@ -1,55 +1,7 @@
 [
   {
-    "spec" : {
-      "slide" : 12,
-      "layout" : "place",
-      "pictures" : [
-        {
-          "box" : [
-            0.25,
-            0.5,
-            0.5,
-            0.34999999999999998
-          ],
-          "subject" : "Same_Voltage_Low_and_High_Impedance_Loads",
-          "title" : "",
-          "alt" : "Two identical signal sources at the same level: the left one drives a small load and a thick, bright stream of current flows; the right one drives a large load and only a thin trickle of current flows",
-          "src" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Images\/Audio_dB_RMS_Headroom_Masterclass-Same_Voltage_Low_and_High_Impedance_Loads.png"
-        }
-      ]
-    },
-    "brief_image" : 102,
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Images\/Audio_dB_RMS_Headroom_Masterclass-Same_Voltage_Low_and_High_Impedance_Loads.png",
-    "check" : "same source in both panels; left small load, thick flow; right large load, thin flow; no text; cards end 0.46 and the footnote sits at 0.88 on a PowerPoint render",
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Sound__The_Decibel\/Presentations\/Audio_dB_RMS_Headroom_Masterclass-Linked.pptx",
-    "state" : "not made"
-  },
-  {
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Monitoring__Psychoacoustics\/Presentations\/Monitoring-Psychoacoustics-Linked.pptx",
-    "spec" : {
-      "slide" : 12,
-      "layout" : "place",
-      "pictures" : [
-        {
-          "box" : [
-            0.20000000000000001,
-            0.56000000000000005,
-            0.59999999999999998,
-            0.38
-          ],
-          "subject" : "One_Mix_Many_Playback_Systems",
-          "title" : "",
-          "alt" : "One glowing waveform in the middle with lines out to a car dashboard, a phone, a pair of earbuds, a club sound system and a pair of studio monitors",
-          "src" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Monitoring__Psychoacoustics\/Presentations\/Images\/Monitoring-Psychoacoustics-One_Mix_Many_Playback_Systems.png"
-        }
-      ]
-    },
-    "state" : "not made",
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-2000--Digital_Audio_Essentials\/Monitoring__Psychoacoustics\/Presentations\/Images\/Monitoring-Psychoacoustics-One_Mix_Many_Playback_Systems.png",
-    "brief_image" : 103,
-    "check" : "exactly one central waveform and five generic systems (car, phone, earbuds, club speakers, studio monitors), no logos, no text; bullets end about 0.53 on a PowerPoint render"
-  },
-  {
+    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Images\/Interactive_Mix-The_Immersive_Interactive_Mix-Height_Rear_and_Close_Placement.png (a copy of brief Image 50, made for Interactive_Audio slide 18)",
+    "brief_image" : "50",
     "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Interactive_Mix-The_Immersive_Interactive_Mix-Linked.pptx",
     "spec" : {
       "slide" : 14,
@@ -69,9 +21,7 @@
         }
       ]
     },
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Images\/Interactive_Mix-The_Immersive_Interactive_Mix-Height_Rear_and_Close_Placement.png (a copy of brief Image 50, made for Interactive_Audio slide 18)",
     "state" : "not made",
-    "brief_image" : "50",
     "check" : "same picture as Image 50 (three sources: orange overhead, green far behind, blue at the ear); place only after Image 50 is approved; table ends about 0.37 on the September PDF, confirm on a PowerPoint render"
   }
 ]
