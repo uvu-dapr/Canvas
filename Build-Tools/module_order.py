@@ -34,6 +34,30 @@ DIVIDER_SETS = {
     "A": dict(content="CONTENT & RESOURCES", practice=None, graded="GRADED WORK", bonus="BONUS (OPTIONAL)", in_class="IN CLASS: ", plain_parts=True),
 }
 DIVIDERS = DIVIDER_SETS["C"]
+TITLE_CASE = False      # --case title: "Study", "Graded Work" instead of STUDY, GRADED WORK (Adam, 2026-10-05, Canvas Preview Settings > Modules)
+
+def title_case(t):
+    """Graded Work, Bonus (Optional), In Class: , Content & Resources; small words stay small after the first."""
+    small = {"and", "or", "of", "the", "a", "an", "to", "in", "on", "for", "with"}
+    out = []
+    for i, w in enumerate(t.split(" ")):
+        lw = w.lower()
+        if i and lw in small: out.append(lw); continue
+        out.append(w[:1].upper() + w[1:].lower() if w[:1] != "(" else "(" + w[1:2].upper() + w[2:].lower())
+    return re.sub(r"(?i)\bmacos\b", "macOS", " ".join(out))
+
+def set_dividers(base, case=None, names=None):
+    """The divider table for a run: a named set, the user's own names, then their case."""
+    global DIVIDERS, STD, TITLE_CASE
+    d = dict(DIVIDER_SETS[base])
+    for k, v in (names or {}).items():
+        if k in d and v is not None: d[k] = v
+    TITLE_CASE = case == "title"
+    for k in ("content", "practice", "graded", "bonus", "in_class"):
+        if d.get(k): d[k] = title_case(d[k]) if TITLE_CASE else d[k].upper()
+    for k in ("content", "practice", "graded", "bonus"):     # a name of the user's own is recognized next time too
+        if d.get(k): KNOWN.setdefault(k, set()).add(d[k].strip().lower())
+    DIVIDERS = d; STD = (DIVIDERS["content"], DIVIDERS["graded"])
 # A PRACTICE page, read from the title after its topic: the student does something step by step (Standards 6.9)
 PRACTICE_PAGE = re.compile(r"(?i)\b(procedure|guide|worked example|workflow|walkthrough|step[- ]by[- ]step|scenario|common mistakes|"
                            r"checklist|verifying|exercise|hands[- ]on|try it|practice|how to)\b")
@@ -60,7 +84,8 @@ def head_name(kind, t):
         return DIVIDERS["in_class"] + (what.title().replace("'S", "'s") if what.isupper() else what)
     if kind == "part" and DIVIDERS["plain_parts"]:
         p = re.sub(r"^P\d+:\s*", "", t.strip())
-        return re.sub(r"(?i)\bmacos\b", "macOS", p.upper().replace(" AND ", " & "))
+        p = p.replace(" AND ", " & ").replace(" and ", " & ")
+        return title_case(p) if TITLE_CASE else re.sub(r"(?i)\bmacos\b", "macOS", p.upper())
     return None
 
 def is_practice(x):
@@ -507,10 +532,12 @@ def apply_plan(W, plan, LIVE=None, ALL=False):
 def main():
     a = sys.argv[1:]
     opt = lambda k: a[a.index(k) + 1] if k in a else None
-    if opt("--dividers"):                  # try another set of divider names (Adam's choice, 2026-10-03)
-        global DIVIDERS, STD
-        assert opt("--dividers") in DIVIDER_SETS, "--dividers is one of " + ", ".join(DIVIDER_SETS)
-        DIVIDERS = DIVIDER_SETS[opt("--dividers")]; STD = (DIVIDERS["content"], DIVIDERS["graded"])
+    # --dividers <set> tries another set of names (Adam's choice, 2026-10-03); --case title|caps and --names '{"graded":
+    # "Graded Work"}' come from Canvas Preview's Settings > Modules (2026-10-05)
+    # Title Case is the default since 2026-10-05 (Adam chose it); --case caps gives STUDY, PRACTICE, GRADED WORK
+    base = opt("--dividers") or "C"
+    assert base in DIVIDER_SETS, "--dividers is one of " + ", ".join(DIVIDER_SETS)
+    set_dividers(base, opt("--case") or "title", json.loads(opt("--names")) if opt("--names") else None)
     if a[:1] == ["plan"] and len(a) > 1:
         p = plan_package(a[1], opt("--live"), opt("--report"))
         js = json.dumps(p, indent=1)

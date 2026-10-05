@@ -381,6 +381,7 @@ def run(root='.', exclude=None):
     # 4-5 weekly spread load and open window; the final is budgeted 33 a week over its last three weeks
     def monday(x): return (x - dt.timedelta(days=x.weekday())).date()
     weekload = {}
+    oneweek = {}     # the part of each week's load from work open only that one week
     for i in live:
         if i['bonus'] or i['attendance'] or not i['due']: continue
         due, unl = i['due'], i['unlock']
@@ -395,9 +396,19 @@ def run(root='.', exclude=None):
         for k in range(weeks):
             w = start + dt.timedelta(weeks=k)
             weekload[w] = weekload.get(w, 0) + i['pts'] / float(weeks)
+            if weeks == 1: oneweek[w] = oneweek.get(w, 0) + i['pts']
+    # Adam, 2026-10-05: "if things have been opened for extra weeks then that doesn't really count against them because
+    # they have more time to work on it ... but let's not do more than 300 in one week". A week over the model's
+    # capacity passes (a warning) when the extra comes from work open longer than a week; it fails over 300, or when
+    # the work open only that week is over capacity by itself.
+    HARD = 300
     over = sorted((w, v) for w, v in weekload.items() if v > M['weekly'] + 0.01)
     for w, v in over:
-        fails.append('week of %s carries %.0f points of spread load; Model %s capacity is %d' % (w, v, key, M['weekly']))
+        if v > HARD + 0.01 or oneweek.get(w, 0) > M['weekly'] + 0.01:
+            fails.append('week of %s carries %.0f points of spread load; Model %s capacity is %d%s' % (w, v, key, M['weekly'],
+                         ' and no week may pass %d' % HARD if v > HARD + 0.01 else ' (work open only this week: %.0f)' % oneweek.get(w, 0)))
+        else:
+            warns.append('week of %s carries %.0f points of spread load (capacity %d): allowed, the extra is work open more than a week, under the %d limit' % (w, v, M['weekly'], HARD))
 
     # 6 two items above 75 points due the same week
     byweek = {}
