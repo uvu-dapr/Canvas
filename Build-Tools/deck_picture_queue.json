@@ -1,27 +1,27 @@
 [
-  {
-    "image" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Images\/Interactive_Mix-The_Immersive_Interactive_Mix-Height_Rear_and_Close_Placement.png (a copy of brief Image 50, made for Interactive_Audio slide 18)",
-    "brief_image" : "50",
-    "deck" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Mix__The_Immersive_Interactive_Mix\/Presentations\/Interactive_Mix-The_Immersive_Interactive_Mix-Linked.pptx",
-    "spec" : {
-      "slide" : 14,
-      "layout" : "place",
-      "pictures" : [
-        {
-          "box" : [
-            0.25,
-            0.41999999999999998,
-            0.5,
-            0.47999999999999998
-          ],
-          "subject" : "Height_Rear_and_Close_Placement",
-          "title" : "",
-          "alt" : "A listener seen from behind and above: one large glowing source high overhead, one far behind, and one small soft source beside the ear",
-          "src" : "\/Users\/adamwolson\/Library\/CloudStorage\/Dropbox\/Reference Files\/Miscellaneous\/4-Work\/UVU\/CloudFlare\/Canvas Links\/DAPR-3345--Spatial_Audio_II\/Interactive_Audio__Foundations_of_Interactive_Spatial_Audio\/Presentations\/Images\/Interactive_Audio-Foundations_of_Interactive_Spatial_Audio-Height_Rear_and_Close_Placement.png"
-        }
-      ]
-    },
-    "state" : "not made",
-    "check" : "same picture as Image 50 (three sources: orange overhead, green far behind, blue at the ear); place only after Image 50 is approved; table ends about 0.37 on the September PDF, confirm on a PowerPoint render"
-  }
+ {
+  "image": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Interactive_Mix__The_Immersive_Interactive_Mix/Presentations/Images/Interactive_Mix-The_Immersive_Interactive_Mix-Height_Rear_and_Close_Placement.png (a copy of brief Image 50, made for Interactive_Audio slide 18)",
+  "brief_image": "50",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Interactive_Mix__The_Immersive_Interactive_Mix/Presentations/Interactive_Mix-The_Immersive_Interactive_Mix-Linked.pptx",
+  "spec": {
+   "slide": 14,
+   "layout": "place",
+   "pictures": [
+    {
+     "box": [
+      0.25,
+      0.42,
+      0.5,
+      0.48
+     ],
+     "subject": "Height_Rear_and_Close_Placement",
+     "title": "",
+     "alt": "A listener seen from behind and above: one large glowing source high overhead, one far behind, and one small soft source beside the ear",
+     "src": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Interactive_Audio__Foundations_of_Interactive_Spatial_Audio/Presentations/Images/Interactive_Audio-Foundations_of_Interactive_Spatial_Audio-Height_Rear_and_Close_Placement.png"
+    }
+   ]
+  },
+  "state": "not made",
+  "check": "same picture as Image 50 (three sources: orange overhead, green far behind, blue at the ear); place only after Image 50 is approved; table ends about 0.37 on the September PDF, confirm on a PowerPoint render"
+ }
 ]

@@ -521,7 +521,7 @@ def add_pictures(linked, spec, archive=True, build=True):
         body = re.sub(r'(?s)<p:sp>(?:(?!</p:sp>).)*?<p:ph (?:type="body" )?idx="1"[^>]*/>.*?</p:sp>', "", body, count=1)
     ids = [int(x) for x in re.findall(r'<p:cNvPr id="(\d+)"', body)] or [1]
     nid = max(ids) + 1
-    k = len(pics); gap = int(H * 0.02); xml = []; new_rels = []
+    k = len(pics); gap = int(H * 0.02); xml = []; new_rels = []; placed_boxes = []
     rows = spec.get("layout", "rows") == "rows"
     for i, (p, (name, dst, blob)) in enumerate(zip(pics, names)):
         if placed:
@@ -557,7 +557,7 @@ def add_pictures(linked, spec, archive=True, build=True):
         xml.append('<p:pic><p:nvPicPr><p:cNvPr id="%d" name="Picture %d" descr="%s"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>'
                    '<p:blipFill><a:blip r:link="%s"/>%s<a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="%d" y="%d"/><a:ext cx="%d" cy="%d"/></a:xfrm>'
                    '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic>' % (nid, nid, alt, lid, src_rect, x, y, w, h))
-        nid += 1
+        nid += 1; placed_boxes.append((x, y, w, h))
         if side or below or placed:
             paras = '<a:p><a:pPr algn="ctr"/><a:r><a:rPr lang="en-US" sz="%d" dirty="0"><a:solidFill><a:srgbClr val="595959"/></a:solidFill></a:rPr><a:t>%s</a:t></a:r></a:p>' % (spec.get("label_size", 1200), html.escape(p.get("title", ""), quote=False))
         else:
@@ -568,6 +568,17 @@ def add_pictures(linked, spec, archive=True, build=True):
                    '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr wrap="square" anchor="%s"><a:normAutofit/></a:bodyPr><a:lstStyle/>%s</p:txBody></p:sp>'
                    % (nid, nid, tbox[0], tbox[1], tbox[2], tbox[3], "ctr" if rows else "t", paras))
         nid += 1
+    # Never over another shape: card layouts (boxes spread across the slide) have no room the body can give up, and a
+    # picture placed there covered a worked example (2026-10-06, Surround_Recording slide 14 and seven more)
+    for sp in re.findall(r"(?s)<p:(?:sp|pic|graphicFrame|grpSp)>.*?</p:(?:sp|pic|graphicFrame|grpSp)>", body):
+        g = re.search(r'<a:off x="(-?\d+)" y="(-?\d+)"/><a:ext cx="(\d+)" cy="(\d+)"/>', sp)
+        if not g: continue
+        ox, oy, ow, oh = (int(v) for v in g.groups())
+        if oy > H * 0.92 or ow * oh > W * H * 0.9: continue          # footer band, or a full-slide background
+        for (px, py, pw_, ph_) in placed_boxes:
+            if px < ox + ow - W * 0.01 and ox < px + pw_ - W * 0.01 and py < oy + oh - H * 0.01 and oy < py + ph_ - H * 0.01:
+                nm = re.search(r'name="([^"]*)"', sp)
+                return dict(deck=linked, error="slide %d has no room: the picture would cover %s; pick a box (layout place) or another slide" % (n, nm.group(1) if nm else "a shape"))
     body = body.replace("</p:spTree>", "".join(xml) + "</p:spTree>", 1)
     data[sx] = body.encode("utf-8")
     data[rn] = (rels or '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"></Relationships>').replace("</Relationships>", "".join(new_rels) + "</Relationships>").encode("utf-8")
@@ -579,6 +590,80 @@ def add_pictures(linked, spec, archive=True, build=True):
     if archive and not os.path.exists(keep): shutil.copy2(linked, keep)
     write(linked, infos, data)
     return dict(deck=linked, slide=n, pictures=[x[0] for x in names], linked_now=len(listing), archived=keep if archive else None, embed=embed(linked) if build else None)
+
+# ---------------------------------------------------------------- picslide
+
+def picture_slide(linked, after, pic, archive=True, build=True):
+    """A new slide right after slide `after`, for a picture that has no room on a card-layout slide (Adam, 2026-10-06:
+    "new slide right after"). It copies that slide's background, its title (and anything above the cards) and its
+    footer, then shows the picture large under the title. Every later slide's page number footer moves down one.
+    pic: {"src", "subject", "alt"}; the file is copied to Images/<Base>-<Subject>.<ext> and linked like addpics."""
+    if is_open(linked): return dict(deck=linked, skipped="open in PowerPoint; close it and run again")
+    infos, data = read(linked); order = slide_order(data)
+    if not 1 <= after <= len(order): return dict(deck=linked, error="no slide %d" % after)
+    W, H = slide_size(data); sx = order[after - 1][1]; body = data[sx].decode("utf-8")
+    base = base_of(linked); images = os.path.join(os.path.dirname(os.path.abspath(linked)), "Images")
+    ext = os.path.splitext(pic["src"])[1].lower().replace(".jpeg", ".jpg"); name = "%s-%s%s" % (base, pic["subject"], ext); dst = os.path.join(images, name)
+    blob = open(pic["src"], "rb").read()
+    if os.path.exists(dst) and sha(open(dst, "rb").read()) != sha(blob): return dict(deck=linked, error="%s already exists with a different picture" % name)
+    def pagenum(xml, old, new):
+        # the footer text box that holds only this slide's number
+        def fix(m):
+            sp = m.group(0); g = re.search(r'<a:off x="-?\d+" y="(\d+)"', sp)
+            if g and int(g.group(1)) > H * 0.9 and re.sub(r"<[^>]+>", "", re.search(r"(?s)<p:txBody>.*</p:txBody>", sp).group(0) if "<p:txBody>" in sp else "").strip() == str(old):
+                return sp.replace("<a:t>%d</a:t>" % old, "<a:t>%d</a:t>" % new, 1)
+            return sp
+        return re.sub(r"(?s)<p:sp>.*?</p:sp>", fix, xml)
+    # the new slide: background, the shapes above the cards, the footer; then the picture
+    keep, top = [], int(H * 0.12)
+    for m in re.finditer(r"(?s)<p:(sp|pic|grpSp|graphicFrame|cxnSp)>.*?</p:\1>", body):
+        sp = m.group(0); g = re.search(r'<a:off x="(-?\d+)" y="(-?\d+)"/><a:ext cx="(\d+)" cy="(\d+)"/>', sp)
+        if not g: continue
+        oy, oh = int(g.group(2)), int(g.group(4))
+        if oy >= H * 0.9: keep.append(sp)
+        elif oy + oh <= H * 0.19: keep.append(sp); top = max(top, oy + oh)
+    tree_open = re.search(r"(?s)<p:spTree>.*?(?:</p:grpSpPr>|<p:grpSpPr/>)", body).group(0)
+    new = body[:body.index("<p:spTree>")] + tree_open + "".join(keep) + "</p:spTree>" + body[body.index("</p:spTree>") + len("</p:spTree>"):]
+    new = re.sub(r'<p:cSld name="[^"]*">', "<p:cSld>", new)
+    new = pagenum(new, after, after + 1)
+    ptop = top + int(H * 0.04); pbot = int(H * 0.9); left = int(W * 0.06); right = W - int(W * 0.06)
+    pw, ph = image_size(pic["src"]); c = content_crop(pic["src"])
+    vw = pw * (1 - (c.get("l", 0) + c.get("r", 0)) / 100000); vh = ph * (1 - (c.get("t", 0) + c.get("b", 0)) / 100000)
+    sc = min((right - left) / vw, (pbot - ptop) / vh); w, h = int(vw * sc), int(vh * sc)
+    x = left + (right - left - w) // 2; y = ptop + (pbot - ptop - h) // 2
+    ids = [int(v) for v in re.findall(r'<p:cNvPr id="(\d+)"', new)] or [1]
+    src_rect = ('<a:srcRect%s/>' % "".join(' %s="%d"' % (kk, vv) for kk, vv in c.items() if vv)) if c else ""
+    new = new.replace("</p:spTree>", '<p:pic><p:nvPicPr><p:cNvPr id="%d" name="Picture %d" descr="%s"/><p:cNvPicPr><a:picLocks noChangeAspect="1"/></p:cNvPicPr><p:nvPr/></p:nvPicPr>'
+        '<p:blipFill><a:blip r:link="rIdLk1"/>%s<a:stretch><a:fillRect/></a:stretch></p:blipFill><p:spPr><a:xfrm><a:off x="%d" y="%d"/><a:ext cx="%d" cy="%d"/></a:xfrm>'
+        '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom></p:spPr></p:pic></p:spTree>' % (max(ids) + 1, max(ids) + 1, html.escape(pic.get("alt", ""), quote=True), src_rect, x, y, w, h), 1)
+    # its part, relationships and content type
+    nums = [int(v) for v in re.findall(r"ppt/slides/slide(\d+)\.xml$", "\n".join(data), re.M)]
+    part = "ppt/slides/slide%d.xml" % (max(nums) + 1)
+    lay = re.search(r'<Relationship [^>]*relationships/slideLayout"[^>]*/>', data[rels_name(sx)].decode("utf-8")).group(0)
+    data[part] = new.encode("utf-8")
+    data[rels_name(part)] = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">%s'
+        '<Relationship Id="rIdLk1" Type="%s" Target="%s" TargetMode="External"/></Relationships>' % (lay, REL_IMG, mirror_link(dst))).encode("utf-8")
+    ct = data["[Content_Types].xml"].decode("utf-8")
+    data["[Content_Types].xml"] = ct.replace("</Types>", '<Override PartName="/%s" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/></Types>' % part, 1).encode("utf-8")
+    prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8"); rid = "rIdPs1"
+    while rid in prels: rid += "x"
+    data["ppt/_rels/presentation.xml.rels"] = prels.replace("</Relationships>", '<Relationship Id="%s" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/slide" Target="slides/%s"/></Relationships>' % (rid, posixpath.basename(part)), 1).encode("utf-8")
+    pres = data["ppt/presentation.xml"].decode("utf-8")
+    sid = max(int(v) for v in re.findall(r'<p:sldId id="(\d+)"', pres)) + 1
+    prev = re.findall(r'<p:sldId [^>]*/>', pres)[after - 1]
+    data["ppt/presentation.xml"] = pres.replace(prev, prev + '<p:sldId id="%d" r:id="%s"/>' % (sid, rid), 1).encode("utf-8")
+    # later slides' page numbers move down one
+    for k, (_, p) in enumerate(order[after:], start=after + 1):
+        data[p] = pagenum(data[p].decode("utf-8"), k, k + 1).encode("utf-8")
+    app = data.get("docProps/app.xml")
+    if app: data["docProps/app.xml"] = re.sub(r"<Slides>\d+</Slides>", "<Slides>%d</Slides>" % (len(order) + 1), app.decode("utf-8")).encode("utf-8")
+    listing = refresh_reference(data, linked)
+    if not os.path.exists(dst): os.makedirs(images, exist_ok=True); open(dst, "wb").write(blob)
+    arch = os.path.join(os.path.dirname(os.path.abspath(linked)), "Archive"); os.makedirs(arch, exist_ok=True)
+    keepf = os.path.join(arch, "%s (before pictures %s).pptx" % (os.path.splitext(os.path.basename(linked))[0], datetime.datetime.now().strftime("%Y-%m-%d %H%M")))
+    if archive and not os.path.exists(keepf): shutil.copy2(linked, keepf)
+    write(linked, infos, data)
+    return dict(deck=linked, new_slide=after + 1, picture=name, linked_now=len(listing), embed=embed(linked) if build else None)
 
 # ---------------------------------------------------------------- uncopy
 
@@ -853,12 +938,14 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["sync"]: print(json.dumps([sync_mirror()])); sys.exit(0)
     if a[:1] == ["unique"]: print(json.dumps(unique(a[1] if len(a) > 1 else LINKS_ROOT), indent=1)); sys.exit(0)
-    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy", "strip", "addpics", "mirror", "place"): print(__doc__); sys.exit(2)
+    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy", "strip", "addpics", "mirror", "place", "picslide"): print(__doc__); sys.exit(2)
     t = a[1]
     if a[0] == "split": res = [split(d, "--dry" in a) for d in decks(t, r"(?<!-Linked)(?<!-Embedded)\.pptx$")]
     elif a[0] == "embed": res = [embed(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "uncopy": res = [uncopy(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "strip": res = [strip(d) for d in decks(t, r"-Linked\.pptx$")]
+    elif a[0] == "picslide":       # picslide <Linked.pptx> <after slide> <spec.json {"src","subject","alt"}>
+        res = [picture_slide(a[1], int(a[2]), json.load(open(a[3], encoding="utf-8")))]
     elif a[0] == "addpics":
         spec = json.load(open(a[2], encoding="utf-8")); specs = spec if isinstance(spec, list) else [spec]
         # several slides in one go: one copy to Archive first, one Embedded build at the end
