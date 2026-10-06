@@ -10,6 +10,7 @@
 
     python3 module_order.py plan  <package .imscc or folder> [--live <Canvas export .imscc>] [--report <.report.json>] [--out plan.json]
     python3 module_order.py apply <unzipped folder> <plan.json> [--live <Canvas export .imscc>] [--all]
+    python3 module_order.py number <unzipped folder> [--live <Canvas export .imscc>]   modules in week order, positions 1..n
     either one takes --dividers <set> to use another set of divider names (DIVIDER_SETS; the default is 6.9's)
 
 plan prints (or writes) a JSON plan: per module its items now, the new order, removals and renames. Canvas Preview's
@@ -526,8 +527,54 @@ def apply_plan(W, plan, LIVE=None, ALL=False):
             if s != s0: wr(p, s)
 
     wr("course_settings/module_meta.xml", mm); wr("imsmanifest.xml", man)
+    number_modules(W, LIVE)          # modules in week order, positions 1..n (2026-10-05)
     return report
 
+
+def number_modules(W, live=None):
+    """Modules in week order with positions 1, 2, 3 ... (Adam, 2026-10-05: "Why don't these modules sort in the right
+    order?": 2020 v79 to v86 and 3340 v83 to v86 carried <position>1</position> on every module, so neither Canvas nor
+    Canvas Preview could order them). Instructor Use Only first, then by opening date (undated keep their place among
+    the dated ones), Auxiliary Resources last. With --live, the live course's own modules (Blueprint ones, modules this
+    package leaves out) count in the numbering too, so the import slots the package's modules between them by date."""
+    p = os.path.join(W, "course_settings/module_meta.xml")
+    mm = open(p, encoding="utf8").read()
+    blocks = list(re.finditer(r'(?s)<module identifier="([^"]+)">.*?</module>', mm))
+    def info(b):
+        hdr = b.split("<items>")[0]
+        t = html.unescape((re.search(r"<title>([^<]*)</title>", hdr) or [0, ""])[1])
+        u = (re.search(r"<unlock_at>([^<]*)</unlock_at>", hdr) or [0, ""])[1][:10]
+        return t, u
+    def rank(t, u, i):
+        if "instructor use only" in t.lower(): return (0, "", i)
+        if t.lower().startswith("auxiliary resources") or "auxiliary resources" in t.lower(): return (3, "", i)
+        return (1, u or "", i)
+    mine = [(m.group(1), *info(m.group(0)), i) for i, m in enumerate(blocks)]
+    # undated modules (other than the two ends) take the date of the module before them, so they keep their place
+    last = ""
+    rows = []
+    for mid, t, u, i in mine:
+        if u: last = u
+        rows.append((mid, t, u or last, i, True))
+    if live:
+        import zipfile as _zl
+        lm = _zl.ZipFile(live).read("course_settings/module_meta.xml").decode("utf8", "ignore")
+        have = {html.unescape(t).lower() for _, t, _, _ in mine}
+        for i, m in enumerate(re.finditer(r'(?s)<module identifier="([^"]+)">.*?</module>', lm)):
+            t, u = info(m.group(0))
+            if _n(t) in {_n(x) for x in have} or any(_n(t) == _n(re.sub(r"^\w+ \d+: ", "", x)) for x in have): continue
+            # Student Essentials right after Instructor Use Only; other undated live modules (BOAA Lab) after the weeks
+            rows.append((None, t, u or ("0000" if "essentials" in t.lower() else "9999"), 1000 + i, False))
+    rows.sort(key=lambda r: rank(r[1], r[2], r[3]))
+    pos = {r[0]: n for n, r in enumerate(rows, 1) if r[0]}
+    order = sorted(blocks, key=lambda m: pos[m.group(1)])
+    out = mm[:blocks[0].start()]
+    for k, m in enumerate(order):
+        b = re.sub(r"(<module identifier=\"[^\"]+\">(?:(?!<items>).)*?<position>)\d+(</position>)", lambda x: x.group(1) + str(pos[m.group(1)]) + x.group(2), m.group(0), count=1, flags=re.S)
+        out += b + (mm[blocks[k].end():blocks[k + 1].start()] if k + 1 < len(blocks) else "")
+    out += mm[blocks[-1].end():]
+    open(p, "w", encoding="utf8").write(out)
+    return [(r[1], n, "live" if not r[4] else "") for n, r in enumerate(rows, 1)]
 
 def main():
     a = sys.argv[1:]
@@ -547,6 +594,8 @@ def main():
         plan = json.load(open(a[2]))
         r = apply_plan(a[1], plan["modules"] if "modules" in plan else plan, opt("--live"), "--all" in a)
         print(json.dumps({k: (len(v) if isinstance(v, list) else v) for k, v in r.items()}))
+    elif a[:1] == ["number"] and len(a) > 1:
+        for t, n, w in number_modules(a[1], opt("--live")): print("%3d %s%s" % (n, t, "   (live only)" if w else ""))
     else:
         print(__doc__); sys.exit(2)
 

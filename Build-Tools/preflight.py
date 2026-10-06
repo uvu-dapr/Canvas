@@ -1796,6 +1796,23 @@ except StopIteration:
 except Exception as _e:
     fails.append('12j the credit hour gate could not run: %s'%_e)
     L('12j the credit hour gate could not run: %s'%_e)
+# 12q MODULES IN WEEK ORDER [Adam, 2026-10-05: "Why don't these modules sort in the right order?"]: every module has its
+#   own <position>, and the dated modules run by opening date (Instructor Use Only first, Auxiliary Resources last).
+#   2020 v79 to v86 and 3340 v83 to v86 carried position 1 on every module. module_order.py number fixes it.
+_mods = []
+for _m in re.finditer(r'(?s)<module identifier="([^"]+)">(.*?)</module>', mm):
+    _h = _m.group(2).split('<items>')[0]
+    _p = re.search(r'<position>(\d+)</position>', _h); _u = re.search(r'<unlock_at>([^<]*)</unlock_at>', _h); _t = re.search(r'<title>([^<]*)</title>', _h)
+    _mods.append((int(_p.group(1)) if _p else 0, (_u.group(1) if _u else '')[:10], html.unescape(_t.group(1)) if _t else '?'))
+_pos = [x[0] for x in _mods]
+_dup = len(_pos) - len(set(_pos))
+_dated = [x for x in sorted(_mods) if x[1] and 'instructor use only' not in x[2].lower() and 'auxiliary resources' not in x[2].lower()]
+_back = [(a[2], b[2]) for a, b in zip(_dated, _dated[1:]) if b[1] < a[1]]
+L('12q modules sharing a position (must be 0): %d   dated modules out of week order: %d' % (_dup, len(_back)))
+for a, b in _back[:6]: L('    %s comes before %s but opens later' % (a[:50], b[:50]))
+if _dup: fails.append('12q %d module(s) share a <position>, so Canvas cannot order them (module_order.py number fixes it)' % _dup)
+if _back: warns.append('12q %d module(s) out of week order (module_order.py number)' % len(_back))
+
 # 12n NO CLASS COPIES OF BLUEPRINT CONTENT (Standards 0b.6; Adam 2026-10-05: "all the orientation stuff for course
 #   orientation gets thrown into from the blueprint course, which is wrong"). Renamed copies ("Orientation: Course Legend"
 #   for "Essentials: 3E) Course Legend") slip past a title check, so blueprint_copies.py compares words against the live

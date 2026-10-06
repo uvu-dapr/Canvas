@@ -380,7 +380,10 @@ for e in EXTRA:
         for it in hits:
             add_note(it, note, who)
             if "noted" in it: it["noted"].append(note_time(e))
-        if hits or kind != "canvasNote": continue
+        # A note on a picture that is no longer listed (finished, approved) brings it back as a fix; approved pictures whose
+        # note is unchanged since approval are dropped again below (DONE). Was canvasNote only, so a new Images to Fix note on
+        # a finished banner was silently ignored (Adam, 2026-10-06)
+        if hits or kind == "deckNote": continue
         if not os.path.exists(path):
             problems.append("Your note on %s: that file is not on this Mac, so it can't be fixed here (%s)" % (os.path.basename(path), e.get("source", "")))
             continue

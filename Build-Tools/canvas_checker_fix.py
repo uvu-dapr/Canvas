@@ -220,12 +220,70 @@ def fix_bold(doc):
     return doc, n
 
 
+def _rgb(v):
+    v = v.strip().lower().replace("!important", "").strip()
+    m = re.match(r"^#([0-9a-f]{3}|[0-9a-f]{6})$", v)
+    if m:
+        h = m.group(1); h = "".join(c * 2 for c in h) if len(h) == 3 else h
+        return tuple(int(h[i:i + 2], 16) for i in (0, 2, 4))
+    m = re.match(r"^rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)", v)
+    if m: return tuple(int(x) for x in m.groups())
+    return {"white": (255, 255, 255), "black": (0, 0, 0)}.get(v)
+
+def _ratio(a, b):
+    def lum(c):
+        def ch(v):
+            s = v / 255
+            return s / 12.92 if s <= 0.03928 else ((s + 0.055) / 1.055) ** 2.4
+        return 0.2126 * ch(c[0]) + 0.7152 * ch(c[1]) + 0.0722 * ch(c[2])
+    x, y = lum(a), lum(b)
+    return (max(x, y) + 0.05) / (min(x, y) + 0.05)
+
+LINK_BLUE = (0x03, 0x74, 0xB5)   # Canvas's own link color
+
+def fix_tinted_links(doc):
+    """A link with no color of its own on a tinted background (Canvas's link blue under 4.5 : 1 there) gets
+    color:#0d47a1, or white on a dark box (Adam, 2026-10-05, Check the App: Accessibility; Canvas Preview's A11y check)."""
+    out, n, last = [], 0, 0
+    stack = [("root", (255, 255, 255), False)]
+    voids = {"img", "br", "hr", "input", "meta", "link", "source", "col", "area", "wbr", "track", "param", "embed"}
+    body_at = doc.find("<body")
+    for m in re.finditer(r"<(/?)([a-zA-Z][a-zA-Z0-9]*)([^>]*?)(/?)>", doc):
+        if m.start() < body_at: continue
+        closing, name, attrs, selfc = m.group(1) == "/", m.group(2).lower(), m.group(3), m.group(4) == "/"
+        if closing:
+            for i in range(len(stack) - 1, 0, -1):
+                if stack[i][0] == name: del stack[i:]; break
+            continue
+        sm = re.search(r'style\s*=\s*"([^"]*)"', attrs, re.I)
+        style = sm.group(1) if sm else ""
+        bgm = re.search(r"(?:^|;)\s*background(?:-color)?\s*:\s*([^;]+)", style, re.I)
+        own = None
+        if bgm:
+            for tok in bgm.group(1).split():
+                own = _rgb(tok)
+                if own: break
+        parent = stack[-1]
+        bg = own or parent[1]
+        tinted = (_ratio(own, (255, 255, 255)) > 1.05) if own else parent[2]
+        if name == "a" and tinted and not re.search(r"(?:^|;)\s*color\s*:", style, re.I) and _ratio(LINK_BLUE, bg) < 4.5:
+            col = "#ffffff" if _ratio((255, 255, 255), bg) >= 4.5 else "#0d47a1"
+            if sm:
+                tag = m.group(0).replace(sm.group(0), 'style="color: %s; %s"' % (col, style.strip()), 1)
+            else:
+                tag = m.group(0)[:-1].rstrip("/") + ' style="color: %s;"' % col + ("/>" if selfc else ">")
+            out.append(doc[last:m.start()]); out.append(tag); last = m.end(); n += 1
+        if not selfc and name not in voids: stack.append((name, bg, tinted))
+    if not n: return doc, 0
+    out.append(doc[last:])
+    return "".join(out), n
+
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
     root, dry, bold = sys.argv[1], "--dry-run" in sys.argv, "--bold" in sys.argv
     bolds = 0
-    scopes = alts = files = heads = worksheets = lists = 0
+    scopes = alts = files = heads = worksheets = lists = links = 0
     for d, _, fs in os.walk(root):
         for f in fs:
             if not f.endswith(".html"):
@@ -238,6 +296,7 @@ def main():
             new, sk = fix_heading_skips(new); hd += sk
             new, wb = fix_worksheet_blocks(new); worksheets += wb
             new, nl = fix_numbered_paragraphs(new); lists += nl
+            new, tl = fix_tinted_links(new); links += tl
             if bold:
                 new, b = fix_bold(new); bolds += b
             if new != doc:
@@ -245,7 +304,7 @@ def main():
                 print("%s: %d scope, %d alt, %d long heading" % (os.path.relpath(p, root), s, a, hd))
                 if not dry:
                     open(p, "w", encoding="utf-8").write(new)
-    print("RESULT: %d file(s), %d header cell(s) given scope, %d file-name alt text(s) rewritten, %d long heading(s) made bold paragraphs, %d worksheet block(s) made one-click, %d numbered paragraph run(s) made lists%s%s" % (files, scopes, alts, heads, worksheets, lists, (", %d font-weight(s) made <strong>" % bolds) if bold else "", " (dry run)" if dry else ""))
+    print("RESULT: %d file(s), %d header cell(s) given scope, %d file-name alt text(s) rewritten, %d long heading(s) made bold paragraphs, %d worksheet block(s) made one-click, %d numbered paragraph run(s) made lists, %d link(s) on tinted backgrounds given a color%s%s" % (files, scopes, alts, heads, worksheets, lists, links, (", %d font-weight(s) made <strong>" % bolds) if bold else "", " (dry run)" if dry else ""))
 
 
 if __name__ == "__main__":
