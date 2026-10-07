@@ -1,0 +1,762 @@
+[
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Auxiliary_Resources",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Auxiliary_Resources/Presentations/Auxiliary_Resources-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Careers__Audio_Careers",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Careers__Audio_Careers/Presentations/Audio_Careers-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Careers__Audio_Careers",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Careers__Audio_Careers/Presentations/Careers-Audio_Careers-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Course_Info",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Course_Info/Presentations/Course_Info-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/DAPR_2000__Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/DAPR_2000__Final_Exam/Presentations/Final_Exam-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/DAW__EQ_and_Dynamics/Presentations/DAW-EQ_and_Dynamics-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/DAW__Your_First_Mix",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/DAW__Your_First_Mix/Presentations/DAW-Your_First_Mix-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Digital_Audio__The_Digital_Domain",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Digital_Audio__The_Digital_Domain/Presentations/Digital_Audio-The_Digital_Domain-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques/Presentations/Mic_Level_Reference-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques/Presentations/Microphone_Components-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques/Presentations/Microphones-Characteristics_Selection_and_Stereo_Techniques-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques/Presentations/Polar_Patterns_and_MEMS-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Microphones__Characteristics_Selection_and_Stereo_Techniques/Presentations/Stereo_Mic_Techniques-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Mixing__Mixing_and_Mastering",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Mixing__Mixing_and_Mastering/Presentations/Mixing-Mixing_and_Mastering-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Monitoring__Psychoacoustics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Monitoring__Psychoacoustics/Presentations/Monitoring-Psychoacoustics-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Pro_Tools__Introduction",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Pro_Tools__Introduction/Presentations/Pro_Tools-Introduction-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Pro_Tools__Introduction",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Pro_Tools__Introduction/Presentations/Pro_Tools_Practice_Topics-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Processing__Compression",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Processing__Compression/Presentations/Processing-Compression-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Processing__Time-Based_Effects",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Processing__Time-Based_Effects/Presentations/Processing-Time-Based_Effects-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Project__Mix_1A_-_Six_of_One",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Project__Mix_1A_-_Six_of_One/Presentations/Project-Mix_1A-Six_of_One-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Project__Mix_1B_-_Peer_Review",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Project__Mix_1B_-_Peer_Review/Presentations/Project-Mix_1B-Peer_Review-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Project__Mix_2_-_Six_of_One_Revision",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Project__Mix_2_-_Six_of_One_Revision/Presentations/Project-Mix_2-Six_of_One_Revision-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Project__Mix_2_-_Six_of_One_Revision",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Project__Mix_2_-_Six_of_One_Revision/Presentations/Six_of_One_Mix_2_Checklist-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Presentations/Signal_Flow-Cables_and_Connections-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Signal_Flow__Cables_and_Connections/Presentations/Signal_Flow-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Sound__The_Decibel",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Sound__The_Decibel/Presentations/Audio_dB_RMS_Headroom_Masterclass-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Sound__The_Decibel",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Sound__The_Decibel/Presentations/Inverse_Square_Law_and_Decibels-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Sound__The_Decibel",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Sound__The_Decibel/Presentations/Sound-The_Decibel-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency/Presentations/Sound-Wave_Properties_Hearing_and_Frequency-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2000--Digital_Audio_Essentials/Sound__Wave_Properties_Hearing_and_Frequency/Presentations/Sound_The_Speed_of_Sound-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Acoustics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Acoustics/Presentations/Acoustics-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Attendance_and_Participation",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Attendance_and_Participation/Presentations/Attendance_and_Participation-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Auxiliary_Resources",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Auxiliary_Resources/Presentations/Auxiliary_Resources-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Console_Operation",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Console_Operation/Presentations/Console_Operation-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Console_Signal_Flow",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Console_Signal_Flow/Presentations/Console_Signal_Flow-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Drum_Recording",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Drum_Recording/Presentations/Drum_Recording-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Final_Exam/Presentations/Final_Exam-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Final_Project",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Final_Project/Presentations/Final_Project-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Gain_Staging",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Gain_Staging/Presentations/Gain_Staging-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Guitar_and_Bass_Recording",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Guitar_and_Bass_Recording/Presentations/Guitar_and_Bass_Recording-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Impedance_and_Voltage",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Impedance_and_Voltage/Presentations/Impedance_and_Voltage-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Microphones",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Microphones/Presentations/Microphones-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Miking_Techniques",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Miking_Techniques/Presentations/Mid_Side_Miking_Presentation-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Miking_Techniques",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Miking_Techniques/Presentations/Miking_Techniques-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Patch_Bays",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Patch_Bays/Presentations/Patch_Bays-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Pro_Tools_for_Tracking",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Pro_Tools_for_Tracking/Presentations/Pro_Tools_for_Tracking-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Session_Delivery_and_Archiving",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Session_Delivery_and_Archiving/Presentations/Session_Delivery_and_Archiving-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Studio_Business",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Studio_Business/Presentations/Studio_Business-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Studio_Etiquette",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Studio_Etiquette/Presentations/Studio_Etiquette-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Studio_Use_and_Care",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Studio_Use_and_Care/Presentations/Studio_Use_and_Care-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/The_Digital_Recording_Process",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/The_Digital_Recording_Process/Presentations/The_Digital_Recording_Process-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2010--Core_Recording/Vocal_Recording",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2010--Core_Recording/Vocal_Recording/Presentations/Vocal_Recording-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Acoustics__Mix_Acoustics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Acoustics__Mix_Acoustics/Presentations/Acoustics-Mix_Acoustics-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Auxiliary_Resources",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Auxiliary_Resources/Presentations/Auxiliary_Resources-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Effects__Balancing_and_Reverb",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Effects__Balancing_and_Reverb/Presentations/Effects-Balancing_and_Reverb-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Effects__Delay_and_Stereo_Enhancements",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Effects__Delay_and_Stereo_Enhancements/Presentations/Effects-Delay_and_Stereo_Enhancements-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Effects__Dynamic_Effects",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Effects__Dynamic_Effects/Presentations/Effects-Dynamic_Effects-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Effects__Dynamic_Effects",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Effects__Dynamic_Effects/Presentations/Universal_Audio_1176-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Effects__Frequency_Dynamics_and_Side-Chains/Presentations/Effects-Frequency_Dynamics_and_Side-Chains-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Effects__Spectral_Effects_and_EQ",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Effects__Spectral_Effects_and_EQ/Presentations/Effects-Spectral_Effects_and_EQ-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Final__Final_Mix_and_Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Final__Final_Mix_and_Final_Exam/Presentations/Final-Final_Mix_and_Final_Exam-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Mixing__Comping_and_Arrangement",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Mixing__Comping_and_Arrangement/Presentations/Mixing-Comping_and_Arrangement-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Mixing__Essential_Groundwork",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Mixing__Essential_Groundwork/Presentations/Mixing-Essential_Groundwork-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Mixing__Focus_and_Balance",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Mixing__Focus_and_Balance/Presentations/Mixing-Focus_and_Balance-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Mixing__In-Class_Mixing",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Mixing__In-Class_Mixing/Presentations/Mixing-In-Class_Mixing-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Mixing__Master-Buss_Processing_and_Endgame",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Mixing__Master-Buss_Processing_and_Endgame/Presentations/Mixing-Master-Buss_Processing_and_Endgame-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Mixing__Timing",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Mixing__Timing/Presentations/Mixing-Timing-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Mixing__Tuning",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Mixing__Tuning/Presentations/Mixing-Tuning-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Monitoring__Calibration_and_Monitoring",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Monitoring__Calibration_and_Monitoring/Presentations/Monitoring-Calibration_and_Monitoring-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Pro_Tools__Fundamentals",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Pro_Tools__Fundamentals/Presentations/Pro_Tools-Fundamentals-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/Professional_Practice__Presentations_and_Sessions",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/Professional_Practice__Presentations_and_Sessions/Presentations/Professional_Practice-Presentations_and_Sessions-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2020--Core_Mixing/macOS__Foundations",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2020--Core_Mixing/macOS__Foundations/Presentations/macOS-Foundations-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/AC_and_DC_Electricity",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/AC_and_DC_Electricity/Presentations/AC_and_DC_Electricity-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Auxiliary_Resources",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Auxiliary_Resources/Presentations/Auxiliary_Resources-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Batteries",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Batteries/Presentations/Batteries-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Capacitors",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Capacitors/Presentations/Capacitors-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Diodes_and_LEDs",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Diodes_and_LEDs/Presentations/Diodes_and_LEDs-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Final_Exam/Presentations/Final_Exam-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Final_Exam/Presentations/Full_Semester_Review-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Inductors_and_Transformers",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Inductors_and_Transformers/Presentations/Inductors_and_Transformers-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/MIDI__Foundation",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/MIDI__Foundation/Presentations/MIDI-Foundation-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Evolution_and_Extended_Protocols",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Evolution_and_Extended_Protocols/Presentations/MIDI-MIDI_Evolution_and_Extended_Protocols-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Over_USB_and_Network_Systems",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Over_USB_and_Network_Systems/Presentations/MIDI-MIDI_Over_USB_and_Network_Systems-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Troubleshooting_and_Diagnostics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/MIDI__MIDI_Troubleshooting_and_Diagnostics/Presentations/MIDI-MIDI_Troubleshooting_and_Diagnostics-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/MIDI__Systems_and_Implementation",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/MIDI__Systems_and_Implementation/Presentations/MIDI-Systems_and_Implementation-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Multimeters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Multimeters/Presentations/Multimeters-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Ohms_Law",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Ohms_Law/Presentations/Ohms_Law-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Power",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Power/Presentations/Power-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Resistors",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Resistors/Presentations/Resistors-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Schematics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Schematics/Presentations/Schematics-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Series_and_Parallel_Circuits",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Series_and_Parallel_Circuits/Presentations/Series_and_Parallel_Circuits-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Switches",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Switches/Presentations/Switches-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Transistors",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Transistors/Presentations/Transistors-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Voltage_and_Current",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Voltage_and_Current/Presentations/Voltage_and_Current-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-2255--Audio_Hardware_I/Wiring_and_Safety",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-2255--Audio_Hardware_I/Wiring_and_Safety/Presentations/Wiring_and_Safety-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Auxiliary_Resources",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Auxiliary_Resources/Presentations/Auxiliary_Resources-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Bonus__Optional_Builds",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Bonus__Optional_Builds/Presentations/Bonus-Optional_Builds-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics/Presentations/Electronics-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__AC_DC_and_Semiconductors",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__AC_DC_and_Semiconductors/Presentations/Electronics-AC_DC_and_Semiconductors-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__AC_DC_and_Semiconductors",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__AC_DC_and_Semiconductors/Presentations/Voltage_Drop_Resistors-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/Electronics-Op_Amps_and_Filters-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/LM741_Op_Amp_Filters-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/Op_Amp__Applications-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/Op_Amp__Core_Configurations-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/Op_Amp__Frequency_Response-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/Op_Amp__Practical_Op_Amps-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/Op_Amp__What_Is_An_Op_Amp-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Op_Amps_and_Filters/Presentations/Op_Amps__Bench_Day_On_the_Bench-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Safety_Schematics_and_Soldering",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Safety_Schematics_and_Soldering/Presentations/CLO1_Electrical_Safety-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Safety_Schematics_and_Soldering",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Safety_Schematics_and_Soldering/Presentations/Electronics-Safety_Schematics_and_Soldering-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Electronics__Transistor_Biasing_and_Breadboarding",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Electronics__Transistor_Biasing_and_Breadboarding/Presentations/Electronics-Transistor_Biasing_and_Breadboarding-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Final_Exam/Presentations/Final_Exam-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Audio_Network_Architecture",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Audio_Network_Architecture/Presentations/Networking-Audio_Network_Architecture-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Cable_Construction_and_Layer_1",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Cable_Construction_and_Layer_1/Presentations/Networking-Cable_Construction_and_Layer_1-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Foundations_of_Audio_Networking",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Foundations_of_Audio_Networking/Presentations/Networking-Foundations_of_Audio_Networking-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Foundations_of_Audio_Networking",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Foundations_of_Audio_Networking/Presentations/Osi_5_vs_7_Layer_Models_Styled_Fixed-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__IP_Addressing",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__IP_Addressing/Presentations/Networking-IP_Addressing-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Industry_Network_Audio_Protocols",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Industry_Network_Audio_Protocols/Presentations/Audio_Networking_Protocols-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Industry_Network_Audio_Protocols",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Industry_Network_Audio_Protocols/Presentations/Networking-Industry_Network_Audio_Protocols-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Network_Configuration_and_Control",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Network_Configuration_and_Control/Presentations/Networking-Network_Configuration_and_Control-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Network_Diagnostics",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Network_Diagnostics/Presentations/Networking-Network_Diagnostics-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Subnets_and_Address_Ranges",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Subnets_and_Address_Ranges/Presentations/Networking-Subnets_and_Address_Ranges-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Subnets_and_Address_Ranges",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Subnets_and_Address_Ranges/Presentations/Private_IP_Ranges_and_Subnetting-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Networking__Subnets_and_Address_Ranges",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Networking__Subnets_and_Address_Ranges/Presentations/Subnet_Masks_for_Audio_over_IP_Dante_and_RAVENNA-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Software_Tools",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Software_Tools/Presentations/Software_Tools-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-3255--Audio_Hardware_II/Wireless_Systems",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3255--Audio_Hardware_II/Wireless_Systems/Presentations/Wireless_Systems-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Ambisonics_and_Binaural",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Ambisonics_and_Binaural/Presentations/Ambisonics_and_Binaural-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Auxiliary_Resources",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Auxiliary_Resources/Presentations/Auxiliary_Resources-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Configuring_Pro_Tools_for_Atmos_Mixing",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Configuring_Pro_Tools_for_Atmos_Mixing/Presentations/Configuring_Pro_Tools_for_Atmos_Mixing-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Creating_Dolby_Atmos_Deliverables/Presentations/Creating_Dolby_Atmos_Deliverables-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Dolby_Certification",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Dolby_Certification/Presentations/Dolby_Certification-Dolby_Learning_Portal_Certification_Track-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Final_Project_and_Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Final_Project_and_Final_Exam/Presentations/Final_Project_and_Final_Exam-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Mixing_in_Dolby_Atmos",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Mixing_in_Dolby_Atmos/Presentations/Mixing_in_Dolby_Atmos-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Orchestral_Recording__Stereo_Mix",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Orchestral_Recording__Stereo_Mix/Presentations/Spatial_Recording-Orchestral_Recording_and_Spatial_Mix-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Surround_Mastering_and_Surround_Encoding",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Surround_Mastering_and_Surround_Encoding/Presentations/Surround_Mastering_and_Surround_Encoding-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Surround_Mixing_and_Surround_Plugins",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Surround_Mixing_and_Surround_Plugins/Presentations/Surround_Mixing_and_Surround_Plugins-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Surround_Monitoring",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Surround_Monitoring/Presentations/Introduction_to_Surround_and_Multichannel_Audio-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Surround_Monitoring",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Surround_Monitoring/Presentations/Surround_Monitoring-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/Surround_Recording",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/Surround_Recording/Presentations/Surround_Recording-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-3340--Spatial_Audio_I/The_Dolby_Atmos_Renderer",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3340--Spatial_Audio_I/The_Dolby_Atmos_Renderer/Presentations/The_Dolby_Atmos_Renderer-Linked.pptx",
+  "theme": "Integral"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Asset_Pipeline__Asset_Tracking_Task_Tracking_and_Source_Control",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Asset_Pipeline__Asset_Tracking_Task_Tracking_and_Source_Control/Presentations/Asset_Pipeline-Asset_Tracking_Task_Tracking_and_Source_Control-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Asset_Pipeline__Asset_Tracking_Task_Tracking_and_Source_Control",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Asset_Pipeline__Asset_Tracking_Task_Tracking_and_Source_Control/Presentations/Gamedev_Tools_Processes_Asset_Tracking-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Asset_Pipeline__Asset_Tracking_Task_Tracking_and_Source_Control",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Asset_Pipeline__Asset_Tracking_Task_Tracking_and_Source_Control/Presentations/Symlinks_Aliases_Shortcuts-Linked.pptx",
+  "theme": "Wisp"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Auxiliary_Resources",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Auxiliary_Resources/Presentations/Auxiliary_Resources-Linked.pptx",
+  "theme": "Savon"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/FMOD__Implementation_in_FMOD_Studio",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/FMOD__Implementation_in_FMOD_Studio/Presentations/FMOD-Implementation_in_FMOD_Studio-Linked.pptx",
+  "theme": "Frame"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Final_Project__Interactive_Audio_Implementation_and_Final_Exam",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Final_Project__Interactive_Audio_Implementation_and_Final_Exam/Presentations/Final_Project-Interactive_Audio_Implementation_and_Final_Exam-Linked.pptx",
+  "theme": "Droplet"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Implementation__Level_Implementation_and_Engine_Scripting",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Implementation__Level_Implementation_and_Engine_Scripting/Presentations/Implementation-Level_Implementation_and_Engine_Scripting-Linked.pptx",
+  "theme": "Shoji"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Interactive_Audio__Foundations_of_Interactive_Spatial_Audio",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Interactive_Audio__Foundations_of_Interactive_Spatial_Audio/Presentations/Interactive_Audio-Foundations_of_Interactive_Spatial_Audio-Linked.pptx",
+  "theme": "Archway"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Interactive_Mix__The_Immersive_Interactive_Mix",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Interactive_Mix__The_Immersive_Interactive_Mix/Presentations/Interactive_Mix-The_Immersive_Interactive_Mix-Linked.pptx",
+  "theme": "Organic"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Variation__Nonrepetitive_Design_Strategies",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Variation__Nonrepetitive_Design_Strategies/Presentations/Variation-Nonrepetitive_Design_Strategies-Linked.pptx",
+  "theme": "Lines"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Voice_Budget__Sound_Prioritization_and_Voice_Budgets",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Voice_Budget__Sound_Prioritization_and_Voice_Budgets/Presentations/Voice_Budget-Sound_Prioritization_and_Voice_Budgets-Linked.pptx",
+  "theme": "Facet"
+ },
+ {
+  "module": "DAPR-3345--Spatial_Audio_II/Wwise__Implementation_and_Certification_in_Wwise",
+  "deck": "/Users/adamwolson/Library/CloudStorage/Dropbox/Reference Files/Miscellaneous/4-Work/UVU/CloudFlare/Canvas Links/DAPR-3345--Spatial_Audio_II/Wwise__Implementation_and_Certification_in_Wwise/Presentations/Wwise-Implementation_and_Certification_in_Wwise-Linked.pptx",
+  "theme": "Integral"
+ }
+]

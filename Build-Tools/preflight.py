@@ -321,6 +321,12 @@ if _ns:
     _p=_ns[0]
     mm=re.sub(r'</?%s:'%re.escape(_p), lambda m: m.group(0).replace(_p+':',''), mm)
     print('    note: module_meta.xml is namespaced (%s:), prefixes stripped for matching'%_p)
+# 12r NO WEEK OR MODULE LABELS IN MODULE NAMES [Adam, 2026-10-06: "Please don't ever conflate or mix up adding the Weeks
+#   to any of the GitHub or Cloudflare uploads ... I want just a modules names without Weeks or module or anything like
+#   that"]: a module title never starts with "Week 06:", "Module 01 -", "Wk 3" or the like, in any package.
+_lab = [html.unescape(t) for t in re.findall(r'<module identifier="[^"]+">\s*<title>([^<]*)</title>', mm) if re.match(r'\s*(?:Week|Wk|Module|M|W) ?\d{1,2}\b', html.unescape(t))]
+L('12r module names with a week or module label (must be 0): %d' % len(_lab))
+if _lab: fails.append('12r %d module name(s) carry a week or module label (%s): module names are the topic only' % (len(_lab), '; '.join(_lab[:3])))
 # --module-labels [Adam, 2026-10-05]: Canvas Preview's Settings, Modules "Also put module names in packages" writes a
 #   label such as "Week 06: ", "(Week 06, 09/28/2026)" or "Module 01 - " into each MODULE title on purpose, so it uploads.
 #   The checks below read module titles without that label; item, page, assignment and quiz titles are checked as before.
@@ -1797,7 +1803,8 @@ except Exception as _e:
     fails.append('12j the credit hour gate could not run: %s'%_e)
     L('12j the credit hour gate could not run: %s'%_e)
 # 12q MODULES IN WEEK ORDER [Adam, 2026-10-05: "Why don't these modules sort in the right order?"]: every module has its
-#   own <position>, and the dated modules run by opening date (Instructor Use Only first, Auxiliary Resources last).
+#   own <position>, and the dated modules run by opening date (Instructor Use Only first, Auxiliary Resources right
+#   after Course Orientation since 2026-10-06; it was last before).
 #   2020 v79 to v86 and 3340 v83 to v86 carried position 1 on every module. module_order.py number fixes it.
 _mods = []
 for _m in re.finditer(r'(?s)<module identifier="([^"]+)">(.*?)</module>', mm):
@@ -1808,10 +1815,17 @@ _pos = [x[0] for x in _mods]
 _dup = len(_pos) - len(set(_pos))
 _dated = [x for x in sorted(_mods) if x[1] and 'instructor use only' not in x[2].lower() and 'auxiliary resources' not in x[2].lower()]
 _back = [(a[2], b[2]) for a, b in zip(_dated, _dated[1:]) if b[1] < a[1]]
-L('12q modules sharing a position (must be 0): %d   dated modules out of week order: %d' % (_dup, len(_back)))
+# Auxiliary Resources sits right after Course Orientation [Adam, 2026-10-06: "Auxiliary resources should be just after
+#   course orientation in every single class"]
+_ord = [x[2].lower() for x in sorted(_mods)]
+_oi = next((k for k, t in enumerate(_ord) if 'course orientation' in t), None)
+_ai = next((k for k, t in enumerate(_ord) if 'auxiliary resources' in t), None)
+_auxbad = 1 if (_oi is not None and _ai is not None and _ai != _oi + 1) else 0
+L('12q modules sharing a position (must be 0): %d   dated modules out of week order: %d   Auxiliary Resources not right after Course Orientation: %d' % (_dup, len(_back), _auxbad))
 for a, b in _back[:6]: L('    %s comes before %s but opens later' % (a[:50], b[:50]))
 if _dup: fails.append('12q %d module(s) share a <position>, so Canvas cannot order them (module_order.py number fixes it)' % _dup)
 if _back: warns.append('12q %d module(s) out of week order (module_order.py number)' % len(_back))
+if _auxbad: fails.append('12q Auxiliary Resources is not right after Course Orientation (module_order.py number fixes it)')
 
 # 12n NO CLASS COPIES OF BLUEPRINT CONTENT (Standards 0b.6; Adam 2026-10-05: "all the orientation stuff for course
 #   orientation gets thrown into from the blueprint course, which is wrong"). Renamed copies ("Orientation: Course Legend"
@@ -1854,6 +1868,27 @@ if '--live' in sys.argv:
         if _tp: fails.append('second copies of taken work: %d (python3 taken_renames.py apply leaves them out)' % len(_tp))
     except Exception as _e:
         L('12o taken work check could not run: %s' % _e); warns.append('12o taken work check could not run')
+# 7a-T NAME AND TIME ON EVERY HAND-IN (Standards 7a-T; Adam 2026-10-07): every assignment students hand in asks for
+#   their name and the time it took, and every one-click worksheet carries the Name and Time lines.
+try:
+    _nt_pages = []; _nt_ws = []
+    for _sp in glob.glob('*/assignment_settings.xml') + glob.glob('assignments/*.xml'):
+        _sx = open(_sp, encoding='utf-8', errors='ignore').read()
+        if not re.sub(r'<\?xml[^>]*\?>\s*', '', _sx[:400], count=1).lstrip().startswith('<assignment'): continue
+        _st = (re.search(r'<submission_types>([^<]*)', _sx) or [0, ''])[1]
+        if all(_t in ('none', 'not_graded', 'on_paper', 'external_tool', '') for _t in _st.split(',')): continue
+        _dir = os.path.dirname(_sp)
+        _hs = [h for h in glob.glob(os.path.join(_dir, '*.html'))] if _dir != 'assignments' else [_sp[:-4] + '.html']
+        for _h in _hs:
+            if not os.path.exists(_h): continue
+            _hx = open(_h, encoding='utf-8', errors='ignore').read()
+            if 'Name and time at the top' not in _hx: _nt_pages.append(_h)
+            if re.search(r'user-select:\s*all', _hx) and 'Time this assignment took' not in _hx: _nt_ws.append(_h)
+    L('7a-T name and time: pages missing the note: %d  worksheets missing the lines: %d' % (len(_nt_pages), len(_nt_ws)))
+    for _x in (_nt_pages + _nt_ws)[:10]: L('    ' + _x)
+    if _nt_pages or _nt_ws: warns.append('7a-T %d assignment page(s) and %d worksheet(s) without name and time (one-offs/nametime_j141.py adds them)' % (len(_nt_pages), len(_nt_ws)))
+except Exception as _e:
+    warns.append('7a-T name and time check could not run: %s' % _e)
 # 12m NOTHING NEW ARRIVES PUBLISHED (Standards 0, S0; Adam 2026-09-30)
 # "They should all be inactive so I can make them live myself." The 30 Sep DAPR 2000 import published new slide links
 # in modules whose pages were still unpublished, because Slides > Update Canvas Links and relink_slides.py wrote new

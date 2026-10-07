@@ -134,6 +134,15 @@ def slide_order(data):
             tgt[re.search(r'Id="([^"]+)"', r).group(1)] = posixpath.normpath(posixpath.join("ppt", re.search(r'Target="([^"]+)"', r).group(1)))
     return [(rid, tgt[rid]) for rid in re.findall(r'<p:sldId [^>]*r:id="([^"]+)"', pres) if rid in tgt]
 
+def slide_title(xml):
+    """The title placeholder's words, or else the first words on the slide that are not the footer or a page number."""
+    t = title_of(xml)
+    if t: return t
+    for x in re.findall(r"<a:t>([^<]*)</a:t>", xml):
+        x = html.unescape(x).strip()
+        if x and not x.startswith("DAPR") and not x.isdigit(): return x
+    return ""
+
 def title_of(xml):
     for m in shapes(xml):
         sp = m.group(0)
@@ -568,6 +577,10 @@ def add_pictures(linked, spec, archive=True, build=True):
                    '<a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></p:spPr><p:txBody><a:bodyPr wrap="square" anchor="%s"><a:normAutofit/></a:bodyPr><a:lstStyle/>%s</p:txBody></p:sp>'
                    % (nid, nid, tbox[0], tbox[1], tbox[2], tbox[3], "ctr" if rows else "t", paras))
         nid += 1
+    # Never a postage stamp: on a table slide the "room beside the text" is a footnote strip, and the picture came out a
+    # few percent of the slide (2026-10-06, Transistors "Three Amplifier Configurations"); a new slide after is better
+    if not placed and any(ph < H * 0.18 for (_, _, _, ph) in placed_boxes):
+        return dict(deck=linked, error="slide %d has no room: the picture would be too small to read; pick a box (layout place) or another slide" % n)
     # Never over another shape: card layouts (boxes spread across the slide) have no room the body can give up, and a
     # picture placed there covered a worked example (2026-10-06, Surround_Recording slide 14 and seven more)
     for sp in re.findall(r"(?s)<p:(?:sp|pic|graphicFrame|grpSp)>.*?</p:(?:sp|pic|graphicFrame|grpSp)>", body):
@@ -591,7 +604,40 @@ def add_pictures(linked, spec, archive=True, build=True):
     write(linked, infos, data)
     return dict(deck=linked, slide=n, pictures=[x[0] for x in names], linked_now=len(listing), archived=keep if archive else None, embed=embed(linked) if build else None)
 
+# ---------------------------------------------------------------- unpic
+
+def remove_picture(linked, slide, subject, build=True):
+    """Takes one addpics picture back off a slide: the picture linked to Images/<Base>-<Subject>.*, the caption box
+    right after it, and its link; the bullets keep the size addpics gave them (a later addpics or picslide redoes it)."""
+    if is_open(linked): return dict(deck=linked, skipped="open in PowerPoint; close it and run again")
+    infos, data = read(linked); order = slide_order(data); sx = order[slide - 1][1]; rn = rels_name(sx)
+    body = data[sx].decode("utf-8"); rels = data.get(rn, b"").decode("utf-8")
+    ids = [m.group(1) for m in re.finditer(r'<Relationship Id="([^"]+)"[^>]*Target="[^"]*%s-%s\.[a-z]+"' % (re.escape(urllib.parse.quote(base_of(linked))), re.escape(subject)), rels)]
+    ids += [m.group(1) for m in re.finditer(r'<Relationship Id="([^"]+)"[^>]*Target="[^"]*%s-%s\.[a-z]+"' % (re.escape(base_of(linked)), re.escape(subject)), rels)]
+    if not ids: return dict(deck=linked, error="no picture %s on slide %d" % (subject, slide))
+    for rid in set(ids):
+        body = re.sub(r'(?s)<p:pic>(?:(?!</p:pic>).)*?r:link="%s".*?</p:pic>(<p:sp><p:nvSpPr><p:cNvPr id="\d+" name="Caption \d+"/>.*?</p:sp>)?' % re.escape(rid), "", body, count=1)
+        rels = re.sub(r'<Relationship Id="%s"[^>]*/>' % re.escape(rid), "", rels)
+    data[sx] = body.encode("utf-8"); data[rn] = rels.encode("utf-8")
+    write(linked, infos, data)
+    return dict(deck=linked, slide=slide, removed=subject, embed=embed(linked) if build else None)
+
 # ---------------------------------------------------------------- picslide
+
+def layout_title_bottom(data, sx, H):
+    """Where a title that takes its position from the layout (or the master) ends; 20% of the height when neither says."""
+    def part_of(src, kind):
+        rels = data.get(rels_name(src), b"").decode("utf-8")
+        m = re.search(r'<Relationship [^>]*relationships/%s"[^>]*/>' % kind, rels)
+        return posixpath.normpath(posixpath.join(posixpath.dirname(src), re.search(r'Target="([^"]+)"', m.group(0)).group(1))) if m else None
+    lay = part_of(sx, "slideLayout"); mas = part_of(lay, "slideMaster") if lay else None
+    for p in (lay, mas):
+        if not p or p not in data: continue
+        for sp in re.findall(r"(?s)<p:sp>.*?</p:sp>", data[p].decode("utf-8")):
+            if re.search(r'<p:ph [^>]*type="(title|ctrTitle)"', sp):
+                g = re.search(r'<a:off x="-?\d+" y="(-?\d+)"/><a:ext cx="\d+" cy="(\d+)"/>', sp)
+                if g: return int(g.group(1)) + int(g.group(2))
+    return int(H * 0.2)
 
 def picture_slide(linked, after, pic, archive=True, build=True):
     """A new slide right after slide `after`, for a picture that has no room on a card-layout slide (Adam, 2026-10-06:
@@ -602,6 +648,11 @@ def picture_slide(linked, after, pic, archive=True, build=True):
     infos, data = read(linked); order = slide_order(data)
     if not 1 <= after <= len(order): return dict(deck=linked, error="no slide %d" % after)
     W, H = slide_size(data); sx = order[after - 1][1]; body = data[sx].decode("utf-8")
+    # the slide may already have its picture slide right after it (2026-10-06: seven MIDI duplicates)
+    if after < len(order):
+        nxt = data[order[after][1]].decode("utf-8")
+        if "<p:pic>" in nxt and slide_title(nxt) and slide_title(nxt) == slide_title(body):
+            return dict(deck=linked, error="slide %d already has a picture slide right after it" % after)
     base = base_of(linked); images = os.path.join(os.path.dirname(os.path.abspath(linked)), "Images")
     ext = os.path.splitext(pic["src"])[1].lower().replace(".jpeg", ".jpg"); name = "%s-%s%s" % (base, pic["subject"], ext); dst = os.path.join(images, name)
     blob = open(pic["src"], "rb").read()
@@ -618,6 +669,8 @@ def picture_slide(linked, after, pic, archive=True, build=True):
     keep, top = [], int(H * 0.12)
     for m in re.finditer(r"(?s)<p:(sp|pic|grpSp|graphicFrame|cxnSp)>.*?</p:\1>", body):
         sp = m.group(0); g = re.search(r'<a:off x="(-?\d+)" y="(-?\d+)"/><a:ext cx="(\d+)" cy="(\d+)"/>', sp)
+        # a title placeholder that takes its position from the layout (older 4:3 decks) still comes along
+        if not g and re.search(r'<p:ph [^>]*type="(title|ctrTitle)"', sp): keep.append(sp); top = max(top, layout_title_bottom(data, sx, H)); continue
         if not g: continue
         oy, oh = int(g.group(2)), int(g.group(4))
         if oy >= H * 0.9: keep.append(sp)
@@ -664,6 +717,42 @@ def picture_slide(linked, after, pic, archive=True, build=True):
     if archive and not os.path.exists(keepf): shutil.copy2(linked, keepf)
     write(linked, infos, data)
     return dict(deck=linked, new_slide=after + 1, picture=name, linked_now=len(listing), embed=embed(linked) if build else None)
+
+# ---------------------------------------------------------------- unpicslide
+
+def remove_picture_slide(linked, slide, build=True):
+    """Takes out a picture slide that picslide made (one linked picture, nothing else but the copied title and
+    footer) and moves every later slide's page number footer back up one. The reverse of picture_slide."""
+    if is_open(linked): return dict(deck=linked, skipped="open in PowerPoint; close it and run again")
+    infos, data = read(linked); order = slide_order(data)
+    if not 2 <= slide <= len(order): return dict(deck=linked, error="no slide %d" % slide)
+    W, H = slide_size(data); rid, part = order[slide - 1]; body = data[part].decode("utf-8")
+    rels = data.get(rels_name(part), b"").decode("utf-8")
+    if body.count("<p:pic>") != 1 or 'Id="rIdLk1"' not in rels: return dict(deck=linked, error="slide %d is not a picture slide made by picslide" % slide)
+    def pagenum(xml, old, new):
+        def fix(m):
+            sp = m.group(0); g = re.search(r'<a:off x="-?\d+" y="(\d+)"', sp)
+            if g and int(g.group(1)) > H * 0.9 and re.sub(r"<[^>]+>", "", re.search(r"(?s)<p:txBody>.*</p:txBody>", sp).group(0) if "<p:txBody>" in sp else "").strip() == str(old):
+                return sp.replace("<a:t>%d</a:t>" % old, "<a:t>%d</a:t>" % new, 1)
+            return sp
+        return re.sub(r"(?s)<p:sp>.*?</p:sp>", fix, xml)
+    pres = data["ppt/presentation.xml"].decode("utf-8")
+    data["ppt/presentation.xml"] = re.sub(r'<p:sldId [^>]*r:id="%s"/>' % re.escape(rid), "", pres, count=1).encode("utf-8")
+    prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8")
+    data["ppt/_rels/presentation.xml.rels"] = re.sub(r'<Relationship [^>]*Id="%s"[^>]*/>' % re.escape(rid), "", prels, count=1).encode("utf-8")
+    ct = data["[Content_Types].xml"].decode("utf-8")
+    data["[Content_Types].xml"] = re.sub(r'<Override PartName="/%s"[^>]*/>' % re.escape(part), "", ct, count=1).encode("utf-8")
+    data.pop(part, None); data.pop(rels_name(part), None)
+    for k, (_, p) in enumerate(order[slide:], start=slide + 1):
+        data[p] = pagenum(data[p].decode("utf-8"), k, k - 1).encode("utf-8")
+    app = data.get("docProps/app.xml")
+    if app: data["docProps/app.xml"] = re.sub(r"<Slides>\d+</Slides>", "<Slides>%d</Slides>" % (len(order) - 1), app.decode("utf-8")).encode("utf-8")
+    refresh_reference(data, linked)
+    arch = os.path.join(os.path.dirname(os.path.abspath(linked)), "Archive"); os.makedirs(arch, exist_ok=True)
+    keepf = os.path.join(arch, "%s (before removing slide %d %s).pptx" % (os.path.splitext(os.path.basename(linked))[0], slide, datetime.datetime.now().strftime("%Y-%m-%d %H%M")))
+    if not os.path.exists(keepf): shutil.copy2(linked, keepf)
+    write(linked, infos, data)
+    return dict(deck=linked, removed_slide=slide, embed=embed(linked) if build else None)
 
 # ---------------------------------------------------------------- uncopy
 
@@ -938,12 +1027,16 @@ if __name__ == "__main__":
     a = sys.argv[1:]
     if a[:1] == ["sync"]: print(json.dumps([sync_mirror()])); sys.exit(0)
     if a[:1] == ["unique"]: print(json.dumps(unique(a[1] if len(a) > 1 else LINKS_ROOT), indent=1)); sys.exit(0)
-    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy", "strip", "addpics", "mirror", "place", "picslide"): print(__doc__); sys.exit(2)
+    if len(a) < 2 or a[0] not in ("split", "embed", "status", "verify", "clean", "uncopy", "strip", "addpics", "mirror", "place", "picslide", "unpic", "unpicslide"): print(__doc__); sys.exit(2)
     t = a[1]
     if a[0] == "split": res = [split(d, "--dry" in a) for d in decks(t, r"(?<!-Linked)(?<!-Embedded)\.pptx$")]
     elif a[0] == "embed": res = [embed(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "uncopy": res = [uncopy(d) for d in decks(t, r"-Linked\.pptx$")]
     elif a[0] == "strip": res = [strip(d) for d in decks(t, r"-Linked\.pptx$")]
+    elif a[0] == "unpic":          # unpic <Linked.pptx> <slide> <Subject>
+        res = [remove_picture(a[1], int(a[2]), a[3])]
+    elif a[0] == "unpicslide":     # unpicslide <Linked.pptx> <slide>
+        res = [remove_picture_slide(a[1], int(a[2]))]
     elif a[0] == "picslide":       # picslide <Linked.pptx> <after slide> <spec.json {"src","subject","alt"}>
         res = [picture_slide(a[1], int(a[2]), json.load(open(a[3], encoding="utf-8")))]
     elif a[0] == "addpics":

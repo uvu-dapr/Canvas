@@ -535,7 +535,8 @@ def number_modules(W, live=None):
     """Modules in week order with positions 1, 2, 3 ... (Adam, 2026-10-05: "Why don't these modules sort in the right
     order?": 2020 v79 to v86 and 3340 v83 to v86 carried <position>1</position> on every module, so neither Canvas nor
     Canvas Preview could order them). Instructor Use Only first, then by opening date (undated keep their place among
-    the dated ones), Auxiliary Resources last. With --live, the live course's own modules (Blueprint ones, modules this
+    the dated ones), Auxiliary Resources right after Course Orientation (Adam, 2026-10-06: "Auxiliary resources should
+    be just after course orientation in every single class"; it was last until then). With --live, the live course's own modules (Blueprint ones, modules this
     package leaves out) count in the numbering too, so the import slots the package's modules between them by date."""
     p = os.path.join(W, "course_settings/module_meta.xml")
     mm = open(p, encoding="utf8").read()
@@ -545,9 +546,10 @@ def number_modules(W, live=None):
         t = html.unescape((re.search(r"<title>([^<]*)</title>", hdr) or [0, ""])[1])
         u = (re.search(r"<unlock_at>([^<]*)</unlock_at>", hdr) or [0, ""])[1][:10]
         return t, u
+    aux = lambda t: "auxiliary resources" in t.lower()
     def rank(t, u, i):
         if "instructor use only" in t.lower(): return (0, "", i)
-        if t.lower().startswith("auxiliary resources") or "auxiliary resources" in t.lower(): return (3, "", i)
+        if aux(t): return orient
         return (1, u or "", i)
     mine = [(m.group(1), *info(m.group(0)), i) for i, m in enumerate(blocks)]
     # undated modules (other than the two ends) take the date of the module before them, so they keep their place
@@ -565,6 +567,9 @@ def number_modules(W, live=None):
             if _n(t) in {_n(x) for x in have} or any(_n(t) == _n(re.sub(r"^\w+ \d+: ", "", x)) for x in have): continue
             # Student Essentials right after Instructor Use Only; other undated live modules (BOAA Lab) after the weeks
             rows.append((None, t, u or ("0000" if "essentials" in t.lower() else "9999"), 1000 + i, False))
+    # Auxiliary Resources sorts just after Course Orientation; with no orientation module, right after Instructor Use Only
+    o = next((r for r in rows if "course orientation" in r[1].lower() and r[4]), None)
+    orient = (1, o[2] or "", o[3] + 0.5) if o else (0, "~", 0)
     rows.sort(key=lambda r: rank(r[1], r[2], r[3]))
     pos = {r[0]: n for n, r in enumerate(rows, 1) if r[0]}
     order = sorted(blocks, key=lambda m: pos[m.group(1)])
