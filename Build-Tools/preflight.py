@@ -1918,5 +1918,24 @@ try:
     if _new_pub: fails.append('12m %d new module(s) or item(s) would arrive published, e.g. %s' % (len(_new_pub), _new_pub[:3]))
 except Exception as _e:
     fails.append('12m the publish gate could not run: %s' % _e)
+# 12s NOTHING UNUSED, NO DUPLICATE PICTURES [Adam, 2026-10-07]. "I don't want extra stuff in packages that don't need to be
+# used that goes for every single canvas package." and "There should never ever be a duplicate image in a canvas package
+# unless it has to be for a different quiz or something." A Canvas export carries every file in the course's Files: the
+# Blueprint's was 123 MB, 108 MB of it screenshots no page used. unused_files.py decides "used" (named by path or manifest
+# id by any other file) and "duplicate" (same bytes, used twice by one module or quiz); its fix command repairs both.
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import unused_files as _uf
+    _un = _uf.find('.'); _du = _uf.dupes('.')
+    L('')
+    L('12s NOTHING UNUSED, NO DUPLICATE PICTURES')
+    L('12s unused files, %.1f MB (must be 0): %d' % (sum(s for _, s in _un) / 1e6, len(_un)))
+    L('12s duplicate pictures used by one module or quiz (must be 0): %d' % len(_du))
+    for _n, _s in _un[:10]: L('    unused: %s' % _n)
+    for _o, _c, _f in _du[:10]: L('    duplicate in %s: %s' % (_o, ' = '.join(_c)))
+    if _un: fails.append('12s unused files: %d, %.1f MB (python3 unused_files.py fix <in> <out> leaves them out)' % (len(_un), sum(s for _, s in _un) / 1e6))
+    if _du: fails.append('12s duplicate pictures used by one module or quiz: %d group(s) (python3 unused_files.py fix repoints them)' % len(_du))
+except Exception as _e:
+    fails.append('12s the unused-file check could not run: %s' % _e)
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
 sys.exit(1 if fails else 0)

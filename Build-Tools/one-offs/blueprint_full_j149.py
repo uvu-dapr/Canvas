@@ -9,7 +9,7 @@
 # would add copies; it is for preview, or for an empty course.
 # Usage: python3 blueprint_full_j149.py <export .imscc> <Blueprint Fixes copy page .html> <output .imscc> <empty work folder>
 # Extracts and repacks with zipfile, keeping every original entry name (zip/unzip mangle the U+202F in a course image name).
-import sys, os, re, html, hashlib
+import sys, os, re, html, hashlib, urllib.parse
 SRC, FIXES, OUT, W = sys.argv[1:5]
 import zipfile
 zipfile.ZipFile(SRC).extractall(W)
@@ -58,6 +58,40 @@ for t, body in zip(FIX_TITLES, bodies):
 pc = titles[next(k for k in titles if k.startswith("Essentials: 3D) Pro Tools Cleanup"))]
 s = open(pc).read(); s2 = s.replace("Pro_Tools_Cleanup/before.jpg", "Pro_Tools_Cleanup/Before.jpg").replace("Pro_Tools_Cleanup/after.jpg", "Pro_Tools_Cleanup/After.jpg")
 assert s2 != s; open(pc, "w").write(s2); fixed.append("Pro Tools Cleanup: Before.jpg / After.jpg")
+
+# Canvas writes quiz assessment_meta.xml with the schema location in xmlns:xsi (an invalid namespace URI), so strict XML
+# readers (Canvas Preview's XMLDocument) can't read the quiz and show "Missing content". Write the header the way Canvas
+# writes every other settings file (xmlns:xsi = XMLSchema-instance, xsi:schemaLocation = the pair).
+BADXSI = 'xmlns:xsi="http://canvas.instructure.com/xsd/cccv1p0 https://canvas.instructure.com/xsd/cccv1p0.xsd"'
+GOODXSI = 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://canvas.instructure.com/xsd/cccv1p0 https://canvas.instructure.com/xsd/cccv1p0.xsd"'
+for d, _, fs in os.walk(W):
+    for fn in fs:
+        if fn == "assessment_meta.xml":
+            p = os.path.join(d, fn); s0 = open(p).read()
+            if BADXSI in s0: open(p, "w").write(s0.replace(BADXSI, GOODXSI)); fixed.append("quiz header: " + os.path.basename(d))
+
+# GitHub picture links whose file was renamed only in capitals (the 2026-09 naming audit: "file name case synced").
+# raw.githubusercontent.com is case-sensitive, so the old lowercase links 404 (Pro Tools Cleanup, Introduce Yourself).
+REPO = "/Users/adamwolson/Library/CloudStorage/Dropbox/apps/GitHub/Canvas/"
+RAW = "https://raw.githubusercontent.com/uvu-dapr/Canvas/main/"
+def case_fix(rel):
+    # the Mac disk ignores capitals, so compare each name exactly against the folder listing
+    parts, cur, out = rel.split("/"), REPO.rstrip("/"), []
+    for p in parts:
+        try: m = next((e for e in os.listdir(cur) if e.lower() == p.lower()), None)
+        except FileNotFoundError: return None
+        if m is None: return None
+        out.append(m); cur = os.path.join(cur, m)
+    good = "/".join(out)
+    return good if good != rel else None
+for d, _, fs in os.walk(W):
+    for fn in fs:
+        if not fn.endswith((".html", ".xml")): continue
+        p = os.path.join(d, fn); s0 = open(p, encoding="utf-8").read(); s1 = s0
+        for url in set(re.findall(re.escape(RAW) + r'[^"\'<>\s?#]+', s0)):
+            rel = urllib.parse.unquote(url[len(RAW):]); good = case_fix(rel)
+            if good: s1 = s1.replace(url, RAW + urllib.parse.quote(good)); fixed.append("case: " + good)
+        if s1 != s0: open(p, "w", encoding="utf-8").write(s1)
 
 # ---------- 2. new pages (same files and ids as v7)
 NEW = {"Protocols: Delivery and File Naming Standards": "protocols-delivery-and-file-naming-standards",
@@ -120,3 +154,10 @@ with zipfile.ZipFile(OUT, "w", zipfile.ZIP_DEFLATED) as z:
             rel = os.path.relpath(os.path.join(root, f), W)
             if rel not in names and not f.startswith("."): z.write(os.path.join(root, f), rel); added += 1
 print("files changed", changed, "| files added", added, "->", OUT)
+
+# Standards 12s (Adam 2026-10-07): no file nothing uses. unused_files.py decides "used" the same way preflight does.
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+import unused_files
+tmp = OUT + ".tmp"; os.replace(OUT, tmp)
+dupes, d = unused_files.fix(tmp, OUT); os.remove(tmp)
+print("left out", len(d), "unused files; repointed", len(dupes), "duplicate picture group(s) (Standards 12s)")
