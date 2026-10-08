@@ -96,5 +96,236 @@
   "class": "2255",
   "page": "midi-network-troubleshooting-checklist.html",
   "checked_by": "picture session (accuracy)"
+ },
+ "MidSidePairAtPiano.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2020",
+  "page": "calibration-and-monitoring-ms-mid-side-matrix-f26.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "MidiAndAudioSeparatePaths.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-what-midi-is-not-and-common-misunderstandings.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ModWheelAndSustainPedal.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-channel-voice-messages-and-musical-control.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "MmcTapeMachineAndDaw.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-timeline-general-midi-and-mmc.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ClockMasterFollowerUnits.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-system-messages-real-time-control-and-sysex.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "BodypackAntennaLengths.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "wireless-rf-spectrum-fundamentals.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ConsumerVsManagedSwitch.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-layer-2-switched-protocols.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "SmallSignalVsPowerTransistors.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "electronics-transistor-biasing.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "OpampBreadboardBypassCaps.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "electronics-op-amp-circuits.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "RouterEdgeSwitchAudioRack.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-network-address-translation-nat.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "PrimarySecondaryNetworkPorts.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "network-dante.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "NetworkTapInlineCapture.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-wireshark-setup-and-capture-basics.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "OneHandProbing.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "electronics-electrical-safety.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "TrunkUplinkBetweenSwitches.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-vlans-trunk-ports-and-audio-slash-video-over-ip.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "LoadinRackDeviceInventory.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-subnet-scanning-and-device-discovery.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "RedBlueMediaFabrics.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-smpte-2110.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "CrushedCableUnderRoadCase.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-throughput-and-load-testing.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ArenaFohFiberRun.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-real-world-applications.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "AntennasOutOfTheRack.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "wireless-frequency-coordination-and-troubleshooting.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ScopeProbeSummingNode.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "electronics-the-summing-amplifier.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "LineArrayNetworkedAmps.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "network-avb.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ControlSurfaceDedicatedNetwork.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-dynamic-host-configuration-protocol-dhcp.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ConsoleToStageboxDirect.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-layer-1-point-to-point-protocols.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "PersonalMonitorMixerOnStand.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "network-proprietary.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "LabeledStageboxMatchesName.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "software-dante-controller-and-essentials.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "BenchSupplyToBreadboard.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "electronics-breadboarding.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "WiremapCableTester.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-cable-construction-rj45.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "SwitchPortDarkLinkLight.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-troubleshooting-decision-tree.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "BroadcastRadioStudio.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-layer-3-routable-ip-protocols.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "StudentToolKitFlatlay.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "course-build-projects-parts-and-budget.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "FilmCapsVsResistorsParts.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "electronics-frequency-and-component-scaling.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "LaptopToSwitchManagementPort.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3255",
+  "page": "networking-switch-management-basics.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "LivingRoomCalibrationMic.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "3340",
+  "page": "consumer-listening-environment-f26.html",
+  "checked_by": "picture session (accuracy)"
  }
 }
