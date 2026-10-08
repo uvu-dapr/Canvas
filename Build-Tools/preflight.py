@@ -325,8 +325,12 @@ if _ns:
 #   to any of the GitHub or Cloudflare uploads ... I want just a modules names without Weeks or module or anything like
 #   that"]: a module title never starts with "Week 06:", "Module 01 -", "Wk 3" or the like, in any package.
 _lab = [html.unescape(t) for t in re.findall(r'<module identifier="[^"]+">\s*<title>([^<]*)</title>', mm) if re.match(r'\s*(?:Week|Wk|Module|M|W) ?\d{1,2}\b', html.unescape(t))]
-L('12r module names with a week or module label (must be 0): %d' % len(_lab))
-if _lab: fails.append('12r %d module name(s) carry a week or module label (%s): module names are the topic only' % (len(_lab), '; '.join(_lab[:3])))
+L(('12r module names with a week or module label: %d (allowed: --module-labels)' if '--module-labels' in sys.argv else '12r module names with a week or module label (must be 0): %d') % len(_lab))
+# Adam, 2026-10-07: "the most important thing of being able to have those save online ... where did that checkbox go?"
+#   With Settings > Modules "Also put the label in module names in Canvas" ticked, Canvas Preview passes --module-labels and
+#   the labels are wanted; GitHub and Cloudflare file and folder names still never carry them.
+if _lab and '--module-labels' in sys.argv: L('    labels allowed: --module-labels (Adam ticked Also put the label in module names in Canvas)')
+elif _lab: fails.append('12r %d module name(s) carry a week or module label (%s): module names are the topic only' % (len(_lab), '; '.join(_lab[:3])))
 # --module-labels [Adam, 2026-10-05]: Canvas Preview's Settings, Modules "Also put module names in packages" writes a
 #   label such as "Week 06: ", "(Week 06, 09/28/2026)" or "Module 01 - " into each MODULE title on purpose, so it uploads.
 #   The checks below read module titles without that label; item, page, assignment and quiz titles are checked as before.

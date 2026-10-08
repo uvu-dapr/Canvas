@@ -1,0 +1,100 @@
+{
+ "RoomModesAxialTangentialOblique.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2000",
+  "page": "sound-sound-wave-properties.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "VintagePlateSpringTapeEffects.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2000",
+  "page": "processing-understanding-time-based-processors-spatial-effects.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "DiBoxBassToXlr.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2000",
+  "page": "signal-flow-balanced-unbalanced-cables.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "SplMeterAtFoh.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2000",
+  "page": "sound-more-about-the-db.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "MscLightingDeskToPlayback.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-midi-show-control-protocol.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ProductionRackPatchPanel.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-network-architecture-and-topology.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "NetworkDmxNodeOnTruss.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-network-based-show-control-systems.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "PerNoteBendController.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-midi-2-0-what-changed-and-why-it-matters.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "BluetoothControllerTablet.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-over-usb-and-network.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "MidiToDmxBoxDjBooth.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-midi-to-dmx-integration-and-conversion.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "WiredSyncSameSwitch.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-synchronization-over-ip.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "ShowOperatorGoButton.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-show-control-fundamentals.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "MidiThruBoxStar.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-troubleshooting-checklist.html",
+  "checked_by": "picture session (accuracy)"
+ },
+ "UsbControllerDirectNoHub.png": {
+  "src": "ChatGPT",
+  "made": "2026-10-07",
+  "class": "2255",
+  "page": "midi-network-troubleshooting-checklist.html",
+  "checked_by": "picture session (accuracy)"
+ }
+}
