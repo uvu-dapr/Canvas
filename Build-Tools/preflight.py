@@ -1941,5 +1941,39 @@ try:
     if _du: fails.append('12s duplicate pictures used by one module or quiz: %d group(s) (python3 unused_files.py fix repoints them)' % len(_du))
 except Exception as _e:
     fails.append('12s the unused-file check could not run: %s' % _e)
+# 12t EVERY ANSWER SHEET REACHES THE LIVE COURSE (Standards 0b.10.4) [Adam, 2026-10-08]. DAPR 2255 v131 left the Instructor
+#   Use Only module out of the live package, and the 12 answer sheet pages in it, which Canvas did not have yet, left with it;
+#   nothing noticed for two days, until the Resistors sheet was missing while Adam graded. Each Canvas/Answer Sheets/*.answers.json
+#   must have its "*No Publish: Answer Sheet: <title>" page in the live export or in this package. Needs --live (the class
+#   folder is found from the export's path). A Full package fails; a pages-only package only warns (it may carry other pages).
+if '--live' in sys.argv:
+    try:
+        import json as _tj
+        _te = os.path.abspath(sys.argv[sys.argv.index('--live') + 1]); _tc = _te
+        while _tc != os.path.dirname(_tc) and not re.match(r'DAPR \d{4} - ', os.path.basename(_tc)): _tc = os.path.dirname(_tc)
+        _tdir = os.path.join(_tc, 'Canvas', 'Answer Sheets')
+        def _tnorm(s): return re.sub(r'\s+', ' ', html.unescape(s)).strip().lower()
+        _thave = set()
+        for _n in _L.namelist():
+            if _n.startswith('wiki_content/') and _n.endswith('.html'):
+                _m = re.search(r'<title>([^<]*)</title>', _lrd(_n))
+                if _m: _thave.add(_tnorm(_m.group(1)))
+        for _p in glob.glob('wiki_content/*.html'):
+            _m = re.search(r'<title>([^<]*)</title>', open(_p, encoding='utf-8', errors='ignore').read())
+            if _m: _thave.add(_tnorm(_m.group(1)))
+        _tmiss = []
+        if os.path.isdir(_tdir):
+            for _f in sorted(os.listdir(_tdir)):
+                if not _f.endswith('.answers.json'): continue
+                _title = _tj.load(open(os.path.join(_tdir, _f), encoding='utf-8')).get('title', _f)
+                if _tnorm('*No Publish: Answer Sheet: ' + _title) not in _thave: _tmiss.append(_title)
+        L('12t EVERY ANSWER SHEET REACHES THE LIVE COURSE')
+        L('12t answer sheets in neither the live course nor this package (must be 0): %d%s' % (len(_tmiss), '' if os.path.isdir(_tdir) else ' (no Answer Sheets folder for this class)'))
+        for _x in _tmiss: L('    missing: *No Publish: Answer Sheet: %s' % _x)
+        if _tmiss:
+            _tmsg = '12t answer sheet pages in neither the live course nor this package: %d (%s); ship them unpublished in their own module (0b.10.4)' % (len(_tmiss), '; '.join(_tmiss[:3]) + (' ...' if len(_tmiss) > 3 else ''))
+            (warns if PAGES_ONLY else fails).append(_tmsg)
+    except Exception as _e:
+        warns.append('12t the answer sheet check could not run: %s' % _e)
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
 sys.exit(1 if fails else 0)

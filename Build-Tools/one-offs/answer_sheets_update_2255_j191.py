@@ -44,7 +44,7 @@ assert len(pages) == 13, len(pages)
 res = "".join('<resource identifier="%s" type="webcontent" href="wiki_content/%s">\n      <file href="wiki_content/%s"/>\n    </resource>\n' % (i, f, f) for i, f, _ in pages)
 open(out + "/imsmanifest.xml", "w", encoding="utf-8").write(
     "<?xml version='1.0' encoding='UTF-8'?>\n"
-    '<manifest xmlns="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" identifier="dapr2255-answer-sheets-v145" '
+    '<manifest xmlns="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" identifier="dapr2255-answer-sheets-v146" '
     'xsi:schemaLocation="http://www.imsglobal.org/xsd/imsccv1p1/imscp_v1p1     http://www.imsglobal.org/profile/cc/ccv1p1/ccv1p1_imscp_v1p1.xsd">\n'
     "  <metadata>\n    <schema>IMS Common Cartridge</schema>\n    <schemaversion>1.1.0</schemaversion>\n  </metadata>\n  <organizations/>\n  <resources>\n"
     '<resource identifier="module_meta_res" type="associatedcontent/imscc_xmlv1p1/learning-application-resource" href="course_settings/canvas_export.txt"><file href="course_settings/module_meta.xml"/><file href="course_settings/canvas_export.txt"/></resource>\n'
