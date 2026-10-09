@@ -678,6 +678,9 @@ def picture_slide(linked, after, pic, archive=True, build=True):
     tree_open = re.search(r"(?s)<p:spTree>.*?(?:</p:grpSpPr>|<p:grpSpPr/>)", body).group(0)
     new = body[:body.index("<p:spTree>")] + tree_open + "".join(keep) + "</p:spTree>" + body[body.index("</p:spTree>") + len("</p:spTree>"):]
     new = re.sub(r'<p:cSld name="[^"]*">', "<p:cSld>", new)
+    # copied shapes keep no links: the new slide's rels carry only its layout and picture (2026-10-09: a copied arrow
+    # button's slide-jump link pointed at a missing rId and PowerPoint refused the whole deck)
+    new = re.sub(r'<a:hlink(?:Click|Hover) r:id="[^"]*"[^>]*?(?:/>|>.*?</a:hlink(?:Click|Hover)>)', "", new, flags=re.S)
     new = pagenum(new, after, after + 1)
     ptop = top + int(H * 0.04); pbot = int(H * 0.9); left = int(W * 0.06); right = W - int(W * 0.06)
     pw, ph = image_size(pic["src"]); c = content_crop(pic["src"])
@@ -694,8 +697,13 @@ def picture_slide(linked, after, pic, archive=True, build=True):
     part = "ppt/slides/slide%d.xml" % (max(nums) + 1)
     lay = re.search(r'<Relationship [^>]*relationships/slideLayout"[^>]*/>', data[rels_name(sx)].decode("utf-8")).group(0)
     data[part] = new.encode("utf-8")
-    data[rels_name(part)] = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">%s'
-        '<Relationship Id="rIdLk1" Type="%s" Target="%s" TargetMode="External"/></Relationships>' % (lay, REL_IMG, mirror_link(dst))).encode("utf-8")
+    # anything else the copied slide still points at (a picture background, 2026-10-09) brings its relationship along
+    src_rels = data[rels_name(sx)].decode("utf-8"); extra = ""
+    for r_id in sorted(set(re.findall(r'r:(?:id|embed|link)="([^"]+)"', new)) - {"rIdLk1"}):
+        m = re.search(r'<Relationship (?=[^>]*Id="%s")[^>]*/>' % re.escape(r_id), src_rels)
+        if m and "slideLayout" not in m.group(0): extra += m.group(0)
+    data[rels_name(part)] = ('<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">%s%s'
+        '<Relationship Id="rIdLk1" Type="%s" Target="%s" TargetMode="External"/></Relationships>' % (lay, extra, REL_IMG, mirror_link(dst))).encode("utf-8")
     ct = data["[Content_Types].xml"].decode("utf-8")
     data["[Content_Types].xml"] = ct.replace("</Types>", '<Override PartName="/%s" ContentType="application/vnd.openxmlformats-officedocument.presentationml.slide+xml"/></Types>' % part, 1).encode("utf-8")
     prels = data["ppt/_rels/presentation.xml.rels"].decode("utf-8"); rid = "rIdPs1"
