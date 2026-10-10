@@ -116,7 +116,21 @@ def read(deck):
     z = zipfile.ZipFile(deck); infos = [i for i in z.infolist() if not i.filename.endswith("/")]
     data = {i.filename: z.read(i.filename) for i in infos}; z.close(); return infos, data
 
+NS = {"a": "http://schemas.openxmlformats.org/drawingml/2006/main", "r": "http://schemas.openxmlformats.org/officeDocument/2006/relationships",
+      "p": "http://schemas.openxmlformats.org/presentationml/2006/main", "a14": "http://schemas.microsoft.com/office/drawing/2010/main",
+      "p14": "http://schemas.microsoft.com/office/powerpoint/2010/main", "mc": "http://schemas.openxmlformats.org/markup-compatibility/2006"}
+
+def fix_ns(x):
+    # a slide whose root does not declare a prefix its shapes use is refused by PowerPoint (2026-10-10: decks saved by
+    # ElementTree declare a: on each element, so a picture inserted without its own xmlns:a / xmlns:r broke the file)
+    m = re.search(r"<p:sld\b[^>]*>", x)
+    if not m: return x
+    root = m.group(0); add = "".join(' xmlns:%s="%s"' % (k, v) for k, v in NS.items() if ("<%s:" % k in x or " %s:" % k in x) and "xmlns:%s=" % k not in root)
+    return x if not add else x.replace(root, root[:-1] + add + ">", 1) if not root.endswith("/>") else x
+
 def write(path, infos, data):
+    for n in list(data):
+        if re.match(r"ppt/slides/slide\d+\.xml$", n): data[n] = fix_ns(data[n].decode("utf-8")).encode("utf-8")
     buf = io.BytesIO(); done = set()
     with zipfile.ZipFile(buf, "w", zipfile.ZIP_DEFLATED) as o:
         o.writestr("[Content_Types].xml", data["[Content_Types].xml"]); done.add("[Content_Types].xml")
