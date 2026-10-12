@@ -866,7 +866,9 @@ def verify(linked):
     if refs: problems.append("%d reference slide(s) inside the Linked deck: they belong in %s (run strip)" % (refs, os.path.basename(note_path(linked))))
     if not os.path.exists(note_path(linked)): problems.append("no %s beside the deck (run strip)" % os.path.basename(note_path(linked)))
     if len(lo) != len(eo): problems.append("slide counts differ: Linked %d, Embedded %d" % (len(lo), len(eo)))
-    strip = lambda x: re.sub(r'\s*r:(embed|link)="[^"]+"', "", x)
+    # both sides through fix_ns: write() adds missing namespace declarations to every slide it saves (2026-10-10), so an
+    # Embedded deck built today differs from an older Linked slide only by those declarations (2026-10-12 false alarm)
+    strip = lambda x: re.sub(r'\s*r:(embed|link)="[^"]+"', "", fix_ns(x))
     for a, b in zip(lo, eo):
         if strip(L[a].decode("utf-8")) != strip(E[b].decode("utf-8")): problems.append("%s differs from its Embedded slide beyond picture storage" % posixpath.basename(a))
         na, nb = rels_name(a), rels_name(b)
