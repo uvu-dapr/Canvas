@@ -145,7 +145,8 @@ def slide_order(data):
     tgt = {}
     for r in re.findall(r"<Relationship [^>]*/>", rels):
         if 'relationships/slide"' in r:
-            tgt[re.search(r'Id="([^"]+)"', r).group(1)] = posixpath.normpath(posixpath.join("ppt", re.search(r'Target="([^"]+)"', r).group(1)))
+            t = re.search(r'Target="([^"]+)"', r).group(1)   # decks from other tools may use absolute targets (/ppt/slides/...)
+            tgt[re.search(r'Id="([^"]+)"', r).group(1)] = t.lstrip("/") if t.startswith("/") else posixpath.normpath(posixpath.join("ppt", t))
     return [(rid, tgt[rid]) for rid in re.findall(r'<p:sldId [^>]*r:id="([^"]+)"', pres) if rid in tgt]
 
 def slide_title(xml):

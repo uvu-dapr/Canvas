@@ -161,7 +161,7 @@ def old_parts(xml):
     items.sort(key=lambda x: (x[0] // 300000, x[1]))
     for y, x, el in items:
         if el.startswith("<p:pic>"):
-            if "r:embed" in el: pics.append(el)
+            if "r:embed" in el or "r:link" in el: pics.append(el)  # -Linked decks link their pictures (2026-10-13)
             continue
         if re.search(r'<p:ph [^>]*type="(sldNum|ftr|dt)"', el): continue
         is_title = re.search(r'<p:ph [^>]*type="(title|ctrTitle)"', el)
@@ -216,12 +216,12 @@ def keep_layout(xml, tpl, ph_xfrm, old_size, title_override=None):
                 x = ph_xfrm(t, re.search(r'idx="(\d+)"', ph.group(1)))
                 if not x: continue
                 el = re.sub(r"<p:spPr/>|<p:spPr>", "<p:spPr>" + x, el, count=1) if re.search(r"<p:spPr/>|<p:spPr>", el) else el
-        if not re.search(r"<a:t>[^<]+</a:t>|r:embed|<a:tbl|<c:chart|<a:graphicData", el) and "<a:prstGeom" not in el and "<a:custGeom" not in el: continue
+        if not re.search(r"<a:t>[^<]+</a:t>|r:embed|r:link|<a:tbl|<c:chart|<a:graphicData", el) and "<a:prstGeom" not in el and "<a:custGeom" not in el: continue
         g = re.search(r'<a:off x="(-?\d+)" y="(-?\d+)"/>\s*<a:ext cx="(\d+)" cy="(\d+)"', el)
         if not g: continue
         gx, gy, gw, gh = (int(v) for v in g.groups()); W0, H0 = old_size
         words = " ".join(html.unescape(x) for x in re.findall(r"<a:t>([^<]*)</a:t>", el)).strip()
-        has_text, has_media = bool(words), bool(re.search(r"r:embed|<a:tbl|<c:chart|<a:graphicData", el))
+        has_text, has_media = bool(words), bool(re.search(r"r:embed|r:link|<a:tbl|<c:chart|<a:graphicData", el))
         # the old title, footer and page number, and design panels, belong to the old look: the newer title and footer replace them
         if words and title and re.sub(r"\W+", "", words.lower()) == re.sub(r"\W+", "", title.lower()): continue
         if gy > H0 * 0.88 and gh < H0 * 0.1 and not has_media and (not has_text or re.search(r'sz="(\d+)"', el) and int(re.search(r'sz="(\d+)"', el).group(1)) <= 1400): continue
