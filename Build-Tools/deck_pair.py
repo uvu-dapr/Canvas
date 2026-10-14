@@ -874,7 +874,9 @@ def verify(linked):
         if strip(L[a].decode("utf-8")) != strip(E[b].decode("utf-8")): problems.append("%s differs from its Embedded slide beyond picture storage" % posixpath.basename(a))
         na, nb = rels_name(a), rels_name(b)
         la = re.findall(r'relationships/notesSlide" Target="([^"]+)"', L.get(na, b"").decode()); lb = re.findall(r'relationships/notesSlide" Target="([^"]+)"', E.get(nb, b"").decode())
-        if la and lb and L[posixpath.normpath(posixpath.join("ppt/slides", la[0]))] != E[posixpath.normpath(posixpath.join("ppt/slides", lb[0]))]: problems.append("notes differ on " + posixpath.basename(a))
+        # some decks give absolute targets ("/ppt/notesSlides/..."), read from the package root (2026-10-14: Mackie deck)
+        part = lambda t: t.lstrip("/") if t.startswith("/") else posixpath.normpath(posixpath.join("ppt/slides", t))
+        if la and lb and L.get(part(la[0])) != E.get(part(lb[0])): problems.append("notes differ on " + posixpath.basename(a))
     links = github = 0
     for n, b in L.items():
         if not n.startswith("ppt/slides/_rels/"): continue

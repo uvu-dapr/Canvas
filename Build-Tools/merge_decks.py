@@ -215,7 +215,7 @@ def keep_layout(xml, tpl, ph_xfrm, old_size, title_override=None):
             if "<a:xfrm" not in el:
                 x = ph_xfrm(t, re.search(r'idx="(\d+)"', ph.group(1)))
                 if not x: continue
-                el = re.sub(r"<p:spPr/>|<p:spPr>", "<p:spPr>" + x, el, count=1) if re.search(r"<p:spPr/>|<p:spPr>", el) else el
+                el = re.sub(r"<p:spPr/>|<p:spPr>", lambda m: "<p:spPr>" + x + ("</p:spPr>" if m.group(0).endswith("/>") else ""), el, count=1) if re.search(r"<p:spPr/>|<p:spPr>", el) else el  # an empty <p:spPr/> needs its closing tag (2026-10-13)
         if not re.search(r"<a:t>[^<]+</a:t>|r:embed|r:link|<a:tbl|<c:chart|<a:graphicData", el) and "<a:prstGeom" not in el and "<a:custGeom" not in el: continue
         g = re.search(r'<a:off x="(-?\d+)" y="(-?\d+)"/>\s*<a:ext cx="(\d+)" cy="(\d+)"', el)
         if not g: continue

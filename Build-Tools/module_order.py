@@ -251,7 +251,10 @@ def plan_module(mt, items, taken, mid=""):
     # PRACTICE (set C): procedure guides, worked examples and the like, then the Resources page and any loose links;
     # STUDY keeps the rest with its part dividers. A part divider left with nothing under it goes.
     practice = []
-    if DIVIDERS.get("practice"):
+    # Course Orientation gets no dividers at all (Adam, 2026-10-13: "I certainly don't need to study for course orientation
+    # that can be removed"): its pages are all its content, so any STUDY / PRACTICE / GRADED WORK heading there goes
+    orient = "orientation" in mt.lower()
+    if DIVIDERS.get("practice") and not orient:
         practice = [x for x in readings if is_practice(x)]
         res = [x for x in readings if is_resource(x) and x not in practice]
         if practice: practice += res
@@ -259,12 +262,12 @@ def plan_module(mt, items, taken, mid=""):
         empty = [h for i, h in enumerate(readings) if h["k"] == SUB and (i + 1 == len(readings) or readings[i + 1]["k"] == SUB)]
         readings = [x for x in readings if x not in empty]; drop += empty
     has_readings = any(x["k"] != SUB for x in readings)
-    c_head = one("content", has_readings)
-    p_head = one("practice", bool(practice))
+    c_head = one("content", has_readings and not orient)
+    p_head = one("practice", bool(practice) and not orient)
     i_head = one("in_class", bool(heads["in_class"]))
     b_needed = bool(bonus) and (bool(DIVIDERS["bonus"]) or bool(heads["bonus"]) and bool(reg))
     b_head = one("bonus", b_needed)
-    g_head = one("graded", bool(reg) or (bool(bonus) and not b_head))
+    g_head = one("graded", (bool(reg) or (bool(bonus) and not b_head)) and not orient)
     if not b_head: reg, bonus = reg + bonus, []           # no bonus divider: bonus work sits with the rest
     for h in readings:
         if h["k"] == SUB:
