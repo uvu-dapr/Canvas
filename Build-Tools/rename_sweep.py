@@ -69,8 +69,9 @@ def packages():
         for term in sorted(terms):
             picks += newest([f for f in fulls if term in os.path.basename(f)], key=ver)
         picks += newest([f for f in fulls if not re.search(r"(Fall|Spring|Summer)-\d{4}", os.path.basename(f))], key=ver)
-        # the newest export by the date in its name (a later download of an older export must not win)
-        picks += newest(exports, key=lambda f: ((re.search(r"\d{4}-\d{2}-\d{2}", os.path.basename(f)) or re.search("", "")).group(0), os.path.getmtime(f)))
+        # the class's one export "DAPR 2000 - Canvas Export (latest).imscc" first (J325, dated by when it was saved), else the
+        # newest by the date in its name (a later download of an older export must not win)
+        picks += newest(exports, key=lambda f: (os.path.basename(f).lower().endswith(" - canvas export (latest).imscc"), (re.search(r"\d{4}-\d{2}-\d{2}", os.path.basename(f)) or re.search("", "")).group(0), os.path.getmtime(f)))
         out += [(cls, f) for f in sorted(set(picks))]
     return out
 

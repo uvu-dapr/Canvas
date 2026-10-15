@@ -70,7 +70,8 @@ def references(export):
             ref[k] = v
     full = [f for f in glob.glob(os.path.join(BLUEPRINT, "*.imscc")) if "blu" in f.lower() and "LIVE" not in f and os.path.getsize(f) > 50e6]
     if full:
-        for k, v in read_items(max(full, key=os.path.getmtime)).items():
+        # "Blueprint - Canvas Export (latest).imscc" first, the Blueprint's one export (J325), else the newest saved
+        for k, v in read_items(max(full, key=lambda f: (f.lower().endswith(" - canvas export (latest).imscc"), os.path.getmtime(f)))).items():
             if len(v["words"]) >= 20 and k not in ref:
                 v = dict(v, slug=None)   # its address in the class is unknown; links fall back to the title
                 ref[k] = v
