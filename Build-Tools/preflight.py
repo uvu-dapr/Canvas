@@ -642,12 +642,41 @@ ur=sorted({r for r in refs if r not in banks})
 L('question group refs: %d  unresolved: %d'%(len(refs),len(ur)))
 if ur: fails.append('unresolved question groups: %s'%ur[:5])
 
-# 10 quiz images must be internal (Canvas quiz iframe is default-src none)
-ext=0
+# 10 QUIZ PICTURES LINK GITHUB (Standards 0b.4 rule 1, Pictures: always GitHub) [Adam, 2026-10-15, J311].
+#   Until 2026-10-15 this failed every outside quiz picture, on the belief that Canvas shows quiz questions in an iframe
+#   with default-src none. Adam's DAPR 2000 quiz preview showed a raw.githubusercontent.com picture loading (Question 4,
+#   Quiz_Waveform_A.png), so a GitHub quiz picture is right. It must name a file the local repo has at exactly that path
+#   (GitHub is case sensitive and macOS is not, so each part is matched by name); a missing one is a broken picture for
+#   students. Any other outside host in a quiz is a warning. DAPR_REPO_ROOT overrides the repo (default: this file's repo).
+_REPO=os.environ.get('DAPR_REPO_ROOT') or os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
+_GH='https://raw.githubusercontent.com/uvu-dapr/Canvas/main/'
+_lsc={}
+def _in_repo(rel):
+    """True when the repo has the file at rel, every part with exactly this case"""
+    d=_REPO
+    for part in rel.split('/'):
+        if d not in _lsc:
+            try: _lsc[d]=set(os.listdir(d))
+            except OSError: _lsc[d]=set()
+        if part not in _lsc[d]: return False
+        d=os.path.join(d,part)
+    return os.path.isfile(d)
+_qgh=[]; _qmiss=[]; _qother=[]
 for p in sorted(set(glob.glob('**/*.qti',recursive=True))|set(QTI_FILES)):
-    ext+=len(re.findall(r'src=(?:&quot;|")https?://',open(p,encoding='utf-8',errors='replace').read()))
-L('quiz images on an external host (must be 0): %d'%ext)
-if ext: fails.append('external quiz image refs: %d'%ext)
+    for u in re.findall(r'src=(?:&quot;|")(https?://[^"&\s]+)',open(p,encoding='utf-8',errors='replace').read()):
+        if u.startswith(_GH):
+            _qgh.append(u)
+            if os.path.isdir(os.path.join(_REPO,'Classes')) and not _in_repo(urllib.parse.unquote(u[len(_GH):].split('?')[0])): _qmiss.append(u[len(_GH):])
+        else: _qother.append(u)
+_qmiss=sorted(set(_qmiss))
+if not os.path.isdir(os.path.join(_REPO,'Classes')):
+    L('quiz pictures on GitHub: %d (repo not found at %s, so not checked)'%(len(_qgh),_REPO))
+else:
+    L('quiz pictures on GitHub: %d   missing from the repo (must be 0): %d   on another outside host: %d'%(len(_qgh),len(_qmiss),len(_qother)))
+for u in _qmiss[:8]: L('    missing from the repo: %s'%u)
+for u in sorted(set(_qother))[:5]: L('    outside host: %s'%u)
+if _qmiss: fails.append('quiz pictures whose GitHub file is missing from the repo: %d (%s)'%(len(_qmiss),'; '.join(_qmiss[:3])))
+if _qother: warns.append('quiz pictures on a host other than GitHub: %d (link the GitHub file, Standards 0b.4 rule 1)'%len(set(_qother)))
 
 # 11 alt text and inline svg
 noalt=svg=0
@@ -1960,6 +1989,47 @@ try:
     if _pyel: warns.append('12u %d picture(s) bigger than needed in pixels: %s' % (len(_pyel), '; '.join(os.path.basename(p) for _, p, _ in _pyel[:4])))
 except Exception as _e:
     warns.append('12u the picture weight check could not run: %s' % _e)
+# 12v PICTURES: ALWAYS GITHUB (Standards 0b.4 rule 1) [Adam, 2026-10-15: "let's keep everything from GitHub ... then we
+#   can keep the Canvas as small as possible"]. Every picture, quiz pictures included, links its GitHub file, so a package
+#   carries no picture file in web_resources/ except the course card. YELLOW for each picture file that the repo already has
+#   (same bytes, or the same file name), so the next build links the GitHub file instead; one the repo lacks is listed too,
+#   to be added to GitHub first. A warning, not a fail: until the builders switch, older packages still carry them.
+try:
+    _pics=[]
+    for dp,dn,fn in os.walk('web_resources'):
+        for f in fn:
+            if f.lower().endswith(('.png','.jpg','.jpeg','.gif','.svg','.webp')): _pics.append(os.path.join(dp,f))
+    _card=set()
+    if os.path.exists('course_settings/course_settings.xml'):
+        for _ci in re.findall(r'<image_identifier_ref>([^<]+)<',open('course_settings/course_settings.xml',encoding='utf-8',errors='replace').read()):
+            _cm=re.search(r'<resource\b[^>]*identifier="%s"[^>]*>(.*?)</resource>'%re.escape(_ci),man,re.S)
+            if _cm: _card.update(urllib.parse.unquote(h) for h in re.findall(r'href="([^"]+)"',_cm.group(0)))
+    _pics=[p for p in _pics if p not in _card and not p.startswith('web_resources/course_image/')]
+    _inrepo=[]; _notrepo=[]
+    if _pics and os.path.isdir(os.path.join(_REPO,'Classes')):
+        import hashlib as _hl
+        _bysize={}; _byname={}
+        for dp,dn,fn in os.walk(os.path.join(_REPO,'Classes')):
+            dn[:]=[d for d in dn if d not in ('.git','Archive','_unused')]
+            for f in fn:
+                if f.lower().endswith(('.png','.jpg','.jpeg','.gif','.svg','.webp')):
+                    _rp=os.path.join(dp,f); _byname.setdefault(f,_rp)
+                    try: _bysize.setdefault(os.path.getsize(_rp),[]).append(_rp)
+                    except OSError: pass
+        def _md5(x): return _hl.md5(open(x,'rb').read()).hexdigest()
+        for p in sorted(_pics):
+            _h=_md5(p)
+            _same=next((r for r in _bysize.get(os.path.getsize(p),[]) if _md5(r)==_h),None) or _byname.get(os.path.basename(p))
+            (_inrepo.append((p,os.path.relpath(_same,_REPO))) if _same else _notrepo.append(p))
+    L('')
+    L('12v PICTURES: ALWAYS GITHUB (Standards 0b.4 rule 1)')
+    L('12v picture files in web_resources (course card left out): %d   the repo already has: %d   not in the repo: %d'%(len(_pics),len(_inrepo),len(_notrepo)))
+    for p,r in _inrepo[:12]: L('    yellow %s: link %s%s'%(p,_GH,urllib.parse.quote(r)))
+    for p in _notrepo[:12]: L('    yellow %s: not in GitHub yet; add it there, then link it'%p)
+    if _inrepo: warns.append('12v %d picture file(s) in web_resources that GitHub already has; link the GitHub file instead (Standards 0b.4 rule 1): %s'%(len(_inrepo),'; '.join(os.path.basename(p) for p,_ in _inrepo[:4])))
+    if _notrepo: warns.append('12v %d picture file(s) in web_resources not in GitHub yet; add them to the repo and link them (Standards 0b.4 rule 1): %s'%(len(_notrepo),'; '.join(os.path.basename(p) for p in _notrepo[:4])))
+except Exception as _e:
+    warns.append('12v the GitHub picture check could not run: %s'%_e)
 # 12t EVERY ANSWER SHEET REACHES THE LIVE COURSE (Standards 0b.10.4) [Adam, 2026-10-08]. DAPR 2255 v131 left the Instructor
 #   Use Only module out of the live package, and the 12 answer sheet pages in it, which Canvas did not have yet, left with it;
 #   nothing noticed for two days, until the Resistors sheet was missing while Adam graded. Each Canvas/Answer Sheets/*.answers.json

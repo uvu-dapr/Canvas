@@ -8,7 +8,7 @@ A Canvas export carries every file in the course's Files, used or not. For each 
 file into:
   card      the course card picture (course_settings.xml image_identifier_ref, Settings ▸ Course Details ▸ Image):
             ALWAYS stays; deleting it blanks the Dashboard card (J308, 2026-10-15 audit). A small JPEG is offered instead.
-  quiz      used by a quiz or a question bank: stays in Canvas Files (quizzes block outside images, Standards 8.1)
+  quiz      used by a quiz or a question bank: linked by a quiz; link it from GitHub instead (quiz pictures from GitHub work, 2026-10-15)
   live      used by a page, assignment or discussion students reach (in a module): moves to Cloudflare, the page is
             pasted with the Cloudflare address, then (once a new export shows nothing links it) the Canvas file is deleted
   oldcopy   used only by old pages in no module: delete those pages first; the file is listed once nothing links it
