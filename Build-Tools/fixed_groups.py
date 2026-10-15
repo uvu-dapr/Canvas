@@ -21,8 +21,31 @@ NS = ('<assignmentGroups xmlns="http://canvas.instructure.com/xsd/cccv1p0" '
       'xsi:schemaLocation="http://canvas.instructure.com/xsd/cccv1p0 https://canvas.instructure.com/xsd/cccv1p0.xsd">')
 
 
+# J388 (Adam, 2026-10-15): the bonus group is "Bonus", never "Bonus SRI" ("it's not an SRI bonus"). The old name is the
+# same group: it matches either way, packages call it "Bonus", and it keeps the fixed id packages already gave it, so a
+# live group renamed in Canvas is still matched and no second bonus group arrives.
+ALIASES = {"bonus sri": "bonus"}
+NAMES = {"bonus": "Bonus"}
+IDS = {"bonus": "dapr-group-bonus-sri"}
+# J388 (Adam, 2026-10-15 4:10 PM): the fourth group, 0%, for work that does not count (the BOAA LC623a sign-off). A package
+# item in it keeps it even before the live course has one (it is made at 0%), never falling back to Assignments, where it
+# would count.
+NOT_COUNTED = "not part of grade"
+NEW_GROUP = {"position": "99", "weight": "0"}
+
+
+def canon(title):
+    t = " ".join(title.split()).lower()
+    return ALIASES.get(t, t)
+
+
+def name(title):
+    return NAMES.get(canon(title), title)
+
+
 def fixed_id(title):
-    return "dapr-group-" + re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")
+    c = canon(title)
+    return IDS.get(c) or "dapr-group-" + re.sub(r"[^a-z0-9]+", "-", c).strip("-")
 
 
 def groups(xml):
@@ -36,7 +59,7 @@ def groups(xml):
 def apply(pkg, export, out):
     assert not os.path.exists(out), "never overwrite: " + out
     live = groups(zipfile.ZipFile(export).read("course_settings/assignment_groups.xml").decode("utf8", "ignore"))
-    live_by_title = {v["title"].lower(): v for v in live.values()}
+    live_by_title = {canon(v["title"]): v for v in live.values()}
     w = tempfile.mkdtemp(prefix="groups-")
     zipfile.ZipFile(pkg).extractall(w)
     shutil.rmtree(os.path.join(w, "__MACOSX"), ignore_errors=True)
@@ -57,10 +80,10 @@ def apply(pkg, export, out):
                 nonlocal moved
                 i = m.group(1)
                 title = mine[i]["title"] if i in mine else live[i]["title"] if i in live else "Assignments"
-                if title.lower() not in live_by_title:
+                if canon(title) not in live_by_title and canon(title) != NOT_COUNTED:
                     title = "Assignments"
                 fid = fixed_id(title)
-                used[fid] = title
+                used[fid] = name(title)
                 if i != fid:
                     moved += 1
                 return "<assignment_group_identifierref>%s</assignment_group_identifierref>" % fid
@@ -68,8 +91,8 @@ def apply(pkg, export, out):
             if t2 != t:
                 open(p, "w", encoding="utf8").write(t2)
     body = ""
-    for fid, title in sorted(used.items(), key=lambda x: int(live_by_title[x[1].lower()]["position"] or 0)):
-        lv = live_by_title[title.lower()]
+    for fid, title in sorted(used.items(), key=lambda x: int(live_by_title.get(canon(x[1]), NEW_GROUP)["position"] or 0)):
+        lv = live_by_title.get(canon(title), NEW_GROUP)
         body += ('\n  <assignmentGroup identifier="%s">\n    <title>%s</title>\n    <position>%s</position>\n'
                  '    <group_weight>%s</group_weight>\n  </assignmentGroup>' % (fid, html.escape(title), lv["position"] or "1", lv["weight"] or "0"))
     os.makedirs(os.path.dirname(gpath), exist_ok=True)

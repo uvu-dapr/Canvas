@@ -1621,7 +1621,11 @@ for _qf in sorted(_qfiles):
 L('question stems asking history or naming (9.3a, must be 0): %d'%len(_histfails))
 for _x in _histfails[:8]: L('    %s'%_x)
 if _histfails: fails.append('history or naming question stems (9.3a): %d'%len(_histfails))
-# 12k LIVE COURSE MATCH. Added 2026-09-28 [Adam]. Runs only with --live <Canvas export .imscc>.
+# 12k LIVE COURSE MATCH. Added 2026-09-28 [Adam]. Runs only with --live <the class's current export .imscc>.
+#   [2026-10-15, Standards §16c, J345] The export is the class's one fixed-name file, "<Class> - Canvas Export (latest).imscc",
+#   current while Canvas has not changed since it was saved. Its age alone never fails or warns here: Canvas Preview
+#   decides from Canvas's change times and counts, and downloads a new export only when Canvas changed (never "to be
+#   safe", never for this gate alone). The log names the export's save date so build notes can say which one was read.
 #   Canvas matches an imported module, module item, page, assignment or quiz to the live one by
 #   identifier. DAPR 2000 v75 and DAPR 2255 v90 gave 116 of 121 and 160 of 164 live items new
 #   identifiers, so importing them would have put a second copy beside each one while students kept
@@ -1719,7 +1723,9 @@ if '--live' in sys.argv:
         if _n in _lnames and '<workflow_state>published</workflow_state>' in _lz.read(_n).decode('utf-8', 'ignore') \
            and '<workflow_state>published</workflow_state>' not in open(_p, encoding='utf-8').read():
             _hidden.append('assignment ' + _p)
-    L('12k LIVE COURSE MATCH (against %s)' % os.path.basename(sys.argv[sys.argv.index('--live') + 1]))
+    _lpath = sys.argv[sys.argv.index('--live') + 1]
+    import time as _ltime
+    L('12k LIVE COURSE MATCH (against %s, saved %s; current while Canvas has not changed since, Standards 16c)' % (os.path.basename(_lpath), _ltime.strftime('%Y-%m-%d %H:%M', _ltime.localtime(os.path.getmtime(_lpath)))))
     L('    would arrive as a second copy: %d' % len(_second)); [L('      ' + x) for x in _second[:15]]
     L('    published in live, hidden by this import: %d' % len(_hidden)); [L('      ' + x) for x in _hidden[:15]]
     if _oldcopy:

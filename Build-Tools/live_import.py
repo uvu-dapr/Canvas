@@ -1,7 +1,7 @@
 """LIVE-Import builder (Standards 0a live import, 2026-09-24; Adam 2026-09-28). Platform Reference 21.1d gate 12k.
 
 Usage (never overwrites; then run preflight.py . --live <export> on a fresh unzip of --out):
-  python3 live_import.py --pkg <newest build .imscc> --export <fresh Canvas export .imscc> --out <next free LIVE-Import .imscc>
+  python3 live_import.py --pkg <newest build .imscc> --export <the class's current export: <Class> - Canvas Export (latest).imscc (Standards §16c)> --out <next free LIVE-Import .imscc>
       --work <empty scratch folder> [--tiebreak <an earlier LIVE-Import that carried live ids>]
       [--rename "package title=>live title"] [--rename "module:package module=>live module"] [--now 2026-09-28T23:59]
 Writes <out>.report.json: mapped count, skipped matches, quizzes left out, pages left out, items kept published,

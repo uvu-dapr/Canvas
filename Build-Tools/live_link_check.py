@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """Broken GitHub picture links on a live course, and where each picture went (Adam, 2026-10-02).
 
-    python3 live_link_check.py <Canvas export .imscc> [--md OUT.md]
+    python3 live_link_check.py <the class's current export: <Class> - Canvas Export (latest).imscc> [--md OUT.md]
 
 Reads every page, assignment, discussion and quiz in a Canvas export, finds each raw.githubusercontent.com picture link
 whose file is no longer in the repo (a rename or move after the page was built, such as the 2026-09-23 renaming that
 retired Images/<topic>/<slug>-01.jpg), and finds the file's new path from git's rename history. Prints one line per
 broken link, grouped by page, with the new raw URL to paste. Pages-only Full packages never update assignments, so an
 assignment's links are fixed by pasting the corrected HTML (or bringing the graded work in, Standards 16b).
+
+The export is the class's current export, the one fixed-name file "<Class> - Canvas Export (latest).imscc" in its -Canvas Entire Course
+folder (DAPR Canvas Standards §16c). It is current while Canvas has not changed since it was saved; Canvas Preview decides
+from Canvas's own change times and counts, never by age alone. Never download a new export "to be safe" or just to run
+this; Get Fresh Exports downloads one only when Canvas changed.
 """
 import os, re, sys, zipfile, subprocess, urllib.parse, collections, html
 

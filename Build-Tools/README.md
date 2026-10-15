@@ -23,7 +23,7 @@ current checker. **The shim is not the checker. Editing it changes nothing.**
 | `fall_2026_spine.py` | Fall 2026 term dates. Exports `W`, `due_fridays()` and `zulu()` |
 | `spring_2027_spine.py` | Spring 2027 term dates, same interface. Daylight saving runs the other way |
 | `module_order.py` | Every module in Adam's order (DAPR Canvas Standards 6.9): readings, then assignments, then the quiz; one heading pair; graded items named "Topic: Assignment - Name" and "Topic: Quiz - Name". `plan` writes a JSON plan (Canvas Preview ▸ Workbench ▸ Module Order shows it side by side and lets Adam adjust it); `apply` writes a plan into an unzipped working copy and stops without writing if a module does not match. Work students took is listed to rename by hand, never renamed by a package |
-| `live_preview.py` | The live course after a LIVE-Import, before Adam imports it (DAPR Canvas Standards 16a): each module live now (the newest Canvas export), after the import, and what stays in Canvas, with new items, renames, moves, due date and point changes, new page words and picture links marked. Plays the import the Canvas way: file order, nothing deleted, work students took placed and never replaced. `--html` writes a web page, `--json` the data; Canvas Preview ▸ Compare ▸ Live Course: After the Import shows it |
+| `live_preview.py` | The live course after a LIVE-Import, before Adam imports it (DAPR Canvas Standards 16a): each module live now (the class's current export, `<Class> - Canvas Export (latest).imscc`, Standards §16c), after the import, and what stays in Canvas, with new items, renames, moves, due date and point changes, new page words and picture links marked. Plays the import the Canvas way: file order, nothing deleted, work students took placed and never replaced. `--html` writes a web page, `--json` the data; Canvas Preview ▸ Compare ▸ Live Course: After the Import shows it |
 | `unused_files.py` | Gate 12s (Standards, Adam 2026-10-07): no file a package does not use, no duplicate picture used twice by one module or quiz. `list` and `dupes` report; `fix <in> <out>` repoints duplicates to one copy and leaves out every unused file and its manifest entry, keeping every other entry byte for byte (zip/unzip mangle names such as a U+202F narrow space). Build tools run `fix` last; preflight runs `find` and `dupes` |
 | `match_ids.py` | The ids Canvas stored for each live item (DAPR Canvas Standards 16a, Platform Reference 23.1): an export labels items with a hash of their own database id, but an import matches only the id an item was created under. `plan <package> <export> <class folder>` reads the older packages (made before the export) for each live item's stored id; `apply` writes the next version with them, keeps live grading weights, leaves out modules whose taken work can't be linked, carries untaken originals from the export, and leaves unsure groups alone; `stored <export>` lists every stored id. Canvas Preview runs it (Report, Workbench ▸ Use the IDs Canvas Matches, Give Items Their Live IDs); preflight 12k and cartridge-gate use it |
 | `deck_pair.py` | Every teaching deck as `<Base>-Linked.pptx` (teaching pictures linked by relative path from `Presentations/Images/<Base>-<Subject>.<ext>`, reference slides at the end) and `<Base>-Embedded.pptx` (built from it, pictures inside), DAPR Canvas Standards 8 "Linked and Embedded pair". `split`, `embed`, `status`, `verify`, `clean`. Design marks (icons, checkmarks, warnings, master pictures) stay inside both decks. Canvas Preview ▸ Slides runs it (Update, Update All ⇧⌃⌘E, Make Linked and Embedded ⇧⌃⌘L) |
@@ -76,7 +76,7 @@ Gate a LIVE-Import against the same export:
 
 ```
 python3 cartridge-gate.py <zip> <fresh unzip> --live <export>      # (the gate lives in the standards Build Tools folder)
-python3 preflight.py . --live <export>                              # run inside the fresh unzip
+python3 preflight.py . --live <the class's current export>        # run inside the fresh unzip
 ```
 
 With `--live`, three things the template rules forbid pass, and only when the live course agrees:
@@ -87,6 +87,11 @@ With `--live`, three things the template rules forbid pass, and only when the li
 
 Gate 12k fails on any item that would arrive as a second copy. An old live module that only shares a title with a
 module the package updates and renames is listed as "old copies to delete", a warning.
+
+**Which export:** `--live` takes the class's current export, the one fixed-name file `<Class> - Canvas Export (latest).imscc` in its
+-Canvas Entire Course folder (DAPR Canvas Standards §16c). It is current while Canvas has not changed since it was saved;
+its age alone never makes it old, and the 12k line names its save date. Download a new one only when Canvas changed
+(Canvas Preview's Get Fresh Exports decides), never "to be safe" or for this gate alone.
 
 **Before calling a LIVE-Import ready,** open every outside link: Canvas Preview, Go, Check Web Links in Every Class
 (Control Option Command E). The gates only check links inside the package.

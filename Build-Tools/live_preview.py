@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """live_preview.py: what a LIVE-Import will do to the running course, module by module (Adam, 2026-09-29).
 
-    python3 live_preview.py <LIVE-Import .imscc> <Canvas export .imscc of the live course> [--report <.report.json>]
+    python3 live_preview.py <LIVE-Import .imscc> <the class's current export: <Class> - Canvas Export (latest).imscc> [--report <.report.json>]
                             [--json out.json] [--html out.html]
 
 For every module: the live course now, the module after the import, and what stays in Canvas that the package does
@@ -9,6 +9,11 @@ not touch. It follows how Canvas imports (context_module_importer.rb): module it
 appear in the package, an item already in Canvas is matched by its identifier and updated, an import never deletes
 anything, and a module already published stays published. Work students took is left out of a LIVE-Import and only
 placed, so it keeps its name, points and grades. DAPR Canvas Standards 16a.
+
+The export is the class's current export, the one fixed-name file "<Class> - Canvas Export (latest).imscc" in its -Canvas Entire Course
+folder (DAPR Canvas Standards §16c). It is current while Canvas has not changed since it was saved; Canvas Preview decides
+from Canvas's own change times and counts, never by age alone. Never download a new export "to be safe" or just to run
+this; Get Fresh Exports downloads one only when Canvas changed.
 """
 import sys, re, os, json, zipfile, html, hashlib
 
@@ -161,7 +166,7 @@ def to_html(o, title):
         (c["new_modules"], "new modules"), (c["updated_modules"], "modules updated"), (c["items_new"], "new items"), (c["items_updated"], "items updated"),
         (c["renamed"], "renamed"), (c["points"], "points change"), (c["dates"], "due dates change"), (c["pages_text"], "pages with new words"), (c.get("pictures", 0), "pages with new picture links"),
         (c["placed"], "placed, never replaced"), (c["stay_items"] + c["stay_modules"], "things that stay in Canvas")]) + "</div>"
-    h += ("<div class='card'><h2>How to read this</h2><ul class='sub'><li><b>Live now</b>: the module in your latest Canvas export.</li>"
+    h += ("<div class='card'><h2>How to read this</h2><ul class='sub'><li><b>Live now</b>: the module in the class's current Canvas export (the fixed-name file; current while Canvas has not changed since it was saved).</li>"
           "<li><b>After the import</b>: the module in the order Canvas will set, each item marked <span class='m new'>new</span> or with what changes "
           "(<span class='m chg'>renamed</span>, points, due date, page text); unmarked items are already in Canvas and unchanged.</li>"
           "<li><b>Stays in Canvas</b>: live items the package does not touch. An import never deletes, so these remain until you delete them (old copies, old headings).</li></ul></div>")
