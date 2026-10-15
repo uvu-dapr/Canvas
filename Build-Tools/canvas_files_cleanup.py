@@ -212,13 +212,17 @@ def esc(s):
     return html.escape(plain(str(s)), quote=True)
 
 
-TIDYUP = 347769   # the TidyUP LTI tool (account level, the same id in every course): Files ▸ Unused Files, Folders tab
+TIDYUP = 347769   # the TidyUP LTI tool (account level, the same id in every course)
 # Every class in Adam's order (Blueprint first, Fall, Spring last; K109) with its live course number, so a class with no
 # export on this Mac still gets its TidyUP link
 CLASSES = [("Blueprint", 655823), ("2000", 636866), ("2020", 643734), ("2255", 642395), ("3340", 641145),
            ("2010", 655746), ("3255", 651912), ("3345", 651955)]
 SAFE = ("unused", "copy", "bankleft")
 KEEP_FOLDERS = ("assessment_questions", "course_image")   # Canvas's own folders: bank pictures and the course card
+# Adam's TidyUP routine, 2026-10-15: Scan Course; Files ▸ Show: Unused Files ▸ select all ▸ Delete Selected; Folders ▸
+# Show: Empty ▸ select all ▸ Delete Selected; Canvas Content ▸ In Modules: the crossed-out circle ▸ Show: All ▸ select
+# all ▸ Delete Selected. This page gives the KEEP list to untick before each Delete Selected.
+TIDY_CSV = "/Users/adamwolson/Library/CloudStorage/Dropbox/Miscellaneous/4-Work/UVU/UVU Courses/Claude outputs/Notes and Briefs/TidyUP Reports"
 
 
 def deletable_folders(rows):
@@ -243,6 +247,84 @@ def who(users):
     return "; ".join(parts[:4]) + (" and %d more" % (len(parts) - 4) if len(parts) > 4 else "")
 
 
+def content(exp):
+    """every page, assignment, quiz, discussion and question bank in an export: [dict(kind, title, slug, inmod, linked)]"""
+    z = zipfile.ZipFile(exp)
+    names = z.namelist()
+    rd = lambda n: z.read(n).decode("utf8", "ignore")
+    man = rd("imsmanifest.xml")
+    mm = rd("course_settings/module_meta.xml")
+    inmod = set(re.findall(r"<identifierref>(.*?)</identifierref>", mm))
+    res_of = {m.group(2): m.group(1) for m in re.finditer(r'<resource identifier="([^"]+)"[^>]*href="([^"]+)"', man)}
+    title = lambda t: html.unescape((re.search(r"<title>(.*?)</title>", t, re.S) or re.search(r"$^", "")).group(1) if re.search(r"<title>(.*?)</title>", t, re.S) else "").strip()
+    out, linked = [], set()
+    for n in names:
+        if n.startswith("web_resources/") or not n.endswith((".html", ".xml", ".qti")) or n == "imsmanifest.xml":
+            continue
+        t = rd(n)
+        linked |= {urllib.parse.unquote(s) for s in re.findall(r"\$WIKI_REFERENCE\$/pages/([^\"'?#<\s]+)", t)}
+        linked |= {urllib.parse.unquote(s) for s in re.findall(r"/courses/\d+/pages/([^\"'?#<\s]+)", t)}
+        if n.startswith("wiki_content/") and n.endswith(".html"):
+            ident = res_of.get(n, "")
+            out.append(dict(kind="page", title=title(t), slug=n[len("wiki_content/"):-5], ident=ident, inmod=ident in inmod, src=n))
+        elif n.endswith("/assessment_meta.xml"):
+            f = n.split("/")[0]
+            out.append(dict(kind="quiz", title=title(t), slug=None, ident=f, inmod=f in inmod, src=n))
+        elif n.endswith("/assignment_settings.xml") and (n.split("/")[0] + "/assessment_meta.xml") not in names:
+            f = n.split("/")[0]
+            out.append(dict(kind="assignment", title=title(t), slug=None, ident=f, inmod=f in inmod, src=n))
+        elif "imsdt" in t[:600] and "<topic" in t[:600]:
+            ident = res_of.get(n, n.split("/")[-1].split(".")[0])
+            out.append(dict(kind="discussion", title=title(t), slug=None, ident=ident, inmod=ident in inmod, src=n))
+        elif "<objectbank" in t:
+            bt = re.search(r"bank_title</fieldlabel>\s*<fieldentry>(.*?)</fieldentry>", t, re.S)
+            out.append(dict(kind="question bank", title=html.unescape(bt.group(1)).strip() if bt else "(no title)", slug=None, ident=n, inmod=False, src=n))
+    for c in out:
+        c["linked"] = c["kind"] == "page" and c["slug"] in linked
+    return out
+
+
+def newest_full(exp):
+    """the class's newest Full package beside its export (DAPR-2000-Fall-2026-v133-Full.imscc), or None"""
+    d = os.path.dirname(exp)
+    best = None
+    for f in os.listdir(d):
+        m = re.match(r"DAPR-\d{4}-.*-v(\d+)-Full\.imscc$", f)
+        if m and (best is None or int(m.group(1)) > best[0]):
+            best = (int(m.group(1)), os.path.join(d, f))
+    return best[1] if best else None
+
+
+def keep_reason(c, bp_titles, is_bp, placed=(), built=()):
+    """why a not-in-module item must stay, or None when it is safe for TidyUP's Canvas Content delete.
+    placed: titles this course has in a module (a loose copy of one is an old duplicate); built: titles in the newest
+    Full package (a loose page the build has and no module holds is current work not placed yet, so it stays)"""
+    t = c["title"].lower()
+    if "roll call" in t or "attendance" in t:
+        return "Roll Call: never deleted"
+    if c["kind"] in ("assignment", "quiz", "discussion"):
+        return "graded work: no gradebook on this Mac proves it has no submissions, so it stays"
+    if c["kind"] == "question bank":
+        return "question bank: banks are cleaned only in Manage Question Banks (step 5)"
+    if any(w in t for w in ("no publish", "not publish", "don't publish", "dont publish", "instructor use only", "instructor notes")):
+        return "instructor page (*No Publish, Do Not Publish, Instructor Use Only)"
+    if t.startswith("essentials:") or t.startswith("boaa lab:"):
+        return "Blueprint content (Essentials, BOAA Lab): fixed in the Blueprint, never in a class"
+    if "syllabus" in t or (c["slug"] or "").startswith("syllabus"):
+        return "Syllabus page built for review"
+    if is_bp:
+        return "Blueprint content: Sync carries it to every class"
+    if c["linked"]:
+        return "another page, assignment or the syllabus links it"
+    if c["title"] in bp_titles:
+        return "synced from the Blueprint: delete it there, never in a class"
+    if "legend" in t or "reference" in t or "front page" in t or "home" == t:
+        return "reference page (Course Legend, Reference)"
+    if c["title"] in built and c["title"] not in placed:
+        return "in the newest Full package but in no module here: current work not placed yet, so it stays until a module holds it"
+    return None
+
+
 def main():
     out = sys.argv[1]
     copy = "--copy" in sys.argv
@@ -256,17 +338,32 @@ def main():
         m = re.search(r"dapr-(\d{4})", os.path.basename(exp).lower())
         return m.group(1) if m else "Blueprint"
     given = {key_of(s[0]): s for s in specs}
+    bp_titles = set()
+    if "Blueprint" in given:
+        bp_titles = {c["title"] for c in content(given["Blueprint"][0]) if c["kind"] != "question bank"}
     bp_rows, bp_docs, sections, nav, totals, summary = {}, {}, [], [], [], []
     bp_twins = set()
     known = [c for c, _ in CLASSES]
+    def tick(cls, step, text):
+        return "<label class='step' data-id='%s|step|%s'><input type='checkbox'> <b>%s</b></label>" % (cls, step, text)
+    def keepbox(cls, step, items, what):
+        """items: [(name, reason)] sorted A to Z like TidyUP"""
+        if not items:
+            return "<p class='ok'>Nothing to untick: %s</p>" % what
+        h = ["<div class='keepbox'><b>KEEP: untick these %d before Delete Selected</b> <span class='mut'>(A to Z, as TidyUP sorts by title)</span><ol>" % len(items)]
+        for nm, why in sorted(items, key=lambda x: x[0].lower()):
+            h.append("<li data-id='%s|keep%s|%s'><label><input type='checkbox'> <b>%s</b></label> <span class='mut'>%s</span></li>" % (cls, step, esc(nm), esc(nm), esc(why)))
+        return "".join(h) + "</ol></div>"
     for cls in known + sorted(set(given) - set(known)):
         name = "DAPR " + cls if cls != "Blueprint" else "Blueprint"
         cid = int(given[cls][2]) if cls in given else dict(CLASSES)[cls]
         tidy = CANVAS % cid + "external_tools/%d" % TIDYUP
+        term = "Blueprint" if cls == "Blueprint" else "Spring 2027" if cls in ("2010", "3255", "3345") else "Fall 2026"
         if cls not in given:
-            sections.append("<section id='c%s'><h2>%s</h2><p><a class='go' href='%s' target='_blank'>Open TidyUP</a></p>"
-                            "<p class='mut'>No export of this live course on this Mac yet, so nothing is listed. Before you tick anything in TidyUP, export it (Settings ▸ Export Course Content), save it in the class's "
-                            "-Canvas Entire Course folder, and this page lists which files a question bank uses (TidyUP cannot see that).</p></section>" % (cls, name, esc(tidy)))
+            sections.append("<section class='cls' id='c%s'><h2>%s <small>%s</small></h2><p><a class='go big' href='%s' target='_blank'>Open TidyUP</a></p>"
+                            "<p class='warn'>No export of this live course on this Mac yet, so there is no KEEP list. Do not press Delete Selected here yet.</p>"
+                            "<p class='mut'>Export it first (Settings ▸ Export Course Content ▸ Create Export) and save it in the class's -Canvas Entire Course folder; this page then lists what to untick.</p>%s</section>"
+                            % (cls, name, term, esc(tidy), tick(cls, "export", "Exported and saved")))
             nav.append("<a href='#c%s'>%s <small>no export</small></a>" % (cls, name))
             continue
         exp = given[cls][0]
@@ -274,6 +371,7 @@ def main():
         z, files, docs, ctx = read(exp)
         rows = classify(files, docs, ctx)
         tw = twins(docs, ctx)
+        items = content(exp)
         whole = sum(i.file_size for i in z.infolist())
         if is_bp:
             bp_twins = {t for t, _ in tw}
@@ -290,104 +388,93 @@ def main():
                     if u["mods"] and not u["quiz"]:
                         bp_docs.setdefault(u["path"], u)
         folders = deletable_folders(rows)
-        in_folder = {r["file"] for _, rs in folders for r in rs}
-        loose = [r for r in rows if r["kind"] in SAFE and r["file"] not in in_folder]
-        # the gap TidyUP warns about: "Question banks cannot be scanned for file usage"
+        # step 2 KEEP: what TidyUP calls unused but must stay. TidyUP: "Question banks cannot be scanned for file usage".
         bankonly = [r for r in rows if r["kind"] == "quiz" and (not r["users"] or all(u["kind"] == "bank" for u in r["users"]))]
-        # the same picture in more than one place: which copy is safe
-        dup = collections.defaultdict(list)
-        for r in rows:
-            dup[ctx["sig"][r["file"]]].append(r)
-        dups = sorted([rs for rs in dup.values() if len(rs) > 1 and any(r["kind"] in SAFE for r in rs)], key=lambda rs: -rs[0]["bytes"] * len(rs))
-        summary.append(dict(cls=name, now=whole, after=after, folders=[(f, len(rs), sum(r["bytes"] for r in rs)) for f, rs in folders],
-                            loose=len(loose), bank_only=len(bankonly), dup_groups=len(dups), twin_titles=len(tw),
-                            twin_extra=sum(len(bs) - 1 for _, bs in tw), card=sorted(ctx["card"])))
-        h = ["<section id='c%s'><h2>%s <small>%s now, about %s after</small></h2>" % (cls, name, mb(whole), mb(after))]
-        h.append("<p><a class='go big' href='%s' target='_blank'>Open TidyUP</a> <span class='mut'>for %s. Deleting is your click in TidyUP or Files; this page only says what is safe.</span></p>" % (esc(tidy), name))
-        h.append("<p class='mut'>From <b>%s</b>. Every file below was checked against every page, assignment, discussion, quiz and question bank in that export, by path and by file id.%s</p>"
-                 % (esc(os.path.basename(exp)), "" if is_bp else " Do the Blueprint first: after its Sync, some of these may already be gone."))
-        for c in sorted(ctx["card"]):
-            small = os.path.join(SMALL, name, os.path.splitext(os.path.basename(c))[0] + ".jpg")
-            h.append("<p class='keep'><b>Keep</b> <code>%s</code> (%s): the <b>course card picture</b> on the Dashboard (Settings ▸ Course Details ▸ Image). "
-                     "TidyUP may list it as unused: do not tick it.%s</p>" % (esc(c), mb(files.get(c, 0)),
-                     (" A small JPEG of it is ready to swap in there: <code>%s</code>." % esc(small)) if os.path.exists(small) else ""))
-        # (c) first, so it is read before any ticking
-        h.append("<h3 class='stop'>Do NOT delete: TidyUP shows these as unused, but a question bank uses them (%d)</h3>" % len(bankonly))
-        if bankonly:
-            h.append("<p class='mut'>TidyUP says \"Question banks cannot be scanned for file usage\", so it lists these as unused. Leave them unticked: deleting one breaks a bank question.</p><ul class='files'>"
-                     + "".join("<li><code>%s</code> <span class='mut'>%s · %s</span></li>" % (esc(r["file"]), mb(r["bytes"]), esc(who(r["users"])) if r["users"] else "named by its file id") for r in bankonly) + "</ul>")
-        else:
-            h.append("<p class='mut'>None in this export.</p>")
-        # (b) folders
-        h.append("<h3>Delete these folders <span class='mut'>(TidyUP ▸ Folders tab, biggest first)</span></h3>")
-        if folders:
-            h.append("<p class='mut'>Every file in each folder (subfolders too) is in no module and linked by nothing.</p><ul>")
-            for f, rs in folders:
-                h.append("<li data-id='%s|folder|%s'><label><input type='checkbox'> <b>%s</b></label> <span class='mut'>%s, %d file(s)</span></li>" % (cls, esc(f), esc(f), mb(sum(r["bytes"] for r in rs)), len(rs)))
-            h.append("</ul>")
-        else:
-            h.append("<p class='mut'>No whole folder can go.</p>")
-        # (d) single files
-        h.append("<h3>Safe to delete: single files TidyUP shows <span class='mut'>(outside those folders)</span></h3>")
-        if loose:
-            h.append("<p class='mut'>Linked by nothing. A \"-N\" name in assessment_questions is a byte for byte copy of the original named beside it (made by the Oct 7 Blueprint import); the original stays.</p><ul class='files'>")
-            for r in loose:
-                h.append("<li data-id='%s|file|%s'><label><input type='checkbox'> <code>%s</code></label> <span class='mut'>%s%s</span></li>"
-                         % (cls, esc(r["file"]), esc(r["file"]), mb(r["bytes"]), (" · copy of %s, which stays" % esc(os.path.basename(r["orig"]))) if r["orig"] else ""))
-            h.append("</ul>")
-        else:
-            h.append("<p class='mut'>None.</p>")
-        if dups:
-            h.append("<details><summary><b>Same file in more than one place (%d)</b>: TidyUP shows each copy with its own date; this says which copy is safe</summary><table><tr><th>File</th><th>Copies</th></tr>" % len(dups))
-            for rs in dups:
-                cells = []
-                for r in sorted(rs, key=lambda r: r["file"]):
-                    if r["kind"] in SAFE:
-                        verdict = "<b>safe</b>" + (" (whole folder goes)" if r["file"] in in_folder else "")
-                    elif r["kind"] == "card":
-                        verdict = "<b class='warn'>keep: course card</b>"
-                    else:
-                        verdict = "<b class='warn'>keep</b>: " + (esc(who(r["users"])) if r["users"] else "named by its file id")
-                    cells.append("<code>%s</code>: %s" % (esc(os.path.dirname(r["file"]) or "(top)"), verdict))
-                h.append("<tr><td>%s <span class='mut'>%s each</span></td><td>%s</td></tr>" % (esc(os.path.basename(rs[0]["file"])), mb(rs[0]["bytes"]), "<br>".join(cells)))
-            h.append("</table>%s</details>" % ("<p class='mut'>Every copy safe: tick both in TidyUP.</p>" if all(all(r["kind"] in SAFE for r in rs) for rs in dups) else ""))
-        # twin banks
+        odd = [r for r in rows if r["kind"] == "byid"]
+        keep2 = [(os.path.basename(r["file"]), "course card picture (Settings ▸ Course Details ▸ Image), %s" % r["file"]) for r in rows if r["kind"] == "card"]
+        keep2 += [(os.path.basename(r["file"]), "a question bank uses it: %s" % who(r["users"]) if r["users"] else "a bank names it by file id") for r in bankonly]
+        keep2 += [(os.path.basename(r["file"]), "named by its file id in course content") for r in odd]
+        gone = [r for r in rows if r["kind"] in SAFE]
+        # step 4 KEEP: not in a module, but must stay
+        loose = [c for c in items if not c["inmod"]]
+        placed = {c["title"] for c in items if c["inmod"]}
+        full = None if is_bp else newest_full(exp)
+        built = {c["title"] for c in content(full)} if full else set()
+        keep4, safe4 = [], []
+        bank_seen = collections.Counter(c["title"] for c in loose if c["kind"] == "question bank")
+        for c in loose:
+            if c["kind"] == "question bank":
+                continue
+            why = keep_reason(c, bp_titles, is_bp, placed, built)
+            (keep4 if why else safe4).append((c["title"], (c["kind"] + ": " + why) if why else c["kind"] + (": an old copy, the module holds another page with this title" if c["title"] in placed else ": in no module, nothing links it, not in the newest Full package")))
+        keep4b = sorted(((t, "question bank%s" % (" (%d copies)" % n if n > 1 else "")) for t, n in bank_seen.items()), key=lambda x: x[0].lower())
+        summary.append(dict(cls=name, now=whole, after=after, keep_files=len(keep2), files_to_go=len(gone),
+                            keep_content=len(keep4), keep_banks=len(keep4b), safe_content=len(safe4), full=os.path.basename(full) if full else None, folders=[f for f, _ in folders],
+                            twin_titles=len(tw), twin_extra=sum(len(bs) - 1 for _, bs in tw), card=sorted(ctx["card"])))
+        h = ["<section class='cls' id='c%s'><h2>%s <small>%s · %s now, about %s after</small></h2>" % (cls, name, term, mb(whole), mb(after))]
+        h.append("<p><a class='go big' href='%s' target='_blank'>Open TidyUP</a> <span class='mut'>for %s. Every Delete Selected is your click; this page only says what to untick first.</span></p>" % (esc(tidy), name))
+        h.append("<p class='mut'>From <b>%s</b>, checked against every page, assignment, discussion, quiz and question bank in it, by path and by file id.%s</p>"
+                 % (esc(os.path.basename(exp)), "" if is_bp else " Do the Blueprint first and Sync: some of these may already be gone."))
+        h.append("<div class='st'>%s<p class='mut'>TidyUP ▸ <b>Scan Course</b>. Wait for it to finish.</p></div>" % tick(cls, "1", "1. Scan Course"))
+        h.append("<div class='st'>%s<p class='mut'>Files tab ▸ Show: <b>Unused Files</b> ▸ select all ▸ <b>untick the KEEP list</b> ▸ Delete Selected. "
+                 "About %d file(s), %s should go; most are listed under Details below.</p>%s" % (tick(cls, "2", "2. Files: Unused Files"), len(gone), mb(sum(r["bytes"] for r in gone)),
+                 keepbox(cls, 2, keep2, "no question bank picture or course card would show as unused.")))
+        if gone:
+            h.append("<details><summary>Details: what should go in step 2 (%d file(s))</summary>" % len(gone))
+            if folders:
+                h.append("<p class='mut'>Whole folders, biggest first:</p><ul class='files'>" + "".join("<li><b>%s</b> <span class='mut'>%s, %d file(s)</span></li>" % (esc(f), mb(sum(r["bytes"] for r in rs)), len(rs)) for f, rs in folders) + "</ul>")
+            inf = {r["file"] for _, rs in folders for r in rs}
+            rest = [r for r in gone if r["file"] not in inf]
+            if rest:
+                h.append("<p class='mut'>Single files (a \"-N\" copy in assessment_questions is a byte for byte copy of the original, which stays):</p><ul class='files'>"
+                         + "".join("<li><code>%s</code> <span class='mut'>%s%s</span></li>" % (esc(r["file"]), mb(r["bytes"]), (" · copy of %s" % esc(os.path.basename(r["orig"]))) if r["orig"] else "") for r in rest) + "</ul>")
+            dup = collections.defaultdict(list)
+            for r in rows:
+                dup[ctx["sig"][r["file"]]].append(r)
+            dups = [rs for rs in dup.values() if len(rs) > 1 and any(r["kind"] in SAFE for r in rs) and all(r["kind"] in SAFE for r in rs)]
+            if dups:
+                h.append("<p class='mut'>Same file twice, every copy safe (TidyUP shows each with its own date; tick both): %s</p>"
+                         % esc(", ".join(sorted({os.path.basename(rs[0]["file"]) for rs in dups})[:40])))
+            h.append("</details>")
+        h.append("<div class='st'>%s<p class='mut'>Folders tab ▸ Show: <b>Empty</b> ▸ select all ▸ Delete Selected. Nothing to untick: an empty folder holds nothing.</p></div>" % tick(cls, "3", "3. Folders: Empty"))
+        h.append("<div class='st'>%s<p class='mut'>Canvas Content tab ▸ In Modules: <b>the crossed-out circle</b> (not in a module) ▸ Show: <b>All</b> ▸ select all ▸ <b>untick the KEEP list</b> ▸ Delete Selected.</p>%s"
+                 % (tick(cls, "4", "4. Canvas Content: not in a module"), keepbox(cls, 4, keep4, "nothing outside a module must stay.")))
+        if keep4b:
+            h.append("<details><summary><b>If TidyUP lists question banks here: untick all %d bank titles too</b> (banks are cleaned only in step 5)</summary><ol>%s</ol></details>"
+                     % (len(keep4b), "".join("<li data-id='%s|keepb|%s'><label><input type='checkbox'> <b>%s</b></label> <span class='mut'>%s</span></li>" % (cls, esc(t), esc(t), esc(k)) for t, k in keep4b)))
+        if is_bp:
+            h.append("<p class='warn'>In the Blueprint everything is synced to every class, so the KEEP list is everything: skip this Delete Selected here.</p>")
+        if safe4:
+            h.append("<details><summary>Details: what should go in step 4 (%d)</summary><ul class='files'>%s</ul></details>"
+                     % (len(safe4), "".join("<li>%s <span class='mut'>%s</span></li>" % (esc(t), esc(k)) for t, k in sorted(safe4, key=lambda x: x[0].lower()))))
+        h.append("</div>")
+        # step 5 twin banks
         if tw:
             extra = sum(len(bs) - 1 for _, bs in tw)
-            h.append("<h3>Twin question banks <span class='mut'>(Quizzes ▸ ⋮ ▸ Manage Question Banks; TidyUP does not do banks)</span></h3>")
+            h.append("<div class='st'>%s" % tick(cls, "5", "5. Twin question banks (Manage Question Banks; TidyUP does not do banks)"))
             if is_bp:
-                h.append("<p class='mut'><b>Do this first.</b> Each title below is in the Blueprint more than once, word for word the same (the Oct 7 Blueprint import added a copy). "
+                h.append("<p class='mut'><b>Do this before any class.</b> Each title below is in the Blueprint more than once, word for word the same (the Oct 7 Blueprint import added a copy). "
                          "Open <a class='go' href='%squestion_banks' target='_blank'>Manage Question Banks</a>, open each copy of the title, and delete the "
                          "<b>later copy</b>: the one whose address ends in the <b>higher number</b>. Keep the first. Then <b>Blueprint ▸ Sync</b>, so every class loses its synced copy too. "
                          "No quiz draws from any of these banks.</p>" % (CANVAS % cid))
             else:
                 h.append("<p class='mut'>After the Blueprint Sync, open <a class='go' href='%squestion_banks' target='_blank'>Manage Question Banks</a> "
-                         "here: for each title below keep <b>one</b> copy (the first, lowest number in its address) and delete the later ones that are still left. "
+                         "here: for each title below keep <b>one</b> copy (the first, lowest number in its address) and delete the later ones still left. "
                          "No quiz in this class draws from any of these banks.</p>" % (CANVAS % cid))
-            h.append("<table><tr><th></th><th>Bank title (exact)</th><th>Questions</th><th>Copies now</th><th>Delete</th>%s</tr>" % ("" if is_bp else "<th>Also twinned in the Blueprint</th>"))
+            h.append("<details><summary>%d bank title(s), %d extra copies</summary><table><tr><th></th><th>Bank title (exact)</th><th>Questions</th><th>Copies now</th><th>Delete</th>%s</tr>" % (len(tw), extra, "" if is_bp else "<th>Also twinned in the Blueprint</th>"))
             for title, bs in tw:
                 h.append("<tr data-id='%s|bank|%s'><td><input type='checkbox'></td><td><b>%s</b></td><td>%d</td><td>%d</td><td>%d (the later %s)</td>%s</tr>"
                          % (cls, esc(title), esc(title), bs[0]["items"], len(bs), len(bs) - 1, "one" if len(bs) == 2 else "ones",
                             "" if is_bp else "<td>%s</td>" % ("yes: the Sync removes one" if title in bp_twins else "no: delete here")))
-            h.append("</table><p class='mut'>%d bank title(s), %d extra copies. Banks that share a title but differ, and the Unfiled Questions banks Canvas makes for quiz questions, are not listed: they stay.</p>" % (len(tw), extra))
-        # old pages and live files (rare now)
-        old = collections.OrderedDict()
-        for r in rows:
-            if r["kind"] == "oldcopy":
-                for u in r["users"]:
-                    if u["kind"] == "page" and "roll call" not in u["title"].lower():
-                        o = old.setdefault(u["path"], dict(u=u, bytes=0, n=0)); o["bytes"] += r["bytes"]; o["n"] += 1
-        if old:
-            h.append("<h3>Old pages holding files</h3><p class='mut'>Pages in no module. Delete the page first (&#8942; ▸ Delete); its files show up above after the next export.</p><ul>")
-            for o in sorted(old.values(), key=lambda o: -o["bytes"]):
-                u = o["u"]
-                h.append("<li data-id='%s|old|%s'><label><input type='checkbox'> <b>%s</b></label> <span class='mut'>%d file(s), %s</span> <a class='go' href='%s' target='_blank'>Open in Canvas</a></li>"
-                         % (cls, esc(u["path"]), esc(u["title"]), o["n"], mb(o["bytes"]), esc(CANVAS % cid + "pages/" + u["slug"])))
-            h.append("</ul>")
-        left = [r for r in rows if r["kind"] == "live" and not r["blueprint"]]
-        if left:
-            h.append("<h3>Move to Cloudflare</h3><ul>" + "".join("<li>%s <span class='mut'>%s, on %s</span></li>" % (esc(r["file"]), mb(r["bytes"]), esc(", ".join(u["title"] for u in r["users"][:2]))) for r in left[:30]) + "</ul>")
-        h.append("<h3>Then export again</h3><p class='mut'>Settings ▸ Export Course Content ▸ Create Export, save it in the class's -Canvas Entire Course folder. Canvas Preview reads it and this page updates.</p></section>")
+            h.append("</table><p class='mut'>Banks that share a title but differ, and the Unfiled Questions banks Canvas makes for quiz questions, are not listed: they stay.</p></details></div>")
+        for c in sorted(ctx["card"]):
+            base = os.path.splitext(os.path.basename(c))[0]
+            small = next((p for p in (os.path.join(SMALL, name, base + e) for e in (".jpg", ".jpeg")) if os.path.exists(p)), None)
+            if small:
+                h.append("<div class='st'>%s<p class='mut'>Settings ▸ Course Details ▸ Image ▸ choose <code>%s</code> (%s instead of %s). The old card file then shows as unused in TidyUP the next time; delete it then.</p></div>"
+                         % (tick(cls, "card", "6. Smaller course card picture"), esc(small), mb(os.path.getsize(small)), mb(files.get(c, 0))))
+        h.append("<div class='st'>%s<p class='mut'>Settings ▸ Export Course Content ▸ Create Export, save it in the class's -Canvas Entire Course folder. Canvas Preview reads it and this page updates.</p></div>" % tick(cls, "x", "Then export again"))
+        h.append("<p><button class='nextc'>Next class</button></p></section>")
         sections.append("".join(h))
         nav.append("<a href='#c%s'>%s <small>%s to %s</small></a>" % (cls, name, mb(whole), mb(after)))
 
@@ -405,7 +492,7 @@ def main():
                     shutil.copyfileobj(src, dst)
                 copied += 1
         size = sum(r["bytes"] for r, _ in bp_rows.values())
-        bp.append("<section id='cBlueprintPages'><h2>Blueprint pages: move their pictures to Cloudflare <small>%d files, %s in every class</small></h2>" % (len(bp_rows), mb(size)))
+        bp.append("<section class='cls' id='cBlueprintPages'><h2>Blueprint pages: move their pictures to Cloudflare <small>%d files, %s in every class</small></h2>" % (len(bp_rows), mb(size)))
         bp.append("<p class='mut'>These Blueprint lessons keep pictures in Canvas Files, so every class export carries them. "
                   "They are in the Cloudflare folder <code>All/BOAA_Lab/Images</code> on this Mac%s.</p>" % (" (copied just now)" if copied else ""))
         bp.append("<h3>1. Upload them to Cloudflare</h3><p class='mut'>In Canvas Preview, Cloudflare Changes lists them as new: tick them and press Upload. Or in Terminal: the dry run first, and if it lists only the BOAA_Lab pictures, the second line.</p>")
@@ -440,29 +527,42 @@ def main():
         sections.insert(1, "".join(bp))
 
     stamp = datetime.datetime.now().strftime("%a %b %-d at %-I:%M %p")
-    page = """<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Canvas Files Cleanup</title><style>
-:root{--bg:#EDEAE4;--card:#fff;--ink:#212121;--mut:#5B6770;--acc:#0D47A1;--keep:#E8F5E9}
-@media (prefers-color-scheme:dark){:root{--bg:#1E1E1E;--card:#2A2A2A;--ink:#EEE;--mut:#A9B3BA;--acc:#8CC8F0;--keep:#1F3324}}
+    page = """<!doctype html><html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>TidyUP Companion</title><style>
+:root{--bg:#EDEAE4;--card:#fff;--ink:#212121;--mut:#5B6770;--acc:#0D47A1;--keep:#FFF3E0;--keepb:#BF360C;--ok:#2E7D32}
+@media (prefers-color-scheme:dark){:root{--bg:#1E1E1E;--card:#2A2A2A;--ink:#EEE;--mut:#A9B3BA;--acc:#8CC8F0;--keep:#3A2A1C;--keepb:#FFAB91;--ok:#81C784}}
 body{font-family:-apple-system,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);margin:0;padding:16px}.w{max-width:980px;margin:0 auto}
-.bar{position:sticky;top:0;background:#1B5E20;color:#fff;padding:8px 14px;border-radius:8px;z-index:2;display:flex;gap:14px;flex-wrap:wrap;align-items:center}
-.bar a{color:#fff;text-decoration:none;background:rgba(255,255,255,.15);padding:2px 10px;border-radius:12px}
+.bar{position:sticky;top:0;background:#1B5E20;color:#fff;padding:8px 14px;border-radius:8px;z-index:2;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bar a{color:#fff;text-decoration:none;background:rgba(255,255,255,.15);padding:2px 10px;border-radius:12px}.bar a.on{background:#fff;color:#1B5E20}
+.bar button{background:#fff;color:#1B5E20;border:0;border-radius:12px;padding:4px 12px;font-weight:700;cursor:pointer}
 section{background:var(--card);border-radius:10px;padding:10px 16px;margin:14px 0}h2 small,.mut{color:var(--mut);font-weight:400;font-size:.9em}
-ul{list-style:none;padding-left:6px}li{padding:3px 0}.files li{font-size:.92em}.fold{margin:6px 0}.go{color:var(--acc);font-weight:600;margin-left:6px}
+ul,ol{padding-left:22px}li{padding:3px 0}.files li{font-size:.92em}.go{color:var(--acc);font-weight:600;margin-left:6px}.go.big{font-size:1.15em;margin-left:0}
+.st{border-left:4px solid var(--acc);padding:4px 12px;margin:12px 0}.st.done{opacity:.5}.step{font-size:1.05em}
+.keepbox{background:var(--keep);border-left:5px solid var(--keepb);padding:6px 12px;border-radius:6px;margin:8px 0}.keepbox li.done{opacity:.45}.ok{color:var(--ok)}
 pre.copy{background:#f2f2f2;color:#222;padding:8px;border-radius:6px;white-space:pre-wrap;word-break:break-all;cursor:pointer;user-select:all;-webkit-user-select:all}
 table{border-collapse:collapse;width:100%%;font-size:.92em}td,th{border-bottom:1px solid rgba(128,128,128,.25);padding:4px 6px;text-align:left;vertical-align:top}
-.keep{background:var(--keep);padding:8px 10px;border-radius:6px;border-left:5px solid #2E7D32}code{word-break:break-all}
-h3.stop{color:#B71C1C}.go.big{font-size:1.1em;margin-left:0}details{margin:8px 0}summary{cursor:pointer}
-textarea{display:none}.warn{color:#B71C1C;font-weight:600}.done{opacity:.45}button{margin-left:6px}
-</style></head><body><div class='w'><div class='bar'><b>Canvas Files Cleanup</b>%s<span style='margin-left:auto;font-size:.85em'>made %s</span></div>
-<section><p><b>A companion to TidyUP</b> (the Canvas tool in every course that lists unused files). Every Canvas export carries all of the course's Files, used or not, so these steps take each class from its size now to about the size shown. Blueprint first (it fixes every class at once), then Fall, then Spring. TidyUP cannot see question banks, so each class first lists the files it shows as unused that a bank uses: never tick those. Ticks here are kept in this browser.</p>
-<p class='mut'><b>Never listed here:</b> the course card picture, graded work (assignments, quizzes, discussions), Roll Call, and any file a page, assignment, quiz or a bank a quiz draws from links.</p>
+code{word-break:break-all}details{margin:8px 0}summary{cursor:pointer}textarea{display:none}.warn{color:#B71C1C;font-weight:600}tr.done,li.done{opacity:.45}
+body.one section.cls{display:none}body.one section.cls.cur{display:block}.hl{outline:3px solid #F9A825;outline-offset:4px}
+</style></head><body class='one'><div class='w'><div class='bar'><b>TidyUP Companion</b><button id='nx' title='Key: n'>Do the Next Step (n)</button>%s<a href='#' id='all'>Show all</a><span style='margin-left:auto;font-size:.85em'>made %s</span></div>
+<section><p><b>A companion to TidyUP</b>, the Canvas tool in every course that lists unused files. One class at a time: Blueprint first, then Fall, then Spring. In each class, before every <b>Delete Selected</b>, untick the orange <b>KEEP</b> list: TidyUP cannot see question banks (it says so) and does not know what is graded, Roll Call, synced or linked. Do the Next Step (or the key n) jumps to the next unticked step. Ticks are kept in this browser.</p>
+<p class='mut'>The KEEP lists hold: question bank pictures and the course card (step 2); Roll Call, every assignment, quiz and discussion (no gradebook on this Mac proves one has no submissions, so all stay), *No Publish and Instructor Use Only pages, Syllabus pages, question banks, pages another page links, and Blueprint content (step 4).</p>
 <p class='mut'>Sizes: %s.</p></section>%s</div>
 <script>
 function cp(e){navigator.clipboard.writeText(e.innerText);e.style.background='#C8E6C9'}
 function cpt(b){var t=b.parentNode.querySelector('textarea');navigator.clipboard.writeText(t.value);b.textContent='Copied';setTimeout(function(){b.textContent='Copy HTML'},1500)}
-var K='cfclean';var s={};try{s=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+var K='cfclean2';var s={};try{s=JSON.parse(localStorage.getItem(K)||'{}')}catch(e){}
+function mark(r,on){var p=r.classList.contains('step')?r.closest('.st'):(r.closest('li,tr')||r);if(p)p.classList.toggle('done',on)}
 document.querySelectorAll('[data-id]').forEach(function(r){var c=r.matches('input')?r:r.querySelector('input');if(!c)return;var id=r.getAttribute('data-id');
-if(s[id]){c.checked=true;r.classList.add('done')}c.addEventListener('change',function(){s[id]=c.checked;(r.closest('li,div,tr')||r).classList.toggle('done',c.checked);try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}})});
+if(s[id]){c.checked=true;mark(r,true)}c.addEventListener('change',function(){s[id]=c.checked;mark(r,c.checked);try{localStorage.setItem(K,JSON.stringify(s))}catch(e){}})});
+var secs=[].slice.call(document.querySelectorAll('section.cls'));
+function show(sec){secs.forEach(function(x){x.classList.toggle('cur',x===sec)});document.querySelectorAll('.bar a[href^="#c"]').forEach(function(a){a.classList.toggle('on',sec&&a.getAttribute('href')==='#'+sec.id)})}
+function next(){var st=[].slice.call(document.querySelectorAll('section.cls label.step input')).filter(function(c){return !c.checked})[0];
+document.querySelectorAll('.hl').forEach(function(x){x.classList.remove('hl')});if(!st){alert('Every step is ticked.');return}
+var sec=st.closest('section');show(sec);var b=st.closest('.st');b.classList.add('hl');b.scrollIntoView({block:'center'})}
+document.getElementById('nx').onclick=next;document.addEventListener('keydown',function(e){if(e.key==='n'&&!e.metaKey&&!e.ctrlKey&&e.target.tagName!=='INPUT')next()});
+document.querySelectorAll('.bar a[href^="#c"]').forEach(function(a){a.onclick=function(e){e.preventDefault();document.body.classList.add('one');show(document.querySelector(a.getAttribute('href')));window.scrollTo(0,0)}});
+document.getElementById('all').onclick=function(e){e.preventDefault();document.body.classList.toggle('one')};
+document.querySelectorAll('.nextc').forEach(function(b){b.onclick=function(){var i=secs.indexOf(b.closest('section'));if(secs[i+1]){show(secs[i+1]);window.scrollTo(0,0)}}});
+show(secs[0]);
 </script></body></html>""" % ("".join(nav), stamp, ", ".join("%s %s to about %s" % (c, mb(w), mb(a)) for c, w, a in totals), "".join(sections))
     open(out, "w").write(page)
     print(json.dumps(dict(out=out, classes=summary, blueprint_files=len(bp_rows))))
