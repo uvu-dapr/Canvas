@@ -1941,6 +1941,25 @@ try:
     if _du: fails.append('12s duplicate pictures used by one module or quiz: %d group(s) (python3 unused_files.py fix repoints them)' % len(_du))
 except Exception as _e:
     fails.append('12s the unused-file check could not run: %s' % _e)
+# 12u PICTURE WEIGHT (Standards 20.2, 20.3; J309, Adam 2026-10-15). The Canvas Size Audit found a 1.77 MB PNG in the
+#   Spring 2000 Template and 7 MB of oversized bank pictures synced into every class: nothing checked weight or pixels.
+#   picture_weight.py: RED for WebP, GIF or SVG (20.2 "Never") and for JPEG over 500 KB or PNG over 1 MB (20.3 budget);
+#   YELLOW for a page picture over 1600 px on its long edge (20.3) or a quiz or bank picture over 1200 px (our choice,
+#   the 20.3 overlay width; there is no Standards quiz size).
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import picture_weight as _pw
+    _pwr = _pw.check('.')
+    _pred = [x for x in _pwr if x[0] == 'red']; _pyel = [x for x in _pwr if x[0] == 'yellow']
+    L('')
+    L('12u PICTURE WEIGHT (Standards 20.2, 20.3)')
+    L('12u pictures that are WebP, GIF or SVG, or over 500 KB JPEG or 1 MB PNG (must be 0): %d' % len(_pred))
+    L('12u pictures over 1600 px (page) or 1200 px (quiz) on the long edge: %d' % len(_pyel))
+    for _lv, _p, _w in _pwr[:20]: L('    %s %s: %s' % (_lv, _p, _w))
+    if _pred: fails.append('12u %d picture(s) over the weight budget or in a banned format: %s' % (len(_pred), '; '.join('%s (%s)' % (os.path.basename(p), w.split(',')[0].split(':')[0]) for _, p, w in _pred[:4])))
+    if _pyel: warns.append('12u %d picture(s) bigger than needed in pixels: %s' % (len(_pyel), '; '.join(os.path.basename(p) for _, p, _ in _pyel[:4])))
+except Exception as _e:
+    warns.append('12u the picture weight check could not run: %s' % _e)
 # 12t EVERY ANSWER SHEET REACHES THE LIVE COURSE (Standards 0b.10.4) [Adam, 2026-10-08]. DAPR 2255 v131 left the Instructor
 #   Use Only module out of the live package, and the 12 answer sheet pages in it, which Canvas did not have yet, left with it;
 #   nothing noticed for two days, until the Resistors sheet was missing while Adam graded. Each Canvas/Answer Sheets/*.answers.json
