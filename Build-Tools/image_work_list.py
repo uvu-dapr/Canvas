@@ -2,9 +2,9 @@
 """ChatGPT Image Work List for every DAPR class: one Markdown list plus an HTML checklist.
 
 Reads the image briefs, checks every file on disk, and lists only what is still open:
-  A  wrong facts in Canvas pictures   (_briefs/ChatGPT Image Prompts - ALL COURSES Priorities.md, Tier 2 items 08 to 29)
+  A  wrong facts in Canvas pictures   (_briefs/ChatGPT Image Creation - DAPR All Courses Priorities.md, Tier 2 items 08 to 29)
   B  outline page topic images        (Schedule_Banner.jpg for 3340, 3255, 3345; prompts below)
-  C  placeholders on Canvas pages     (_briefs/ChatGPT Image Prompts - ALL COURSES TO DO.md)
+  C  placeholders on Canvas pages     (_briefs/ChatGPT Image Creation - DAPR All Courses TO DO.md)
   D  new PowerPoint pictures          (each class's _briefs/ChatGPT Image Creation - DAPR #### Presentations.md)
 plus two sections that are not ChatGPT work (Needs Adam captures, live pictures that were only renamed).
 
@@ -102,8 +102,15 @@ def alt_from_prompt(prompt):
 
 items = []
 
+def brief(part):
+    """The shared brief in Classes/_briefs. Standards 20.5 names every brief "ChatGPT Image Creation - ..." (2026-10-16);
+    the two shared briefs were saved as "ChatGPT Image Prompts - ALL COURSES ..." before that, so the old name is read
+    until the file is renamed in the repo."""
+    new = CLASSES + "/_briefs/ChatGPT Image Creation - DAPR All Courses %s.md" % part
+    return new if os.path.exists(new) else CLASSES + "/_briefs/ChatGPT Image Prompts - ALL COURSES %s.md" % part
+
 # ---------------- Part A: wrong facts ----------------
-pa = open(CLASSES + "/_briefs/ChatGPT Image Prompts - ALL COURSES Priorities.md").read()
+pa = open(brief("Priorities")).read()
 tier2 = pa.split("# Tier 2.")[1].split("# Tier 3.")[0]
 a_done = []
 for m in re.finditer(r"^## Tier 2, (\d\d)\. (DAPR \d{4}|ALL COURSES): (\S+)\n(.*?)(?=^## Tier 2|\Z)", tier2, re.S | re.M):
@@ -134,7 +141,7 @@ B_ITEMS = {
   "Create a 1600 x 600 pixel JPEG at quality 88.\n\nPhotorealistic, wide landscape photograph. A quiet immersive mixing room in the early morning: a ring of unbranded speakers on stands around a single listening chair, more small speakers mounted high on the walls and ceiling, acoustic panels in deep green (#1B5E20) and charcoal (#212121). On the mixing desk in the foreground lies an open paper week planner, its pages blocked in solid colors of blue (#0D47A1), green and soft gray with no writing at all, beside closed back headphones and a cup of coffee. The computer screens on the desk are dark or softly out of focus. Soft natural light from a high window, shallow depth of field so the speakers behind fall gently soft. Keep the left third of the frame calm.\n\nNo text, no numbers, no letters, no labels, no logos, no brand marks, no model numbers, no watermark, no signature, no borders, frames, title bars or caption text, no legible screens or writing anywhere, including on the planner. No real product you could name. No people, no hands.",
   "Immersive mixing room with ceiling speakers and an open color blocked planner on the desk"),
  "3255": ("An audio electronics bench set up for planning the term",
-  "Create a 1600 x 600 pixel JPEG at quality 88.\n\nPhotorealistic, wide landscape photograph of a tidy electronics and audio networking workbench in a university lab. Across the bench: a solderless breadboard with a few generic components, a coil of solder, a small soldering station, a bundle of blue (#0D47A1) network patch cables, a generic unbranded network switch with tiny green status lights, and a multimeter with its display turned away from the camera. Behind the bench, a pegboard wall holds rows of solid colored index cards in blue, green (#1B5E20) and orange (#993300), pinned in neat columns like a term plan, with no writing on any card. Warm task lighting from the left, shallow depth of field. Keep the left third of the frame calm.\n\nNo text, no numbers, no letters, no labels, no silkscreen or component markings, no logos, no brand marks, no model numbers, no watermark, no signature, no borders, frames, title bars or caption text, no legible screens or writing anywhere. No real product you could name. No people, no hands.",
+  "Create a 1600 x 600 pixel JPEG at quality 88.\n\nPhotorealistic, wide landscape photograph of a tidy electronics and audio networking workbench in a university lab. Across the bench: a solderless breadboard with a few generic components, a coil of solder, a small soldering station, a bundle of blue (#0D47A1) network patch cables, a generic unbranded network switch with tiny green status lights, and a multimeter with its display turned away from the camera. Behind the bench, a pegboard wall holds rows of solid colored index cards in blue, green (#1B5E20) and orange (#BF360C), pinned in neat columns like a term plan, with no writing on any card. Warm task lighting from the left, shallow depth of field. Keep the left third of the frame calm.\n\nNo text, no numbers, no letters, no labels, no silkscreen or component markings, no logos, no brand marks, no model numbers, no watermark, no signature, no borders, frames, title bars or caption text, no legible screens or writing anywhere. No real product you could name. No people, no hands.",
   "Electronics bench with breadboard, network cables and a pegboard of color coded planning cards"),
  "3345": ("A game audio studio with a production planning board",
   "Create a 1600 x 600 pixel JPEG at quality 88.\n\nPhotorealistic, wide landscape photograph of a small game audio studio. A desk with two unbranded monitors that are dark or softly out of focus, closed back headphones, a generic game controller and a compact keyboard. On the wall behind the desk, a glass production board holds columns of solid colored sticky notes in blue (#0D47A1), green (#1B5E20), violet (#4A148C) and gray, arranged like a sprint plan, with no writing on any note. Unbranded studio monitors sit on stands at each side of the desk. Cool evening light with a warm desk lamp, shallow depth of field. Keep the left third of the frame calm.\n\nNo text, no numbers, no letters, no labels, no logos, no brand marks, no model numbers, no watermark, no signature, no borders, frames, title bars or caption text, no legible screens or writing anywhere, including on the notes. No real product you could name. No people, no hands.",
@@ -154,7 +161,7 @@ for cls in ["3340", "3255", "3345"]:
         alt=alt, prompt=prompt, chip="Standards 0b.4 and 16b: every page needs a real image"))
 
 # ---------------- Part C: placeholders ----------------
-pc = open(CLASSES + "/_briefs/ChatGPT Image Prompts - ALL COURSES TO DO.md").read()
+pc = open(brief("TO DO")).read()
 c_done = []
 for sec in re.split(r"^(?=# )", pc, flags=re.M):
     hm = re.match(r"# (Shared|DAPR (\d{4}))", sec)
@@ -340,7 +347,7 @@ def fix_prompt(path, notes):
             "Open it and look at it: it is wrong in the ways Adam's notes below describe. Make a corrected replacement that does the same teaching job: "
             "keep what is right, fix everything the notes name, and make every technical detail accurate (controls and readings, connector pins, signal flow, values and labels as they really are).\n\n"
             "If the old picture is a photograph, make a realistic photograph of generic equipment showing the correction. If it is a drawing, diagram or chart, "
-            "make a clean, richly rendered, slightly dimensional illustration with soft shading, in deep green #1B5E20, blue #0D47A1, red #B71C1C and orange #993300 on neutral greys, %s. "
+            "make a clean, richly rendered, slightly dimensional illustration with soft shading, in deep green #1B5E20, blue #0D47A1, red #B71C1C and orange #BF360C on neutral greys, %s. "
             "No logos, brand marks or model numbers. No watermark, signature or border.\n\n"
             "Adam's notes on what is wrong and how to fix it (they win over anything above): %s"
             % (w, h, "JPEG" if jpeg else "PNG", class_of(path), module, path, "on a white background" if jpeg else "on a white or fully transparent background", notes))
@@ -424,7 +431,7 @@ for u in deck_pair.unique(deck_pair.LINKS_ROOT):
               "for the slide: for a diagram or chart, the same parts, order, values and labels in a new rendered look; for a photograph, the "
               "same kind of subject as a new photograph with a different angle, setting and light. Generic equipment only.\n\n"
               "Slide picture: %s\n\nStyle: clean, richly rendered and slightly dimensional, soft shading, solid color fills in deep green #1B5E20, "
-              "blue #0D47A1, red #B71C1C and orange #993300 on neutral greys, %s. No logos, brand marks or model numbers. No watermark, "
+              "blue #0D47A1, red #B71C1C and orange #BF360C on neutral greys, %s. No logos, brand marks or model numbers. No watermark, "
               "signature, border or caption text." % (u["width"], u["height"], "JPEG at quality 88" if jpeg else "PNG",
               title, CLASS_NAME[class_of(u["deck"])], u["github"], straight(u["alt"] or title), "on a white background" if jpeg else "on a white or fully transparent background"))
     items.append(dict(part="G", cls=class_of(u["deck"]), fname=os.path.basename(u["new"]), path=u["new"], action="ADD NEW",
@@ -496,6 +503,11 @@ items[:] = [it for it in items if it["path"] not in DONE or it.get("temp")]
 for row in items + e_items:
     for k, v in row.items():
         if isinstance(v, str): row[k] = straight(v)
+
+# One orange (Standards 2 and 20.5, 2026-10-16): older briefs still name the retired #993300 in their palettes, so every
+# prompt this list hands out says #BF360C. The briefs themselves are left as written.
+for it in items:
+    if it.get("prompt"): it["prompt"] = re.sub(r"(?i)#993300\b", "#BF360C", it["prompt"])
 
 # ---------------- order and numbers ----------------
 items.sort(key=lambda it: ("EFABCDG".index(it["part"]), CLASS_ORDER.index(it["cls"]) if it["part"] in "CD" and it["cls"] in CLASS_ORDER else -1))
@@ -690,7 +702,7 @@ header.mast{padding:22px 0 8px}header.mast h1{margin:0;font-size:1.6em}header.ma
 .btns button{font:inherit;padding:6px 12px;margin-right:8px;border-radius:8px;border:1px solid #bdb6aa;background:#fff;cursor:pointer}
 .grp{background:#fff;border-radius:10px;margin:14px 0;overflow:hidden}
 .gh{margin:0;font-size:1.05em;padding:12px 16px;cursor:pointer;border-left:6px solid #0D47A1;user-select:none}
-.grp[data-g="1"] .gh{border-color:#B71C1C}.grp[data-g="2"] .gh{border-color:#993300}.grp[data-g="3"] .gh{border-color:#4A148C}.grp[data-g="11"] .gh{border-color:#5d4037}.grp[data-g="12"] .gh{border-color:#757575}
+.grp[data-g="1"] .gh{border-color:#B71C1C}.grp[data-g="2"] .gh{border-color:#BF360C}.grp[data-g="3"] .gh{border-color:#4A148C}.grp[data-g="11"] .gh{border-color:#5d4037}.grp[data-g="12"] .gh{border-color:#757575}
 .arr{display:inline-block;transition:transform .15s}.grp.open .arr{transform:rotate(90deg)}
 .gc,.gd{font-weight:400;color:#6d675e;font-size:.85em;margin-left:6px}
 .gb{display:none;padding:4px 16px 12px}.grp.open .gb{display:block}

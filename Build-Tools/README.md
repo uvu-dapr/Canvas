@@ -46,7 +46,7 @@ Two environment variables change what it checks:
 
 | Variable | Effect |
 |---|---|
-| `DAPR_COURSE_FOLDER` | The course's repo folder name, for example `DAPR-2255--Audio_Hardware_I`. Turns on the cross course image check and the filename prefix check |
+| `DAPR_COURSE_FOLDER` | The course's repo folder name, for example `DAPR-2255--Audio_Hardware_I`, for gate 12h (cross course pictures, pictures linked from another module's folder). Optional: without it, 12h takes the course most GitHub picture links name |
 | `DAPR_PREFLIGHT_NO_NET` | Skips the live link check. Use it for a fast pass; never for the run that ships |
 
 ## Live imports (2026-09-28)

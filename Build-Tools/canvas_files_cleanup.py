@@ -45,9 +45,13 @@ def BLUEPRINT_EXPORT():
     """the Blueprint's newest full export (Universal Class Content), for its own page addresses"""
     d = "/Users/adamwolson/Library/CloudStorage/Dropbox/Miscellaneous/4-Work/UVU/UVU Courses/Universal Class Content/Canvas/Canvas Templates/-Canvas Entire Course"
     fs = [os.path.join(d, f) for f in os.listdir(d) if f.endswith(".imscc") and "blu" in f.lower() and "LIVE" not in f]
+    # "Blueprint - Canvas Export (latest).imscc" first, the Blueprint's one export (J325): it is tiny now (under 20 MB), so
+    # it must win before the size test below, or an old dated full export left in the folder would be read instead
+    fixed = [f for f in fs if f.lower().endswith(" - canvas export (latest).imscc")]
+    if fixed:
+        return fixed[0]
     full = [f for f in fs if os.path.getsize(f) > 50e6] or fs   # a full export, not a small LIVE-Add package
-    # "Blueprint - Canvas Export (latest).imscc" first, the Blueprint's one export (J325), else the newest saved
-    return max(full, key=lambda f: (f.lower().endswith(" - canvas export (latest).imscc"), os.path.getmtime(f)))
+    return max(full, key=os.path.getmtime)
 
 
 def cf_name(base):

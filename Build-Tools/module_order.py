@@ -35,7 +35,8 @@ DIVIDER_SETS = {
     "A": dict(content="CONTENT & RESOURCES", practice=None, graded="GRADED WORK", bonus="BONUS (OPTIONAL)", in_class="IN CLASS: ", plain_parts=True),
 }
 DIVIDERS = DIVIDER_SETS["C"]
-TITLE_CASE = False      # --case title: "Study", "Graded Work" instead of STUDY, GRADED WORK (Adam, 2026-10-05, Canvas Preview Settings > Modules)
+TITLE_CASE = True       # Title Case by default: "Study", "Graded Work" (Adam, 2026-10-05, Canvas Preview Settings > Modules;
+                        # Standards 6.9, 2026-10-16); --case caps gives STUDY, GRADED WORK
 
 def title_case(t):
     """Graded Work, Bonus (Optional), In Class: , Content & Resources; small words stay small after the first."""
@@ -53,7 +54,7 @@ def set_dividers(base, case=None, names=None):
     d = dict(DIVIDER_SETS[base])
     for k, v in (names or {}).items():
         if k in d and v is not None: d[k] = v
-    TITLE_CASE = case == "title"
+    TITLE_CASE = case != "caps"
     for k in ("content", "practice", "graded", "bonus", "in_class"):
         if d.get(k): d[k] = title_case(d[k]) if TITLE_CASE else d[k].upper()
     for k in ("content", "practice", "graded", "bonus"):     # a name of the user's own is recognized next time too
@@ -68,6 +69,7 @@ KNOWN = dict(content={"content and resources", "content & resources", "study", "
              graded={"quizzes and assignments", "quizzes & assignments", "graded work", "required"},
              bonus={"bonus", "bonus (optional)"})
 IN_CLASS = re.compile(r"(?i)^(?:LECTURE TIME WILL BE USED FOR|IN CLASS:)\s*(.+)$")
+set_dividers("C", "title")   # the default for a tool that imports this file, the same as main()'s
 
 def head_kind(t):
     """content, practice, graded, bonus, in_class or part (a custom divider inside the readings, kept with them)."""

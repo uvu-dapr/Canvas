@@ -904,37 +904,68 @@ if numbered:
     fails.append('numbered titles: %d'%len(numbered))
 
 
-# 12h Standards 8.1, which was already written and was ignored twice on 2026-09-20:
-#     "every module's folder holds what that module uses and no page has to reach into
-#     another module's folder", and "every image filename begins with the slug of the topic
-#     folder it sits in". Both were violated: a module referenced another COURSE's images,
-#     and then a set of non-topic folders was invented to hold them. Neither produced any
-#     error, because the URLs resolved. Now it fails the build.
-#     Set DAPR_COURSE_FOLDER to this course's repo folder name, e.g.
-#     DAPR-2000--Digital_Audio_Essentials.
+# 12h Standards 8.0.1 (one module, one folder) and the gate 12h row of 18a.4. Written 2026-09-20 after a module
+#     referenced another COURSE's images and a set of non-topic folders was invented to hold them; neither produced
+#     an error, because the URLs resolved. Rewritten 2026-10-16 (J407, Standards 2026-10-16 v01 item 19): the Images/
+#     level, the topic slug and the "filename begins with its topic folder" rule are gone, so a picture's own folder
+#     is the module folder right under the course (Classes/<Course_Folder>/<Module_Name>/...). It fails when
+#       1. a page links another course's picture (Classes/All/, the shared icons, is every course's), or
+#       2. a page in one module links a picture in a different folder: another module's folder, a utility folder
+#          (_unused, _briefs ...) or a folder that matches no module of this package. A picture another module also
+#          links is allowed: a picture used by two modules sits in the most specific one (8.0.1), so the module whose
+#          folder holds it must link it too.
+#     Pages in no module, and the Instructor Use Only module (its notes cite every week), are not scored for 2.
+#     The module a page sits in comes from module_meta.xml; its folder is the module title through the 8.0.1
+#     substitutions with the leading week or sequence label stripped. A package with no modules (a pages-only
+#     Update) checks rule 1 only. The course comes from DAPR_COURSE_FOLDER, or else from the course most links name.
+def _modfolder(_t):
+    _t=re.sub(r'^\s*(M\d+[a-z]?\s*[:\-_]|Weeks?\s*\d+(\s*(to|and|-)\s*\d+)?\s*[:\-])\s*','',_t,flags=re.I)
+    _t=re.sub(r'\s*\((Weeks?[^)]*|Finals Week|[^)]*%[^)]*|\d+\s*pts?)\)\s*$','',_t,flags=re.I)
+    _t=re.sub(r'\s*-?\s*\(?Unified Class Content\)?\s*$','',_t)
+    _t=_t.replace('%','').replace('&','and').replace(',','').replace("'",'').replace('’','')
+    _t=_t.replace(':','__').replace('/','-').replace(' ','_')
+    return re.sub(r'_{3,}','__',_t)
+_PIC=re.compile(r'githubusercontent\.com/[^/"\'<>\s]+/[^/"\'<>\s]+/[^/"\'<>\s]+/Classes/([^/"\'&<>\s]+)/([^/"\'&<>\s]+)/((?:[^/"\'&<>\s]+/)*[^/"\'&<>\s]+\.(?:png|jpe?g|gif|svg|webp))',re.I)
+_hmod={}   # resource identifier -> (module title, module folder)
+for _blk in re.findall(r'<module identifier="[^"]+">(.*?)</module>',mm,re.S):
+    _tt=re.search(r'<title>([^<]*)</title>',_blk.split('<items>',1)[0])
+    if not _tt: continue
+    _mt=html.unescape(_tt.group(1))
+    for _r in re.findall(r'<identifierref>([^<]+)</identifierref>',_blk): _hmod.setdefault(_r,(_mt,_modfolder(_mt)))
+_hfolders={f for _,f in _hmod.values()}
+_hrefs=[]   # (file, resource id, course, folder, rest)
+for _rid,_r in RES.items():
+    for _f in sorted(set(_r.get('files',[])+([_r['href']] if _r.get('href') else []))):
+        if not _f.endswith(('.html','.xml','.qti')) or not os.path.exists(_f): continue
+        _s=html.unescape(open(_f,encoding='utf-8',errors='replace').read())
+        for _m in _PIC.finditer(_s):
+            _hrefs.append((_f,_rid,urllib.parse.unquote(_m.group(1)),urllib.parse.unquote(_m.group(2)),urllib.parse.unquote(_m.group(3))))
 _cf=os.environ.get('DAPR_COURSE_FOLDER')
-if _cf:
-    _foreign=[]; _misnamed=[]
-    _seen=set()
-    for dp,dn,fn in os.walk('wiki_content'):
-        for f in sorted(fn):
-            if not f.endswith('.html'): continue
-            t=open(os.path.join(dp,f),encoding='utf-8',errors='replace').read()
-            for m in re.finditer(r'src="[^"]*?/Classes/([^/"]+)/Images/([^/"]+)/([^/"]+)"',t):
-                course,topic,fname=m.group(1),m.group(2),m.group(3)
-                key=(course,topic,fname)
-                if key in _seen: continue
-                _seen.add(key)
-                if course!=_cf: _foreign.append((f,course,topic,fname)); continue
-                if not fname.startswith(topic+'-'): _misnamed.append((topic,fname))
-    L('images referenced from another course (must be 0): %d'%len(_foreign))
-    if _foreign:
-        for x in _foreign[:6]: L('    %s -> Classes/%s/Images/%s/%s'%x)
-        fails.append('cross-course image refs: %d'%len(_foreign))
-    L('image filenames not prefixed by their topic folder (must be 0): %d'%len(_misnamed))
-    if _misnamed:
-        for tp,fn2 in _misnamed[:8]: L('    Images/%s/%s'%(tp,fn2))
-        fails.append('image filename prefix mismatches: %d'%len(_misnamed))
+_cfwhy='DAPR_COURSE_FOLDER'
+if not _cf:
+    _cc=collections.Counter(c for _,_,c,_,_ in _hrefs if c!='All')
+    _cf=_cc.most_common(1)[0][0] if _cc else None; _cfwhy='the course most links name'
+_usedby={}   # (folder, rest) -> module folders whose pages link it
+for _f,_rid,_c,_y,_rest in _hrefs:
+    if _c==_cf and _rid in _hmod: _usedby.setdefault((_y,_rest),set()).add(_hmod[_rid][1])
+_foreign=set(); _outside=set(); _stale=set()
+for _f,_rid,_c,_y,_rest in _hrefs:
+    if _c=='All': continue
+    if _c!=_cf: _foreign.add((_f,_c,_y,_rest)); continue
+    if _rid not in _hmod or _rid in _INSTR_IDS or 'Instructor Use Only' in _hmod[_rid][0]: continue
+    _own=_hmod[_rid][1]
+    if _y==_own or (_y in _hfolders and _y in _usedby.get((_y,_rest),set())): continue
+    (_outside if _y in _hfolders or _y.startswith('_') else _stale).add((_f,_own,_y,_rest))
+L('12h course folder: %s (from %s)'%(_cf or 'none, no GitHub picture links',_cfwhy))
+L('images referenced from another course (must be 0): %d'%len(_foreign))
+for _x in sorted(_foreign)[:6]: L('    %s -> Classes/%s/%s/%s'%_x)
+if _foreign: fails.append('12h cross-course image refs: %d (Standards 8.0.1)'%len(_foreign))
+L('images linked from another module\'s folder or a utility folder (must be 0): %d'%len(_outside))
+for _x in sorted(_outside)[:10]: L('    %s (module folder %s) -> %s/%s'%_x)
+if _outside: fails.append('12h images linked from another module\'s folder: %d (Standards 8.0.1: a picture sits in the module folder of the page that links it; one two modules use sits in the more specific one, and that module links it too)'%len(_outside))
+L('images in a folder that matches no module of this package (a warning): %d'%len(_stale))
+for _x in sorted(_stale)[:10]: L('    %s (module folder %s) -> %s/%s'%_x)
+if _stale: warns.append('12h %d picture(s) in a repo folder named after no module of this package (%s): move them into the module folder (Standards 8.0.1); the move is a repo change for Adam to commit'%(len(_stale),', '.join(sorted({_y for _,_,_y,_ in _stale})[:4])))
 
 # 12e-1 Sections that are not permitted on a student facing page (Standards 6.8, 17).
 #     A module overview carries Learning Objectives, Before Class and a Conclusion.
@@ -2070,5 +2101,26 @@ if '--live' in sys.argv:
             (warns if PAGES_ONLY else fails).append(_tmsg)
     except Exception as _e:
         warns.append('12t the answer sheet check could not run: %s' % _e)
+# 12w EVERYTHING LIVES IN A MODULE (J397) [Adam, 2026-10-15: "Everything lives in a module."]. TidyUP's "not in a
+#   module, delete all" took 78 items out of live DAPR 2000 that morning, each live but in no module. Every page, assignment,
+#   quiz and discussion a package carries is in one of its modules (or, with --live, already in a live module); Syllabus
+#   pages and instructor items go into Instructor Use Only; the front page needs none. module_home.py decides, and its fix
+#   command puts them in Instructor Use Only (a package that carries that module). A package with no modules (a pages-only
+#   Update) only warns: it cannot carry the live Instructor Use Only module safely (export ids are not import match ids),
+#   so Fix Everything step 11 places it live after the import.
+try:
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import module_home as _mh
+    _mhl = _mh.find('.', sys.argv[sys.argv.index('--live') + 1] if '--live' in sys.argv else None)
+    L('')
+    L('12w EVERYTHING LIVES IN A MODULE')
+    L('12w items in no module%s (must be 0): %d' % (' here or live' if '--live' in sys.argv else '', len(_mhl)))
+    for _it, _w in _mhl[:12]: L('    %s "%s": goes to %s' % (_it['kind'], _it['title'], _w))
+    if _mhl:
+        _mhmsg = '12w %d item(s) in no module: %s' % (len(_mhl), '; '.join('%s "%s" (%s)' % (_i['kind'], _i['title'], _w) for _i, _w in _mhl[:4]))
+        if not _mh.carries_modules('.'): warns.append(_mhmsg + '; after the import, Fix Everything step 11 (Put Everything in Its Module) places them live')
+        else: fails.append(_mhmsg + ' (python3 module_home.py fix <in> <out> puts them in Instructor Use Only)')
+except Exception as _e:
+    fails.append('12w the module check could not run: %s' % _e)
 L('RESULT: %s | hard fails: %s | warnings: %s'%('PASS' if not fails else 'FAIL',fails,warns))
 sys.exit(1 if fails else 0)

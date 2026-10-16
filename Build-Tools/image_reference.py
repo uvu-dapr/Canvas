@@ -27,7 +27,8 @@ HEAD = """<!DOCTYPE html>
 body{font-family:Arial,Helvetica,sans-serif;color:#212121;background:#f5f5f5;margin:0;padding:32px 24px 80px}
 .wrap{max-width:1250px;margin:0 auto}h1{font-size:1.7em;margin:0 0 4px}
 .sub{color:#616161;margin:0 0 24px}
-h2{color:#993300;border-bottom:3px solid #993300;padding-bottom:6px;margin:34px 0 14px;font-size:1.2em}
+h2{background-color:#BF360C;color:#ffffff;padding:8px 14px;margin:34px 0 4px;font-size:1.2em}
+hr{border:none;border-top:2px solid #BF360C;margin:0 0 14px}
 .grid{display:flex;flex-wrap:wrap;gap:14px}
 .img-item{background:#fff;border:1px solid #cfd8dc;border-radius:5px;padding:8px;width:216px}
 .img-item img{width:200px;height:160px;object-fit:contain;background:#fff;display:block}
@@ -59,7 +60,7 @@ def main():
         if not files:
             continue
         total += len(files)
-        body.append('<h2>%s <span style="color:#616161;font-weight:normal;font-size:.8em">(%d)</span></h2>'
+        body.append('<h2>%s <span style="font-weight:normal;font-size:.8em">(%d)</span></h2><hr>'
                     % (topic, len(files)))
         body.append('<div class="grid">')
         for f in files:
