@@ -56,9 +56,15 @@ CF = {"2000": "DAPR-2000--Digital_Audio_Essentials", "2010": "DAPR-2010--Core_Re
 # The schedule picture each outline page shows now (read from the newest package, 2026-10-01)
 B_OLD = {"3340": "Schedule_Module_Timeline.png", "3255": "Term_Schedule_Spring_2027.png", "3345": "Term_Schedule.png"}
 
+# Brands on gear (J503, DAPR Canvas Standards 2026-10-16 v06 20.1 rule 1, Adam 2026-10-16): a real brand is fine when it is a
+# respected pro audio brand spelled right; Hosa and Behringer never appear; never an invented or misspelled brand or model number
+BRAND_RULE = ("A real brand name or logo on the gear is fine when it is a respected pro audio brand (such as Neumann, Shure, Sennheiser, SSL, Neve, "
+              "Universal Audio, Genelec, Yamaha, Telefunken or Neutrik), spelled exactly right; never Hosa or Behringer, and never an invented or "
+              "misspelled brand, logo or model number.")
+
 # What ChatGPT is told, in the Markdown for ChatGPT and on the HTML page (both are given to the ChatGPT desktop app)
 GPT_STEPS = ["1. Read the item's five details: Action, File name, Save path, Old image, What to create.", '2. Open the old image at its path on this Mac and look at it. For a REPLACE, see exactly what is wrong and fix that. For a New PowerPoint picture, make something clearly different from it. An item with no old image has nothing to open.', "3. Generate one image from the item's prompt exactly as written: its pixel size, format and background.", "4. Save it at the item's Save path with the exact File name (same spelling, case and extension). REPLACE: save over the file that is there. ADD NEW: save it as a new file, creating the folder if needed.", '5. Check the saved image against the prompt and the old image. If a fact is wrong, a quoted label is misspelled, or text appears that the prompt did not ask for, make it again and save over it.', '6. Write the item number, the file name and the path you saved to, then stop and wait. Adam says "next" to continue, or an item number to jump to.']
-GPT_RULES = ['Every image here is approved to be made. REPLACE items are corrections Adam asked for; do not refuse and do not ask for a photo.', 'Keep every word and number: when an item has an old image, every label, number, address, value, unit and explanation it shows goes into the new image, spelled exactly, beside the part it describes; change only the wording the item calls wrong. This wins over any line in a prompt that says no text or no numbers (Standards 20.5c).', 'A picture with no old image: no text, numbers, letters, logos, brand marks, model numbers, watermarks or readable screens, unless the prompt quotes exact labels; then use only those labels, spelled exactly.', 'Nothing that claims to be a real named product. Equipment is generic and unbranded; screens are dark or out of focus.', 'A New PowerPoint picture must look clearly different from the old Canvas picture it stands beside: a different angle, setting and composition.']
+GPT_RULES = ['Every image here is approved to be made. REPLACE items are corrections Adam asked for; do not refuse and do not ask for a photo.', 'Keep every word and number: when an item has an old image, every label, number, address, value, unit and explanation it shows goes into the new image, spelled exactly, beside the part it describes; change only the wording the item calls wrong. This wins over any line in a prompt that says no text or no numbers (Standards 20.5c).', 'A picture with no old image: no text, numbers, letters, watermarks or readable screens, unless the prompt quotes exact labels; then use only those labels, spelled exactly.', BRAND_RULE, 'Screens are dark or out of focus, or show a generic DAW session with no brand.', 'A New PowerPoint picture must look clearly different from the old Canvas picture it stands beside: a different angle, setting and composition.']
 
 changes = {"alt_trunc": 0, "size_line": 0, "replace_header": 0, "alt_written": 0}
 problems = []
@@ -348,9 +354,9 @@ def fix_prompt(path, notes):
             "keep what is right, fix everything the notes name, and make every technical detail accurate (controls and readings, connector pins, signal flow, values and labels as they really are).\n\n"
             "If the old picture is a photograph, make a realistic photograph of generic equipment showing the correction. If it is a drawing, diagram or chart, "
             "make a clean, richly rendered, slightly dimensional illustration with soft shading, in deep green #1B5E20, blue #0D47A1, red #B71C1C and orange #BF360C on neutral greys, %s. "
-            "No logos, brand marks or model numbers. No watermark, signature or border.\n\n"
+            "%s No watermark, signature or border.\n\n"
             "Adam's notes on what is wrong and how to fix it (they win over anything above): %s"
-            % (w, h, "JPEG" if jpeg else "PNG", class_of(path), module, path, "on a white background" if jpeg else "on a white or fully transparent background", notes))
+            % (w, h, "JPEG" if jpeg else "PNG", class_of(path), module, path, "on a white background" if jpeg else "on a white or fully transparent background", BRAND_RULE, notes))
 
 REPO = os.path.dirname(CLASSES)
 def last_change(path):
@@ -431,9 +437,9 @@ for u in deck_pair.unique(deck_pair.LINKS_ROOT):
               "for the slide: for a diagram or chart, the same parts, order, values and labels in a new rendered look; for a photograph, the "
               "same kind of subject as a new photograph with a different angle, setting and light. Generic equipment only.\n\n"
               "Slide picture: %s\n\nStyle: clean, richly rendered and slightly dimensional, soft shading, solid color fills in deep green #1B5E20, "
-              "blue #0D47A1, red #B71C1C and orange #BF360C on neutral greys, %s. No logos, brand marks or model numbers. No watermark, "
+              "blue #0D47A1, red #B71C1C and orange #BF360C on neutral greys, %s. %s No watermark, "
               "signature, border or caption text." % (u["width"], u["height"], "JPEG at quality 88" if jpeg else "PNG",
-              title, CLASS_NAME[class_of(u["deck"])], u["github"], straight(u["alt"] or title), "on a white background" if jpeg else "on a white or fully transparent background"))
+              title, CLASS_NAME[class_of(u["deck"])], u["github"], straight(u["alt"] or title), "on a white background" if jpeg else "on a white or fully transparent background", BRAND_RULE))
     items.append(dict(part="G", cls=class_of(u["deck"]), fname=os.path.basename(u["new"]), path=u["new"], action="ADD NEW",
         old=u["github"], olds=[u["github"]],
         old_desc=("The slide shows the Canvas picture now, linked from GitHub: %s. Make a unique picture of the same content for the slide; "

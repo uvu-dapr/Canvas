@@ -1795,7 +1795,11 @@ if '--live' in sys.argv:
     #   becomes a SECOND group of the same name (2255 v111 would have made a second "Assignments"); an item naming a group
     #   neither the package nor the live course (by stored id) has lands in "Imported Assignments", 0% in a weighted course
     #   (Canvas AssignmentImporter's fallback; both DAPR 2020 and 2255 got one on 2026-10-05).
-    _grp2, _imp = [], []
+    #   [2026-10-16, J491] An item with NO group at all lands there too (same fallback: no migration id, so no group is
+    #   found). 12k used to count only items naming a group, so DAPR 3340 v117's 13 group-less assignments read "0 land in
+    #   Imported Assignments". They are counted now. A group-less item that arrives unpublished is a warning (no student
+    #   sees it or its 0% weight; Fix Everything step 11 moves it to its group after the import); a published one fails.
+    _grp2, _imp, _nogrp, _nogrp_pub = [], [], [], []
     try:
         _pg = {}
         if os.path.exists('course_settings/assignment_groups.xml'):
@@ -1815,11 +1819,17 @@ if '--live' in sys.argv:
             _g = re.search(r'<assignment_group_identifierref>([^<]+)<', _x)
             if _g and _g.group(1) not in _pg and not _hit(_g.group(1)):
                 _imp.append(html.unescape((re.search(r'<title>([^<]*)', _x) or [0, _f])[1]))
+            elif not _g or not _g.group(1).strip():
+                _nt = html.unescape((re.search(r'<title>([^<]*)', _x) or [0, _f])[1])
+                (_nogrp_pub if '<workflow_state>published</workflow_state>' in _x else _nogrp).append(_nt)
     except Exception as _e:
         L('    note: gradebook groups not compared (%s)' % _e)
     L('    groups that would arrive as a second group of the same name (must be 0): %d' % len(_grp2)); [L('      ' + x) for x in _grp2]
     if _grp2: fails.append('12k %d gradebook group(s) arrive as a SECOND group of the same name (no stored id): %s. Leave the group out and point its items at the live group (match_ids.py apply does)' % (len(_grp2), '; '.join(_grp2)))
-    L('    items that would land in Imported Assignments (must be 0): %d' % len(_imp)); [L('      ' + x) for x in _imp[:15]]
+    L('    items that would land in Imported Assignments: %d (%d name a group Canvas cannot find, must be 0; %d name no group, %d of them published, must be 0)' % (len(_imp) + len(_nogrp) + len(_nogrp_pub), len(_imp), len(_nogrp) + len(_nogrp_pub), len(_nogrp_pub)))
+    [L('      ' + x) for x in _imp[:15]]; [L('      no group: ' + x) for x in (_nogrp_pub + _nogrp)[:15]]
+    if _nogrp: warns.append('12k %d unpublished item(s) name no gradebook group, so they land in "Imported Assignments" (0%% in a weighted course) until moved: after the import, Fix Everything step 11 (grade groups) moves them to their group: %s' % (len(_nogrp), '; '.join(_nogrp[:5])))
+    if _nogrp_pub: fails.append('12k %d published item(s) name no gradebook group, so students see them in "Imported Assignments" (0%% in a weighted course): %s. Point them at the live group (match_ids.py apply) or leave them unpublished' % (len(_nogrp_pub), '; '.join(_nogrp_pub[:5])))
     if _imp: fails.append('12k %d item(s) name a gradebook group Canvas cannot find, so they land in "Imported Assignments" (0%% in a weighted course): %s' % (len(_imp), '; '.join(_imp[:5])))
     if _wchg:
         L('    grading weights this import would change: %d' % len(_wchg)); [L('      ' + x) for x in _wchg]
