@@ -93,7 +93,7 @@ tr:nth-child(even) td { background: #F9F9F9; }
     </div>
     <div class="icon-desc">
       <strong>Audio bounce - indigo hexagon</strong>
-      A stereo mixdown exported from your session. Format is WAV 44.1 kHz / 24-bit interleaved unless the assignment specifies MP3. Name it exactly as shown in the assignment.
+      A stereo mixdown exported from your session. Format is WAV 44.1 kHz / 16-bit interleaved unless the assignment specifies MP3. Name it exactly as shown in the assignment.
     </div>
   </div>
   <div class="icon-row">
@@ -204,7 +204,7 @@ tr:nth-child(even) td { background: #F9F9F9; }
 
 <div class="required"><strong>Pattern with song name (mix assignments):</strong><br>
 <span class="name-example">LastName, FirstName - Assignment Name - Song Name.ext</span>
-<strong>Pattern without song name (process labs):</strong><br>
+<strong>Pattern without song name (process assignments):</strong><br>
 <span class="name-example">LastName, FirstName - Assignment Name.ext</span>
 </div>
 
@@ -217,14 +217,14 @@ tr:nth-child(even) td { background: #F9F9F9; }
 <table>
   <thead><tr><th>Canvas Page Name</th><th>What Goes in Segment 2</th></tr></thead>
   <tbody>
-    <tr><td>EQ: EQ Lab</td><td>EQ - EQ Lab</td></tr>
+    <tr><td>EQ: Vocal EQ</td><td>EQ - Vocal EQ</td></tr>
     <tr><td>Sound: The Decibel</td><td>Sound - The Decibel</td></tr>
     <tr><td>Mixing: DAW Mix 1</td><td>Mixing - DAW Mix 1</td></tr>
   </tbody>
 </table>
 
 <h3>Segment 3 - Song name (mix assignments only)</h3>
-<p>Use the song title with normal capitalization and spaces. Strip apostrophes and all other punctuation (commas, periods, exclamation marks). Omit this segment entirely for process-only labs with no song deliverable.</p>
+<p>Use the song title with normal capitalization and spaces. Strip apostrophes and all other punctuation (commas, periods, exclamation marks). Omit this segment entirely for process-only assignments with no song deliverable.</p>
 <table>
   <thead><tr><th>Song Title</th><th>What Goes in Segment 3</th></tr></thead>
   <tbody>
@@ -240,14 +240,14 @@ tr:nth-child(even) td { background: #F9F9F9; }
   <thead><tr><th>Assignment Type</th><th>Required Filenames</th></tr></thead>
   <tbody>
     <tr>
-      <td>25-pt lab with WAV and PDF</td>
+      <td>25-pt assignment with WAV and PDF</td>
       <td>
-        <span class="name-example">Smith, John - EQ - EQ Lab - Dont Think Twice.wav</span>
-        <span class="name-example">Smith, John - EQ - EQ Lab - Dont Think Twice.pdf</span>
+        <span class="name-example">Smith, John - EQ - Vocal EQ - Dont Think Twice.wav</span>
+        <span class="name-example">Smith, John - EQ - Vocal EQ - Dont Think Twice.pdf</span>
       </td>
     </tr>
     <tr>
-      <td>25-pt process lab, no song</td>
+      <td>25-pt process assignment, no song</td>
       <td><span class="name-example">Smith, John - Sound - The Decibel.pdf</span></td>
     </tr>
     <tr>
@@ -268,9 +268,9 @@ tr:nth-child(even) td { background: #F9F9F9; }
   <thead><tr><th>Wrong</th><th>Why It Fails</th></tr></thead>
   <tbody>
     <tr><td><code>Untitled.ptx</code></td><td>Default Pro Tools name. No student name, no assignment name.</td></tr>
-    <tr><td><code>john smith eq lab.ptx</code></td><td>Name order wrong. Comma missing. No separator dashes.</td></tr>
-    <tr><td><code>SmithJohn_EQLab_DontThinkTwice.ptx</code></td><td>Underscores instead of space-hyphen-space. No comma.</td></tr>
-    <tr><td><code>Smith, John - EQ: EQ Lab - Dont Think Twice.ptx</code></td><td>Colon not replaced. Replace every colon with a space-hyphen-space.</td></tr>
+    <tr><td><code>john smith vocal eq.ptx</code></td><td>Name order wrong. Comma missing. No separator dashes.</td></tr>
+    <tr><td><code>SmithJohn_VocalEQ_DontThinkTwice.ptx</code></td><td>Underscores instead of space-hyphen-space. No comma.</td></tr>
+    <tr><td><code>Smith, John - EQ: Vocal EQ - Dont Think Twice.ptx</code></td><td>Colon not replaced. Replace every colon with a space-hyphen-space.</td></tr>
   </tbody>
 </table>
 
@@ -284,9 +284,9 @@ tr:nth-child(even) td { background: #F9F9F9; }
 <table>
   <thead><tr><th>File Type</th><th>What It Is</th><th>Song Name in Filename?</th></tr></thead>
   <tbody>
-    <tr><td>.wav</td><td>Stereo bounce. 44.1 kHz / 24-bit / Interleaved stereo.</td><td>Yes (mix assignments)</td></tr>
-    <tr><td>.zip</td><td>Zipped Pro Tools session folder. Contains the .ptx, Audio Files folder, Fade Files folder, and all session assets.</td><td>Yes (mix assignments)</td></tr>
-    <tr><td>.pdf</td><td>Numbered screenshots exported from Word as PDF. See Section 4.</td><td>Yes for mix assignments, no for process-only labs</td></tr>
+    <tr><td>.wav</td><td>Stereo bounce. 44.1 kHz / 16-bit / Interleaved stereo.</td><td>Yes (mix assignments)</td></tr>
+    <tr><td>.zip</td><td>Zipped Pro Tools session folder (File - Save Copy In). Contains the .ptx and its Audio Files folder. Only when the assignment asks for a session zip; most assignments take the WAV and PDFs.</td><td>Yes (mix assignments)</td></tr>
+    <tr><td>.pdf</td><td>Numbered screenshots exported from Word as PDF. See Section 4.</td><td>Yes for mix assignments, no for process-only assignments</td></tr>
     <tr><td>.ptx (inside zip)</td><td>The Pro Tools session file sitting at the root of the zipped folder. Must match the zip filename exactly.</td><td>Yes</td></tr>
   </tbody>
 </table>
@@ -309,7 +309,7 @@ tr:nth-child(even) td { background: #F9F9F9; }
   <li>Submit the PDF to Canvas along with your other deliverables.</li>
 </ol>
 
-<div class="note"><strong>Note:</strong> The PDF is worth more points than you might expect - on a 25-point lab it is worth 15 points, and on a 100-point major mix it is worth 40 points. It documents that you completed the full workflow, not just the final bounce. Missing screenshots cost you significant points.</div>
+<div class="note"><strong>Note:</strong> The PDF is worth more points than you might expect - on a 25-point assignment it is worth 15 points, and on a 100-point major mix it is worth 40 points. It documents that you completed the full workflow, not just the final bounce. Missing screenshots cost you significant points.</div>
 
 <hr class="section-divider">
 
@@ -323,13 +323,13 @@ tr:nth-child(even) td { background: #F9F9F9; }
   <tbody>
     <tr><td>File format</td><td>WAV (.wav)</td></tr>
     <tr><td>Sample rate</td><td>44.1 kHz</td></tr>
-    <tr><td>Bit depth</td><td>24-bit</td></tr>
+    <tr><td>Bit depth</td><td>16-bit</td></tr>
     <tr><td>Format</td><td>Interleaved stereo</td></tr>
     <tr><td>Duration</td><td>Full length of the mix - no extra silence at the start or end</td></tr>
   </tbody>
 </table>
 
-<div class="warn"><strong>Warning:</strong> Do not submit MP3 files when WAV is required. Do not submit 16-bit or 32-bit files when 24-bit is required. Wrong specs count as incorrect delivery and lose points on the submission criterion.</div>
+<div class="warn"><strong>Warning:</strong> Do not submit MP3 files when WAV is required. Do not submit 24-bit or 32-bit files when 16-bit is required. Wrong specs count as incorrect delivery and lose points on the submission criterion.</div>
 
 <hr class="section-divider">
 
@@ -349,7 +349,7 @@ tr:nth-child(even) td { background: #F9F9F9; }
   <li>Submit the ZIP to Canvas.</li>
 </ol>
 
-<div class="stop"><strong>Stop:</strong> Do not zip a session folder that has missing audio files. If Audio Files or Fade Files are missing from inside the ZIP, your session zip receives zero points and the submission will be returned. Save Copy In with Copy All Audio Files checked prevents this.</div>
+<div class="stop"><strong>Stop:</strong> Do not zip a session folder that has missing audio files. If the Audio Files folder is missing from inside the ZIP, your session zip receives zero points and the submission will be returned. Save Copy In with Copy All Audio Files checked prevents this.</div>
 
 <hr class="section-divider">
 
@@ -361,12 +361,12 @@ tr:nth-child(even) td { background: #F9F9F9; }
 <table>
   <thead><tr><th>Type</th><th>Points</th><th>Expected Time</th><th>What Is Graded</th></tr></thead>
   <tbody>
-    <tr><td>Lab or short assignment</td><td>25 pts</td><td>1 to 2 hours</td><td>Process completion - did you follow every step correctly?</td></tr>
+    <tr><td>Short assignment or exercise</td><td>25 pts</td><td>1 to 2 hours</td><td>Process completion - did you follow every step correctly?</td></tr>
     <tr><td>Major mix or final project</td><td>100 pts</td><td>4 to 8 hours</td><td>Mix quality and technical decisions - how well does it sound and how well is it documented?</td></tr>
   </tbody>
 </table>
 
-<h3>Where points go on a 25-point lab</h3>
+<h3>Where points go on a 25-point assignment</h3>
 <table>
   <thead><tr><th>Deliverable</th><th>Points</th></tr></thead>
   <tbody>
@@ -380,14 +380,13 @@ tr:nth-child(even) td { background: #F9F9F9; }
 <table>
   <thead><tr><th>Deliverable</th><th>Points</th></tr></thead>
   <tbody>
-    <tr><td>Zipped Pro Tools session</td><td>40 pts</td></tr>
-    <tr><td>Stereo bounce WAV</td><td>20 pts</td></tr>
-    <tr><td>PDF documentation with screenshots</td><td>40 pts</td></tr>
+    <tr><td>Stereo bounce WAV</td><td>50 pts</td></tr>
+    <tr><td>PDF documentation with screenshots</td><td>50 pts</td></tr>
     <tr><td>Total</td><td>100 pts</td></tr>
   </tbody>
 </table>
 
-<div class="note"><strong>Note:</strong> The PDF is worth as much as or more than the audio file in both tiers. A perfectly mixed track with no PDF documentation loses 15 or 40 points depending on the assignment tier. Document your work every time.</div>
+<div class="note"><strong>Note:</strong> The PDF is worth as much as or more than the audio file in both tiers. A perfectly mixed track with no PDF documentation loses 15 or 50 points depending on the assignment tier. Document your work every time.</div>
 
 <hr class="section-divider">
 
@@ -402,7 +401,7 @@ tr:nth-child(even) td { background: #F9F9F9; }
   <li>Apostrophes and punctuation are stripped from the song name segment</li>
   <li>The ZIP filename, the .ptx inside it, the WAV, and the PDF all share the same base filename</li>
   <li>The ZIP was created from a Save Copy In folder - audio files are inside</li>
-  <li>The WAV is 44.1 kHz, 24-bit, interleaved stereo</li>
+  <li>The WAV is 44.1 kHz, 16-bit, interleaved stereo</li>
   <li>The PDF has a screenshot below every numbered item in the copy-paste block</li>
   <li>Keep with next is applied to every numbered item line in the Word doc before export</li>
   <li>The PDF filename matches the ZIP and WAV base name</li>
@@ -414,7 +413,7 @@ tr:nth-child(even) td { background: #F9F9F9; }
 <!-- ====================================================== -->
 <h2 id="late-policy">9. Late Submissions and Returns</h2>
 
-<p>Assignments submitted after the due date follow the late policy stated in the course syllabus. Check your syllabus - the policy is the same for all DAPR lab courses.</p>
+<p>Assignments submitted after the due date follow the late policy stated in the course syllabus. Check your syllabus - the policy is the same for all DAPR courses.</p>
 
 <p>Files returned ungraded due to naming errors or missing content are returned with a note in SpeedGrader comments. Correct the issue and resubmit. A resubmission after the deadline is subject to the late penalty even if the original submission was on time.</p>
 

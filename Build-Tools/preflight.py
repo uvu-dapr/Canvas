@@ -371,6 +371,15 @@ for _blk in re.findall(r'<module identifier="[^"]+">(.*?)</module>',mm,re.S):
     if '<workflow_state>unpublished</workflow_state>' not in _blk.split('<items>',1)[0]: continue
     for _r in re.findall(r'<identifierref>([^<]+)</identifierref>',_blk):
         _res=RES.get(_r,{}); _h=_res.get('href')
+        # Amended 2026-10-16 (K145): a quiz resource has no href (its settings are <id>/assessment_meta.xml), so
+        # an unpublished quiz in this module was never exempted. module_home.py fix (gate 12w) puts held alternate
+        # quizzes here, and the date check then failed them for having no due date. Read the quiz's own state.
+        _qm=os.path.join(_r,'assessment_meta.xml')
+        if not _h and os.path.exists(_qm):
+            if re.search(r'<workflow_state>\s*unpublished\s*</workflow_state>',open(_qm,encoding='utf-8',errors='ignore').read()):
+                _INSTR_IDS.add(_r)
+                _INSTR_FILES.update(os.path.normpath(f) for f in _res.get('files',[])+[_qm])
+            continue
         if not _h or not os.path.exists(_h): continue
         _unpub='content="unpublished"' in open(_h,encoding='utf-8',errors='ignore').read()
         _ax,_axt=_instr_xml(_res,_h)

@@ -48,7 +48,10 @@ ALLOW=['Sulphur-rich volcanic eruptions and stratospheric aerosols',
        # documentation set, filenames as published: 'Connector Panel Visualisation.pdf'
        # and 'ASP4816-HE Visualisation.pdf'.
        'Connector Panel Visualisation',
-       'ASP4816-HE Visualisation']
+       'ASP4816-HE Visualisation',
+       # Live Canvas module name, DAPR 2020 (K145, 2026-10-16): 'Master-Buss Processing & Endgame' and the
+       # assignment 'Mix Master-buss Processing'. Buss is the standard audio console spelling, not British.
+       'Master-Buss', 'Master-buss']
 
 def scan(paths):
     hits=[]
