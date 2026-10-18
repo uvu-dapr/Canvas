@@ -31,6 +31,15 @@ What it reads (read only, unless `fixmeta` is asked for):
                      fonts and left alignment written out) and the deckstyle bars are marked decorative. In place it
                      keeps a copy in Archive first; the Embedded deck and PDF must then be built again (deck_pair.py embed).
     python3 a11y_files.py summary [--out <folder>]                  the last scan's counts, one line per class (for the app)
+    python3 a11y_files.py fixclass <class> [--dry-run] [--only <Base>,<Base>] [--scratch <folder>] [--look-limit 0.5]
+                     one class's slide decks end to end (J526): each slide's own heading becomes its title placeholder,
+                     shapes with no words are marked decorative, a chart's alt text comes from its own title, the
+                     Embedded deck is built again, the PDF is exported tagged by LibreOffice (PowerPoint for Mac never
+                     tags) with title and language set, every page is compared with the same export of the unchanged
+                     deck (over 0.5% of a page changed = left alone), and each -Linked deck is backed up to its
+                     Presentations/Archive first. Picture alt text is never written (it comes only from a README, brief,
+                     caption or meaning). Prints before and after counts per PDF and the PDFs with no deck and no link.
+                     --dry-run only counts: nothing is exported or written.
 
 Standard library only (zlib, zipfile, re); no pikepdf or pypdf on this Mac. The PDF reader follows cross-reference
 tables and streams (with /Prev chains and PNG predictors) and object streams, and falls back to scanning for
@@ -1059,6 +1068,345 @@ def write_class_report(c, out_dir, stamp):
     slim = {k2: v for k2, v in c.items()}
     with open(os.path.join(out_dir, base + ".json"), "w") as f: json.dump(slim, f, indent=1, default=str)
 
+# ================================================================ fixclass: one class's slide decks and PDFs, end to end
+
+# J526 (2026-10-17): the DAPR 2000 scratch steps, folded in so any class runs with one command. Per -Linked deck:
+# the slide's own heading becomes its title placeholder (deck_titles, then a fallback for headings under 24 pt or with
+# inherited formatting, every inherited look written out), shapes with no words are marked decorative, a chart with no
+# alt text gets one from the chart's own title, the Embedded deck is built again, its PDF is exported tagged by
+# LibreOffice with title and language set, and every page is compared with the same export of the unchanged deck.
+# The -Linked deck is backed up to its Presentations/Archive before anything is written. Never alt text for a picture:
+# a picture's alt comes only from its README, brief, caption or meaning, so pictures without it are only counted.
+
+LO_SOFFICE = "/Applications/LibreOffice.app/Contents/MacOS/soffice"
+LO_TAGGED = ('pdf:impress_pdf_Export:{"UseTaggedPDF":{"type":"boolean","value":"true"},"PDFUACompliance":{"type":"boolean","value":"true"},'
+             '"ExportBookmarks":{"type":"boolean","value":"true"},"ExportNotes":{"type":"boolean","value":"false"},"ExportNotesPages":{"type":"boolean","value":"false"}}')
+CACHE = os.path.expanduser("~/Library/Caches/CanvasPreview")
+LOOK_LIMIT = 0.5          # percent of a page's pixels that may differ (sub pixel title shifts); more and the deck is left alone
+
+def neutral_title(sp):
+    """make_title, plus what a master title style could add that the text box never had, written out: 100% line
+    spacing, no space before, no all caps (the DAPR 2000 masters: lnSpc 90% and cap="all" in the title style)"""
+    out = make_title(sp)
+    if out is None: return None
+    lv = re.search(r"(?s)<a:lstStyle>.*?(<a:lvl1pPr\b.*?</a:lvl1pPr>)", out); lv = lv.group(1) if lv else ""   # its own list style stays
+    def ppr(m):
+        t = m.group(0)
+        if t.endswith("/>"): t = t[:-2] + "></a:pPr>"
+        head = re.match(r"<a:pPr\b[^>]*>", t).group(0); rest = t[len(head):]
+        add = ""
+        if "<a:lnSpc>" not in rest and "<a:lnSpc>" not in lv: add += '<a:lnSpc><a:spcPct val="100000"/></a:lnSpc>'
+        if "<a:spcBef>" not in rest and "<a:spcBef>" not in lv: add += '<a:spcBef><a:spcPts val="0"/></a:spcBef>'
+        return head + add + rest
+    out = re.sub(r"(?s)<a:pPr\b[^>]*/>|<a:pPr\b[^>]*>.*?</a:pPr>", ppr, out)
+    return re.sub(r"<a:(rPr|endParaRPr)\b(?![^>]*\bcap=)", r'<a:\1 cap="none"', out)
+
+def _text_defaults(data):
+    """The deck's default text size, colour and font (presentation.xml defaultTextStyle) and the slide height"""
+    pres = data["ppt/presentation.xml"].decode("utf-8")
+    m = re.search(r"(?s)<p:defaultTextStyle>.*?<a:lvl1pPr\b.*?<a:defRPr\b([^>]*)>(.*?)</a:defRPr>", pres)
+    attrs, kids = (m.group(1), m.group(2)) if m else ("", "")
+    sz = re.search(r'\bsz="(\d+)"', attrs); fill = re.search(r"(?s)<a:solidFill>.*?</a:solidFill>", kids); lat = re.search(r"<a:latin [^>]*/>", kids)
+    h = re.search(r'<p:sldSz [^>]*cy="(\d+)"', pres)
+    return (sz.group(1) if sz else "1800", fill.group(0) if fill else '<a:solidFill><a:schemeClr val="tx1"/></a:solidFill>',
+            lat.group(0) if lat else '<a:latin typeface="+mn-lt"/>', int(h.group(1)) if h else 6858000)
+
+def _written_out(sp, d):
+    """What a text box inherits (insets, anchor, size, colour, font, bold), written out, so the title placeholder
+    cannot change how it looks"""
+    sz, fill, lat, _ = d
+    b = re.search(r"<a:bodyPr\b[^>]*?(/?)>", sp)
+    if not b: return sp
+    nb = b.group(0)
+    for k, v in (("lIns", "91440"), ("tIns", "45720"), ("rIns", "91440"), ("bIns", "45720"), ("anchor", "t")):
+        if not re.search(r'\b%s="' % k, nb): nb = nb.replace("<a:bodyPr", '<a:bodyPr %s="%s"' % (k, v), 1)
+    sp = sp.replace(b.group(0), nb, 1)
+    # the text box's own list style (lstStyle lvl1pPr): its size, caps, colour and font come before the deck defaults
+    # (J526 DAPR 2010 Sonic Reality slide 20: an all caps serif heading set only in its lstStyle)
+    lm = re.search(r"(?s)<a:lstStyle>.*?<a:lvl1pPr\b.*?<a:defRPr\b([^>]*?)(/>|>(.*?)</a:defRPr>).*?</a:lvl1pPr>", sp)
+    lattrs = lm.group(1) if lm else ""; lkids = (lm.group(3) or "") if lm else ""
+    def para(pm):
+        P_ = pm.group(0)
+        dm = re.search(r"(?s)<a:pPr\b[^>]*>.*?<a:defRPr\b([^>]*?)(/>|>(.*?)</a:defRPr>)", P_)
+        dattrs = (dm.group(1) if dm else "") + " " + lattrs; dkids = ((dm.group(3) or "") if dm else "") + lkids
+        psz = re.search(r'\bsz="(\d+)"', dattrs); pfill = re.search(r"(?s)<a:(solidFill|gradFill)>.*?</a:\1>|<a:noFill/>", re.sub(r"(?s)<a:ln\b[^>]*/>|<a:ln\b.*?</a:ln>", "", dkids)); plat = re.search(r"<a:latin [^>]*/>", dkids)   # an outline's noFill is not the text's fill
+        flags = re.findall(r'\b(b|i|u|strike|baseline|spc|kern|cap)="([^"]*)"', dattrs)
+        P_ = re.sub(r"<a:r>(?!<a:rPr)", '<a:r><a:rPr lang="en-US"/>', P_)
+        def rpr(m):
+            t = m.group(0)
+            if t.endswith("/>"): t = t[:-2] + "></a:rPr>"
+            if ' sz="' not in t: t = t.replace("<a:rPr", '<a:rPr sz="%s"' % (psz.group(1) if psz else sz), 1)
+            for k, v in flags:
+                if not re.search(r'<a:rPr\b[^>]*\b%s="' % k, t): t = t.replace("<a:rPr", '<a:rPr %s="%s"' % (k, v), 1)
+            head = re.match(r"<a:rPr\b[^>]*>", t).group(0); body = t[len(head):-len("</a:rPr>")]
+            if "<a:solidFill>" not in body and "<a:gradFill>" not in body and "<a:noFill/>" not in body:
+                f = pfill.group(0) if pfill else fill
+                body = re.sub(r"^(<a:ln\b.*?</a:ln>|<a:ln\b[^>]*/>)?", lambda q: (q.group(0) or "") + f, body, count=1)
+            if "<a:latin " not in body:
+                l = plat.group(0) if plat else lat
+                mm = re.search(r"<a:(ea|cs|sym|hlinkClick|hlinkMouseOver|rtl|extLst)\b", body)
+                body = body[:mm.start()] + l + body[mm.start():] if mm else body + l
+            return head + body + "</a:rPr>"
+        return re.sub(r"(?s)<a:rPr\b[^>]*/>|<a:rPr\b[^>]*>.*?</a:rPr>", rpr, P_)
+    return re.sub(r"(?s)<a:p>.*?</a:p>", para, sp)
+
+def _has_title(x, shapes):
+    return any(re.search(r'<p:ph\b[^>]*\btype="(title|ctrTitle)"', m.group(0)) and re.search(r"<a:t>[^<]*\S", m.group(0)) for m in shapes(x))
+
+def title_fallback(data):
+    """Slides still without a title: the slide's own first line near the top (its kicker or heading, 14 pt or more,
+    in the top 30%), with every inherited look written out, becomes the title placeholder. Same words, same place.
+    Changes data in place; returns (slides titled, slide numbers left untitled)."""
+    import deck_pair as dp
+    from merge_decks import shapes, geom
+    d = _text_defaults(data); H = d[3]; n = 0; left = []
+    for k, (rid, sx) in enumerate(dp.slide_order(data), 1):
+        if sx not in data: continue
+        x = data[sx].decode("utf-8")
+        if re.search(r'<p:sld\b[^>]*\bshow="0"', x) or _has_title(x, shapes): continue
+        best = None
+        for m in shapes(x):
+            sp = m.group(0); g = geom(sp)
+            words = "".join(re.findall(r"<a:t(?: [^>]*)?>([^<]*)</a:t>", sp)).strip()
+            if "<p:ph" in sp or not g or not words: continue
+            if re.search(r'name="(classlabel|Caption \d+)"', sp) or g[1] > 0.30 * H: continue
+            szs = [int(v) for v in re.findall(r'\bsz="(\d+)"', sp)] or [int(d[0])]
+            if max(szs) < 1400: continue
+            key = (g[1], -max(szs))
+            if best is None or key < best[0]: best = (key, sp)
+        new = neutral_title(_written_out(best[1], d)) if best else None
+        if not new: left.append(k); continue
+        data[sx] = x.replace(best[1], new, 1).encode("utf-8"); n += 1
+    return n, left
+
+def mark_design_shapes(data):
+    """Shapes with no words, no picture and no placeholder (bars, card backgrounds, number circles, arrows, divider
+    lines, empty boxes) marked decorative the PowerPoint way, so the tagged PDF leaves them out as artifacts"""
+    import deck_pair as dp
+    n = 0
+    for rid, sx in dp.slide_order(data):
+        if sx not in data: continue
+        x = data[sx].decode("utf-8"); y = x
+        for m in re.finditer(r"(?s)<p:(sp|cxnSp)>.*?</p:\1>", x):
+            sp = m.group(0)
+            words = "".join(re.findall(r"<a:t(?: [^>]*)?>([^<]*)</a:t>", sp)).strip()
+            if words or "<a:blip" in sp or "<p:ph" in sp: continue
+            if re.search(r'<adec:decorative\b[^>]*\bval="0"', sp):      # PowerPoint Designer's card and backdrop shapes
+                y = y.replace(sp, re.sub(r'(<adec:decorative\b[^>]*\bval=)"0"', r'\1"1"', sp, count=1), 1); n += 1; continue
+            if "decorative" in sp: continue
+            c = re.search(r"<p:cNvPr\b[^>]*?(/>|>)", sp)
+            if not c: continue
+            rep = c.group(0)[:-2] + ">" + DECOR_EXT + "</p:cNvPr>" if c.group(1) == "/>" else c.group(0) + DECOR_EXT
+            y = y.replace(sp, sp.replace(c.group(0), rep, 1), 1); n += 1
+        # pictures PowerPoint Designer placed as design elements (p16:designElem val="1": the corner line art and
+        # background overlays) that say decorative val="0": marked decorative, as their own alt text describes them
+        for m in re.finditer(r"(?s)<p:pic>.*?</p:pic>", y):
+            pic = m.group(0)
+            if re.search(r'<p16:designElem\b[^>]*\bval="1"', pic) and re.search(r'<adec:decorative\b[^>]*\bval="0"', pic):
+                y = y.replace(pic, re.sub(r'(<adec:decorative\b[^>]*\bval=)"0"', r'\1"1"', pic, count=1), 1); n += 1
+        if y != x: data[sx] = y.encode("utf-8")
+    return n
+
+def chart_alt(data):
+    """A chart with no alt text gets one from the chart's own words: its kind, its title and its axis titles (the
+    slide title when the chart has none). Nothing made up; under 120 characters. Returns the alt texts written."""
+    import deck_pair as dp
+    notes = []
+    def words(block): return " ".join(html.unescape(w) for w in re.findall(r"<a:t>([^<]*)</a:t>", block)).strip()
+    for rid, sx in dp.slide_order(data):
+        if sx not in data: continue
+        x = data[sx].decode("utf-8"); y = x
+        rels = data.get(dp.rels_name(sx), b"").decode("utf-8")
+        for m in re.finditer(r"(?s)<p:graphicFrame>.*?</p:graphicFrame>", x):
+            gf = m.group(0)
+            cid = re.search(r'<c:chart\b[^>]*r:id="([^"]+)"', gf); c = re.search(r"<p:cNvPr\b[^>]*?/?>", gf)
+            if not cid or not c or re.search(r'\bdescr="[^"]+', c.group(0)): continue
+            t = re.search(r'Id="%s"[^>]*Target="([^"]+)"' % re.escape(cid.group(1)), rels) or re.search(r'Target="([^"]+)"[^>]*Id="%s"' % re.escape(cid.group(1)), rels)
+            cx = data.get(posixpath.normpath(posixpath.join(posixpath.dirname(sx), t.group(1))), b"").decode("utf-8") if t else ""
+            plot = re.search(r"(?s)<c:plotArea>.*</c:plotArea>", cx)
+            whole = cx.replace(plot.group(0), "") if plot else cx
+            ct = re.search(r"(?s)<c:title>.*?</c:title>", whole)
+            title = words(ct.group(0)) if ct else ""
+            axes = [w for w in (words(b) for b in re.findall(r"(?s)<c:title>.*?</c:title>", plot.group(0))) if w] if plot else []
+            kind = re.search(r"<c:(bar|line|scatter|pie|area|doughnut|radar|bubble)Chart>", cx)
+            kind = kind.group(1).capitalize() if kind else ""
+            if not title: title = dp.title_of(y) or ""
+            if not title: continue                         # no words of its own to describe it: left for Adam
+            alt = ("%s chart: %s" % (kind, title) if kind else "Chart: %s" % title).strip()
+            if axes and len(alt) + len(", ".join(axes)) + 7 < 120: alt += " (%s)" % (" by ".join(reversed(axes[:2])) if len(axes) >= 2 else axes[0])
+            alt = alt[:119]; q = html.escape(alt, quote=True); cnv = c.group(0)
+            new = cnv.replace("/>", ' descr="%s"/>' % q) if cnv.endswith("/>") else cnv[:-1] + ' descr="%s">' % q
+            y = y.replace(gf, gf.replace(cnv, new, 1), 1); notes.append(alt)
+        if y != x: data[sx] = y.encode("utf-8")
+    return notes
+
+def _tidy_slide(x):
+    """Same XML, written the way the steps read it: a namespace the slide root already declares is not declared again
+    on each element, and "<a:off ... />" loses the space before "/>" (decks saved by .NET and ElementTree tools, like
+    DAPR 2255's Mackie_HUI_and_MCU, where every shape looked like it had no position)"""
+    root = re.search(r"<p:sld\b[^>]*>", x)
+    if not root: return x
+    for k, v in re.findall(r'\sxmlns:(\w+)="([^"]+)"', root.group(0)):
+        decl = ' xmlns:%s="%s"' % (k, v)
+        head, tail = x[:root.end()], x[root.end():]
+        x = head + tail.replace(decl, "")
+    return re.sub(r"(<[^<>]*?) +/>", r"\1/>", x)
+
+def fix_deck_data(data):
+    """All the deck steps on one deck's parts, in memory. Returns what changed."""
+    import deck_pair as dp
+    from merge_decks import shapes, geom
+    titled = bars = 0; skipped = []
+    for rid, sx in dp.slide_order(data):
+        if sx in data:
+            x = data[sx].decode("utf-8"); t = _tidy_slide(x)
+            if t != x: data[sx] = t.encode("utf-8")
+    # 1 the slide's own heading box (24 pt or more near the top, or 32 pt anywhere) as its title: deck_titles' rule
+    for k, (rid, sx) in enumerate(dp.slide_order(data), 1):
+        if sx not in data: continue
+        x = data[sx].decode("utf-8")
+        if re.search(r'<p:sld\b[^>]*\bshow="0"', x) or _has_title(x, shapes): continue
+        best = None
+        for m in shapes(x):
+            sp = m.group(0); g = geom(sp); sz = re.search(r'sz="(\d+)"', sp)
+            t = " ".join(re.findall(r"<a:t>([^<]*)</a:t>", sp)).strip()
+            if "<p:ph" in sp or not (g and sz and t): continue
+            near_top = g[1] < 1300000 and int(sz.group(1)) >= 2400; big = int(sz.group(1)) >= 3200
+            if not (near_top or big): continue
+            key = (1 if near_top else 0, int(sz.group(1)))
+            if best is None or key > best[0]: best = (key, sp)
+        if best:
+            new = neutral_title(best[1])
+            if new: data[sx] = x.replace(best[1], new, 1).encode("utf-8"); titled += 1
+    # 2 the rest: the first line near the top, inherited look written out
+    fb, left = title_fallback(data)
+    # 3 shapes with no words: decorative; 4 charts: alt from their own titles
+    bars = mark_design_shapes(data)
+    charts = chart_alt(data)
+    return dict(titled=titled + fb, untitled=left, decorative=bars, chart_alts=charts)
+
+def export_tagged(pptx, outdir):
+    """LibreOffice, tagged PDF/UA with bookmarks (the app's taggedPDFFilter), its own settings folder so a LibreOffice
+    window Adam has open never takes the conversion. PowerPoint for Mac's Save as PDF never tags (Standards §2a.1),
+    so there is no tagged PowerPoint export to keep: every slide PDF comes from LibreOffice."""
+    import subprocess
+    prof = os.path.join(CACHE, "lo-profile"); os.makedirs(prof, exist_ok=True)
+    subprocess.run([LO_SOFFICE, "-env:UserInstallation=file://" + urllib.parse.quote(prof), "--headless", "--convert-to", LO_TAGGED, "--outdir", outdir, pptx], capture_output=True, timeout=600)
+    p = os.path.join(outdir, os.path.splitext(os.path.basename(pptx))[0] + ".pdf")
+    return p if os.path.exists(p) else None
+
+def look_diff(a_pdf, b_pdf):
+    """(worst page percent, pages over LOOK_LIMIT, page counts differ) from pdfdiff.swift (built once into the cache)"""
+    import subprocess
+    tool = os.path.join(CACHE, "pdfdiff"); src = os.path.join(os.path.dirname(os.path.abspath(__file__)), "pdfdiff.swift")
+    if not os.path.exists(tool) or os.path.getmtime(tool) < os.path.getmtime(src):
+        os.makedirs(CACHE, exist_ok=True); subprocess.run(["swiftc", "-O", src, "-o", tool], capture_output=True)
+    out = subprocess.run([tool, a_pdf, b_pdf], capture_output=True, text=True).stdout
+    w = re.search(r"worst ([\d.]+)%", out); worst = float(w.group(1)) if w else 100.0
+    bad = [(int(p), float(v)) for p, v in re.findall(r"(\d+):([\d.]+)%", out) if float(v) > LOOK_LIMIT]
+    return worst, bad, "PAGES" in out
+
+def producer(path):
+    """Who made a PDF (its /Info /Producer and /Creator), for the report"""
+    try:
+        p = PDF(path); i = p.info or {}
+        s = " ".join(text_of(p.get(i.get(k))) for k in ("Producer", "Creator") if i.get(k) is not None)
+        p.close(); return s
+    except Exception: return ""
+
+def _pdf_counts(path):
+    r = pdf_facts(path)
+    return dict(tagged=bool(r.get("tagged")), pages=r.get("pages"), noalt=(r.get("figures", 0) - r.get("figures_with_alt", 0)) if r.get("tagged") else None)
+
+def _ours(path, mtime=None):
+    """The decks fixclass itself wrote, with their time, so its own write is not taken for Adam's 15 minute edit"""
+    led = os.path.join(CACHE, "a11y-fixclass-written.json")
+    try: d = json.load(open(led))
+    except Exception: d = {}
+    if mtime is None: return d.get(path)
+    d[path] = mtime; os.makedirs(CACHE, exist_ok=True); json.dump(d, open(led, "w"), indent=1); return mtime
+
+def class_decks(code):
+    """Every -Linked deck of one class in the Cloudflare Canvas Links folder (Archive and _unused skipped)"""
+    out = []
+    for d in glob.glob(os.path.join(CF, "DAPR-%s--*" % code)):
+        out += [f for f in walk_files(d, {".pptx"}) if f.endswith("-Linked.pptx") and os.path.basename(os.path.dirname(f)) == "Presentations"]
+    return sorted(out)
+
+def fix_class(code, dry=False, scratch=None, only=None, log=print):
+    """One class, end to end (see the section comment). dry: counts only, nothing exported or written."""
+    import deck_pair as dp, time, subprocess
+    stamp = datetime.datetime.now().strftime("%Y-%m-%d %H%M")
+    scratch = scratch or tempfile.mkdtemp(prefix="a11y-fixclass-%s-" % code); os.makedirs(scratch, exist_ok=True)
+    rows = []
+    for L in class_decks(code):
+        base = dp.base_of(L)
+        if only and base not in only: continue
+        pres = os.path.dirname(L); E = os.path.join(pres, base + "-Embedded.pptx"); pdf = os.path.join(pres, "PDF", base + ".pdf")
+        row = dict(base=base, linked=L, pdf=pdf if os.path.exists(pdf) else None)
+        before_deck = deck_facts(L)
+        row["before"] = _pdf_counts(pdf) if row["pdf"] else dict(tagged=None, pages=None, noalt=None)
+        row["before"]["no_title"] = len(before_deck.get("slides_no_title", []))
+        row["deck_pictures_no_alt"] = len(before_deck.get("pictures_no_alt", [])) + len(before_deck.get("pictures_bad_alt", []))
+        row["producer"] = producer(pdf) if row["pdf"] else ""
+        infos, data = dp.read(L)
+        ch = fix_deck_data(data)
+        row.update(ch)
+        if dry:
+            row["after_no_title"] = len(ch["untitled"]); rows.append(row)
+            log("WOULD %s: titles %d (left %s), decorative %d, chart alt %d, deck pictures without alt %d (never written); now: %s, %d slides without a title, figures without alt %s" % (
+                base, ch["titled"], ch["untitled"] or "none", ch["decorative"], len(ch["chart_alts"]), row["deck_pictures_no_alt"], "tagged" if row["before"]["tagged"] else "untagged",
+                row["before"]["no_title"], row["before"]["noalt"] if row["before"]["noalt"] is not None else "n/a"))
+            continue
+        # scratch: the unchanged deck's export and the changed deck's export, page by page
+        w = os.path.join(scratch, base); os.makedirs(os.path.join(w, "orig"), exist_ok=True); os.makedirs(os.path.join(w, "new"), exist_ok=True)
+        o_l = os.path.join(w, "orig", base + "-Linked.pptx"); shutil.copy2(L, o_l)
+        o_e = os.path.join(w, "orig", base + "-Embedded.pptx"); e = dp.embed(o_l, o_e)
+        n_l = os.path.join(w, "new", base + "-Linked.pptx"); dp.write(n_l, infos, data)
+        n_e = os.path.join(w, "new", base + "-Embedded.pptx"); e2 = dp.embed(n_l, n_e)
+        if e.get("error") or e2.get("error"):
+            row["skipped"] = "Embedded build: %s" % (e.get("error") or e2.get("error")); rows.append(row); log("SKIP %s %s" % (base, row["skipped"])); continue
+        po = export_tagged(o_e, os.path.join(w, "orig")); pn = export_tagged(n_e, os.path.join(w, "new"))
+        if not po or not pn: row["skipped"] = "no PDF came out of LibreOffice"; rows.append(row); log("SKIP %s %s" % (base, row["skipped"])); continue
+        worst, bad, pages_differ = look_diff(po, pn); row["look_worst"] = worst
+        why = None
+        if pages_differ: why = "page count changed"
+        elif bad: why = "look changed on page(s) %s" % ", ".join("%d (%.2f%%)" % b for b in bad[:6])
+        elif not ch["titled"] and not ch["decorative"] and not ch["chart_alts"] and row["before"]["tagged"]: why = "nothing to change"
+        elif dp.is_open(L) or dp.is_open(E): why = "open in PowerPoint"
+        elif time.time() - os.path.getmtime(L) < 900 and _ours(L) != os.path.getmtime(L): why = "Linked deck changed in the last 15 minutes"
+        elif os.path.getmtime(L) > os.path.getmtime(o_l) + 1: why = "Linked deck changed while this ran"
+        if why:
+            row["skipped"] = why; row["after"] = row["before"]; rows.append(row); log("SKIP %s: %s" % (base, why)); continue
+        # in place: back up, put the fixed Linked deck in, build Embedded, export, title and language, read back
+        arch = os.path.join(pres, "Archive"); os.makedirs(arch, exist_ok=True)
+        shutil.copy2(L, os.path.join(arch, "%s-Linked (before slide titles and alt text %s).pptx" % (base, stamp)))
+        if row["pdf"]: shutil.copy2(pdf, os.path.join(w, "orig", base + " (old).pdf"))
+        shutil.copyfile(n_l, L)
+        e = dp.embed(L)
+        if e.get("error"): row["error"] = "embed: %s" % e; rows.append(row); log("ERROR %s %s" % (base, row["error"])); continue
+        fin = os.path.join(w, "final"); os.makedirs(fin, exist_ok=True)
+        made = export_tagged(E, fin)
+        if not made: row["error"] = "no PDF came out"; rows.append(row); log("ERROR %s no PDF" % base); continue
+        fix_meta(made, like=pdf if row["pdf"] else None)
+        after = _pdf_counts(made); full = pdf_facts(made)
+        if after["pages"] != pdf_facts(po).get("pages") or not after["tagged"]:
+            row["error"] = "final PDF check failed: %s" % after; rows.append(row); log("ERROR %s %s" % (base, row["error"])); continue
+        os.makedirs(os.path.dirname(pdf), exist_ok=True)
+        shutil.copyfile(made, pdf); _ours(L, os.path.getmtime(L))
+        after["no_title"] = len(deck_facts(L).get("slides_no_title", []))
+        row.update(after=after, title=full.get("title"), lang=full.get("lang"), verify=dp.verify(L).get("problems") or "OK", exporter="LibreOffice")
+        rows.append(row)
+        log("DONE %s: titles %d, decorative %d, chart alt %d, look worst %.2f%%, verify %s" % (base, ch["titled"], ch["decorative"], len(ch["chart_alts"]), worst, row["verify"]))
+    with open(os.path.join(scratch, "fixclass-%s-%s.json" % (code, "dry" if dry else "run")), "w") as f: json.dump(rows, f, indent=1, default=str)
+    return rows, scratch
+
+def orphan_pdfs(code, out_dir):
+    """PDFs of one class with no deck beside them and no class page linking them (from a scan into out_dir)"""
+    scan(code, out_dir)
+    c = json.load(open(os.path.join(out_dir, [f for f in os.listdir(out_dir) if f.endswith(".json") and code in f and f != "summary.json"][0])))
+    return sorted(r["rel"] for r in c.get("pdfs", []) if not r.get("deck") and not r.get("linked_from"))
+
 # ================================================================ main
 
 def main(argv):
@@ -1095,6 +1443,25 @@ def main(argv):
         for a in rest:
             t, b, sk = deck_titles(a, out=out, dry=dry)
             print("%s %s: %d slide titles, %d design bars marked decorative%s" % ("WOULD CHANGE" if dry else "CHANGED" if (t or b) else "same", a, t, b, ("; skipped " + "; ".join(sk[:6])) if sk else ""))
+        return 0
+    if cmd == "fixclass":
+        dry = "--dry-run" in rest
+        if dry: rest.remove("--dry-run")
+        only = opt("--only"); scratch = opt("--scratch")
+        global LOOK_LIMIT
+        LOOK_LIMIT = float(opt("--look-limit", LOOK_LIMIT))   # raise only after looking at the flagged page by eye
+        if not rest: print(__doc__); return 2
+        code = rest[0]
+        rows, scratch = fix_class(code, dry=dry, scratch=scratch, only=set(only.split(",")) if only else None)
+        def cell(v): return "n/a" if v is None else v
+        print("\nDAPR %s per PDF (untagged, slides without a title, figures without alt)%s:" % (code, "" if dry else "; before > after"))
+        for r in rows:
+            b = r["before"]; a_ = r.get("after") or {}
+            if dry: print("  %s: %s, %d, %s (would title %d slides)" % (r["base"], "untagged" if b["tagged"] is False else "tagged" if b["tagged"] else "no PDF", b["no_title"], cell(b["noalt"]), r["titled"]))
+            else: print("  %s: %s > %s, %d > %s, %s > %s%s" % (r["base"], "untagged" if not b["tagged"] else "tagged", "tagged" if a_.get("tagged") else "untagged", b["no_title"], cell(a_.get("no_title")), cell(b["noalt"]), cell(a_.get("noalt")), ("  [" + (r.get("skipped") or r.get("error")) + "]") if r.get("skipped") or r.get("error") else ""))
+        orphans = orphan_pdfs(code, os.path.join(scratch, "scan"))
+        print("PDFs with no deck and no link: %s" % ("; ".join(orphans) or "none"))
+        print("scratch: %s" % scratch)
         return 0
     if cmd == "fixmeta":
         dry = "--dry" in rest
