@@ -1742,6 +1742,10 @@ def main(argv):
         if name in rest:
             i = rest.index(name); v = rest[i + 1]; del rest[i:i + 2]; return v
         return default
+    if cmd == "exporttagged":   # 2026-10-19 (StudioPrime, brief item 8): Canvas Builder's own slide export calls this, so its PDFs
+        # get the group and SmartArt alt the same way (export_tagged and its LibreOffice macro); prints the PDF and the macro result
+        if len(rest) != 2: print("usage: a11y_files.py exporttagged <deck.pptx> <outdir>"); return 2
+        p = export_tagged(rest[0], rest[1]); print(json.dumps(dict(pdf=p, alt=LAST_ALT_EXPORT), default=str)); return 0 if p else 1
     if cmd == "scan":
         only = opt("--class"); out = opt("--out", OUT)
         s = scan(only, out)
