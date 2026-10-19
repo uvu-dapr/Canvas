@@ -1,0 +1,53 @@
+{
+ "Console_Signal_Flow/Presentations/Audient_ASP4816-Linked.pptx": {
+  "ppt/slides/slide2.xml": {"828": "Blue mic path: mic or line input, gain, insert and short fader to the interface and Mac; magenta mix bus to speakers",
+                            "10": "Red DAW path: Mac and interface into a line input, insert and long fader; magenta mix bus to the master and speakers",
+                            "800": "Green headphone path: cue sends from two channel knobs to cue level knobs, two amplifiers and the headphones",
+                            "6": "Line color key: blue Mic Path, green Headphone Path, red DAW Path, magenta Mix Bus/Monitor"},
+  "ppt/slides/slide3.xml": {"828": "Blue mic path, numbered 1 to 33: mic or line input, gain, insert and short fader to the interface, Mac and speakers",
+                            "10": "Red DAW path, numbered 34 to 47: Mac and interface into a line input, insert and long fader, then the mix bus",
+                            "800": "Green headphone path, numbered 48 to 54: cue level knobs, buttons, two amplifiers and the headphones",
+                            "821": "Line color key: blue Mic Path, green Headphone Path, red DAW Path, magenta Mix Bus/Monitor"}
+ },
+ "Pro_Tools_for_Tracking/Presentations/Pro_Tools_for_Tracking-Linked.pptx": {
+  "ppt/slides/slide25.xml": {"13": "One speaker playing both identical copies, so both ears hear the same sound",
+                             "14": "Second speaker with no signal",
+                             "22": "Left speaker playing one take, heard in the left ear",
+                             "23": "Right speaker playing a different take, heard in the right ear"},
+  "ppt/slides/slide28.xml": {"11": "Track 1 comp: colored sections taken from five takes below it, arrows showing which take each came from",
+                             "12": "Track 2 comp: different sections from five other takes, so the two tracks never match"}
+ },
+ "Patch_Bays/Presentations/Patch_Bays-Linked.pptx": {
+  "ppt/slides/slide26.xml": {"17": "Patch point, Back and Front: signal enters the top back jack and normals down to the bottom back jack",
+                             "30": "Patch point, Back and Front: a cord in the front In jack, its far end unplugged, stops the signal (dead patch)"}
+ },
+ "Console_Signal_Flow/Presentations/Behringer-Linked.pptx": {
+  "ppt/slides/slide2.xml": {"19": "Symbol key: Button/Switch, Knob, Amplifier, Fader, Insert, Out / In, Line Input, Mic Input",
+                            "3": "Mixer signal flow: mic or line input through gain, insert and fader to the main mix, with aux and subgroup paths"}
+ },
+ "The_Digital_Recording_Process/Presentations/Digital_Audio_Workstations-Linked.pptx": {
+  "ppt/slides/slide2.xml": {"8": "DAW hardware in three parts: Computer, Interface, Controllers"}
+ },
+ "Auxiliary_Resources/Presentations/Sonic_Reality_in_a_Virtual_World-Linked.pptx": {
+  "ppt/slides/slide3.xml": {"6": "Stereo: front left speaker aimed at the listener in the center", "7": "Stereo: front right speaker aimed at the listener in the center"},
+  "ppt/slides/slide4.xml": {"6": "Front left speaker aimed at the listener", "7": "Front right speaker aimed at the listener",
+                            "15": "Phantom center, shown faded: no speaker there, the sound seems to come from between left and right"},
+  "ppt/slides/slide5.xml": {"6": "Quadraphonic: front left speaker", "7": "Quadraphonic: front right speaker",
+                            "15": "Quadraphonic: rear right speaker behind the listener", "20": "Quadraphonic: rear left speaker behind the listener"},
+  "ppt/slides/slide6.xml": {"6": "5.1: front left speaker", "7": "5.1: front right speaker", "25": "5.1: center speaker in front of the listener",
+                            "15": "5.1: right surround speaker", "20": "5.1: left surround speaker", "33": "5.1: subwoofer, the .1 low frequency channel"},
+  "ppt/slides/slide7.xml": {"6": "Front left speaker", "7": "Front right speaker", "25": "Center speaker in front of the listener",
+                            "15": "Right side surround speaker", "20": "Left side surround speaker", "30": "Right rear surround speaker",
+                            "35": "Left rear surround speaker", "51": "Subwoofer for the low frequency channel"},
+  "ppt/slides/slide8.xml": {"59": "Atmos 7.1.4: front left speaker", "64": "Atmos 7.1.4: front right speaker", "79": "Atmos 7.1.4: center speaker",
+                            "69": "Atmos 7.1.4: right side surround speaker", "74": "Atmos 7.1.4: left side surround speaker",
+                            "84": "Atmos 7.1.4: right rear surround speaker", "89": "Atmos 7.1.4: left rear surround speaker",
+                            "95": "Atmos 7.1.4: subwoofer for the low frequency channel",
+                            "43": "Atmos 7.1.4: overhead height speaker, front left", "44": "Atmos 7.1.4: overhead height speaker, front right",
+                            "49": "Atmos 7.1.4: overhead height speaker, rear right", "54": "Atmos 7.1.4: overhead height speaker, rear left"},
+  "ppt/slides/slide14.xml": {"6": "Speaker directly in front of the listener",
+                             "15": "Listener's head from above: sound from straight ahead reaches both ears at the same time"},
+  "ppt/slides/slide15.xml": {"6": "Speaker to the front left of the listener",
+                             "15": "Listener's head from above: sound from the left reaches the left ear first, then the right ear"}
+ }
+}

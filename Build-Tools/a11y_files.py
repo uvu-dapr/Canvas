@@ -11,7 +11,10 @@ What it reads (read only, unless `fixmeta` is asked for):
             for a PDF of 20 pages or more, encryption.
   Decks     every -Linked deck (and any single deck) beside them: slides with no title, pictures with no alt text
             (decorative pictures marked the PowerPoint way count as done), alt text that is a file name, a
-            document title in docProps/core.xml.
+            document title in docProps/core.xml. 2026-10-18: also drawn groups and SmartArt with no alt text and
+            not decorative (each is one PDF Figure; a group of pictures that all carry alt is not), and alt text
+            over 120 characters or that reads like a shop page title (Minor). export_tagged carries group and
+            SmartArt alt into LibreOffice (which drops a group's alt when it opens a .pptx) before every export.
   Pictures  every GitHub picture a class page links: the page's alt text (missing, empty, a file name, a
             placeholder word, over 120 characters), and pictures no page links at all.
   Pages     each class's current export (the fixed-name "Canvas Export (latest).imscc"), or for a class with no
@@ -40,6 +43,11 @@ What it reads (read only, unless `fixmeta` is asked for):
                      Presentations/Archive first. Picture alt text is never written (it comes only from a README, brief,
                      caption or meaning). Prints before and after counts per PDF and the PDFs with no deck and no link.
                      --dry-run only counts: nothing is exported or written.
+    python3 a11y_files.py refont <class> [--only <Base>,<Base>] [--scratch <folder>]
+                     J558: each PDF LibreOffice made with its own stand-in fonts (Carlito for Calibri and the like) is
+                     exported again with the fonts the deck names (lo_fonts_conf), from an Embedded deck built from the
+                     unchanged Linked deck. It replaces today's PDF only when nothing but the fonts changed (pages,
+                     tags, title, en-US, figures and alt, headings, bookmarks, verify OK); anything else is reported.
 
 Standard library only (zlib, zipfile, re); no pikepdf or pypdf on this Mac. The PDF reader follows cross-reference
 tables and streams (with /Prev chains and PNG predictors) and object streams, and falls back to scanning for
@@ -455,34 +463,62 @@ def pdf_facts(path):
         ol = p.get(cat.get("Outlines"))
         r["bookmarks"] = bool(isinstance(ol, dict) and ol.get("First") is not None)
         # the structure tree: figures with alt, headings, tables
+        # 2026-10-18 (UVU session, Figure walk hardened): every structure element at every depth is visited (/K as
+        # a single kid, an array or a dictionary, direct or by reference; MCIDs, MCR and OBJR kids are content, not
+        # elements), and each element's type is resolved through /RoleMap even when the /S name or the RoleMap value
+        # is an indirect object, and through PDF 2.0 namespaces (/NS with /RoleMapNS). Nested Figures each count.
+        # Rule (PDF/UA-1 7.3, Matterhorn 13-004, what Panorama checks): EVERY Figure needs its own /Alt or
+        # /ActualText; a child Figure that carries alt does not excuse its parent, nor a parent its child. The only
+        # Figures left out are those inside an Artifact element (not real content, so screen readers skip them).
         figs = figs_alt = heads = tables = th = 0; types = {}
         if r["struct_tree"]:
             root = p.get(cat.get("StructTreeRoot"))
             rm = p.get(root.get("RoleMap")) if isinstance(root, dict) else None
             rm = rm if isinstance(rm, dict) else {}
-            stack = [root.get("K")] if isinstance(root, dict) else []
+            def role(k):
+                s = p.get(k.get("S"))
+                if not isinstance(s, (Name, str)): return None
+                t = str(s); ns = p.get(k.get("NS")); hop = 0
+                while hop < 10:
+                    hop += 1
+                    rmns = p.get(ns.get("RoleMapNS")) if isinstance(ns, dict) else None
+                    if isinstance(rmns, dict) and t in rmns:
+                        v = p.get(rmns[t])
+                        if isinstance(v, list) and v and isinstance(p.get(v[0]), (Name, str)):
+                            nt = str(p.get(v[0])); ns = p.get(v[1]) if len(v) > 1 else None
+                        elif isinstance(v, (Name, str)): nt = str(v); ns = None
+                        else: break
+                    elif t in rm:
+                        v = p.get(rm[t])
+                        if not isinstance(v, (Name, str)): break
+                        nt = str(v)
+                    else: break
+                    if nt == t: break
+                    t = nt
+                return t
+            stack = [(root.get("K"), False)] if isinstance(root, dict) else []
             seen = set(); count = 0
             while stack and count < 200000:
-                k = stack.pop()
+                k, art = stack.pop()
                 if isinstance(k, Ref):
                     if k.num in seen: continue
                     seen.add(k.num); k = p.get(k)
-                if isinstance(k, list): stack.extend(reversed(k)); continue
-                if not isinstance(k, dict): continue
-                s = k.get("S")
-                if s is None: continue                    # a marked-content or object reference
+                if isinstance(k, list): stack.extend((x, art) for x in reversed(k)); continue
+                if not isinstance(k, dict): continue        # an MCID number, null or a broken reference
+                if k.get("Type") in ("MCR", "OBJR") or "S" not in k: continue   # a marked-content or object reference
                 count += 1
-                t = str(s); hop = 0
-                while t in rm and isinstance(rm.get(t), Name) and hop < 5 and rm[t] != t: t = str(rm[t]); hop += 1
+                t = role(k)
+                if t is None: t = "?"
                 types[t] = types.get(t, 0) + 1
-                if t == "Figure":
+                art = art or t == "Artifact"
+                if t == "Figure" and not art:
                     figs += 1
                     if text_of(p.get(k.get("Alt"))).strip() or text_of(p.get(k.get("ActualText"))).strip(): figs_alt += 1
                 elif re.fullmatch(r"H[1-6]?", t): heads += 1
                 elif t == "Table": tables += 1
                 elif t == "TH": th += 1
                 kk = k.get("K")
-                if kk is not None: stack.append(kk)
+                if kk is not None: stack.append((kk, art))
         r.update(figures=figs, figures_with_alt=figs_alt, headings=heads, tables=tables, table_headers=th,
                  struct_types=dict(sorted(types.items(), key=lambda x: -x[1])[:12]))
         r["broken_xref"] = p.broken_xref
@@ -702,6 +738,70 @@ def subprocess_xattr_copy(src, dst):
 
 A_NS_DECOR = re.compile(r'<adec:decorative\b[^>]*\bval="1"|<[a-z0-9]+:decorative\b[^>]*\bval="1"')
 
+# 2026-10-18 (UVU session, group alt text class fix): drawn diagrams built from grouped shapes (p:grpSp) and SmartArt
+# (a p:graphicFrame holding a dgm diagram) each become ONE Figure tag in LibreOffice's tagged PDF, so each top-level
+# group and SmartArt needs its own alt text (or the PowerPoint decorative mark). Shapes inside a group are covered by
+# the group's Figure. Found in the DAPR 2010 decks: pictures all had alt, yet 56 PDF Figures had none.
+ALT_MAX = 120             # Standards §2a deck rule 2: alt text under 120 characters
+_P = "{http://schemas.openxmlformats.org/presentationml/2006/main}"
+_MC = "{http://schemas.openxmlformats.org/markup-compatibility/2006}"
+
+def slide_frames(x):
+    """Top-level groups and SmartArt frames of one slide's XML, in document order:
+    [{kind: group|smartart, name, id, alt, decorative, nth}], nth = the shape's place among top-level shapes of the
+    same name (so the LibreOffice macro can find it when a slide reuses a name)."""
+    import xml.etree.ElementTree as ET
+    try: root = ET.fromstring(x.encode("utf-8") if isinstance(x, str) else x)
+    except ET.ParseError: return []
+    tree = root.find("%scSld/%sspTree" % (_P, _P))
+    if tree is None: return []
+    kids = []
+    for el in tree:
+        if el.tag == _MC + "AlternateContent":           # PowerPoint's own choice first, the way it shows the slide
+            ch = el.find(_MC + "Choice")
+            if ch is None: ch = el.find(_MC + "Fallback")
+            kids += list(ch) if ch is not None else []
+        else: kids.append(el)
+    out = []; seen = {}
+    for el in kids:
+        tag = el.tag[len(_P):] if el.tag.startswith(_P) else ""
+        nv = next((c for c in el if c.tag.startswith(_P + "nv") and c.tag.endswith("Pr")), None)
+        cnv = nv.find(_P + "cNvPr") if nv is not None else None
+        if cnv is None: continue
+        name = cnv.get("name", ""); seen[name] = seen.get(name, 0) + 1
+        if tag == "grpSp": kind = "group"
+        elif tag == "graphicFrame" and any((g.get("uri") or "").endswith("/diagram") for g in el.iter() if g.tag.endswith("}graphicData")): kind = "smartart"
+        else: continue
+        deco = any(c.tag.endswith("}decorative") and c.get("val") in ("1", "true") for c in cnv.iter())
+        # a group made only of pictures that each carry alt (or are decorative) is tagged picture by picture by
+        # LibreOffice, so it needs no alt of its own (DAPR 2010 Behringer and Digital_Audio_Workstations PDFs pass so)
+        pics_only = False
+        if kind == "group":
+            leaves = [c for c in el.iter() if c is not el and c.tag in (_P + "sp", _P + "pic", _P + "cxnSp", _P + "graphicFrame")]
+            def _ok(c):
+                n = c.find(".//" + _P + "cNvPr")
+                return n is not None and ((n.get("descr") or "").strip() or any(d.tag.endswith("}decorative") and d.get("val") in ("1", "true") for d in n.iter()))
+            pics_only = bool(leaves) and all(c.tag == _P + "pic" and _ok(c) for c in leaves)
+        out.append(dict(kind=kind, name=name, id=cnv.get("id", ""), alt=(cnv.get("descr") or "").strip(), decorative=deco, nth=seen[name] - 1,
+                        pictures_only=pics_only))
+    return out
+
+_SHOP = re.compile(r"(?i)\b(includes?|included|compatible|certified|bundle|warranty|free shipping|upgraded|newest|"
+                   r"pack of|\d+[- ]?pack|\d+\s?pcs|for (?:mac|pc|windows|ios|iphone|ipad|android)|w/)(?=\W|$)")
+
+def shop_alt(alt):
+    """True when alt text reads like a shop page's product title (pasted from where the picture came from):
+    two or more of: square brackets, '(1)' style counts, store words (includes, compatible, certified, pack of ...),
+    a run of two words in capitals (SENNHEISER AMBEO), or a title cased string of 8 words or more."""
+    hits = 0
+    if re.search(r"[\[\]]", alt): hits += 1
+    if re.search(r"\(\d+\)", alt): hits += 1
+    hits += min(2, len(set(m.lower() for m in _SHOP.findall(alt))))
+    if re.search(r"\b[A-Z]{3,}\s+[A-Z]{3,}\b", alt): hits += 1
+    w = re.findall(r"[A-Za-z][A-Za-z0-9'-]*", alt)
+    if len(w) >= 8 and sum(1 for t in w if t[0].isupper()) >= 0.8 * len(w): hits += 1
+    return hits >= 2
+
 def deck_facts(path):
     r = {"file": path, "name": os.path.basename(path)}
     try: z = zipfile.ZipFile(path)
@@ -724,6 +824,7 @@ def deck_facts(path):
         lm = re.search(r'<a:defRPr\b[^>]*\blang="([^"]+)"', pres) or re.search(r'\blang="([^"]+)"', pres)
         r["lang"] = lm.group(1) if lm else ""
         slides = []; no_title = []; no_alt = []; bad_alt = []; pics = 0; decorative = 0; hidden = 0
+        groups = smartart = 0; groups_no_alt = []; smartart_no_alt = []; long_alt = []; shop = []
         # a layout's title placeholder counts only when the slide fills it; text in a title placeholder is the title
         for pos, rid in enumerate(order, 1):
             tgt = tmap.get(rid)
@@ -749,9 +850,22 @@ def deck_facts(path):
                 elif re.search(r"\.(png|jpe?g|gif|svg|webp|tiff?|bmp|emf|wmf)\b", alt, re.I) or "/" in alt and " " not in alt or alt.lower() in PLACEHOLDER_ALT or re.fullmatch(r"(?i)(picture|image|graphic)\s*\d+", alt):
                     bad_alt.append(pos)
                 elif re.search(r"(?i)description automatically generated", alt): bad_alt.append(pos)
+                if alt and len(alt) > ALT_MAX: long_alt.append((pos, "picture", len(alt), alt))
+                if alt and shop_alt(alt): shop.append((pos, "picture", alt))
+            # 2026-10-18: top-level groups and SmartArt are one PDF Figure each (see slide_frames)
+            for fr in slide_frames(x):
+                if fr["decorative"]: decorative += 1; continue
+                if fr["pictures_only"] and not fr["alt"]: continue    # its pictures are the Figures, each with alt
+                if fr["kind"] == "group": groups += 1
+                else: smartart += 1
+                if not fr["alt"]: (groups_no_alt if fr["kind"] == "group" else smartart_no_alt).append(pos); continue
+                if len(fr["alt"]) > ALT_MAX: long_alt.append((pos, fr["kind"], len(fr["alt"]), fr["alt"]))
+                if shop_alt(fr["alt"]): shop.append((pos, fr["kind"], fr["alt"]))
             slides.append(pos)
         r.update(slides=len(order), shown=len(slides), hidden=hidden, pictures=pics, decorative=decorative,
-                 slides_no_title=no_title, pictures_no_alt=no_alt, pictures_bad_alt=bad_alt)
+                 slides_no_title=no_title, pictures_no_alt=no_alt, pictures_bad_alt=bad_alt,
+                 groups=groups, groups_no_alt=groups_no_alt, smartart=smartart, smartart_no_alt=smartart_no_alt,
+                 alt_long=long_alt, alt_shop=shop)
     except Exception as e:
         r["error"] = "%s: %s" % (type(e).__name__, e)
     finally:
@@ -762,6 +876,10 @@ def deck_facts(path):
         if r["slides_no_title"]: out.append(("Major", "%d slide(s) without a title: %s" % (len(r["slides_no_title"]), short_list(r["slides_no_title"])), "deck"))
         if r["pictures_no_alt"]: out.append(("Major", "%d picture(s) without alt text on slide(s) %s" % (len(r["pictures_no_alt"]), short_list(sorted(set(r["pictures_no_alt"])))), "alt"))
         if r["pictures_bad_alt"]: out.append(("Major", "%d picture(s) whose alt text is a file name or placeholder on slide(s) %s" % (len(r["pictures_bad_alt"]), short_list(sorted(set(r["pictures_bad_alt"])))), "alt"))
+        if r["groups_no_alt"]: out.append(("Major", "%d drawn group(s) without alt text (each is a PDF Figure) on slide(s) %s" % (len(r["groups_no_alt"]), short_list(sorted(set(r["groups_no_alt"])))), "alt"))
+        if r["smartart_no_alt"]: out.append(("Major", "%d SmartArt without alt text on slide(s) %s" % (len(r["smartart_no_alt"]), short_list(sorted(set(r["smartart_no_alt"])))), "alt"))
+        if r["alt_long"]: out.append(("Minor", "%d alt text(s) over %d characters on slide(s) %s" % (len(r["alt_long"]), ALT_MAX, short_list(sorted(set(a[0] for a in r["alt_long"])))), "alt"))
+        if r["alt_shop"]: out.append(("Minor", "%d alt text(s) that read like a shop page title on slide(s) %s" % (len(r["alt_shop"]), short_list(sorted(set(a[0] for a in r["alt_shop"])))), "alt"))
         if not r["title"] or looks_like_filename(r["title"], r["name"]): out.append(("Major", "no document title (File > Properties)", "deck"))
         elif not title_matches(r["title"], r["name"]): out.append(("Minor", "document title %r looks copied from another deck" % r["title"], "deck"))
     r["issues"] = out
@@ -1008,12 +1126,18 @@ def scan(only=None, out_dir=OUT):
         pdf_severe = sum(1 for r in c["pdfs"] if any(i[0] == "Severe" for i in r["issues"]))
         fig_noalt = sum(max(0, r.get("figures", 0) - r.get("figures_with_alt", 0)) for r in c["pdfs"] if r.get("tagged"))
         deck_noalt = sum(len(d.get("pictures_no_alt", [])) + len(d.get("pictures_bad_alt", [])) for d in c["decks"])
+        # 2026-10-18: drawn groups and SmartArt without alt are PDF Figures without alt too (red, like pictures);
+        # long or shop title alt text is counted for the report only
+        deck_groups_noalt = sum(len(d.get("groups_no_alt", [])) + len(d.get("smartart_no_alt", [])) for d in c["decks"])
+        deck_noalt += deck_groups_noalt
+        deck_alt_long = sum(len(d.get("alt_long", [])) for d in c["decks"]); deck_alt_shop = sum(len(d.get("alt_shop", [])) for d in c["decks"])
         deck_notitle = sum(len(d.get("slides_no_title", [])) for d in c["decks"])
         pic_bad = sum(1 for p in c["pictures"] if p["problems"])
         pic_missing = sum(1 for p in c["pictures"] if not p.get("exists"))
         c["counts"] = dict(pdfs=len(c["pdfs"]), pdf_untagged=pdf_untagged, pdf_meta=pdf_meta, pdf_severe=pdf_severe,
                            pdf_figures_no_alt=fig_noalt, decks=len(c["decks"]), deck_pictures_no_alt=deck_noalt,
-                           deck_slides_no_title=deck_notitle, pictures=len(c["pictures"]), pictures_bad_alt=pic_bad,
+                           deck_slides_no_title=deck_notitle, deck_groups_no_alt=deck_groups_noalt, deck_alt_long=deck_alt_long,
+                           deck_alt_shop=deck_alt_shop, pictures=len(c["pictures"]), pictures_bad_alt=pic_bad,
                            pictures_missing=pic_missing, pictures_unlinked=c.get("pictures_unlinked", 0),
                            red=pdf_untagged + pdf_severe + deck_noalt + pic_bad + pic_missing,
                            yellow=pdf_meta + deck_notitle + fig_noalt)
@@ -1036,6 +1160,8 @@ def write_class_report(c, out_dir, stamp):
           "| Figure tags without alt in tagged PDFs | %d |" % k["pdf_figures_no_alt"],
           "| Decks | %d |" % k["decks"], "| Deck pictures without real alt text | %d |" % k["deck_pictures_no_alt"],
           "| Deck slides without a title | %d |" % k["deck_slides_no_title"],
+          "| Deck drawn groups and SmartArt without alt (in the count above) | %d |" % k.get("deck_groups_no_alt", 0),
+          "| Deck alt text over 120 characters / reading like a shop page title | %d / %d |" % (k.get("deck_alt_long", 0), k.get("deck_alt_shop", 0)),
           "| Pictures on pages (GitHub and Cloudflare) | %d |" % k["pictures"], "| Pictures with missing or bad alt on a page | %d |" % k["pictures_bad_alt"],
           "| Pictures a page links that are not on the Mac (GitHub repo or Canvas Links) | %d |" % k["pictures_missing"],
           "| GitHub pictures no page links | %d |" % k["pictures_unlinked"], ""]
@@ -1285,15 +1411,133 @@ def fix_deck_data(data):
     charts = chart_alt(data)
     return dict(titled=titled + fb, untitled=left, decorative=bars, chart_alts=charts)
 
+def lo_fonts_conf():
+    """J558 (2026-10-18): LibreOffice 26.8 on this Mac finds fonts through fontconfig, and its own list holds only the
+    fonts it ships, so every 26.8 PDF had Carlito for Calibri, Liberation Sans for Arial and Linux Libertine G or Frank
+    Ruhl Hofshi for Candara, Baskerville and the rest (24.8 used the real fonts). This list adds the Mac's font folders,
+    PowerPoint's own (Aptos lives only there) and Office's cloud fonts PowerPoint has downloaded (Felix Titling, Aptos
+    Display, Ebrima), so the PDF uses the fonts the deck names, as PowerPoint shows them. Checked by deck_fonts.py --pdf."""
+    conf = os.path.join(CACHE, "lo-fonts.conf"); os.makedirs(CACHE, exist_ok=True)
+    # Office's .ttf copies first: fontconfig takes the first file of a family, and /Library/Fonts holds old suitcase
+    # files LibreOffice cannot open (Goudy Old Style came out in another font when the suitcase came first)
+    dirs = ["/Applications/Microsoft PowerPoint.app/Contents/Resources/DFonts"]
+    dirs += sorted(glob.glob(os.path.expanduser("~/Library/Group Containers/UBF8T346G9.Office/FontCache/*/CloudFonts")))
+    dirs += ["/System/Library/Fonts", "/Library/Fonts", os.path.expanduser("~/Library/Fonts")]
+    body = ('<?xml version="1.0"?>\n<!DOCTYPE fontconfig SYSTEM "fonts.dtd">\n<fontconfig>\n'
+            + "".join("  <dir>%s</dir>\n" % html.escape(d) for d in dirs if os.path.isdir(d))
+            + "  <cachedir>%s</cachedir>\n</fontconfig>\n" % html.escape(os.path.join(CACHE, "lo-fontconfig-cache")))
+    if not os.path.exists(conf) or open(conf).read() != body: open(conf, "w").write(body)
+    return conf
+
+# 2026-10-18 (UVU session, group alt text class fix): LibreOffice 26.8 ignores descr and title on a GROUP when it opens
+# a .pptx (it keeps them on pictures, shapes and SmartArt, and it keeps "decorative" on groups), so alt text written
+# into a deck's drawn diagrams never reached the PDF, and every re-export (fixclass, refont) dropped it again. When a
+# deck has top-level groups or SmartArt with alt text or the decorative mark, export_tagged opens the deck in
+# LibreOffice through this macro, gives each one the deck's alt text (and decorative flag), then exports with the same
+# filter options as LO_TAGGED. Generalized from one-offs/deck_group_alt_2010 (cpvgroupalt.py, groupexport.py).
+LO_ALT_MACRO = r'''"""Build-Tools a11y_files.py export_tagged macro (runs inside soffice). Job file in env CPV_ALT_JOB:
+{"deck", "pdf", "frames": [{"slide", "name", "nth", "same_name", "alt", "decorative"}], "result"}."""
+import os, json, uno
+from com.sun.star.beans import PropertyValue
+def _pv(n, v):
+    p = PropertyValue(); p.Name = n; p.Value = v; return p
+def run(*args):
+    job = json.load(open(os.environ["CPV_ALT_JOB"])); res = dict(set=0, already=0, decorative=0, notes=[])
+    try:
+        desk = XSCRIPTCONTEXT.getDesktop()
+        doc = desk.loadComponentFromURL(uno.systemPathToFileUrl(job["deck"]), "_blank", 0, (_pv("Hidden", True),))
+        pages = doc.getDrawPages()
+        for f in job["frames"]:
+            if f["slide"] >= pages.getCount(): res["notes"].append("slide %d missing" % (f["slide"] + 1)); continue
+            pg = pages.getByIndex(f["slide"])
+            hits = [s for s in (pg.getByIndex(i) for i in range(pg.getCount())) if s.getName() == f["name"]]
+            if len(hits) == f["same_name"]: s = hits[f["nth"]]
+            elif len(hits) == 1: s = hits[0]
+            else: res["notes"].append("slide %d %r: %d shapes of that name, deck has %d" % (f["slide"] + 1, f["name"], len(hits), f["same_name"])); continue
+            if f["alt"]:
+                if (s.Description or "") == f["alt"]: res["already"] += 1
+                else: s.Description = f["alt"]; res["set"] += 1
+            if f["decorative"]:
+                try: s.setPropertyValue("Decorative", True); res["decorative"] += 1
+                except Exception as e: res["notes"].append("slide %d %r decorative: %s" % (f["slide"] + 1, f["name"], e))
+        fd = uno.Any("[]com.sun.star.beans.PropertyValue", tuple(_pv(k, v) for k, v in (("UseTaggedPDF", True), ("PDFUACompliance", True),
+                     ("ExportBookmarks", True), ("ExportNotes", False), ("ExportNotesPages", False))))
+        uno.invoke(doc, "storeToURL", (uno.systemPathToFileUrl(job["pdf"]), (_pv("FilterName", "impress_pdf_Export"), _pv("FilterData", fd))))
+        doc.close(True); res["ok"] = True
+    except Exception as e:
+        res["error"] = "%s: %s" % (type(e).__name__, e)
+    json.dump(res, open(job["result"], "w"))
+g_exportedScripts = (run,)
+'''
+LAST_ALT_EXPORT = {}      # the last export_tagged's macro result (set, already, decorative, notes, wanted), for callers
+
+def deck_frame_alts(pptx):
+    """Every top-level group and SmartArt with alt text or the decorative mark, over ALL slides (hidden ones too, so
+    the index matches LibreOffice's draw pages): [{slide (0 based), name, nth, same_name, alt, decorative, kind}]"""
+    out = []
+    with zipfile.ZipFile(pptx) as z:
+        pres = z.read("ppt/presentation.xml").decode("utf-8", "replace"); rels = z.read("ppt/_rels/presentation.xml.rels").decode("utf-8", "replace")
+        tmap = {}
+        for rel in re.findall(r"<Relationship\b[^>]*/?>", rels):
+            i = re.search(r'Id="([^"]+)"', rel); t = re.search(r'Target="([^"]+)"', rel)
+            if i and t: tmap[i.group(1)] = t.group(1)
+        lst = re.search(r"(?s)<p:sldIdLst>(.*?)</p:sldIdLst>", pres)
+        for si, rid in enumerate(re.findall(r'<p:sldId\b[^>]*\br:id="([^"]+)"', lst.group(1) if lst else "")):
+            tgt = tmap.get(rid)
+            if not tgt: continue
+            sx = posixpath.normpath(posixpath.join("ppt", tgt)) if not tgt.startswith("/") else tgt.lstrip("/")
+            try: x = z.read(sx)
+            except KeyError: continue
+            frames = slide_frames(x)
+            if not frames: continue
+            # how many top-level shapes of each name the slide has (any kind), so the macro can tell repeats apart
+            import xml.etree.ElementTree as ET
+            names = {}
+            tree = ET.fromstring(x).find("%scSld/%sspTree" % (_P, _P))
+            for el in (tree if tree is not None else []):
+                els = list(el.find(_MC + "Choice") if el.tag == _MC + "AlternateContent" and el.find(_MC + "Choice") is not None else [el])
+                for e2 in els:
+                    nv = next((c for c in e2 if c.tag.startswith(_P + "nv") and c.tag.endswith("Pr")), None)
+                    c = nv.find(_P + "cNvPr") if nv is not None else None
+                    if c is not None: names[c.get("name", "")] = names.get(c.get("name", ""), 0) + 1
+            for fr in frames:
+                if fr["alt"] or fr["decorative"]:
+                    out.append(dict(slide=si, name=fr["name"], nth=fr["nth"], same_name=names.get(fr["name"], 1), alt=fr["alt"], decorative=fr["decorative"], kind=fr["kind"]))
+    return out
+
 def export_tagged(pptx, outdir):
     """LibreOffice, tagged PDF/UA with bookmarks (the app's taggedPDFFilter), its own settings folder so a LibreOffice
     window Adam has open never takes the conversion. PowerPoint for Mac's Save as PDF never tags (Standards §2a.1),
-    so there is no tagged PowerPoint export to keep: every slide PDF comes from LibreOffice."""
+    so there is no tagged PowerPoint export to keep: every slide PDF comes from LibreOffice.
+    2026-10-18: a deck with alt text (or the decorative mark) on top-level groups or SmartArt goes through LO_ALT_MACRO,
+    which gives LibreOffice that alt before the export (LibreOffice drops a group's alt when it opens a .pptx);
+    LAST_ALT_EXPORT holds what it set. Decks without them export exactly as before."""
     import subprocess
-    prof = os.path.join(CACHE, "lo-profile"); os.makedirs(prof, exist_ok=True)
-    subprocess.run([LO_SOFFICE, "-env:UserInstallation=file://" + urllib.parse.quote(prof), "--headless", "--convert-to", LO_TAGGED, "--outdir", outdir, pptx], capture_output=True, timeout=600)
+    global LAST_ALT_EXPORT
+    LAST_ALT_EXPORT = {}
+    env = dict(os.environ, FONTCONFIG_FILE=lo_fonts_conf())
     p = os.path.join(outdir, os.path.splitext(os.path.basename(pptx))[0] + ".pdf")
-    return p if os.path.exists(p) else None
+    try: frames = deck_frame_alts(pptx)
+    except Exception as e: frames = []; LAST_ALT_EXPORT = dict(notes=["deck not read for group alt: %s" % e])
+    if not frames:
+        prof = os.path.join(CACHE, "lo-profile"); os.makedirs(prof, exist_ok=True)
+        subprocess.run([LO_SOFFICE, "-env:UserInstallation=file://" + urllib.parse.quote(prof), "--headless", "--convert-to", LO_TAGGED, "--outdir", outdir, pptx], capture_output=True, timeout=600, env=env)
+        return p if os.path.exists(p) else None
+    prof = os.path.join(CACHE, "lo-profile-alt"); sd = os.path.join(prof, "user", "Scripts", "python"); os.makedirs(sd, exist_ok=True)
+    mf = os.path.join(sd, "cpvexportalt.py")
+    if not os.path.exists(mf) or open(mf).read() != LO_ALT_MACRO: open(mf, "w").write(LO_ALT_MACRO)
+    tmp = tempfile.mkdtemp(prefix="a11y-altjob-")
+    job = dict(deck=os.path.abspath(pptx), pdf=os.path.abspath(p), frames=frames, result=os.path.join(tmp, "result.json"))
+    jf = os.path.join(tmp, "job.json"); json.dump(job, open(jf, "w"))
+    if os.path.exists(p): os.remove(p)
+    subprocess.run([LO_SOFFICE, "-env:UserInstallation=file://" + urllib.parse.quote(prof), "--headless", "--norestore",
+                    "vnd.sun.star.script:cpvexportalt.py$run?language=Python&location=user"], capture_output=True, timeout=900, env=dict(env, CPV_ALT_JOB=jf))
+    try: r = json.load(open(job["result"]))
+    except Exception: r = dict(error="the LibreOffice macro left no result")
+    r["wanted"] = sum(1 for f in frames if f["alt"]); r["wanted_decorative"] = sum(1 for f in frames if f["decorative"])
+    LAST_ALT_EXPORT = r
+    shutil.rmtree(tmp, ignore_errors=True)
+    return p if os.path.exists(p) and r.get("ok") else None
 
 def look_diff(a_pdf, b_pdf):
     """(worst page percent, pages over LOOK_LIMIT, page counts differ) from pdfdiff.swift (built once into the cache)"""
@@ -1388,6 +1632,10 @@ def fix_class(code, dry=False, scratch=None, only=None, log=print):
         fin = os.path.join(w, "final"); os.makedirs(fin, exist_ok=True)
         made = export_tagged(E, fin)
         if not made: row["error"] = "no PDF came out"; rows.append(row); log("ERROR %s no PDF" % base); continue
+        # 2026-10-18: the deck's group and SmartArt alt text must all have reached LibreOffice (LO_ALT_MACRO)
+        row["group_alt"] = LAST_ALT_EXPORT
+        if LAST_ALT_EXPORT.get("notes") or LAST_ALT_EXPORT.get("error"):
+            row["error"] = "group alt: %s" % "; ".join(LAST_ALT_EXPORT.get("notes", [])[:4] + [LAST_ALT_EXPORT.get("error", "")]).strip("; "); rows.append(row); log("ERROR %s %s" % (base, row["error"])); continue
         fix_meta(made, like=pdf if row["pdf"] else None)
         after = _pdf_counts(made); full = pdf_facts(made)
         if after["pages"] != pdf_facts(po).get("pages") or not after["tagged"]:
@@ -1399,6 +1647,84 @@ def fix_class(code, dry=False, scratch=None, only=None, log=print):
         rows.append(row)
         log("DONE %s: titles %d, decorative %d, chart alt %d, look worst %.2f%%, verify %s" % (base, ch["titled"], ch["decorative"], len(ch["chart_alts"]), worst, row["verify"]))
     with open(os.path.join(scratch, "fixclass-%s-%s.json" % (code, "dry" if dry else "run")), "w") as f: json.dump(rows, f, indent=1, default=str)
+    return rows, scratch
+
+# ================================================================ refont: PDFs again with the deck's own fonts (J558)
+
+LO_STANDIN_PREFIXES = ("Carlito", "Caladea", "LiberationSans", "LiberationSerif", "LiberationMono", "LinuxLibertine", "LinuxBiolinum",
+                       "DejaVu", "FrankRuhlHofshi", "Gentium", "SourceSans", "SourceSerif", "SourceCode", "NotoSans", "NotoSerif", "Amiri", "Scheherazade")
+
+def wait_load(limit=60, log=print):
+    """the load rule: no LibreOffice export while the 1 minute load is over the limit"""
+    import time
+    said = False
+    while os.getloadavg()[0] > limit:
+        if not said: log("  waiting: load %.0f over %d" % (os.getloadavg()[0], limit)); said = True
+        time.sleep(15)
+
+def refont_class(code, scratch=None, only=None, log=print):
+    """J558 (2026-10-18): every PDF of one class that LibreOffice 26.8 made with its own stand-in fonts, exported again
+    with lo_fonts_conf (the fonts the deck names). Per deck: the Embedded deck is built from the Linked deck into scratch,
+    exported tagged, title and language set like today's PDF, and it replaces today's PDF only when the one difference is
+    the fonts: same page count, tagged, the same title and en-US, the same figures, figures with alt, headings and tables,
+    bookmarks kept, no stand-in font left, and deck_pair verify OK once the new Embedded deck is in place. Anything else
+    keeps today's PDF and Embedded deck and is reported. The Linked deck is never written."""
+    import deck_pair as dp, deck_fonts as df, time
+    scratch = scratch or tempfile.mkdtemp(prefix="a11y-refont-%s-" % code); os.makedirs(scratch, exist_ok=True)
+    rows = []
+    for L in class_decks(code):
+        base = dp.base_of(L)
+        if only and base not in only: continue
+        pres = os.path.dirname(L); E = os.path.join(pres, base + "-Embedded.pptx"); pdf = os.path.join(pres, "PDF", base + ".pdf")
+        row = dict(base=base, pdf=pdf)
+        if not os.path.exists(pdf): row["skipped"] = "no PDF"; rows.append(row); continue
+        old_st = sorted(f for f in df.pdf_fonts(pdf) if f.startswith(LO_STANDIN_PREFIXES))
+        row["standins_before"] = old_st
+        if not old_st: row["skipped"] = "no stand-in fonts"; rows.append(row); log("SKIP %s: no stand-in fonts" % base); continue
+        why = None
+        if dp.is_open(L) or dp.is_open(E): why = "open in PowerPoint"
+        elif time.time() - os.path.getmtime(L) < 900 and _ours(L) != os.path.getmtime(L): why = "Linked deck changed in the last 15 minutes"
+        if why: row["skipped"] = why; rows.append(row); log("SKIP %s: %s" % (base, why)); continue
+        w = os.path.join(scratch, base); os.makedirs(w, exist_ok=True)
+        lm = os.path.getmtime(L)
+        ne = os.path.join(w, base + "-Embedded.pptx"); e = dp.embed(L, ne)
+        if e.get("error"): row["error"] = "embed: %s" % e.get("error"); rows.append(row); log("STOP %s %s" % (base, row["error"])); continue
+        wait_load(log=log)
+        made = export_tagged(ne, w)
+        if not made: row["error"] = "no PDF came out of LibreOffice"; rows.append(row); log("STOP %s %s" % (base, row["error"])); continue
+        ga = LAST_ALT_EXPORT; row["group_alt"] = ga
+        fix_meta(made, like=pdf)
+        o, n = pdf_facts(pdf), pdf_facts(made)
+        new_st = sorted(f for f in df.pdf_fonts(made) if f.startswith(LO_STANDIN_PREFIXES))
+        diffs = []
+        if n.get("error"): diffs.append("new PDF unreadable: %s" % n["error"])
+        if o.get("pages") != n.get("pages"): diffs.append("pages %s > %s" % (o.get("pages"), n.get("pages")))
+        if not n.get("tagged"): diffs.append("not tagged")
+        if n.get("lang") != "en-US": diffs.append("lang %r" % n.get("lang"))
+        if (n.get("title") or "") != (o.get("title") or "") or not n.get("title"): diffs.append("title %r > %r" % (o.get("title"), n.get("title")))
+        for k in ("figures", "figures_with_alt", "headings", "tables", "table_headers", "bookmarks", "display_doc_title"):
+            if k == "figures_with_alt" and (n.get(k) or 0) > (o.get(k) or 0): continue   # 2026-10-18: more alt (group alt now kept) is fine
+            if o.get(k) != n.get(k): diffs.append("%s %s > %s" % (k, o.get(k), n.get(k)))
+        if ga.get("notes") or ga.get("error"): diffs.append("group alt: %s" % "; ".join(ga.get("notes", [])[:4] + [ga.get("error", "")]).strip("; "))
+        if new_st: diffs.append("stand-ins left: %s" % ", ".join(new_st))
+        if os.path.getmtime(L) != lm: diffs.append("Linked deck changed while this ran")
+        worst, _, _ = look_diff(pdf, made); row["look_worst"] = worst
+        row.update(pages=n.get("pages"), figures=n.get("figures"), figures_with_alt=n.get("figures_with_alt"), headings=n.get("headings"),
+                   fonts_after=sorted(df.pdf_fonts(made)))
+        if diffs: row["error"] = "; ".join(diffs); rows.append(row); log("STOP %s: %s (today's PDF kept)" % (base, row["error"])); continue
+        # in place: the new Embedded deck (built from the unchanged Linked deck) and its PDF
+        keep_e = os.path.join(w, base + "-Embedded (today).pptx")
+        if os.path.exists(E): shutil.copy2(E, keep_e)
+        shutil.copy2(pdf, os.path.join(w, base + " (today).pdf"))
+        shutil.copyfile(ne, E)
+        v = dp.verify(L).get("problems") or []
+        if v:
+            if os.path.exists(keep_e): shutil.copyfile(keep_e, E)
+            row["error"] = "verify: %s" % "; ".join(v[:4]); rows.append(row); log("STOP %s %s (Embedded put back, today's PDF kept)" % (base, row["error"])); continue
+        shutil.copyfile(made, pdf)
+        row["done"] = True; rows.append(row)
+        log("DONE %s: %d pages, fonts %s (were %s), look %.2f%%, verify OK" % (base, n.get("pages"), ", ".join(row["fonts_after"]), ", ".join(old_st), worst))
+    with open(os.path.join(scratch, "refont-%s.json" % code), "w") as f: json.dump(rows, f, indent=1, default=str)
     return rows, scratch
 
 def orphan_pdfs(code, out_dir):
@@ -1444,6 +1770,16 @@ def main(argv):
             t, b, sk = deck_titles(a, out=out, dry=dry)
             print("%s %s: %d slide titles, %d design bars marked decorative%s" % ("WOULD CHANGE" if dry else "CHANGED" if (t or b) else "same", a, t, b, ("; skipped " + "; ".join(sk[:6])) if sk else ""))
         return 0
+    if cmd == "refont":
+        only = opt("--only"); scratch = opt("--scratch")
+        if not rest: print(__doc__); return 2
+        rows, scratch = refont_class(rest[0], scratch=scratch, only=set(only.split(",")) if only else None)
+        done = sum(1 for r in rows if r.get("done")); stop = [r for r in rows if r.get("error")]; skip = [r for r in rows if r.get("skipped")]
+        print("\nDAPR %s refont: %d PDFs exported again, %d stopped, %d skipped" % (rest[0], done, len(stop), len(skip)))
+        for r in stop: print("  STOP %s: %s" % (r["base"], r["error"]))
+        for r in skip: print("  SKIP %s: %s" % (r["base"], r["skipped"]))
+        print("scratch: %s" % scratch)
+        return 1 if stop else 0
     if cmd == "fixclass":
         dry = "--dry-run" in rest
         if dry: rest.remove("--dry-run")

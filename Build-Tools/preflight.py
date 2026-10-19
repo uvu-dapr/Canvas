@@ -800,6 +800,11 @@ if dead:
 graded=set(re.findall(r'<title>([^<]*)</title>',mm))
 modtitles={html.unescape(t).strip() for t in re.findall(r'<module identifier[^>]*>\s*<title>([^<]*)</title>',mm)}
 allmm=' '.join(graded).lower()
+# [2026-10-18 J572] A LIVE Update (--live) may name graded work the live course already has: the outline page's generated
+# table lists "LC623a Studio Proficiency Assessment" from the live course, and a pages-only package carries no
+# module_meta titles, so 12d called it drift. The live export's module item titles count as present too.
+if '--live' in sys.argv:
+    allmm+=' '+' '.join(re.findall(r'<title>([^<]*)</title>',_lrd('course_settings/module_meta.xml'))).lower()
 GHOSTS=[('midterm','a midterm exam'),('practice quiz','a practice quiz'),
         ('lc623a','an LC623a item'),('boaa','a BOAA item')]
 drift=[]
