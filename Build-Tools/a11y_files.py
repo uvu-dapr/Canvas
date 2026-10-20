@@ -587,7 +587,8 @@ def deck_title_for(pdf):
         return t if t and not looks_like_filename(t, cand) and len(t) <= 200 and title_matches(t, base) else None
     return None
 
-def _words(t): return set(w for w in re.findall(r"[a-z0-9]+", t.lower().replace("&", " and ")) if w not in ("and", "the", "of", "a", "to", "in", "linked", "embedded"))
+# 2026-10-19: apostrophes dropped before splitting, so "Ohm's Law" reads "ohms law" and matches Ohms_Law (was "ohm s", a false copied-title alarm)
+def _words(t): return set(w for w in re.findall(r"[a-z0-9]+", t.lower().replace("&", " and ").replace("'", "").replace("\u2019", "")) if w not in ("and", "the", "of", "a", "to", "in", "linked", "embedded"))
 
 def title_matches(title, fname):
     """A deck title copied from another deck (3255 decks titled "Networking: IP Addressing") does not match its file"""
@@ -802,6 +803,25 @@ def shop_alt(alt):
     if len(w) >= 8 and sum(1 for t in w if t[0].isupper()) >= 0.8 * len(w): hits += 1
     return hits >= 2
 
+def numbering_restarts(x):
+    """2026-10-19 (K178): numbered paragraphs that continue a list but carry their own startAt="1". pptxgenjs (the
+    npm library AI sessions build decks with) writes startAt="1" on every numbered paragraph; PowerPoint keeps
+    counting, but LibreOffice (which makes the tagged PDFs) starts each one again, so the PDF reads 1. 1. 1.
+    Fix: one-offs/numbering_fix_k178.py, or leave startAt off every paragraph after the first of a list."""
+    n = 0
+    for body in re.findall(r"(?s)<p:txBody>.*?</p:txBody>", x):
+        prev = []
+        for p in re.findall(r"(?s)<a:p>.*?</a:p>|<a:p/>", body):
+            m = re.search(r"(?s)<a:pPr\b([^>]*?)(?:/>|>(.*?)</a:pPr>)", p)
+            lv = re.search(r'\blvl="(\d+)"', m.group(1)) if m else None; lvl = int(lv.group(1)) if lv else 0
+            num = re.search(r"<a:buAutoNum\b[^>]*/>", (m.group(2) or "") if m else "")
+            typ = re.search(r'type="([^"]+)"', num.group(0)).group(1) if num else None
+            if num and 'startAt="1"' in num.group(0):
+                q = next((q for q in reversed(prev) if q[0] <= lvl), None)
+                if q and q[0] == lvl and q[1] == typ: n += 1
+            prev.append((lvl, typ))
+    return n
+
 def deck_facts(path):
     r = {"file": path, "name": os.path.basename(path)}
     try: z = zipfile.ZipFile(path)
@@ -825,6 +845,7 @@ def deck_facts(path):
         r["lang"] = lm.group(1) if lm else ""
         slides = []; no_title = []; no_alt = []; bad_alt = []; pics = 0; decorative = 0; hidden = 0
         groups = smartart = 0; groups_no_alt = []; smartart_no_alt = []; long_alt = []; shop = []
+        restarts = []   # 2026-10-19 (K178): slides whose numbered lists restart at 1 in the LibreOffice PDF
         # a layout's title placeholder counts only when the slide fills it; text in a title placeholder is the title
         for pos, rid in enumerate(order, 1):
             tgt = tmap.get(rid)
@@ -861,11 +882,12 @@ def deck_facts(path):
                 if not fr["alt"]: (groups_no_alt if fr["kind"] == "group" else smartart_no_alt).append(pos); continue
                 if len(fr["alt"]) > ALT_MAX: long_alt.append((pos, fr["kind"], len(fr["alt"]), fr["alt"]))
                 if shop_alt(fr["alt"]): shop.append((pos, fr["kind"], fr["alt"]))
+            if numbering_restarts(x): restarts.append(pos)
             slides.append(pos)
         r.update(slides=len(order), shown=len(slides), hidden=hidden, pictures=pics, decorative=decorative,
                  slides_no_title=no_title, pictures_no_alt=no_alt, pictures_bad_alt=bad_alt,
                  groups=groups, groups_no_alt=groups_no_alt, smartart=smartart, smartart_no_alt=smartart_no_alt,
-                 alt_long=long_alt, alt_shop=shop)
+                 alt_long=long_alt, alt_shop=shop, numbering_restarts=restarts)
     except Exception as e:
         r["error"] = "%s: %s" % (type(e).__name__, e)
     finally:
@@ -880,6 +902,7 @@ def deck_facts(path):
         if r["smartart_no_alt"]: out.append(("Major", "%d SmartArt without alt text on slide(s) %s" % (len(r["smartart_no_alt"]), short_list(sorted(set(r["smartart_no_alt"])))), "alt"))
         if r["alt_long"]: out.append(("Minor", "%d alt text(s) over %d characters on slide(s) %s" % (len(r["alt_long"]), ALT_MAX, short_list(sorted(set(a[0] for a in r["alt_long"])))), "alt"))
         if r["alt_shop"]: out.append(("Minor", "%d alt text(s) that read like a shop page title on slide(s) %s" % (len(r["alt_shop"]), short_list(sorted(set(a[0] for a in r["alt_shop"])))), "alt"))
+        if r.get("numbering_restarts"): out.append(("Minor", "numbered list(s) that read 1. 1. 1. in the LibreOffice PDF (startAt=\"1\" on each paragraph) on slide(s) %s" % short_list(r["numbering_restarts"]), "deck"))
         if not r["title"] or looks_like_filename(r["title"], r["name"]): out.append(("Major", "no document title (File > Properties)", "deck"))
         elif not title_matches(r["title"], r["name"]): out.append(("Minor", "document title %r looks copied from another deck" % r["title"], "deck"))
     r["issues"] = out

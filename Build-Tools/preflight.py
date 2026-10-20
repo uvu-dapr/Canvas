@@ -839,9 +839,9 @@ if drift:
 #     "DAW: M7 - Your First Mix" and "Electronics: 03 AC & DC" through untouched.
 NUMBERED=re.compile(r'(?:^|[:\s(])(?:M-?\d{1,2}\b|Q\d{1,2}\b|Module\s*\d|Week\s*\d|Wk\s*\d|\d{1,2}\.\d\b)'
                     r'|^\s*\d{1,2}[)\.]\s|:\s*\d{1,2}\s+[A-Z]', re.I)
-# proper names and real course codes are names, not sequence: Wwise 101, DAPR 3345, CLO 3
+# proper names and real course codes are names, not sequence: Wwise 101, DAPR 3345, CLO 3, Midas M32 (a console model, K176 2026-10-19)
 EXEMPT=re.compile(r'\b(?:DAPR|MUSC|THEA)\s*\d{3,4}\b|\bWwise\s*\d{3}\b|\bCLO\s*\d\b|\b\d{3,4}\s*Hz\b'
-                  r'|\bMix\s*\d[AB]?\b|\bLayer\s*\d\b|\d+(?:\.\d+)?\s*%|\d+(?:\.\d+)?\s*(?:pts?|points)\b', re.I)
+                  r'|\bMidas\s+M32\b|\bMix\s*\d[AB]?\b|\bLayer\s*\d\b|\d+(?:\.\d+)?\s*%|\d+(?:\.\d+)?\s*(?:pts?|points)\b', re.I)
 titles=set()
 # Instructor Use Only items in the unpublished module are exempt (2255 v82, Adam 2026-09-24):
 # their module item titles, manifest item titles and their own assignment or quiz XML.
