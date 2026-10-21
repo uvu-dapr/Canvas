@@ -78,6 +78,11 @@ def head_kind(t):
         if l in names: return k
     return "in_class" if IN_CLASS.match(t.strip()) else "part"
 
+def no_dividers(mt):
+    """Course Orientation is Week 00 and gets no STUDY / PRACTICE / GRADED WORK dividers (Adam, 2026-10-13): a module
+    named for orientation, or any module whose title starts "Week 00" (K402, the Spring Templates' label)."""
+    return "orientation" in mt.lower() or bool(re.match(r"(?i)\s*Week 00\b", mt))
+
 def head_name(kind, t):
     """The name a divider of this kind carries in the current set (None: keep its own)."""
     if kind in ("content", "graded", "practice"): return DIVIDERS[kind]
@@ -215,7 +220,7 @@ def plan_module(mt, items, taken, mid=""):
     # ends in Overview ("Dolby Atmos Renderer Interface Overview")
     overview = lambda x: x["k"] == "WikiPage" and re.search(r"(?i)(^|:\s*)((module|section)\s+)?overview$", x["t"].strip())
     top = []                                  # the leading overview and slides, above the first heading if there is one
-    if "orientation" not in mt.lower():       # Orientation's pages are all its content
+    if not no_dividers(mt):                   # Orientation's pages are all its content
         for x in keep[:first_h]:
             # the first page is the overview only when it is named for the module (3340's "Surround Monitoring" page)
             named_for = x["k"] == "WikiPage" and _n(x["t"]) in (_n(mt), _n(mt.split(":", 1)[-1]))
@@ -255,7 +260,7 @@ def plan_module(mt, items, taken, mid=""):
     practice = []
     # Course Orientation gets no dividers at all (Adam, 2026-10-13: "I certainly don't need to study for course orientation
     # that can be removed"): its pages are all its content, so any STUDY / PRACTICE / GRADED WORK heading there goes
-    orient = "orientation" in mt.lower()
+    orient = no_dividers(mt)
     if DIVIDERS.get("practice") and not orient:
         practice = [x for x in readings if is_practice(x)]
         res = [x for x in readings if is_resource(x) and x not in practice]

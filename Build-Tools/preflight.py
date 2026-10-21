@@ -331,6 +331,17 @@ L(('12r module names with a week or module label: %d (allowed: --module-labels)'
 #   the labels are wanted; GitHub and Cloudflare file and folder names still never carry them.
 if _lab and '--module-labels' in sys.argv: L('    labels allowed: --module-labels (Adam ticked Also put the label in module names in Canvas)')
 elif _lab: fails.append('12r %d module name(s) carry a week or module label (%s): module names are the topic only' % (len(_lab), '; '.join(_lab[:3])))
+# 12x NO DIVIDERS IN WEEK 00 [Adam, 2026-10-13: "I certainly don't need to study for course orientation that can be
+#   removed"; K402]: Course Orientation is Week 00 and has no STUDY / PRACTICE / GRADED WORK divider (Standards 6.9).
+#   Read before the module labels step below strips the "Week 00: " label from the title.
+_w00 = []
+for _t, _b in re.findall(r'<module identifier="[^"]+">\s*<title>([^<]*)</title>(.*?)</module>', mm, re.S):
+    _t = html.unescape(_t)
+    if re.match(r'(?i)\s*Week 00\b', _t) or 'orientation' in _t.lower():
+        _w00 += ['%s (%s)' % (_t, html.unescape(_h).strip()) for _h in re.findall(r'<content_type>ContextModuleSubHeader</content_type>.*?<title>([^<]*)</title>', _b, re.S)
+                 if html.unescape(_h).strip().upper() in ('STUDY', 'PRACTICE', 'GRADED WORK', 'CONTENT AND RESOURCES', 'CONTENT & RESOURCES', 'QUIZZES AND ASSIGNMENTS', 'QUIZZES & ASSIGNMENTS', 'REQUIRED', 'LEARN')]
+L('12x dividers in a Week 00 or Course Orientation module (must be 0): %d' % len(_w00))
+if _w00: fails.append('12x %d divider(s) in Week 00 (%s): Course Orientation has no STUDY / PRACTICE / GRADED WORK dividers' % (len(_w00), '; '.join(_w00[:3])))
 # --module-labels [Adam, 2026-10-05]: Canvas Preview's Settings, Modules "Also put module names in packages" writes a
 #   label such as "Week 06: ", "(Week 06, 09/28/2026)" or "Module 01 - " into each MODULE title on purpose, so it uploads.
 #   The checks below read module titles without that label; item, page, assignment and quiz titles are checked as before.
