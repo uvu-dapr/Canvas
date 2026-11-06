@@ -654,6 +654,28 @@ def layout_title_bottom(data, sx, H):
                 if g: return int(g.group(1)) + int(g.group(2))
     return int(H * 0.2)
 
+def shift_slide_refs(data, order, at, delta):
+    """Slide words that point at a slide by number ("See slide 14: Width Is a Trade") follow it when a slide goes in
+    after slide `at` (delta 1) or slide `at` comes out (delta -1). order is the slide order before the change. Only a
+    number followed by that slide's own title moves; a bare "slide N" may mean another deck (2026-11-04: a Calibration
+    note named "slides 5 and 11" of another deck), so it is listed for a person to check, not changed."""
+    titles = {k: html.escape(slide_title(data[p].decode("utf-8")), quote=False) for k, (_, p) in enumerate(order, start=1) if p in data}
+    moved, check = [], []
+    parts = [p for _, p in order if p in data] + [n for n in data if re.match(r"ppt/notesSlides/notesSlide\d+\.xml$", n)]
+    for p in parts:
+        def run(m):
+            def ref(r):
+                n = int(r.group(2)); tail = m.group(1)[r.end():]
+                if r.group(1).endswith("s"): check.append((p, r.group(0))); return r.group(0)
+                if delta < 0 and n == at: check.append((p, r.group(0) + " (the slide taken out)")); return r.group(0)
+                if n <= at: return r.group(0)
+                if titles.get(n) and tail.lstrip(": ").startswith(titles[n]): moved.append((p, n, n + delta)); return "%s %d" % (r.group(1), n + delta)
+                check.append((p, r.group(0))); return r.group(0)
+            return "<a:t>%s</a:t>" % re.sub(r"\b([Ss]lides?) (\d+)\b", ref, m.group(1))
+        x = data[p].decode("utf-8"); y = re.sub(r"<a:t>([^<]*)</a:t>", run, x)
+        if y != x: data[p] = y.encode("utf-8")
+    return dict(moved=["%s: slide %d to %d" % (posixpath.basename(p), a, b) for p, a, b in moved], check=["%s: %s" % (posixpath.basename(p), s) for p, s in check])
+
 def picture_slide(linked, after, pic, archive=True, build=True):
     """A new slide right after slide `after`, for a picture that has no room on a card-layout slide (Adam, 2026-10-06:
     "new slide right after"). It copies that slide's background, its title (and anything above the cards) and its
@@ -728,6 +750,7 @@ def picture_slide(linked, after, pic, archive=True, build=True):
     sid = max(int(v) for v in re.findall(r'<p:sldId id="(\d+)"', pres)) + 1
     prev = re.findall(r'<p:sldId [^>]*/>', pres)[after - 1]
     data["ppt/presentation.xml"] = pres.replace(prev, prev + '<p:sldId id="%d" r:id="%s"/>' % (sid, rid), 1).encode("utf-8")
+    refs = shift_slide_refs(data, order, after, 1)
     # later slides' page numbers move down one
     for k, (_, p) in enumerate(order[after:], start=after + 1):
         data[p] = pagenum(data[p].decode("utf-8"), k, k + 1).encode("utf-8")
@@ -739,7 +762,7 @@ def picture_slide(linked, after, pic, archive=True, build=True):
     keepf = os.path.join(arch, "%s (before pictures %s).pptx" % (os.path.splitext(os.path.basename(linked))[0], datetime.datetime.now().strftime("%Y-%m-%d %H%M")))
     if archive and not os.path.exists(keepf): shutil.copy2(linked, keepf)
     write(linked, infos, data)
-    return dict(deck=linked, new_slide=after + 1, picture=name, linked_now=len(listing), embed=embed(linked) if build else None)
+    return dict(deck=linked, new_slide=after + 1, picture=name, linked_now=len(listing), slide_refs=refs, embed=embed(linked) if build else None)
 
 # ---------------------------------------------------------------- unpicslide
 
@@ -766,6 +789,7 @@ def remove_picture_slide(linked, slide, build=True):
     ct = data["[Content_Types].xml"].decode("utf-8")
     data["[Content_Types].xml"] = re.sub(r'<Override PartName="/%s"[^>]*/>' % re.escape(part), "", ct, count=1).encode("utf-8")
     data.pop(part, None); data.pop(rels_name(part), None)
+    refs = shift_slide_refs(data, order, slide, -1)
     for k, (_, p) in enumerate(order[slide:], start=slide + 1):
         data[p] = pagenum(data[p].decode("utf-8"), k, k - 1).encode("utf-8")
     app = data.get("docProps/app.xml")
@@ -775,7 +799,7 @@ def remove_picture_slide(linked, slide, build=True):
     keepf = os.path.join(arch, "%s (before removing slide %d %s).pptx" % (os.path.splitext(os.path.basename(linked))[0], slide, datetime.datetime.now().strftime("%Y-%m-%d %H%M")))
     if not os.path.exists(keepf): shutil.copy2(linked, keepf)
     write(linked, infos, data)
-    return dict(deck=linked, removed_slide=slide, embed=embed(linked) if build else None)
+    return dict(deck=linked, removed_slide=slide, slide_refs=refs, embed=embed(linked) if build else None)
 
 # ---------------------------------------------------------------- uncopy
 
